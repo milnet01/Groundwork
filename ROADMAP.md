@@ -32,3 +32,8 @@
 > least one item, and every item
 > names what must close before it can start, in `Blocked-by:`
 > (`~/.claude/workflow.md` § 5, `roadmap-format.md` § 3.5).
+
+## Backlog — no version yet
+
+Items not yet placed in a release. Each moves into a version section once it is
+scheduled.
