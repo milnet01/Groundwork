@@ -1,4 +1,5 @@
 <!-- ants-roadmap-format: 1 -->
+<!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -12,6 +13,7 @@
 **Legend**
 
 - ✅ Done · 🚧 In progress · 📋 Planned · 💭 Considered
+- 🚫 Dropped (closed, not done)
 
 ## 0.1.0 — (first release)
 

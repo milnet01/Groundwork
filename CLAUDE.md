@@ -107,6 +107,15 @@ installs those versions, and the gate warns locally when yours differ.
 `GRND-NNNN`, per `roadmap-format.md` § 3.5.1. Commit subjects
 are `<ID>: <description>`, per `commits.md`.
 
+The roadmap lives in the Ants roadmap store (project slug `groundwork`).
+`ROADMAP.md` is generated from it, so hand edits are discarded by the next
+write. Read it with `roadmap_query` and change it with `roadmap_log`.
+
+**The first `roadmap_log` append must pass `id_prefix: "GRND"`.** The store
+does not hold the prefix until an item carries it. Without it, the first id
+is derived from the directory name and comes out `GROU-0001`, which a trial
+append confirmed.
+
 ### Overrides
 
 Any place this project deliberately departs from a global standard goes
