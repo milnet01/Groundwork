@@ -19,6 +19,12 @@ on:
 permissions:
   contents: read
 
+# A newer push to the same branch supersedes an older run: the newer commit
+# contains the older one, so finishing the older run checks nothing new.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   gate:
     runs-on: ubuntu-latest
