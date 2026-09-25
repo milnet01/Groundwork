@@ -1,0 +1,35 @@
+# This workflow sets up a machine and CALLS the gate script. It restates no
+# step of it, and no check may be added here.
+#
+# `local-gate.md` § 3: the local run must execute the pipeline's own
+# definition, not a copy. Everything CI does lives in scripts/local-ci.sh, so
+# the run before your push and the run on GitHub cannot disagree. Adding a step
+# here instead creates a second list, and the drift is discovered by a red
+# build — the thing running locally was meant to prevent.
+#
+# Setup (installing a toolchain, checking out, caching) belongs here. Checks
+# belong in the script.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned by digest: a tag is mutable and runs a different program on the
+      # day it changes (security.md § 8).
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      # Install the toolchain the script expects. Pin versions in the SCRIPT
+      # and read them from it, so one commit cannot use two different versions:
+      #   - run: pipx install ruff==$(./scripts/local-ci.sh --ruff-version)
+
+      - name: Run the gate
+        run: ./scripts/local-ci.sh

@@ -1,0 +1,67 @@
+# Language-agnostic baseline. Stack-specific ignores get added once
+# the stack is chosen in design.
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*.bak
+*.orig
+*.rej
+
+# Editor / IDE
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+*~
+.#*
+\#*\#
+
+# Secrets / local env
+.env
+.env.*
+!.env.example
+
+# Claude Code (local settings, history, allowlist — mostly personal).
+# Drop the trailing slash so the negation below can re-include a
+# specific file; with `.claude/` git short-circuits at the
+# directory and ignores the !.claude/foo line.
+.claude/*
+# Team-shared Claude Code config that SHOULD be in version control:
+!.claude/settings.json
+# No `!.claude/workflow.md` here, deliberately. `workflow.md` § 1 forbids a
+# per-project workflow, and reserving the path reads as a prescription to
+# create one. That file is also `/app-workflow`'s trigger, so creating it
+# routes drift work to the predecessor `workflow.md` replaced.
+
+# Logs / runtime
+*.log
+*.pid
+*.sock
+
+# Coverage / sanitizers
+*.gcda
+*.gcno
+*.gcov
+coverage.*
+.coverage
+lcov.info
+
+# Core dumps
+core
+core.*
+*.core
+vgcore.*
+
+# Scratch
+scratch/
+tmp/
+Screenshot_*.png
+screenshot*.png
+
+# Roadmap ID counter — derived per-machine cache, not source.
+# True high-water mark is the highest ID across ROADMAP.md +
+# CHANGELOG.md + docs/roadmap/*.md (roadmap-format.md § 3.5.1).
+.roadmap-counter
