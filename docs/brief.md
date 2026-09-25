@@ -153,3 +153,11 @@ useful as a periodic audit — "is this machine still set up right?"
 
 Point `/start-app` at this folder. The task table above is close to a roadmap
 already — one item per task, each needing a check and an apply.
+
+## Decided at kickoff (2026-09-25)
+
+The user settled the three open questions above:
+
+- **Separate app.** Groundwork is its own app. It reuses OneUp's engine patterns but is not a tab inside OneUp.
+- **Leap and Tumbleweed.** Both are supported. The app detects which one is running and adapts. It never asks the user.
+- **Extras list.** Short, with every item visible. Only near-universal items start switched on.
