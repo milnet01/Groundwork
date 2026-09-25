@@ -81,7 +81,26 @@ rather than in a standard.
 
 ### Build and test
 
-(Filled once the stack exists.)
+The CI gate is `scripts/local-ci.sh`. GitHub's `ci.yml` calls it and adds
+no steps of its own, so a change to CI goes in the script. It has two modes:
+
+- `./scripts/local-ci.sh` — the full gate. Build and test legs are empty
+  until the stack exists.
+- `./scripts/local-ci.sh --docs` — every check that needs no build.
+
+Every push runs the gate. `.githooks/pre-push` hands off to
+`~/.claude/githooks/pre-push`, which picks `--docs` when every changed
+path matches the script's `--docs-glob`. A fresh clone needs this once:
+
+```bash
+git config core.hooksPath .githooks
+git config ants.gate.command  ./scripts/local-ci.sh
+git config ants.gate.docsMode --docs
+git config ants.gate.docsGlob "$(./scripts/local-ci.sh --docs-glob)"
+```
+
+Linter versions are pinned in `scripts/ci-tools.env`. The workflow
+installs those versions, and the gate warns locally when yours differ.
 
 ### Roadmap IDs
 
