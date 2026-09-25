@@ -116,10 +116,10 @@ The roadmap is split by version, as Pressless does it: one
 `## Backlog — no version yet` last. Create a version section with
 `roadmap_log op:create_section` when design places items in it.
 
-**The first `roadmap_log` append must pass `id_prefix: "GRND"`.** The store
-does not hold the prefix until an item carries it. Without it, the first id
-is derived from the directory name and comes out `GROU-0001`, which a trial
-append confirmed.
+The prefix is pinned in `.ants/project.json` (`id_format.prefix`), set with
+`project_settings op:"set"`. Without it, the first id would be derived from
+the directory name as `GROU-0001`. A dry-run append after the pin gave
+`GRND-0001`.
 
 ### Overrides
 
