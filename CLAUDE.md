@@ -111,6 +111,11 @@ The roadmap lives in the Ants roadmap store (project slug `groundwork`).
 `ROADMAP.md` is generated from it, so hand edits are discarded by the next
 write. Read it with `roadmap_query` and change it with `roadmap_log`.
 
+The roadmap is split by version, as Pressless does it: one
+`## X.Y.Z — <theme>` section per release, in order, then
+`## Backlog — no version yet` last. Create a version section with
+`roadmap_log op:create_section` when design places items in it.
+
 **The first `roadmap_log` append must pass `id_prefix: "GRND"`.** The store
 does not hold the prefix until an item carries it. Without it, the first id
 is derived from the directory name and comes out `GROU-0001`, which a trial
