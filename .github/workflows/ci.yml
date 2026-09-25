@@ -25,11 +25,32 @@ jobs:
     steps:
       # Pinned by digest: a tag is mutable and runs a different program on the
       # day it changes (security.md § 8).
+      # persist-credentials: nothing here pushes, so the job token has no
+      # reason to stay in .git/config for the rest of the run.
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
-      # Install the toolchain the script expects. Pin versions in the SCRIPT
-      # and read them from it, so one commit cannot use two different versions:
-      #   - run: pipx install ruff==$(./scripts/local-ci.sh --ruff-version)
+      # Versions and digests come from scripts/ci-tools.env, which the gate
+      # script also reads, so this job and a developer's machine run the same
+      # tools. Release tarballs rather than apt, because apt offers whatever
+      # the runner image happens to carry. A digest mismatch fails here.
+      - name: Install the pinned linters
+        run: |
+          . scripts/ci-tools.env
+          mkdir -p "$HOME/.local/bin"
+          cd "$RUNNER_TEMP"
+          curl -fsSL -o sc.tar.xz \
+            "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz"
+          echo "${SHELLCHECK_SHA256}  sc.tar.xz" | sha256sum -c -
+          tar -xJf sc.tar.xz
+          install "shellcheck-v${SHELLCHECK_VERSION}/shellcheck" "$HOME/.local/bin/"
+          curl -fsSL -o al.tar.gz \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          echo "${ACTIONLINT_SHA256}  al.tar.gz" | sha256sum -c -
+          tar -xzf al.tar.gz actionlint
+          install actionlint "$HOME/.local/bin/"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Run the gate
         run: ./scripts/local-ci.sh
