@@ -161,3 +161,5 @@ The user settled the three open questions above:
 - **Separate app.** Groundwork is its own app. It reuses OneUp's engine patterns but is not a tab inside OneUp.
 - **Leap and Tumbleweed.** Both are supported. The app detects which one is running and adapts. It never asks the user.
 - **Extras list.** Short, with every item visible. Only near-universal items start switched on.
+- **Packaging comes after the first release.** 0.1.0 runs from the source folder. AppImage, RPM and OBS packaging follow in a later version.
+- **Roadmap items are written after discovery and design.** Not before.

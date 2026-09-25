@@ -3,61 +3,59 @@
 > **Purpose — so that later, anyone can tell whether the thing being
 > built is still the thing that was wanted.**
 
-Not a kick-off document. This is what everything is checked against for
-the life of the project, which is why the signs of success below have to
-be things you could actually observe.
+This is what everything is checked against for the life of the project.
+Design does not start until it is agreed — `~/.claude/workflow.md` § 2.
 
-**This document is a gate.** Design does not start until it is agreed —
-`~/.claude/workflow.md` § 2. It passes when a stranger could read it and
-say whether a given feature serves it.
+**Status:** draft, 2026-09-25 — awaiting the user's agreement.
 
-**Status:** not started.
+Source material: `docs/brief.md`, including its "Decided at kickoff"
+section.
 
 ## The problem
 
-> What hurt is this addressing? Specific, not aspirational. *"I lose
-> context between sessions and re-explain the project every time"* is the
-> right level; *"better productivity"* is not.
+A fresh openSUSE install can't play an MP4, doesn't know about Flathub,
+has no proprietary graphics driver, and renders fonts poorly. Fixing each
+of those means finding a forum post, pasting commands you don't fully
+understand, and guessing at the vendor-change prompt in the middle. Some
+of that advice is out of date. None of it checks whether a step is
+already done.
+
+Groundwork is that set of first steps: one window, each task with a
+toggle, a plain-English explanation and a status. Every task checks
+itself first, so re-running it is safe.
 
 ## Who it is for
 
-> One to three, each written as "a person who…". Concrete, not a
-> category. Often that is you — say so, it is useful.
+- **The author, setting up a fresh install.** Someone who reinstalls or
+  sets up new machines and wants the first steps done in one pass.
+- **A person new to openSUSE.** Someone who has just installed it,
+  doesn't know what "Packman" is, and would otherwise copy commands from
+  blog posts.
+- **A person re-checking a machine.** Someone who runs it now and then to
+  ask "is this machine still set up right?" A secondary use: it does not
+  drive the design.
 
 ## Signs it is working
 
-> Not *shipped* — working. Each written so that you could tell, by using
-> the thing, whether it is true yet. If you cannot imagine the moment you
-> would observe it, it is not one of these.
->
-> **Each gets a LABEL, because the roadmap gate points back at it** —
-> every sign must be claimed by at least one item before the queue is
-> agreed (`~/.claude/workflow.md` § 5). Without one there is nothing to
-> point at, and the gate becomes two lists a human matches by eye.
->
-> **The scheme is yours; `S<n>` below is a worked example, not a default.**
-> `check-queue` reads whatever label your roadmap actually cites its signs
-> by rather than choosing one for you. Keep `S1`, `S2` or replace them —
-> what matters is that the roadmap uses the same spelling. **Whatever you
-> pick, pick one**: where the roadmap can name NO sign there is no scheme,
-> the coverage check cannot run, and it may make no claim in either
-> direction. One sign the roadmap cannot name is unlabelled on its own, and
-> the check still runs for the rest.
-> Swept 2026-09-07: this said `S<n>` was the DEFAULT, matching `workflow.md`
-> § 3 as it then read; § 3 now says the document proposes no scheme, so the
-> word went from both rather than from one.
->
-> **Ids are never reused and never renumbered.** Delete a sign and its id
-> retires with it — the next one still takes the next unused number.
-> Renumbering is the one way this can fail, because every citation
-> elsewhere keeps pointing at whatever now holds the old number, and
-> nothing announces it.
+Ids are never reused and never renumbered. The roadmap cites these
+labels.
 
-- **S1** — <something you could observe, in one line>.
-- **S2** — <another>.
+- **S1** — On a machine that is already set up, every row reports
+  "already done", and nothing is changed.
+- **S2** — On a fresh Tumbleweed or Leap virtual machine, one button and
+  one password prompt complete every switched-on task, and a video file
+  plays afterwards.
+- **S3** — Before anything is applied, each row shows in plain English
+  what it would do.
 
 ## What it deliberately does not do
 
-> The only line that catches scope creep, which is the main way a project
-> stops being what was wanted. An empty section is a fair answer, but the
-> heading is worth answering rather than deleting.
+- **Not an installer.** The system is already installed.
+- **Not a settings app.** A short, curated list, not everything YaST can
+  do.
+- **Not other distributions.** openSUSE only: Tumbleweed and Leap.
+- **No dotfile or app-preference management.**
+- **Not a tab inside OneUp.** A separate app that reuses OneUp's engine
+  patterns.
+- **Never asks which openSUSE it is on.** It detects Tumbleweed or Leap
+  itself.
