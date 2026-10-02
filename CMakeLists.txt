@@ -18,6 +18,7 @@ add_library(groundwork_core STATIC
     src/core/checkrunner.cpp
     src/core/commandrunner.cpp
     src/core/filereader.cpp
+    src/core/markers.cpp
     src/core/selection.cpp
     src/core/systemidentity.cpp)
 target_include_directories(groundwork_core PUBLIC src)
@@ -31,8 +32,14 @@ add_library(groundwork_items STATIC
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)
 
+# The Worker depends on Core and Items, never on the Wizard.
+add_library(groundwork_worker STATIC
+    src/worker/privilege.cpp
+    src/worker/worker.cpp)
+target_link_libraries(groundwork_worker PUBLIC groundwork_items groundwork_core)
+
 add_executable(groundwork src/main.cpp)
-target_link_libraries(groundwork PRIVATE groundwork_items groundwork_core Qt6::Core Qt6::Widgets)
+target_link_libraries(groundwork PRIVATE groundwork_worker groundwork_items groundwork_core Qt6::Core Qt6::Widgets)
 target_compile_definitions(groundwork PRIVATE
     GROUNDWORK_VERSION="${PROJECT_VERSION}")
 

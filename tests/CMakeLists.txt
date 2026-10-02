@@ -33,3 +33,8 @@ add_test(NAME cli_check_setup_machine_starts_nothing COMMAND groundwork --check)
 set_tests_properties(cli_check_setup_machine_starts_nothing PROPERTIES
     ENVIRONMENT "GROUNDWORK_ROOT=${CMAKE_CURRENT_SOURCE_DIR}/fixtures/tumbleweed;PATH=${CMAKE_CURRENT_SOURCE_DIR}/fakes/flathub-present"
     PASS_REGULAR_EXPRESSION "Flatpak and Flathub: already done\n.*Nothing would start switched on")
+
+# The Worker end to end, driving the built program with fakes on PATH.
+groundwork_test(tst_worker)
+target_compile_definitions(tst_worker PRIVATE GROUNDWORK_BIN="$<TARGET_FILE:groundwork>")
+add_dependencies(tst_worker groundwork)

@@ -3,9 +3,12 @@
 #include "core/checkrunner.h"
 #include "core/systemidentity.h"
 #include "items/catalogue.h"
+#include "worker/worker.h"
 
 #include <QCoreApplication>
 #include <QTextStream>
+
+#include <csignal>
 
 namespace {
 
@@ -76,6 +79,23 @@ int main(int argc, char *argv[])
         const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
         return checkMode(root);
     }
-    QTextStream(stderr) << tr("Usage: groundwork --check | --version") << '\n';
+    if (args.contains(QStringLiteral("--worker"))) {
+        // The window may close while a run goes on: writing to a closed
+        // output must not end it (design, Stopping).
+        std::signal(SIGPIPE, SIG_IGN);
+        QStringList ids;
+        for (qsizetype i = args.indexOf(QStringLiteral("--worker")) + 1; i < args.size(); ++i) {
+            if (args[i] == QLatin1String("--lang")) {
+                ++i; // the language is loaded by the translation machinery (GRND-0032)
+                continue;
+            }
+            ids << args[i];
+        }
+        const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
+        gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::Worker::defaultStateDir());
+        return worker.run(ids);
+    }
+    QTextStream(stderr) << tr("Usage: groundwork --check | --worker [--lang LANG] [ITEM...] | --version")
+                        << '\n';
     return 2;
 }

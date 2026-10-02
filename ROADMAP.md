@@ -165,12 +165,19 @@
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0011] **Item: media codecs from Packman Essentials, including browser video.**
+- ✅ [GRND-0011] **Item: media codecs from Packman Essentials, including browser video.**
   Serves S2 (a video plays). ADR-0003: the Essentials repository, per
   the wiki; a system with the full Packman repository counts as done.
   Slowroll has its own Packman tree. Browser H.264 needs openh264 from
   codecs.opensuse.org (docs/research/2026-10-02-sources.md). Take
   commands from the live wiki when built.
+  Shipped 2026-10-02 in 9866067: local gate and GitHub run 37025068071
+  green. Correction: that commit body says the red check ran; it did not
+  (the break failed to compile under -Werror, so no test ran). Re-run
+  the same day with a compiling break: reusesAnExistingPackmanRepository
+  failed, restored green. Commands come from the wiki's 2026-05-11
+  snapshot; GRND-0013 checks them against the live page and on fresh
+  systems.
   **Layman:** Makes videos and music play, including in the web browser.
   Kind: implement.
   Source: design-2026-10-02.
