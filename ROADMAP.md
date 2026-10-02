@@ -33,12 +33,14 @@
 > names what must close before it can start, in `Blocked-by:`
 > (`~/.claude/workflow.md` § 5, `roadmap-format.md` § 3.5).
 
-- 📋 [GRND-0001] **Build skeleton: CMake, Qt 6, Qt Test, wired into the CI gate.**
+- ✅ [GRND-0001] **Build skeleton: CMake, Qt 6, Qt Test, wired into the CI gate.**
   Serves S2 (the whole). C++20, Qt 6 Core and Widgets, CMake,
   Qt Test under CTest (design: The stack). Fill scripts/local-ci.sh's
   build and test legs; ci.yml installs the toolchain and calls the
   script, adding no step of its own.
   Overlaps every later item on CMakeLists.txt.
+  Shipped 2026-10-02 in a00acec: local gate and GitHub run 37020573478
+  both green, 2 tests.
   **Layman:** Sets up the empty program so it builds and its tests run on every push.
   Kind: chore.
   Source: design-2026-10-02.

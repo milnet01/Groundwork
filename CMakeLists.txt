@@ -13,8 +13,16 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Test)
 # Warnings are errors in the gate, so a warning cannot sit unread.
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
+# Core depends on Qt Core only (docs/design.md, What may depend on what).
+add_library(groundwork_core STATIC
+    src/core/checkrunner.cpp
+    src/core/commandrunner.cpp
+    src/core/filereader.cpp)
+target_include_directories(groundwork_core PUBLIC src)
+target_link_libraries(groundwork_core PUBLIC Qt6::Core)
+
 add_executable(groundwork src/main.cpp)
-target_link_libraries(groundwork PRIVATE Qt6::Core Qt6::Widgets)
+target_link_libraries(groundwork PRIVATE groundwork_core Qt6::Core Qt6::Widgets)
 target_compile_definitions(groundwork PRIVATE
     GROUNDWORK_VERSION="${PROJECT_VERSION}")
 
