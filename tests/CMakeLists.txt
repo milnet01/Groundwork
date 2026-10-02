@@ -17,6 +17,7 @@ groundwork_test(tst_codecsitem)
 groundwork_test(tst_serviceitems)
 groundwork_test(tst_clockitem)
 groundwork_test(tst_soundfirmwareitem)
+groundwork_test(tst_broadcomitem)
 # The built program itself: --version answers and exits 0.
 add_test(NAME cli_version COMMAND groundwork --version)
 set_tests_properties(cli_version PROPERTIES

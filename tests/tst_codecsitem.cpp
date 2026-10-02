@@ -2,6 +2,7 @@
 // library's vendor from a fake rpm, and steps per system (ADR-0003).
 #include "items/catalogue.h"
 #include "items/codecsitem.h"
+#include "items/packman.h"
 
 #include <QDir>
 #include <QFile>
@@ -73,7 +74,7 @@ private slots:
              "[packman]\nenabled=0\nbaseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/\n");
         fakeRpm(packmanLibrary());
         QCOMPARE(gw::CodecsItem().check(context()).state, gw::CheckState::NotDone);
-        QVERIFY(gw::CodecsItem::packmanAlias(context()).isEmpty());
+        QVERIFY(gw::packmanAlias(context()).isEmpty());
     }
 
     void findsPackmanInAMultiSectionFile()
@@ -81,7 +82,7 @@ private slots:
         repo(QStringLiteral("mixed.repo"),
              "[oss]\nbaseurl=https://download.opensuse.org/tumbleweed/repo/oss/\n\n"
              "[pm]\nbaseurl=https://ftp.fau.de/packman/suse/openSUSE_Tumbleweed/Essentials/\n");
-        QCOMPARE(gw::CodecsItem::packmanAlias(context()), QStringLiteral("pm"));
+        QCOMPARE(gw::packmanAlias(context()), QStringLiteral("pm"));
     }
 
     void failingRpmCouldNotTell()

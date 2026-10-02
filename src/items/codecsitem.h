@@ -24,10 +24,6 @@ public:
     CheckResult check(const CheckContext &context) const override;
     QList<Step> applySteps(const SystemIdentity &system,
                            const CheckContext &context) const override;
-
-    // The alias of an enabled Packman repository, full or Essentials, if
-    // one is configured; empty otherwise.
-    static QString packmanAlias(const CheckContext &context);
 };
 
 } // namespace gw

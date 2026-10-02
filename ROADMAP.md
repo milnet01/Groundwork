@@ -274,10 +274,13 @@ hardware is found and lacks support.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0015] **Item: sound firmware, offered only where sound hardware needs it.**
+- ✅ [GRND-0015] **Item: sound firmware, offered only where sound hardware needs it.**
   Serves S2. sof-firmware, per the openSUSE forum tips thread and
   SDB:Audio_troubleshooting (docs/research/2026-10-02-sources.md).
   The check must tell needed from not needed without root.
+  Shipped 2026-10-02 in 5bae708: local gate and GitHub run 37037026258
+  green; on the author's machine the check reads not needed here. Apply
+  first runs for real on SOF hardware, which this machine is not.
   **Layman:** Fixes the common 'no sound on my laptop' problem after a new install.
   Kind: implement.
   Source: design-2026-10-02.

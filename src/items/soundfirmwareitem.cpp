@@ -1,18 +1,12 @@
 #include "soundfirmwareitem.h"
 
+#include "hardware.h"
+
 #include <QCoreApplication>
 
 namespace gw {
 namespace {
 QString tr(const char *text) { return QCoreApplication::translate("gw::SoundFirmwareItem", text); }
-const QString kDevices = QStringLiteral("/sys/bus/pci/devices");
-QString field(const CheckContext &context, const QString &device, const char *name)
-{
-    return QString::fromLatin1(context.readFile(kDevices + QLatin1Char('/') + device + QLatin1Char('/')
-                                                + QLatin1String(name))
-                                   .value_or(QByteArray()))
-        .trimmed();
-}
 } // namespace
 
 QString SoundFirmwareItem::title() const { return tr("Sound firmware"); }
@@ -25,16 +19,14 @@ QString SoundFirmwareItem::applySentence() const
 
 bool SoundFirmwareItem::needsSof(const CheckContext &context)
 {
-    for (const QString &device : context.entries(kDevices)) {
-        const QString cls = field(context, device, "class");
-        if (!cls.startsWith(QLatin1String("0x04")))
+    for (const PciDevice &d : pciDevices(context)) {
+        if (!d.cls.startsWith(QLatin1String("0x04")))
             continue; // not multimedia
-        const QString driver = context.linkTargetName(kDevices + QLatin1Char('/') + device + QStringLiteral("/driver"));
-        if (driver.contains(QLatin1String("sof"), Qt::CaseInsensitive))
+        if (d.driver.contains(QLatin1String("sof"), Qt::CaseInsensitive))
             return true;
-        const bool intelDsp = field(context, device, "vendor") == QLatin1String("0x8086")
-            && (cls.startsWith(QLatin1String("0x0401")) || cls == QLatin1String("0x040380"));
-        if (intelDsp && driver.isEmpty())
+        const bool intelDsp = d.vendor == QLatin1String("0x8086")
+            && (d.cls.startsWith(QLatin1String("0x0401")) || d.cls == QLatin1String("0x040380"));
+        if (intelDsp && d.driver.isEmpty())
             return true;
     }
     return false;
