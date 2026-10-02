@@ -111,6 +111,10 @@
   the Worker sets; sudo passes the prompt as the first argument
   (measured 2026-10-02). Shows sudo's own prompt, which names whose
   password it wants (root's, on Tumbleweed).
+  Open (design gate loop 6, 2026-10-02): /usr/etc/sudoers has Defaults
+  targetpw on Tumbleweed, so sudo asks for root's password. Check
+  whether Leap 16 does the same, and whether a fresh Leap 16 can have no
+  root password, which would bear on S2's one password prompt.
   **Layman:** A simple password window, so the app works on any desktop, not only KDE.
   Kind: implement.
   Source: design-2026-10-02.
