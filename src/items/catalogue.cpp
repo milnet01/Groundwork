@@ -1,5 +1,6 @@
 #include "catalogue.h"
 
+#include "clockitem.h"
 #include "codecsitem.h"
 #include "firewallitem.h"
 #include "flathubitem.h"
@@ -15,7 +16,8 @@ const Catalogue &catalogue()
     static const FlathubItem flathub;
     static const FirewallItem firewall;
     static const SshItem ssh;
-    static const Catalogue all({&update, &codecs, &flathub, &firewall, &ssh});
+    static const ClockItem clock;
+    static const Catalogue all({&update, &codecs, &flathub, &firewall, &ssh, &clock});
     return all;
 }
 

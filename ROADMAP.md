@@ -309,10 +309,13 @@ The design's second and third levels.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0018] **Item: the firewall is on.**
+- ✅ [GRND-0018] **Item: the firewall is on.**
   Serves S1 and S3. Check with systemctl is-active firewalld;
   firewall-cmd --state is not a reliable rootless check (measured
   2026-10-02).
+  Shipped 2026-10-02 in 193f5fb: local gate and GitHub run 37035595316
+  green; on the author's machine the check reads already done. Apply
+  first runs for real under GRND-0013.
   **Layman:** Confirms the firewall is switched on, and offers to switch it on if not.
   Kind: implement.
   Source: design-2026-10-02.
@@ -348,9 +351,12 @@ The design's second and third levels.
   Lanes: items, gui.
   Blocked-by: GRND-0003, GRND-0008.
 
-- 📋 [GRND-0022] **Item: remote login over SSH, off by default.**
+- ✅ [GRND-0022] **Item: remote login over SSH, off by default.**
   Serves S3. Leap 16.0 turns password root login over SSH off on new
   installs (release notes 3.5); keep that default.
+  Shipped 2026-10-02 in 193f5fb: local gate and GitHub run 37035595316
+  green; on the author's machine the check reads switched off, which is
+  true there. Apply first runs for real under GRND-0013.
   **Layman:** Lets you switch remote login to this computer on or off.
   Kind: implement.
   Source: design-2026-10-02.
