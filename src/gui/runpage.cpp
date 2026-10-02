@@ -4,6 +4,9 @@
 
 #include <QLabel>
 #include <QPlainTextEdit>
+#include <QProcess>
+#include <QPushButton>
+#include <QStandardPaths>
 #include <QToolButton>
 #include <QVBoxLayout>
 
@@ -11,7 +14,8 @@ namespace gw {
 
 RunPage::RunPage(QWidget *parent)
     : QWizardPage(parent), m_rows(new QVBoxLayout), m_hintLabel(new QLabel(this)),
-      m_summary(new QLabel(this)), m_details(new QPlainTextEdit(this))
+      m_summary(new QLabel(this)), m_details(new QPlainTextEdit(this)),
+      m_oneUp(new QPushButton(tr("Open OneUp to keep this computer up to date"), this))
 {
     setTitle(tr("Setting up"));
     setSubTitle(tr("You can close this window; Groundwork then stops after the current step."));
@@ -19,6 +23,12 @@ RunPage::RunPage(QWidget *parent)
     m_summary->setWordWrap(true);
     m_details->setReadOnly(true);
     m_details->hide();
+    // OneUp keeps a machine up to date after setup (design, The levels).
+    // Its program is `oneup` (OneUp's data/za.co.antsprojectshub.OneUp.desktop).
+    m_oneUp->hide();
+    connect(m_oneUp, &QPushButton::clicked, this, [] {
+        QProcess::startDetached(QStandardPaths::findExecutable(QStringLiteral("oneup")), {});
+    });
     auto *toggle = new QToolButton(this);
     toggle->setText(tr("Show details"));
     toggle->setCheckable(true);
@@ -28,6 +38,7 @@ RunPage::RunPage(QWidget *parent)
     layout->addLayout(m_rows);
     layout->addWidget(m_hintLabel);
     layout->addWidget(m_summary);
+    layout->addWidget(m_oneUp);
     layout->addWidget(toggle);
     layout->addWidget(m_details);
 
@@ -42,6 +53,7 @@ RunPage::RunPage(QWidget *parent)
         m_pending.clear();
         if (m_summary->text().isEmpty())
             m_summary->setText(tr("Groundwork stopped unexpectedly. The details below say why."));
+        m_oneUp->setVisible(!QStandardPaths::findExecutable(QStringLiteral("oneup")).isEmpty());
         emit completeChanged();
         emit runFinished();
     });

@@ -6,6 +6,8 @@
 #include "gui/wizard.h"
 
 #include <QCheckBox>
+#include <QDir>
+#include <QPushButton>
 #include <QFile>
 #include <QTemporaryDir>
 #include <QtTest>
@@ -147,6 +149,40 @@ private slots:
         QTRY_VERIFY(w->runPage()->isComplete());
         QVERIFY(w->runPage()->statusOf(QStringLiteral("codecs")).contains(QLatin1String("done")));
         QCOMPARE(w->runPage()->summary(), QStringLiteral("All done."));
+    }
+
+    void offersOneUpOnlyWhenItIsInstalled()
+    {
+        // A fake oneup on PATH that leaves a mark when started.
+        const QString bin = m_dir.filePath(QStringLiteral("oneup-bin"));
+        QDir().mkpath(bin);
+        const QString mark = m_dir.filePath(QStringLiteral("oneup-started"));
+        QFile f(bin + QStringLiteral("/oneup"));
+        QVERIFY(f.open(QIODevice::WriteOnly));
+        f.write("#!/bin/sh\ntouch '" + mark.toUtf8() + "'\n");
+        f.close();
+        QVERIFY(f.setPermissions(f.permissions() | QFile::ExeOwner));
+        const QByteArray oldPath = qgetenv("PATH");
+
+        qputenv("PATH", "/usr/bin:/bin"); // no oneup
+        {
+            auto w = make();
+            QTRY_VERIFY(w->checksDone());
+            goToRunPage(*w);
+            QTRY_VERIFY(w->runPage()->isComplete());
+            QVERIFY(w->runPage()->oneUpButton()->isHidden());
+        }
+        qputenv("PATH", bin.toUtf8() + ":/usr/bin:/bin");
+        {
+            auto w = make();
+            QTRY_VERIFY(w->checksDone());
+            goToRunPage(*w);
+            QTRY_VERIFY(w->runPage()->isComplete());
+            QVERIFY(!w->runPage()->oneUpButton()->isHidden());
+            w->runPage()->oneUpButton()->click();
+            QTRY_VERIFY(QFile::exists(mark));
+        }
+        qputenv("PATH", oldPath);
     }
 
     void closingMidRunAsksTheWorkerToStopAndWaits()

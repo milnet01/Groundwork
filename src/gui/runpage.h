@@ -7,6 +7,7 @@
 #include <QWizardPage>
 
 class QLabel;
+class QPushButton;
 class QPlainTextEdit;
 class QVBoxLayout;
 
@@ -27,6 +28,8 @@ public:
     QString statusOf(const QString &id) const;
     QString summary() const;
     QStringList hints() const { return m_hints; }
+    // Offered when a run ends and OneUp is installed (GRND-0024).
+    QPushButton *oneUpButton() const { return m_oneUp; }
 
 signals:
     void runFinished();
@@ -44,6 +47,7 @@ private:
     QLabel *m_hintLabel;
     QLabel *m_summary;
     QPlainTextEdit *m_details;
+    QPushButton *m_oneUp;
 };
 
 } // namespace gw

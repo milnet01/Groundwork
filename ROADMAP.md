@@ -363,9 +363,12 @@ The design's second and third levels.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0023] **Item: the clock setting, offered only where Windows is also installed.**
+- ✅ [GRND-0023] **Item: the clock setting, offered only where Windows is also installed.**
   Serves S3. https://itsfoss.com/wrong-time-dual-boot/ describes the
   problem; the check must find a Windows install without root.
+  Shipped 2026-10-02 in 77b7dee: local gate and GitHub run 37036031656
+  green; on the author's machine the check reads not needed here. The
+  Linux-side fix is a user decision on the list.
   **Layman:** Stops the clock being wrong after switching between Linux and Windows.
   Kind: implement.
   Source: design-2026-10-02.
