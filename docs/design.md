@@ -33,6 +33,17 @@ Essentials. Every item's check runs before any page is shown, so
 each row already says "already done", "not done", "not needed here" or
 "couldn't tell".
 
+**Bringing the system up to date is a preparation, not a goal.** It
+starts switched on only when another item starts switched on, so the
+installs that follow meet a current system. On a set-up machine nothing
+else starts on, so it does not either (S1). Keeping a machine up to date
+afterwards is OneUp's job.
+
+**Dependencies are kept by both sides.** Switching an item on in the
+Wizard switches on what it depends on, and the row says why. The Worker,
+given an item whose dependency is neither done nor in its list, skips
+it and says why.
+
 1. **Essentials** — what a desktop user needs for things to work.
    Bring the system up to date; media codecs, including video in the
    browser; Flatpak and Flathub. Hardware support, offered only where
@@ -55,16 +66,16 @@ cover it.
 
 After a run, if OneUp is installed, the last page offers to open it.
 
-The list of items is data in one file, not code spread across the
-wizard. Adding an item means adding one item file and one catalogue
-line. Each item's commands are taken from current openSUSE sources when
-that item is built, and its roadmap item cites them. None are recorded
-here.
+The list of items is one catalogue file in Items, not code spread
+across the wizard. Adding an item means adding one item file and one
+catalogue line. Each item's commands are taken from current openSUSE
+sources when that item is built, and its roadmap item cites them. None
+are recorded here.
 
 ## Which systems it runs on
 
-It reads `ID` and `VERSION_ID` from `/etc/os-release`, never `NAME` and
-never `ID_LIKE` first.
+It reads `ID` and `VERSION_ID` from `/etc/os-release`, never `NAME` or
+`ID_LIKE`.
 
 - `opensuse-tumbleweed` and `opensuse-slowroll` — supported, as the
   rolling family.
@@ -84,17 +95,22 @@ Every path is under `src/` unless it says otherwise.
 
 | Part | Responsible for | Files |
 |---|---|---|
-| **Core** | Reading the system's identity; the item interface; the catalogue; running a read-only command with a time limit; reading a system file; running every check; the marker format | `core/` |
-| **Items** | One file per item: its check, a plain-English sentence saying what its apply would do, and the steps its apply would run | `items/` |
+| **Core** | Reading the system's identity; the item interface; running a read-only command with a time limit; reading a system file; running the checks it is given; the marker format | `core/` |
+| **Items** | One file per item: its check, a plain-English sentence saying what its apply would do, and the steps its apply would run; the catalogue listing every item | `items/` |
 | **Worker** | Getting root once and keeping it; running steps in order; stopping only between items; the log | `worker/` |
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
-| **Entry** | Choosing the mode from the command line; check mode, which prints Core's check results | `main.cpp` |
+| **Entry** | Choosing the mode: from the command line, or, for askpass, from an environment variable the Worker sets, because `SUDO_ASKPASS` names a program path and carries no option (`man sudo`, `-A`); check mode, which prints Core's results for the catalogue's checks | `main.cpp` |
 | **Tests** | Unit tests and the fake-command scenarios | `tests/` |
 | **Packaging** | The AppImage build | `packaging/appimage/` |
 
 The marker format is OneUp's: `@@NAME@@|field|field`, one per line, on
-standard output. Groundwork's own list of markers lives in
-a reference file the worker's roadmap item creates.
+standard output.
+
+**The Worker's interface** is one reference file, created by the
+Worker's roadmap item: its markers, its command line, and where the
+stop file lives. The Worker takes the ids of the items to run on its
+command line. Given none, it runs the items the Wizard would start
+switched on.
 
 ## What may depend on what
 
@@ -112,6 +128,7 @@ a reference file the worker's roadmap item creates.
   through it. Nothing else may start a root process.
 - **No shell.** Every command is a fixed argument list. Nothing builds a
   command string for `sh -c`.
+- **Entry may depend on every part**; no part depends on Entry.
 - **The Wizard refuses to start as root.**
 
 ## What every part does the same way
@@ -125,9 +142,11 @@ a reference file the worker's roadmap item creates.
 - **The Worker re-checks before it applies.** It runs an item's check
   immediately before the item's steps, and an item already done is
   skipped, with the result "skipped, already done".
-- **zypper's exit codes** are read with OneUp's rule: 0, 100–103 and 106
-  are success. 106 also means a repository was skipped, and the user is
-  told which.
+- **zypper's exit codes in an apply step** are read with OneUp's rule:
+  0, 100–103 and 106 are success. 106 also means a repository was
+  skipped, and the user is told which. 103 means zypper updated itself,
+  so the step is run once more to finish (`man zypper`, EXIT CODES). In
+  a check, 106 gives "couldn't tell".
 - **Stopping** is cooperative, between items. The Worker never signals a
   running zypper. Closing the window asks the Worker to stop; the Worker
   survives its output being closed and finishes the current item.
@@ -184,3 +203,4 @@ a reference file the worker's roadmap item creates.
 | Loop | Date | Lanes | Q1 | Q2 | Q3 | Q4 | Outcome |
 |------|------|-------|----|----|----|----|---------|
 | 1 | 2026-10-02 | 2, each holding every question | 2 | 4 | 5 | — | 11 verified, 11 fixed; 3 dismissed as not changing the design (the keep-alive mechanism, which password `sudo` asks for, Slowroll's Packman tree: each settled by its item). Before dispatch, building the packet found the research record's rootless firewall check false; fixed in 3aa443f, outside the subject. Discovery's S1, S2 and supported systems narrowed to match, per `workflow.md` § 4. |
+| 2 | 2026-10-02 | 2, each holding every question | 1 | 4 | 4 | — | 9 verified, 9 fixed: the catalogue moved from Core to Items; the update item starts on only with another item, keeping S1; the Worker's command line, default and stop file have one owner; dependencies are kept by Wizard and Worker; zypper's rule is scoped to apply steps, 103 re-runs (`man zypper`); `ID_LIKE` never read; askpass mode is chosen by an environment variable (`man sudo`); one collision this loop's own fix created (the Worker's default) fixed before commit. 3 dismissed as settled by an item: the keep-alive mechanism, FUSE on a fresh install (ADR-0002 already requires it), the NVIDIA key prompt at boot. |
