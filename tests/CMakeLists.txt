@@ -24,6 +24,7 @@ groundwork_test(tst_poweritem)
 groundwork_test(tst_snapshotsitem)
 groundwork_test(tst_hostnameitem)
 groundwork_test(tst_fontsitem)
+groundwork_test(tst_appitems)
 # The built program itself: --version answers and exits 0.
 add_test(NAME cli_version COMMAND groundwork --version)
 set_tests_properties(cli_version PROPERTIES

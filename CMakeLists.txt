@@ -30,6 +30,7 @@ target_link_libraries(groundwork_core PUBLIC Qt6::Core)
 
 # Items depend on Core only.
 add_library(groundwork_items STATIC
+    src/items/appitems.cpp
     src/items/broadcomitem.cpp
     src/items/catalogue.cpp
     src/items/clockitem.cpp
