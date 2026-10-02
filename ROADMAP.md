@@ -333,10 +333,13 @@ The design's second and third levels.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0019] **Item: firmware updates.**
+- ✅ [GRND-0019] **Item: firmware updates.**
   Serves S1 and S3. fwupdmgr get-updates runs without root
   (docs/research/2026-10-02-sources.md); whether refresh needs
   authentication is unverified.
+  Shipped 2026-10-02 in 88e46b5: local gate and GitHub run 37039223504
+  green; on the author's machine the check reads already done. Apply
+  first runs for real where firmware updates wait.
   **Layman:** Checks for and installs firmware updates for the computer's hardware.
   Kind: implement.
   Source: design-2026-10-02.

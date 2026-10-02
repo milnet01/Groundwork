@@ -7,6 +7,7 @@
 #include "firmwareitem.h"
 #include "flathubitem.h"
 #include "nvidiaitem.h"
+#include "poweritem.h"
 #include "soundfirmwareitem.h"
 #include "sshitem.h"
 #include "updateitem.h"
@@ -23,9 +24,10 @@ const Catalogue &catalogue()
     static const BroadcomItem broadcom;
     static const FirewallItem firewall;
     static const FirmwareItem firmware;
+    static const PowerItem power;
     static const SshItem ssh;
     static const ClockItem clock;
-    static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom, &firewall, &firmware, &ssh, &clock});
+    static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom, &firewall, &firmware, &power, &ssh, &clock});
     return all;
 }
 

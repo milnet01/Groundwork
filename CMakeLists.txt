@@ -40,6 +40,7 @@ add_library(groundwork_items STATIC
     src/items/hardware.cpp
     src/items/nvidiaitem.cpp
     src/items/packman.cpp
+    src/items/poweritem.cpp
     src/items/service.cpp
     src/items/soundfirmwareitem.cpp
     src/items/sshitem.cpp
