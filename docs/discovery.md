@@ -6,7 +6,9 @@
 This is what everything is checked against for the life of the project.
 Design does not start until it is agreed — `~/.claude/workflow.md` § 2.
 
-**Status:** draft, 2026-09-25 — awaiting the user's agreement.
+**Status:** agreed by the user, 2026-10-02. It is expected to change as
+the work goes on. A change is made here, with the user's agreement
+(`~/.claude/workflow.md` §§ 4 and 7).
 
 Source material: `docs/brief.md`, including its "Decided at kickoff"
 section.
