@@ -35,6 +35,7 @@ add_library(groundwork_items STATIC
     src/items/clockitem.cpp
     src/items/codecsitem.cpp
     src/items/firewallitem.cpp
+    src/items/firmwareitem.cpp
     src/items/flathubitem.cpp
     src/items/hardware.cpp
     src/items/nvidiaitem.cpp

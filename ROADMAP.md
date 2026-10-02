@@ -261,13 +261,18 @@
 Essentials that depend on the machine's hardware: offered only where the
 hardware is found and lacks support.
 
-- 📋 [GRND-0014] **Item: NVIDIA driver, offered only where an NVIDIA card is found.**
+- ✅ [GRND-0014] **Item: NVIDIA driver, offered only where an NVIDIA card is found.**
   Serves S2 and S3. Detect the card from /sys/bus/pci/devices without
   root. Driver generation by card (G06, G07 for Turing and newer) and
   the NVIDIA repository from SDB:NVIDIA_drivers and Stefan Dirsch's
   notes (docs/research/2026-10-02-sources.md). Leap 16.0 may already
   have it: the check must say so. With Secure Boot, the row says a key
   must be approved at the next restart. Other cards: not needed here.
+  Shipped 2026-10-02 in c8cc4c5: local gate and GitHub run 37038762087
+  green; package names proven by dry runs in Tumbleweed and Leap 16
+  containers. Not run on a real NVIDIA card. Two decisions on the user's
+  list: the licence accepted by a pre-ticked item, and Tumbleweed's
+  current G07 version skew.
   **Layman:** Installs the right NVIDIA graphics driver, and warns about the extra step at the next restart.
   Kind: implement.
   Source: design-2026-10-02.

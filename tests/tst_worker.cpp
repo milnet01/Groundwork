@@ -210,6 +210,23 @@ private slots:
         QCOMPARE(r.count(QStringLiteral("sudo")), 0);
     }
 
+    void aStepsExtraSuccessCodeCountsAsOk()
+    {
+        // Firmware updates waiting; `fwupdmgr update` then finds nothing
+        // to do and exits 2, which that step accepts.
+        writeFile(m_bin + QStringLiteral("/fwupdmgr"), R"(#!/bin/sh
+echo "fwupdmgr $*" >> "$FAKE_LOG"
+case "$1" in
+  get-updates) printf '{"Devices":[{"Releases":[{"Version":"2"}]}]}';;
+  update) exit 2;;
+esac
+)", true);
+        const Run r = run({QStringLiteral("firmware-updates")});
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.endsFor(QStringLiteral("firmware-updates")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.count(QStringLiteral("fwupdmgr update")), 1);
+    }
+
     void refusesAnUnknownItem()
     {
         QCOMPARE(run({QStringLiteral("no-such-item")}).exitCode, 2);

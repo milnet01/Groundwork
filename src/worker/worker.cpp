@@ -103,7 +103,7 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail)
                               {itemId, tr("A software source could not be read and was skipped.")}));
         if (zypperSucceeded(code))
             return true;
-    } else if (code == 0) {
+    } else if (code == 0 || step.alsoOk.contains(code)) {
         return true;
     }
     *detail = tr("%1 failed (exit code %2).").arg(step.label).arg(code);

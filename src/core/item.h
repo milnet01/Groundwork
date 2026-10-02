@@ -40,6 +40,9 @@ struct Step
     bool needsRoot = false;
     Tool tool = Tool::Generic;
     QString label; // plain English, shown on the run page
+    // Exit codes besides 0 that mean success for a Generic step, such as
+    // fwupdmgr's 2, "nothing to do" (measured 2026-10-02).
+    QList<int> alsoOk = {};
 };
 
 // What a check may ask of Core.
