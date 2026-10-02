@@ -17,4 +17,15 @@ CheckResults runChecks(const QList<const Item *> &items, const CheckContext &con
     return results;
 }
 
+QString stateText(CheckState state)
+{
+    switch (state) {
+    case CheckState::Done: return QCoreApplication::translate("gw::CheckRunner", "already done");
+    case CheckState::NotDone: return QCoreApplication::translate("gw::CheckRunner", "not done");
+    case CheckState::NotNeeded: return QCoreApplication::translate("gw::CheckRunner", "not needed here");
+    case CheckState::CouldNotTell: return QCoreApplication::translate("gw::CheckRunner", "couldn't tell");
+    }
+    return {};
+}
+
 } // namespace gw

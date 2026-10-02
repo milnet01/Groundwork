@@ -5,29 +5,23 @@
 #include "core/systemidentity.h"
 #include "core/translations.h"
 #include "gui/askpassdialog.h"
+#include "gui/wizard.h"
 #include "items/catalogue.h"
 #include "worker/worker.h"
 
 #include <QApplication>
 #include <QCoreApplication>
+#include <QMessageBox>
 #include <QTextStream>
 
 #include <csignal>
+#include <memory>
+
+#include <unistd.h>
 
 namespace {
 
 QString tr(const char *text) { return QCoreApplication::translate("gw::Entry", text); }
-
-QString stateLabel(gw::CheckState state)
-{
-    switch (state) {
-    case gw::CheckState::Done: return tr("already done");
-    case gw::CheckState::NotDone: return tr("not done");
-    case gw::CheckState::NotNeeded: return tr("not needed here");
-    case gw::CheckState::CouldNotTell: return tr("couldn't tell");
-    }
-    return {};
-}
 
 // Check mode: print every item's state and what would start switched on.
 // Changes nothing. Exits 3 on an unsupported system.
@@ -47,7 +41,7 @@ int checkMode(const QString &root)
     const gw::CheckResults results = gw::runChecks(all.items(), gw::CheckContext(files));
     for (const gw::Item *item : all.items()) {
         const gw::CheckResult r = results.value(item->id());
-        out << "  " << item->title() << ": " << stateLabel(r.state);
+        out << "  " << item->title() << ": " << gw::stateText(r.state);
         if (!r.detail.isEmpty())
             out << " — " << r.detail;
         out << '\n';
@@ -65,6 +59,52 @@ int checkMode(const QString &root)
     return 0;
 }
 
+// Wizard mode: refuses root and unsupported systems, then shows the
+// Wizard; choosing another language rebuilds it in that language.
+int wizardMode(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    QApplication::setApplicationName(QStringLiteral("groundwork"));
+    const QStringList args = QApplication::arguments();
+    QString language = args.size() == 3 ? args[2] : gw::systemLanguage();
+    gw::loadLanguage(language);
+
+    if (geteuid() == 0) {
+        QMessageBox::critical(nullptr, tr("Groundwork"),
+                              tr("Please start Groundwork as yourself, not as root. "
+                                 "It asks for the password when it needs it."));
+        return 1;
+    }
+    const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
+    const gw::FileReader files(root);
+    const gw::SystemIdentity identity = gw::readSystemIdentity(files);
+    if (!identity.supported()) {
+        QMessageBox::information(nullptr, tr("Groundwork"), identity.reason);
+        return 3;
+    }
+
+    std::unique_ptr<gw::Wizard> wizard;
+    std::function<void(const QString &)> build = [&](const QString &code) {
+        language = code;
+        gw::loadLanguage(language);
+        QApplication::setLayoutDirection(gw::directionFor(language));
+        gw::WizardSetup setup;
+        setup.catalogue = &gw::catalogue();
+        setup.runChecks = [files] { return gw::runChecks(gw::catalogue().items(), gw::CheckContext(files)); };
+        setup.language = language;
+        setup.workerProgram = QApplication::applicationFilePath();
+        setup.stateDir = gw::defaultStateDir();
+        wizard = std::make_unique<gw::Wizard>(setup);
+        QObject::connect(wizard.get(), &gw::Wizard::languageChangeRequested, wizard.get(),
+                         [&](const QString &next) {
+                             QMetaObject::invokeMethod(qApp, [&, next] { build(next); }, Qt::QueuedConnection);
+                         });
+        wizard->show();
+    };
+    build(language);
+    return app.exec();
+}
+
 } // namespace
 
 int main(int argc, char *argv[])
@@ -77,6 +117,10 @@ int main(int argc, char *argv[])
         QApplication::setLayoutDirection(gw::directionFor(gw::systemLanguage()));
         return gw::runAskpass(argc > 1 ? QString::fromLocal8Bit(argv[1]) : QString());
     }
+
+    // No mode argument: the Wizard (docs/design.md, The shape).
+    if (argc == 1 || (argc == 3 && QByteArray(argv[1]) == "--lang"))
+        return wizardMode(argc, argv);
 
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName(QStringLiteral("groundwork"));

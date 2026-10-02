@@ -135,7 +135,7 @@
   Lanes: gui, entry.
   Blocked-by: GRND-0006.
 
-- 📋 [GRND-0008] **Wizard: level pages, rows, review page and run page.**
+- 🚧 [GRND-0008] **Wizard: level pages, rows, review page and run page.**
   Serves S3 and S4. Rows show each item's state and its plain-English
   sentence; toggles; dependencies switched on with the reason shown.
   Apply is unavailable with nothing switched on. Closing the window

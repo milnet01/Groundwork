@@ -51,3 +51,8 @@ target_compile_definitions(tst_translations PRIVATE
     FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/fixtures"
     FAKES="${CMAKE_CURRENT_SOURCE_DIR}/fakes")
 add_dependencies(tst_translations groundwork)
+
+# The Wizard, on Qt's offscreen display, with a fake Worker script.
+groundwork_test(tst_wizard)
+target_link_libraries(tst_wizard PRIVATE groundwork_gui Qt6::Widgets)
+set_tests_properties(tst_wizard PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")

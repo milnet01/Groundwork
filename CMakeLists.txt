@@ -42,7 +42,10 @@ target_link_libraries(groundwork_worker PUBLIC groundwork_items groundwork_core)
 
 # The Wizard's widgets; never depended on by the Worker.
 add_library(groundwork_gui STATIC
-    src/gui/askpassdialog.cpp)
+    src/gui/askpassdialog.cpp
+    src/gui/itemrow.cpp
+    src/gui/runpage.cpp
+    src/gui/wizard.cpp)
 target_link_libraries(groundwork_gui PUBLIC groundwork_core Qt6::Widgets)
 
 add_executable(groundwork src/main.cpp)
