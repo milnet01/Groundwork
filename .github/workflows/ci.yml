@@ -64,5 +64,14 @@ jobs:
           install actionlint "$HOME/.local/bin/"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
+      # The build toolchain: a C++20 compiler, CMake, Ninja and Qt 6 with its
+      # Test module (docs/design.md, The stack). The runner image's Qt is
+      # older than openSUSE's, so the code keeps to what both have.
+      - name: Install the build toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake ninja-build g++ qt6-base-dev
+
       - name: Run the gate
         run: ./scripts/local-ci.sh

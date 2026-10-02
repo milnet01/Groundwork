@@ -1,5 +1,7 @@
-# Language-agnostic baseline. Stack-specific ignores get added once
-# the stack is chosen in design.
+# Language-agnostic baseline, plus the C++ build tree below.
+
+# Build (CMake)
+build/
 
 # OS
 .DS_Store

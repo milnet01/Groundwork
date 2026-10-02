@@ -150,12 +150,19 @@ if (( DOCS_ONLY )); then
 fi
 
 # ── Checks that need a build or a full environment ──────────────────────────
-# Empty until the stack is chosen (docs/design.md). Add each leg here, never in
-# ci.yml, and pin its tool in scripts/ci-tools.env.
+# C++20 and Qt 6 with CMake (docs/design.md, ADR-0001). Add each leg here,
+# never in ci.yml. The compiler's own warnings, as errors, are the lint and
+# type legs.
 
-step 'lint'
-step 'types'
 step 'build'
+need cmake || fail "cmake is needed for the build leg"
+# Memory, not CPU count, bounds parallel compiles on this machine.
+JOBS=${GROUNDWORK_JOBS:-4}
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug >/dev/null
+cmake --build build --parallel "$JOBS"
+printf 'build clean\n' >&2
+
 step 'test'
+ctest --test-dir build --output-on-failure --timeout 60
 
 report 'full gate'
