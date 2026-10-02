@@ -22,6 +22,9 @@ public:
     // Names of the entries directly inside a directory, sorted; empty if
     // the directory is absent.
     QStringList entries(const QString &absoluteDir) const;
+    // The file name a symbolic link points at, such as a sysfs device's
+    // driver; empty if the path is not a link.
+    QString linkTargetName(const QString &absolutePath) const;
 
     const QString &root() const { return m_root; }
 

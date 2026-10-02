@@ -36,4 +36,10 @@ QStringList FileReader::entries(const QString &absoluteDir) const
         .entryList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::System, QDir::Name);
 }
 
+QString FileReader::linkTargetName(const QString &absolutePath) const
+{
+    const QFileInfo info(resolve(absolutePath));
+    return info.isSymLink() ? QFileInfo(info.symLinkTarget()).fileName() : QString();
+}
+
 } // namespace gw

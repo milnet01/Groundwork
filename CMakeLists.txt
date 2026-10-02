@@ -36,6 +36,7 @@ add_library(groundwork_items STATIC
     src/items/firewallitem.cpp
     src/items/flathubitem.cpp
     src/items/service.cpp
+    src/items/soundfirmwareitem.cpp
     src/items/sshitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)

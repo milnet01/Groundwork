@@ -375,8 +375,10 @@ The design's second and third levels.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0024] **Final page: offer to open OneUp when it is installed.**
+- ✅ [GRND-0024] **Final page: offer to open OneUp when it is installed.**
   Serves S2 (the run ends cleanly). Design: The levels.
+  Shipped 2026-10-02 in 9e59e60: local gate and GitHub run 37036466994
+  green.
   **Layman:** After setup, points you to OneUp to keep the computer up to date.
   Kind: implement.
   Source: design-2026-10-02.

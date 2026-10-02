@@ -4,6 +4,7 @@
 #include "codecsitem.h"
 #include "firewallitem.h"
 #include "flathubitem.h"
+#include "soundfirmwareitem.h"
 #include "sshitem.h"
 #include "updateitem.h"
 
@@ -14,10 +15,11 @@ const Catalogue &catalogue()
     static const UpdateItem update;
     static const CodecsItem codecs;
     static const FlathubItem flathub;
+    static const SoundFirmwareItem soundFirmware;
     static const FirewallItem firewall;
     static const SshItem ssh;
     static const ClockItem clock;
-    static const Catalogue all({&update, &codecs, &flathub, &firewall, &ssh, &clock});
+    static const Catalogue all({&update, &codecs, &flathub, &soundFirmware, &firewall, &ssh, &clock});
     return all;
 }
 
