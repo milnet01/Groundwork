@@ -346,10 +346,13 @@ The design's second and third levels.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0020] **Item: laptop power settings, offered only where there is a battery.**
+- ✅ [GRND-0020] **Item: laptop power settings, offered only where there is a battery.**
   Serves S3. TLP conflicts with power-profiles-daemon on openSUSE
   (https://linrunner.de/tlp/installation/opensuse.html); pick one
   and say why.
+  Shipped 2026-10-02 in dff0338: local gate and GitHub run 37039533482
+  green; on the author's desktop the check reads not needed here. Apply
+  first runs for real on a laptop.
   **Layman:** Sets up battery-friendly power settings on laptops.
   Kind: implement.
   Source: design-2026-10-02.

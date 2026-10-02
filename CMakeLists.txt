@@ -42,6 +42,7 @@ add_library(groundwork_items STATIC
     src/items/packman.cpp
     src/items/poweritem.cpp
     src/items/service.cpp
+    src/items/snapshotsitem.cpp
     src/items/soundfirmwareitem.cpp
     src/items/sshitem.cpp
     src/items/updateitem.cpp)

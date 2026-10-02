@@ -21,6 +21,7 @@ groundwork_test(tst_broadcomitem)
 groundwork_test(tst_nvidiaitem)
 groundwork_test(tst_firmwareitem)
 groundwork_test(tst_poweritem)
+groundwork_test(tst_snapshotsitem)
 # The built program itself: --version answers and exits 0.
 add_test(NAME cli_version COMMAND groundwork --version)
 set_tests_properties(cli_version PROPERTIES
