@@ -94,7 +94,7 @@
 
 - 📋 [GRND-0006] **Worker: root once, run steps, markers, stop, log.**
   Serves S2 and S1. sudo -A with a display, plain sudo on a terminal;
-  keep-alive as OneUp's engine does it. Re-checks each item before
+  every sudo, keep-alive included, started by the Worker itself (design: Root). Re-checks each item before
   applying, applies only on not done. zypper exit rule: 0, 100-103,
   106 succeed; 103 re-runs; 106 told to the user. Stops only between
   items, survives a closed output. Creates the Worker interface

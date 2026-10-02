@@ -41,9 +41,9 @@ says whether updates are waiting, and S1 does not count it. Keeping a
 machine up to date afterwards is OneUp's job.
 
 **Dependencies are kept by both sides.** Switching an item on in the
-Wizard switches on what it depends on, and the row says why. The Worker,
-given an item whose dependency is neither done nor in its list, skips
-it and says why. **Core owns the rule** for which items start switched
+Wizard switches on what it depends on, and switching one off switches
+off what needs it; the rows say why. The Worker, given an item whose
+dependency is neither done nor in its list, skips it and says why. **Core owns the rule** for which items start switched
 on and for closing dependencies, over the items it is given, so the
 Wizard and the Worker apply the same one.
 
@@ -83,8 +83,9 @@ It reads `ID` and `VERSION_ID` from `/etc/os-release`, never `NAME` or
 - `opensuse-tumbleweed` and `opensuse-slowroll` — supported, as the
   rolling family.
 - `opensuse-leap` with `VERSION_ID` 16 or later — supported.
-- Anything else — the wizard says in plain words that this system is
-  not supported, and stops. That includes Leap 15, Leap Micro, MicroOS
+- Anything else — not supported, in every mode: the wizard says so in
+  plain words and stops; the Worker and check mode print it and exit
+  non-zero. That includes Leap 15, Leap Micro, MicroOS
   and other distributions. Leap Micro and MicroOS update through
   `transactional-update`, which every item here would get wrong.
 
@@ -112,9 +113,13 @@ standard output.
 **The Worker's interface** is one reference file, created by the
 Worker's roadmap item: its markers, its command line, and where the
 stop file lives. The Worker takes the ids of the items to run on its
-command line. Given none, it runs the items the Wizard would start
-switched on. The Wizard never starts it with an empty selection: Apply
-is unavailable until an item is switched on.
+command line, with the language to speak. Given no items, it runs the
+items the Wizard would start switched on; given no language, it uses
+the system's. It runs items in catalogue order, whatever order the ids
+arrive in, and the catalogue lists every item after what it depends on.
+The Wizard never starts it with an empty selection: Apply is
+unavailable until an item is switched on. The Worker translates the
+text it produces itself.
 
 ## What may depend on what
 
@@ -140,10 +145,10 @@ is unavailable until an item is switched on.
 - **Check results** are one of: done, not done, not needed here,
   couldn't tell. "Couldn't tell" carries a reason and is never shown as
   done. A skipped repository is "couldn't tell", not "up to date".
-- **Step results** are ok, skipped or failed, with a detail line. A
-  failed item causes only the items that depend on it to be skipped,
-  each saying why; all others still run. Each item states what it
-  depends on.
+- **Step results** are ok, skipped or failed, with a detail line. An
+  item whose dependency failed, or was skipped for any reason but
+  "already done", is skipped too, saying why; all others still run.
+  Each item states what it depends on.
 - **The Worker re-checks before it applies.** It runs an item's check
   immediately before the item's steps, and applies only on "not done".
   Any other result skips the item: "skipped, already done", or skipped
@@ -156,13 +161,17 @@ is unavailable until an item is switched on.
 - **Stopping** is cooperative, between items. The Worker never signals a
   running zypper. Closing the window asks the Worker to stop; the Worker
   survives its output being closed and finishes the current item.
-- **Root** is asked for once per run and kept alive the way OneUp's
-  engine does it: a child that re-runs `sudo -n -v` and dies with the
-  Worker. The password box shows `sudo`'s own prompt, which names whose
-  password it wants: root's, on Tumbleweed as measured 2026-10-02.
-  With a display, `sudo -A` shows the app's own
-  password box; without one, `sudo` asks on the terminal. No root
-  command runs inside a pipe or a captured subshell.
+- **Root** is asked for once per run. Every `sudo` is started directly
+  by the Worker process, never by a helper or a shell: with no
+  terminal, `sudo` keys its remembered password to the process that
+  started it (`man sudoers`, `timestamp_type`, default `tty`, which
+  falls back to the parent process). So the Worker keeps the password
+  fresh by running `sudo -n -v` on its own timer. Reading a root
+  command's output through a pipe is fine. The password box shows
+  `sudo`'s own prompt, which names whose password it wants: root's, on
+  Tumbleweed (`Defaults targetpw` in `/usr/etc/sudoers`, read
+  2026-10-02). With a display, `sudo -A` shows the app's own password
+  box; without one, `sudo` asks on the terminal.
 - **Logging** goes to one file per run under the user's state directory,
   and the Worker's output is mirrored there.
 - **Persistence:** none, beyond the logs and the window's own settings.
@@ -220,3 +229,4 @@ is unavailable until an item is switched on.
 | 1 | 2026-10-02 | 2, each holding every question | 2 | 4 | 5 | — | 11 verified, 11 fixed; 3 dismissed as not changing the design (the keep-alive mechanism, which password `sudo` asks for, Slowroll's Packman tree: each settled by its item). Before dispatch, building the packet found the research record's rootless firewall check false; fixed in 3aa443f, outside the subject. Discovery's S1, S2 and supported systems narrowed to match, per `workflow.md` § 4. |
 | 2 | 2026-10-02 | 2, each holding every question | 1 | 4 | 4 | — | 9 verified, 9 fixed: the catalogue moved from Core to Items; the update item starts on only with another item, keeping S1; the Worker's command line, default and stop file have one owner; dependencies are kept by Wizard and Worker; zypper's rule is scoped to apply steps, 103 re-runs (`man zypper`); `ID_LIKE` never read; askpass mode is chosen by an environment variable (`man sudo`); one collision this loop's own fix created (the Worker's default) fixed before commit. 3 dismissed as settled by an item: the keep-alive mechanism, FUSE on a fresh install (ADR-0002 already requires it), the NVIDIA key prompt at boot. |
 | 3 | 2026-10-02 | 2, each holding every question | 0 | 3 | 5 | — | 8 verified, 8 fixed: the update item is a dependency of every installing item and S1 does not count it (discovery's S1 narrowed to match); a failed item skips only its dependants; the Wizard never sends an empty selection; Core owns the default selection and dependency closure; the Worker applies only on "not done"; the keep-alive follows OneUp's engine; the password box shows `sudo`'s prompt (root's password, measured); the library rule allows what the AppImage bundles. Askpass by environment variable measured: `sudo -A` passes the caller's variable and the prompt as the first argument. At the ADR cap: this loop's fixes are read by no lane. Calm cap: of the 8, 5 landed on text loops 1–2 wrote (update rule, dependencies, Worker default, keep-alive, default selection), all unpropagated consequences of loop 2's update decision rather than repairs of repairs. Second share: the whole document was new in this gate, so every finding is inside the armed span by construction. |
+| 4 | 2026-10-02 | 2, each holding every question | 0 | 2 | 5 | — | New run, armed by the translation amendment (7a963e1). 7 verified, 7 fixed: the Worker takes the language on its command line and translates its own text (in the change); and, outside it, every mode refuses an unsupported system; a dependency skipped for any reason but "already done" skips its dependants; switching a dependency off switches off what needs it; the Worker runs items in catalogue order; every `sudo`, keep-alive included, is started by the Worker itself (`man sudoers`: `timestamp_type` default `tty`, falling back to the parent process; read 2026-10-02), and a pipe from the Worker's own child is allowed. The out-of-change findings were fixed here rather than filed, because the next item built under the design needs them and filing would start another run on the same text. Dismissed: FUSE on a fresh install, already ADR-0002's requirement. |
