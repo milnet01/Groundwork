@@ -1,0 +1,3 @@
+#!/bin/sh
+# Fake flatpak for check-mode tests: Flathub already added.
+printf 'flathub\tsystem\n'

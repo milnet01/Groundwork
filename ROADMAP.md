@@ -147,9 +147,12 @@
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0010] **Item: Flatpak and Flathub.**
+- ✅ [GRND-0010] **Item: Flatpak and Flathub.**
   Serves S2 and S1. Commands from https://flathub.org/setup/openSUSE.
   Rootless check: flatpak remotes.
+  Shipped 2026-10-02 in 2488b45: local gate and GitHub run 37023886515
+  green. The check is proven by tests and on the author's machine; the
+  apply first runs for real under GRND-0013.
   **Layman:** Turns on the app store most modern Linux apps ship through.
   Kind: implement.
   Source: design-2026-10-02.
