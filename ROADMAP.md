@@ -214,7 +214,7 @@
   Lanes: tests.
   Blocked-by: GRND-0005, GRND-0008, GRND-0009, GRND-0010, GRND-0011, GRND-0012.
 
-- 🚧 [GRND-0032] **Translation machinery: translatable strings, language choice, right-to-left layout.**
+- ✅ [GRND-0032] **Translation machinery: translatable strings, language choice, right-to-left layout.**
   Serves S3 and S4. Qt Linguist tools in CMake (translation sources
   under translations/); load the translation matching the system
   language, with a choice on the wizard's first page; right-to-left
@@ -227,6 +227,9 @@
   pseudo-translation test. Building .ts/.qm files waits for
   qt6-linguist-devel (Main Repository OSS), which needs the user's root
   password.
+  Shipped 2026-10-02 in 7b05c64: local gate and GitHub run 37026680184
+  green. Building .ts/.qm files is its own item, GRND-0038, which waits
+  for the Linguist tools.
   **Layman:** Lets the app show its words in other languages, including ones written right to left.
   Kind: implement.
   Source: user-request-2026-10-02.
@@ -419,7 +422,7 @@ translation.
   Kind: implement.
   Source: user-request-2026-10-02.
   Lanes: translations.
-  Blocked-by: GRND-0032, GRND-0008.
+  Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
 - 📋 [GRND-0034] **Translations: Arabic and Hebrew, right to left.**
   Serves S3 and S4. Proves the mirrored layout on every page.
@@ -427,7 +430,7 @@ translation.
   Kind: implement.
   Source: user-request-2026-10-02.
   Lanes: translations, gui.
-  Blocked-by: GRND-0032, GRND-0008.
+  Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
 - 📋 [GRND-0035] **Translations: Chinese (Simplified), Japanese and Korean.**
   Serves S3. Check that a fresh install shows these scripts; if a font
@@ -436,7 +439,7 @@ translation.
   Kind: implement.
   Source: user-request-2026-10-02.
   Lanes: translations.
-  Blocked-by: GRND-0032, GRND-0008.
+  Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
 - 📋 [GRND-0036] **Translation: Hindi.**
   Serves S3. Same font check as the East Asian item.
@@ -444,7 +447,7 @@ translation.
   Kind: implement.
   Source: user-request-2026-10-02.
   Lanes: translations.
-  Blocked-by: GRND-0032, GRND-0008.
+  Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
 - 📋 [GRND-0037] **Translations: German, French, Spanish and Portuguese.**
   Serves S3.
@@ -452,7 +455,18 @@ translation.
   Kind: implement.
   Source: user-request-2026-10-02.
   Lanes: translations.
-  Blocked-by: GRND-0032, GRND-0008.
+  Blocked-by: GRND-0032, GRND-0008, GRND-0038.
+
+- 📋 [GRND-0038] **Build translation files with Qt's Linguist tools, locally and on GitHub.**
+  Serves S3. Extract strings into translations/*.ts and compile .qm
+  files into the program's resources at :/i18n, which
+  core/translations.cpp already reads. Install the tools in ci.yml too.
+  Waiting-on: the user installing qt6-linguist-devel (Main Repository
+  OSS), which needs the root password (asked 2026-10-02).
+  **Layman:** Sets up the tools that turn translated text into files the app can load.
+  Kind: implement.
+  Source: split-from-GRND-0032-2026-10-02.
+  Lanes: build, translations.
 
 ## Backlog — no version yet
 

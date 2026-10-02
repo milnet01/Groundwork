@@ -1,6 +1,7 @@
 // Groundwork's entry point: chooses the mode (docs/design.md, Entry). The
 // wizard, worker and askpass modes land here as each is built.
 #include "core/checkrunner.h"
+#include "core/statepaths.h"
 #include "core/systemidentity.h"
 #include "core/translations.h"
 #include "gui/askpassdialog.h"
@@ -108,7 +109,7 @@ int main(int argc, char *argv[])
             ids << args[i];
         }
         const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
-        gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::Worker::defaultStateDir());
+        gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::defaultStateDir());
         return worker.run(ids);
     }
     QTextStream(stderr) << tr("Usage: groundwork [--lang LANG] --check | --worker [ITEM...] | --version")

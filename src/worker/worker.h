@@ -23,11 +23,6 @@ public:
 
     int run(const QStringList &ids);
 
-    // Where the Wizard writes to ask the Worker to stop between items.
-    static QString stopFilePath(const QString &stateDir);
-    // $XDG_STATE_HOME/groundwork, or ~/.local/state/groundwork.
-    static QString defaultStateDir();
-
 private:
     enum class Outcome { Ok, SkippedDone, SkippedNotNeeded, SkippedOther, Failed };
 

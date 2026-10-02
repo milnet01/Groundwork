@@ -2,6 +2,7 @@
 
 #include "core/checkrunner.h"
 #include "core/markers.h"
+#include "core/statepaths.h"
 #include "core/systemidentity.h"
 #include "privilege.h"
 
@@ -30,16 +31,6 @@ Worker::Worker(const Catalogue &catalogue, FileReader files, QString stateDir)
     : m_catalogue(catalogue), m_files(std::move(files)), m_stateDir(std::move(stateDir))
 {
 }
-
-QString Worker::defaultStateDir()
-{
-    QString base = qEnvironmentVariable("XDG_STATE_HOME");
-    if (base.isEmpty())
-        base = QDir::homePath() + QStringLiteral("/.local/state");
-    return base + QStringLiteral("/groundwork");
-}
-
-QString Worker::stopFilePath(const QString &stateDir) { return stateDir + QStringLiteral("/stop.request"); }
 
 bool Worker::stopRequested() const { return QFile::exists(stopFilePath(m_stateDir)); }
 
