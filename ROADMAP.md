@@ -311,9 +311,11 @@ hardware is found and lacks support.
 
 The design's second and third levels.
 
-- 📋 [GRND-0017] **Item: Btrfs snapshots are on.**
+- ✅ [GRND-0017] **Item: Btrfs snapshots are on.**
   Serves S1 and S3. snapper list-configs works without root (measured
   2026-10-02).
+  Shipped 2026-10-02 in caa09cf: local gate and GitHub run 37039826131
+  green; on the author's machine the check reads already done.
   **Layman:** Confirms the system can be rolled back if an update goes wrong.
   Kind: implement.
   Source: design-2026-10-02.

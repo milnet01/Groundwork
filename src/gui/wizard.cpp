@@ -117,7 +117,7 @@ public:
         m_list->setText(lines.join(QLatin1Char('\n')));
     }
     // Apply is unavailable until an item is switched on (design, Worker's interface).
-    bool isComplete() const override { return !m_wizard->selection().isEmpty(); }
+    bool isComplete() const override { return !m_wizard->selection().isEmpty() && m_wizard->valuesValid(); }
 
 private:
     Wizard *m_wizard;
@@ -132,17 +132,16 @@ public:
     void initializePage() override
     {
         QList<QPair<QString, QString>> titles;
-        for (const QString &id : m_wizard->workerArguments().mid(m_firstId))
+        for (const QString &id : m_wizard->runOrder())
             titles.append({id, m_wizard->row(id) ? rowTitle(id) : id});
         start(m_program, m_wizard->workerArguments(), titles);
     }
-    void configure(const QString &program, int firstId) { m_program = program; m_firstId = firstId; }
+    void configure(const QString &program) { m_program = program; }
 
 private:
     QString rowTitle(const QString &id) const { return m_wizard->row(id)->toggle()->text(); }
     Wizard *m_wizard;
     QString m_program;
-    int m_firstId = 0;
 };
 
 } // namespace
@@ -176,7 +175,7 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     }
     addPage(new ReviewPage(this, *m_setup.catalogue));
     auto *run = new RunWizardPage(this);
-    run->configure(m_setup.workerProgram, int(m_setup.workerPrefix.size()) + 3);
+    run->configure(m_setup.workerProgram);
     m_runPage = run;
     addPage(run);
     connect(m_runPage, &RunPage::runFinished, this, [this] {
@@ -232,9 +231,25 @@ void Wizard::refreshRows(const QStringList &pulled, const QString &cause, bool o
 
 QStringList Wizard::workerArguments() const
 {
-    return m_setup.workerPrefix
-        + QStringList{QStringLiteral("--worker"), QStringLiteral("--lang"), m_setup.language}
-        + m_setup.catalogue->runOrder(m_selection);
+    QStringList args = m_setup.workerPrefix
+        + QStringList{QStringLiteral("--worker"), QStringLiteral("--lang"), m_setup.language};
+    const QStringList order = runOrder();
+    for (const QString &id : order) {
+        const ItemRow *row = m_rows.value(id);
+        if (row && row->valueField())
+            args << QStringLiteral("--set") << id + QLatin1Char('=') + row->value();
+    }
+    return args + order;
+}
+
+bool Wizard::valuesValid() const
+{
+    for (const QString &id : runOrder()) {
+        const ItemRow *row = m_rows.value(id);
+        if (row && row->valueField() && !m_setup.catalogue->find(id)->isValidValue(row->value()))
+            return false;
+    }
+    return true;
 }
 
 bool Wizard::stopForClose()

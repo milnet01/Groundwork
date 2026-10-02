@@ -32,6 +32,9 @@ struct CheckResult
     QString detail; // plain English; required for CouldNotTell
 };
 
+// In a step's argv, replaced by the value the user gave the item.
+inline const QString kValuePlaceholder = QStringLiteral("{value}");
+
 // One command the Worker runs for an apply.
 struct Step
 {
@@ -81,6 +84,10 @@ public:
     // A preparation never starts switched on by itself; every item that
     // installs packages depends on it (docs/design.md, The levels).
     virtual bool isPreparation() const { return false; }
+    // Non-empty for an item that takes a value from the user, such as the
+    // computer's name: the field's label. Its steps carry kValuePlaceholder.
+    virtual QString valuePrompt() const { return {}; }
+    virtual bool isValidValue(const QString &) const { return true; }
 
     virtual CheckResult check(const CheckContext &context) const = 0;
     // The steps can differ by system (dup on the rolling family, update on

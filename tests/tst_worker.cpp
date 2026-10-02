@@ -227,6 +227,27 @@ esac
         QCOMPARE(r.count(QStringLiteral("fwupdmgr update")), 1);
     }
 
+    void aValueReachesItsCommandAndAMissingOneSkips()
+    {
+        writeFile(m_bin + QStringLiteral("/hostnamectl"), R"(#!/bin/sh
+echo "hostnamectl $*" >> "$FAKE_LOG"
+[ "$2" = --static ] && echo localhost
+exit 0
+)", true);
+        Run r = run({QStringLiteral("--set"), QStringLiteral("computer-name=lounge-pc"), QStringLiteral("computer-name")});
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.endsFor(QStringLiteral("computer-name")).value(1), QStringLiteral("ok"));
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- hostnamectl hostname lounge-pc")));
+
+        QFile::remove(m_log);
+        r = run({QStringLiteral("computer-name")}); // no --set
+        QCOMPARE(r.endsFor(QStringLiteral("computer-name")).value(1), QStringLiteral("skip"));
+        QCOMPARE(r.count(QStringLiteral("hostnamectl hostname lounge")), 0);
+
+        r = run({QStringLiteral("--set"), QStringLiteral("computer-name=-bad-"), QStringLiteral("computer-name")});
+        QCOMPARE(r.endsFor(QStringLiteral("computer-name")).value(1), QStringLiteral("skip"));
+    }
+
     void refusesAnUnknownItem()
     {
         QCOMPARE(run({QStringLiteral("no-such-item")}).exitCode, 2);

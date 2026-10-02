@@ -110,7 +110,7 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail)
     return false;
 }
 
-int Worker::run(const QStringList &ids)
+int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
 {
     (void)QDir().mkpath(m_stateDir + QStringLiteral("/logs"));
     // A stop file left by an earlier run must not stop this one.
@@ -192,9 +192,19 @@ int Worker::run(const QStringList &ids)
             continue;
         }
 
+        // An item that takes a value runs only with a valid one.
+        const QString value = values.value(id);
+        if (!item->valuePrompt().isEmpty() && (value.isEmpty() || !item->isValidValue(value))) {
+            outcomes.insert(id, Outcome::SkippedOther);
+            say(formatMarker(QStringLiteral("STEP_END"),
+                             {id, QStringLiteral("skip"), tr("Skipped: no valid value was given.")}));
+            continue;
+        }
+
         QString detail;
         bool success = true;
-        for (const Step &step : item->applySteps(system, context)) {
+        for (Step step : item->applySteps(system, context)) {
+            step.argv.replaceInStrings(kValuePlaceholder, value);
             if (step.needsRoot && !ensureRoot())
                 break;
             if (!runStep(id, step, &detail)) {

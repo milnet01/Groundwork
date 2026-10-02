@@ -145,18 +145,24 @@ int main(int argc, char *argv[])
         // output must not end it (design, Stopping).
         std::signal(SIGPIPE, SIG_IGN);
         QStringList ids;
+        QHash<QString, QString> values;
         for (qsizetype i = args.indexOf(QStringLiteral("--worker")) + 1; i < args.size(); ++i) {
             if (args[i] == QLatin1String("--lang")) {
                 ++i; // loaded above
+                continue;
+            }
+            if (args[i] == QLatin1String("--set") && i + 1 < args.size()) {
+                const QString pair = args[++i]; // ID=VALUE
+                values.insert(pair.section(QLatin1Char('='), 0, 0), pair.section(QLatin1Char('='), 1));
                 continue;
             }
             ids << args[i];
         }
         const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
         gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::defaultStateDir());
-        return worker.run(ids);
+        return worker.run(ids, values);
     }
-    QTextStream(stderr) << tr("Usage: groundwork [--lang LANG] --check | --worker [ITEM...] | --version")
+    QTextStream(stderr) << tr("Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version")
                         << '\n';
     return 2;
 }

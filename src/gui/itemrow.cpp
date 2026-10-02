@@ -5,6 +5,7 @@
 #include <QCheckBox>
 #include <QEvent>
 #include <QLabel>
+#include <QLineEdit>
 #include <QSignalBlocker>
 #include <QVBoxLayout>
 
@@ -34,7 +35,18 @@ ItemRow::ItemRow(const Item &item, const CheckResult &result, QWidget *parent)
     layout->addWidget(stateLabel);
     layout->addWidget(sentence);
     layout->addWidget(m_reason);
+    if (!item.valuePrompt().isEmpty()) {
+        auto *prompt = new QLabel(item.valuePrompt(), this);
+        prompt->setWordWrap(true);
+        m_value = new QLineEdit(this);
+        prompt->setBuddy(m_value);
+        m_value->setAccessibleName(item.valuePrompt());
+        layout->addWidget(prompt);
+        layout->addWidget(m_value);
+    }
 }
+
+QString ItemRow::value() const { return m_value ? m_value->text().trimmed() : QString(); }
 
 void ItemRow::changeEvent(QEvent *event)
 {

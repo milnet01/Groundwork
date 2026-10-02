@@ -38,6 +38,9 @@ public:
     ItemRow *row(const QString &id) const { return m_rows.value(id); }
     RunPage *runPage() const { return m_runPage; }
     QStringList workerArguments() const;
+    QStringList runOrder() const { return m_setup.catalogue->runOrder(m_selection); }
+    // Every switched-on item that takes a value has a valid one.
+    bool valuesValid() const;
 
     // The user switched an item on or off in a row.
     void userToggled(const QString &id, bool on);

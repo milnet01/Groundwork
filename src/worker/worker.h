@@ -10,6 +10,7 @@
 #include "privilege.h"
 
 #include <QFile>
+#include <QHash>
 #include <QStringList>
 
 namespace gw {
@@ -21,7 +22,8 @@ public:
 
     Worker(const Catalogue &catalogue, FileReader files, QString stateDir);
 
-    int run(const QStringList &ids);
+    // values: what the user gave items that take one, keyed by item id.
+    int run(const QStringList &ids, const QHash<QString, QString> &values = {});
 
 private:
     enum class Outcome { Ok, SkippedDone, SkippedNotNeeded, SkippedOther, Failed };

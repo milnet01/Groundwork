@@ -10,7 +10,7 @@ the Worker as built in `src/worker/worker.cpp` and `src/main.cpp`.
 ## Command line
 
 ```
-groundwork --worker [--lang LANG] [ITEM...]
+groundwork --worker [--lang LANG] [--set ITEM=VALUE]... [ITEM...]
 ```
 
 - **`ITEM...`** — item ids from the catalogue, for example
@@ -18,8 +18,10 @@ groundwork --worker [--lang LANG] [ITEM...]
   order, whatever order they are given in.
 - **No items** — the Worker runs the items the Wizard would start
   switched on.
-- **`--lang LANG`** — the language to speak. Accepted now; translations
-  are loaded once GRND-0032 builds the machinery.
+- **`--lang LANG`** — the language to speak.
+- **`--set ITEM=VALUE`** — the value for an item that takes one, such as
+  `computer-name=lounge-pc`. The value replaces `{value}` in that item's
+  commands. Without a valid value the item is skipped, saying why.
 
 ## Exit codes
 

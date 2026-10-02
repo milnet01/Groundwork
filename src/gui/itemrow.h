@@ -9,6 +9,7 @@
 
 class QCheckBox;
 class QLabel;
+class QLineEdit;
 
 namespace gw {
 
@@ -26,6 +27,9 @@ public:
     void setReason(const QString &reason);
     QString reason() const;
     QCheckBox *toggle() const { return m_toggle; }
+    // For an item that takes a value; null otherwise.
+    QLineEdit *valueField() const { return m_value; }
+    QString value() const;
 
 signals:
     void toggledByUser(const QString &id, bool on);
@@ -41,6 +45,7 @@ private:
     QString m_id;
     QCheckBox *m_toggle;
     QLabel *m_reason;
+    QLineEdit *m_value = nullptr;
 };
 
 } // namespace gw

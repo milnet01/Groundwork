@@ -7,6 +7,7 @@
 
 #include <QCheckBox>
 #include <QDir>
+#include <QLineEdit>
 #include <QPushButton>
 #include <QFile>
 #include <QTemporaryDir>
@@ -36,7 +37,14 @@ private:
 
 const FakeItem update(QStringLiteral("update"), gw::Level::Essentials, false, true);
 const FakeItem codecs(QStringLiteral("codecs"), gw::Level::Essentials, true);
-const FakeItem hostname(QStringLiteral("hostname"), gw::Level::Configuration, false);
+class FakeValueItem : public FakeItem
+{
+public:
+    using FakeItem::FakeItem;
+    QString valuePrompt() const override { return QStringLiteral("Name:"); }
+    bool isValidValue(const QString &v) const override { return !v.isEmpty() && !v.contains(QLatin1Char(' ')); }
+};
+const FakeValueItem hostname(QStringLiteral("hostname"), gw::Level::Configuration, false);
 const FakeItem fonts(QStringLiteral("fonts"), gw::Level::NiceToHave, true);
 const gw::Catalogue catalogue({&update, &codecs, &hostname, &fonts});
 
@@ -183,6 +191,26 @@ private slots:
             QTRY_VERIFY(QFile::exists(mark));
         }
         qputenv("PATH", oldPath);
+    }
+
+    void aValueItemNeedsAValidValueAndPassesIt()
+    {
+        auto w = make();
+        QTRY_VERIFY(w->checksDone());
+        gw::ItemRow *row = w->row(QStringLiteral("hostname"));
+        QVERIFY(row->valueField());
+        row->toggle()->click();
+        row->valueField()->setText(QStringLiteral("bad name"));
+        QVERIFY(!w->valuesValid());
+        for (int i = 0; i < 10 && !w->currentPage()->isCommitPage(); ++i)
+            w->next();
+        QVERIFY(!w->currentPage()->isComplete()); // Apply unavailable
+        row->valueField()->setText(QStringLiteral("lounge-pc"));
+        QVERIFY(w->valuesValid());
+        QVERIFY(w->currentPage()->isComplete());
+        const QStringList args = w->workerArguments();
+        QVERIFY(args.join(QLatin1Char(' ')).contains(QLatin1String("--set hostname=lounge-pc")));
+        QVERIFY(w->row(QStringLiteral("codecs"))->valueField() == nullptr);
     }
 
     void closingMidRunAsksTheWorkerToStopAndWaits()
