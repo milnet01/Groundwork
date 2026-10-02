@@ -46,11 +46,13 @@
   Source: design-2026-10-02.
   Lanes: build.
 
-- 📋 [GRND-0002] **Core: read the system's identity and refuse unsupported systems.**
+- ✅ [GRND-0002] **Core: read the system's identity and refuse unsupported systems.**
   Serves S2. Reads ID and VERSION_ID from /etc/os-release, never NAME
   or ID_LIKE (design: Which systems it runs on). Supported:
   opensuse-tumbleweed, opensuse-slowroll, opensuse-leap 16 or later.
   IDs from docs/research/2026-10-02-sources.md.
+  Shipped 2026-10-02 in e555d58: local gate and GitHub run 37023262086
+  both green. Each mode enforces the refusal in its own item.
   **Layman:** The app works out which openSUSE it is on, and says plainly if it can't help.
   Kind: implement.
   Source: design-2026-10-02.

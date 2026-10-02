@@ -18,6 +18,7 @@ add_library(groundwork_core STATIC
     src/core/checkrunner.cpp
     src/core/commandrunner.cpp
     src/core/filereader.cpp
+    src/core/selection.cpp
     src/core/systemidentity.cpp)
 target_include_directories(groundwork_core PUBLIC src)
 target_link_libraries(groundwork_core PUBLIC Qt6::Core)

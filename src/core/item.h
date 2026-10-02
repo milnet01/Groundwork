@@ -73,6 +73,9 @@ public:
     virtual QString applySentence() const = 0; // S3: what applying would do
     virtual QStringList dependsOn() const { return {}; }
     virtual bool installsPackages() const { return false; }
+    // A preparation never starts switched on by itself; every item that
+    // installs packages depends on it (docs/design.md, The levels).
+    virtual bool isPreparation() const { return false; }
 
     virtual CheckResult check(const CheckContext &context) const = 0;
     virtual QList<Step> applySteps() const = 0;

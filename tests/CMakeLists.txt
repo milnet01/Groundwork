@@ -10,6 +10,7 @@ groundwork_test(tst_filereader)
 groundwork_test(tst_commandrunner)
 groundwork_test(tst_checkrunner)
 groundwork_test(tst_systemidentity)
+groundwork_test(tst_selection)
 # The built program itself: --version answers and exits 0.
 add_test(NAME cli_version COMMAND groundwork --version)
 set_tests_properties(cli_version PROPERTIES
