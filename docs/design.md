@@ -33,14 +33,24 @@ each row already says "already done", "not done", "not needed here" or
 "couldn't tell".
 
 1. **Essentials** — what a desktop user needs for things to work.
-   Bring the system up to date; media codecs; Flatpak and Flathub; the
-   graphics driver, offered only where the card needs one.
+   Bring the system up to date; media codecs, including video in the
+   browser; Flatpak and Flathub. Hardware support, offered only where
+   the hardware is found and lacks it: the NVIDIA driver, sound
+   firmware, Broadcom Wi-Fi.
 2. **System setup** — that the system can recover and is protected.
-   Btrfs snapshots, firmware updates, the firewall.
+   Btrfs snapshots, the firewall, firmware updates, and laptop power
+   settings where there is a battery.
 3. **Configuration** — choices a new install asks of its owner. The
-   computer's name, and remote login over SSH.
-4. **Nice to have** — extras. Microsoft-compatible fonts, and a short
-   list of handy programs, each its own toggle.
+   computer's name; remote login over SSH; the clock setting, where
+   Windows is also installed.
+4. **Nice to have** — extras, each its own toggle. Everyday apps,
+   gaming, developer tools, a backup tool for the user's own files,
+   Microsoft-compatible fonts, and handy command-line programs.
+
+Which needs are common comes from the sources in
+`docs/research/2026-10-02-sources.md`. Desktop look and feel is left
+out: it differs between desktops, and each desktop's own settings
+cover it.
 
 After a run, if OneUp is installed, the last page offers to open it.
 
