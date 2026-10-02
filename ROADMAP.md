@@ -99,7 +99,7 @@
   Lanes: entry.
   Blocked-by: GRND-0002, GRND-0003.
 
-- 📋 [GRND-0006] **Worker: root once, run steps, markers, stop, log.**
+- ✅ [GRND-0006] **Worker: root once, run steps, markers, stop, log.**
   Serves S2 and S1. sudo -A with a display, plain sudo on a terminal;
   every sudo, keep-alive included, started by the Worker itself (design: Root). Re-checks each item before
   applying, applies only on not done. zypper exit rule: 0, 100-103,
@@ -107,6 +107,10 @@
   items, survives a closed output. Creates the Worker interface
   reference file: markers, command line, stop-file location.
   Borrows OneUp's lessons, not its code (ADR-0001).
+  Shipped 2026-10-02 in dc75532: local gate and GitHub run 37025886274
+  green, 12 end-to-end worker cases with fake sudo, zypper and flatpak.
+  Real root runs come with GRND-0013. --lang is accepted; loading it
+  waits for GRND-0032.
   **Layman:** The part that does the admin work, asks for the password once, and reports progress.
   Kind: implement.
   Source: design-2026-10-02.

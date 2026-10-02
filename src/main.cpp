@@ -2,9 +2,11 @@
 // wizard, worker and askpass modes land here as each is built.
 #include "core/checkrunner.h"
 #include "core/systemidentity.h"
+#include "gui/askpassdialog.h"
 #include "items/catalogue.h"
 #include "worker/worker.h"
 
+#include <QApplication>
 #include <QCoreApplication>
 #include <QTextStream>
 
@@ -65,6 +67,13 @@ int checkMode(const QString &root)
 
 int main(int argc, char *argv[])
 {
+    // Askpass mode: sudo -A runs this program with its prompt as the only
+    // argument, so the Worker selects the mode by environment (design, Entry).
+    if (qEnvironmentVariable("GROUNDWORK_ASKPASS") == QLatin1String("1")) {
+        QApplication app(argc, argv);
+        return gw::runAskpass(argc > 1 ? QString::fromLocal8Bit(argv[1]) : QString());
+    }
+
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName(QStringLiteral("groundwork"));
     QCoreApplication::setApplicationVersion(QStringLiteral(GROUNDWORK_VERSION));

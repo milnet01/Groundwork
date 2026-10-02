@@ -38,3 +38,8 @@ set_tests_properties(cli_check_setup_machine_starts_nothing PROPERTIES
 groundwork_test(tst_worker)
 target_compile_definitions(tst_worker PRIVATE GROUNDWORK_BIN="$<TARGET_FILE:groundwork>")
 add_dependencies(tst_worker groundwork)
+
+# The password box, on Qt's offscreen display.
+groundwork_test(tst_askpass)
+target_link_libraries(tst_askpass PRIVATE groundwork_gui Qt6::Widgets)
+set_tests_properties(tst_askpass PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
