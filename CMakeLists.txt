@@ -8,7 +8,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Test)
+option(GROUNDWORK_TESTS "Build the tests" ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
 # Warnings are errors in the gate, so a warning cannot sit unread.
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
@@ -53,5 +55,14 @@ target_link_libraries(groundwork PRIVATE groundwork_gui groundwork_worker ground
 target_compile_definitions(groundwork PRIVATE
     GROUNDWORK_VERSION="${PROJECT_VERSION}")
 
-enable_testing()
-add_subdirectory(tests)
+include(GNUInstallDirs)
+install(TARGETS groundwork RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(FILES packaging/appimage/groundwork.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES packaging/appimage/groundwork.svg
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+
+if(GROUNDWORK_TESTS)
+    find_package(Qt6 REQUIRED COMPONENTS Test)
+    enable_testing()
+    add_subdirectory(tests)
+endif()

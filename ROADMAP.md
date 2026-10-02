@@ -135,12 +135,15 @@
   Lanes: gui, entry.
   Blocked-by: GRND-0006.
 
-- 🚧 [GRND-0008] **Wizard: level pages, rows, review page and run page.**
+- ✅ [GRND-0008] **Wizard: level pages, rows, review page and run page.**
   Serves S3 and S4. Rows show each item's state and its plain-English
   sentence; toggles; dependencies switched on with the reason shown.
   Apply is unavailable with nothing switched on. Closing the window
   asks the Worker to stop. Follows the system font size and colours
   and works at large sizes; refuses to start as root.
+  Shipped 2026-10-02 in 4caedef: local gate and GitHub run 37027912051
+  green; pages checked by eye at 18 pt offscreen. Against the real
+  Worker and sudo: GRND-0013.
   **Layman:** The step-by-step window: one page per level, a summary, then the progress page.
   Kind: implement.
   Source: design-2026-10-02.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <!-- Groundwork: layers laid down from the bottom up. -->
+  <rect width="256" height="256" rx="40" fill="#1f3d2b"/>
+  <rect x="40" y="168" width="176" height="40" rx="8" fill="#73ba25"/>
+  <rect x="60" y="116" width="136" height="40" rx="8" fill="#9fd36a"/>
+  <rect x="84" y="64" width="88" height="40" rx="8" fill="#d5ecb9"/>
+</svg>
