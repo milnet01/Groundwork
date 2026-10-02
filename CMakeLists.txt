@@ -37,6 +37,7 @@ add_library(groundwork_items STATIC
     src/items/firewallitem.cpp
     src/items/flathubitem.cpp
     src/items/hardware.cpp
+    src/items/nvidiaitem.cpp
     src/items/packman.cpp
     src/items/service.cpp
     src/items/soundfirmwareitem.cpp

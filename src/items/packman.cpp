@@ -13,7 +13,7 @@ const QString kMirror = QStringLiteral("https://ftp.gwdg.de/pub/linux/misc/packm
 
 } // namespace
 
-QString packmanAlias(const CheckContext &context)
+QString repositoryAlias(const CheckContext &context, const QString &urlPart)
 {
     for (const QString &name : context.entries(kReposDir)) {
         if (!name.endsWith(QLatin1String(".repo")))
@@ -23,19 +23,19 @@ QString packmanAlias(const CheckContext &context)
             continue;
         // One .repo file can hold several [alias] sections.
         QString alias;
-        bool packman = false;
+        bool matches = false;
         bool enabled = true;
-        auto finish = [&]() { return packman && enabled ? alias : QString(); };
+        auto finish = [&]() { return matches && enabled ? alias : QString(); };
         for (const QByteArray &raw : text->split('\n')) {
             const QString line = QString::fromUtf8(raw).trimmed();
             if (line.startsWith(QLatin1Char('[')) && line.endsWith(QLatin1Char(']'))) {
                 if (!finish().isEmpty())
                     return finish();
                 alias = line.mid(1, line.size() - 2);
-                packman = false;
+                matches = false;
                 enabled = true;
             } else if (line.startsWith(QLatin1String("baseurl="))) {
-                packman = line.contains(QLatin1String("packman"), Qt::CaseInsensitive);
+                matches = line.contains(urlPart, Qt::CaseInsensitive);
             } else if (line.startsWith(QLatin1String("enabled="))) {
                 enabled = line.mid(8).trimmed() == QLatin1String("1");
             }
@@ -44,6 +44,11 @@ QString packmanAlias(const CheckContext &context)
             return finish();
     }
     return {};
+}
+
+QString packmanAlias(const CheckContext &context)
+{
+    return repositoryAlias(context, QStringLiteral("packman"));
 }
 
 QList<Step> packmanSteps(const SystemIdentity &system, const CheckContext &context, QString *alias)

@@ -9,8 +9,12 @@
 
 namespace gw {
 
+// The alias of the first enabled repository in /etc/zypp/repos.d whose
+// baseurl contains urlPart (case-insensitive); empty when there is none.
+QString repositoryAlias(const CheckContext &context, const QString &urlPart);
+
 // The alias of an enabled Packman repository, full or Essentials, on any
-// mirror, read from /etc/zypp/repos.d; empty when there is none.
+// mirror; empty when there is none.
 QString packmanAlias(const CheckContext &context);
 
 // The steps that make Packman usable: add Essentials when none is

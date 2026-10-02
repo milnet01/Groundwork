@@ -287,12 +287,15 @@ hardware is found and lacks support.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0016] **Item: Broadcom Wi-Fi, offered only where a Broadcom card is found.**
+- ✅ [GRND-0016] **Item: Broadcom Wi-Fi, offered only where a Broadcom card is found.**
   Serves S2. broadcom-wl comes from Packman; find out whether the
   Essentials repository carries it, since ADR-0003 adds only that.
   If it does not, the item says so rather than adding the full
   repository silently. Known to break after kernel updates
   (docs/research/2026-10-02-sources.md).
+  Shipped 2026-10-02 in 6db56d0: local gate and GitHub run 37037627999
+  green; on the author's machine the check reads not needed here. Apply
+  first runs for real on a listed Broadcom chip.
   **Layman:** Gets Broadcom Wi-Fi cards working.
   Kind: implement.
   Source: design-2026-10-02.
