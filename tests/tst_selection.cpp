@@ -21,7 +21,7 @@ public:
     bool installsPackages() const override { return m_installs; }
     bool isPreparation() const override { return m_prep; }
     gw::CheckResult check(const gw::CheckContext &) const override { return {}; }
-    QList<gw::Step> applySteps(const gw::SystemIdentity &) const override { return {}; }
+    QList<gw::Step> applySteps(const gw::SystemIdentity &, const gw::CheckContext &) const override { return {}; }
 
 private:
     QString m_id;

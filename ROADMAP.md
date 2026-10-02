@@ -140,10 +140,13 @@
   Lanes: gui.
   Blocked-by: GRND-0004, GRND-0006, GRND-0032.
 
-- 📋 [GRND-0009] **Item: bring the system up to date.**
+- ✅ [GRND-0009] **Item: bring the system up to date.**
   Serves S2. zypper dup on Tumbleweed and Slowroll, zypper update on
   Leap; take the commands from current openSUSE docs when built.
   A dependency of every installing item; S1 does not count it.
+  Shipped 2026-10-02 in f26a71d: local gate and GitHub run 37024548661
+  green. The check never says done (a rootless check cannot see a dup);
+  the apply first runs for real under GRND-0013.
   **Layman:** Updates the system before installing anything, so new software fits.
   Kind: implement.
   Source: design-2026-10-02.

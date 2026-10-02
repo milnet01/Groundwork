@@ -26,6 +26,7 @@ target_link_libraries(groundwork_core PUBLIC Qt6::Core)
 # Items depend on Core only.
 add_library(groundwork_items STATIC
     src/items/catalogue.cpp
+    src/items/codecsitem.cpp
     src/items/flathubitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)

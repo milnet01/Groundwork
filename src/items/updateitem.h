@@ -20,7 +20,8 @@ public:
     QString applySentence() const override;
     bool isPreparation() const override { return true; }
     CheckResult check(const CheckContext &context) const override;
-    QList<Step> applySteps(const SystemIdentity &system) const override;
+    QList<Step> applySteps(const SystemIdentity &system,
+                           const CheckContext &context) const override;
 };
 
 } // namespace gw

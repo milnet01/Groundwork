@@ -71,7 +71,8 @@ private slots:
 
     void applyInstallsThenAddsTheSystemRemote()
     {
-        const auto steps = gw::FlathubItem().applySteps(gw::parseOsRelease("ID=opensuse-tumbleweed\n"));
+        const auto steps = gw::FlathubItem().applySteps(gw::parseOsRelease("ID=opensuse-tumbleweed\n"),
+                                                        gw::CheckContext(gw::FileReader(m_root.path())));
         QCOMPARE(steps.size(), 2);
         QCOMPARE(steps[0].tool, gw::Step::Tool::Zypper);
         QVERIFY(steps[0].needsRoot && steps[1].needsRoot);

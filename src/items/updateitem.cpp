@@ -40,7 +40,7 @@ CheckResult UpdateItem::check(const CheckContext &context) const
     return {CheckState::NotDone, detail};
 }
 
-QList<Step> UpdateItem::applySteps(const SystemIdentity &system) const
+QList<Step> UpdateItem::applySteps(const SystemIdentity &system, const CheckContext &) const
 {
     // Tumbleweed and Slowroll upgrade with dup; Leap with update.
     const QString command = system.family == SystemIdentity::Family::Leap

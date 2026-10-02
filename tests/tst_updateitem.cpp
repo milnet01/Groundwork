@@ -23,10 +23,8 @@ class TstUpdateItem : public QObject
         f.close();
         QVERIFY(f.setPermissions(f.permissions() | QFile::ExeOwner));
     }
-    gw::CheckResult check() const
-    {
-        return gw::UpdateItem().check(gw::CheckContext(gw::FileReader(m_root.path())));
-    }
+    gw::CheckContext context() const { return gw::CheckContext(gw::FileReader(m_root.path())); }
+    gw::CheckResult check() const { return gw::UpdateItem().check(context()); }
 
 private slots:
     void initTestCase()
@@ -72,8 +70,8 @@ private slots:
 
     void rollingUsesDupAndLeapUsesUpdate()
     {
-        const auto rolling = gw::UpdateItem().applySteps(gw::parseOsRelease("ID=opensuse-slowroll\n"));
-        const auto leap = gw::UpdateItem().applySteps(gw::parseOsRelease("ID=opensuse-leap\nVERSION_ID=16.0\n"));
+        const auto rolling = gw::UpdateItem().applySteps(gw::parseOsRelease("ID=opensuse-slowroll\n"), context());
+        const auto leap = gw::UpdateItem().applySteps(gw::parseOsRelease("ID=opensuse-leap\nVERSION_ID=16.0\n"), context());
         QCOMPARE(rolling.last().argv, QStringList({"zypper", "-n", "dup"}));
         QCOMPARE(leap.last().argv, QStringList({"zypper", "-n", "update"}));
         QCOMPARE(rolling.first().argv, QStringList({"zypper", "-n", "refresh"}));

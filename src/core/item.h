@@ -79,8 +79,11 @@ public:
     virtual bool isPreparation() const { return false; }
 
     virtual CheckResult check(const CheckContext &context) const = 0;
-    // The steps differ by system: dup on the rolling family, update on Leap.
-    virtual QList<Step> applySteps(const SystemIdentity &system) const = 0;
+    // The steps can differ by system (dup on the rolling family, update on
+    // Leap) and by what is already configured, which the context reads
+    // without root.
+    virtual QList<Step> applySteps(const SystemIdentity &system,
+                                   const CheckContext &context) const = 0;
 };
 
 } // namespace gw
