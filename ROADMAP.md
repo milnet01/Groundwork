@@ -194,11 +194,17 @@
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0012] **AppImage build on the oldest supported system.**
+- ✅ [GRND-0012] **AppImage build on the oldest supported system.**
   Serves S2. ADR-0002: runs on a fresh install with nothing installed
   first, so check whether the runtime needs FUSE or libfuse2 on a
   fresh Tumbleweed and Leap 16. Built on Leap 16, the oldest supported
   system (design: The stack).
+  Shipped 2026-10-02 in d98e78f: local gate and GitHub run 37033646998
+  green; the AppImage ran --version, --check and its window (on Xvfb) on
+  the author's Tumbleweed. Found in a bare Tumbleweed container: it
+  needs libGLX.so.0 (package libglvnd), which a bare container lacks;
+  whether every fresh desktop install has it, and whether FUSE is
+  present, is checked under GRND-0013.
   **Layman:** Packs the app into one file you download and double-click.
   Kind: package.
   Source: design-2026-10-02.
@@ -211,6 +217,17 @@
   plays (S2); a second run starts nothing and changes nothing (S1);
   rows say what they would do (S3); levels in order, toggles obeyed
   (S4).
+  Progress 2026-10-02: tests/realrun/run-in-container.sh ran the
+  AppImage's Worker for real in fresh Tumbleweed and Leap 16.0
+  containers (a normal user, passwordless sudo). On both: AUTH ok once;
+  system-update, media-codecs and flathub ended ok; check mode then
+  showed codecs and Flathub already done; ffmpeg lists h264 and hevc
+  decoders; libavcodec comes from Packman. Leap's $releasever URL
+  resolved. Found: the AppImage needs the desktop's X11, OpenGL and font
+  libraries (libxcb, libGLX, libfontconfig and others, which AppImages
+  leave to the system); a bare container lacks them. Still owed for S1
+  to S4: fresh desktop VMs, with the Wizard, the real password box,
+  FUSE, and a video playing.
   **Layman:** Tries the finished app on brand-new test machines to prove it works.
   Kind: test.
   Source: design-2026-10-02.

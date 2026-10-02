@@ -118,7 +118,7 @@ printf 'every relative link resolves\n' >&2
 
 step 'shell scripts (shellcheck)'
 # The git hooks too: they run on every commit and push.
-mapfile -t SCRIPTS < <(git ls-files 'scripts/*.sh' '.githooks/*' 'packaging/*.sh')
+mapfile -t SCRIPTS < <(git ls-files 'scripts/*.sh' '.githooks/*' 'packaging/*.sh' 'tests/*.sh')
 (( ${#SCRIPTS[@]} > 0 )) || fail "no tracked shell scripts — this is not the checkout this script belongs to"
 if need shellcheck; then
     check_version shellcheck "$SHELLCHECK_VERSION" \
