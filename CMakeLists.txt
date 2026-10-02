@@ -32,7 +32,10 @@ target_link_libraries(groundwork_core PUBLIC Qt6::Core)
 add_library(groundwork_items STATIC
     src/items/catalogue.cpp
     src/items/codecsitem.cpp
+    src/items/firewallitem.cpp
     src/items/flathubitem.cpp
+    src/items/service.cpp
+    src/items/sshitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)
 
