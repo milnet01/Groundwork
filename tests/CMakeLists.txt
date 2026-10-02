@@ -43,3 +43,11 @@ add_dependencies(tst_worker groundwork)
 groundwork_test(tst_askpass)
 target_link_libraries(tst_askpass PRIVATE groundwork_gui Qt6::Widgets)
 set_tests_properties(tst_askpass PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+
+# Language choice, direction, and the pseudo-translation proof.
+groundwork_test(tst_translations)
+target_compile_definitions(tst_translations PRIVATE
+    GROUNDWORK_BIN="$<TARGET_FILE:groundwork>"
+    FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/fixtures"
+    FAKES="${CMAKE_CURRENT_SOURCE_DIR}/fakes")
+add_dependencies(tst_translations groundwork)

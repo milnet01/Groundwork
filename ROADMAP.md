@@ -117,7 +117,7 @@
   Lanes: worker.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0007] **Askpass mode: the app's own password box.**
+- ✅ [GRND-0007] **Askpass mode: the app's own password box.**
   Serves S2 (one password prompt). Selected by an environment variable
   the Worker sets; sudo passes the prompt as the first argument
   (measured 2026-10-02). Shows sudo's own prompt, which names whose
@@ -126,6 +126,9 @@
   targetpw on Tumbleweed, so sudo asks for root's password. Check
   whether Leap 16 does the same, and whether a fresh Leap 16 can have no
   root password, which would bear on S2's one password prompt.
+  Shipped 2026-10-02 in aa45a71: local gate and GitHub run 37026224446
+  green. A real sudo -A prompt is first seen under GRND-0013; the open
+  question on Leap 16's targetpw stays there too.
   **Layman:** A simple password window, so the app works on any desktop, not only KDE.
   Kind: implement.
   Source: design-2026-10-02.
@@ -211,7 +214,7 @@
   Lanes: tests.
   Blocked-by: GRND-0005, GRND-0008, GRND-0009, GRND-0010, GRND-0011, GRND-0012.
 
-- 📋 [GRND-0032] **Translation machinery: translatable strings, language choice, right-to-left layout.**
+- 🚧 [GRND-0032] **Translation machinery: translatable strings, language choice, right-to-left layout.**
   Serves S3 and S4. Qt Linguist tools in CMake (translation sources
   under translations/); load the translation matching the system
   language, with a choice on the wizard's first page; right-to-left
@@ -219,6 +222,11 @@
   way, Text). A pseudo-translation test proves every visible string is
   translatable. Qt's Linguist tools are not installed on the author's
   machine; installing them needs the root password.
+  Started 2026-10-02 with the half that needs no Linguist tools:
+  language loading and choice, right-to-left direction, and a
+  pseudo-translation test. Building .ts/.qm files waits for
+  qt6-linguist-devel (Main Repository OSS), which needs the user's root
+  password.
   **Layman:** Lets the app show its words in other languages, including ones written right to left.
   Kind: implement.
   Source: user-request-2026-10-02.

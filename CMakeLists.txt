@@ -20,7 +20,8 @@ add_library(groundwork_core STATIC
     src/core/filereader.cpp
     src/core/markers.cpp
     src/core/selection.cpp
-    src/core/systemidentity.cpp)
+    src/core/systemidentity.cpp
+    src/core/translations.cpp)
 target_include_directories(groundwork_core PUBLIC src)
 target_link_libraries(groundwork_core PUBLIC Qt6::Core)
 

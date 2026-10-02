@@ -2,6 +2,7 @@
 // wizard, worker and askpass modes land here as each is built.
 #include "core/checkrunner.h"
 #include "core/systemidentity.h"
+#include "core/translations.h"
 #include "gui/askpassdialog.h"
 #include "items/catalogue.h"
 #include "worker/worker.h"
@@ -71,6 +72,8 @@ int main(int argc, char *argv[])
     // argument, so the Worker selects the mode by environment (design, Entry).
     if (qEnvironmentVariable("GROUNDWORK_ASKPASS") == QLatin1String("1")) {
         QApplication app(argc, argv);
+        gw::loadLanguage(gw::systemLanguage());
+        QApplication::setLayoutDirection(gw::directionFor(gw::systemLanguage()));
         return gw::runAskpass(argc > 1 ? QString::fromLocal8Bit(argv[1]) : QString());
     }
 
@@ -79,6 +82,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(GROUNDWORK_VERSION));
 
     const QStringList args = QCoreApplication::arguments();
+    // --lang chooses the language; otherwise the system's is used.
+    const qsizetype langAt = args.indexOf(QStringLiteral("--lang"));
+    const QString language = langAt > 0 && langAt + 1 < args.size() ? args[langAt + 1] : gw::systemLanguage();
+    gw::loadLanguage(language);
     if (args.contains(QStringLiteral("--version"))) {
         QTextStream(stdout) << "groundwork " << QCoreApplication::applicationVersion() << '\n';
         return 0;
@@ -95,7 +102,7 @@ int main(int argc, char *argv[])
         QStringList ids;
         for (qsizetype i = args.indexOf(QStringLiteral("--worker")) + 1; i < args.size(); ++i) {
             if (args[i] == QLatin1String("--lang")) {
-                ++i; // the language is loaded by the translation machinery (GRND-0032)
+                ++i; // loaded above
                 continue;
             }
             ids << args[i];
@@ -104,7 +111,7 @@ int main(int argc, char *argv[])
         gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::Worker::defaultStateDir());
         return worker.run(ids);
     }
-    QTextStream(stderr) << tr("Usage: groundwork --check | --worker [--lang LANG] [ITEM...] | --version")
+    QTextStream(stderr) << tr("Usage: groundwork [--lang LANG] --check | --worker [ITEM...] | --version")
                         << '\n';
     return 2;
 }
