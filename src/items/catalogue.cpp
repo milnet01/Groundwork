@@ -6,6 +6,7 @@
 #include "firewallitem.h"
 #include "firmwareitem.h"
 #include "flathubitem.h"
+#include "fontsitem.h"
 #include "hostnameitem.h"
 #include "nvidiaitem.h"
 #include "poweritem.h"
@@ -31,7 +32,8 @@ const Catalogue &catalogue()
     static const HostnameItem hostname;
     static const SshItem ssh;
     static const ClockItem clock;
-    static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom, &snapshots, &firewall, &firmware, &power, &hostname, &ssh, &clock});
+    static const FontsItem fonts;
+    static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom, &snapshots, &firewall, &firmware, &power, &hostname, &ssh, &clock, &fonts});
     return all;
 }
 

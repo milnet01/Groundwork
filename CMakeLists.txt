@@ -38,6 +38,7 @@ add_library(groundwork_items STATIC
     src/items/firmwareitem.cpp
     src/items/flathubitem.cpp
     src/items/hostnameitem.cpp
+    src/items/fontsitem.cpp
     src/items/hardware.cpp
     src/items/nvidiaitem.cpp
     src/items/packman.cpp

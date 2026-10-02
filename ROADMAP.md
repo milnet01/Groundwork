@@ -361,9 +361,12 @@ The design's second and third levels.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0021] **Item: the computer's name.**
+- ✅ [GRND-0021] **Item: the computer's name.**
   Serves S3 and S4. The first item that takes a value from the user,
   not only a toggle; the Wizard row needs a text field.
+  Shipped 2026-10-02 in 61bdcdb: local gate and GitHub run 37040365830
+  green; on the author's machine the check reads already done (AntsPC).
+  Values reach the Worker through --set.
   **Layman:** Lets you give the computer a name of your choice.
   Kind: implement.
   Source: design-2026-10-02.
