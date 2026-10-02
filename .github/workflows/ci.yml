@@ -28,6 +28,9 @@ concurrency:
 jobs:
   gate:
     runs-on: ubuntu-latest
+    # Sized for a cold run, not a warm one. A run takes seconds today; the
+    # build and test legs will add to it once the stack exists.
+    timeout-minutes: 15
     steps:
       # Pinned by digest: a tag is mutable and runs a different program on the
       # day it changes (security.md § 8).
