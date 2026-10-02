@@ -32,7 +32,7 @@ CheckResult FlathubItem::check(const CheckContext &context) const
     return {CheckState::NotDone, tr("Flathub is not added yet.")};
 }
 
-QList<Step> FlathubItem::applySteps() const
+QList<Step> FlathubItem::applySteps(const SystemIdentity &) const
 {
     return {
         {{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("install"),

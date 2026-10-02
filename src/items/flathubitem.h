@@ -15,7 +15,7 @@ public:
     QString applySentence() const override;
     bool installsPackages() const override { return true; }
     CheckResult check(const CheckContext &context) const override;
-    QList<Step> applySteps() const override;
+    QList<Step> applySteps(const SystemIdentity &system) const override;
 };
 
 } // namespace gw

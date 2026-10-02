@@ -86,10 +86,13 @@
   Lanes: core.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0005] **Check mode: print every item's state in a terminal.**
+- ✅ [GRND-0005] **Check mode: print every item's state in a terminal.**
   Serves S1: run on this set-up machine, nothing starts switched on
   and every item it was set up with reports already done.
   Entry prints Core's results for the catalogue's checks.
+  Shipped 2026-10-02 in 403776c: local gate and GitHub run 37024140249
+  green. On the author's Tumbleweed it printed "Nothing would start
+  switched on" (S1, for the items built so far).
   **Layman:** A command that shows what is and isn't set up, without changing anything.
   Kind: implement.
   Source: design-2026-10-02.

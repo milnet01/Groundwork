@@ -16,7 +16,7 @@ public:
     QString title() const override { return m_id; }
     QString applySentence() const override { return {}; }
     gw::CheckResult check(const gw::CheckContext &) const override { return m_result; }
-    QList<gw::Step> applySteps() const override { return {}; }
+    QList<gw::Step> applySteps(const gw::SystemIdentity &) const override { return {}; }
 
 private:
     QString m_id;
