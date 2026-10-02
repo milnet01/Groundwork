@@ -36,8 +36,9 @@ each row already says "already done", "not done", "not needed here" or
 
 **Bringing the system up to date is a preparation, not a goal.** Every
 item that installs packages depends on it, so the installs meet a
-current system. It is switched on only through that dependency. Its row
-says whether updates are waiting, and S1 does not count it. Keeping a
+current system. It never starts switched on by itself: switching on an
+item that installs packages switches it on, and the user may also
+switch it on alone. Its row says whether updates are waiting, and S1 does not count it. Keeping a
 machine up to date afterwards is OneUp's job.
 
 **Dependencies are kept by both sides.** Switching an item on in the
@@ -95,7 +96,7 @@ repository.
 
 ## The parts
 
-Every path is under `src/` unless it says otherwise.
+Source files are under `src/`; tests and packaging are at the top level.
 
 | Part | Responsible for | Files |
 |---|---|---|
@@ -144,7 +145,10 @@ text it produces itself.
 
 - **Check results** are one of: done, not done, not needed here,
   couldn't tell. "Couldn't tell" carries a reason and is never shown as
-  done. A skipped repository is "couldn't tell", not "up to date".
+  done. A skipped repository is "couldn't tell", not "up to date" —
+  except in the update item's check, which reports the updates the
+  other repositories offer and names the one it skipped, so one
+  unreachable repository does not block every install.
 - **Step results** are ok, skipped or failed, with a detail line. An
   item whose dependency failed, or was skipped for any reason but
   "already done", is skipped too, saying why; all others still run.
@@ -159,8 +163,11 @@ text it produces itself.
   so the step is run once more to finish (`man zypper`, EXIT CODES). In
   a check, 106 gives "couldn't tell".
 - **Stopping** is cooperative, between items. The Worker never signals a
-  running zypper. Closing the window asks the Worker to stop; the Worker
-  survives its output being closed and finishes the current item.
+  running zypper. Closing the window during a run asks the Worker to
+  stop and hides the window; the Wizard's process stays until the
+  Worker has finished the current item and exited, so neither Qt nor
+  the AppImage's mount ends the Worker early. The Worker also survives
+  its output being closed.
 - **Root** is asked for once per run. Every `sudo` is started directly
   by the Worker process, never by a helper or a shell: with no
   terminal, `sudo` keys its remembered password to the process that
@@ -183,8 +190,9 @@ text it produces itself.
   language mirrors the layout. Commands a check reads still run with
   `LC_ALL=C`, whatever the user's language. The window follows the
   system's font size and colour scheme, and works at large font sizes.
-- **Tests never touch the real system.** Commands are replaced by fakes
-  placed first on `PATH`. Core's file reader and every state path take a
+- **Tests never touch the real system.** Items name every command
+  bare (`zypper`, never `/usr/bin/zypper`), so fakes placed first on
+  `PATH` replace them. Core's file reader and every state path take a
   root directory that tests redirect.
 
 ## Where each sign is delivered
@@ -230,3 +238,4 @@ text it produces itself.
 | 2 | 2026-10-02 | 2, each holding every question | 1 | 4 | 4 | — | 9 verified, 9 fixed: the catalogue moved from Core to Items; the update item starts on only with another item, keeping S1; the Worker's command line, default and stop file have one owner; dependencies are kept by Wizard and Worker; zypper's rule is scoped to apply steps, 103 re-runs (`man zypper`); `ID_LIKE` never read; askpass mode is chosen by an environment variable (`man sudo`); one collision this loop's own fix created (the Worker's default) fixed before commit. 3 dismissed as settled by an item: the keep-alive mechanism, FUSE on a fresh install (ADR-0002 already requires it), the NVIDIA key prompt at boot. |
 | 3 | 2026-10-02 | 2, each holding every question | 0 | 3 | 5 | — | 8 verified, 8 fixed: the update item is a dependency of every installing item and S1 does not count it (discovery's S1 narrowed to match); a failed item skips only its dependants; the Wizard never sends an empty selection; Core owns the default selection and dependency closure; the Worker applies only on "not done"; the keep-alive follows OneUp's engine; the password box shows `sudo`'s prompt (root's password, measured); the library rule allows what the AppImage bundles. Askpass by environment variable measured: `sudo -A` passes the caller's variable and the prompt as the first argument. At the ADR cap: this loop's fixes are read by no lane. Calm cap: of the 8, 5 landed on text loops 1–2 wrote (update rule, dependencies, Worker default, keep-alive, default selection), all unpropagated consequences of loop 2's update decision rather than repairs of repairs. Second share: the whole document was new in this gate, so every finding is inside the armed span by construction. |
 | 4 | 2026-10-02 | 2, each holding every question | 0 | 2 | 5 | — | New run, armed by the translation amendment (7a963e1). 7 verified, 7 fixed: the Worker takes the language on its command line and translates its own text (in the change); and, outside it, every mode refuses an unsupported system; a dependency skipped for any reason but "already done" skips its dependants; switching a dependency off switches off what needs it; the Worker runs items in catalogue order; every `sudo`, keep-alive included, is started by the Worker itself (`man sudoers`: `timestamp_type` default `tty`, falling back to the parent process; read 2026-10-02), and a pipe from the Worker's own child is allowed. The out-of-change findings were fixed here rather than filed, because the next item built under the design needs them and filing would start another run on the same text. Dismissed: FUSE on a fresh install, already ADR-0002's requirement. |
+| 5 | 2026-10-02 | 2, each holding every question | 0 | 2 | 3 | — | 5 verified, 5 fixed: the update item can be switched on alone, keeping S4 (both lanes); items name commands bare so fakes on `PATH` replace them (both lanes); the update check reports a skipped repository without blocking every install; source paths are under `src/`, tests and packaging at the top level; the Wizard's process stays until the Worker exits, so neither Qt nor the AppImage mount ends it early. The last three were settled from the lanes' open questions. Unrunnable here: the AppImage mount behaviour, for GRND-0012 to confirm. |
