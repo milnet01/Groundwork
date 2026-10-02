@@ -307,6 +307,18 @@ hardware is found and lacks support.
   Lanes: items.
   Blocked-by: GRND-0003.
 
+- 💭 [GRND-0039] **Licence-bearing items never start switched on.**
+  Serves S4. GRND-0014 installs with --auto-agree-with-licenses (zypper
+  aborts without it), and as designed an Essentials item that is not done
+  starts ticked. Proposal: an item flag that keeps it off by default.
+  Needs the user's yes and a one-line design change with its review
+  (docs/design.md, The levels). Recommended 2026-10-02; waiting on the
+  user's decision.
+  **Layman:** The NVIDIA driver accepts NVIDIA's licence, so you would tick it yourself rather than find it pre-ticked.
+  Kind: ux.
+  Source: in-session-2026-10-02.
+  Lanes: core, items.
+
 ## 0.3.0 — System setup and configuration
 
 The design's second and third levels.
