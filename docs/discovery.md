@@ -7,7 +7,8 @@ This is what everything is checked against for the life of the project.
 Design does not start until it is agreed — `~/.claude/workflow.md` § 2.
 
 **Status:** agreed by the user, 2026-10-02. Amended the same day for
-levels and configuration, and agreed again. It is expected to change as
+levels and configuration, and agreed again. S1, S2 and the supported
+systems narrowed the same day to match the design. It is expected to change as
 the work goes on. A change is made here, with the user's agreement
 (`~/.claude/workflow.md` §§ 4 and 7).
 
@@ -48,11 +49,12 @@ it is safe.
 Ids are never reused and never renumbered. The roadmap cites these
 labels.
 
-- **S1** — On a machine that is already set up, every row reports
-  "already done", and nothing is changed.
-- **S2** — On a fresh Tumbleweed or Leap virtual machine, one button and
-  one password prompt complete every switched-on task, and a video file
-  plays afterwards.
+- **S1** — On a machine that is already set up, no item starts
+  switched on, every item it was set up with reports "already done",
+  and a run changes nothing.
+- **S2** — On a fresh Tumbleweed or Leap 16 virtual machine, one button
+  and one password prompt complete every switched-on task, and a video
+  file plays afterwards.
 - **S3** — Before anything is applied, each row shows in plain English
   what it would do.
 - **S4** — Items are shown in levels, essentials first. Before anything
@@ -64,9 +66,10 @@ labels.
 - **Not an installer.** The system is already installed.
 - **Not a replacement for YaST.** It configures the common choices a new
   install needs, each explained. It does not offer every setting.
-- **Not other distributions.** openSUSE only: Tumbleweed and Leap.
+- **Not other distributions.** openSUSE only: Tumbleweed, Slowroll, and Leap 16
+  or later.
 - **No dotfile or app-preference management.**
 - **Not a tab inside OneUp.** A separate app that reuses OneUp's engine
   patterns.
-- **Never asks which openSUSE it is on.** It detects Tumbleweed or Leap
-  itself.
+- **Never asks which openSUSE it is on.** It detects which supported openSUSE
+  it is on itself.

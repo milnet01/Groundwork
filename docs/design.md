@@ -4,9 +4,7 @@
 > new piece of work belongs and what it is allowed to touch.**
 
 **This document is a gate.** Work is not broken into items until it is
-agreed — `~/.claude/workflow.md` § 2. It passes when someone can take any
-item off the queue and say which part it belongs in and what it may
-touch.
+agreed — `~/.claude/workflow.md` § 4 says when it passes.
 
 **Status:** draft, 2026-10-02 — awaiting the user's agreement.
 
@@ -20,7 +18,8 @@ wizard never has root. When the user presses Apply, it starts a second
 copy of itself in **worker** mode. The worker asks for the password once,
 does the root work, and reports progress as marker lines on its output.
 The worker also runs on its own in a terminal, so a broken desktop can
-still use it. A **check** mode prints every item's state in a terminal
+still use it; there, with no display, `sudo` asks for the password on
+the terminal. A **check** mode prints every item's state in a terminal
 and changes nothing. An **askpass** mode is the password box `sudo`
 calls, so the app needs no desktop's own password helper.
 
@@ -28,7 +27,9 @@ calls, so the app needs no desktop's own password helper.
 
 The wizard shows the levels in this order, one page each. An item
 starts switched on only in Essentials, and only if its check says it is
-not done (S1, S4). Every item's check runs before any page is shown, so
+not done (S1, S4). This replaces the kickoff rule that near-universal
+extras start on (`docs/brief.md`): what is near-universal is placed in
+Essentials. Every item's check runs before any page is shown, so
 each row already says "already done", "not done", "not needed here" or
 "couldn't tell".
 
@@ -74,7 +75,8 @@ never `ID_LIKE` first.
   `transactional-update`, which every item here would get wrong.
 
 An item that does not exist on a system is "not needed here", not an
-error. For example, `fetchmsttfonts` is not in Leap 16.0's repositories.
+error. For example, `fetchmsttfonts` was not found in Leap 16.0's main
+repository.
 
 ## The parts
 
@@ -82,11 +84,11 @@ Every path is under `src/` unless it says otherwise.
 
 | Part | Responsible for | Files |
 |---|---|---|
-| **Core** | Reading the system's identity; the item interface; the catalogue; running a read-only command with a time limit; the marker format | `core/` |
-| **Items** | One file per item: its check, and the steps its apply would run | `items/` |
+| **Core** | Reading the system's identity; the item interface; the catalogue; running a read-only command with a time limit; reading a system file; running every check; the marker format | `core/` |
+| **Items** | One file per item: its check, a plain-English sentence saying what its apply would do, and the steps its apply would run | `items/` |
 | **Worker** | Getting root once and keeping it; running steps in order; stopping only between items; the log | `worker/` |
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
-| **Entry** | Choosing the mode from the command line | `main.cpp` |
+| **Entry** | Choosing the mode from the command line; check mode, which prints Core's check results | `main.cpp` |
 | **Tests** | Unit tests and the fake-command scenarios | `tests/` |
 | **Packaging** | The AppImage build | `packaging/appimage/` |
 
@@ -98,9 +100,10 @@ a reference file the worker's roadmap item creates.
 
 - **Core depends on Qt Core only.** It never includes anything from
   Items, Worker or Wizard.
-- **Items depend on Core only.** An item never runs a command itself.
-  Its check returns the read-only commands to run and how to read their
-  output. Its apply returns a list of steps. Core or Worker runs them.
+- **Items depend on Core only.** An item never runs a command or opens
+  a file itself. Its check names the read-only commands and system
+  files it needs, and how to read them; Core runs and reads them. Its
+  apply returns a list of steps, which the Worker runs.
 - **Worker and Wizard depend on Core and Items, never on each other.**
   They meet only through a child process: the Wizard starts the Worker,
   reads its markers, and asks it to stop by writing a file. No shared
@@ -119,14 +122,19 @@ a reference file the worker's roadmap item creates.
 - **Step results** are ok, skipped or failed, with a detail line. A
   failed item does not stop the items after it, unless one depends on
   it. Each item states what it depends on.
-- **zypper's exit codes** are read with OneUp's rule. 0 and 100–103 are
-  success. 106 means a repository was skipped and is surfaced to the
-  user.
+- **The Worker re-checks before it applies.** It runs an item's check
+  immediately before the item's steps, and an item already done is
+  skipped, with the result "skipped, already done".
+- **zypper's exit codes** are read with OneUp's rule: 0, 100–103 and 106
+  are success. 106 also means a repository was skipped, and the user is
+  told which.
 - **Stopping** is cooperative, between items. The Worker never signals a
-  running zypper.
-- **Root** is asked for once per run, through `sudo -A`, and kept alive
-  by a helper that dies with the Worker. No root command runs inside a
-  pipe or a captured subshell.
+  running zypper. Closing the window asks the Worker to stop; the Worker
+  survives its output being closed and finishes the current item.
+- **Root** is asked for once per run and kept alive by a helper that
+  dies with the Worker. With a display, `sudo -A` shows the app's own
+  password box; without one, `sudo` asks on the terminal. No root
+  command runs inside a pipe or a captured subshell.
 - **Logging** goes to one file per run under the user's state directory,
   and the Worker's output is mirrored there.
 - **Persistence:** none, beyond the logs and the window's own settings.
@@ -135,7 +143,17 @@ a reference file the worker's roadmap item creates.
   window follows the system's font size and colour scheme, and works at
   large font sizes.
 - **Tests never touch the real system.** Commands are replaced by fakes
-  placed first on `PATH`, and every state path is redirected.
+  placed first on `PATH`. Core's file reader and every state path take a
+  root directory that tests redirect.
+
+## Where each sign is delivered
+
+| Sign | Delivered by |
+|---|---|
+| S1 — a set-up machine changes nothing | Items' checks, run by Core; the Worker's re-check before apply |
+| S2 — one button and one password on a fresh system, video plays | The whole: the Essentials items, the Worker, the Wizard, the AppImage |
+| S3 — each row says what it would do | Each item's plain-English sentence; the Wizard's rows |
+| S4 — levels in order, any item switched on or off, only those run | The Wizard's pages and toggles; the Worker runs only the items it is given |
 
 ## The stack, and what it rules out
 
@@ -165,3 +183,4 @@ a reference file the worker's roadmap item creates.
 
 | Loop | Date | Lanes | Q1 | Q2 | Q3 | Q4 | Outcome |
 |------|------|-------|----|----|----|----|---------|
+| 1 | 2026-10-02 | 2, each holding every question | 2 | 4 | 5 | — | 11 verified, 11 fixed; 3 dismissed as not changing the design (the keep-alive mechanism, which password `sudo` asks for, Slowroll's Packman tree: each settled by its item). Before dispatch, building the packet found the research record's rootless firewall check false; fixed in 3aa443f, outside the subject. Discovery's S1, S2 and supported systems narrowed to match, per `workflow.md` § 4. |
