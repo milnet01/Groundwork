@@ -2,7 +2,7 @@
 
 ## Where this project is
 
-**State:** 3 — Unqueued. Discovery and design are agreed; no roadmap items yet.
+**State:** 4 — Between items. The 0.1.0 queue is filed; nothing in flight.
 **In flight:** nothing.
 
 > Keep the two lines above true, and keep them to two lines. They are
