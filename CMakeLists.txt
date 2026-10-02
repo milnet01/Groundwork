@@ -23,8 +23,14 @@ add_library(groundwork_core STATIC
 target_include_directories(groundwork_core PUBLIC src)
 target_link_libraries(groundwork_core PUBLIC Qt6::Core)
 
+# Items depend on Core only.
+add_library(groundwork_items STATIC
+    src/items/catalogue.cpp
+    src/items/flathubitem.cpp)
+target_link_libraries(groundwork_items PUBLIC groundwork_core)
+
 add_executable(groundwork src/main.cpp)
-target_link_libraries(groundwork PRIVATE groundwork_core Qt6::Core Qt6::Widgets)
+target_link_libraries(groundwork PRIVATE groundwork_items groundwork_core Qt6::Core Qt6::Widgets)
 target_compile_definitions(groundwork PRIVATE
     GROUNDWORK_VERSION="${PROJECT_VERSION}")
 

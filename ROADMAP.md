@@ -73,11 +73,13 @@
   Lanes: core.
   Blocked-by: GRND-0001.
 
-- 📋 [GRND-0004] **Core: default selection and dependency closure.**
+- ✅ [GRND-0004] **Core: default selection and dependency closure.**
   Serves S4 and S1. Only Essentials not done start on; the system
   update is switched on only as a dependency of an installing item
   (design: The levels). One rule, used by both the Wizard and the
   Worker.
+  Shipped 2026-10-02 in 6d973ae: local gate and GitHub run 37023636302
+  both green.
   **Layman:** Decides which items start ticked, and ticks anything an item needs first.
   Kind: implement.
   Source: design-2026-10-02.
