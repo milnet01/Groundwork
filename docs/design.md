@@ -151,17 +151,18 @@ text it produces itself.
   unreachable repository does not block every install.
 - **Step results** are ok, skipped or failed, with a detail line. An
   item whose dependency failed, or was skipped for any reason but
-  "already done", is skipped too, saying why; all others still run.
+  "already done" or "not needed here", is skipped too, saying why; all others still run.
   Each item states what it depends on.
 - **The Worker re-checks before it applies.** It runs an item's check
   immediately before the item's steps, and applies only on "not done".
-  Any other result skips the item: "skipped, already done", or skipped
-  with the reason it couldn't tell.
+  Any other result skips the item: "skipped, already done", "skipped,
+  not needed here", or skipped with the reason it couldn't tell.
 - **zypper's exit codes in an apply step** are read with OneUp's rule:
   0, 100–103 and 106 are success. 106 also means a repository was
   skipped, and the user is told which. 103 means zypper updated itself,
   so the step is run once more to finish (`man zypper`, EXIT CODES). In
-  a check, 106 gives "couldn't tell".
+  a check, 106 gives "couldn't tell", except in the update item's
+  check (Check results, above).
 - **Stopping** is cooperative, between items. The Worker never signals a
   running zypper. Closing the window during a run asks the Worker to
   stop and hides the window; the Wizard's process stays until the
@@ -239,3 +240,4 @@ text it produces itself.
 | 3 | 2026-10-02 | 2, each holding every question | 0 | 3 | 5 | — | 8 verified, 8 fixed: the update item is a dependency of every installing item and S1 does not count it (discovery's S1 narrowed to match); a failed item skips only its dependants; the Wizard never sends an empty selection; Core owns the default selection and dependency closure; the Worker applies only on "not done"; the keep-alive follows OneUp's engine; the password box shows `sudo`'s prompt (root's password, measured); the library rule allows what the AppImage bundles. Askpass by environment variable measured: `sudo -A` passes the caller's variable and the prompt as the first argument. At the ADR cap: this loop's fixes are read by no lane. Calm cap: of the 8, 5 landed on text loops 1–2 wrote (update rule, dependencies, Worker default, keep-alive, default selection), all unpropagated consequences of loop 2's update decision rather than repairs of repairs. Second share: the whole document was new in this gate, so every finding is inside the armed span by construction. |
 | 4 | 2026-10-02 | 2, each holding every question | 0 | 2 | 5 | — | New run, armed by the translation amendment (7a963e1). 7 verified, 7 fixed: the Worker takes the language on its command line and translates its own text (in the change); and, outside it, every mode refuses an unsupported system; a dependency skipped for any reason but "already done" skips its dependants; switching a dependency off switches off what needs it; the Worker runs items in catalogue order; every `sudo`, keep-alive included, is started by the Worker itself (`man sudoers`: `timestamp_type` default `tty`, falling back to the parent process; read 2026-10-02), and a pipe from the Worker's own child is allowed. The out-of-change findings were fixed here rather than filed, because the next item built under the design needs them and filing would start another run on the same text. Dismissed: FUSE on a fresh install, already ADR-0002's requirement. |
 | 5 | 2026-10-02 | 2, each holding every question | 0 | 2 | 3 | — | 5 verified, 5 fixed: the update item can be switched on alone, keeping S4 (both lanes); items name commands bare so fakes on `PATH` replace them (both lanes); the update check reports a skipped repository without blocking every install; source paths are under `src/`, tests and packaging at the top level; the Wizard's process stays until the Worker exits, so neither Qt nor the AppImage mount ends it early. The last three were settled from the lanes' open questions. Unrunnable here: the AppImage mount behaviour, for GRND-0012 to confirm. |
+| 6 | 2026-10-02 | 2, each holding every question | 0 | 1 | 1 | — | 2 verified, 2 fixed: the zypper rule's 106-in-a-check now names the update check's exception (both lanes; loop 5's own fix had not been carried into it); a dependency "not needed here" no longer skips its dependants (from a lane's open question). This run's cap (loops 4–6): these fixes are read by no lane; implementation is their reader. Own-fix share of the final loop: 1 of 2, an unpropagated consequence of loop 5's exception rather than a repair of a repair, so a calm cap. Second share: the run was armed by 7a963e1's translation amendment, and 1 of the run's 14 findings lay inside it. Open, for GRND-0007: whether Leap 16 also asks for root's password (`targetpw` read on Tumbleweed only). |
