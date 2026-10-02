@@ -57,12 +57,14 @@
   Lanes: core.
   Blocked-by: GRND-0001.
 
-- 📋 [GRND-0003] **Core: item interface, command runner, file reader and check runner.**
+- ✅ [GRND-0003] **Core: item interface, command runner, file reader and check runner.**
   Serves S1. Items name read-only commands and files; Core runs them
   with a time limit and reads files through a reader whose root
   directory tests redirect (design: What may depend on what; What
   every part does the same way). Four check results: done, not done,
   not needed here, couldn't tell. Fake commands first on PATH in tests.
+  Shipped 2026-10-02 in 12300f7: local gate and GitHub run 37021064015
+  both green, 5 tests.
   **Layman:** The shared machinery every setup item uses to look at the system without changing it.
   Kind: implement.
   Source: design-2026-10-02.
@@ -125,7 +127,7 @@
   Kind: implement.
   Source: design-2026-10-02.
   Lanes: gui.
-  Blocked-by: GRND-0004, GRND-0006.
+  Blocked-by: GRND-0004, GRND-0006, GRND-0032.
 
 - 📋 [GRND-0009] **Item: bring the system up to date.**
   Serves S2. zypper dup on Tumbleweed and Slowroll, zypper update on
@@ -180,6 +182,20 @@
   Source: design-2026-10-02.
   Lanes: tests.
   Blocked-by: GRND-0005, GRND-0008, GRND-0009, GRND-0010, GRND-0011, GRND-0012.
+
+- 📋 [GRND-0032] **Translation machinery: translatable strings, language choice, right-to-left layout.**
+  Serves S3 and S4. Qt Linguist tools in CMake (translation sources
+  under translations/); load the translation matching the system
+  language, with a choice on the wizard's first page; right-to-left
+  languages mirror the layout (design: What every part does the same
+  way, Text). A pseudo-translation test proves every visible string is
+  translatable. Qt's Linguist tools are not installed on the author's
+  machine; installing them needs the root password.
+  **Layman:** Lets the app show its words in other languages, including ones written right to left.
+  Kind: implement.
+  Source: user-request-2026-10-02.
+  Lanes: build, core, gui.
+  Blocked-by: GRND-0001.
 
 ## 0.2.0 — Hardware support
 
@@ -354,6 +370,53 @@ The design's fourth level: extras, each its own toggle.
   Source: design-2026-10-02.
   Lanes: items.
   Blocked-by: GRND-0003.
+
+## 0.5.0 — Languages
+
+Translations, asked for by the user on 2026-10-02: Asian and right-to-left
+languages, and Afrikaans. The machinery ships in 0.1.0; each item here is one
+translation.
+
+- 📋 [GRND-0033] **Translation: Afrikaans.**
+  Serves S3. The user is South African and can check this one.
+  **Layman:** The whole app in Afrikaans.
+  Kind: implement.
+  Source: user-request-2026-10-02.
+  Lanes: translations.
+  Blocked-by: GRND-0032, GRND-0008.
+
+- 📋 [GRND-0034] **Translations: Arabic and Hebrew, right to left.**
+  Serves S3 and S4. Proves the mirrored layout on every page.
+  **Layman:** The app in Arabic and Hebrew, laid out right to left.
+  Kind: implement.
+  Source: user-request-2026-10-02.
+  Lanes: translations, gui.
+  Blocked-by: GRND-0032, GRND-0008.
+
+- 📋 [GRND-0035] **Translations: Chinese (Simplified), Japanese and Korean.**
+  Serves S3. Check that a fresh install shows these scripts; if a font
+  is missing, the app says so rather than showing empty boxes.
+  **Layman:** The app in Chinese, Japanese and Korean.
+  Kind: implement.
+  Source: user-request-2026-10-02.
+  Lanes: translations.
+  Blocked-by: GRND-0032, GRND-0008.
+
+- 📋 [GRND-0036] **Translation: Hindi.**
+  Serves S3. Same font check as the East Asian item.
+  **Layman:** The app in Hindi.
+  Kind: implement.
+  Source: user-request-2026-10-02.
+  Lanes: translations.
+  Blocked-by: GRND-0032, GRND-0008.
+
+- 📋 [GRND-0037] **Translations: German, French, Spanish and Portuguese.**
+  Serves S3.
+  **Layman:** The app in four widely used European languages.
+  Kind: implement.
+  Source: user-request-2026-10-02.
+  Lanes: translations.
+  Blocked-by: GRND-0032, GRND-0008.
 
 ## Backlog — no version yet
 

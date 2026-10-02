@@ -83,7 +83,7 @@ It reads `ID` and `VERSION_ID` from `/etc/os-release`, never `NAME` or
 - `opensuse-tumbleweed` and `opensuse-slowroll` — supported, as the
   rolling family.
 - `opensuse-leap` with `VERSION_ID` 16 or later — supported.
-- Anything else — the wizard says in plain English that this system is
+- Anything else — the wizard says in plain words that this system is
   not supported, and stops. That includes Leap 15, Leap Micro, MicroOS
   and other distributions. Leap Micro and MicroOS update through
   `transactional-update`, which every item here would get wrong.
@@ -99,7 +99,7 @@ Every path is under `src/` unless it says otherwise.
 | Part | Responsible for | Files |
 |---|---|---|
 | **Core** | Reading the system's identity; the item interface; running a read-only command with a time limit; reading a system file; running the checks it is given; the default selection and dependency closure; the marker format | `core/` |
-| **Items** | One file per item: its check, a plain-English sentence saying what its apply would do, and the steps its apply would run; the catalogue listing every item | `items/` |
+| **Items** | One file per item: its check, a plain sentence saying what its apply would do, and the steps its apply would run; the catalogue listing every item | `items/` |
 | **Worker** | Getting root once and keeping it; running steps in order; stopping only between items; the log | `worker/` |
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
 | **Entry** | Choosing the mode: from the command line, or, for askpass, from an environment variable the Worker sets, because `SUDO_ASKPASS` names a program path and carries no option (`man sudo`, `-A`); check mode, which prints Core's results for the catalogue's checks | `main.cpp` |
@@ -167,9 +167,13 @@ is unavailable until an item is switched on.
   and the Worker's output is mirrored there.
 - **Persistence:** none, beyond the logs and the window's own settings.
   Every run starts from fresh checks.
-- **Text** is plain English, written for someone new to openSUSE. The
-  window follows the system's font size and colour scheme, and works at
-  large font sizes.
+- **Text** is plain words, written for someone new to openSUSE, and
+  every string a user sees is translatable at its source, items'
+  titles, sentences and details included. The language follows the
+  system's, and the first page offers a choice. A right-to-left
+  language mirrors the layout. Commands a check reads still run with
+  `LC_ALL=C`, whatever the user's language. The window follows the
+  system's font size and colour scheme, and works at large font sizes.
 - **Tests never touch the real system.** Commands are replaced by fakes
   placed first on `PATH`. Core's file reader and every state path take a
   root directory that tests redirect.
@@ -180,13 +184,14 @@ is unavailable until an item is switched on.
 |---|---|
 | S1 — a set-up machine changes nothing | Items' checks, run by Core; the Worker's re-check before apply |
 | S2 — one button and one password on a fresh system, video plays | The whole: the Essentials items, the Worker, the Wizard, the AppImage |
-| S3 — each row says what it would do | Each item's plain-English sentence; the Wizard's rows |
+| S3 — each row says what it would do, in the user's language | Each item's translatable sentence; the translations; the Wizard's rows |
 | S4 — levels in order, any item switched on or off, only those run | The Wizard's pages and toggles; the Worker runs only the items it is given |
 
 ## The stack, and what it rules out
 
 - **C++20 and Qt 6 (Core and Widgets), built with CMake, tested with Qt
-  Test under CTest** — the user's choice, and Qt has a wizard component
+  Test under CTest, translated with Qt's Linguist tools** — the user's
+  choice, and Qt has a wizard component
   (ADR-0001). Runner-up: Python and PySide6, copying OneUp.
 - **One AppImage** carries the program and its Qt libraries (ADR-0002).
   It is built on the oldest supported system, so its libraries are not

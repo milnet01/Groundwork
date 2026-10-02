@@ -8,8 +8,9 @@ Design does not start until it is agreed — `~/.claude/workflow.md` § 2.
 
 **Status:** agreed by the user, 2026-10-02. Amended the same day for
 levels and configuration, and agreed again. S1, S2 and the supported
-systems narrowed the same day to match the design. It is expected to change as
-the work goes on. A change is made here, with the user's agreement
+systems narrowed the same day to match the design; S3 widened to the
+user's language at the user's request. It is expected to change as the
+work goes on. A change is made here, with the user's agreement
 (`~/.claude/workflow.md` §§ 4 and 7).
 
 Source material: `docs/brief.md`, including its "Decided at kickoff"
@@ -28,9 +29,9 @@ Groundwork lets anyone set up openSUSE the way they want, in one
 window. It offers a list of items, and the user picks the ones they
 want. The items are grouped into levels that run in order, from
 essentials to nice-to-haves. Some items install things; others
-configure the system. Each item has a toggle, a plain-English
-explanation and a status. Every item checks itself first, so re-running
-it is safe.
+configure the system. Each item has a toggle, a plain explanation
+in the user's language, and a status. Every item checks itself first,
+so re-running it is safe.
 
 ## Who it is for
 
@@ -56,8 +57,8 @@ labels.
 - **S2** — On a fresh Tumbleweed or Leap 16 virtual machine, one button
   and one password prompt complete every switched-on task, and a video
   file plays afterwards.
-- **S3** — Before anything is applied, each row shows in plain English
-  what it would do.
+- **S3** — Before anything is applied, each row shows in plain words,
+  in the user's language, what it would do.
 - **S4** — Items are shown in levels, essentials first. Before anything
   runs, the user can switch any item on or off, and only the switched-on
   items run.
