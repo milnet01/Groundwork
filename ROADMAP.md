@@ -411,52 +411,63 @@ The design's second and third levels.
 
 The design's fourth level: extras, each its own toggle.
 
-- 📋 [GRND-0025] **Item group: everyday apps.**
+- ✅ [GRND-0025] **Item group: everyday apps.**
   Serves S3 and S4. Each app its own toggle. Choose Flathub or the
   vendor's repository per app and say why in the item; opi's targets
   list the common asks (https://github.com/openSUSE/opi).
+  Shipped 2026-10-02 in 9679a25: Chrome, Brave, VLC, Discord, Zoom,
+  Spotify from Flathub; local gate and GitHub run 37041400283 green. The
+  list is on the user's decision list.
   **Layman:** Offers popular apps such as other web browsers, chat and office programs.
   Kind: implement.
   Source: design-2026-10-02.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0026] **Item group: gaming.**
+- ✅ [GRND-0026] **Item group: gaming.**
   Serves S3 and S4.
+  Shipped 2026-10-02 in 9679a25: Steam and Bottles from Flathub.
   **Layman:** Offers Steam and other gaming tools.
   Kind: implement.
   Source: design-2026-10-02.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0027] **Item group: developer tools.**
+- ✅ [GRND-0027] **Item group: developer tools.**
   Serves S3 and S4.
+  Shipped 2026-10-02 in 9679a25: gcc, gcc-c++ and make; VSCodium from
+  Flathub.
   **Layman:** Offers common programming tools.
   Kind: implement.
   Source: design-2026-10-02.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0028] **Item: a backup tool for the user's own files.**
+- ✅ [GRND-0028] **Item: a backup tool for the user's own files.**
   Serves S3 and S4.
+  Shipped 2026-10-02 in 9679a25: Déjà Dup from Flathub.
   **Layman:** Offers a tool to back up your documents and photos, which system snapshots do not cover.
   Kind: implement.
   Source: design-2026-10-02.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0029] **Item: Microsoft-compatible fonts.**
+- ✅ [GRND-0029] **Item: Microsoft-compatible fonts.**
   Serves S3 and S4. fetchmsttfonts is in Tumbleweed and was not found
   in Leap 16.0's main repository: not needed here there, unless
   another source is found.
+  Shipped 2026-10-02 in b7f7668: local gate and GitHub run 37040782797
+  green; on the author's machine the check reads not done (no Arial
+  there).
   **Layman:** Installs fonts like Arial and Times New Roman so documents and websites look right.
   Kind: implement.
   Source: design-2026-10-02.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0030] **Item group: handy command-line programs.**
+- ✅ [GRND-0030] **Item group: handy command-line programs.**
   Serves S3 and S4.
+  Shipped 2026-10-02 in 9679a25: htop, 7-Zip, Git, fastfetch.
   **Layman:** Offers a short list of useful small programs, each with its own switch.
   Kind: implement.
   Source: design-2026-10-02.
