@@ -6,7 +6,8 @@
 **This document is a gate.** Work is not broken into items until it is
 agreed — `~/.claude/workflow.md` § 4 says when it passes.
 
-**Status:** draft, 2026-10-02 — awaiting the user's agreement.
+**Status:** agreed (2026-10-02). The user delegated the approval to
+Claude, which gave it after the independent review reached its cap.
 
 What it serves: `docs/discovery.md`, signs S1–S4.
 
@@ -33,16 +34,18 @@ Essentials. Every item's check runs before any page is shown, so
 each row already says "already done", "not done", "not needed here" or
 "couldn't tell".
 
-**Bringing the system up to date is a preparation, not a goal.** It
-starts switched on only when another item starts switched on, so the
-installs that follow meet a current system. On a set-up machine nothing
-else starts on, so it does not either (S1). Keeping a machine up to date
-afterwards is OneUp's job.
+**Bringing the system up to date is a preparation, not a goal.** Every
+item that installs packages depends on it, so the installs meet a
+current system. It is switched on only through that dependency. Its row
+says whether updates are waiting, and S1 does not count it. Keeping a
+machine up to date afterwards is OneUp's job.
 
 **Dependencies are kept by both sides.** Switching an item on in the
 Wizard switches on what it depends on, and the row says why. The Worker,
 given an item whose dependency is neither done nor in its list, skips
-it and says why.
+it and says why. **Core owns the rule** for which items start switched
+on and for closing dependencies, over the items it is given, so the
+Wizard and the Worker apply the same one.
 
 1. **Essentials** — what a desktop user needs for things to work.
    Bring the system up to date; media codecs, including video in the
@@ -95,7 +98,7 @@ Every path is under `src/` unless it says otherwise.
 
 | Part | Responsible for | Files |
 |---|---|---|
-| **Core** | Reading the system's identity; the item interface; running a read-only command with a time limit; reading a system file; running the checks it is given; the marker format | `core/` |
+| **Core** | Reading the system's identity; the item interface; running a read-only command with a time limit; reading a system file; running the checks it is given; the default selection and dependency closure; the marker format | `core/` |
 | **Items** | One file per item: its check, a plain-English sentence saying what its apply would do, and the steps its apply would run; the catalogue listing every item | `items/` |
 | **Worker** | Getting root once and keeping it; running steps in order; stopping only between items; the log | `worker/` |
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
@@ -110,7 +113,8 @@ standard output.
 Worker's roadmap item: its markers, its command line, and where the
 stop file lives. The Worker takes the ids of the items to run on its
 command line. Given none, it runs the items the Wizard would start
-switched on.
+switched on. The Wizard never starts it with an empty selection: Apply
+is unavailable until an item is switched on.
 
 ## What may depend on what
 
@@ -137,11 +141,13 @@ switched on.
   couldn't tell. "Couldn't tell" carries a reason and is never shown as
   done. A skipped repository is "couldn't tell", not "up to date".
 - **Step results** are ok, skipped or failed, with a detail line. A
-  failed item does not stop the items after it, unless one depends on
-  it. Each item states what it depends on.
+  failed item causes only the items that depend on it to be skipped,
+  each saying why; all others still run. Each item states what it
+  depends on.
 - **The Worker re-checks before it applies.** It runs an item's check
-  immediately before the item's steps, and an item already done is
-  skipped, with the result "skipped, already done".
+  immediately before the item's steps, and applies only on "not done".
+  Any other result skips the item: "skipped, already done", or skipped
+  with the reason it couldn't tell.
 - **zypper's exit codes in an apply step** are read with OneUp's rule:
   0, 100–103 and 106 are success. 106 also means a repository was
   skipped, and the user is told which. 103 means zypper updated itself,
@@ -150,8 +156,11 @@ switched on.
 - **Stopping** is cooperative, between items. The Worker never signals a
   running zypper. Closing the window asks the Worker to stop; the Worker
   survives its output being closed and finishes the current item.
-- **Root** is asked for once per run and kept alive by a helper that
-  dies with the Worker. With a display, `sudo -A` shows the app's own
+- **Root** is asked for once per run and kept alive the way OneUp's
+  engine does it: a child that re-runs `sudo -n -v` and dies with the
+  Worker. The password box shows `sudo`'s own prompt, which names whose
+  password it wants: root's, on Tumbleweed as measured 2026-10-02.
+  With a display, `sudo -A` shows the app's own
   password box; without one, `sudo` asks on the terminal. No root
   command runs inside a pipe or a captured subshell.
 - **Logging** goes to one file per run under the user's state directory,
@@ -186,7 +195,8 @@ switched on.
   - a polkit policy or any file installed system-wide, since an AppImage
     installs none;
   - YaST, which Leap 16.0 removed;
-  - Python, and any library a base install might not have;
+  - Python, and any library that is neither bundled in the AppImage nor
+    part of a base install;
   - a window running as root;
   - systems that update through `transactional-update`.
 
@@ -204,3 +214,4 @@ switched on.
 |------|------|-------|----|----|----|----|---------|
 | 1 | 2026-10-02 | 2, each holding every question | 2 | 4 | 5 | — | 11 verified, 11 fixed; 3 dismissed as not changing the design (the keep-alive mechanism, which password `sudo` asks for, Slowroll's Packman tree: each settled by its item). Before dispatch, building the packet found the research record's rootless firewall check false; fixed in 3aa443f, outside the subject. Discovery's S1, S2 and supported systems narrowed to match, per `workflow.md` § 4. |
 | 2 | 2026-10-02 | 2, each holding every question | 1 | 4 | 4 | — | 9 verified, 9 fixed: the catalogue moved from Core to Items; the update item starts on only with another item, keeping S1; the Worker's command line, default and stop file have one owner; dependencies are kept by Wizard and Worker; zypper's rule is scoped to apply steps, 103 re-runs (`man zypper`); `ID_LIKE` never read; askpass mode is chosen by an environment variable (`man sudo`); one collision this loop's own fix created (the Worker's default) fixed before commit. 3 dismissed as settled by an item: the keep-alive mechanism, FUSE on a fresh install (ADR-0002 already requires it), the NVIDIA key prompt at boot. |
+| 3 | 2026-10-02 | 2, each holding every question | 0 | 3 | 5 | — | 8 verified, 8 fixed: the update item is a dependency of every installing item and S1 does not count it (discovery's S1 narrowed to match); a failed item skips only its dependants; the Wizard never sends an empty selection; Core owns the default selection and dependency closure; the Worker applies only on "not done"; the keep-alive follows OneUp's engine; the password box shows `sudo`'s prompt (root's password, measured); the library rule allows what the AppImage bundles. Askpass by environment variable measured: `sudo -A` passes the caller's variable and the prompt as the first argument. At the ADR cap: this loop's fixes are read by no lane. Calm cap: of the 8, 5 landed on text loops 1–2 wrote (update rule, dependencies, Worker default, keep-alive, default selection), all unpropagated consequences of loop 2's update decision rather than repairs of repairs. Second share: the whole document was new in this gate, so every finding is inside the armed span by construction. |

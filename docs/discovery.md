@@ -50,7 +50,8 @@ Ids are never reused and never renumbered. The roadmap cites these
 labels.
 
 - **S1** — On a machine that is already set up, no item starts
-  switched on, every item it was set up with reports "already done",
+  switched on, every item it was set up with reports "already done"
+  (the system update aside: it reports whether updates are waiting),
   and a run changes nothing.
 - **S2** — On a fresh Tumbleweed or Leap 16 virtual machine, one button
   and one password prompt complete every switched-on task, and a video

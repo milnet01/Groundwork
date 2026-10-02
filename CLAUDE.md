@@ -2,7 +2,7 @@
 
 ## Where this project is
 
-**State:** 2 — Unshaped. `docs/discovery.md` is agreed; the design is not.
+**State:** 3 — Unqueued. Discovery and design are agreed; no roadmap items yet.
 **In flight:** nothing.
 
 > Keep the two lines above true, and keep them to two lines. They are
