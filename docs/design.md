@@ -28,7 +28,10 @@ calls, so the app needs no desktop's own password helper.
 
 The wizard shows the levels in this order, one page each. An item
 starts switched on only in Essentials, and only if its check says it is
-not done (S1, S4). This replaces the kickoff rule that near-universal
+not done (S1, S4). An item whose apply accepts a licence for the user
+never starts switched on, at any level; the user switches it on, and
+its row names the licence. No item depends on one, so switching on
+another item never switches it on. This replaces the kickoff rule that near-universal
 extras start on (`docs/brief.md`): what is near-universal is placed in
 Essentials. Every item's check runs before any page is shown, so
 each row already says "already done", "not done", "not needed here" or
@@ -101,7 +104,7 @@ Source files are under `src/`; tests and packaging are at the top level.
 | Part | Responsible for | Files |
 |---|---|---|
 | **Core** | Reading the system's identity; the item interface; running a read-only command with a time limit; reading a system file; running the checks it is given; the default selection and dependency closure; the marker format | `core/` |
-| **Items** | One file per item: its check, a plain sentence saying what its apply would do, and the steps its apply would run; the catalogue listing every item | `items/` |
+| **Items** | One file per item: its check, a plain sentence saying what its apply would do, whether that apply accepts a licence, and the steps its apply would run; the catalogue listing every item | `items/` |
 | **Worker** | Getting root once and keeping it; running steps in order; stopping only between items; the log | `worker/` |
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
 | **Entry** | Choosing the mode: from the command line, or, for askpass, from an environment variable the Worker sets, because `SUDO_ASKPASS` names a program path and carries no option (`man sudo`, `-A`); check mode, which prints Core's results for the catalogue's checks | `main.cpp` |
@@ -187,7 +190,10 @@ text it produces itself.
 - **Text** is plain words, written for someone new to openSUSE, and
   every string a user sees is translatable at its source, items'
   titles, sentences and details included. The language follows the
-  system's, and the first page offers a choice. A right-to-left
+  system's, and the first page offers a choice. A translation no native
+  speaker has checked yet ships marked as a draft: the first page's
+  choice says so, and so does that page when the draft is the language
+  in use. English and checked translations carry no mark. A right-to-left
   language mirrors the layout. Commands a check reads still run with
   `LC_ALL=C`, whatever the user's language. The window follows the
   system's font size and colour scheme, and works at large font sizes.

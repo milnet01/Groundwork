@@ -307,13 +307,15 @@ hardware is found and lacks support.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 💭 [GRND-0039] **Licence-bearing items never start switched on.**
+- 📋 [GRND-0039] **Licence-bearing items never start switched on.**
   Serves S4. GRND-0014 installs with --auto-agree-with-licenses (zypper
   aborts without it), and as designed an Essentials item that is not done
   starts ticked. Proposal: an item flag that keeps it off by default.
   Needs the user's yes and a one-line design change with its review
   (docs/design.md, The levels). Recommended 2026-10-02; waiting on the
   user's decision.
+  Decided 2026-10-07: the user said yes. docs/design.md, The levels,
+  amended the same day; the review-contract gate runs before the build.
   **Layman:** The NVIDIA driver accepts NVIDIA's licence, so you would tick it yourself rather than find it pre-ticked.
   Kind: ux.
   Source: in-session-2026-10-02.
@@ -537,12 +539,29 @@ translation.
   Serves S3. Extract strings into translations/*.ts and compile .qm
   files into the program's resources at :/i18n, which
   core/translations.cpp already reads. Install the tools in ci.yml too.
-  Waiting-on: the user installing qt6-linguist-devel (Main Repository
-  OSS), which needs the root password (asked 2026-10-02).
+  qt6-linguist-devel 6.11.2 installed here on 2026-10-07.
   **Layman:** Sets up the tools that turn translated text into files the app can load.
   Kind: implement.
   Source: split-from-GRND-0032-2026-10-02.
   Lanes: build, translations.
+
+- 📋 [GRND-0040] **Translations: isiZulu and isiXhosa.**
+  Serves S3. Added at the user's request on 2026-10-07.
+  **Layman:** The app in isiZulu and isiXhosa.
+  Kind: implement.
+  Source: user-request-2026-10-07.
+  Lanes: translations.
+  Blocked-by: GRND-0032, GRND-0008, GRND-0038.
+
+- 📋 [GRND-0041] **Unchecked translations are marked as drafts.**
+  Serves S3. docs/design.md, Text: a translation no native speaker has
+  checked ships marked as a draft, on the first page's language choice
+  and on that page when it is the language in use. The user checks
+  Afrikaans; the rest ship as drafts (user's decision, 2026-10-07).
+  **Layman:** Languages nobody fluent has checked yet are labelled as drafts, so people know.
+  Kind: implement.
+  Source: user-request-2026-10-07.
+  Lanes: translations, gui.
 
 ## Backlog — no version yet
 
