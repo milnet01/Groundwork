@@ -84,6 +84,10 @@ public:
     // A preparation never starts switched on by itself; every item that
     // installs packages depends on it (docs/design.md, The levels).
     virtual bool isPreparation() const { return false; }
+    // True when the apply accepts a licence for the user. Such an item never
+    // starts switched on, and no item may depend on one (docs/design.md, The
+    // levels).
+    virtual bool acceptsLicence() const { return false; }
     // Non-empty for an item that takes a value from the user, such as the
     // computer's name: the field's label. Its steps carry kValuePlaceholder.
     virtual QString valuePrompt() const { return {}; }

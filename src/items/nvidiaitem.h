@@ -9,7 +9,8 @@
 //    forum reports leaving the desktop dead; asking for both makes zypper
 //    refuse instead, and nothing changes;
 //  - the install needs --auto-agree-with-licenses (NVIDIA's licence), so
-//    the row says that switching it on accepts the licence.
+//    the row says that switching it on accepts the licence, and the item
+//    never starts switched on (GRND-0039).
 #pragma once
 
 #include "core/item.h"
@@ -26,6 +27,7 @@ public:
     QString title() const override;
     QString applySentence() const override;
     bool installsPackages() const override { return true; }
+    bool acceptsLicence() const override { return true; }
     CheckResult check(const CheckContext &context) const override;
     QList<Step> applySteps(const SystemIdentity &system,
                            const CheckContext &context) const override;

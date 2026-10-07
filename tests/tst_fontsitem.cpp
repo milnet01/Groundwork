@@ -61,6 +61,11 @@ private slots:
         QVERIFY(gw::catalogue().find(QStringLiteral("microsoft-fonts")));
         QVERIFY(gw::catalogue().orderProblems().isEmpty());
     }
+
+    void declaresItsLicence() // never starts switched on (docs/design.md, The levels)
+    {
+        QVERIFY(gw::FontsItem().acceptsLicence());
+    }
 };
 
 QTEST_GUILESS_MAIN(TstFontsItem)

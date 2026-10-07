@@ -35,3 +35,8 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - **Language support, including right-to-left layouts; translations to follow** (GRND-0032)
 
 - **A single-file AppImage that runs without installing anything first** (GRND-0012)
+
+### Changed
+
+- **Items that accept a licence (the NVIDIA driver, Microsoft fonts) no longer start switched on.** (GRND-0039)
+  You switch them on yourself, so nobody accepts a licence by accident.

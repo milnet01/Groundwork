@@ -10,9 +10,9 @@ class FakeItem : public gw::Item
 {
 public:
     FakeItem(QString id, gw::Level level, bool installs = false, bool preparation = false,
-             QStringList deps = {})
+             QStringList deps = {}, bool licence = false)
         : m_id(std::move(id)), m_level(level), m_installs(installs), m_prep(preparation),
-          m_deps(std::move(deps)) {}
+          m_deps(std::move(deps)), m_licence(licence) {}
     QString id() const override { return m_id; }
     gw::Level level() const override { return m_level; }
     QString title() const override { return m_id; }
@@ -20,6 +20,7 @@ public:
     QStringList dependsOn() const override { return m_deps; }
     bool installsPackages() const override { return m_installs; }
     bool isPreparation() const override { return m_prep; }
+    bool acceptsLicence() const override { return m_licence; }
     gw::CheckResult check(const gw::CheckContext &) const override { return {}; }
     QList<gw::Step> applySteps(const gw::SystemIdentity &, const gw::CheckContext &) const override { return {}; }
 
@@ -28,12 +29,13 @@ private:
     gw::Level m_level;
     bool m_installs, m_prep;
     QStringList m_deps;
+    bool m_licence;
 };
 
 const FakeItem update(QStringLiteral("update"), gw::Level::Essentials, false, true);
 const FakeItem codecs(QStringLiteral("codecs"), gw::Level::Essentials, true);
 const FakeItem flathub(QStringLiteral("flathub"), gw::Level::Essentials, true);
-const FakeItem nvidia(QStringLiteral("nvidia"), gw::Level::Essentials, true);
+const FakeItem nvidia(QStringLiteral("nvidia"), gw::Level::Essentials, true, false, {}, true);
 const FakeItem fonts(QStringLiteral("fonts"), gw::Level::NiceToHave, true);
 const FakeItem hostname(QStringLiteral("hostname"), gw::Level::Configuration);
 
@@ -115,6 +117,24 @@ private slots:
         const FakeItem orphan(QStringLiteral("orphan"), gw::Level::NiceToHave, false, false,
                               {QStringLiteral("missing")});
         QCOMPARE(gw::Catalogue({&orphan}).orderProblems(), QStringList{"orphan depends on unknown missing"});
+    }
+
+    void aLicenceItemNeverStartsSwitchedOn() // docs/design.md, The levels
+    {
+        const auto r = results({{"update", S::NotDone}, {"codecs", S::Done}, {"flathub", S::Done},
+                                {"nvidia", S::NotDone}});
+        QVERIFY(catalogue().defaultSelection(r).isEmpty());
+        gw::Selection s;
+        QCOMPARE(catalogue().switchOn(s, QStringLiteral("nvidia"), r), QStringList{"update"});
+        QCOMPARE(sorted(s), QStringList({"nvidia", "update"}));
+    }
+
+    void orderProblemsFindsADependencyOnALicenceItem()
+    {
+        const FakeItem needsNvidia(QStringLiteral("needs-nvidia"), gw::Level::NiceToHave, false, false,
+                                   {QStringLiteral("nvidia")});
+        QCOMPARE(gw::Catalogue({&update, &nvidia, &needsNvidia}).orderProblems(),
+                 QStringList{"needs-nvidia depends on licence item nvidia"});
     }
 };
 

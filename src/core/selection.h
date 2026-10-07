@@ -26,8 +26,8 @@ public:
     // when it installs packages.
     QStringList dependencies(const Item &item) const;
 
-    // Essentials whose check says "not done", other than preparations, plus
-    // what they depend on.
+    // Essentials whose check says "not done", other than preparations and
+    // items that accept a licence, plus what they depend on.
     Selection defaultSelection(const CheckResults &results) const;
 
     // Switch an item on, with each dependency not already done or not
@@ -42,8 +42,9 @@ public:
     // The selected ids in catalogue order, which is the Worker's run order.
     QStringList runOrder(const Selection &selection) const;
 
-    // Items listed before something they depend on, or depending on an id
-    // the catalogue lacks. Empty when the catalogue is well formed.
+    // Items listed before something they depend on, depending on an id the
+    // catalogue lacks, or depending on an item that accepts a licence. Empty
+    // when the catalogue is well formed.
     QStringList orderProblems() const;
 
 private:

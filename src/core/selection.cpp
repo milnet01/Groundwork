@@ -26,7 +26,7 @@ Selection Catalogue::defaultSelection(const CheckResults &results) const
     Selection selection;
     for (const Item *item : m_items) {
         if (item->level() == Level::Essentials && !item->isPreparation()
-            && results.value(item->id()).state == CheckState::NotDone)
+            && !item->acceptsLicence() && results.value(item->id()).state == CheckState::NotDone)
             switchOn(selection, item->id(), results);
     }
     return selection;
@@ -90,8 +90,11 @@ QStringList Catalogue::orderProblems() const
     QSet<QString> seen;
     for (const Item *item : m_items) {
         for (const QString &dep : dependencies(*item)) {
-            if (!find(dep))
+            const Item *target = find(dep);
+            if (!target)
                 problems.append(item->id() + QStringLiteral(" depends on unknown ") + dep);
+            else if (target->acceptsLicence())
+                problems.append(item->id() + QStringLiteral(" depends on licence item ") + dep);
             else if (!seen.contains(dep))
                 problems.append(item->id() + QStringLiteral(" is listed before ") + dep);
         }

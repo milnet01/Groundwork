@@ -307,7 +307,7 @@ hardware is found and lacks support.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-- 📋 [GRND-0039] **Licence-bearing items never start switched on.**
+- ✅ [GRND-0039] **Licence-bearing items never start switched on.**
   Serves S4. GRND-0014 installs with --auto-agree-with-licenses (zypper
   aborts without it), and as designed an Essentials item that is not done
   starts ticked. Proposal: an item flag that keeps it off by default.
@@ -316,6 +316,10 @@ hardware is found and lacks support.
   user's decision.
   Decided 2026-10-07: the user said yes. docs/design.md, The levels,
   amended the same day; the user ruled no review is required.
+  Shipped 2026-10-07: Item::acceptsLicence(); Core's default selection
+  skips such items and orderProblems() refuses a dependency on one.
+  NVIDIA driver and Microsoft fonts set it. Tests in tst_selection,
+  tst_nvidiaitem and tst_fontsitem, seen red before the change.
   **Layman:** The NVIDIA driver accepts NVIDIA's licence, so you would tick it yourself rather than find it pre-ticked.
   Kind: ux.
   Source: in-session-2026-10-02.

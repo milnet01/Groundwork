@@ -18,6 +18,7 @@ public:
     QString title() const override;
     QString applySentence() const override;
     bool installsPackages() const override { return true; }
+    bool acceptsLicence() const override { return true; }
     CheckResult check(const CheckContext &context) const override;
     QList<Step> applySteps(const SystemIdentity &system,
                            const CheckContext &context) const override;

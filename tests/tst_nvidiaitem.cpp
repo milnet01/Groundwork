@@ -129,6 +129,11 @@ private slots:
         QVERIFY(gw::catalogue().find(QStringLiteral("nvidia-driver")));
         QVERIFY(gw::catalogue().orderProblems().isEmpty());
     }
+
+    void declaresItsLicence() // never starts switched on (docs/design.md, The levels)
+    {
+        QVERIFY(gw::NvidiaItem().acceptsLicence());
+    }
 };
 
 QTEST_GUILESS_MAIN(TstNvidiaItem)
