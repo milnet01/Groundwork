@@ -2,8 +2,8 @@
 
 ## Where this project is
 
-**State:** 4 — Between items. The 0.1.0 queue is filed; nothing in flight.
-**In flight:** nothing.
+**State:** 5 — Building an item.
+**In flight:** GRND-0033, the Afrikaans draft; it waits for the user's check.
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where

@@ -501,8 +501,13 @@ Translations, asked for by the user on 2026-10-02: Asian and right-to-left
 languages, and Afrikaans. The machinery ships in 0.1.0; each item here is one
 translation.
 
-- 📋 [GRND-0033] **Translation: Afrikaans.**
+- 🚧 [GRND-0033] **Translation: Afrikaans.**
   Serves S3. The user is South African and can check this one.
+  Progress (2026-10-07): every string has an Afrikaans draft (e7dd36e);
+  waits for the user's check before it ships as checked. Found and fixed
+  on the way: counted sentences had one form, so counts above one showed
+  English in every language (d13308d); Qt has no Afrikaans button words,
+  so the app now labels its own buttons (e7dd36e).
   **Layman:** The whole app in Afrikaans.
   Kind: implement.
   Source: user-request-2026-10-02.
