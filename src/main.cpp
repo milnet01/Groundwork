@@ -12,6 +12,7 @@
 #include <QApplication>
 #include <QCoreApplication>
 #include <QMessageBox>
+#include <QPushButton>
 #include <QTextStream>
 
 #include <csignal>
@@ -20,6 +21,15 @@
 #include <unistd.h>
 
 namespace {
+
+// A message before the Wizard opens. Its button is labelled here: Qt has no
+// words of its own for some languages offered.
+void tell(QMessageBox::Icon icon, const QString &text)
+{
+    QMessageBox box(icon, QCoreApplication::translate("gw::Entry", "Groundwork"), text, QMessageBox::Ok);
+    box.button(QMessageBox::Ok)->setText(QCoreApplication::translate("gw::Entry", "OK"));
+    box.exec();
+}
 
 // Check mode: print every item's state and what would start switched on.
 // Changes nothing. Exits 3 on an unsupported system.
@@ -68,16 +78,16 @@ int wizardMode(int argc, char *argv[])
     gw::loadLanguage(language);
 
     if (geteuid() == 0) {
-        QMessageBox::critical(nullptr, QCoreApplication::translate("gw::Entry", "Groundwork"),
-                              QCoreApplication::translate("gw::Entry", "Please start Groundwork as yourself, not as root. "
-                                 "It asks for the password when it needs it."));
+        tell(QMessageBox::Critical,
+             QCoreApplication::translate("gw::Entry", "Please start Groundwork as yourself, not as root. "
+                                                      "It asks for the password when it needs it."));
         return 1;
     }
     const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
     const gw::FileReader files(root);
     const gw::SystemIdentity identity = gw::readSystemIdentity(files);
     if (!identity.supported()) {
-        QMessageBox::information(nullptr, QCoreApplication::translate("gw::Entry", "Groundwork"), identity.reason);
+        tell(QMessageBox::Information, identity.reason);
         return 3;
     }
 

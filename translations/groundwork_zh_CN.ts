@@ -162,6 +162,14 @@
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::BroadcomItem</name>
@@ -283,6 +291,10 @@
     </message>
     <message>
         <source>Groundwork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -834,6 +846,22 @@
     </message>
     <message>
         <source>Groundwork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt; &amp;Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Next &gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -5,874 +5,902 @@
     <name>gw::Apps</name>
     <message>
         <source>Flatpak is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flatpak is nie geïnstalleer nie.</translation>
     </message>
     <message>
         <source>Flatpak did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flatpak het nie geantwoord nie.</translation>
     </message>
     <message>
         <source>Installed from the system&apos;s software sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geïnstalleer uit die stelsel se sagtewarebronne.</translation>
     </message>
     <message>
         <source>Installing %1 from Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans %1 vanaf Flathub</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die geïnstalleerde pakkette kon nie gelys word nie.</translation>
     </message>
     <message>
         <source>Installing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans %1</translation>
     </message>
     <message>
         <source>Google Chrome</source>
-        <translation type="unfinished"></translation>
+        <translation>Google Chrome</translation>
     </message>
     <message>
         <source>Installs Google&apos;s web browser from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer Google se webblaaier vanaf Flathub.</translation>
     </message>
     <message>
         <source>Brave</source>
-        <translation type="unfinished"></translation>
+        <translation>Brave</translation>
     </message>
     <message>
         <source>Installs the Brave web browser from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer die Brave-webblaaier vanaf Flathub.</translation>
     </message>
     <message>
         <source>VLC media player</source>
-        <translation type="unfinished"></translation>
+        <translation>VLC-mediaspeler</translation>
     </message>
     <message>
         <source>Installs VLC, which plays almost any video or music file, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer VLC, wat byna enige video- of musieklêer speel, vanaf Flathub.</translation>
     </message>
     <message>
         <source>Discord</source>
-        <translation type="unfinished"></translation>
+        <translation>Discord</translation>
     </message>
     <message>
         <source>Installs the Discord chat app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer die Discord-kletstoep vanaf Flathub.</translation>
     </message>
     <message>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom</translation>
     </message>
     <message>
         <source>Installs the Zoom video-call app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer die Zoom-video-oproeptoep vanaf Flathub.</translation>
     </message>
     <message>
         <source>Spotify</source>
-        <translation type="unfinished"></translation>
+        <translation>Spotify</translation>
     </message>
     <message>
         <source>Installs the Spotify music app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer die Spotify-musiektoep vanaf Flathub.</translation>
     </message>
     <message>
         <source>Steam</source>
-        <translation type="unfinished"></translation>
+        <translation>Steam</translation>
     </message>
     <message>
         <source>Installs Valve&apos;s Steam game store from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer Valve se Steam-speletjiewinkel vanaf Flathub.</translation>
     </message>
     <message>
         <source>Bottles</source>
-        <translation type="unfinished"></translation>
+        <translation>Bottles</translation>
     </message>
     <message>
         <source>Installs Bottles, which runs Windows games and programs, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer Bottles, wat Windows-speletjies en -programme laat loop, vanaf Flathub.</translation>
     </message>
     <message>
         <source>Build tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Bougereedskap</translation>
     </message>
     <message>
         <source>Installs the C and C++ compilers and make, for building software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer die C- en C++-samestellers en make, om sagteware te bou.</translation>
     </message>
     <message>
         <source>VSCodium</source>
-        <translation type="unfinished"></translation>
+        <translation>VSCodium</translation>
     </message>
     <message>
         <source>Installs VSCodium, a code editor, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer VSCodium, &apos;n kode-redigeerder, vanaf Flathub.</translation>
     </message>
     <message>
         <source>Déjà Dup backups</source>
-        <translation type="unfinished"></translation>
+        <translation>Déjà Dup-rugsteun</translation>
     </message>
     <message>
         <source>Installs Déjà Dup, which backs up your documents and photos; system snapshots do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer Déjà Dup, wat jou dokumente en foto&apos;s rugsteun; stelsel-momentopnames doen dit nie.</translation>
     </message>
     <message>
         <source>htop</source>
-        <translation type="unfinished"></translation>
+        <translation>htop</translation>
     </message>
     <message>
         <source>Installs htop, which shows what is using the computer&apos;s memory and processor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer htop, wat wys wat die rekenaar se geheue en verwerker gebruik.</translation>
     </message>
     <message>
         <source>7-Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>7-Zip</translation>
     </message>
     <message>
         <source>Installs 7-Zip, for opening .7z and other archives.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer 7-Zip, om .7z- en ander argiewe oop te maak.</translation>
     </message>
     <message>
         <source>Git</source>
-        <translation type="unfinished"></translation>
+        <translation>Git</translation>
     </message>
     <message>
         <source>Installs Git, for downloading and tracking source code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer Git, om bronkode af te laai en veranderinge daaraan by te hou.</translation>
     </message>
     <message>
         <source>fastfetch</source>
-        <translation type="unfinished"></translation>
+        <translation>fastfetch</translation>
     </message>
     <message>
         <source>Installs fastfetch, which shows a summary of this computer&apos;s hardware and system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer fastfetch, wat &apos;n opsomming van hierdie rekenaar se hardeware en stelsel wys.</translation>
     </message>
 </context>
 <context>
     <name>gw::AskpassDialog</name>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork</translation>
     </message>
     <message>
         <source>Groundwork needs administrator rights to make the changes you chose.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork het administrateursregte nodig om die veranderinge te maak wat jy gekies het.</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wagwoord</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Kanselleer</translation>
     </message>
 </context>
 <context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>
-        <translation type="unfinished"></translation>
+        <translation>Broadcom-Wi-Fi</translation>
     </message>
     <message>
         <source>Installs the driver this computer&apos;s Broadcom Wi-Fi card needs. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer die drywer wat hierdie rekenaar se Broadcom-Wi-Fi-kaart nodig het. Dit werk eers ná &apos;n herbegin.</translation>
     </message>
     <message>
         <source>No Broadcom Wi-Fi card that needs this driver was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen Broadcom-Wi-Fi-kaart wat hierdie drywer nodig het, is gevind nie.</translation>
     </message>
     <message>
         <source>This computer&apos;s Wi-Fi card needs a driver that is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie rekenaar se Wi-Fi-kaart het &apos;n drywer nodig wat nie geïnstalleer is nie.</translation>
     </message>
     <message>
         <source>Secure Boot is on, so you may be asked to approve a key at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Secure Boot is aan, so jy sal dalk gevra word om &apos;n sleutel by die volgende herbegin goed te keur.</translation>
     </message>
     <message>
         <source>Installing the Broadcom Wi-Fi driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die Broadcom-Wi-Fi-drywer</translation>
     </message>
 </context>
 <context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die kontrole het geen rede gegee nie.</translation>
     </message>
     <message>
         <source>already done</source>
-        <translation type="unfinished"></translation>
+        <translation>reeds gedoen</translation>
     </message>
     <message>
         <source>not done</source>
-        <translation type="unfinished"></translation>
+        <translation>nie gedoen nie</translation>
     </message>
     <message>
         <source>not needed here</source>
-        <translation type="unfinished"></translation>
+        <translation>nie hier nodig nie</translation>
     </message>
     <message>
         <source>couldn&apos;t tell</source>
-        <translation type="unfinished"></translation>
+        <translation>kon nie bepaal nie</translation>
     </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Klok gedeel met Windows</translation>
     </message>
     <message>
         <source>Keeps the computer&apos;s hardware clock in local time, as Windows does, so the time is right after switching between the two.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hou die rekenaar se hardewareklok op plaaslike tyd, soos Windows doen, sodat die tyd reg is nadat jy tussen die twee oorgeskakel het.</translation>
     </message>
     <message>
         <source>Windows was not found on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows is nie op hierdie rekenaar gevind nie.</translation>
     </message>
     <message>
         <source>The clock settings could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die klokinstellings kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>Windows is installed, and the clock will be wrong after switching.</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows is geïnstalleer, en die klok sal verkeerd wees nadat jy oorgeskakel het.</translation>
     </message>
     <message>
         <source>Setting the clock to local time</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel tans die klok op plaaslike tyd</translation>
     </message>
 </context>
 <context>
     <name>gw::CodecsItem</name>
     <message>
         <source>Media codecs</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediakodeks</translation>
     </message>
     <message>
         <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg die Packman Essentials-sagtewarebron by, vertrou sy ondertekeningsleutel, en installeer die kodeks wat video&apos;s en musiek laat speel, ook in die webblaaier.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die geïnstalleerde pakkette kon nie gelys word nie.</translation>
     </message>
     <message>
         <source>Packman is added, but the codecs are not installed from it yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Packman is bygevoeg, maar die kodeks is nog nie daaruit geïnstalleer nie.</translation>
     </message>
     <message>
         <source>Videos and music in common formats will not play yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Video&apos;s en musiek in algemene formate sal nog nie speel nie.</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die mediakodeks</translation>
     </message>
 </context>
 <context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelsel: %1</translation>
     </message>
     <message>
         <source>Nothing would start switched on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niks sou aangeskakel begin nie.</translation>
     </message>
     <message>
         <source>Would start switched on: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sou aangeskakel begin: %1</translation>
     </message>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin asseblief Groundwork as jouself, nie as root nie. Dit vra die wagwoord wanneer dit dit nodig het.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
     <name>gw::FirewallItem</name>
     <message>
         <source>Firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Brandmuur</translation>
     </message>
     <message>
         <source>Switches the firewall on now and at every start, so other computers cannot reach services you did not open.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skakel die brandmuur nou en by elke opstart aan, sodat ander rekenaars nie dienste kan bereik wat jy nie oopgemaak het nie.</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die diensbestuurder het nie geantwoord nie.</translation>
     </message>
     <message>
         <source>The firewall is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die brandmuur is nie geïnstalleer nie.</translation>
     </message>
     <message>
         <source>The firewall is installed but not switched on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die brandmuur is geïnstalleer, maar nie aangeskakel nie.</translation>
     </message>
     <message>
         <source>Installing the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die brandmuur</translation>
     </message>
     <message>
         <source>Switching the firewall on</source>
-        <translation type="unfinished"></translation>
+        <translation>Skakel tans die brandmuur aan</translation>
     </message>
 </context>
 <context>
     <name>gw::FirmwareItem</name>
     <message>
         <source>Firmware updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermware-bywerkings</translation>
     </message>
     <message>
         <source>Installs firmware updates for this computer&apos;s hardware from the Linux Vendor Firmware Service. Some finish at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer fermware-bywerkings vir hierdie rekenaar se hardeware vanaf die Linux Vendor Firmware Service. Sommige word eers by die volgende herbegin voltooi.</translation>
     </message>
     <message>
         <source>The firmware updater is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die fermware-bywerker is nie geïnstalleer nie.</translation>
     </message>
     <message>
         <source>The firmware updater could not check for updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die fermware-bywerker kon nie vir bywerkings kyk nie.</translation>
     </message>
     <message numerus="yes">
         <source>%n device(s) have firmware updates waiting.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n toestel het fermware-bywerkings wat wag.</numerusform>
+            <numerusform>%n toestelle het fermware-bywerkings wat wag.</numerusform>
         </translation>
     </message>
     <message>
         <source>Installing the firmware updater</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die fermware-bywerker</translation>
     </message>
     <message>
         <source>Reading the latest firmware list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees tans die nuutste fermwarelys</translation>
     </message>
     <message>
         <source>Installing firmware updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans fermware-bywerkings</translation>
     </message>
 </context>
 <context>
     <name>gw::FlathubItem</name>
     <message>
         <source>Flatpak and Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>Flatpak en Flathub</translation>
     </message>
     <message>
         <source>Installs Flatpak and adds Flathub, the app store most modern Linux apps ship through.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer Flatpak en voeg Flathub by, die toepwinkel waardeur die meeste moderne Linux-toepassings versprei word.</translation>
     </message>
     <message>
         <source>Flatpak is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flatpak is nie geïnstalleer nie.</translation>
     </message>
     <message>
         <source>Flatpak did not list its app sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flatpak het nie sy toepbronne gelys nie.</translation>
     </message>
     <message>
         <source>Flathub is not added yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flathub is nog nie bygevoeg nie.</translation>
     </message>
     <message>
         <source>Installing Flatpak</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans Flatpak</translation>
     </message>
     <message>
         <source>Adding Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg tans Flathub by</translation>
     </message>
 </context>
 <context>
     <name>gw::FontsItem</name>
     <message>
         <source>Microsoft-compatible fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Microsoft-versoenbare lettertipes</translation>
     </message>
     <message>
         <source>Downloads Microsoft&apos;s free web fonts, such as Arial and Times New Roman, under Microsoft&apos;s licence, so documents and websites look as intended.</source>
-        <translation type="unfinished"></translation>
+        <translation>Laai Microsoft se gratis weblettertipes, soos Arial en Times New Roman, onder Microsoft se lisensie af, sodat dokumente en webwerwe lyk soos bedoel.</translation>
     </message>
     <message>
         <source>The software sources could not be searched.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die sagtewarebronne kon nie deursoek word nie.</translation>
     </message>
     <message>
         <source>These fonts are not offered for this system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie lettertipes word nie vir hierdie stelsel aangebied nie.</translation>
     </message>
     <message>
         <source>Arial and the other Microsoft fonts are not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arial en die ander Microsoft-lettertipes is nie geïnstalleer nie.</translation>
     </message>
     <message>
         <source>Installing the Microsoft fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die Microsoft-lettertipes</translation>
     </message>
 </context>
 <context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Rekenaarnaam</translation>
     </message>
     <message>
         <source>Gives this computer the name you type, which other computers on the network see.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gee hierdie rekenaar die naam wat jy tik, wat ander rekenaars op die netwerk sien.</translation>
     </message>
     <message>
         <source>Name (letters, digits and hyphens):</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam (letters, syfers en koppeltekens):</translation>
     </message>
     <message>
         <source>The computer&apos;s name could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die rekenaar se naam kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>This computer has no name of its own yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie rekenaar het nog nie &apos;n eie naam nie.</translation>
     </message>
     <message>
         <source>It is called %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit heet %1.</translation>
     </message>
     <message>
         <source>Naming the computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Gee tans die rekenaar &apos;n naam</translation>
     </message>
 </context>
 <context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>
-        <translation type="unfinished"></translation>
+        <translation>NVIDIA-grafikadrywer</translation>
     </message>
     <message>
         <source>Installs NVIDIA&apos;s driver for this graphics card, which accepts NVIDIA&apos;s licence. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer NVIDIA se drywer vir hierdie grafikakaart, wat NVIDIA se lisensie aanvaar. Dit werk eers ná &apos;n herbegin.</translation>
     </message>
     <message>
         <source>No NVIDIA graphics card was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen NVIDIA-grafikakaart is gevind nie.</translation>
     </message>
     <message>
         <source>This NVIDIA card is too old for NVIDIA&apos;s current drivers; the built-in driver is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie NVIDIA-kaart is te oud vir NVIDIA se huidige drywers; die ingeboude drywer word gebruik.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die geïnstalleerde pakkette kon nie gelys word nie.</translation>
     </message>
     <message>
         <source>Installed; it takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geïnstalleer; dit werk eers ná &apos;n herbegin.</translation>
     </message>
     <message>
         <source>This computer has an NVIDIA card without NVIDIA&apos;s driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie rekenaar het &apos;n NVIDIA-kaart sonder NVIDIA se drywer.</translation>
     </message>
     <message>
         <source>Secure Boot is on, so you may be asked to approve a key at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Secure Boot is aan, so jy sal dalk gevra word om &apos;n sleutel by die volgende herbegin goed te keur.</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg tans NVIDIA se sagtewarebron by</translation>
     </message>
     <message>
         <source>Reading NVIDIA&apos;s software list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees tans NVIDIA se sagtewarelys</translation>
     </message>
     <message>
         <source>Installing the NVIDIA driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die NVIDIA-drywer</translation>
     </message>
 </context>
 <context>
     <name>gw::Packman</name>
     <message>
         <source>Adding the Packman Essentials software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg tans die Packman Essentials-sagtewarebron by</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees tans Packman se sagtewarelys</translation>
     </message>
 </context>
 <context>
     <name>gw::PowerItem</name>
     <message>
         <source>Laptop power settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Kraginstellings vir skootrekenaars</translation>
     </message>
     <message>
         <source>Installs power profiles, so you can choose between saving battery and full speed from the desktop&apos;s battery menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer kragprofiele, sodat jy in die werkskerm se batterykieslys kan kies tussen battery spaar en volle spoed.</translation>
     </message>
     <message>
         <source>This computer has no battery.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie rekenaar het geen battery nie.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die geïnstalleerde pakkette kon nie gelys word nie.</translation>
     </message>
     <message>
         <source>No power-profile tool is installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen kragprofiel-hulpmiddel is geïnstalleer nie.</translation>
     </message>
     <message>
         <source>Installing power profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans kragprofiele</translation>
     </message>
 </context>
 <context>
     <name>gw::RunPage</name>
     <message>
         <source>Open OneUp to keep this computer up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak OneUp oop om hierdie rekenaar op datum te hou</translation>
     </message>
     <message>
         <source>Setting up</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel tans op</translation>
     </message>
     <message>
         <source>You can close this window; Groundwork then stops after the current step.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jy kan hierdie venster toemaak; Groundwork stop dan ná die huidige stap.</translation>
     </message>
     <message>
         <source>Show details</source>
-        <translation type="unfinished"></translation>
+        <translation>Wys besonderhede</translation>
     </message>
     <message>
         <source>Groundwork stopped unexpectedly. The details below say why.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork het onverwags gestop. Die besonderhede hieronder sê hoekom.</translation>
     </message>
     <message>
         <source>%1: waiting</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: wag</translation>
     </message>
     <message>
         <source>%1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: %2</translation>
     </message>
     <message>
         <source>working…</source>
-        <translation type="unfinished"></translation>
+        <translation>besig…</translation>
     </message>
     <message>
         <source>done</source>
-        <translation type="unfinished"></translation>
+        <translation>klaar</translation>
     </message>
     <message>
         <source>skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>oorgeslaan</translation>
     </message>
     <message>
         <source>failed</source>
-        <translation type="unfinished"></translation>
+        <translation>misluk</translation>
     </message>
     <message>
         <source>The password was not accepted, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die wagwoord is nie aanvaar nie, so niks is verander nie.</translation>
     </message>
     <message>
         <source>Stopped. Nothing after the last finished step was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestop. Niks ná die laaste voltooide stap is verander nie.</translation>
     </message>
     <message numerus="yes">
         <source>Finished, but %n item(s) could not be completed.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Klaar, maar %n item kon nie voltooi word nie.</numerusform>
+            <numerusform>Klaar, maar %n items kon nie voltooi word nie.</numerusform>
         </translation>
     </message>
     <message>
         <source>All done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles klaar.</translation>
     </message>
 </context>
 <context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelsel-momentopnames</translation>
     </message>
     <message>
         <source>Takes a snapshot of the system around every software change, so a change that goes wrong can be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neem &apos;n momentopname van die stelsel voor en ná elke sagtewareverandering, sodat &apos;n verandering wat verkeerd loop, ongedaan gemaak kan word.</translation>
     </message>
     <message>
         <source>The system&apos;s file system could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die stelsel se lêerstelsel kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>Snapshots need the Btrfs file system, which this system does not use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Momentopnames het die Btrfs-lêerstelsel nodig, wat hierdie stelsel nie gebruik nie.</translation>
     </message>
     <message>
         <source>The snapshot tool is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die momentopname-hulpmiddel is nie geïnstalleer nie.</translation>
     </message>
     <message>
         <source>The snapshot settings could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die momentopname-instellings kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>Snapshots are not set up for the system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Momentopnames is nie vir die stelsel opgestel nie.</translation>
     </message>
     <message>
         <source>Installing the snapshot tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die momentopname-hulpmiddel</translation>
     </message>
     <message>
         <source>Setting up snapshots for the system</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel tans momentopnames vir die stelsel op</translation>
     </message>
 </context>
 <context>
     <name>gw::SoundFirmwareItem</name>
     <message>
         <source>Sound firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Klankfermware</translation>
     </message>
     <message>
         <source>Installs the firmware some laptops need before their speakers and microphone work. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer die fermware wat sommige skootrekenaars nodig het voordat hul luidsprekers en mikrofoon werk. Dit werk eers ná &apos;n herbegin.</translation>
     </message>
     <message>
         <source>This computer&apos;s sound works without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie rekenaar se klank werk sonder dit.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die geïnstalleerde pakkette kon nie gelys word nie.</translation>
     </message>
     <message>
         <source>This computer&apos;s sound needs firmware that is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie rekenaar se klank het fermware nodig wat nie geïnstalleer is nie.</translation>
     </message>
     <message>
         <source>Installing the sound firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die klankfermware</translation>
     </message>
 </context>
 <context>
     <name>gw::SshItem</name>
     <message>
         <source>Remote login (SSH)</source>
-        <translation type="unfinished"></translation>
+        <translation>Afstandaanmelding (SSH)</translation>
     </message>
     <message>
         <source>Lets you log in to this computer from another one over the network, and lets that through the firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat jou toe om oor die netwerk van &apos;n ander rekenaar af by hierdie een aan te meld, en laat dit deur die brandmuur.</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die diensbestuurder het nie geantwoord nie.</translation>
     </message>
     <message>
         <source>Remote login is switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afstandaanmelding is afgeskakel.</translation>
     </message>
     <message>
         <source>Installing the remote login service</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die afstandaanmelddiens</translation>
     </message>
     <message>
         <source>Switching remote login on</source>
-        <translation type="unfinished"></translation>
+        <translation>Skakel tans afstandaanmelding aan</translation>
     </message>
     <message>
         <source>Letting remote login through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat tans afstandaanmelding deur die brandmuur</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Laai tans die brandmuur weer</translation>
     </message>
 </context>
 <context>
     <name>gw::SystemIdentity</name>
     <message>
         <source>This is openSUSE Leap %1. Groundwork needs Leap 16 or later, or Tumbleweed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is openSUSE Leap %1. Groundwork het Leap 16 of later, of Tumbleweed, nodig.</translation>
     </message>
     <message>
         <source>Groundwork could not tell which system this is.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork kon nie bepaal watter stelsel dit is nie.</translation>
     </message>
     <message>
         <source>This is %1. Groundwork works on openSUSE Tumbleweed, Slowroll and Leap 16 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is %1. Groundwork werk op openSUSE Tumbleweed, Slowroll en Leap 16 of later.</translation>
     </message>
     <message>
         <source>Groundwork could not read this system&apos;s release information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork kon nie hierdie stelsel se weergawe-inligting lees nie.</translation>
     </message>
 </context>
 <context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Bring die stelsel op datum</translation>
     </message>
     <message>
         <source>Refreshes the software sources and installs every waiting update, so new software is installed on a current system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfris die sagtewarebronne en installeer elke bywerking wat wag, sodat nuwe sagteware op &apos;n bygewerkte stelsel geïnstalleer word.</translation>
     </message>
     <message>
         <source>zypper, openSUSE&apos;s package manager, was not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>zypper, openSUSE se pakketbestuurder, is nie gevind nie.</translation>
     </message>
     <message>
         <source>zypper could not list the waiting updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>zypper kon nie die bywerkings wat wag, lys nie.</translation>
     </message>
     <message>
         <source>No updates were waiting at the last refresh of the software sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen bywerkings het by die laaste verfrissing van die sagtewarebronne gewag nie.</translation>
     </message>
     <message numerus="yes">
         <source>%n update(s) waiting at the last refresh of the software sources.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n bywerking het by die laaste verfrissing van die sagtewarebronne gewag.</numerusform>
+            <numerusform>%n bywerkings het by die laaste verfrissing van die sagtewarebronne gewag.</numerusform>
         </translation>
     </message>
     <message>
         <source>One or more software sources could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een of meer sagtewarebronne kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>Refreshing the software sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfris tans die sagtewarebronne</translation>
     </message>
     <message>
         <source>Installing the waiting updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer tans die bywerkings wat wag</translation>
     </message>
 </context>
 <context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
-        <translation type="unfinished"></translation>
+        <translation>Noodsaaklikhede</translation>
     </message>
     <message>
         <source>System setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelselopstelling</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurasie</translation>
     </message>
     <message>
         <source>Nice to have</source>
-        <translation type="unfinished"></translation>
+        <translation>Lekker om te hê</translation>
     </message>
     <message>
         <source>What a desktop needs for things to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wat &apos;n rekenaar nodig het sodat dinge werk.</translation>
     </message>
     <message>
         <source>That the system can recover and is protected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dat die stelsel kan herstel en beskerm is.</translation>
     </message>
     <message>
         <source>Choices a new install asks of its owner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keuses wat &apos;n nuwe installasie van sy eienaar vra.</translation>
     </message>
     <message>
         <source>Extras. Each one is its own choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekstras. Elkeen is &apos;n eie keuse.</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Welkom by Groundwork</translation>
     </message>
     <message>
         <source>Groundwork sets up this computer the way you want. Each page offers a level of choices, from essentials to extras. Nothing changes until you press Apply.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork stel hierdie rekenaar op soos jy wil. Elke bladsy bied &apos;n vlak van keuses, van noodsaaklikhede tot ekstras. Niks verander voordat jy Pas toe druk nie.</translation>
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal:</translation>
     </message>
     <message>
         <source>Checking this computer…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontroleer tans hierdie rekenaar…</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gekontroleer. Druk Volgende om te kies wat opgestel moet word.</translation>
     </message>
     <message>
         <source>Ready to apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereed om toe te pas</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas toe</translation>
     </message>
     <message>
         <source>Nothing is switched on. Go back to choose what to set up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niks is aangeskakel nie. Gaan terug om te kies wat opgestel moet word.</translation>
     </message>
     <message>
         <source>These run in this order after one password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie loop in hierdie volgorde ná een wagwoord.</translation>
     </message>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork</translation>
+    </message>
+    <message>
+        <source>&lt; &amp;Back</source>
+        <translation>&lt; &amp;Terug</translation>
+    </message>
+    <message>
+        <source>&amp;Next &gt;</source>
+        <translation>&amp;Volgende &gt;</translation>
+    </message>
+    <message>
+        <source>&amp;Finish</source>
+        <translation>&amp;Klaar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Kanselleer</translation>
     </message>
     <message>
         <source>Switched on because %1 needs it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangeskakel omdat %1 dit nodig het.</translation>
     </message>
     <message>
         <source>Switched off because it needs %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afgeskakel omdat dit %1 nodig het.</translation>
     </message>
 </context>
 <context>
     <name>gw::Worker</name>
     <message>
         <source>A software source could not be read and was skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;n Sagtewarebron kon nie gelees word nie en is oorgeslaan.</translation>
     </message>
     <message>
         <source>%1 failed (exit code %2).</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 het misluk (uittreekode %2).</translation>
     </message>
     <message>
         <source>Already done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reeds gedoen.</translation>
     </message>
     <message>
         <source>Not needed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie hier nodig nie.</translation>
     </message>
     <message>
         <source>Skipped: %1 did not complete.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oorgeslaan: %1 is nie voltooi nie.</translation>
     </message>
     <message>
         <source>Skipped: no valid value was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oorgeslaan: geen geldige waarde is gegee nie.</translation>
     </message>
 </context>
 </TS>

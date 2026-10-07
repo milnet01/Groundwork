@@ -152,6 +152,12 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     setWizardStyle(QWizard::ModernStyle);
     setOption(QWizard::NoBackButtonOnLastPage);
     setOption(QWizard::NoCancelButtonOnLastPage, false);
+    // Labelled here rather than left to Qt, which has no words of its own
+    // for some languages offered, such as Afrikaans. The English is Qt's.
+    setButtonText(QWizard::BackButton, tr("< &Back"));
+    setButtonText(QWizard::NextButton, tr("&Next >"));
+    setButtonText(QWizard::FinishButton, tr("&Finish"));
+    setButtonText(QWizard::CancelButton, tr("Cancel"));
 
     addPage(new WelcomePage(this, m_setup.language));
     for (Level level : {Level::Essentials, Level::SystemSetup, Level::Configuration, Level::NiceToHave}) {

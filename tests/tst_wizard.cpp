@@ -1,6 +1,7 @@
 // The Wizard on Qt's offscreen display, with fake items and a fake Worker
 // script: default toggles, dependency toggling with reasons, Apply's
 // availability, the run page reading markers, and closing mid-run.
+#include "core/translations.h"
 #include "gui/itemrow.h"
 #include "gui/runpage.h"
 #include "gui/wizard.h"
@@ -107,6 +108,23 @@ class TstWizard : public QObject
     }
 
 private slots:
+    void cleanup() { gw::loadLanguage(QStringLiteral("en")); }
+
+    // Qt has no words of its own for Afrikaans, so the Wizard labels its
+    // own buttons (GRND-0033). None may keep Qt's English.
+    void itsButtonsSpeakTheChosenLanguage()
+    {
+        QVERIFY(gw::loadLanguage(QStringLiteral("af")));
+        auto w = make();
+        const QList<std::pair<QWizard::WizardButton, QString>> qtEnglish{
+            {QWizard::BackButton, QStringLiteral("< &Back")},
+            {QWizard::NextButton, QStringLiteral("&Next >")},
+            {QWizard::FinishButton, QStringLiteral("&Finish")},
+            {QWizard::CancelButton, QStringLiteral("Cancel")}};
+        for (const auto &[which, english] : qtEnglish)
+            QVERIFY2(w->buttonText(which) != english, qPrintable(english));
+    }
+
     void defaultsFollowTheSelectionRule()
     {
         auto w = make();

@@ -3,6 +3,7 @@
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 #include <QVBoxLayout>
 
 #include <cstdio>
@@ -22,6 +23,9 @@ AskpassDialog::AskpassDialog(const QString &sudoPrompt, QWidget *parent)
     m_field->setEchoMode(QLineEdit::Password);
     m_field->setAccessibleName(tr("Password"));
     auto *buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    // Labelled here: Qt has no words of its own for some languages offered.
+    buttons->button(QDialogButtonBox::Ok)->setText(tr("OK"));
+    buttons->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
     connect(buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
