@@ -122,6 +122,14 @@ The prefix is pinned in `.ants/project.json` (`id_format.prefix`), set with
 the directory name as `GROU-0001`. A dry-run append after the pin gave
 `GRND-0001`.
 
+### Reviews and specs
+
+The user ruled on 2026-10-07: this project runs no reviews. The
+`review-contract` gate (`~/.claude/CLAUDE.md` rule 14) is cancelled for
+every document here, and no review skill runs as a gate on code or
+documents. Write a spec only where `spec-format.md` § 1 says one is
+needed; otherwise write none.
+
 ### Overrides
 
 Any place this project deliberately departs from a global standard goes

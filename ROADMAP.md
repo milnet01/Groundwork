@@ -315,7 +315,7 @@ hardware is found and lacks support.
   (docs/design.md, The levels). Recommended 2026-10-02; waiting on the
   user's decision.
   Decided 2026-10-07: the user said yes. docs/design.md, The levels,
-  amended the same day; the review-contract gate runs before the build.
+  amended the same day; the user ruled no review is required.
   **Layman:** The NVIDIA driver accepts NVIDIA's licence, so you would tick it yourself rather than find it pre-ticked.
   Kind: ux.
   Source: in-session-2026-10-02.
