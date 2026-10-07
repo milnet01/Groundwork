@@ -8,10 +8,7 @@
 namespace gw {
 namespace {
 
-QString tr(const char *text, int n = -1)
-{
-    return QCoreApplication::translate("gw::FirmwareItem", text, nullptr, n);
-}
+QString tr(const char *text) { return QCoreApplication::translate("gw::FirmwareItem", text); }
 
 const QStringList kGetUpdates{QStringLiteral("fwupdmgr"), QStringLiteral("get-updates"),
                               QStringLiteral("--json"), QStringLiteral("--no-unreported-check")};
@@ -42,7 +39,10 @@ CheckResult FirmwareItem::check(const CheckContext &context) const
             ++waiting;
     if (waiting == 0)
         return {CheckState::Done, {}};
-    return {CheckState::NotDone, tr("%n device(s) have firmware updates waiting.", waiting)};
+    // Named at the call, so lupdate sees the count and gives it plural forms.
+    return {CheckState::NotDone, QCoreApplication::translate("gw::FirmwareItem",
+                                                             "%n device(s) have firmware updates waiting.",
+                                                             nullptr, waiting)};
 }
 
 QList<Step> FirmwareItem::applySteps(const SystemIdentity &, const CheckContext &context) const

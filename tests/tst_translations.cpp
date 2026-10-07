@@ -16,7 +16,8 @@
 
 namespace {
 
-// Each message in a .ts file as "context|source" (GRND-0038).
+// Each message in a .ts file as "context|source", with "|plural" appended
+// to one that has plural forms (GRND-0038, GRND-0033).
 QSet<QString> tsMessages(const QString &path)
 {
     QSet<QString> keys;
@@ -25,13 +26,17 @@ QSet<QString> tsMessages(const QString &path)
         return keys;
     QXmlStreamReader xml(&file);
     QString context;
+    bool plural = false;
     while (xml.readNextStartElement() || !xml.atEnd()) {
         if (!xml.isStartElement())
             continue;
         if (xml.name() == QLatin1String("name"))
             context = xml.readElementText();
+        else if (xml.name() == QLatin1String("message"))
+            plural = xml.attributes().value(QLatin1String("numerus")) == QLatin1String("yes");
         else if (xml.name() == QLatin1String("source"))
-            keys.insert(context + QLatin1Char('|') + xml.readElementText());
+            keys.insert(context + QLatin1Char('|') + xml.readElementText()
+                        + (plural ? QStringLiteral("|plural") : QString()));
     }
     return keys;
 }
@@ -155,6 +160,18 @@ private slots:
             QVERIFY2(lookedUp.contains(name) || qobjects.contains(name), qPrintable(name));
         for (const QString &name : lookedUp)
             QVERIFY2(extracted.contains(name), qPrintable(name));
+    }
+
+    // lupdate gives a string plural forms only when it sees the count at the
+    // call. Without them, a language whose plural form is not its first
+    // finds no translation and shows English for that count.
+    void countedStringsHavePluralForms()
+    {
+        const QSet<QString> now = extractNow();
+        QVERIFY(!now.isEmpty());
+        for (const QString &key : now)
+            if (key.contains(QStringLiteral("%n")))
+                QVERIFY2(key.endsWith(QStringLiteral("|plural")), qPrintable(key));
     }
 
     void onlyTranslatedLanguagesAreOffered() // an empty .qm would show English

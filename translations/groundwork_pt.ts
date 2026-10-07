@@ -343,9 +343,12 @@
         <source>The firmware updater could not check for updates.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <source>%n device(s) have firmware updates waiting.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <source>Installing the firmware updater</source>
@@ -739,12 +742,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%n update(s) waiting at the last refresh of the software sources.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No updates were waiting at the last refresh of the software sources.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n update(s) waiting at the last refresh of the software sources.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <source>One or more software sources could not be read.</source>

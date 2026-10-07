@@ -4,10 +4,7 @@
 
 namespace gw {
 namespace {
-QString tr(const char *text, int n = -1)
-{
-    return QCoreApplication::translate("gw::UpdateItem", text, nullptr, n);
-}
+QString tr(const char *text) { return QCoreApplication::translate("gw::UpdateItem", text); }
 } // namespace
 
 QString UpdateItem::title() const { return tr("Bring the system up to date"); }
@@ -32,9 +29,14 @@ CheckResult UpdateItem::check(const CheckContext &context) const
         return {CheckState::CouldNotTell, tr("zypper could not list the waiting updates.")};
 
     const int count = int(r.out.count("<update "));
-    QString detail = count > 0
-        ? tr("%n update(s) waiting at the last refresh of the software sources.", count)
-        : tr("No updates were waiting at the last refresh of the software sources.");
+    QString detail = tr("No updates were waiting at the last refresh of the software sources.");
+    // Named at the call, so lupdate sees the count and gives it plural forms.
+    // Its own statement: in a ?: lupdate filed the other branch's tr()
+    // under QCoreApplication.
+    if (count > 0)
+        detail = QCoreApplication::translate("gw::UpdateItem",
+                                             "%n update(s) waiting at the last refresh of the software sources.",
+                                             nullptr, count);
     if (r.exitCode == 106)
         detail += QLatin1Char(' ') + tr("One or more software sources could not be read.");
     return {CheckState::NotDone, detail};
