@@ -38,6 +38,7 @@ timeout 1500 podman run --rm \
     "$BUILD_IMAGE" bash -Eeuo pipefail -c '
         zypper -n --quiet install --no-recommends cmake ninja gcc-c++ \
             qt6-base-devel qt6-base-common-devel qt6-widgets-devel \
+            qt6-linguist-devel \
             file findutils gzip >/dev/null
         cmake -S /src -B /tmp/build -G Ninja -DCMAKE_BUILD_TYPE=Release \
             -DGROUNDWORK_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr >/dev/null

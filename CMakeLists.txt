@@ -10,7 +10,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(GROUNDWORK_TESTS "Build the tests" ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets LinguistTools)
 
 # Warnings are errors in the gate, so a warning cannot sit unread.
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
@@ -27,6 +27,29 @@ add_library(groundwork_core STATIC
     src/core/translations.cpp)
 target_include_directories(groundwork_core PUBLIC src)
 target_link_libraries(groundwork_core PUBLIC Qt6::Core)
+
+# Translations (GRND-0038): each translations/groundwork_<code>.ts is
+# compiled into Core's resources at :/i18n, which core/translations.cpp
+# reads, so every program linking Core has them. After changing a string,
+# refresh the .ts files with: cmake --build build --target update_translations
+set(GROUNDWORK_LANGUAGES af ar de es fr he hi ja ko pt xh zh_CN zu)
+set(groundwork_ts "")
+set(groundwork_qm "")
+foreach(code IN LISTS GROUNDWORK_LANGUAGES)
+    set(ts "${PROJECT_SOURCE_DIR}/translations/groundwork_${code}.ts")
+    set(qm "${PROJECT_BINARY_DIR}/i18n/groundwork_${code}.qm")
+    add_custom_command(OUTPUT "${qm}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory "${PROJECT_BINARY_DIR}/i18n"
+        COMMAND Qt6::lrelease -silent "${ts}" -qm "${qm}"
+        DEPENDS "${ts}" VERBATIM)
+    list(APPEND groundwork_ts "${ts}")
+    list(APPEND groundwork_qm "${qm}")
+endforeach()
+qt_add_resources(groundwork_core groundwork_i18n
+    PREFIX /i18n BASE "${PROJECT_BINARY_DIR}/i18n" FILES ${groundwork_qm})
+add_custom_target(update_translations
+    COMMAND Qt6::lupdate -silent -locations none "${PROJECT_SOURCE_DIR}/src" -ts ${groundwork_ts}
+    VERBATIM)
 
 # Items depend on Core only.
 add_library(groundwork_items STATIC

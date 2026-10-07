@@ -103,6 +103,25 @@ git config ants.gate.docsGlob "$(./scripts/local-ci.sh --docs-glob)"
 Linter versions are pinned in `scripts/ci-tools.env`. The workflow
 installs those versions, and the gate warns locally when yours differ.
 
+### Translations
+
+Each language has `translations/groundwork_<code>.ts`, compiled into the
+program at `:/i18n`. A language is offered only once its file has
+translations. After changing any text a user sees, refresh the files:
+
+```bash
+cmake --build build --target update_translations
+```
+
+`tst_translations` fails until they match the source.
+
+The trap: `lupdate` files a string under a context only from what it can
+see at the call. A local `tr` helper in a free function gets the wrong
+context, or none, so that text is never translated. Inside a free
+function, name the context at the call:
+`QCoreApplication::translate("gw::Name", "...")`. `tst_translations`
+checks every context the code looks up.
+
 ### Roadmap IDs
 
 `GRND-NNNN`, per `roadmap-format.md` § 3.5.1. Commit subjects

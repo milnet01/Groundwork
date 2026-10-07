@@ -36,8 +36,12 @@ QStringList availableLanguages()
 {
     QStringList codes{QStringLiteral("en")};
     const QStringList files = QDir(kResourceDir).entryList({QStringLiteral("groundwork_*.qm")}, QDir::Files);
-    for (const QString &file : files)
-        codes << file.mid(11, file.size() - 11 - 3); // groundwork_<code>.qm
+    for (const QString &file : files) {
+        // A language nobody has translated yet would show only English.
+        QTranslator translation;
+        if (translation.load(file, kResourceDir) && !translation.isEmpty())
+            codes << file.mid(11, file.size() - 11 - 3); // groundwork_<code>.qm
+    }
     return codes;
 }
 

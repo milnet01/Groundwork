@@ -14,7 +14,8 @@ namespace gw {
 // not translatable shows up unwrapped.
 inline const QString kPseudoLanguage = QStringLiteral("pseudo");
 
-// Language codes with a translation built in, plus "en", the source.
+// Language codes with a non-empty translation built in, plus "en", the
+// source.
 QStringList availableLanguages();
 
 // The system's language as a code this app has, else "en".

@@ -5,8 +5,6 @@
 namespace gw {
 namespace {
 
-QString tr(const char *text) { return QCoreApplication::translate("gw::Packman", text); }
-
 const QString kReposDir = QStringLiteral("/etc/zypp/repos.d");
 const QString kEssentialsAlias = QStringLiteral("packman-essentials");
 const QString kMirror = QStringLiteral("https://ftp.gwdg.de/pub/linux/misc/packman/suse/");
@@ -67,11 +65,11 @@ QList<Step> packmanSteps(const SystemIdentity &system, const CheckContext &conte
         steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("addrepo"),
                        QStringLiteral("-cfp"), QStringLiteral("90"),
                        kMirror + tree + QStringLiteral("/Essentials/"), *alias},
-                      true, Step::Tool::Zypper, tr("Adding the Packman Essentials software source")});
+                      true, Step::Tool::Zypper, QCoreApplication::translate("gw::Packman", "Adding the Packman Essentials software source")});
     }
     steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"),
                    QStringLiteral("--gpg-auto-import-keys"), QStringLiteral("refresh"), *alias},
-                  true, Step::Tool::Zypper, tr("Reading Packman's software list")});
+                  true, Step::Tool::Zypper, QCoreApplication::translate("gw::Packman", "Reading Packman's software list")});
     return steps;
 }
 

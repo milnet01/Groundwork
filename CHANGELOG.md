@@ -14,6 +14,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Translation files for thirteen languages, built into the app.** (GRND-0038)
+  Each language is offered once it has been translated.
+
 - **A step-by-step setup window: choose a language, pick items level by level, review, then apply with one password** (GRND-0008)
   Items start ticked only where they are essential and not yet done.
   Ticking an item ticks what it needs, and the row says why.
@@ -40,3 +43,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 - **Items that accept a licence (the NVIDIA driver, Microsoft fonts) no longer start switched on.** (GRND-0039)
   You switch them on yourself, so nobody accepts a licence by accident.
+
+### Fixed
+
+- **Startup messages, system-check messages, Packman steps and the app extras could not have been translated.**
+  They were filed under the wrong name for translators, so a
+  translation would never have shown.

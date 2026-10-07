@@ -228,6 +228,9 @@
   leave to the system); a bare container lacks them. Still owed for S1
   to S4: fresh desktop VMs, with the Wizard, the real password box,
   FUSE, and a video playing.
+  Decided 2026-10-07: the user chose two virtual machines (fresh
+  Tumbleweed and fresh Leap 16 with a desktop, about 4 GB each), run one
+  at a time, with the user looking at the screen for the visual checks.
   **Layman:** Tries the finished app on brand-new test machines to prove it works.
   Kind: test.
   Source: design-2026-10-02.
@@ -539,11 +542,19 @@ translation.
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- 📋 [GRND-0038] **Build translation files with Qt's Linguist tools, locally and on GitHub.**
+- ✅ [GRND-0038] **Build translation files with Qt's Linguist tools, locally and on GitHub.**
   Serves S3. Extract strings into translations/*.ts and compile .qm
   files into the program's resources at :/i18n, which
   core/translations.cpp already reads. Install the tools in ci.yml too.
   qt6-linguist-devel 6.11.2 installed here on 2026-10-07.
+  Shipped 2026-10-07: translations/groundwork_<code>.ts for af ar de es
+  fr he hi ja ko pt xh zh_CN zu, compiled by lrelease into Core's
+  resources at :/i18n; update_translations refreshes them. A language is
+  offered only when its .qm is non-empty. Found and fixed: main.cpp,
+  systemidentity.cpp, packman.cpp and appitems.cpp strings were extracted
+  under the wrong context or none. tst_translations checks the files match
+  the source and every looked-up context. Verified: gate 28/28 here;
+  Ubuntu 24.04 (Qt 6.4.2) 28/28; Leap 16.0 release build.
   **Layman:** Sets up the tools that turn translated text into files the app can load.
   Kind: implement.
   Source: split-from-GRND-0032-2026-10-02.

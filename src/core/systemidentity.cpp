@@ -6,11 +6,6 @@
 namespace gw {
 namespace {
 
-QString tr(const char *text)
-{
-    return QCoreApplication::translate("gw::SystemIdentity", text);
-}
-
 QString unquote(QString value)
 {
     if (value.size() >= 2 && value.front() == QLatin1Char('\'') && value.back() == QLatin1Char('\''))
@@ -57,12 +52,12 @@ SystemIdentity parseOsRelease(const QByteArray &text)
         if (numeric && major >= 16)
             identity.family = SystemIdentity::Family::Leap;
         else
-            identity.reason = tr("This is openSUSE Leap %1. Groundwork needs Leap 16 or later, "
+            identity.reason = QCoreApplication::translate("gw::SystemIdentity", "This is openSUSE Leap %1. Groundwork needs Leap 16 or later, "
                                  "or Tumbleweed.").arg(identity.versionId);
     } else if (identity.id.isEmpty()) {
-        identity.reason = tr("Groundwork could not tell which system this is.");
+        identity.reason = QCoreApplication::translate("gw::SystemIdentity", "Groundwork could not tell which system this is.");
     } else {
-        identity.reason = tr("This is %1. Groundwork works on openSUSE Tumbleweed, Slowroll "
+        identity.reason = QCoreApplication::translate("gw::SystemIdentity", "This is %1. Groundwork works on openSUSE Tumbleweed, Slowroll "
                              "and Leap 16 or later.").arg(identity.prettyName);
     }
     return identity;
@@ -75,7 +70,7 @@ SystemIdentity readSystemIdentity(const FileReader &files)
         text = files.read(QStringLiteral("/usr/lib/os-release"));
     if (!text) {
         SystemIdentity identity;
-        identity.reason = tr("Groundwork could not read this system's release information.");
+        identity.reason = QCoreApplication::translate("gw::SystemIdentity", "Groundwork could not read this system's release information.");
         return identity;
     }
     return parseOsRelease(*text);

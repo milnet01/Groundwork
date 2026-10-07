@@ -59,6 +59,8 @@ set_tests_properties(tst_askpass PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscre
 groundwork_test(tst_translations)
 target_compile_definitions(tst_translations PRIVATE
     GROUNDWORK_BIN="$<TARGET_FILE:groundwork>"
+    LUPDATE_BIN="$<TARGET_FILE:Qt6::lupdate>"
+    SOURCE_DIR="${PROJECT_SOURCE_DIR}"
     FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/fixtures"
     FAKES="${CMAKE_CURRENT_SOURCE_DIR}/fakes")
 add_dependencies(tst_translations groundwork)

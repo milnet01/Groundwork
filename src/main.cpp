@@ -21,8 +21,6 @@
 
 namespace {
 
-QString tr(const char *text) { return QCoreApplication::translate("gw::Entry", text); }
-
 // Check mode: print every item's state and what would start switched on.
 // Changes nothing. Exits 3 on an unsupported system.
 int checkMode(const QString &root)
@@ -35,7 +33,7 @@ int checkMode(const QString &root)
         err << identity.reason << '\n';
         return 3;
     }
-    out << tr("System: %1").arg(identity.prettyName) << '\n';
+    out << QCoreApplication::translate("gw::Entry", "System: %1").arg(identity.prettyName) << '\n';
 
     const gw::Catalogue &all = gw::catalogue();
     const gw::CheckResults results = gw::runChecks(all.items(), gw::CheckContext(files));
@@ -49,12 +47,12 @@ int checkMode(const QString &root)
 
     const QStringList start = all.runOrder(all.defaultSelection(results));
     if (start.isEmpty()) {
-        out << tr("Nothing would start switched on.") << '\n';
+        out << QCoreApplication::translate("gw::Entry", "Nothing would start switched on.") << '\n';
     } else {
         QStringList titles;
         for (const QString &id : start)
             titles << all.find(id)->title();
-        out << tr("Would start switched on: %1").arg(titles.join(QStringLiteral(", "))) << '\n';
+        out << QCoreApplication::translate("gw::Entry", "Would start switched on: %1").arg(titles.join(QStringLiteral(", "))) << '\n';
     }
     return 0;
 }
@@ -70,8 +68,8 @@ int wizardMode(int argc, char *argv[])
     gw::loadLanguage(language);
 
     if (geteuid() == 0) {
-        QMessageBox::critical(nullptr, tr("Groundwork"),
-                              tr("Please start Groundwork as yourself, not as root. "
+        QMessageBox::critical(nullptr, QCoreApplication::translate("gw::Entry", "Groundwork"),
+                              QCoreApplication::translate("gw::Entry", "Please start Groundwork as yourself, not as root. "
                                  "It asks for the password when it needs it."));
         return 1;
     }
@@ -79,7 +77,7 @@ int wizardMode(int argc, char *argv[])
     const gw::FileReader files(root);
     const gw::SystemIdentity identity = gw::readSystemIdentity(files);
     if (!identity.supported()) {
-        QMessageBox::information(nullptr, tr("Groundwork"), identity.reason);
+        QMessageBox::information(nullptr, QCoreApplication::translate("gw::Entry", "Groundwork"), identity.reason);
         return 3;
     }
 
@@ -162,7 +160,7 @@ int main(int argc, char *argv[])
         gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::defaultStateDir());
         return worker.run(ids, values);
     }
-    QTextStream(stderr) << tr("Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version")
+    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version")
                         << '\n';
     return 2;
 }
