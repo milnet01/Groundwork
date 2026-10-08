@@ -79,7 +79,11 @@ for f in $staged; do
         printf '%s\n' "$added" | grep -qF -- "$gone" && continue
         git grep -n -F -- "$gone" -- '*.md' ':!docs/' 2>/dev/null |
         while IFS= read -r hit; do
-            [ "${hit%%:*}" = "$f" ] && continue
+            hf=${hit%%:*}
+            [ "$hf" = "$f" ] && continue
+            git diff --cached -- "$hf" | grep -E '^\+' | grep -v -e '^+++ ' |
+                sed 's/^+//; s/^[[:space:]]*//; s/[[:space:]]*$//' |
+                grep -qF -- "$gone" && continue
             printf 'BLOCK survivor %s -> %s\n' "$f" "$hit"
         done
     done >> /tmp/.pc-link.$$ 2>/dev/null
