@@ -126,6 +126,13 @@ forms; and after a named call inside `?:`, `lupdate` filed the other
 branch's `tr()` under `QCoreApplication`, so give each its own
 statement (`updateitem.cpp`).
 
+Right-to-left text has a trap of its own. Qt sets a label's direction
+from its first letter. A translation that starts with a Latin name or a
+`%1` lays out left to right, and its full stop lands at the wrong end.
+Start such a translation with U+200F, the right-to-left mark. Put U+200E,
+the left-to-right mark, after "C++" and before ".7z", or their symbols
+land on the wrong side. Only a look at the window shows either fault.
+
 A translation checked only by a machine (Claude, Gemini) is still a
 draft (design.md, Text). A language leaves draft by adding its code to
 `kChecked` in `src/core/translations.cpp`.

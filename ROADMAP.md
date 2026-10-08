@@ -522,8 +522,14 @@ translation.
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- 📋 [GRND-0034] **Translations: Arabic and Hebrew, right to left.**
+- 🚧 [GRND-0034] **Translations: Arabic and Hebrew, right to left.**
   Serves S3 and S4. Proves the mirrored layout on every page.
+  Progress (2026-10-08): both drafted by Claude and filled. Arabic is
+  Modern Standard; Hebrew instructions use the infinitive so they
+  address no gender. Mirrored layout checked by picture on all six
+  wizard pages, both languages, up to the review page. Lines starting
+  with Latin text got a right-to-left mark (CLAUDE.md, Translations).
+  Next: the Gemini check, which has not run yet.
   **Layman:** The app in Arabic and Hebrew, laid out right to left.
   Kind: implement.
   Source: user-request-2026-10-02.

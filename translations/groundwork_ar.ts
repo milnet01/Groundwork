@@ -5,922 +5,922 @@
     <name>gw::Apps</name>
     <message>
         <source>Flatpak is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak غير مثبّت.</translation>
     </message>
     <message>
         <source>Flatpak did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يستجب Flatpak.</translation>
     </message>
     <message>
         <source>Installed from the system&apos;s software sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>مثبّت من مصادر البرامج الخاصة بالنظام.</translation>
     </message>
     <message>
         <source>Installing %1 from Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت %1 من Flathub</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر عرض قائمة الحزم المثبّتة.</translation>
     </message>
     <message>
         <source>Installing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت %1</translation>
     </message>
     <message>
         <source>Google Chrome</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Google Chrome</translation>
     </message>
     <message>
         <source>Installs Google&apos;s web browser from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت متصفح الويب من Google من Flathub.</translation>
     </message>
     <message>
         <source>Brave</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Brave</translation>
     </message>
     <message>
         <source>Installs the Brave web browser from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت متصفح الويب Brave من Flathub.</translation>
     </message>
     <message>
         <source>VLC media player</source>
-        <translation type="unfinished"></translation>
+        <translation>مشغّل الوسائط VLC</translation>
     </message>
     <message>
         <source>Installs VLC, which plays almost any video or music file, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت VLC، الذي يشغّل تقريبًا أي ملف فيديو أو موسيقى، من Flathub.</translation>
     </message>
     <message>
         <source>Discord</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Discord</translation>
     </message>
     <message>
         <source>Installs the Discord chat app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت تطبيق الدردشة Discord من Flathub.</translation>
     </message>
     <message>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Zoom</translation>
     </message>
     <message>
         <source>Installs the Zoom video-call app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت تطبيق مكالمات الفيديو Zoom من Flathub.</translation>
     </message>
     <message>
         <source>Spotify</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Spotify</translation>
     </message>
     <message>
         <source>Installs the Spotify music app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت تطبيق الموسيقى Spotify من Flathub.</translation>
     </message>
     <message>
         <source>Steam</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Steam</translation>
     </message>
     <message>
         <source>Installs Valve&apos;s Steam game store from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت Steam، متجر الألعاب من Valve، من Flathub.</translation>
     </message>
     <message>
         <source>Bottles</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Bottles</translation>
     </message>
     <message>
         <source>Installs Bottles, which runs Windows games and programs, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت Bottles، الذي يشغّل ألعاب وبرامج Windows، من Flathub.</translation>
     </message>
     <message>
         <source>Build tools</source>
-        <translation type="unfinished"></translation>
+        <translation>أدوات البناء</translation>
     </message>
     <message>
         <source>Installs the C and C++ compilers and make, for building software.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت مترجمَي C وC++‎ والأداة make، لبناء البرامج.</translation>
     </message>
     <message>
         <source>VSCodium</source>
-        <translation type="unfinished"></translation>
+        <translation>‏VSCodium</translation>
     </message>
     <message>
         <source>Installs VSCodium, a code editor, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت VSCodium، وهو محرّر للشيفرة البرمجية، من Flathub.</translation>
     </message>
     <message>
         <source>Déjà Dup backups</source>
-        <translation type="unfinished"></translation>
+        <translation>النسخ الاحتياطي بـ Déjà Dup</translation>
     </message>
     <message>
         <source>Installs Déjà Dup, which backs up your documents and photos; system snapshots do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت Déjà Dup، الذي ينسخ مستنداتك وصورك احتياطيًا؛ أما لقطات النظام فلا تفعل ذلك.</translation>
     </message>
     <message>
         <source>htop</source>
-        <translation type="unfinished"></translation>
+        <translation>‏htop</translation>
     </message>
     <message>
         <source>Installs htop, which shows what is using the computer&apos;s memory and processor.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت htop، الذي يعرض ما يستخدم ذاكرة الحاسوب ومعالجه.</translation>
     </message>
     <message>
         <source>7-Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>‏7-Zip</translation>
     </message>
     <message>
         <source>Installs 7-Zip, for opening .7z and other archives.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت 7-Zip، لفتح ملفات ‎.7z وغيرها من الملفات المضغوطة.</translation>
     </message>
     <message>
         <source>Git</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Git</translation>
     </message>
     <message>
         <source>Installs Git, for downloading and tracking source code.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت Git، لتنزيل الشيفرة المصدرية وتتبّع التغييرات عليها.</translation>
     </message>
     <message>
         <source>fastfetch</source>
-        <translation type="unfinished"></translation>
+        <translation>‏fastfetch</translation>
     </message>
     <message>
         <source>Installs fastfetch, which shows a summary of this computer&apos;s hardware and system.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت fastfetch، الذي يعرض ملخّصًا لعتاد هذا الحاسوب ونظامه.</translation>
     </message>
 </context>
 <context>
     <name>gw::AskpassDialog</name>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork</translation>
     </message>
     <message>
         <source>Groundwork needs administrator rights to make the changes you chose.</source>
-        <translation type="unfinished"></translation>
+        <translation>يحتاج Groundwork إلى صلاحيات المدير لإجراء التغييرات التي اخترتها.</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>كلمة المرور</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>‏OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>إلغاء</translation>
     </message>
 </context>
 <context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Wi-Fi من Broadcom</translation>
     </message>
     <message>
         <source>Installs the driver this computer&apos;s Broadcom Wi-Fi card needs. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت برنامج التشغيل الذي تحتاجه بطاقة Wi-Fi من Broadcom في هذا الحاسوب. يسري مفعوله بعد إعادة التشغيل.</translation>
     </message>
     <message>
         <source>No Broadcom Wi-Fi card that needs this driver was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعثر على بطاقة Wi-Fi من Broadcom تحتاج إلى برنامج التشغيل هذا.</translation>
     </message>
     <message>
         <source>This computer&apos;s Wi-Fi card needs a driver that is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>تحتاج بطاقة Wi-Fi في هذا الحاسوب إلى برنامج تشغيل غير مثبّت.</translation>
     </message>
     <message>
         <source>Secure Boot is on, so you may be asked to approve a key at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>خاصية Secure Boot مفعّلة، لذا قد يُطلب منك الموافقة على مفتاح عند إعادة التشغيل التالية.</translation>
     </message>
     <message>
         <source>Installing the Broadcom Wi-Fi driver</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت برنامج تشغيل Wi-Fi من Broadcom</translation>
     </message>
 </context>
 <context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يذكر الفحص أي سبب.</translation>
     </message>
     <message>
         <source>already done</source>
-        <translation type="unfinished"></translation>
+        <translation>تم بالفعل</translation>
     </message>
     <message>
         <source>not done</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يتم</translation>
     </message>
     <message>
         <source>not needed here</source>
-        <translation type="unfinished"></translation>
+        <translation>غير مطلوب هنا</translation>
     </message>
     <message>
         <source>couldn&apos;t tell</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر التحديد</translation>
     </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>ساعة مشتركة مع Windows</translation>
     </message>
     <message>
         <source>Keeps the computer&apos;s hardware clock in local time, as Windows does, so the time is right after switching between the two.</source>
-        <translation type="unfinished"></translation>
+        <translation>يضبط ساعة العتاد في الحاسوب على التوقيت المحلي، كما يفعل Windows، حتى يكون الوقت صحيحًا بعد التبديل بين النظامين.</translation>
     </message>
     <message>
         <source>Windows was not found on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعثر على Windows في هذا الحاسوب.</translation>
     </message>
     <message>
         <source>The clock settings could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة إعدادات الساعة.</translation>
     </message>
     <message>
         <source>Windows is installed, and the clock will be wrong after switching.</source>
-        <translation type="unfinished"></translation>
+        <translation>نظام Windows مثبّت، وسيكون الوقت خاطئًا بعد التبديل بين النظامين.</translation>
     </message>
     <message>
         <source>Setting the clock to local time</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ ضبط الساعة على التوقيت المحلي</translation>
     </message>
 </context>
 <context>
     <name>gw::CodecsItem</name>
     <message>
         <source>Media codecs</source>
-        <translation type="unfinished"></translation>
+        <translation>برامج ترميز الوسائط</translation>
     </message>
     <message>
         <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation type="unfinished"></translation>
+        <translation>يضيف مصدر البرامج Packman Essentials، ويثق بمفتاح توقيعه، ويثبّت برامج الترميز التي تتيح تشغيل الفيديو والموسيقى، في المتصفح أيضًا.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر عرض قائمة الحزم المثبّتة.</translation>
     </message>
     <message>
         <source>Packman is added, but the codecs are not installed from it yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>تمت إضافة Packman، لكن برامج الترميز لم تُثبَّت منه بعد.</translation>
     </message>
     <message>
         <source>Videos and music in common formats will not play yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>لن يعمل الفيديو والموسيقى بالصيغ الشائعة بعد.</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت برامج ترميز الوسائط</translation>
     </message>
 </context>
 <context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>النظام: %1</translation>
     </message>
     <message>
         <source>Nothing would start switched on.</source>
-        <translation type="unfinished"></translation>
+        <translation>لن يبدأ أي شيء مفعّلًا.</translation>
     </message>
     <message>
         <source>Would start switched on: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>سيبدأ مفعّلًا: %1</translation>
     </message>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>‏OK</translation>
     </message>
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
-        <translation type="unfinished"></translation>
+        <translation>يُرجى تشغيل Groundwork بحسابك أنت، لا بحساب root. سيطلب كلمة المرور عند الحاجة إليها.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation type="unfinished"></translation>
+        <translation>الاستخدام: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
     <name>gw::FirewallItem</name>
     <message>
         <source>Firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>جدار الحماية</translation>
     </message>
     <message>
         <source>Switches the firewall on now and at every start, so other computers cannot reach services you did not open.</source>
-        <translation type="unfinished"></translation>
+        <translation>يفعّل جدار الحماية الآن وعند كل تشغيل، حتى لا تصل الحواسيب الأخرى إلى خدمات لم تفتحها.</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يستجب مدير الخدمات.</translation>
     </message>
     <message>
         <source>The firewall is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>جدار الحماية غير مثبّت.</translation>
     </message>
     <message>
         <source>The firewall is installed but not switched on.</source>
-        <translation type="unfinished"></translation>
+        <translation>جدار الحماية مثبّت لكنه غير مفعّل.</translation>
     </message>
     <message>
         <source>Installing the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت جدار الحماية</translation>
     </message>
     <message>
         <source>Switching the firewall on</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تفعيل جدار الحماية</translation>
     </message>
 </context>
 <context>
     <name>gw::FirmwareItem</name>
     <message>
         <source>Firmware updates</source>
-        <translation type="unfinished"></translation>
+        <translation>تحديثات البرامج الثابتة</translation>
     </message>
     <message>
         <source>Installs firmware updates for this computer&apos;s hardware from the Linux Vendor Firmware Service. Some finish at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت تحديثات البرامج الثابتة لعتاد هذا الحاسوب من Linux Vendor Firmware Service. يكتمل بعضها عند إعادة التشغيل التالية.</translation>
     </message>
     <message>
         <source>The firmware updater is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>أداة تحديث البرامج الثابتة غير مثبّتة.</translation>
     </message>
     <message>
         <source>The firmware updater could not check for updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على أداة تحديث البرامج الثابتة البحث عن تحديثات.</translation>
     </message>
     <message numerus="yes">
         <source>%n device(s) have firmware updates waiting.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>لا توجد أجهزة لديها تحديثات برامج ثابتة منتظرة.</numerusform>
+            <numerusform>جهاز واحد لديه تحديثات برامج ثابتة منتظرة.</numerusform>
+            <numerusform>جهازان لديهما تحديثات برامج ثابتة منتظرة.</numerusform>
+            <numerusform>‏%n أجهزة لديها تحديثات برامج ثابتة منتظرة.</numerusform>
+            <numerusform>‏%n جهازًا لديها تحديثات برامج ثابتة منتظرة.</numerusform>
+            <numerusform>‏%n جهاز لديها تحديثات برامج ثابتة منتظرة.</numerusform>
         </translation>
     </message>
     <message>
         <source>Installing the firmware updater</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت أداة تحديث البرامج الثابتة</translation>
     </message>
     <message>
         <source>Reading the latest firmware list</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ قراءة أحدث قائمة للبرامج الثابتة</translation>
     </message>
     <message>
         <source>Installing firmware updates</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت تحديثات البرامج الثابتة</translation>
     </message>
 </context>
 <context>
     <name>gw::FlathubItem</name>
     <message>
         <source>Flatpak and Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak وFlathub</translation>
     </message>
     <message>
         <source>Installs Flatpak and adds Flathub, the app store most modern Linux apps ship through.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت Flatpak ويضيف Flathub، متجر التطبيقات الذي تُوزَّع عبره معظم تطبيقات Linux الحديثة.</translation>
     </message>
     <message>
         <source>Flatpak is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak غير مثبّت.</translation>
     </message>
     <message>
         <source>Flatpak did not list its app sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يعرض Flatpak قائمة مصادر تطبيقاته.</translation>
     </message>
     <message>
         <source>Flathub is not added yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم تتم إضافة Flathub بعد.</translation>
     </message>
     <message>
         <source>Installing Flatpak</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت Flatpak</translation>
     </message>
     <message>
         <source>Adding Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إضافة Flathub</translation>
     </message>
 </context>
 <context>
     <name>gw::FontsItem</name>
     <message>
         <source>Microsoft-compatible fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>خطوط متوافقة مع Microsoft</translation>
     </message>
     <message>
         <source>Downloads Microsoft&apos;s free web fonts, such as Arial and Times New Roman, under Microsoft&apos;s licence, so documents and websites look as intended.</source>
-        <translation type="unfinished"></translation>
+        <translation>ينزّل خطوط الويب المجانية من Microsoft، مثل Arial وTimes New Roman، بموجب ترخيص Microsoft، حتى تظهر المستندات ومواقع الويب كما ينبغي.</translation>
     </message>
     <message>
         <source>The software sources could not be searched.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر البحث في مصادر البرامج.</translation>
     </message>
     <message>
         <source>These fonts are not offered for this system.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذه الخطوط غير متوفرة لهذا النظام.</translation>
     </message>
     <message>
         <source>Arial and the other Microsoft fonts are not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>الخط Arial وخطوط Microsoft الأخرى غير مثبّتة.</translation>
     </message>
     <message>
         <source>Installing the Microsoft fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت خطوط Microsoft</translation>
     </message>
 </context>
 <context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>
-        <translation type="unfinished"></translation>
+        <translation>اسم الحاسوب</translation>
     </message>
     <message>
         <source>Gives this computer the name you type, which other computers on the network see.</source>
-        <translation type="unfinished"></translation>
+        <translation>يعطي هذا الحاسوب الاسم الذي تكتبه، وهو ما تراه الحواسيب الأخرى على الشبكة.</translation>
     </message>
     <message>
         <source>Name (letters, digits and hyphens):</source>
-        <translation type="unfinished"></translation>
+        <translation>الاسم (حروف وأرقام وشرطات):</translation>
     </message>
     <message>
         <source>The computer&apos;s name could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة اسم الحاسوب.</translation>
     </message>
     <message>
         <source>This computer has no name of its own yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>ليس لهذا الحاسوب اسم خاص به بعد.</translation>
     </message>
     <message>
         <source>It is called %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>اسمه %1.</translation>
     </message>
     <message>
         <source>Naming the computer</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تسمية الحاسوب</translation>
     </message>
 </context>
 <context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>
-        <translation type="unfinished"></translation>
+        <translation>برنامج تشغيل الرسوميات من NVIDIA</translation>
     </message>
     <message>
         <source>Installs NVIDIA&apos;s driver for this graphics card, which accepts NVIDIA&apos;s licence. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت برنامج تشغيل NVIDIA لبطاقة الرسوميات هذه، مما يعني قبول ترخيص NVIDIA. يسري مفعوله بعد إعادة التشغيل.</translation>
     </message>
     <message>
         <source>No NVIDIA graphics card was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعثر على بطاقة رسوميات من NVIDIA.</translation>
     </message>
     <message>
         <source>This NVIDIA card is too old for NVIDIA&apos;s current drivers; the built-in driver is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>بطاقة NVIDIA هذه أقدم من أن تدعمها برامج تشغيل NVIDIA الحالية؛ يُستخدم برنامج التشغيل المدمج.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر عرض قائمة الحزم المثبّتة.</translation>
     </message>
     <message>
         <source>Installed; it takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>مثبّت؛ يسري مفعوله بعد إعادة التشغيل.</translation>
     </message>
     <message>
         <source>This computer has an NVIDIA card without NVIDIA&apos;s driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>في هذا الحاسوب بطاقة من NVIDIA دون برنامج تشغيل NVIDIA.</translation>
     </message>
     <message>
         <source>Secure Boot is on, so you may be asked to approve a key at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>خاصية Secure Boot مفعّلة، لذا قد يُطلب منك الموافقة على مفتاح عند إعادة التشغيل التالية.</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إضافة مصدر البرامج الخاص بـ NVIDIA</translation>
     </message>
     <message>
         <source>Reading NVIDIA&apos;s software list</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ قراءة قائمة برامج NVIDIA</translation>
     </message>
     <message>
         <source>Installing the NVIDIA driver</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت برنامج تشغيل NVIDIA</translation>
     </message>
 </context>
 <context>
     <name>gw::Packman</name>
     <message>
         <source>Adding the Packman Essentials software source</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إضافة مصدر البرامج Packman Essentials</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ قراءة قائمة برامج Packman</translation>
     </message>
 </context>
 <context>
     <name>gw::PowerItem</name>
     <message>
         <source>Laptop power settings</source>
-        <translation type="unfinished"></translation>
+        <translation>إعدادات الطاقة للحاسوب المحمول</translation>
     </message>
     <message>
         <source>Installs power profiles, so you can choose between saving battery and full speed from the desktop&apos;s battery menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت أوضاع الطاقة، حتى تختار بين توفير البطارية والسرعة الكاملة من قائمة البطارية في سطح المكتب.</translation>
     </message>
     <message>
         <source>This computer has no battery.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا توجد بطارية في هذا الحاسوب.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر عرض قائمة الحزم المثبّتة.</translation>
     </message>
     <message>
         <source>No power-profile tool is installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا توجد أداة مثبّتة لأوضاع الطاقة.</translation>
     </message>
     <message>
         <source>Installing power profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت أوضاع الطاقة</translation>
     </message>
 </context>
 <context>
     <name>gw::RunPage</name>
     <message>
         <source>Open OneUp to keep this computer up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>افتح OneUp لإبقاء هذا الحاسوب محدّثًا</translation>
     </message>
     <message>
         <source>Setting up</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ الإعداد</translation>
     </message>
     <message>
         <source>You can close this window; Groundwork then stops after the current step.</source>
-        <translation type="unfinished"></translation>
+        <translation>يمكنك إغلاق هذه النافذة؛ عندها يتوقف Groundwork بعد الخطوة الحالية.</translation>
     </message>
     <message>
         <source>Show details</source>
-        <translation type="unfinished"></translation>
+        <translation>عرض التفاصيل</translation>
     </message>
     <message>
         <source>Groundwork stopped unexpectedly. The details below say why.</source>
-        <translation type="unfinished"></translation>
+        <translation>توقف Groundwork بشكل غير متوقع. توضّح التفاصيل أدناه السبب.</translation>
     </message>
     <message>
         <source>%1: waiting</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: في الانتظار</translation>
     </message>
     <message>
         <source>%1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: %2</translation>
     </message>
     <message>
         <source>working…</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ العمل…</translation>
     </message>
     <message>
         <source>done</source>
-        <translation type="unfinished"></translation>
+        <translation>تم</translation>
     </message>
     <message>
         <source>skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>تم التخطي</translation>
     </message>
     <message>
         <source>failed</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل</translation>
     </message>
     <message>
         <source>The password was not accepted, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم تُقبل كلمة المرور، لذا لم يتغير أي شيء.</translation>
     </message>
     <message>
         <source>Stopped. Nothing after the last finished step was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>توقف. لم يتغير أي شيء بعد آخر خطوة اكتملت.</translation>
     </message>
     <message numerus="yes">
         <source>Finished, but %n item(s) could not be completed.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>اكتمل كل شيء.</numerusform>
+            <numerusform>اكتمل، لكن تعذّر إكمال عنصر واحد.</numerusform>
+            <numerusform>اكتمل، لكن تعذّر إكمال عنصرين.</numerusform>
+            <numerusform>اكتمل، لكن تعذّر إكمال %n عناصر.</numerusform>
+            <numerusform>اكتمل، لكن تعذّر إكمال %n عنصرًا.</numerusform>
+            <numerusform>اكتمل، لكن تعذّر إكمال %n عنصر.</numerusform>
         </translation>
     </message>
     <message>
         <source>All done.</source>
-        <translation type="unfinished"></translation>
+        <translation>اكتمل كل شيء.</translation>
     </message>
 </context>
 <context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>لقطات النظام</translation>
     </message>
     <message>
         <source>Takes a snapshot of the system around every software change, so a change that goes wrong can be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>يلتقط لقطة للنظام قبل كل تغيير في البرامج وبعده، حتى يمكن التراجع عن أي تغيير يحدث فيه خطأ.</translation>
     </message>
     <message>
         <source>The system&apos;s file system could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة نظام الملفات الخاص بالنظام.</translation>
     </message>
     <message>
         <source>Snapshots need the Btrfs file system, which this system does not use.</source>
-        <translation type="unfinished"></translation>
+        <translation>تحتاج اللقطات إلى نظام الملفات Btrfs، وهذا النظام لا يستخدمه.</translation>
     </message>
     <message>
         <source>The snapshot tool is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>أداة اللقطات غير مثبّتة.</translation>
     </message>
     <message>
         <source>The snapshot settings could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة إعدادات اللقطات.</translation>
     </message>
     <message>
         <source>Snapshots are not set up for the system.</source>
-        <translation type="unfinished"></translation>
+        <translation>اللقطات غير مُعدّة للنظام.</translation>
     </message>
     <message>
         <source>Installing the snapshot tool</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت أداة اللقطات</translation>
     </message>
     <message>
         <source>Setting up snapshots for the system</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إعداد لقطات النظام</translation>
     </message>
 </context>
 <context>
     <name>gw::SoundFirmwareItem</name>
     <message>
         <source>Sound firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>البرنامج الثابت للصوت</translation>
     </message>
     <message>
         <source>Installs the firmware some laptops need before their speakers and microphone work. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>يثبّت البرنامج الثابت الذي تحتاجه بعض الحواسيب المحمولة لكي تعمل مكبّرات الصوت والميكروفون. يسري مفعوله بعد إعادة التشغيل.</translation>
     </message>
     <message>
         <source>This computer&apos;s sound works without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>الصوت في هذا الحاسوب يعمل من دونه.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر عرض قائمة الحزم المثبّتة.</translation>
     </message>
     <message>
         <source>This computer&apos;s sound needs firmware that is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>يحتاج الصوت في هذا الحاسوب إلى برنامج ثابت غير مثبّت.</translation>
     </message>
     <message>
         <source>Installing the sound firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت البرنامج الثابت للصوت</translation>
     </message>
 </context>
 <context>
     <name>gw::SshItem</name>
     <message>
         <source>Remote login (SSH)</source>
-        <translation type="unfinished"></translation>
+        <translation>تسجيل الدخول عن بُعد (SSH)</translation>
     </message>
     <message>
         <source>Lets you log in to this computer from another one over the network, and lets that through the firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>يتيح لك تسجيل الدخول إلى هذا الحاسوب من حاسوب آخر عبر الشبكة، ويسمح بذلك عبر جدار الحماية.</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يستجب مدير الخدمات.</translation>
     </message>
     <message>
         <source>Remote login is switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>تسجيل الدخول عن بُعد غير مفعّل.</translation>
     </message>
     <message>
         <source>Installing the remote login service</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت خدمة تسجيل الدخول عن بُعد</translation>
     </message>
     <message>
         <source>Switching remote login on</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تفعيل تسجيل الدخول عن بُعد</translation>
     </message>
     <message>
         <source>Letting remote login through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ السماح بتسجيل الدخول عن بُعد عبر جدار الحماية</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إعادة تحميل جدار الحماية</translation>
     </message>
 </context>
 <context>
     <name>gw::SystemIdentity</name>
     <message>
         <source>This is openSUSE Leap %1. Groundwork needs Leap 16 or later, or Tumbleweed.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا openSUSE Leap %1. يحتاج Groundwork إلى Leap 16 أو أحدث، أو إلى Tumbleweed.</translation>
     </message>
     <message>
         <source>Groundwork could not tell which system this is.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على Groundwork معرفة هذا النظام.</translation>
     </message>
     <message>
         <source>This is %1. Groundwork works on openSUSE Tumbleweed, Slowroll and Leap 16 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا %1. يعمل Groundwork على openSUSE Tumbleweed وSlowroll وLeap 16 أو أحدث.</translation>
     </message>
     <message>
         <source>Groundwork could not read this system&apos;s release information.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على Groundwork قراءة معلومات إصدار هذا النظام.</translation>
     </message>
 </context>
 <context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>تحديث النظام</translation>
     </message>
     <message>
         <source>Refreshes the software sources and installs every waiting update, so new software is installed on a current system.</source>
-        <translation type="unfinished"></translation>
+        <translation>ينعش مصادر البرامج ويثبّت كل التحديثات المنتظرة، حتى تُثبَّت البرامج الجديدة على نظام محدّث.</translation>
     </message>
     <message>
         <source>zypper, openSUSE&apos;s package manager, was not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعثر على zypper، مدير الحزم في openSUSE.</translation>
     </message>
     <message>
         <source>zypper could not list the waiting updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على zypper عرض قائمة التحديثات المنتظرة.</translation>
     </message>
     <message>
         <source>No updates were waiting at the last refresh of the software sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم تكن هناك تحديثات منتظرة عند آخر إنعاش لمصادر البرامج.</translation>
     </message>
     <message numerus="yes">
         <source>%n update(s) waiting at the last refresh of the software sources.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>لم تكن هناك تحديثات منتظرة عند آخر إنعاش لمصادر البرامج.</numerusform>
+            <numerusform>تحديث واحد كان منتظرًا عند آخر إنعاش لمصادر البرامج.</numerusform>
+            <numerusform>تحديثان كانا منتظرين عند آخر إنعاش لمصادر البرامج.</numerusform>
+            <numerusform>‏%n تحديثات كانت منتظرة عند آخر إنعاش لمصادر البرامج.</numerusform>
+            <numerusform>‏%n تحديثًا كانت منتظرة عند آخر إنعاش لمصادر البرامج.</numerusform>
+            <numerusform>‏%n تحديث كانت منتظرة عند آخر إنعاش لمصادر البرامج.</numerusform>
         </translation>
     </message>
     <message>
         <source>One or more software sources could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة مصدر برامج واحد أو أكثر.</translation>
     </message>
     <message>
         <source>Refreshing the software sources</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إنعاش مصادر البرامج</translation>
     </message>
     <message>
         <source>Installing the waiting updates</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت التحديثات المنتظرة</translation>
     </message>
 </context>
 <context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
-        <translation type="unfinished"></translation>
+        <translation>الأساسيات</translation>
     </message>
     <message>
         <source>System setup</source>
-        <translation type="unfinished"></translation>
+        <translation>إعداد النظام</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>الضبط</translation>
     </message>
     <message>
         <source>Nice to have</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافات مفيدة</translation>
     </message>
     <message>
         <source>What a desktop needs for things to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>ما يحتاجه الحاسوب لكي يعمل كل شيء.</translation>
     </message>
     <message>
         <source>That the system can recover and is protected.</source>
-        <translation type="unfinished"></translation>
+        <translation>أن يتمكن النظام من التعافي وأن يكون محميًا.</translation>
     </message>
     <message>
         <source>Choices a new install asks of its owner.</source>
-        <translation type="unfinished"></translation>
+        <translation>الخيارات التي يطلبها التثبيت الجديد من صاحبه.</translation>
     </message>
     <message>
         <source>Extras. Each one is its own choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافات. كل واحدة منها خيار مستقل.</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>مرحبًا بك في Groundwork</translation>
     </message>
     <message>
         <source>Groundwork sets up this computer the way you want. Each page offers a level of choices, from essentials to extras. Nothing changes until you press Apply.</source>
-        <translation type="unfinished"></translation>
+        <translation>يُعدّ Groundwork هذا الحاسوب بالطريقة التي تريدها. تعرض كل صفحة مستوى من الخيارات، من الأساسيات إلى الإضافات. لن يتغير شيء حتى تضغط تطبيق.</translation>
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>اللغة:</translation>
     </message>
     <message>
         <source>%1 (draft)</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 (مسودة)</translation>
     </message>
     <message>
         <source>This translation is a draft: no native speaker has checked it yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذه الترجمة مسودة: لم يراجعها أي متحدث أصلي بعد.</translation>
     </message>
     <message>
         <source>Checking this computer…</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ فحص هذا الحاسوب…</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>
-        <translation type="unfinished"></translation>
+        <translation>اكتمل الفحص. اضغط التالي لاختيار ما تريد إعداده.</translation>
     </message>
     <message>
         <source>Ready to apply</source>
-        <translation type="unfinished"></translation>
+        <translation>جاهز للتطبيق</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>تطبيق</translation>
     </message>
     <message>
         <source>Nothing is switched on. Go back to choose what to set up.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا شيء مفعّل. ارجع لاختيار ما تريد إعداده.</translation>
     </message>
     <message>
         <source>These run in this order after one password.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعمل هذه بهذا الترتيب بعد إدخال كلمة مرور واحدة.</translation>
     </message>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork</translation>
     </message>
     <message>
         <source>&lt; &amp;Back</source>
-        <translation type="unfinished"></translation>
+        <translation>‏&lt; ال&amp;سابق</translation>
     </message>
     <message>
         <source>&amp;Next &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ال&amp;تالي &gt;</translation>
     </message>
     <message>
         <source>&amp;Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>إ&amp;نهاء</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>إلغاء</translation>
     </message>
     <message>
         <source>Switched on because %1 needs it.</source>
-        <translation type="unfinished"></translation>
+        <translation>مفعّل لأن %1 يحتاج إليه.</translation>
     </message>
     <message>
         <source>Switched off because it needs %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>غير مفعّل لأنه يحتاج إلى %1.</translation>
     </message>
 </context>
 <context>
     <name>gw::Worker</name>
     <message>
         <source>A software source could not be read and was skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة أحد مصادر البرامج وتم تخطيه.</translation>
     </message>
     <message>
         <source>%1 failed (exit code %2).</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل %1 (رمز الخروج %2).</translation>
     </message>
     <message>
         <source>Already done.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم بالفعل.</translation>
     </message>
     <message>
         <source>Not needed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>غير مطلوب هنا.</translation>
     </message>
     <message>
         <source>Skipped: %1 did not complete.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم التخطي: لم يكتمل %1.</translation>
     </message>
     <message>
         <source>Skipped: no valid value was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم التخطي: لم تُعطَ قيمة صالحة.</translation>
     </message>
 </context>
 </TS>

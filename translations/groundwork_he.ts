@@ -5,910 +5,910 @@
     <name>gw::Apps</name>
     <message>
         <source>Flatpak is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak אינו מותקן.</translation>
     </message>
     <message>
         <source>Flatpak did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak לא הגיב.</translation>
     </message>
     <message>
         <source>Installed from the system&apos;s software sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>הותקן ממקורות התוכנה של המערכת.</translation>
     </message>
     <message>
         <source>Installing %1 from Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את %1 מ־Flathub</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
     </message>
     <message>
         <source>Installing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את %1</translation>
     </message>
     <message>
         <source>Google Chrome</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Google Chrome</translation>
     </message>
     <message>
         <source>Installs Google&apos;s web browser from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את דפדפן האינטרנט של Google מ־Flathub.</translation>
     </message>
     <message>
         <source>Brave</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Brave</translation>
     </message>
     <message>
         <source>Installs the Brave web browser from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את דפדפן האינטרנט Brave מ־Flathub.</translation>
     </message>
     <message>
         <source>VLC media player</source>
-        <translation type="unfinished"></translation>
+        <translation>נגן המדיה VLC</translation>
     </message>
     <message>
         <source>Installs VLC, which plays almost any video or music file, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את VLC, שמנגן כמעט כל קובץ וידאו או מוזיקה, מ־Flathub.</translation>
     </message>
     <message>
         <source>Discord</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Discord</translation>
     </message>
     <message>
         <source>Installs the Discord chat app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את אפליקציית הצ&apos;אט Discord מ־Flathub.</translation>
     </message>
     <message>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Zoom</translation>
     </message>
     <message>
         <source>Installs the Zoom video-call app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את אפליקציית שיחות הווידאו Zoom מ־Flathub.</translation>
     </message>
     <message>
         <source>Spotify</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Spotify</translation>
     </message>
     <message>
         <source>Installs the Spotify music app from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את אפליקציית המוזיקה Spotify מ־Flathub.</translation>
     </message>
     <message>
         <source>Steam</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Steam</translation>
     </message>
     <message>
         <source>Installs Valve&apos;s Steam game store from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את Steam, חנות המשחקים של Valve, מ־Flathub.</translation>
     </message>
     <message>
         <source>Bottles</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Bottles</translation>
     </message>
     <message>
         <source>Installs Bottles, which runs Windows games and programs, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את Bottles, שמריץ משחקים ותוכנות של Windows, מ־Flathub.</translation>
     </message>
     <message>
         <source>Build tools</source>
-        <translation type="unfinished"></translation>
+        <translation>כלי בנייה</translation>
     </message>
     <message>
         <source>Installs the C and C++ compilers and make, for building software.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את המהדרים של C ו־C++‎ ואת make, לבניית תוכנה.</translation>
     </message>
     <message>
         <source>VSCodium</source>
-        <translation type="unfinished"></translation>
+        <translation>‏VSCodium</translation>
     </message>
     <message>
         <source>Installs VSCodium, a code editor, from Flathub.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את VSCodium, עורך קוד, מ־Flathub.</translation>
     </message>
     <message>
         <source>Déjà Dup backups</source>
-        <translation type="unfinished"></translation>
+        <translation>גיבויים עם Déjà Dup</translation>
     </message>
     <message>
         <source>Installs Déjà Dup, which backs up your documents and photos; system snapshots do not.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את Déjà Dup, שמגבה את המסמכים והתמונות שלך; תמונות מצב של המערכת לא עושות זאת.</translation>
     </message>
     <message>
         <source>htop</source>
-        <translation type="unfinished"></translation>
+        <translation>‏htop</translation>
     </message>
     <message>
         <source>Installs htop, which shows what is using the computer&apos;s memory and processor.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את htop, שמראה מה משתמש בזיכרון ובמעבד של המחשב.</translation>
     </message>
     <message>
         <source>7-Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>‏7-Zip</translation>
     </message>
     <message>
         <source>Installs 7-Zip, for opening .7z and other archives.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את 7-Zip, לפתיחת קובצי ‎.7z וארכיונים אחרים.</translation>
     </message>
     <message>
         <source>Git</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Git</translation>
     </message>
     <message>
         <source>Installs Git, for downloading and tracking source code.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את Git, להורדת קוד מקור ולמעקב אחר השינויים בו.</translation>
     </message>
     <message>
         <source>fastfetch</source>
-        <translation type="unfinished"></translation>
+        <translation>‏fastfetch</translation>
     </message>
     <message>
         <source>Installs fastfetch, which shows a summary of this computer&apos;s hardware and system.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את fastfetch, שמציג סיכום של החומרה והמערכת של המחשב הזה.</translation>
     </message>
 </context>
 <context>
     <name>gw::AskpassDialog</name>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork</translation>
     </message>
     <message>
         <source>Groundwork needs administrator rights to make the changes you chose.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork צריך הרשאות מנהל כדי לבצע את השינויים שבחרת.</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>סיסמה</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>‏OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>ביטול</translation>
     </message>
 </context>
 <context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Wi-Fi של Broadcom</translation>
     </message>
     <message>
         <source>Installs the driver this computer&apos;s Broadcom Wi-Fi card needs. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את מנהל ההתקן שכרטיס ה־Wi-Fi של Broadcom במחשב הזה צריך. השינוי ייכנס לתוקף לאחר הפעלה מחדש.</translation>
     </message>
     <message>
         <source>No Broadcom Wi-Fi card that needs this driver was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא נמצא כרטיס Wi-Fi של Broadcom שצריך את מנהל ההתקן הזה.</translation>
     </message>
     <message>
         <source>This computer&apos;s Wi-Fi card needs a driver that is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>כרטיס ה־Wi-Fi של המחשב הזה צריך מנהל התקן שאינו מותקן.</translation>
     </message>
     <message>
         <source>Secure Boot is on, so you may be asked to approve a key at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Secure Boot מופעל, לכן ייתכן שתופיע בקשה לאשר מפתח בהפעלה מחדש הבאה.</translation>
     </message>
     <message>
         <source>Installing the Broadcom Wi-Fi driver</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את מנהל ההתקן של Wi-Fi מבית Broadcom</translation>
     </message>
 </context>
 <context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
-        <translation type="unfinished"></translation>
+        <translation>הבדיקה לא נתנה סיבה.</translation>
     </message>
     <message>
         <source>already done</source>
-        <translation type="unfinished"></translation>
+        <translation>כבר בוצע</translation>
     </message>
     <message>
         <source>not done</source>
-        <translation type="unfinished"></translation>
+        <translation>לא בוצע</translation>
     </message>
     <message>
         <source>not needed here</source>
-        <translation type="unfinished"></translation>
+        <translation>לא נדרש כאן</translation>
     </message>
     <message>
         <source>couldn&apos;t tell</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לקבוע</translation>
     </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>שעון משותף עם Windows</translation>
     </message>
     <message>
         <source>Keeps the computer&apos;s hardware clock in local time, as Windows does, so the time is right after switching between the two.</source>
-        <translation type="unfinished"></translation>
+        <translation>שומר את שעון החומרה של המחשב לפי השעה המקומית, כמו ש־Windows עושה, כדי שהשעה תהיה נכונה אחרי מעבר בין השניים.</translation>
     </message>
     <message>
         <source>Windows was not found on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Windows לא נמצא במחשב הזה.</translation>
     </message>
     <message>
         <source>The clock settings could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא את הגדרות השעון.</translation>
     </message>
     <message>
         <source>Windows is installed, and the clock will be wrong after switching.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Windows מותקן, והשעה תהיה שגויה אחרי מעבר בין השניים.</translation>
     </message>
     <message>
         <source>Setting the clock to local time</source>
-        <translation type="unfinished"></translation>
+        <translation>מכוון את השעון לשעה המקומית</translation>
     </message>
 </context>
 <context>
     <name>gw::CodecsItem</name>
     <message>
         <source>Media codecs</source>
-        <translation type="unfinished"></translation>
+        <translation>מקודדי מדיה</translation>
     </message>
     <message>
         <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation type="unfinished"></translation>
+        <translation>מוסיף את מקור התוכנה Packman Essentials, סומך על מפתח החתימה שלו ומתקין את המקודדים שמאפשרים לנגן וידאו ומוזיקה, גם בדפדפן.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
     </message>
     <message>
         <source>Packman is added, but the codecs are not installed from it yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Packman נוסף, אבל המקודדים עדיין לא הותקנו ממנו.</translation>
     </message>
     <message>
         <source>Videos and music in common formats will not play yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>וידאו ומוזיקה בפורמטים נפוצים עדיין לא יתנגנו.</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את מקודדי המדיה</translation>
     </message>
 </context>
 <context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>מערכת: %1</translation>
     </message>
     <message>
         <source>Nothing would start switched on.</source>
-        <translation type="unfinished"></translation>
+        <translation>שום דבר לא יתחיל כשהוא מופעל.</translation>
     </message>
     <message>
         <source>Would start switched on: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>יתחילו כשהם מופעלים: %1</translation>
     </message>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>‏OK</translation>
     </message>
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
-        <translation type="unfinished"></translation>
+        <translation>יש להפעיל את Groundwork מהמשתמש שלך, לא כ־root. הוא יבקש את הסיסמה כשיצטרך אותה.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation type="unfinished"></translation>
+        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
     <name>gw::FirewallItem</name>
     <message>
         <source>Firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>חומת אש</translation>
     </message>
     <message>
         <source>Switches the firewall on now and at every start, so other computers cannot reach services you did not open.</source>
-        <translation type="unfinished"></translation>
+        <translation>מפעיל את חומת האש עכשיו ובכל הפעלה, כדי שמחשבים אחרים לא יוכלו להגיע לשירותים שלא פתחת.</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>מנהל השירותים לא הגיב.</translation>
     </message>
     <message>
         <source>The firewall is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>חומת האש אינה מותקנת.</translation>
     </message>
     <message>
         <source>The firewall is installed but not switched on.</source>
-        <translation type="unfinished"></translation>
+        <translation>חומת האש מותקנת אבל אינה מופעלת.</translation>
     </message>
     <message>
         <source>Installing the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את חומת האש</translation>
     </message>
     <message>
         <source>Switching the firewall on</source>
-        <translation type="unfinished"></translation>
+        <translation>מפעיל את חומת האש</translation>
     </message>
 </context>
 <context>
     <name>gw::FirmwareItem</name>
     <message>
         <source>Firmware updates</source>
-        <translation type="unfinished"></translation>
+        <translation>עדכוני קושחה</translation>
     </message>
     <message>
         <source>Installs firmware updates for this computer&apos;s hardware from the Linux Vendor Firmware Service. Some finish at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין עדכוני קושחה לחומרה של המחשב הזה מ־Linux Vendor Firmware Service. חלקם יסתיימו בהפעלה מחדש הבאה.</translation>
     </message>
     <message>
         <source>The firmware updater is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>כלי עדכון הקושחה אינו מותקן.</translation>
     </message>
     <message>
         <source>The firmware updater could not check for updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>כלי עדכון הקושחה לא הצליח לבדוק אם יש עדכונים.</translation>
     </message>
     <message numerus="yes">
         <source>%n device(s) have firmware updates waiting.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>להתקן אחד יש עדכוני קושחה ממתינים.</numerusform>
+            <numerusform>ל־%n התקנים יש עדכוני קושחה ממתינים.</numerusform>
         </translation>
     </message>
     <message>
         <source>Installing the firmware updater</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את כלי עדכון הקושחה</translation>
     </message>
     <message>
         <source>Reading the latest firmware list</source>
-        <translation type="unfinished"></translation>
+        <translation>קורא את רשימת הקושחה העדכנית</translation>
     </message>
     <message>
         <source>Installing firmware updates</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין עדכוני קושחה</translation>
     </message>
 </context>
 <context>
     <name>gw::FlathubItem</name>
     <message>
         <source>Flatpak and Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak ו־Flathub</translation>
     </message>
     <message>
         <source>Installs Flatpak and adds Flathub, the app store most modern Linux apps ship through.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את Flatpak ומוסיף את Flathub, חנות האפליקציות שדרכה מופצות רוב האפליקציות המודרניות ל־Linux.</translation>
     </message>
     <message>
         <source>Flatpak is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak אינו מותקן.</translation>
     </message>
     <message>
         <source>Flatpak did not list its app sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flatpak לא הציג את רשימת מקורות האפליקציות שלו.</translation>
     </message>
     <message>
         <source>Flathub is not added yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Flathub עדיין לא נוסף.</translation>
     </message>
     <message>
         <source>Installing Flatpak</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את Flatpak</translation>
     </message>
     <message>
         <source>Adding Flathub</source>
-        <translation type="unfinished"></translation>
+        <translation>מוסיף את Flathub</translation>
     </message>
 </context>
 <context>
     <name>gw::FontsItem</name>
     <message>
         <source>Microsoft-compatible fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>גופנים תואמי Microsoft</translation>
     </message>
     <message>
         <source>Downloads Microsoft&apos;s free web fonts, such as Arial and Times New Roman, under Microsoft&apos;s licence, so documents and websites look as intended.</source>
-        <translation type="unfinished"></translation>
+        <translation>מוריד את גופני האינטרנט החינמיים של Microsoft, כמו Arial ו־Times New Roman, לפי הרישיון של Microsoft, כדי שמסמכים ואתרים ייראו כמו שצריך.</translation>
     </message>
     <message>
         <source>The software sources could not be searched.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לחפש במקורות התוכנה.</translation>
     </message>
     <message>
         <source>These fonts are not offered for this system.</source>
-        <translation type="unfinished"></translation>
+        <translation>הגופנים האלה אינם זמינים למערכת הזאת.</translation>
     </message>
     <message>
         <source>Arial and the other Microsoft fonts are not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Arial ושאר הגופנים של Microsoft אינם מותקנים.</translation>
     </message>
     <message>
         <source>Installing the Microsoft fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את הגופנים של Microsoft</translation>
     </message>
 </context>
 <context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>
-        <translation type="unfinished"></translation>
+        <translation>שם המחשב</translation>
     </message>
     <message>
         <source>Gives this computer the name you type, which other computers on the network see.</source>
-        <translation type="unfinished"></translation>
+        <translation>נותן למחשב הזה את השם שיוקלד, והוא השם שמחשבים אחרים ברשת רואים.</translation>
     </message>
     <message>
         <source>Name (letters, digits and hyphens):</source>
-        <translation type="unfinished"></translation>
+        <translation>שם (אותיות, ספרות ומקפים):</translation>
     </message>
     <message>
         <source>The computer&apos;s name could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא את שם המחשב.</translation>
     </message>
     <message>
         <source>This computer has no name of its own yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>למחשב הזה עדיין אין שם משלו.</translation>
     </message>
     <message>
         <source>It is called %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>שמו %1.</translation>
     </message>
     <message>
         <source>Naming the computer</source>
-        <translation type="unfinished"></translation>
+        <translation>נותן שם למחשב</translation>
     </message>
 </context>
 <context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>
-        <translation type="unfinished"></translation>
+        <translation>מנהל התקן גרפי של NVIDIA</translation>
     </message>
     <message>
         <source>Installs NVIDIA&apos;s driver for this graphics card, which accepts NVIDIA&apos;s licence. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את מנהל ההתקן של NVIDIA לכרטיס הגרפי הזה, ובכך מקבל את הרישיון של NVIDIA. השינוי ייכנס לתוקף לאחר הפעלה מחדש.</translation>
     </message>
     <message>
         <source>No NVIDIA graphics card was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא נמצא כרטיס גרפי של NVIDIA.</translation>
     </message>
     <message>
         <source>This NVIDIA card is too old for NVIDIA&apos;s current drivers; the built-in driver is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>כרטיס ה־NVIDIA הזה ישן מדי למנהלי ההתקן הנוכחיים של NVIDIA; נעשה שימוש במנהל ההתקן המובנה.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
     </message>
     <message>
         <source>Installed; it takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>הותקן; ייכנס לתוקף לאחר הפעלה מחדש.</translation>
     </message>
     <message>
         <source>This computer has an NVIDIA card without NVIDIA&apos;s driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>במחשב הזה יש כרטיס של NVIDIA בלי מנהל ההתקן של NVIDIA.</translation>
     </message>
     <message>
         <source>Secure Boot is on, so you may be asked to approve a key at the next restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Secure Boot מופעל, לכן ייתכן שתופיע בקשה לאשר מפתח בהפעלה מחדש הבאה.</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>מוסיף את מקור התוכנה של NVIDIA</translation>
     </message>
     <message>
         <source>Reading NVIDIA&apos;s software list</source>
-        <translation type="unfinished"></translation>
+        <translation>קורא את רשימת התוכנה של NVIDIA</translation>
     </message>
     <message>
         <source>Installing the NVIDIA driver</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את מנהל ההתקן של NVIDIA</translation>
     </message>
 </context>
 <context>
     <name>gw::Packman</name>
     <message>
         <source>Adding the Packman Essentials software source</source>
-        <translation type="unfinished"></translation>
+        <translation>מוסיף את מקור התוכנה Packman Essentials</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>
-        <translation type="unfinished"></translation>
+        <translation>קורא את רשימת התוכנה של Packman</translation>
     </message>
 </context>
 <context>
     <name>gw::PowerItem</name>
     <message>
         <source>Laptop power settings</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרות צריכת חשמל למחשב נייד</translation>
     </message>
     <message>
         <source>Installs power profiles, so you can choose between saving battery and full speed from the desktop&apos;s battery menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין פרופילי צריכת חשמל, כדי שאפשר יהיה לבחור בין חיסכון בסוללה למהירות מלאה מתפריט הסוללה של שולחן העבודה.</translation>
     </message>
     <message>
         <source>This computer has no battery.</source>
-        <translation type="unfinished"></translation>
+        <translation>למחשב הזה אין סוללה.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
     </message>
     <message>
         <source>No power-profile tool is installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא מותקן כלי לפרופילי צריכת חשמל.</translation>
     </message>
     <message>
         <source>Installing power profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין פרופילי צריכת חשמל</translation>
     </message>
 </context>
 <context>
     <name>gw::RunPage</name>
     <message>
         <source>Open OneUp to keep this computer up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>פתיחת OneUp כדי לשמור על המחשב הזה מעודכן</translation>
     </message>
     <message>
         <source>Setting up</source>
-        <translation type="unfinished"></translation>
+        <translation>מגדיר</translation>
     </message>
     <message>
         <source>You can close this window; Groundwork then stops after the current step.</source>
-        <translation type="unfinished"></translation>
+        <translation>אפשר לסגור את החלון הזה; Groundwork יעצור אז אחרי השלב הנוכחי.</translation>
     </message>
     <message>
         <source>Show details</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת פרטים</translation>
     </message>
     <message>
         <source>Groundwork stopped unexpectedly. The details below say why.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork נעצר באופן בלתי צפוי. הפרטים שלמטה מסבירים למה.</translation>
     </message>
     <message>
         <source>%1: waiting</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: ממתין</translation>
     </message>
     <message>
         <source>%1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: %2</translation>
     </message>
     <message>
         <source>working…</source>
-        <translation type="unfinished"></translation>
+        <translation>בעבודה…</translation>
     </message>
     <message>
         <source>done</source>
-        <translation type="unfinished"></translation>
+        <translation>הושלם</translation>
     </message>
     <message>
         <source>skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>דולג</translation>
     </message>
     <message>
         <source>failed</source>
-        <translation type="unfinished"></translation>
+        <translation>נכשל</translation>
     </message>
     <message>
         <source>The password was not accepted, so nothing was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>הסיסמה לא התקבלה, ולכן שום דבר לא השתנה.</translation>
     </message>
     <message>
         <source>Stopped. Nothing after the last finished step was changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>נעצר. שום דבר לא השתנה אחרי השלב האחרון שהסתיים.</translation>
     </message>
     <message numerus="yes">
         <source>Finished, but %n item(s) could not be completed.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>הסתיים, אבל פריט אחד לא הושלם.</numerusform>
+            <numerusform>הסתיים, אבל %n פריטים לא הושלמו.</numerusform>
         </translation>
     </message>
     <message>
         <source>All done.</source>
-        <translation type="unfinished"></translation>
+        <translation>הכול הושלם.</translation>
     </message>
 </context>
 <context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונות מצב של המערכת</translation>
     </message>
     <message>
         <source>Takes a snapshot of the system around every software change, so a change that goes wrong can be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>יוצר תמונת מצב של המערכת לפני כל שינוי בתוכנה ואחריו, כדי שאפשר יהיה לבטל שינוי שהשתבש.</translation>
     </message>
     <message>
         <source>The system&apos;s file system could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא את מערכת הקבצים של המערכת.</translation>
     </message>
     <message>
         <source>Snapshots need the Btrfs file system, which this system does not use.</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונות מצב דורשות את מערכת הקבצים Btrfs, שהמערכת הזאת אינה משתמשת בה.</translation>
     </message>
     <message>
         <source>The snapshot tool is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>הכלי לתמונות מצב אינו מותקן.</translation>
     </message>
     <message>
         <source>The snapshot settings could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא את הגדרות תמונות המצב.</translation>
     </message>
     <message>
         <source>Snapshots are not set up for the system.</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונות מצב אינן מוגדרות למערכת.</translation>
     </message>
     <message>
         <source>Installing the snapshot tool</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את הכלי לתמונות מצב</translation>
     </message>
     <message>
         <source>Setting up snapshots for the system</source>
-        <translation type="unfinished"></translation>
+        <translation>מגדיר תמונות מצב למערכת</translation>
     </message>
 </context>
 <context>
     <name>gw::SoundFirmwareItem</name>
     <message>
         <source>Sound firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>קושחת שמע</translation>
     </message>
     <message>
         <source>Installs the firmware some laptops need before their speakers and microphone work. It takes effect after a restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את הקושחה שחלק מהמחשבים הניידים צריכים כדי שהרמקולים והמיקרופון יעבדו. השינוי ייכנס לתוקף לאחר הפעלה מחדש.</translation>
     </message>
     <message>
         <source>This computer&apos;s sound works without it.</source>
-        <translation type="unfinished"></translation>
+        <translation>השמע במחשב הזה עובד גם בלעדיה.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
     </message>
     <message>
         <source>This computer&apos;s sound needs firmware that is not installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>השמע במחשב הזה צריך קושחה שאינה מותקנת.</translation>
     </message>
     <message>
         <source>Installing the sound firmware</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את קושחת השמע</translation>
     </message>
 </context>
 <context>
     <name>gw::SshItem</name>
     <message>
         <source>Remote login (SSH)</source>
-        <translation type="unfinished"></translation>
+        <translation>התחברות מרחוק (SSH)</translation>
     </message>
     <message>
         <source>Lets you log in to this computer from another one over the network, and lets that through the firewall.</source>
-        <translation type="unfinished"></translation>
+        <translation>מאפשר להתחבר למחשב הזה ממחשב אחר דרך הרשת, ומתיר את ההתחברות הזאת בחומת האש.</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished"></translation>
+        <translation>מנהל השירותים לא הגיב.</translation>
     </message>
     <message>
         <source>Remote login is switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>ההתחברות מרחוק כבויה.</translation>
     </message>
     <message>
         <source>Installing the remote login service</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את שירות ההתחברות מרחוק</translation>
     </message>
     <message>
         <source>Switching remote login on</source>
-        <translation type="unfinished"></translation>
+        <translation>מפעיל את ההתחברות מרחוק</translation>
     </message>
     <message>
         <source>Letting remote login through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>מתיר את ההתחברות מרחוק בחומת האש</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>טוען מחדש את חומת האש</translation>
     </message>
 </context>
 <context>
     <name>gw::SystemIdentity</name>
     <message>
         <source>This is openSUSE Leap %1. Groundwork needs Leap 16 or later, or Tumbleweed.</source>
-        <translation type="unfinished"></translation>
+        <translation>זוהי openSUSE Leap %1. Groundwork צריך Leap 16 ומעלה, או Tumbleweed.</translation>
     </message>
     <message>
         <source>Groundwork could not tell which system this is.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork לא הצליח לזהות איזו מערכת זו.</translation>
     </message>
     <message>
         <source>This is %1. Groundwork works on openSUSE Tumbleweed, Slowroll and Leap 16 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>זוהי %1. Groundwork עובד על openSUSE Tumbleweed,‏ Slowroll ו־Leap 16 ומעלה.</translation>
     </message>
     <message>
         <source>Groundwork could not read this system&apos;s release information.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork לא הצליח לקרוא את פרטי הגרסה של המערכת הזאת.</translation>
     </message>
 </context>
 <context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>עדכון המערכת</translation>
     </message>
     <message>
         <source>Refreshes the software sources and installs every waiting update, so new software is installed on a current system.</source>
-        <translation type="unfinished"></translation>
+        <translation>מרענן את מקורות התוכנה ומתקין את כל העדכונים הממתינים, כדי שתוכנה חדשה תותקן על מערכת מעודכנת.</translation>
     </message>
     <message>
         <source>zypper, openSUSE&apos;s package manager, was not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏zypper, מנהל החבילות של openSUSE, לא נמצא.</translation>
     </message>
     <message>
         <source>zypper could not list the waiting updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏zypper לא הצליח להציג את העדכונים הממתינים.</translation>
     </message>
     <message>
         <source>No updates were waiting at the last refresh of the software sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא היו עדכונים ממתינים ברענון האחרון של מקורות התוכנה.</translation>
     </message>
     <message numerus="yes">
         <source>%n update(s) waiting at the last refresh of the software sources.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>עדכון אחד המתין ברענון האחרון של מקורות התוכנה.</numerusform>
+            <numerusform>‏%n עדכונים המתינו ברענון האחרון של מקורות התוכנה.</numerusform>
         </translation>
     </message>
     <message>
         <source>One or more software sources could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא מקור תוכנה אחד או יותר.</translation>
     </message>
     <message>
         <source>Refreshing the software sources</source>
-        <translation type="unfinished"></translation>
+        <translation>מרענן את מקורות התוכנה</translation>
     </message>
     <message>
         <source>Installing the waiting updates</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את העדכונים הממתינים</translation>
     </message>
 </context>
 <context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
-        <translation type="unfinished"></translation>
+        <translation>הבסיס</translation>
     </message>
     <message>
         <source>System setup</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת המערכת</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>תצורה</translation>
     </message>
     <message>
         <source>Nice to have</source>
-        <translation type="unfinished"></translation>
+        <translation>תוספות שימושיות</translation>
     </message>
     <message>
         <source>What a desktop needs for things to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>מה שמחשב צריך כדי שהכול יעבוד.</translation>
     </message>
     <message>
         <source>That the system can recover and is protected.</source>
-        <translation type="unfinished"></translation>
+        <translation>שהמערכת תוכל להתאושש ותהיה מוגנת.</translation>
     </message>
     <message>
         <source>Choices a new install asks of its owner.</source>
-        <translation type="unfinished"></translation>
+        <translation>הבחירות שהתקנה חדשה מבקשת מהבעלים שלה.</translation>
     </message>
     <message>
         <source>Extras. Each one is its own choice.</source>
-        <translation type="unfinished"></translation>
+        <translation>תוספות. כל אחת מהן היא בחירה נפרדת.</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>ברוכים הבאים ל־Groundwork</translation>
     </message>
     <message>
         <source>Groundwork sets up this computer the way you want. Each page offers a level of choices, from essentials to extras. Nothing changes until you press Apply.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork מגדיר את המחשב הזה כפי שרוצים. כל עמוד מציע רמה של בחירות, מהבסיס ועד התוספות. שום דבר לא ישתנה עד שילחצו על החלה.</translation>
     </message>
     <message>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>שפה:</translation>
     </message>
     <message>
         <source>%1 (draft)</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 (טיוטה)</translation>
     </message>
     <message>
         <source>This translation is a draft: no native speaker has checked it yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>התרגום הזה הוא טיוטה: אף דובר שפת אם עדיין לא בדק אותו.</translation>
     </message>
     <message>
         <source>Checking this computer…</source>
-        <translation type="unfinished"></translation>
+        <translation>בודק את המחשב הזה…</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>
-        <translation type="unfinished"></translation>
+        <translation>הבדיקה הסתיימה. יש ללחוץ על הבא כדי לבחור מה להגדיר.</translation>
     </message>
     <message>
         <source>Ready to apply</source>
-        <translation type="unfinished"></translation>
+        <translation>מוכן להחלה</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>החלה</translation>
     </message>
     <message>
         <source>Nothing is switched on. Go back to choose what to set up.</source>
-        <translation type="unfinished"></translation>
+        <translation>שום דבר לא מופעל. יש לחזור אחורה כדי לבחור מה להגדיר.</translation>
     </message>
     <message>
         <source>These run in this order after one password.</source>
-        <translation type="unfinished"></translation>
+        <translation>אלה ירוצו בסדר הזה אחרי סיסמה אחת.</translation>
     </message>
     <message>
         <source>Groundwork</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork</translation>
     </message>
     <message>
         <source>&lt; &amp;Back</source>
-        <translation type="unfinished"></translation>
+        <translation>‏&lt; ה&amp;קודם</translation>
     </message>
     <message>
         <source>&amp;Next &gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ה&amp;בא &gt;</translation>
     </message>
     <message>
         <source>&amp;Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>‏&amp;סיום</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>ביטול</translation>
     </message>
     <message>
         <source>Switched on because %1 needs it.</source>
-        <translation type="unfinished"></translation>
+        <translation>מופעל כי %1 צריך אותו.</translation>
     </message>
     <message>
         <source>Switched off because it needs %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>כבוי כי הוא צריך את %1.</translation>
     </message>
 </context>
 <context>
     <name>gw::Worker</name>
     <message>
         <source>A software source could not be read and was skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא מקור תוכנה, והוא דולג.</translation>
     </message>
     <message>
         <source>%1 failed (exit code %2).</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 נכשל (קוד יציאה %2).</translation>
     </message>
     <message>
         <source>Already done.</source>
-        <translation type="unfinished"></translation>
+        <translation>כבר בוצע.</translation>
     </message>
     <message>
         <source>Not needed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא נדרש כאן.</translation>
     </message>
     <message>
         <source>Skipped: %1 did not complete.</source>
-        <translation type="unfinished"></translation>
+        <translation>דולג: %1 לא הושלם.</translation>
     </message>
     <message>
         <source>Skipped: no valid value was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>דולג: לא ניתן ערך תקין.</translation>
     </message>
 </context>
 </TS>
