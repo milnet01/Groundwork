@@ -14,6 +14,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Languages nobody fluent has checked yet are labelled as drafts.** (GRND-0041)
+  The language choice says so, and so does the first page while a draft
+  is in use.
+
 - **Translation files for thirteen languages, built into the app.** (GRND-0038)
   Each language is offered once it has been translated.
 

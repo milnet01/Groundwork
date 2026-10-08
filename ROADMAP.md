@@ -573,11 +573,15 @@ translation.
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- 📋 [GRND-0041] **Unchecked translations are marked as drafts.**
+- ✅ [GRND-0041] **Unchecked translations are marked as drafts.**
   Serves S3. docs/design.md, Text: a translation no native speaker has
   checked ships marked as a draft, on the first page's language choice
   and on that page when it is the language in use. The user checks
   Afrikaans; the rest ship as drafts (user's decision, 2026-10-07).
+  Resolved (2026-10-08): the language choice shows "(draft)" after an
+  unchecked language, and the first page carries a notice when one is in
+  use. The checked list lives in core/translations.cpp and is empty until
+  the user approves Afrikaans.
   **Layman:** Languages nobody fluent has checked yet are labelled as drafts, so people know.
   Kind: implement.
   Source: user-request-2026-10-07.
