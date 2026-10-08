@@ -755,7 +755,7 @@
     </message>
     <message>
         <source>No updates were waiting at the last refresh of the software sources.</source>
-        <translation>Geen bywerkings het by die laaste verfrissing van die sagtewarebronne gewag nie.</translation>
+        <translation>Geen opdaterings was aan die wag tydens die laaste verversing van die sagtewarebronne nie.</translation>
     </message>
     <message numerus="yes">
         <source>%n update(s) waiting at the last refresh of the software sources.</source>
