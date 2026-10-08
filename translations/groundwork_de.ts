@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>Installs Déjà Dup, which backs up your documents and photos; system snapshots do not.</source>
-        <translation>Installiert Déjà Dup, das Ihre Dokumente und Fotos sichert; System-Schnappschüsse tun das nicht.</translation>
+        <translation>Installiert Déjà Dup, das Ihre Dokumente und Fotos sichert; das tun System-Schnappschüsse nicht.</translation>
     </message>
     <message>
         <source>htop</source>
@@ -623,7 +623,7 @@
     </message>
     <message>
         <source>Takes a snapshot of the system around every software change, so a change that goes wrong can be undone.</source>
-        <translation>Macht vor und nach jeder Softwareänderung einen Schnappschuss des Systems, damit sich eine missglückte Änderung rückgängig machen lässt.</translation>
+        <translation>Macht vor und nach jeder Softwareänderung einen Schnappschuss des Systems, damit eine missglückte Änderung rückgängig gemacht werden kann.</translation>
     </message>
     <message>
         <source>The system&apos;s file system could not be read.</source>
@@ -817,7 +817,7 @@
     </message>
     <message>
         <source>Groundwork sets up this computer the way you want. Each page offers a level of choices, from essentials to extras. Nothing changes until you press Apply.</source>
-        <translation>Groundwork richtet diesen Computer so ein, wie Sie es möchten. Jede Seite bietet eine Stufe von Auswahlmöglichkeiten, vom Wichtigsten bis zu Extras. Nichts ändert sich, bevor Sie auf Anwenden klicken.</translation>
+        <translation>Groundwork richtet diesen Computer so ein, wie Sie es möchten. Jede Seite bietet verschiedene Auswahlmöglichkeiten, vom Wichtigsten bis zu Extras. Nichts ändert sich, bevor Sie auf Anwenden klicken.</translation>
     </message>
     <message>
         <source>Language:</source>

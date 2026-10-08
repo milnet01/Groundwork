@@ -581,7 +581,7 @@
     </message>
     <message>
         <source>working…</source>
-        <translation>trabalhando…</translation>
+        <translation>em andamento…</translation>
     </message>
     <message>
         <source>done</source>

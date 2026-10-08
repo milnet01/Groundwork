@@ -552,6 +552,10 @@ translation.
   Progress (2026-10-08): all four drafted by Claude and filled. German uses "Sie",
   French "vous", Spanish (Spain) "tú", Portuguese is Brazilian (the file's
   pt_BR) with "você". Each ships marked draft; a Gemini check is next.
+  Gemini check (2026-10-08), all four: German took three rewordings
+  (one rejected: it named Google's browser "Google"); French and Spanish
+  needed none; Portuguese took "em andamento…" for "working…". Still
+  drafts until a native speaker reads them.
   **Layman:** The app in four widely used European languages.
   Kind: implement.
   Source: user-request-2026-10-02.
