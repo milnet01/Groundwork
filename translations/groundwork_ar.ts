@@ -362,8 +362,8 @@
             <numerusform>جهاز واحد لديه تحديثات برامج ثابتة منتظرة.</numerusform>
             <numerusform>جهازان لديهما تحديثات برامج ثابتة منتظرة.</numerusform>
             <numerusform>‏%n أجهزة لديها تحديثات برامج ثابتة منتظرة.</numerusform>
-            <numerusform>‏%n جهازًا لديها تحديثات برامج ثابتة منتظرة.</numerusform>
-            <numerusform>‏%n جهاز لديها تحديثات برامج ثابتة منتظرة.</numerusform>
+            <numerusform>‏%n جهازًا لديه تحديثات برامج ثابتة منتظرة.</numerusform>
+            <numerusform>‏%n جهاز لديه تحديثات برامج ثابتة منتظرة.</numerusform>
         </translation>
     </message>
     <message>
@@ -772,8 +772,8 @@
             <numerusform>تحديث واحد كان منتظرًا عند آخر إنعاش لمصادر البرامج.</numerusform>
             <numerusform>تحديثان كانا منتظرين عند آخر إنعاش لمصادر البرامج.</numerusform>
             <numerusform>‏%n تحديثات كانت منتظرة عند آخر إنعاش لمصادر البرامج.</numerusform>
-            <numerusform>‏%n تحديثًا كانت منتظرة عند آخر إنعاش لمصادر البرامج.</numerusform>
-            <numerusform>‏%n تحديث كانت منتظرة عند آخر إنعاش لمصادر البرامج.</numerusform>
+            <numerusform>‏%n تحديثًا كان منتظرًا عند آخر إنعاش لمصادر البرامج.</numerusform>
+            <numerusform>‏%n تحديث كان منتظرًا عند آخر إنعاش لمصادر البرامج.</numerusform>
         </translation>
     </message>
     <message>

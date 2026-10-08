@@ -530,6 +530,11 @@ translation.
   wizard pages, both languages, up to the review page. Lines starting
   with Latin text got a right-to-left mark (CLAUDE.md, Translations).
   Next: the Gemini check, which has not run yet.
+  Gemini check (2026-10-08, Gemini 3.1 Pro): Arabic took four plural
+  fixes (11 and up count with a singular noun, so the verb agrees in the
+  singular); Hebrew took two rewordings. Rejected: dropping "יש" before
+  instructions, and %n in place of "one" in Hebrew singulars. Still
+  drafts until a native speaker reads them.
   **Layman:** The app in Arabic and Hebrew, laid out right to left.
   Kind: implement.
   Source: user-request-2026-10-02.

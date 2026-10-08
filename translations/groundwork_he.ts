@@ -195,7 +195,7 @@
     </message>
     <message>
         <source>Installing the Broadcom Wi-Fi driver</source>
-        <translation>מתקין את מנהל ההתקן של Wi-Fi מבית Broadcom</translation>
+        <translation>מתקין את מנהל ההתקן של ה־Wi-Fi של Broadcom</translation>
     </message>
 </context>
 <context>
@@ -817,7 +817,7 @@
     </message>
     <message>
         <source>Groundwork sets up this computer the way you want. Each page offers a level of choices, from essentials to extras. Nothing changes until you press Apply.</source>
-        <translation>‏Groundwork מגדיר את המחשב הזה כפי שרוצים. כל עמוד מציע רמה של בחירות, מהבסיס ועד התוספות. שום דבר לא ישתנה עד שילחצו על החלה.</translation>
+        <translation>‏Groundwork מגדיר את המחשב הזה כפי שרוצים. כל עמוד מציע רמה של בחירות, מהבסיס ועד התוספות. שום דבר לא ישתנה עד לחיצה על החלה.</translation>
     </message>
     <message>
         <source>Language:</source>
