@@ -56,9 +56,19 @@ public:
         auto *languages = new QComboBox(this);
         languageLabel->setBuddy(languages);
         for (const QString &code : availableLanguages()) {
-            const QString name = code == QLatin1String("en") ? QStringLiteral("English")
-                                                             : QLocale(code).nativeLanguageName();
+            QString name = code == QLatin1String("en") ? QStringLiteral("English")
+                                                       : QLocale(code).nativeLanguageName();
+            if (isDraft(code))
+                name = Wizard::tr("%1 (draft)").arg(name);
             languages->addItem(name, code);
+        }
+        // A draft in use says so in its own words, so its reader can tell.
+        QLabel *draftNotice = nullptr;
+        if (isDraft(language)) {
+            draftNotice = new QLabel(
+                Wizard::tr("This translation is a draft: no native speaker has checked it yet."), this);
+            draftNotice->setObjectName(QStringLiteral("draftNotice"));
+            draftNotice->setWordWrap(true);
         }
         languages->setCurrentIndex(qMax(0, languages->findData(language)));
         connect(languages, &QComboBox::currentIndexChanged, this, [this, languages] {
@@ -75,6 +85,8 @@ public:
         layout->addWidget(intro);
         layout->addWidget(languageLabel);
         layout->addWidget(languages);
+        if (draftNotice)
+            layout->addWidget(draftNotice);
         layout->addWidget(m_status);
         layout->addStretch();
     }

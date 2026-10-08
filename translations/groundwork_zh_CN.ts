@@ -821,6 +821,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>%1 (draft)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This translation is a draft: no native speaker has checked it yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation type="unfinished"></translation>
     </message>

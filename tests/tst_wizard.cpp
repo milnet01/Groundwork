@@ -7,7 +7,10 @@
 #include "gui/wizard.h"
 
 #include <QCheckBox>
+#include <QComboBox>
 #include <QDir>
+#include <QLabel>
+#include <QLocale>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QFile>
@@ -74,7 +77,7 @@ class TstWizard : public QObject
 
     QTemporaryDir m_dir;
 
-    std::unique_ptr<gw::Wizard> make()
+    std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"))
     {
         const QString worker = m_dir.filePath(QStringLiteral("fake-worker"));
         if (!QFile::exists(worker)) {
@@ -94,7 +97,7 @@ class TstWizard : public QObject
             r.insert(QStringLiteral("fonts"), {gw::CheckState::NotDone, {}});
             return r;
         };
-        setup.language = QStringLiteral("en");
+        setup.language = language;
         setup.workerProgram = worker;
         setup.stateDir = m_dir.filePath(QStringLiteral("state"));
         auto w = std::make_unique<gw::Wizard>(setup);
@@ -123,6 +126,39 @@ private slots:
             {QWizard::CancelButton, QStringLiteral("Cancel")}};
         for (const auto &[which, english] : qtEnglish)
             QVERIFY2(w->buttonText(which) != english, qPrintable(english));
+    }
+
+    // A translation no native speaker has checked is marked as a draft in
+    // the language choice; English carries no mark (GRND-0041; docs/
+    // design.md, Text). Afrikaans awaits its check.
+    void theLanguageChoiceMarksDrafts()
+    {
+        auto w = make();
+        auto *languages = w->page(0)->findChild<QComboBox *>();
+        QVERIFY(languages);
+        const int en = languages->findData(QStringLiteral("en"));
+        const int af = languages->findData(QStringLiteral("af"));
+        QVERIFY(en >= 0 && af >= 0);
+        QCOMPARE(languages->itemText(en), QStringLiteral("English"));
+        const QString name = QLocale(QStringLiteral("af")).nativeLanguageName();
+        QVERIFY2(languages->itemText(af).contains(name) && languages->itemText(af) != name,
+                 qPrintable(languages->itemText(af)));
+    }
+
+    // In a draft language, the first page says so; in English it says nothing.
+    void theFirstPageSaysWhenItsLanguageIsADraft()
+    {
+        {
+            auto w = make();
+            auto *notice = w->page(0)->findChild<QLabel *>(QStringLiteral("draftNotice"));
+            QVERIFY(!notice || notice->isHidden());
+        }
+        QVERIFY(gw::loadLanguage(QStringLiteral("af")));
+        auto w = make(QStringLiteral("af"));
+        auto *notice = w->page(0)->findChild<QLabel *>(QStringLiteral("draftNotice"));
+        QVERIFY(notice);
+        QVERIFY(!notice->isHidden());
+        QVERIFY(!notice->text().isEmpty());
     }
 
     void defaultsFollowTheSelectionRule()

@@ -14,6 +14,10 @@ namespace {
 
 const QString kResourceDir = QStringLiteral(":/i18n");
 
+// Translations a native speaker has checked. Add a code once its check is
+// done; every other translation is a draft.
+const QStringList kChecked{};
+
 class PseudoTranslator : public QTranslator
 {
 public:
@@ -81,6 +85,11 @@ bool loadLanguage(const QString &code)
         installed().push_back(std::move(qt));
     }
     return true;
+}
+
+bool isDraft(const QString &code)
+{
+    return code != QLatin1String("en") && code != kPseudoLanguage && !kChecked.contains(code);
 }
 
 Qt::LayoutDirection directionFor(const QString &code)

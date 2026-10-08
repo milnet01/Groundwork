@@ -824,6 +824,14 @@
         <translation>Taal:</translation>
     </message>
     <message>
+        <source>%1 (draft)</source>
+        <translation>%1 (konsep)</translation>
+    </message>
+    <message>
+        <source>This translation is a draft: no native speaker has checked it yet.</source>
+        <translation>Hierdie vertaling is &apos;n konsep: geen moedertaalspreker het dit nog nagegaan nie.</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>Kontroleer tans hierdie rekenaar…</translation>
     </message>

@@ -25,6 +25,10 @@ QString systemLanguage();
 // Returns false, leaving the source text, when there is none.
 bool loadLanguage(const QString &code);
 
+// True for a translation no native speaker has checked yet, which ships
+// marked as a draft (GRND-0041; docs/design.md, Text). False for English.
+bool isDraft(const QString &code);
+
 Qt::LayoutDirection directionFor(const QString &code);
 
 } // namespace gw
