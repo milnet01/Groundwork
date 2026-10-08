@@ -549,6 +549,10 @@ translation.
   chosen: software uses standard written Chinese. Font check: this
   openSUSE install has no Chinese, Japanese, Korean or Hindi font, and
   the default "fonts" pattern installs none.
+  Progress (2026-10-08): zh_CN, zh_TW, ja and ko drafted by Claude
+  (d387222); full gate passed. The no-font test's disabled branch now
+  runs and was proved red once. Gemini check still owed: Pro was busy
+  and the request failed twice.
   **Layman:** The app in Chinese, Japanese and Korean.
   Kind: implement.
   Source: user-request-2026-10-02.
