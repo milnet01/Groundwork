@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 5 — Building an item.
-**In flight:** GRND-0033, the Afrikaans draft; it waits for the user's check.
+**In flight:** GRND-0033, Afrikaans; it waits for a fluent person's read.
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where
@@ -120,7 +120,15 @@ see at the call. A local `tr` helper in a free function gets the wrong
 context, or none, so that text is never translated. Inside a free
 function, name the context at the call:
 `QCoreApplication::translate("gw::Name", "...")`. `tst_translations`
-checks every context the code looks up.
+checks every context the code looks up. Two more of the same kind: a
+count must be passed at that named call, or the string gets no plural
+forms; and after a named call inside `?:`, `lupdate` filed the other
+branch's `tr()` under `QCoreApplication`, so give each its own
+statement (`updateitem.cpp`).
+
+A translation checked only by a machine (Claude, Gemini) is still a
+draft (design.md, Text). A language leaves draft by adding its code to
+`kChecked` in `src/core/translations.cpp`.
 
 ### Roadmap IDs
 

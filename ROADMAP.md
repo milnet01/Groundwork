@@ -508,6 +508,14 @@ translation.
   on the way: counted sentences had one form, so counts above one showed
   English in every language (d13308d); Qt has no Afrikaans button words,
   so the app now labels its own buttons (e7dd36e).
+  Progress (2026-10-08): the user checked A to E with Gemini and sent
+  wording (applied, 70802b1, 831fcfc); F to T went through Gemini in the
+  user's Chrome (0a2bef0). User's decisions: informal "jy"; "OK" stays
+  "OK"; the name stays "Groundwork"; "opdatering" for update everywhere;
+  progress messages as "Besig om ... te ..."; Afrikaans KEEPS its draft
+  mark until a fluent person reads it, since Gemini and Claude are not
+  native speakers. Done means: that read, then add "af" to kChecked in
+  src/core/translations.cpp and flip this item.
   **Layman:** The whole app in Afrikaans.
   Kind: implement.
   Source: user-request-2026-10-02.
