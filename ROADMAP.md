@@ -547,8 +547,11 @@ translation.
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- 📋 [GRND-0037] **Translations: German, French, Spanish and Portuguese.**
+- 🚧 [GRND-0037] **Translations: German, French, Spanish and Portuguese.**
   Serves S3.
+  Progress (2026-10-08): all four drafted by Claude and filled. German uses "Sie",
+  French "vous", Spanish (Spain) "tú", Portuguese is Brazilian (the file's
+  pt_BR) with "você". Each ships marked draft; a Gemini check is next.
   **Layman:** The app in four widely used European languages.
   Kind: implement.
   Source: user-request-2026-10-02.
