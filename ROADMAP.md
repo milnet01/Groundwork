@@ -211,7 +211,7 @@
   Lanes: packaging.
   Blocked-by: GRND-0007, GRND-0008.
 
-- 📋 [GRND-0013] **Release check: S1 to S4 on fresh Tumbleweed and Leap 16 machines.**
+- ✅ [GRND-0013] **Release check: S1 to S4 on fresh Tumbleweed and Leap 16 machines.**
   Serves S1, S2, S3 and S4. On a fresh virtual machine of each: one
   button and one password complete the switched-on items and a video
   plays (S2); a second run starts nothing and changes nothing (S1);
@@ -231,6 +231,31 @@
   Decided 2026-10-07: the user chose two virtual machines (fresh
   Tumbleweed and fresh Leap 16 with a desktop, about 4 GB each), run one
   at a time, with the user looking at the screen for the visual checks.
+  Progress 2026-10-08, Tumbleweed (snapshot 20261007, KDE, YaST
+  default install, QEMU VM): S1, S2, S3, S4 pass. AppImage built from
+  4eebc5f started with no setup. Defaults on: system update, media
+  codecs; Flathub, VLC, snapshots, firewall, firmware already done;
+  hardware rows greyed "not needed here". Switched on Computer name
+  (gw-test) only; Ready-to-apply listed exactly those three. One
+  password; all done in about 3 minutes. After: hostname gw-test,
+  libavcodec from Packman, h264 and hevc decoders, sshd still disabled,
+  no Flathub apps; an H.264 file played in VLC. Second run: nothing
+  switched on, codecs and name "already done", update "No updates were
+  waiting", Apply greyed out. Found: the AppImage lacks Qt's Wayland
+  plugin (runs through XWayland); the password box shows sudo's raw
+  "[sudo] password for root:" line.
+  Resolved 2026-10-08, Leap 16.0 (Build178.27, KDE, Agama default
+  install with the first user as sudo admin, QEMU VM): S1, S2, S3, S4
+  pass. Defaults on: system update, media codecs, Flathub ("not added
+  yet"); snapshots, firewall, firmware, VLC already done. Unticking the
+  update also switched off codecs and Flathub, with a note saying why;
+  Apply then said nothing is switched on. With the three on, one
+  password (the user's own) finished all three: 391 updates, Packman
+  codecs, Flathub. After: libavcodec61 and 62 from Packman, h264 and
+  hevc decoders, flathub remote, hostname and sshd untouched; an H.264
+  file played in VLC. Second run: nothing switched on, codecs and
+  Flathub "already done", Apply greyed out. Both systems pass S1 to S4.
+  Findings filed as GRND-0045 to GRND-0049.
   **Layman:** Tries the finished app on brand-new test machines to prove it works.
   Kind: test.
   Source: design-2026-10-02.
@@ -724,3 +749,53 @@ scheduled.
   Source: brief-2026-09-25.
   Lanes: packaging.
   Blocked-by: GRND-0012.
+
+- 📋 [GRND-0045] **Bundle Qt's Wayland plugin in the AppImage.**
+  Found in GRND-0013 on Tumbleweed (Plasma on Wayland): the terminal
+  printed Qt's "Could not find the Qt platform plugin wayland" and the
+  wizard ran through XWayland. It worked, but the AppImage carries no
+  wayland platform plugin.
+  **Layman:** On Wayland desktops the app runs through the older X11 route instead of natively.
+  Kind: package.
+  Source: release-check-2026-10-08.
+  Lanes: packaging.
+
+- 📋 [GRND-0046] **Say the password prompt in plain words, not sudo's raw line.**
+  Found in GRND-0013: under "Groundwork needs administrator rights"
+  the box shows sudo's own prompt, "[sudo] password for root:" on
+  Tumbleweed and "[sudo] password for tester:" on Leap 16. Tumbleweed
+  wants root's password, Leap the user's own, so the plain words should
+  say which.
+  **Layman:** The password box shows a technical line like "[sudo] password for root:".
+  Kind: ux.
+  Source: release-check-2026-10-08.
+  Lanes: gui.
+
+- 📋 [GRND-0047] **Clear the "Switched off because it needs" note when the needed item is switched back on.**
+  Found in GRND-0013 on Leap 16: unticking "Bring the system up to
+  date" switched off Media codecs and Flathub with the note "Switched
+  off because it needs Bring the system up to date." Ticking the
+  update again left both off, and the note stayed, even after Media
+  codecs was ticked again by hand.
+  **Layman:** A row can say it was switched off for a reason that no longer holds.
+  Kind: fix.
+  Source: release-check-2026-10-08.
+  Lanes: gui.
+
+- 📋 [GRND-0048] **Tell the user when a restart is suggested after updates.**
+  Found in GRND-0013 on Leap 16: the update installed 391 packages and
+  zypper said "Reboot is suggested" because core libraries changed.
+  That line appears only under Show details; the summary says "All
+  done."
+  **Layman:** After a big update the app says "All done" without saying a restart would be wise.
+  Kind: ux.
+  Source: release-check-2026-10-08.
+  Lanes: gui, core.
+
+- 📋 [GRND-0049] **Open the wizard large enough to show a level's rows without scrolling.**
+  Found in GRND-0013: at its opening size on a 1280x960 screen the
+  Essentials page showed two of its six rows; maximised, all fit.
+  **Layman:** The window opens small, so most choices on a page are hidden until you scroll.
+  Kind: ux.
+  Source: release-check-2026-10-08.
+  Lanes: gui.
