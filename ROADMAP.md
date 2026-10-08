@@ -556,6 +556,13 @@ translation.
   Progress (2026-10-08, later): Gemini 3.1 Pro tried on zh_CN; it
   answered "Sorry, something went wrong", then an empty reply. Stopped
   after two. CJK fonts are now installed, so the four can be read on screen.
+  Progress (2026-10-08, 14:35): Pro tried twice more on zh_CN. First
+  reply came from a fallback model ("Pro is in high demand ... Another
+  model was used"), so not counted; the retry gave no reply in 5.5
+  minutes. Gemini check still owed. Looked on screen instead: welcome
+  page and all four options pages draw in zh_CN, zh_TW, ja and ko, every
+  character shown, nothing clipped. One fault found: bold CJK text is
+  smeared (GRND-0042).
   **Layman:** The app in Chinese, Japanese and Korean.
   Kind: implement.
   Source: user-request-2026-10-02.
@@ -568,6 +575,9 @@ translation.
   passed. Noto Devanagari and CJK fonts installed, with the user's leave.
   Gemini check owed: Pro failed twice today on zh_CN, so all checks
   (zh_CN, zh_TW, ja, ko, hi) wait for one batch.
+  Progress (2026-10-08, 14:55): looked on screen. Welcome page and
+  options pages draw in Hindi, every character shown, nothing clipped.
+  Gemini check still owed: Pro failed every try today.
   **Layman:** The app in Hindi.
   Kind: implement.
   Source: user-request-2026-10-02.
@@ -613,6 +623,10 @@ translation.
   draft; full gate passed. Choices are in each table's header comment
   (tr_zu.py, tr_xh.py in the handoff tools folder). Gemini check owed,
   batched with zh_CN, zh_TW, ja, ko and hi.
+  Progress (2026-10-08, 14:55): looked on screen. Welcome page and
+  options pages draw in isiZulu and isiXhosa; the long lines fit and
+  nothing is clipped. Gemini check still owed: Pro failed every try
+  today.
   **Layman:** The app in isiZulu and isiXhosa.
   Kind: implement.
   Source: user-request-2026-10-07.
@@ -631,6 +645,20 @@ translation.
   **Layman:** Languages nobody fluent has checked yet are labelled as drafts, so people know.
   Kind: implement.
   Source: user-request-2026-10-07.
+  Lanes: translations, gui.
+
+- 📋 [GRND-0042] **Bold Chinese, Japanese and Korean text is smeared.**
+  Seen 2026-10-08 on screenshots from demoreel (zh_CN, zh_TW, ko worst;
+  Japanese kana look clean). Item titles, which the wizard draws bold,
+  come out as heavy blobs, e.g. "媒体解码器"; disabled titles such as
+  "音频固件" are close to unreadable. Body text is fine.
+  The installed fonts are variable fonts (NotoSansCJK*-VF.otf) whose
+  Bold instance fontconfig lists, so the likely cause is Qt faking bold
+  on fallback glyphs instead of using that instance. Unverified; find
+  the cause before choosing a fix.
+  **Layman:** Bold titles in Chinese, Japanese and Korean look blurred and heavy, and greyed-out ones are hard to read.
+  Kind: fix.
+  Source: in-session-2026-10-08.
   Lanes: translations, gui.
 
 ## Backlog — no version yet
