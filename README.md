@@ -1,12 +1,20 @@
 # Groundwork
 
-> One line: what this does, for whom.
+> Sets up a fresh openSUSE install in one window, for anyone who would
+> rather not paste commands from forum posts.
+
+Groundwork lists what a new install usually lacks: media codecs,
+Flathub, graphics drivers, better fonts and more. Each item has a
+toggle, a plain explanation and a status. Every item checks itself
+first, so running it again is safe. It works on Tumbleweed, Slowroll
+and Leap 16 or later.
 
 ## Status
 
-Just scaffolded. Nothing has been built and nothing has been decided —
-the first step is discovery (`~/.claude/workflow.md` § 3), which answers
-what problem this addresses and how we would know it is working.
+Not released yet. The wizard and its items are built and tested. The
+first release, 0.1.0, waits on a test run on fresh Tumbleweed and
+Leap 16 machines (GRND-0013). Translations are drafts until a fluent
+speaker checks them.
 
 ## Install
 
@@ -14,7 +22,15 @@ what problem this addresses and how we would know it is working.
 
 ## Usage
 
-(Once there is something to use.)
+```bash
+groundwork                    # the setup window, in the system's language
+groundwork --lang de          # the setup window, in German
+groundwork --check            # list what is and is not set up; changes nothing
+groundwork --version
+```
+
+Start it as yourself, not as root. It asks for your password once,
+when it applies your choices.
 
 ## Documentation
 

@@ -259,12 +259,14 @@
   Lanes: build, core, gui.
   Blocked-by: GRND-0001.
 
-- 📋 [GRND-0043] **README still holds the starter template text.**
+- ✅ [GRND-0043] **README still holds the starter template text.**
   Found 2026-10-08 while answering the website session. README.md's
   one-line summary is the placeholder "One line: what this does, for
   whom." and its Status says "Just scaffolded. Nothing has been built".
   Write the real summary and status before the first release; the
   website page will be built from it.
+  Resolved (2026-10-08): README.md now holds the real summary, status
+  and usage. Install stays a placeholder until there is a release.
   **Layman:** The project's front page still says nothing has been built, which is no longer true.
   Kind: doc-fix.
   Source: in-session-2026-10-08.
