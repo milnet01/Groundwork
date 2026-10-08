@@ -259,6 +259,17 @@
   Lanes: build, core, gui.
   Blocked-by: GRND-0001.
 
+- 📋 [GRND-0043] **README still holds the starter template text.**
+  Found 2026-10-08 while answering the website session. README.md's
+  one-line summary is the placeholder "One line: what this does, for
+  whom." and its Status says "Just scaffolded. Nothing has been built".
+  Write the real summary and status before the first release; the
+  website page will be built from it.
+  **Layman:** The project's front page still says nothing has been built, which is no longer true.
+  Kind: doc-fix.
+  Source: in-session-2026-10-08.
+  Lanes: docs.
+
 ## 0.2.0 — Hardware support
 
 Essentials that depend on the machine's hardware: offered only where the
