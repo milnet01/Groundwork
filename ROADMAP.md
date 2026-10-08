@@ -553,14 +553,21 @@ translation.
   (d387222); full gate passed. The no-font test's disabled branch now
   runs and was proved red once. Gemini check still owed: Pro was busy
   and the request failed twice.
+  Progress (2026-10-08, later): Gemini 3.1 Pro tried on zh_CN; it
+  answered "Sorry, something went wrong", then an empty reply. Stopped
+  after two. CJK fonts are now installed, so the four can be read on screen.
   **Layman:** The app in Chinese, Japanese and Korean.
   Kind: implement.
   Source: user-request-2026-10-02.
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- 📋 [GRND-0036] **Translation: Hindi.**
+- 🚧 [GRND-0036] **Translation: Hindi.**
   Serves S3. Same font check as the East Asian item.
+  Progress (2026-10-08): Hindi drafted by Claude, marked draft; full gate
+  passed. Noto Devanagari and CJK fonts installed, with the user's leave.
+  Gemini check owed: Pro failed twice today on zh_CN, so all checks
+  (zh_CN, zh_TW, ja, ko, hi) wait for one batch.
   **Layman:** The app in Hindi.
   Kind: implement.
   Source: user-request-2026-10-02.
