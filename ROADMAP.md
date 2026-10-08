@@ -607,8 +607,12 @@ translation.
   Source: split-from-GRND-0032-2026-10-02.
   Lanes: build, translations.
 
-- 📋 [GRND-0040] **Translations: isiZulu and isiXhosa.**
+- 🚧 [GRND-0040] **Translations: isiZulu and isiXhosa.**
   Serves S3. Added at the user's request on 2026-10-07.
+  Progress (2026-10-08): isiZulu and isiXhosa drafted by Claude, marked
+  draft; full gate passed. Choices are in each table's header comment
+  (tr_zu.py, tr_xh.py in the handoff tools folder). Gemini check owed,
+  batched with zh_CN, zh_TW, ja, ko and hi.
   **Layman:** The app in isiZulu and isiXhosa.
   Kind: implement.
   Source: user-request-2026-10-07.
