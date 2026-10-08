@@ -689,12 +689,24 @@ translation.
   Source: in-session-2026-10-08.
   Lanes: translations, gui.
 
-- 📋 [GRND-0044] **Chinese text may be drawn with the Korean font's letter shapes.**
+- ✅ [GRND-0044] **Chinese text may be drawn with the Korean font's letter shapes.**
   Seen 2026-10-08 in a probe program while locating GRND-0042: with
   no language hint, Qt drew Chinese text with Noto Sans CJK KR rather
   than SC. Some shared characters are drawn differently in each. Not
   yet checked inside the wizard, which runs with a language chosen.
   Check which CJK font the wizard picks in zh_CN, zh_TW and ja.
+  Resolved (2026-10-08): confirmed. Qt picks the face for shared
+  characters from the system's LANG; QLocale::setDefault does not
+  change it, so an English system drew zh_CN, zh_TW and ja with the
+  Korean face. A fallback face is also kept per family for the whole
+  run, so a second CJK language got the first one's shapes.
+  gw::fontFor() now puts the language's Noto Sans CJK face first, and
+  the wizard sets it as the application font for those languages
+  only. tst_boldtext became tst_cjktext and checks all four faces in
+  one run. Latin words in those languages now use the CJK face's
+  Latin letters, as a Chinese desktop does. After choosing one of them,
+  a live change to the system font may not be followed until restart;
+  not tested.
   **Layman:** Some Chinese characters may show in their Korean shape, which a Chinese reader would notice.
   Kind: investigate.
   Source: in-session-2026-10-08.

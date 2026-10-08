@@ -70,7 +70,7 @@ groundwork_test(tst_wizard)
 target_link_libraries(tst_wizard PRIVATE groundwork_gui Qt6::Widgets)
 set_tests_properties(tst_wizard PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
 
-# Bold Chinese text, on Qt's offscreen display.
-groundwork_test(tst_boldtext)
-target_link_libraries(tst_boldtext PRIVATE groundwork_gui Qt6::Widgets)
-set_tests_properties(tst_boldtext PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+# Chinese, Japanese and Korean text, on Qt's offscreen display.
+groundwork_test(tst_cjktext)
+target_link_libraries(tst_cjktext PRIVATE groundwork_gui Qt6::Widgets)
+set_tests_properties(tst_cjktext PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")

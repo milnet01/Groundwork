@@ -7,6 +7,7 @@
 #include "core/checkrunner.h"
 #include "core/selection.h"
 
+#include <QFont>
 #include <QHash>
 #include <QWizard>
 
@@ -25,6 +26,11 @@ bool fontShowsLanguage(const QString &code);
 // Chinese, Japanese and Korean text (GRND-0042). Call before any text is
 // drawn.
 void useFontsOwnBold();
+
+// The font for language code. For Chinese, Japanese and Korean, the
+// installed Noto Sans CJK face for that language comes first, so shared
+// characters take that language's shapes (GRND-0044). Otherwise base.
+QFont fontFor(const QString &code, const QFont &base);
 
 struct WizardSetup
 {

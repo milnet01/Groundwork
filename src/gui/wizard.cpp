@@ -197,6 +197,24 @@ void useFontsOwnBold()
     qputenv("QT_NO_SYNTHESIZED_BOLD", "1");
 }
 
+QFont fontFor(const QString &code, const QFont &base)
+{
+    // First, not as a fallback: Qt keeps the first fallback face it finds
+    // for a family, so a second language would get the first one's shapes.
+    static const QHash<QLocale::Script, QString> kFaces{
+        {QLocale::SimplifiedHanScript, QStringLiteral("Noto Sans CJK SC")},
+        {QLocale::TraditionalHanScript, QStringLiteral("Noto Sans CJK TC")},
+        {QLocale::JapaneseScript, QStringLiteral("Noto Sans CJK JP")},
+        {QLocale::KoreanScript, QStringLiteral("Noto Sans CJK KR")},
+    };
+    const auto face = kFaces.constFind(QLocale(code).script());
+    if (face == kFaces.cend() || !QFontDatabase::families().contains(*face))
+        return base;
+    QFont font = base;
+    font.setFamilies({*face, base.family()});
+    return font;
+}
+
 Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(std::move(setup))
 {
     setWindowTitle(tr("Groundwork"));

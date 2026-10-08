@@ -73,6 +73,7 @@ int wizardMode(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     QApplication::setApplicationName(QStringLiteral("groundwork"));
+    const QFont systemFont = QApplication::font();
     const QStringList args = QApplication::arguments();
     QString language = args.size() == 3 ? args[2] : gw::systemLanguage();
     if (!gw::fontShowsLanguage(language))
@@ -98,6 +99,10 @@ int wizardMode(int argc, char *argv[])
         language = code;
         gw::loadLanguage(language);
         QApplication::setLayoutDirection(gw::directionFor(language));
+        // Set only when a language needs its own face; the rest leave the
+        // font to Qt and the system.
+        if (const QFont font = gw::fontFor(language, systemFont); font != QApplication::font())
+            QApplication::setFont(font);
         gw::WizardSetup setup;
         setup.catalogue = &gw::catalogue();
         setup.runChecks = [files] { return gw::runChecks(gw::catalogue().items(), gw::CheckContext(files)); };
