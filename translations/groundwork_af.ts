@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Installing %1 from Flathub</source>
-        <translation>Installeer tans %1 vanaf Flathub</translation>
+        <translation>Besig om %1 vanaf Flathub te installeer</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>Installing %1</source>
-        <translation>Installeer tans %1</translation>
+        <translation>Besig om %1 te installeer</translation>
     </message>
     <message>
         <source>Google Chrome</source>
@@ -195,7 +195,7 @@
     </message>
     <message>
         <source>Installing the Broadcom Wi-Fi driver</source>
-        <translation>Installeer tans die Broadcom-Wi-Fi-drywer</translation>
+        <translation>Besig om die Broadcom-Wi-Fi-drywer te installeer</translation>
     </message>
 </context>
 <context>
@@ -245,7 +245,7 @@
     </message>
     <message>
         <source>Setting the clock to local time</source>
-        <translation>Stel tans die klok op plaaslike tyd</translation>
+        <translation>Besig om die klok op plaaslike tyd te stel</translation>
     </message>
 </context>
 <context>
@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>Installing the media codecs</source>
-        <translation>Installeer tans die mediakodeks</translation>
+        <translation>Besig om die mediakodeks te installeer</translation>
     </message>
 </context>
 <context>
@@ -330,49 +330,49 @@
     </message>
     <message>
         <source>Installing the firewall</source>
-        <translation>Installeer tans die brandmuur</translation>
+        <translation>Besig om die brandmuur te installeer</translation>
     </message>
     <message>
         <source>Switching the firewall on</source>
-        <translation>Skakel tans die brandmuur aan</translation>
+        <translation>Besig om die brandmuur aan te skakel</translation>
     </message>
 </context>
 <context>
     <name>gw::FirmwareItem</name>
     <message>
         <source>Firmware updates</source>
-        <translation>Fermware-bywerkings</translation>
+        <translation>Fermware-opdaterings</translation>
     </message>
     <message>
         <source>Installs firmware updates for this computer&apos;s hardware from the Linux Vendor Firmware Service. Some finish at the next restart.</source>
-        <translation>Installeer fermware-bywerkings vir hierdie rekenaar se hardeware vanaf die Linux Vendor Firmware Service. Sommige word eers by die volgende herbegin voltooi.</translation>
+        <translation>Installeer fermware-opdaterings vir hierdie rekenaar se hardeware vanaf die Linux Vendor Firmware Service. Sommige word eers by die volgende herbegin voltooi.</translation>
     </message>
     <message>
         <source>The firmware updater is not installed.</source>
-        <translation>Die fermware-bywerker is nie geïnstalleer nie.</translation>
+        <translation>Die fermware-opdaterer is nie geïnstalleer nie.</translation>
     </message>
     <message>
         <source>The firmware updater could not check for updates.</source>
-        <translation>Die fermware-bywerker kon nie vir bywerkings kyk nie.</translation>
+        <translation>Die fermware-opdaterer kon nie vir opdaterings kyk nie.</translation>
     </message>
     <message numerus="yes">
         <source>%n device(s) have firmware updates waiting.</source>
         <translation>
-            <numerusform>%n toestel het fermware-bywerkings wat wag.</numerusform>
-            <numerusform>%n toestelle het fermware-bywerkings wat wag.</numerusform>
+            <numerusform>%n toestel het fermware-opdaterings wat wag.</numerusform>
+            <numerusform>%n toestelle het fermware-opdaterings wat wag.</numerusform>
         </translation>
     </message>
     <message>
         <source>Installing the firmware updater</source>
-        <translation>Installeer tans die fermware-bywerker</translation>
+        <translation>Besig om die fermware-opdaterer te installeer</translation>
     </message>
     <message>
         <source>Reading the latest firmware list</source>
-        <translation>Lees tans die nuutste fermwarelys</translation>
+        <translation>Besig om die nuutste fermwarelys te lees</translation>
     </message>
     <message>
         <source>Installing firmware updates</source>
-        <translation>Installeer tans fermware-bywerkings</translation>
+        <translation>Besig om fermware-opdaterings te installeer</translation>
     </message>
 </context>
 <context>
@@ -399,11 +399,11 @@
     </message>
     <message>
         <source>Installing Flatpak</source>
-        <translation>Installeer tans Flatpak</translation>
+        <translation>Besig om Flatpak te installeer</translation>
     </message>
     <message>
         <source>Adding Flathub</source>
-        <translation>Voeg tans Flathub by</translation>
+        <translation>Besig om Flathub by te voeg</translation>
     </message>
 </context>
 <context>
@@ -430,7 +430,7 @@
     </message>
     <message>
         <source>Installing the Microsoft fonts</source>
-        <translation>Installeer tans die Microsoft-lettertipes</translation>
+        <translation>Besig om die Microsoft-lettertipes te installeer</translation>
     </message>
 </context>
 <context>
@@ -461,7 +461,7 @@
     </message>
     <message>
         <source>Naming the computer</source>
-        <translation>Gee tans die rekenaar &apos;n naam</translation>
+        <translation>Besig om die rekenaar &apos;n naam te gee</translation>
     </message>
 </context>
 <context>
@@ -500,26 +500,26 @@
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
-        <translation>Voeg tans NVIDIA se sagtewarebron by</translation>
+        <translation>Besig om NVIDIA se sagtewarebron by te voeg</translation>
     </message>
     <message>
         <source>Reading NVIDIA&apos;s software list</source>
-        <translation>Lees tans NVIDIA se sagtewarelys</translation>
+        <translation>Besig om NVIDIA se sagtewarelys te lees</translation>
     </message>
     <message>
         <source>Installing the NVIDIA driver</source>
-        <translation>Installeer tans die NVIDIA-drywer</translation>
+        <translation>Besig om die NVIDIA-drywer te installeer</translation>
     </message>
 </context>
 <context>
     <name>gw::Packman</name>
     <message>
         <source>Adding the Packman Essentials software source</source>
-        <translation>Voeg tans die Packman Essentials-sagtewarebron by</translation>
+        <translation>Besig om die Packman Essentials-sagtewarebron by te voeg</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>
-        <translation>Lees tans Packman se sagtewarelys</translation>
+        <translation>Besig om Packman se sagtewarelys te lees</translation>
     </message>
 </context>
 <context>
@@ -546,7 +546,7 @@
     </message>
     <message>
         <source>Installing power profiles</source>
-        <translation>Installeer tans kragprofiele</translation>
+        <translation>Besig om kragprofiele te installeer</translation>
     </message>
 </context>
 <context>
@@ -557,7 +557,7 @@
     </message>
     <message>
         <source>Setting up</source>
-        <translation>Stel tans op</translation>
+        <translation>Besig om op te stel</translation>
     </message>
     <message>
         <source>You can close this window; Groundwork then stops after the current step.</source>
@@ -647,11 +647,11 @@
     </message>
     <message>
         <source>Installing the snapshot tool</source>
-        <translation>Installeer tans die momentopname-hulpmiddel</translation>
+        <translation>Besig om die momentopname-hulpmiddel te installeer</translation>
     </message>
     <message>
         <source>Setting up snapshots for the system</source>
-        <translation>Stel tans momentopnames vir die stelsel op</translation>
+        <translation>Besig om momentopnames vir die stelsel op te stel</translation>
     </message>
 </context>
 <context>
@@ -678,7 +678,7 @@
     </message>
     <message>
         <source>Installing the sound firmware</source>
-        <translation>Installeer tans die klankfermware</translation>
+        <translation>Besig om die klankfermware te installeer</translation>
     </message>
 </context>
 <context>
@@ -701,19 +701,19 @@
     </message>
     <message>
         <source>Installing the remote login service</source>
-        <translation>Installeer tans die afstandaanmelddiens</translation>
+        <translation>Besig om die afstandaanmelddiens te installeer</translation>
     </message>
     <message>
         <source>Switching remote login on</source>
-        <translation>Skakel tans afstandaanmelding aan</translation>
+        <translation>Besig om afstandaanmelding aan te skakel</translation>
     </message>
     <message>
         <source>Letting remote login through the firewall</source>
-        <translation>Laat tans afstandaanmelding deur die brandmuur</translation>
+        <translation>Besig om afstandaanmelding deur die brandmuur te laat</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation>Laai tans die brandmuur weer</translation>
+        <translation>Besig om die brandmuur weer te laai</translation>
     </message>
 </context>
 <context>
