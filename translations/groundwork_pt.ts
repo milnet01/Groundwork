@@ -824,6 +824,10 @@
         <translation>Idioma:</translation>
     </message>
     <message>
+        <source>%1 (no font installed)</source>
+        <translation>%1 (nenhuma fonte instalada)</translation>
+    </message>
+    <message>
         <source>%1 (draft)</source>
         <translation>%1 (rascunho)</translation>
     </message>

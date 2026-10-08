@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ja_JP">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>gw::Apps</name>
     <message>
@@ -278,6 +278,14 @@
 <context>
     <name>gw::Entry</name>
     <message>
+        <source>Groundwork</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>System: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -287,14 +295,6 @@
     </message>
     <message>
         <source>Would start switched on: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Groundwork</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

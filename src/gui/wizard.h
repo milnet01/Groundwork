@@ -17,6 +17,10 @@ namespace gw {
 class ItemRow;
 class RunPage;
 
+// Whether an installed font covers the script of language code, so its
+// text shows as letters rather than empty boxes (GRND-0035).
+bool fontShowsLanguage(const QString &code);
+
 struct WizardSetup
 {
     const Catalogue *catalogue = nullptr;

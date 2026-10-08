@@ -836,6 +836,10 @@
         <translation>اللغة:</translation>
     </message>
     <message>
+        <source>%1 (no font installed)</source>
+        <translation>‏%1 (لا يوجد خط مثبّت)</translation>
+    </message>
+    <message>
         <source>%1 (draft)</source>
         <translation>‏%1 (مسودة)</translation>
     </message>

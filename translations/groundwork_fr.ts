@@ -824,6 +824,10 @@
         <translation>Langue&#xa0;:</translation>
     </message>
     <message>
+        <source>%1 (no font installed)</source>
+        <translation>%1 (aucune police installée)</translation>
+    </message>
+    <message>
         <source>%1 (draft)</source>
         <translation>%1 (brouillon)</translation>
     </message>

@@ -541,9 +541,14 @@ translation.
   Lanes: translations, gui.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- 📋 [GRND-0035] **Translations: Chinese (Simplified), Japanese and Korean.**
+- 🚧 [GRND-0035] **Translations: Chinese (Simplified and Traditional), Japanese and Korean.**
   Serves S3. Check that a fresh install shows these scripts; if a font
   is missing, the app says so rather than showing empty boxes.
+  Traditional Chinese (zh_TW, as read in Taiwan and mostly in Hong Kong)
+  added at the user's request on 2026-10-08. Written Cantonese was not
+  chosen: software uses standard written Chinese. Font check: this
+  openSUSE install has no Chinese, Japanese, Korean or Hindi font, and
+  the default "fonts" pattern installs none.
   **Layman:** The app in Chinese, Japanese and Korean.
   Kind: implement.
   Source: user-request-2026-10-02.

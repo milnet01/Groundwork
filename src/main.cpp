@@ -75,6 +75,8 @@ int wizardMode(int argc, char *argv[])
     QApplication::setApplicationName(QStringLiteral("groundwork"));
     const QStringList args = QApplication::arguments();
     QString language = args.size() == 3 ? args[2] : gw::systemLanguage();
+    if (!gw::fontShowsLanguage(language))
+        language = QStringLiteral("en"); // rather than a window of empty boxes
     gw::loadLanguage(language);
 
     if (geteuid() == 0) {
@@ -121,8 +123,11 @@ int main(int argc, char *argv[])
     // argument, so the Worker selects the mode by environment (design, Entry).
     if (qEnvironmentVariable("GROUNDWORK_ASKPASS") == QLatin1String("1")) {
         QApplication app(argc, argv);
-        gw::loadLanguage(gw::systemLanguage());
-        QApplication::setLayoutDirection(gw::directionFor(gw::systemLanguage()));
+        QString language = gw::systemLanguage();
+        if (!gw::fontShowsLanguage(language))
+            language = QStringLiteral("en");
+        gw::loadLanguage(language);
+        QApplication::setLayoutDirection(gw::directionFor(language));
         return gw::runAskpass(argc > 1 ? QString::fromLocal8Bit(argv[1]) : QString());
     }
 

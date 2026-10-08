@@ -824,6 +824,10 @@
         <translation>Taal:</translation>
     </message>
     <message>
+        <source>%1 (no font installed)</source>
+        <translation>%1 (geen lettertipe geïnstalleer nie)</translation>
+    </message>
+    <message>
         <source>%1 (draft)</source>
         <translation>%1 (konsep)</translation>
     </message>

@@ -11,9 +11,12 @@
 #include <QComboBox>
 #include <QDir>
 #include <QFile>
+#include <QFontDatabase>
+#include <QHash>
 #include <QLabel>
 #include <QLocale>
 #include <QScrollArea>
+#include <QStandardItemModel>
 #include <QThread>
 #include <QVBoxLayout>
 
@@ -58,9 +61,21 @@ public:
         for (const QString &code : availableLanguages()) {
             QString name = code == QLatin1String("en") ? QStringLiteral("English")
                                                        : QLocale(code).nativeLanguageName();
-            if (isDraft(code))
+            const bool shows = fontShowsLanguage(code);
+            if (!shows) {
+                // Its own name would show as empty boxes, so it is named in
+                // English and cannot be chosen.
+                const QLocale locale(code);
+                QString english = QLocale::languageToString(locale.language());
+                if (code.contains(QLatin1Char('_')))
+                    english += QStringLiteral(", ") + QLocale::territoryToString(locale.territory());
+                name = Wizard::tr("%1 (no font installed)").arg(english);
+            } else if (isDraft(code)) {
                 name = Wizard::tr("%1 (draft)").arg(name);
+            }
             languages->addItem(name, code);
+            if (!shows)
+                static_cast<QStandardItemModel *>(languages->model())->item(languages->count() - 1)->setEnabled(false);
         }
         // A draft in use says so in its own words, so its reader can tell.
         QLabel *draftNotice = nullptr;
@@ -157,6 +172,23 @@ private:
 };
 
 } // namespace
+
+bool fontShowsLanguage(const QString &code)
+{
+    // Scripts the default font set may lack; Latin, Arabic and Hebrew come
+    // with DejaVu, but are checked the same way.
+    static const QHash<QLocale::Script, QFontDatabase::WritingSystem> kNeeds{
+        {QLocale::SimplifiedHanScript, QFontDatabase::SimplifiedChinese},
+        {QLocale::TraditionalHanScript, QFontDatabase::TraditionalChinese},
+        {QLocale::JapaneseScript, QFontDatabase::Japanese},
+        {QLocale::KoreanScript, QFontDatabase::Korean},
+        {QLocale::DevanagariScript, QFontDatabase::Devanagari},
+        {QLocale::ArabicScript, QFontDatabase::Arabic},
+        {QLocale::HebrewScript, QFontDatabase::Hebrew},
+    };
+    const auto need = kNeeds.constFind(QLocale(code).script());
+    return need == kNeeds.cend() || !QFontDatabase::families(*need).isEmpty();
+}
 
 Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(std::move(setup))
 {

@@ -13,6 +13,7 @@
 #include <QLocale>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QStandardItemModel>
 #include <QFile>
 #include <QTemporaryDir>
 #include <QtTest>
@@ -143,6 +144,25 @@ private slots:
         const QString name = QLocale(QStringLiteral("af")).nativeLanguageName();
         QVERIFY2(languages->itemText(af).contains(name) && languages->itemText(af) != name,
                  qPrintable(languages->itemText(af)));
+    }
+
+    // A language whose script no installed font covers is named in English
+    // and cannot be chosen, so it never shows as empty boxes (GRND-0035).
+    void aLanguageWithoutItsFontCannotBeChosen()
+    {
+        QVERIFY(gw::fontShowsLanguage(QStringLiteral("en")));
+        QVERIFY(gw::fontShowsLanguage(QStringLiteral("af")));
+        auto w = make();
+        auto *languages = w->page(0)->findChild<QComboBox *>();
+        auto *model = qobject_cast<QStandardItemModel *>(languages->model());
+        QVERIFY(model);
+        for (int i = 0; i < languages->count(); ++i) {
+            const QString code = languages->itemData(i).toString();
+            const bool shows = gw::fontShowsLanguage(code);
+            QVERIFY2(model->item(i)->isEnabled() == shows, qPrintable(code));
+            if (!shows)
+                QVERIFY2(!languages->itemText(i).contains(QLocale(code).nativeLanguageName()), qPrintable(code));
+        }
     }
 
     // In a draft language, the first page says so; in English it says nothing.

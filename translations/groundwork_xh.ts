@@ -824,6 +824,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>%1 (no font installed)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>%1 (draft)</source>
         <translation type="unfinished"></translation>
     </message>

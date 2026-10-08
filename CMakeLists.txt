@@ -32,7 +32,7 @@ target_link_libraries(groundwork_core PUBLIC Qt6::Core)
 # compiled into Core's resources at :/i18n, which core/translations.cpp
 # reads, so every program linking Core has them. After changing a string,
 # refresh the .ts files with: cmake --build build --target update_translations
-set(GROUNDWORK_LANGUAGES af ar de es fr he hi ja ko pt xh zh_CN zu)
+set(GROUNDWORK_LANGUAGES af ar de es fr he hi ja ko pt xh zh_CN zh_TW zu)
 set(groundwork_ts "")
 set(groundwork_qm "")
 foreach(code IN LISTS GROUNDWORK_LANGUAGES)

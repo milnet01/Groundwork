@@ -193,8 +193,10 @@ text it produces itself.
   system's, and the first page offers a choice. A translation no native
   speaker has checked yet ships marked as a draft: the first page's
   choice says so, and so does that page when the draft is the language
-  in use. English and checked translations carry no mark. A right-to-left
-  language mirrors the layout. Commands a check reads still run with
+  in use. English and checked translations carry no mark. A language
+  whose script no installed font covers is named in English in the
+  choice and cannot be chosen, and Groundwork starts in English rather
+  than in it. A right-to-left language mirrors the layout. Commands a check reads still run with
   `LC_ALL=C`, whatever the user's language. The window follows the
   system's font size and colour scheme, and works at large font sizes.
 - **Tests never touch the real system.** Items name every command
