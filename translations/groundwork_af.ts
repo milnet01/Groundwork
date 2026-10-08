@@ -202,7 +202,7 @@
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
-        <translation>Die kontrole het geen rede gegee nie.</translation>
+        <translation>Geen rede is deur die kontrole gegee nie.</translation>
     </message>
     <message>
         <source>already done</source>
@@ -218,7 +218,7 @@
     </message>
     <message>
         <source>couldn&apos;t tell</source>
-        <translation>kon nie bepaal nie</translation>
+        <translation>kon nie vasstel nie</translation>
     </message>
 </context>
 <context>
@@ -256,7 +256,7 @@
     </message>
     <message>
         <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>Voeg die Packman Essentials-sagtewarebron by, vertrou sy ondertekeningsleutel, en installeer die kodeks wat video&apos;s en musiek laat speel, ook in die webblaaier.</translation>
+        <translation>Voeg die Packman Essentials-sagtewarebron by, vertrou die ondertekeningsleutel daarvan, en installeer die kodeks wat video&apos;s en musiek laat speel, ook in die blaaier.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
-        <translation>Begin asseblief Groundwork as jouself, nie as root nie. Dit vra die wagwoord wanneer dit dit nodig het.</translation>
+        <translation>Begin asseblief Groundwork as jouself, nie as root nie. Dit vra die wagwoord wanneer dit nodig is.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <source>Groundwork could not tell which system this is.</source>
-        <translation>Groundwork kon nie bepaal watter stelsel dit is nie.</translation>
+        <translation>Groundwork kon nie uitwerk watter stelsel dit is nie.</translation>
     </message>
     <message>
         <source>This is %1. Groundwork works on openSUSE Tumbleweed, Slowroll and Leap 16 or later.</source>
@@ -743,7 +743,7 @@
     </message>
     <message>
         <source>Refreshes the software sources and installs every waiting update, so new software is installed on a current system.</source>
-        <translation>Verfris die sagtewarebronne en installeer elke bywerking wat wag, sodat nuwe sagteware op &apos;n bygewerkte stelsel geïnstalleer word.</translation>
+        <translation>Vernuwe die sagtewarebronne en installeer elke wagende opdatering, sodat nuwe sagteware op &apos;n huidige stelsel geïnstalleer word.</translation>
     </message>
     <message>
         <source>zypper, openSUSE&apos;s package manager, was not found.</source>
@@ -751,7 +751,7 @@
     </message>
     <message>
         <source>zypper could not list the waiting updates.</source>
-        <translation>zypper kon nie die bywerkings wat wag, lys nie.</translation>
+        <translation>zypper kon nie die wagende opdaterings lys nie.</translation>
     </message>
     <message>
         <source>No updates were waiting at the last refresh of the software sources.</source>
@@ -760,8 +760,8 @@
     <message numerus="yes">
         <source>%n update(s) waiting at the last refresh of the software sources.</source>
         <translation>
-            <numerusform>%n bywerking het by die laaste verfrissing van die sagtewarebronne gewag.</numerusform>
-            <numerusform>%n bywerkings het by die laaste verfrissing van die sagtewarebronne gewag.</numerusform>
+            <numerusform>%n opdatering was aan die wag tydens die laaste verversing van die sagtewarebronne.</numerusform>
+            <numerusform>%n opdaterings was aan die wag tydens die laaste verversing van die sagtewarebronne.</numerusform>
         </translation>
     </message>
     <message>
@@ -770,11 +770,11 @@
     </message>
     <message>
         <source>Refreshing the software sources</source>
-        <translation>Verfris tans die sagtewarebronne</translation>
+        <translation>Besig om die sagtewarebronne te verfris</translation>
     </message>
     <message>
         <source>Installing the waiting updates</source>
-        <translation>Installeer tans die bywerkings wat wag</translation>
+        <translation>Besig om die wagende opdaterings te installeer</translation>
     </message>
 </context>
 <context>
@@ -793,7 +793,7 @@
     </message>
     <message>
         <source>Nice to have</source>
-        <translation>Lekker om te hê</translation>
+        <translation>&apos;n Nuttige ekstra</translation>
     </message>
     <message>
         <source>What a desktop needs for things to work.</source>
@@ -805,11 +805,11 @@
     </message>
     <message>
         <source>Choices a new install asks of its owner.</source>
-        <translation>Keuses wat &apos;n nuwe installasie van sy eienaar vra.</translation>
+        <translation>Die keuses wat &apos;n nuwe installasie van sy eienaar vra.</translation>
     </message>
     <message>
         <source>Extras. Each one is its own choice.</source>
-        <translation>Ekstras. Elkeen is &apos;n eie keuse.</translation>
+        <translation>Ekstras. Elkeen is sy eie keuse.</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -817,7 +817,7 @@
     </message>
     <message>
         <source>Groundwork sets up this computer the way you want. Each page offers a level of choices, from essentials to extras. Nothing changes until you press Apply.</source>
-        <translation>Groundwork stel hierdie rekenaar op soos jy wil. Elke bladsy bied &apos;n vlak van keuses, van noodsaaklikhede tot ekstras. Niks verander voordat jy Pas toe druk nie.</translation>
+        <translation>Groundwork stel jou rekenaar in soos jy verkies. Elke bladsy bied keuses, van die noodsaaklike tot die ekstras. Niks verander voor jy op Pas toe klik nie.</translation>
     </message>
     <message>
         <source>Language:</source>
@@ -833,11 +833,11 @@
     </message>
     <message>
         <source>Checking this computer…</source>
-        <translation>Kontroleer tans hierdie rekenaar…</translation>
+        <translation>Besig om hierdie rekenaar te kontroleer…</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>
-        <translation>Gekontroleer. Druk Volgende om te kies wat opgestel moet word.</translation>
+        <translation>Nagesien. Klik Volgende om te kies wat om op te stel.</translation>
     </message>
     <message>
         <source>Ready to apply</source>
@@ -853,7 +853,7 @@
     </message>
     <message>
         <source>These run in this order after one password.</source>
-        <translation>Hierdie loop in hierdie volgorde ná een wagwoord.</translation>
+        <translation>Hierdie loop na een wagwoord in hierdie volgorde.</translation>
     </message>
     <message>
         <source>Groundwork</source>
