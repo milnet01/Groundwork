@@ -658,7 +658,7 @@ translation.
   Source: user-request-2026-10-07.
   Lanes: translations, gui.
 
-- 📋 [GRND-0042] **Bold Chinese, Japanese and Korean text is smeared.**
+- ✅ [GRND-0042] **Bold Chinese, Japanese and Korean text is smeared.**
   Seen 2026-10-08 on screenshots from demoreel (zh_CN, zh_TW, ko worst;
   Japanese kana look clean). Item titles, which the wizard draws bold,
   come out as heavy blobs, e.g. "媒体解码器"; disabled titles such as
@@ -677,8 +677,24 @@ translation.
   bold site is ItemRow::applyFontScale (src/gui/itemrow.cpp).
   Side note: with no language hint, Chinese text fell back to Noto Sans
   CJK KR, not SC; not yet checked inside the wizard.
+  Resolved (2026-10-08): main() sets QT_NO_SYNTHESIZED_BOLD through
+  gw::useFontsOwnBold(), so Qt draws the font's own Bold and no more.
+  tst_boldtext fails when bold Chinese text has 1.6 times Regular's
+  ink or more (1.84 before the fix). A demoreel picture of the zh_CN
+  options page shows the titles clean.
   **Layman:** Bold titles in Chinese, Japanese and Korean look blurred and heavy, and greyed-out ones are hard to read.
   Kind: fix.
+  Source: in-session-2026-10-08.
+  Lanes: translations, gui.
+
+- 📋 [GRND-0044] **Chinese text may be drawn with the Korean font's letter shapes.**
+  Seen 2026-10-08 in a probe program while locating GRND-0042: with
+  no language hint, Qt drew Chinese text with Noto Sans CJK KR rather
+  than SC. Some shared characters are drawn differently in each. Not
+  yet checked inside the wizard, which runs with a language chosen.
+  Check which CJK font the wizard picks in zh_CN, zh_TW and ja.
+  **Layman:** Some Chinese characters may show in their Korean shape, which a Chinese reader would notice.
+  Kind: investigate.
   Source: in-session-2026-10-08.
   Lanes: translations, gui.
 

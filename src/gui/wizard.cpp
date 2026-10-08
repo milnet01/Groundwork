@@ -190,6 +190,13 @@ bool fontShowsLanguage(const QString &code)
     return need == kNeeds.cend() || !QFontDatabase::families(*need).isEmpty();
 }
 
+void useFontsOwnBold()
+{
+    // Measured on Noto Sans CJK, a variable font: Qt picks its Bold, then
+    // thickens it again. Fonts with no Bold of their own now show regular.
+    qputenv("QT_NO_SYNTHESIZED_BOLD", "1");
+}
+
 Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(std::move(setup))
 {
     setWindowTitle(tr("Groundwork"));

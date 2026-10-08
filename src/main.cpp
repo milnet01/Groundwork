@@ -119,6 +119,8 @@ int wizardMode(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
+    gw::useFontsOwnBold();
+
     // Askpass mode: sudo -A runs this program with its prompt as the only
     // argument, so the Worker selects the mode by environment (design, Entry).
     if (qEnvironmentVariable("GROUNDWORK_ASKPASS") == QLatin1String("1")) {

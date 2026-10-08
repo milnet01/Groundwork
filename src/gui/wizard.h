@@ -21,6 +21,11 @@ class RunPage;
 // text shows as letters rather than empty boxes (GRND-0035).
 bool fontShowsLanguage(const QString &code);
 
+// Stops Qt thickening a font's own Bold a second time, which smears bold
+// Chinese, Japanese and Korean text (GRND-0042). Call before any text is
+// drawn.
+void useFontsOwnBold();
+
 struct WizardSetup
 {
     const Catalogue *catalogue = nullptr;
