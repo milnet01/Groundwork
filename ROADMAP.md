@@ -667,6 +667,16 @@ translation.
   Bold instance fontconfig lists, so the likely cause is Qt faking bold
   on fallback glyphs instead of using that instance. Unverified; find
   the cause before choosing a fix.
+  Located (2026-10-08): the lead above is wrong. Qt 6.11.2 does use
+  the font's real Bold instance, then thickens it again with its own
+  fake bold. A probe drawing "Noto Sans CJK SC" at 13 px measured ink
+  482/655/773/1205/1311 for Light/Regular/Medium/Bold/Black; with
+  QT_NO_SYNTHESIZED_BOLD=1 Bold and Black fall to 919/1052 and look
+  crisp, the rest unchanged. Same with the family named directly, so
+  the fault is in Qt's drawing, not in font fallback. The wizard's one
+  bold site is ItemRow::applyFontScale (src/gui/itemrow.cpp).
+  Side note: with no language hint, Chinese text fell back to Noto Sans
+  CJK KR, not SC; not yet checked inside the wizard.
   **Layman:** Bold titles in Chinese, Japanese and Korean look blurred and heavy, and greyed-out ones are hard to read.
   Kind: fix.
   Source: in-session-2026-10-08.
