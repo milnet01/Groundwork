@@ -496,6 +496,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>El registrador de bloqueos</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>Guarda un pequeño registro de lo que usa la memoria del ordenador cada vez que escasea, para que tras un bloqueo se pueda encontrar la causa.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>El gestor de servicios no ha respondido.</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>Nada registra lo que hacía el ordenador antes de un bloqueo.</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>Configurando el registrador de bloqueos</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

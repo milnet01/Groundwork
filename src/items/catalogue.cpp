@@ -9,6 +9,7 @@
 #include "firewallitem.h"
 #include "firmwareitem.h"
 #include "flathubitem.h"
+#include "freezerecorderitem.h"
 #include "fontsitem.h"
 #include "hostnameitem.h"
 #include "logcapitem.h"
@@ -44,6 +45,7 @@ const Catalogue &catalogue()
     static const WakeItem calmWake;
     static const LogCapItem logCap;
     static const BootMenuItem bootMenu;
+    static const FreezeRecorderItem freezeRecorder;
     // Configuration
     static const HostnameItem hostname;
     static const SshItem ssh;
@@ -102,7 +104,7 @@ const Catalogue &catalogue()
     static const FontsItem fonts;
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
-                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu,
+                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder,
                                 &hostname, &ssh, &clock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles,
                                 &buildTools, &codium, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});

@@ -496,6 +496,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>Die vriesopnemer</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>Hou &apos;n klein log van wat die rekenaar se geheue gebruik wanneer dit min raak, sodat die oorsaak ná &apos;n vries gevind kan word.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>Die diensbestuurder het nie geantwoord nie.</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>Niks teken aan wat die rekenaar voor &apos;n vries gedoen het nie.</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>Die vriesopnemer word opgestel</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

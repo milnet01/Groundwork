@@ -940,11 +940,20 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0058] **Item: the freeze recorder, which notes what was using memory before a freeze.**
+- ✅ [GRND-0058] **Item: the freeze recorder, which notes what was using memory before a freeze.**
   From SYSTEM_OPTIMISATIONS.md, section 11: a protected service
   sampling memory and I/O pressure every 10 s, logging only when
   pressure rises, to the journal and a size-capped file under
   /var/log. Its script must ship inside Groundwork; no shell steps.
+  Shipped 2026-10-10: FreezeRecorderItem writes the script,
+  src/items/freeze-recorder.sh (built in at :/items), to
+  /usr/local/bin/freeze-recorder and the owner's hardened unit to
+  /etc/systemd/system/freeze-recorder.service, then daemon-reload,
+  enable and restart. Same file names as the owner's, so the owner's
+  machine reads done. Changes from the owner's script: it covers every
+  logged-in user, not only uid 1000, and PROC lets the test feed fixed
+  readings. The gate now shellchecks src/*.sh. tst_freezerecorderitem
+  runs the script once under fixed pressure, calm and ring trimming.
   **Layman:** If the computer freezes, a small log shows afterwards what was eating its memory.
   Kind: feature.
   Source: user-request-2026-10-10.

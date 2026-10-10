@@ -496,6 +496,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>מתעד הקפאות</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>שומר יומן קטן של מה שמשתמש בזיכרון של המחשב בכל פעם שהוא אוזל, כדי שאחרי הקפאה אפשר יהיה למצוא את הסיבה.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>מנהל השירותים לא הגיב.</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>שום דבר אינו מתעד מה המחשב עשה לפני הקפאה.</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>מגדיר את מתעד ההקפאות</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

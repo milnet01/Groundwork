@@ -495,6 +495,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>死机记录器</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>每当电脑内存不足时，记录一份关于内存被谁占用的小日志，以便在死机后能找到原因。</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>服务管理器没有响应。</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>没有任何程序记录电脑死机前在做什么。</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>正在设置死机记录器</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

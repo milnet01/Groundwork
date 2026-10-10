@@ -496,6 +496,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>Der Einfrier-Rekorder</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>Führt ein kleines Protokoll darüber, was den Arbeitsspeicher des Computers belegt, wenn er knapp wird, damit sich nach einem Einfrieren die Ursache finden lässt.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>Die Dienstverwaltung hat nicht geantwortet.</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>Nichts zeichnet auf, was der Computer vor einem Einfrieren getan hat.</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>Der Einfrier-Rekorder wird eingerichtet</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

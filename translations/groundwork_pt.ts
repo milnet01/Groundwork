@@ -496,6 +496,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>O gravador de travamentos</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>Mantém um pequeno registro do que está usando a memória do computador sempre que ela fica escassa, para que, após um travamento, a causa possa ser encontrada.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>O gerenciador de serviços não respondeu.</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>Nada registra o que o computador estava fazendo antes de um travamento.</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>Configurando o gravador de travamentos</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

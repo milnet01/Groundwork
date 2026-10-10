@@ -496,6 +496,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>फ़्रीज़ रिकॉर्डर</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>जब भी कंप्यूटर की मेमोरी कम पड़ती है, यह एक छोटा लॉग रखता है कि उसे क्या इस्तेमाल कर रहा है, ताकि फ़्रीज़ होने के बाद कारण पता चल सके।</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>सेवा प्रबंधक ने जवाब नहीं दिया।</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>कंप्यूटर फ़्रीज़ होने से पहले क्या कर रहा था, यह कुछ भी रिकॉर्ड नहीं करता।</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>फ़्रीज़ रिकॉर्डर सेट किया जा रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

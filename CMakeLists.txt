@@ -77,8 +77,13 @@ add_library(groundwork_items STATIC
     src/items/wakeitem.cpp
     src/items/logcapitem.cpp
     src/items/bootmenuitem.cpp
+    src/items/freezerecorderitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)
+# The freeze recorder's script (GRND-0058) is built in at :/items, so the
+# item writes it from the program itself.
+qt_add_resources(groundwork_items groundwork_scripts
+    PREFIX /items BASE src/items FILES src/items/freeze-recorder.sh)
 
 # The Worker depends on Core and Items, never on the Wizard.
 add_library(groundwork_worker STATIC

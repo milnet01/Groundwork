@@ -14,6 +14,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **The freeze recorder** (GRND-0058)
+  A small protected service notes what is using memory whenever it
+  runs short, in the journal and in /var/log/freeze-recorder.log, so
+  the cause of a freeze can be found afterwards. The log drops its
+  oldest lines first, so it stays small.
+
 - **A shorter wait at the boot menu** (GRND-0057)
   The boot menu shows for 3 seconds, so the computer starts sooner,
   with time still to choose from it. Works with systemd-boot,

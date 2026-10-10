@@ -496,6 +496,29 @@
     </message>
 </context>
 <context>
+    <name>gw::FreezeRecorderItem</name>
+    <message>
+        <source>The freeze recorder</source>
+        <translation>Isiqophi sokuqhwa</translation>
+    </message>
+    <message>
+        <source>Keeps a small log of what is using the computer&apos;s memory whenever it runs short, so after a freeze the cause can be found.</source>
+        <translation>Igcina irekhodi elincane lalokho okusebenzisa inkumbulo yekhompyutha noma nini lapho iphela, ukuze ngemva kokuqhwa imbangela itholakale.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>Umphathi wamasevisi akaphendulanga.</translation>
+    </message>
+    <message>
+        <source>Nothing records what the computer was doing before a freeze.</source>
+        <translation>Akukho okuqopha ukuthi ikhompyutha ibenzani ngaphambi kokuqhwa.</translation>
+    </message>
+    <message>
+        <source>Setting up the freeze recorder</source>
+        <translation>Kusethwa isiqophi sokuqhwa</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

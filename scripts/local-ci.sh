@@ -117,8 +117,9 @@ done < <(git ls-files '*.md')
 printf 'every relative link resolves\n' >&2
 
 step 'shell scripts (shellcheck)'
-# The git hooks too: they run on every commit and push.
-mapfile -t SCRIPTS < <(git ls-files 'scripts/*.sh' '.githooks/*' 'packaging/*.sh' 'tests/*.sh')
+# The git hooks too: they run on every commit and push. And src's, which
+# the program installs (the freeze recorder, GRND-0058).
+mapfile -t SCRIPTS < <(git ls-files 'scripts/*.sh' '.githooks/*' 'packaging/*.sh' 'tests/*.sh' 'src/*.sh')
 (( ${#SCRIPTS[@]} > 0 )) || fail "no tracked shell scripts — this is not the checkout this script belongs to"
 if need shellcheck; then
     check_version shellcheck "$SHELLCHECK_VERSION" \
