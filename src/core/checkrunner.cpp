@@ -28,4 +28,14 @@ QString stateText(CheckState state)
     return {};
 }
 
+QString stateLine(const Item &item, const CheckResult &result)
+{
+    if (item.isPreparation() && result.state == CheckState::NotDone && !result.detail.isEmpty())
+        return result.detail;
+    QString line = stateText(result.state);
+    if (!result.detail.isEmpty())
+        line += QStringLiteral(" — ") + result.detail;
+    return line;
+}
+
 } // namespace gw

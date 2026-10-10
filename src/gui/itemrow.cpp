@@ -15,10 +15,7 @@ ItemRow::ItemRow(const Item &item, const CheckResult &result, QWidget *parent)
     : QWidget(parent), m_id(item.id()), m_toggle(new QCheckBox(item.title(), this)),
       m_reason(new QLabel(this))
 {
-    QString state = stateText(result.state);
-    if (!result.detail.isEmpty())
-        state += QStringLiteral(" — ") + result.detail;
-    auto *stateLabel = new QLabel(state, this);
+    auto *stateLabel = new QLabel(stateLine(item, result), this);
     auto *sentence = new QLabel(item.applySentence(), this);
     for (QLabel *label : {stateLabel, sentence, m_reason})
         label->setWordWrap(true);

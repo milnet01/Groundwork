@@ -49,10 +49,7 @@ int checkMode(const QString &root)
     const gw::CheckResults results = gw::runChecks(all.items(), gw::CheckContext(files));
     for (const gw::Item *item : all.items()) {
         const gw::CheckResult r = results.value(item->id());
-        out << "  " << item->title() << ": " << gw::stateText(r.state);
-        if (!r.detail.isEmpty())
-            out << " — " << r.detail;
-        out << '\n';
+        out << "  " << item->title() << ": " << gw::stateLine(*item, r) << '\n';
     }
 
     const QStringList start = all.runOrder(all.defaultSelection(results));

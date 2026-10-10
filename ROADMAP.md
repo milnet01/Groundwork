@@ -796,6 +796,20 @@ were added on 2026-10-10 (GRND-0050).
   Source: user-request-2026-10-10.
   Lanes: gui.
 
+- ✅ [GRND-0051] **Drop "not done" from the update row, which read as a contradiction beside "no updates were waiting".**
+  Seen in the 0.1.0 Essentials screenshot by the website session: "not
+  done — No updates were waiting at the last refresh of the software
+  sources." The update is a preparation and is always not done by
+  design, so the word says nothing there. Its row, and check mode's
+  line, now show the detail alone.
+  Resolved (2026-10-10): core's stateLine() now builds the line for
+  both the row and check mode; a not-done preparation shows its detail
+  alone.
+  **Layman:** The update row no longer says "not done" while also saying no updates are waiting.
+  Kind: ux.
+  Source: website-session-2026-10-10.
+  Lanes: gui, core.
+
 ## Backlog — no version yet
 
 Items not yet placed in a release. Each moves into a version section once it is

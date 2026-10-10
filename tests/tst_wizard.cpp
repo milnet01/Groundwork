@@ -194,6 +194,22 @@ private slots:
         QVERIFY(!w->row(QStringLiteral("fonts"))->isChecked());
     }
 
+    // The update is a preparation, always "not done"; "not done — No
+    // updates were waiting" read as a contradiction (GRND-0051). Its row
+    // says what it found, with no state word.
+    void aPreparationRowSaysWhatItFoundWithoutAStateWord()
+    {
+        auto w = make();
+        QTRY_VERIFY(w->checksDone());
+        QStringList texts;
+        for (auto *label : w->row(QStringLiteral("update"))->findChildren<QLabel *>())
+            texts << label->text();
+        QVERIFY2(texts.contains(QStringLiteral("2 waiting")), qPrintable(texts.join(QLatin1Char('|'))));
+        for (auto *label : w->row(QStringLiteral("codecs"))->findChildren<QLabel *>())
+            texts << label->text();
+        QVERIFY2(texts.contains(QStringLiteral("not done")), qPrintable(texts.join(QLatin1Char('|'))));
+    }
+
     void switchingOffADependencySwitchesOffWhatNeedsIt()
     {
         auto w = make();

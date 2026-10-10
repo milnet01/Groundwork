@@ -12,6 +12,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Fixed
+
+- **The update row no longer says "not done" beside "no updates were waiting".** (GRND-0051)
+  It shows what the check found, in the window and in --check.
+
 ## [0.1.0] - 2026-10-10
 
 **Theme:** Every level, from essentials to extras.
