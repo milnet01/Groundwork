@@ -159,6 +159,14 @@
         <translation>आपके चुने हुए बदलाव करने के लिए Groundwork को एडमिनिस्ट्रेटर अधिकार चाहिए।</translation>
     </message>
     <message>
+        <source>Type the administrator password (the password for root).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type your password (the password for %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Password</source>
         <translation>पासवर्ड</translation>
     </message>

@@ -25,7 +25,9 @@ bool Privilege::authenticate()
         // askpass mode is chosen by an environment variable (design, Entry).
         env.insert(QStringLiteral("SUDO_ASKPASS"), QCoreApplication::applicationFilePath());
         env.insert(QStringLiteral("GROUNDWORK_ASKPASS"), QStringLiteral("1"));
-        args << QStringLiteral("-A");
+        // The prompt is only whose password sudo wants, for the box to put
+        // in plain words (GRND-0046).
+        args << QStringLiteral("-A") << QStringLiteral("-p") << QStringLiteral("%p");
     }
     args << QStringLiteral("-v");
     sudo.setProcessEnvironment(env);

@@ -1,5 +1,6 @@
-// The password box, on Qt's offscreen display: it shows sudo's prompt,
-// masks what is typed, and hands back the password only on OK.
+// The password box, on Qt's offscreen display: it says in plain words whose
+// password it wants, masks what is typed, and hands back the password only
+// on OK.
 #include "core/translations.h"
 #include "gui/askpassdialog.h"
 
@@ -13,14 +14,39 @@ class TstAskpass : public QObject
 {
     Q_OBJECT
 private slots:
-    void showsSudosPromptAndMasksTheField()
+    static QString allText(const gw::AskpassDialog &d)
     {
-        gw::AskpassDialog d(QStringLiteral("[sudo] password for root: "));
-        bool shown = false;
+        QStringList texts;
         for (auto *label : d.findChildren<QLabel *>())
-            shown = shown || label->text() == QLatin1String("[sudo] password for root:");
-        QVERIFY(shown);
+            texts << label->text();
+        return texts.join(QLatin1Char('\n'));
+    }
+
+    // sudo passes only whose password it wants, not its raw "[sudo]
+    // password for root:" line (GRND-0046). Tumbleweed asks for root's.
+    void namesRootsPasswordAsTheAdministrators()
+    {
+        gw::AskpassDialog d(QStringLiteral("root"));
+        const QString text = allText(d);
+        QVERIFY2(text.contains(QLatin1String("administrator password")), qPrintable(text));
+        QVERIFY2(!text.contains(QLatin1String("[sudo]")), qPrintable(text));
         QCOMPARE(d.passwordField()->echoMode(), QLineEdit::Password);
+    }
+
+    // Leap 16 asks for the user's own.
+    void namesAUsersPasswordAsTheirOwn()
+    {
+        gw::AskpassDialog d(QStringLiteral("tester"));
+        const QString text = allText(d);
+        QVERIFY2(text.contains(QLatin1String("your password")), qPrintable(text));
+        QVERIFY2(text.contains(QLatin1String("tester")), qPrintable(text));
+    }
+
+    // A prompt that is not a bare name, such as PAM's own, is shown as it is.
+    void showsAnyOtherPromptAsItIs()
+    {
+        gw::AskpassDialog d(QStringLiteral("Password for root: "));
+        QVERIFY(allText(d).contains(QLatin1String("Password for root:")));
     }
 
     void okReturnsWhatWasTyped()

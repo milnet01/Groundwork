@@ -178,10 +178,11 @@ text it produces itself.
   started it (`man sudoers`, `timestamp_type`, default `tty`, which
   falls back to the parent process). So the Worker keeps the password
   fresh by running `sudo -n -v` on its own timer. Reading a root
-  command's output through a pipe is fine. The password box shows
-  `sudo`'s own prompt, which names whose password it wants: root's, on
-  Tumbleweed (`Defaults targetpw` in `/usr/etc/sudoers`, read
-  2026-10-02). With a display, `sudo -A` shows the app's own password
+  command's output through a pipe is fine. The password box says in
+  plain words whose password `sudo` wants. That is root's on Tumbleweed
+  (`Defaults targetpw` in `/usr/etc/sudoers`, read 2026-10-02), and the
+  user's own on Leap 16 (GRND-0013). The Worker passes `sudo -p %p`,
+  so the box receives only that name. With a display, `sudo -A` shows the app's own password
   box; without one, `sudo` asks on the terminal.
 - **Logging** goes to one file per run under the user's state directory,
   and the Worker's output is mirrored there.

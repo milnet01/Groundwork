@@ -159,6 +159,14 @@
         <translation>يحتاج Groundwork إلى صلاحيات المدير لإجراء التغييرات التي اخترتها.</translation>
     </message>
     <message>
+        <source>Type the administrator password (the password for root).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type your password (the password for %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Password</source>
         <translation>كلمة المرور</translation>
     </message>

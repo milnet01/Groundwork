@@ -1,6 +1,6 @@
 // The app's own password box (GRND-0007): the program sudo -A calls, so the
-// app needs no desktop's password helper. It shows sudo's own prompt, which
-// names whose password it wants (docs/design.md, Root).
+// app needs no desktop's password helper. It says in plain words whose
+// password sudo wants (docs/design.md, Root).
 #pragma once
 
 #include <QDialog>
@@ -13,6 +13,7 @@ class AskpassDialog : public QDialog
 {
     Q_OBJECT
 public:
+    // sudoPrompt is whose password sudo wants, or a whole prompt of its own.
     explicit AskpassDialog(const QString &sudoPrompt, QWidget *parent = nullptr);
     QString password() const;
     QLineEdit *passwordField() const { return m_field; }

@@ -159,6 +159,14 @@
         <translation>選択した変更を行うには、Groundwork に管理者権限が必要です。</translation>
     </message>
     <message>
+        <source>Type the administrator password (the password for root).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type your password (the password for %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Password</source>
         <translation>パスワード</translation>
     </message>

@@ -159,6 +159,14 @@
         <translation>Groundwork a besoin des droits d&apos;administrateur pour effectuer les modifications que vous avez choisies.</translation>
     </message>
     <message>
+        <source>Type the administrator password (the password for root).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type your password (the password for %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>

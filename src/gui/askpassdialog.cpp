@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QRegularExpression>
 #include <QVBoxLayout>
 
 #include <cstdio>
@@ -16,8 +17,17 @@ AskpassDialog::AskpassDialog(const QString &sudoPrompt, QWidget *parent)
     setWindowTitle(tr("Groundwork"));
     auto *why = new QLabel(tr("Groundwork needs administrator rights to make the changes you chose."), this);
     why->setWordWrap(true);
-    // sudo's own prompt says whose password it wants.
-    auto *prompt = new QLabel(sudoPrompt.trimmed(), this);
+    // The Worker has sudo pass only whose password it wants (%p), so the
+    // box can say it plainly (GRND-0046). Anything else, such as PAM's own
+    // prompt, is shown as it is.
+    const QString account = sudoPrompt.trimmed();
+    static const QRegularExpression kBareName(QStringLiteral("^[^\\s:]+$"));
+    QString text = account;
+    if (account == QLatin1String("root"))
+        text = tr("Type the administrator password (the password for root).");
+    else if (kBareName.match(account).hasMatch())
+        text = tr("Type your password (the password for %1).").arg(account);
+    auto *prompt = new QLabel(text, this);
     prompt->setWordWrap(true);
     prompt->setBuddy(m_field);
     m_field->setEchoMode(QLineEdit::Password);

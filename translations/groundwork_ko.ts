@@ -159,6 +159,14 @@
         <translation>선택한 변경 사항을 적용하려면 Groundwork에 관리자 권한이 필요합니다.</translation>
     </message>
     <message>
+        <source>Type the administrator password (the password for root).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type your password (the password for %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Password</source>
         <translation>비밀번호</translation>
     </message>

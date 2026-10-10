@@ -159,6 +159,14 @@
         <translation>Groundwork 需要管理员权限才能进行你选择的更改。</translation>
     </message>
     <message>
+        <source>Type the administrator password (the password for root).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type your password (the password for %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Password</source>
         <translation>密码</translation>
     </message>
