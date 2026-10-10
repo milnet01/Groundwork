@@ -608,6 +608,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>Verr. Num activé à la connexion</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>Active Verr. Num sur l&apos;écran de connexion, pour que le pavé numérique fonctionne tout de suite.</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>L&apos;écran de connexion n&apos;est pas SDDM, celui que cette option configure.</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>Verr. Num n&apos;est pas activé sur l&apos;écran de connexion.</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>Activation de Verr. Num sur l&apos;écran de connexion</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

@@ -608,6 +608,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>Bloq Num activado al iniciar sesión</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>Activa Bloq Num en la pantalla de inicio de sesión, para que el teclado numérico funcione desde el principio.</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>La pantalla de inicio de sesión no es SDDM, la que esto configura.</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>Bloq Num no está activado en la pantalla de inicio de sesión.</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>Activando Bloq Num en la pantalla de inicio de sesión</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

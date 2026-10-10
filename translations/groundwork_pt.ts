@@ -608,6 +608,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>NumLock ligado no login</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>Liga o NumLock na tela de login, para que o teclado numérico funcione logo de cara.</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>A tela de login não é o SDDM, que é o que isto configura.</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>O NumLock não está ligado na tela de login.</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>Ligando o NumLock na tela de login</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

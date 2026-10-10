@@ -607,6 +607,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>登入時開啟 NumLock</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>在登入畫面開啟 NumLock，讓數字鍵盤立即可用。</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>登入畫面不是此項設定的 SDDM。</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>登入畫面未開啟 NumLock。</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>正在登入畫面開啟 NumLock</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

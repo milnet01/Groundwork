@@ -608,6 +608,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>NumLock aan by aanmelding</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>Skakel NumLock by die aanmeldskerm aan, sodat die syferbord dadelik werk.</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>Die aanmeldskerm is nie SDDM nie, die een wat dit opstel.</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>NumLock is nie by die aanmeldskerm aangeskakel nie.</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>NumLock word by die aanmeldskerm aangeskakel</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

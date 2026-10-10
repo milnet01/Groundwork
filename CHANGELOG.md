@@ -14,6 +14,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **NumLock on at login** (GRND-0060)
+  The number pad works straight away at the login screen. Offered
+  where the login screen is SDDM; it takes effect the next time that
+  screen appears.
+
 - **Less eager swapping** (GRND-0059)
   Programs stay in memory longer before the computer moves them to
   disk (vm.swappiness 10, from the kernel's 60). A lower setting

@@ -607,6 +607,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>로그인 시 NumLock 켜기</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>로그인 화면에서 NumLock을 켜서 숫자 키패드를 바로 쓸 수 있게 합니다.</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>로그인 화면이 이 항목이 설정하는 SDDM이 아닙니다.</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>로그인 화면에서 NumLock이 켜져 있지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>로그인 화면에서 NumLock을 켜는 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

@@ -69,7 +69,8 @@ Wizard and the Worker apply the same one.
    stay in memory longer.
 3. **Configuration** — choices a new install asks of its owner. The
    computer's name; remote login over SSH; the clock setting, where
-   Windows is also installed.
+   Windows is also installed; NumLock on at the login screen, where
+   that screen is SDDM.
 4. **Nice to have** — extras, each its own toggle. Everyday apps,
    gaming, developer tools, a backup tool for the user's own files,
    Microsoft-compatible fonts, and handy command-line programs.

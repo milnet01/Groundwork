@@ -13,6 +13,7 @@
 #include "fontsitem.h"
 #include "hostnameitem.h"
 #include "logcapitem.h"
+#include "numlockitem.h"
 #include "memoryitem.h"
 #include "nvidiaitem.h"
 #include "poweritem.h"
@@ -52,6 +53,7 @@ const Catalogue &catalogue()
     static const HostnameItem hostname;
     static const SshItem ssh;
     static const ClockItem clock;
+    static const NumlockItem numlock;
     // Nice to have: everyday apps (GRND-0025)
     static const FlathubAppItem chrome(QStringLiteral("app-chrome"), QT_TRANSLATE_NOOP("gw::Apps", "Google Chrome"),
         QT_TRANSLATE_NOOP("gw::Apps", "Installs Google's web browser from Flathub."), QStringLiteral("com.google.Chrome"),
@@ -107,7 +109,7 @@ const Catalogue &catalogue()
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
-                                &hostname, &ssh, &clock,
+                                &hostname, &ssh, &clock, &numlock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles,
                                 &buildTools, &codium, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;

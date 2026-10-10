@@ -608,6 +608,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>I-NumLock ivuliwe xa usungena</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>Ivula i-NumLock kwiscreen sokungena, ukuze iphedi yamanani isebenze ngoko nangoko.</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>Iscreen sokungena asiyiyo i-SDDM, leyo isetwa koku.</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>I-NumLock ayivulwanga kwiscreen sokungena.</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>Kuvulwa i-NumLock kwiscreen sokungena</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

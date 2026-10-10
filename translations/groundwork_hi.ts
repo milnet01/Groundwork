@@ -608,6 +608,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>लॉगिन पर NumLock चालू</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>लॉगिन स्क्रीन पर NumLock चालू करता है, ताकि नंबर पैड तुरंत काम करे।</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>लॉगिन स्क्रीन SDDM नहीं है, जिसे यह सेट करता है।</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>लॉगिन स्क्रीन पर NumLock चालू नहीं है।</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>लॉगिन स्क्रीन पर NumLock चालू किया जा रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

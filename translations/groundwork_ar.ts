@@ -612,6 +612,29 @@
     </message>
 </context>
 <context>
+    <name>gw::NumlockItem</name>
+    <message>
+        <source>NumLock on at login</source>
+        <translation>تشغيل NumLock عند تسجيل الدخول</translation>
+    </message>
+    <message>
+        <source>Switches NumLock on at the login screen, so the number pad works straight away.</source>
+        <translation>يشغّل NumLock في شاشة تسجيل الدخول، فتعمل لوحة الأرقام فورًا.</translation>
+    </message>
+    <message>
+        <source>The login screen is not SDDM, the one this sets up.</source>
+        <translation>شاشة تسجيل الدخول ليست SDDM، وهي التي يضبطها هذا الخيار.</translation>
+    </message>
+    <message>
+        <source>NumLock is not switched on at the login screen.</source>
+        <translation>مفتاح NumLock غير مُشغَّل في شاشة تسجيل الدخول.</translation>
+    </message>
+    <message>
+        <source>Switching NumLock on at the login screen</source>
+        <translation>جارٍ تشغيل NumLock في شاشة تسجيل الدخول</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

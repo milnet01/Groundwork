@@ -973,9 +973,17 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0060] **Item: NumLock on at login.**
+- ✅ [GRND-0060] **Item: NumLock on at login.**
   From the owner's set-up script: Numlock=on in /etc/sddm.conf.d.
   Offered only where SDDM is the login screen.
+  Shipped 2026-10-10: NumlockItem, in Configuration. SDDM is the
+  login screen when /etc/alternatives/default-displaymanager points at
+  sddm (openSUSE's way) or display-manager.service at sddm.service.
+  Reads [General] Numlock= in SDDM's order (sddm.conf(5): system
+  folder, /etc/sddm.conf.d, /etc/sddm.conf; default none). Apply
+  writes /etc/sddm.conf.d/99-groundwork-numlock.conf; no SDDM restart,
+  which would end the session. The owner's machine reads done.
+  tst_numlockitem.
   **Layman:** The number pad works straight away at the login screen.
   Kind: feature.
   Source: user-request-2026-10-10.
