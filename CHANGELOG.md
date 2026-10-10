@@ -14,6 +14,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **A 1 GB limit on the system log** (GRND-0056)
+  The system's log keeps at most 1 GB and deletes its oldest entries
+  first, so it can no longer fill a small drive. A limit of 1 GB or
+  less that is already set is left alone.
+
 - **Calmer wake from hibernation: maintenance jobs missed while asleep are spread over half an hour instead of all starting at once.** (GRND-0055)
 
 - **Smoother spinning hard drives: every spinning drive uses the bfq scheduler, so the desktop stays smooth while one is busy.** (GRND-0054)

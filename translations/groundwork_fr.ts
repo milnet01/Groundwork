@@ -500,6 +500,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>Une taille limite pour le journal système</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>Limite le journal système à 1 Go au maximum, en supprimant d&apos;abord les entrées les plus anciennes, afin qu&apos;il ne puisse jamais remplir le disque.</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>Le journal système peut dépasser 1 Go.</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>Limitation de la taille du journal système</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>

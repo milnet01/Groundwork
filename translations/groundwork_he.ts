@@ -500,6 +500,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>מגבלת גודל ליומן המערכת</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>שומר על יומן המערכת בגודל של 1 GB לכל היותר, ומוחק קודם את הרשומות הישנות ביותר, כך שלעולם לא ימלא את הכונן.</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>יומן המערכת עלול לגדול מעבר ל־1 GB.</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>מגביל את גודל יומן המערכת</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>

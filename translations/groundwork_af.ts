@@ -500,6 +500,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>&apos;n Groottebeperking op die stelsellog</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>Hou die stelsellog op hoogstens 1 GB en vee die oudste inskrywings eerste uit, sodat dit nooit die skyf kan volmaak nie.</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>Die stelsellog kan groter as 1 GB word.</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>Die grootte van die stelsellog word beperk</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>

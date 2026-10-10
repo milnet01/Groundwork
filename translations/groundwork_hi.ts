@@ -500,6 +500,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>सिस्टम लॉग के आकार की सीमा</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>सिस्टम लॉग को अधिकतम 1 GB तक रखता है और सबसे पुरानी प्रविष्टियाँ पहले हटाता है, ताकि वह कभी ड्राइव को भर न सके।</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>सिस्टम लॉग 1 GB से बड़ा हो सकता है।</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>सिस्टम लॉग का आकार सीमित किया जा रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>

@@ -500,6 +500,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>Um limite de tamanho para o registro do sistema</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>Mantém o registro do sistema em no máximo 1 GB, apagando primeiro as entradas mais antigas, para que ele nunca possa encher o disco.</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>O registro do sistema pode crescer além de 1 GB.</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>Limitando o tamanho do registro do sistema</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>

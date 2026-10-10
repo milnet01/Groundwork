@@ -29,6 +29,7 @@ groundwork_test(tst_memoryitem)
 groundwork_test(tst_sysrqitem)
 groundwork_test(tst_diskscheduleritem)
 groundwork_test(tst_wakeitem)
+groundwork_test(tst_logcapitem)
 # The built program itself: --version answers and exits 0.
 add_test(NAME cli_version COMMAND groundwork --version)
 set_tests_properties(cli_version PROPERTIES

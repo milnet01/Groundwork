@@ -903,11 +903,20 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0056] **Item: cap the system log at 1 GB.**
+- ✅ [GRND-0056] **Item: cap the system log at 1 GB.**
   From SYSTEM_OPTIMISATIONS.md, section 11: a journald.conf.d drop-in
   with SystemMaxUse=1G, SystemKeepFree=2G, SystemMaxFileSize=128M and
   MaxRetentionSec=3month. Check journald's real default when built;
   the notes' 10% figure is unverified.
+  Shipped 2026-10-10: LogCapItem writes
+  /etc/systemd/journald.conf.d/99-groundwork-log-cap.conf with the
+  four settings, then restarts systemd-journald (restart, not reload:
+  journald reloads on SIGHUP only from systemd 258). Done when the
+  SystemMaxUse systemd would use is 1G or less, read from journald.conf
+  and its drop-ins in systemd's order. journald's real default is 10%
+  of the filesystem capped at 4G (journald.conf(5), systemd 261), so
+  the notes' "~20 GB here" was wrong. The notes' Storage=persistent
+  was left out: not part of this item. tst_logcapitem.
   **Layman:** The system's log can no longer grow large enough to fill a small drive.
   Kind: feature.
   Source: user-request-2026-10-10.

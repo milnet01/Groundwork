@@ -500,6 +500,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>Umkhawulo kasayizi werekhodi lesistimu</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>Igcina irekhodi lesistimu lingeqi ku-1 GB, isula okufakiwe okudala kakhulu kuqala, ukuze lingaze ligcwalise idrayivu.</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>Irekhodi lesistimu lingakhula libe ngaphezu kuka-1 GB.</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>Kukhawulelwa usayizi werekhodi lesistimu</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>

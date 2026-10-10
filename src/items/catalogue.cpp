@@ -10,6 +10,7 @@
 #include "flathubitem.h"
 #include "fontsitem.h"
 #include "hostnameitem.h"
+#include "logcapitem.h"
 #include "memoryitem.h"
 #include "nvidiaitem.h"
 #include "poweritem.h"
@@ -40,6 +41,7 @@ const Catalogue &catalogue()
     static const SysrqItem sysrq;
     static const DiskSchedulerItem diskScheduler;
     static const WakeItem calmWake;
+    static const LogCapItem logCap;
     // Configuration
     static const HostnameItem hostname;
     static const SshItem ssh;
@@ -98,7 +100,7 @@ const Catalogue &catalogue()
     static const FontsItem fonts;
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
-                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake,
+                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap,
                                 &hostname, &ssh, &clock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles,
                                 &buildTools, &codium, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});

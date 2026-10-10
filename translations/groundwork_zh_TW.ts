@@ -499,6 +499,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>系統日誌大小上限</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>將系統日誌維持在 1 GB 以內，優先刪除最舊的項目，使其永遠不會佔滿磁碟。</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>系統日誌可能會超過 1 GB。</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>正在限制系統日誌大小</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>

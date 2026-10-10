@@ -499,6 +499,25 @@
     </message>
 </context>
 <context>
+    <name>gw::LogCapItem</name>
+    <message>
+        <source>A size limit on the system log</source>
+        <translation>시스템 로그 크기 제한</translation>
+    </message>
+    <message>
+        <source>Keeps the system&apos;s log to at most 1 GB, deleting the oldest entries first, so it can never fill the drive.</source>
+        <translation>시스템 로그를 최대 1GB로 유지하고 가장 오래된 항목부터 삭제하여 드라이브가 가득 차지 않도록 합니다.</translation>
+    </message>
+    <message>
+        <source>The system&apos;s log may grow larger than 1 GB.</source>
+        <translation>시스템 로그가 1GB보다 커질 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>Limiting the size of the system log</source>
+        <translation>시스템 로그 크기를 제한하는 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::MemoryItem</name>
     <message>
         <source>RAM protection</source>
