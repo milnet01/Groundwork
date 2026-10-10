@@ -557,6 +557,29 @@
     </message>
 </context>
 <context>
+    <name>gw::GamingExtrasItem</name>
+    <message>
+        <source>Game controllers and GameMode</source>
+        <translation>ゲームコントローラーと GameMode</translation>
+    </message>
+    <message>
+        <source>Lets Steam reach game controllers and VR headsets, and installs GameMode, which tunes the computer for games while one runs. Where SELinux is on, it also stops SELinux blocking Windows games.</source>
+        <translation>Steam がゲームコントローラーや VR ヘッドセットを使えるようにし、ゲームの実行中にコンピューターをゲーム向けに調整する GameMode をインストールします。SELinux が有効な場合は、SELinux が Windows ゲームをブロックしないようにもします。</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>インストール済みのパッケージを一覧表示できませんでした。</translation>
+    </message>
+    <message>
+        <source>Some of the gaming support is not installed.</source>
+        <translation>ゲーム用のサポートの一部がインストールされていません。</translation>
+    </message>
+    <message>
+        <source>Installing game controller support and GameMode</source>
+        <translation>ゲームコントローラーのサポートと GameMode をインストールしています</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

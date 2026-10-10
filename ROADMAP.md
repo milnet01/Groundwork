@@ -1015,17 +1015,32 @@ as the terminal.
   From the owner's machine: Mesa's VA-API driver for radeonsi.
   Offered only where an AMD graphics card is found. Check what the
   media codecs item already brings in from Packman.
+  Finding 2026-10-10, before building: the codecs item brings in no
+  Mesa package. Packman's Mesa-libva, the one that decodes H.264 and
+  HEVC, is only in the full Packman repository; Essentials carries no
+  Mesa package (checked against both repositories' package lists).
+  ADR-0003 rules the full repository out. openSUSE's own Mesa-libva
+  leaves those formats out. Waiting on the user: openSUSE's driver
+  only, an ADR-0003 exception for Mesa, or drop the item.
   **Layman:** Videos play using the graphics card, which is smoother and saves power.
   Kind: feature.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0063] **Item: gaming additions — game controllers, and SELinux's gaming policy.**
+- ✅ [GRND-0063] **Item: gaming additions — game controllers, and SELinux's gaming policy.**
   Adds to the gaming group (GRND-0026, which installs Steam and
   Bottles from Flathub). Flatpak Steam needs the host's controller
   rules (steam-devices). Where SELinux is enforcing, the owner's
   machine has selinux-policy-targeted-gaming. GameMode too, if Flatpak
   Steam can use the host's.
+  Shipped 2026-10-10: GamingExtrasItem, after Bottles. Installs
+  steam-devices and gamemoded, plus selinux-policy-targeted-gaming
+  where /sys/fs/selinux/enforce reads 1; all from openSUSE's main
+  repository. GameMode: the daemon is the gamemoded package (gamemode
+  holds only the tools). Flatpak apps reach it through the portal's
+  org.freedesktop.portal.GameMode interface, which this machine's
+  portal offers; that Flatpak Steam uses it end to end was not run
+  here (Flatpak Steam is not installed). tst_gamingextrasitem.
   **Layman:** Game controllers work in Steam, and Windows games run where SELinux would block them.
   Kind: feature.
   Source: user-request-2026-10-10.

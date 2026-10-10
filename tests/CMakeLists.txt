@@ -35,6 +35,7 @@ groundwork_test(tst_freezerecorderitem)
 groundwork_test(tst_swappinessitem)
 groundwork_test(tst_numlockitem)
 groundwork_test(tst_antsterminalitem)
+groundwork_test(tst_gamingextrasitem)
 # The built program itself: --version answers and exits 0.
 add_test(NAME cli_version COMMAND groundwork --version)
 set_tests_properties(cli_version PROPERTIES

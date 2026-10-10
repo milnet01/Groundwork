@@ -558,6 +558,29 @@
     </message>
 </context>
 <context>
+    <name>gw::GamingExtrasItem</name>
+    <message>
+        <source>Game controllers and GameMode</source>
+        <translation>Speletjiebeheerders en GameMode</translation>
+    </message>
+    <message>
+        <source>Lets Steam reach game controllers and VR headsets, and installs GameMode, which tunes the computer for games while one runs. Where SELinux is on, it also stops SELinux blocking Windows games.</source>
+        <translation>Laat Steam by speletjiebeheerders en VR-headsets uitkom, en installeer GameMode, wat die rekenaar vir speletjies instel terwyl een loop. Waar SELinux aan is, keer dit ook dat SELinux Windows-speletjies blokkeer.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Die geïnstalleerde pakkette kon nie gelys word nie.</translation>
+    </message>
+    <message>
+        <source>Some of the gaming support is not installed.</source>
+        <translation>Van die speletjie-ondersteuning is nie geïnstalleer nie.</translation>
+    </message>
+    <message>
+        <source>Installing game controller support and GameMode</source>
+        <translation>Ondersteuning vir speletjiebeheerders en GameMode word geïnstalleer</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

@@ -558,6 +558,29 @@
     </message>
 </context>
 <context>
+    <name>gw::GamingExtrasItem</name>
+    <message>
+        <source>Game controllers and GameMode</source>
+        <translation>Izilawuli zemidlalo ne-GameMode</translation>
+    </message>
+    <message>
+        <source>Lets Steam reach game controllers and VR headsets, and installs GameMode, which tunes the computer for games while one runs. Where SELinux is on, it also stops SELinux blocking Windows games.</source>
+        <translation>Ivumela i-Steam ifinyelele izilawuli zemidlalo nezigqoko ze-VR, futhi ifaka i-GameMode, elungisa ikhompyutha yemidlalo ngesikhathi umdlalo usebenza. Lapho i-SELinux ivuliwe, iphinde ivimbele i-SELinux ukuthi ingavimbi imidlalo ye-Windows.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Akukwazekanga ukubhala uhlu lwamaphakheji afakiwe.</translation>
+    </message>
+    <message>
+        <source>Some of the gaming support is not installed.</source>
+        <translation>Okunye kokusekelwa kwemidlalo akufakiwe.</translation>
+    </message>
+    <message>
+        <source>Installing game controller support and GameMode</source>
+        <translation>Kufakwa ukusekelwa kwezilawuli zemidlalo ne-GameMode</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

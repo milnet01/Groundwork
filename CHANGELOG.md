@@ -14,6 +14,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Game controllers and GameMode** (GRND-0063)
+  Steam can reach game controllers and VR headsets, and GameMode
+  tunes the computer while a game runs. Where SELinux is on, its
+  gaming policy stops it blocking Windows games.
+
 - **Ants Terminal, set as the terminal** (GRND-0061)
   Installs Ants Terminal from its own software source, on Tumbleweed
   and Leap 16.0. On KDE Plasma it also becomes the terminal the

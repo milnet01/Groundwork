@@ -72,7 +72,7 @@ Wizard and the Worker apply the same one.
    Windows is also installed; NumLock on at the login screen, where
    that screen is SDDM.
 4. **Nice to have** — extras, each its own toggle. Everyday apps,
-   gaming, developer tools, Ants Terminal, a backup tool for the user's
+   gaming with game controllers and GameMode, developer tools, Ants Terminal, a backup tool for the user's
    own files, Microsoft-compatible fonts, and handy command-line
    programs.
 
