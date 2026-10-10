@@ -71,6 +71,7 @@ protected:
 private:
     void showResults(const CheckResults &results);
     void refreshRows(const QStringList &pulled, const QString &cause, bool on);
+    void fitRows();
     bool stopForClose();
 
     WizardSetup m_setup;

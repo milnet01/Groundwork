@@ -13,6 +13,8 @@
 #include <QLocale>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QScrollArea>
+#include <QScrollBar>
 #include <QStandardItemModel>
 #include <QFile>
 #include <QTemporaryDir>
@@ -78,7 +80,8 @@ class TstWizard : public QObject
 
     QTemporaryDir m_dir;
 
-    std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"))
+    std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
+                                     const gw::Catalogue *items = &catalogue)
     {
         const QString worker = m_dir.filePath(QStringLiteral("fake-worker"));
         if (!QFile::exists(worker)) {
@@ -89,7 +92,7 @@ class TstWizard : public QObject
             f.setPermissions(f.permissions() | QFile::ExeOwner);
         }
         gw::WizardSetup setup;
-        setup.catalogue = &catalogue;
+        setup.catalogue = items;
         setup.runChecks = [] {
             gw::CheckResults r;
             r.insert(QStringLiteral("update"), {gw::CheckState::NotDone, QStringLiteral("2 waiting")});
@@ -323,6 +326,25 @@ private slots:
         const QStringList args = w->workerArguments();
         QVERIFY(args.join(QLatin1Char(' ')).contains(QLatin1String("--set hostname=lounge-pc")));
         QVERIFY(w->row(QStringLiteral("codecs"))->valueField() == nullptr);
+    }
+
+    // The release check's Essentials page showed two of its six rows until
+    // the window was maximised (GRND-0049). It opens showing them all.
+    void aLevelsRowsShowWithoutScrolling()
+    {
+        QList<FakeItem> six;
+        for (int i = 0; i < 6; ++i)
+            six.append(FakeItem(QStringLiteral("item%1").arg(i), gw::Level::Essentials, false));
+        QList<const gw::Item *> items;
+        for (const FakeItem &item : six)
+            items.append(&item);
+        const gw::Catalogue sixRows(items);
+        auto w = make(QStringLiteral("en"), &sixRows);
+        QTRY_VERIFY(w->checksDone());
+        w->next();
+        auto *scroll = w->currentPage()->findChild<QScrollArea *>();
+        QVERIFY(scroll);
+        QTRY_COMPARE(scroll->verticalScrollBar()->maximum(), 0);
     }
 
     void closingMidRunAsksTheWorkerToStopAndWaits()

@@ -15,7 +15,9 @@
 #include <QHash>
 #include <QLabel>
 #include <QLocale>
+#include <QScreen>
 #include <QScrollArea>
+#include <QScrollBar>
 #include <QStandardItemModel>
 #include <QThread>
 #include <QVBoxLayout>
@@ -253,6 +255,7 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     run->configure(m_setup.workerProgram);
     m_runPage = run;
     addPage(run);
+    connect(this, &QWizard::currentIdChanged, this, &Wizard::fitRows);
     connect(m_runPage, &RunPage::runFinished, this, [this] {
         if (!isVisible()) // closed during the run: quit once the Worker is done
             qApp->quit();
@@ -283,6 +286,33 @@ void Wizard::showResults(const CheckResults &results)
     refreshRows({}, {}, true);
     m_checksDone = true;
     emit checksFinished();
+}
+
+void Wizard::fitRows()
+{
+    // The window opens at the welcome page's size, which shows a level's
+    // rows only after scrolling (GRND-0049). On a level page, where the
+    // header is its own height, grow it to the fullest level, within the
+    // screen.
+    if (!currentPage())
+        return;
+    auto *shown = currentPage()->findChild<QScrollArea *>();
+    if (!shown || !m_levelPages.values().contains(shown->widget()))
+        return;
+    QCoreApplication::sendPostedEvents(nullptr, QEvent::LayoutRequest); // settle the shown page
+    const int viewWidth = shown->viewport()->width();
+    int extra = 0;
+    for (QWidget *inner : std::as_const(m_levelPages)) {
+        const int need = inner->hasHeightForWidth() ? inner->heightForWidth(viewWidth) : inner->sizeHint().height();
+        extra = qMax(extra, need - shown->viewport()->height());
+    }
+    if (extra <= 0)
+        return;
+    const QRect screen = this->screen()->availableGeometry();
+    const int frame = frameGeometry().height() - height();
+    resize(width(), qMin(height() + extra, screen.height() - frame));
+    if (frameGeometry().bottom() > screen.bottom())
+        move(x(), screen.top());
 }
 
 void Wizard::userToggled(const QString &id, bool on)

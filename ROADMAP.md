@@ -771,12 +771,15 @@ scheduled.
   Source: release-check-2026-10-08.
   Lanes: gui.
 
-- 📋 [GRND-0047] **Clear the "Switched off because it needs" note when the needed item is switched back on.**
+- ✅ [GRND-0047] **Clear the "Switched off because it needs" note when the needed item is switched back on.**
   Found in GRND-0013 on Leap 16: unticking "Bring the system up to
   date" switched off Media codecs and Flathub with the note "Switched
   off because it needs Bring the system up to date." Ticking the
   update again left both off, and the note stayed, even after Media
   codecs was ticked again by hand.
+  Resolved (2026-10-10, 9e5bec8): the note clears once the item it
+  names, or the row itself, is switched back. Codecs stays off when the
+  update is re-ticked, as design.md says; only the stale note was wrong.
   **Layman:** A row can say it was switched off for a reason that no longer holds.
   Kind: fix.
   Source: release-check-2026-10-08.
@@ -798,4 +801,15 @@ scheduled.
   **Layman:** The window opens small, so most choices on a page are hidden until you scroll.
   Kind: ux.
   Source: release-check-2026-10-08.
+  Lanes: gui.
+
+- 📋 [GRND-0050] **Offer a dark theme: follow the desktop, with a Light / Dark / Follow desktop choice.**
+  The user asked on 2026-10-10: they are partially sighted, light
+  sensitive, and prefer dark mode. Decided that day: the window opens
+  dark when the desktop is dark, light otherwise, and the first page
+  offers Light / Dark / Follow desktop to override it. It goes in the
+  release after 0.1.0, not in 0.1.0.
+  **Layman:** The app can be dark, which is easier on light-sensitive eyes; it follows the desktop unless you choose otherwise.
+  Kind: feature.
+  Source: user-request-2026-10-10.
   Lanes: gui.
