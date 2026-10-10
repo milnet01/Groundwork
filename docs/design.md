@@ -60,7 +60,8 @@ Wizard and the Worker apply the same one.
    Btrfs snapshots, the firewall, firmware updates, and laptop power
    settings where there is a battery. RAM protection, which closes the
    most memory-hungry app before the desktop freezes. The emergency
-   keyboard escape, which restarts a frozen computer cleanly.
+   keyboard escape, which restarts a frozen computer cleanly. A smoother
+   scheduler for spinning hard drives, where one is found.
 3. **Configuration** — choices a new install asks of its owner. The
    computer's name; remote login over SSH; the clock setting, where
    Windows is also installed.

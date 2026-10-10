@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>回転式ハードディスクをなめらかに</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>回転式ハードディスクが忙しいあいだも、ディスクの時間をより公平に分けることで、デスクトップをなめらかに保ちます。</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>ドライブの情報を読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>回転式ハードディスクは見つかりませんでした。</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>回転式ハードディスクが標準のスケジューラーを使っています。</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>回転式ハードディスクを設定しています</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

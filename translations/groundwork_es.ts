@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>Discos duros giratorios más fluidos</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>Mantiene el escritorio fluido mientras un disco duro giratorio está ocupado, repartiendo el tiempo del disco de forma más justa.</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>No se pudieron leer los datos de una unidad.</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>No se encontró ningún disco duro giratorio.</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>Un disco duro giratorio usa el planificador estándar.</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>Configurando los discos duros giratorios</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

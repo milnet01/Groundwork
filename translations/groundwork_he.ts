@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>כוננים קשיחים מסתובבים חלקים יותר</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>שומר על שולחן העבודה חלק בזמן שכונן קשיח מסתובב עסוק, על ידי חלוקה הוגנת יותר של זמן הכונן.</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>לא ניתן היה לקרוא את פרטי אחד הכוננים.</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>לא נמצא כונן קשיח מסתובב.</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>כונן קשיח מסתובב משתמש במתזמן הרגיל.</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>מגדיר את הכוננים הקשיחים המסתובבים</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

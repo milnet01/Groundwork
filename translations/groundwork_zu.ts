@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>Ama-hard drive ajikelezayo abushelelezayo</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>Igcina ideskithophu ibushelelezi ngenkathi i-hard drive ejikelezayo imatasa, ngokuhlukanisa isikhathi sedrayivu ngokulinganayo kakhulu.</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>Imininingwane yedrayivu ayikwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>Ayikho i-hard drive ejikelezayo etholakele.</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>I-hard drive ejikelezayo isebenzisa isihleli esijwayelekile.</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>Kusethwa ama-hard drive ajikelezayo</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>让机械硬盘更流畅</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>在机械硬盘繁忙时，更公平地分配硬盘的时间，让桌面保持流畅。</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>无法读取某个驱动器的信息。</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>没有找到机械硬盘。</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>有一块机械硬盘在使用标准调度器。</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>正在设置机械硬盘</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

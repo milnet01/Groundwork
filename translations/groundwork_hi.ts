@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>घूमने वाली हार्ड ड्राइव के लिए सहज काम</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>जब कोई घूमने वाली हार्ड ड्राइव व्यस्त हो, तब ड्राइव का समय अधिक न्यायपूर्ण ढंग से बाँटकर डेस्कटॉप को सहज बनाए रखता है।</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>किसी ड्राइव का विवरण पढ़ा नहीं जा सका।</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>कोई घूमने वाली हार्ड ड्राइव नहीं मिली।</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>एक घूमने वाली हार्ड ड्राइव मानक शेड्यूलर का उपयोग करती है।</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>घूमने वाली हार्ड ड्राइव सेट की जा रही हैं</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

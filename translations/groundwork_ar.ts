@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>أقراص صلبة دوّارة أكثر سلاسة</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>يحافظ على سلاسة سطح المكتب أثناء انشغال قرص صلب دوّار، بتوزيع وقت القرص بإنصاف أكبر.</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>تعذّرت قراءة تفاصيل أحد الأقراص.</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>لم يُعثر على قرص صلب دوّار.</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>يستخدم قرص صلب دوّار المجدول القياسي.</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>جارٍ إعداد الأقراص الصلبة الدوّارة</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>讓傳統硬碟更順暢</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>在傳統硬碟忙碌時，更公平地分配硬碟的時間，讓桌面保持順暢。</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>無法讀取某個磁碟機的資訊。</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>找不到傳統硬碟。</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>有一顆傳統硬碟正在使用標準排程器。</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>正在設定傳統硬碟</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>Groundwork</source>

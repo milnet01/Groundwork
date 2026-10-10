@@ -284,6 +284,33 @@
     </message>
 </context>
 <context>
+    <name>gw::DiskSchedulerItem</name>
+    <message>
+        <source>Smoother spinning hard drives</source>
+        <translation>Flüssigere drehende Festplatten</translation>
+    </message>
+    <message>
+        <source>Keeps the desktop smooth while a spinning hard drive is busy, by sharing the drive&apos;s time more fairly.</source>
+        <translation>Hält den Desktop flüssig, während eine drehende Festplatte beschäftigt ist, indem die Zeit der Platte gerechter verteilt wird.</translation>
+    </message>
+    <message>
+        <source>A drive&apos;s details could not be read.</source>
+        <translation>Die Angaben eines Laufwerks konnten nicht gelesen werden.</translation>
+    </message>
+    <message>
+        <source>No spinning hard drive was found.</source>
+        <translation>Es wurde keine drehende Festplatte gefunden.</translation>
+    </message>
+    <message>
+        <source>A spinning hard drive uses the standard scheduler.</source>
+        <translation>Eine drehende Festplatte verwendet den Standard-Scheduler.</translation>
+    </message>
+    <message>
+        <source>Setting up the spinning hard drives</source>
+        <translation>Drehende Festplatten werden eingerichtet</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>

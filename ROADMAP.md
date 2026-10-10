@@ -871,11 +871,17 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0054] **Item: a smoother scheduler for spinning hard drives.**
+- ✅ [GRND-0054] **Item: a smoother scheduler for spinning hard drives.**
   Generalised from SYSTEM_OPTIMISATIONS.md, section 9, which set BFQ
   on one SMR drive by serial. Here: a udev rule setting bfq on every
   drive whose queue/rotational is 1; SSDs keep their scheduler.
   Offered only where a spinning drive is found.
+  Shipped 2026-10-10: DiskSchedulerItem writes
+  /etc/udev/rules.d/60-groundwork-iosched.rules, matching whole sd*
+  disks with queue/rotational 1, then reloads udev and triggers a
+  change on the spinning drives. Optical and loop devices also report
+  rotational, so only sd* counts. Not needed where no spinning drive is
+  found. tst_diskscheduleritem.
   **Layman:** While a slow hard drive is busy, the desktop stays smooth.
   Kind: feature.
   Source: user-request-2026-10-10.
