@@ -15,23 +15,11 @@
 - ✅ Done · 🚧 In progress · 📋 Planned · 💭 Considered
 - 🚫 Dropped (closed, not done)
 
-## 0.1.0 — Essentials
+## 0.1.0 — Every level, from essentials to extras
 
-> **Name the version this work ships in, and its theme** — § 3.2 makes a
-> release block the default at every version, pre-1.0 included, so the
-> roadmap answers what is still needed for the next release. Add
-> `(target: YYYY-MM)` once there is a date worth stating.
->
-> A phase block (`## P01 — …`) is the alternative where you cannot yet
-> place items in a release, and it costs rotation: § 3.9's phase occasion
-> is specified and unperformable today.
->
-> **Nothing goes here until design is agreed.** Items are broken out of
-> the design, and the gate on doing so is that every sign of success in
-> `docs/discovery.md` — each carrying an `S<n>` id — is claimed by at
-> least one item, and every item
-> names what must close before it can start, in `Blocked-by:`
-> (`~/.claude/workflow.md` § 5, `roadmap-format.md` § 3.5).
+The first release: every level of the design, Essentials to Nice to
+have, with the translations as drafts. The user chose on 2026-10-10 to
+ship it all as 0.1.0 rather than as the four releases first planned.
 
 - ✅ [GRND-0001] **Build skeleton: CMake, Qt 6, Qt Test, wired into the CI gate.**
   Serves S2 (the whole). C++20, Qt 6 Core and Widgets, CMake,
@@ -297,11 +285,6 @@
   Source: in-session-2026-10-08.
   Lanes: docs.
 
-## 0.2.0 — Hardware support
-
-Essentials that depend on the machine's hardware: offered only where the
-hardware is found and lacks support.
-
 - ✅ [GRND-0014] **Item: NVIDIA driver, offered only where an NVIDIA card is found.**
   Serves S2 and S3. Detect the card from /sys/bus/pci/devices without
   root. Driver generation by card (G06, G07 for Turing and newer) and
@@ -365,10 +348,6 @@ hardware is found and lacks support.
   Kind: ux.
   Source: in-session-2026-10-02.
   Lanes: core, items.
-
-## 0.3.0 — System setup and configuration
-
-The design's second and third levels.
 
 - ✅ [GRND-0017] **Item: Btrfs snapshots are on.**
   Serves S1 and S3. snapper list-configs works without root (measured
@@ -466,10 +445,6 @@ The design's second and third levels.
   Lanes: gui.
   Blocked-by: GRND-0008.
 
-## 0.4.0 — Nice to have
-
-The design's fourth level: extras, each its own toggle.
-
 - ✅ [GRND-0025] **Item group: everyday apps.**
   Serves S3 and S4. Each app its own toggle. Choose Flathub or the
   vendor's repository per app and say why in the item; opi's targets
@@ -533,11 +508,159 @@ The design's fourth level: extras, each its own toggle.
   Lanes: items.
   Blocked-by: GRND-0003.
 
-## 0.5.0 — Languages
+- ✅ [GRND-0038] **Build translation files with Qt's Linguist tools, locally and on GitHub.**
+  Serves S3. Extract strings into translations/*.ts and compile .qm
+  files into the program's resources at :/i18n, which
+  core/translations.cpp already reads. Install the tools in ci.yml too.
+  qt6-linguist-devel 6.11.2 installed here on 2026-10-07.
+  Shipped 2026-10-07: translations/groundwork_<code>.ts for af ar de es
+  fr he hi ja ko pt xh zh_CN zu, compiled by lrelease into Core's
+  resources at :/i18n; update_translations refreshes them. A language is
+  offered only when its .qm is non-empty. Found and fixed: main.cpp,
+  systemidentity.cpp, packman.cpp and appitems.cpp strings were extracted
+  under the wrong context or none. tst_translations checks the files match
+  the source and every looked-up context. Verified: gate 28/28 here;
+  Ubuntu 24.04 (Qt 6.4.2) 28/28; Leap 16.0 release build.
+  **Layman:** Sets up the tools that turn translated text into files the app can load.
+  Kind: implement.
+  Source: split-from-GRND-0032-2026-10-02.
+  Lanes: build, translations.
+
+- ✅ [GRND-0041] **Unchecked translations are marked as drafts.**
+  Serves S3. docs/design.md, Text: a translation no native speaker has
+  checked ships marked as a draft, on the first page's language choice
+  and on that page when it is the language in use. The user checks
+  Afrikaans; the rest ship as drafts (user's decision, 2026-10-07).
+  Resolved (2026-10-08): the language choice shows "(draft)" after an
+  unchecked language, and the first page carries a notice when one is in
+  use. The checked list lives in core/translations.cpp and is empty until
+  the user approves Afrikaans.
+  **Layman:** Languages nobody fluent has checked yet are labelled as drafts, so people know.
+  Kind: implement.
+  Source: user-request-2026-10-07.
+  Lanes: translations, gui.
+
+- ✅ [GRND-0042] **Bold Chinese, Japanese and Korean text is smeared.**
+  Seen 2026-10-08 on screenshots from demoreel (zh_CN, zh_TW, ko worst;
+  Japanese kana look clean). Item titles, which the wizard draws bold,
+  come out as heavy blobs, e.g. "媒体解码器"; disabled titles such as
+  "音频固件" are close to unreadable. Body text is fine.
+  The installed fonts are variable fonts (NotoSansCJK*-VF.otf) whose
+  Bold instance fontconfig lists, so the likely cause is Qt faking bold
+  on fallback glyphs instead of using that instance. Unverified; find
+  the cause before choosing a fix.
+  Located (2026-10-08): the lead above is wrong. Qt 6.11.2 does use
+  the font's real Bold instance, then thickens it again with its own
+  fake bold. A probe drawing "Noto Sans CJK SC" at 13 px measured ink
+  482/655/773/1205/1311 for Light/Regular/Medium/Bold/Black; with
+  QT_NO_SYNTHESIZED_BOLD=1 Bold and Black fall to 919/1052 and look
+  crisp, the rest unchanged. Same with the family named directly, so
+  the fault is in Qt's drawing, not in font fallback. The wizard's one
+  bold site is ItemRow::applyFontScale (src/gui/itemrow.cpp).
+  Side note: with no language hint, Chinese text fell back to Noto Sans
+  CJK KR, not SC; not yet checked inside the wizard.
+  Resolved (2026-10-08): main() sets QT_NO_SYNTHESIZED_BOLD through
+  gw::useFontsOwnBold(), so Qt draws the font's own Bold and no more.
+  tst_boldtext fails when bold Chinese text has 1.6 times Regular's
+  ink or more (1.84 before the fix). A demoreel picture of the zh_CN
+  options page shows the titles clean.
+  **Layman:** Bold titles in Chinese, Japanese and Korean look blurred and heavy, and greyed-out ones are hard to read.
+  Kind: fix.
+  Source: in-session-2026-10-08.
+  Lanes: translations, gui.
+
+- ✅ [GRND-0044] **Chinese text may be drawn with the Korean font's letter shapes.**
+  Seen 2026-10-08 in a probe program while locating GRND-0042: with
+  no language hint, Qt drew Chinese text with Noto Sans CJK KR rather
+  than SC. Some shared characters are drawn differently in each. Not
+  yet checked inside the wizard, which runs with a language chosen.
+  Check which CJK font the wizard picks in zh_CN, zh_TW and ja.
+  Resolved (2026-10-08): confirmed. Qt picks the face for shared
+  characters from the system's LANG; QLocale::setDefault does not
+  change it, so an English system drew zh_CN, zh_TW and ja with the
+  Korean face. A fallback face is also kept per family for the whole
+  run, so a second CJK language got the first one's shapes.
+  gw::fontFor() now puts the language's Noto Sans CJK face first, and
+  the wizard sets it as the application font for those languages
+  only. tst_boldtext became tst_cjktext and checks all four faces in
+  one run. Latin words in those languages now use the CJK face's
+  Latin letters, as a Chinese desktop does. After choosing one of them,
+  a live change to the system font may not be followed until restart;
+  not tested.
+  **Layman:** Some Chinese characters may show in their Korean shape, which a Chinese reader would notice.
+  Kind: investigate.
+  Source: in-session-2026-10-08.
+  Lanes: translations, gui.
+
+- ✅ [GRND-0045] **Bundle Qt's Wayland plugin in the AppImage.**
+  Found in GRND-0013 on Tumbleweed (Plasma on Wayland): the terminal
+  printed Qt's "Could not find the Qt platform plugin wayland" and the
+  wizard ran through XWayland. It worked, but the AppImage carries no
+  wayland platform plugin.
+  Resolved (2026-10-10): the AppImage now carries Qt's wayland platform
+  plugins and its shell, decoration and graphics plugins. Checked on a
+  headless weston: Qt reported loading the wayland plugin, no errors.
+  **Layman:** On Wayland desktops the app runs through the older X11 route instead of natively.
+  Kind: package.
+  Source: release-check-2026-10-08.
+  Lanes: packaging.
+
+- ✅ [GRND-0046] **Say the password prompt in plain words, not sudo's raw line.**
+  Found in GRND-0013: under "Groundwork needs administrator rights"
+  the box shows sudo's own prompt, "[sudo] password for root:" on
+  Tumbleweed and "[sudo] password for tester:" on Leap 16. Tumbleweed
+  wants root's password, Leap the user's own, so the plain words should
+  say which.
+  Resolved (2026-10-10, f829538): sudo -p %p passes only whose
+  password it wants; the box says it in plain words.
+  **Layman:** The password box shows a technical line like "[sudo] password for root:".
+  Kind: ux.
+  Source: release-check-2026-10-08.
+  Lanes: gui.
+
+- ✅ [GRND-0047] **Clear the "Switched off because it needs" note when the needed item is switched back on.**
+  Found in GRND-0013 on Leap 16: unticking "Bring the system up to
+  date" switched off Media codecs and Flathub with the note "Switched
+  off because it needs Bring the system up to date." Ticking the
+  update again left both off, and the note stayed, even after Media
+  codecs was ticked again by hand.
+  Resolved (2026-10-10, 9e5bec8): the note clears once the item it
+  names, or the row itself, is switched back. Codecs stays off when the
+  update is re-ticked, as design.md says; only the stale note was wrong.
+  **Layman:** A row can say it was switched off for a reason that no longer holds.
+  Kind: fix.
+  Source: release-check-2026-10-08.
+  Lanes: gui.
+
+- ✅ [GRND-0048] **Tell the user when a restart is suggested after updates.**
+  Found in GRND-0013 on Leap 16: the update installed 391 packages and
+  zypper said "Reboot is suggested" because core libraries changed.
+  That line appears only under Show details; the summary says "All
+  done."
+  Resolved (2026-10-10, b95f0e4): after a run that changed anything,
+  the Worker asks zypper needs-rebooting; on 102 the run page says a
+  restart is suggested.
+  **Layman:** After a big update the app says "All done" without saying a restart would be wise.
+  Kind: ux.
+  Source: release-check-2026-10-08.
+  Lanes: gui, core.
+
+- ✅ [GRND-0049] **Open the wizard large enough to show a level's rows without scrolling.**
+  Found in GRND-0013: at its opening size on a 1280x960 screen the
+  Essentials page showed two of its six rows; maximised, all fit.
+  Resolved (2026-10-10, 19826ef): on the first level page shown, the
+  window grows to fit the fullest level's rows, within the screen.
+  **Layman:** The window opens small, so most choices on a page are hidden until you scroll.
+  Kind: ux.
+  Source: release-check-2026-10-08.
+  Lanes: gui.
+
+## 0.2.0 — Checked languages and colour themes
 
 Translations, asked for by the user on 2026-10-02: Asian and right-to-left
-languages, and Afrikaans. The machinery ships in 0.1.0; each item here is one
-translation.
+languages, and Afrikaans. The machinery and every draft ship in 0.1.0;
+each translation item here closes once its check is done. Colour themes
+were added on 2026-10-10 (GRND-0050).
 
 - 🚧 [GRND-0033] **Translation: Afrikaans.**
   Serves S3. The user is South African and can check this one.
@@ -637,24 +760,6 @@ translation.
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- ✅ [GRND-0038] **Build translation files with Qt's Linguist tools, locally and on GitHub.**
-  Serves S3. Extract strings into translations/*.ts and compile .qm
-  files into the program's resources at :/i18n, which
-  core/translations.cpp already reads. Install the tools in ci.yml too.
-  qt6-linguist-devel 6.11.2 installed here on 2026-10-07.
-  Shipped 2026-10-07: translations/groundwork_<code>.ts for af ar de es
-  fr he hi ja ko pt xh zh_CN zu, compiled by lrelease into Core's
-  resources at :/i18n; update_translations refreshes them. A language is
-  offered only when its .qm is non-empty. Found and fixed: main.cpp,
-  systemidentity.cpp, packman.cpp and appitems.cpp strings were extracted
-  under the wrong context or none. tst_translations checks the files match
-  the source and every looked-up context. Verified: gate 28/28 here;
-  Ubuntu 24.04 (Qt 6.4.2) 28/28; Leap 16.0 release build.
-  **Layman:** Sets up the tools that turn translated text into files the app can load.
-  Kind: implement.
-  Source: split-from-GRND-0032-2026-10-02.
-  Lanes: build, translations.
-
 - 🚧 [GRND-0040] **Translations: isiZulu and isiXhosa.**
   Serves S3. Added at the user's request on 2026-10-07.
   Progress (2026-10-08): isiZulu and isiXhosa drafted by Claude, marked
@@ -670,148 +775,6 @@ translation.
   Source: user-request-2026-10-07.
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
-
-- ✅ [GRND-0041] **Unchecked translations are marked as drafts.**
-  Serves S3. docs/design.md, Text: a translation no native speaker has
-  checked ships marked as a draft, on the first page's language choice
-  and on that page when it is the language in use. The user checks
-  Afrikaans; the rest ship as drafts (user's decision, 2026-10-07).
-  Resolved (2026-10-08): the language choice shows "(draft)" after an
-  unchecked language, and the first page carries a notice when one is in
-  use. The checked list lives in core/translations.cpp and is empty until
-  the user approves Afrikaans.
-  **Layman:** Languages nobody fluent has checked yet are labelled as drafts, so people know.
-  Kind: implement.
-  Source: user-request-2026-10-07.
-  Lanes: translations, gui.
-
-- ✅ [GRND-0042] **Bold Chinese, Japanese and Korean text is smeared.**
-  Seen 2026-10-08 on screenshots from demoreel (zh_CN, zh_TW, ko worst;
-  Japanese kana look clean). Item titles, which the wizard draws bold,
-  come out as heavy blobs, e.g. "媒体解码器"; disabled titles such as
-  "音频固件" are close to unreadable. Body text is fine.
-  The installed fonts are variable fonts (NotoSansCJK*-VF.otf) whose
-  Bold instance fontconfig lists, so the likely cause is Qt faking bold
-  on fallback glyphs instead of using that instance. Unverified; find
-  the cause before choosing a fix.
-  Located (2026-10-08): the lead above is wrong. Qt 6.11.2 does use
-  the font's real Bold instance, then thickens it again with its own
-  fake bold. A probe drawing "Noto Sans CJK SC" at 13 px measured ink
-  482/655/773/1205/1311 for Light/Regular/Medium/Bold/Black; with
-  QT_NO_SYNTHESIZED_BOLD=1 Bold and Black fall to 919/1052 and look
-  crisp, the rest unchanged. Same with the family named directly, so
-  the fault is in Qt's drawing, not in font fallback. The wizard's one
-  bold site is ItemRow::applyFontScale (src/gui/itemrow.cpp).
-  Side note: with no language hint, Chinese text fell back to Noto Sans
-  CJK KR, not SC; not yet checked inside the wizard.
-  Resolved (2026-10-08): main() sets QT_NO_SYNTHESIZED_BOLD through
-  gw::useFontsOwnBold(), so Qt draws the font's own Bold and no more.
-  tst_boldtext fails when bold Chinese text has 1.6 times Regular's
-  ink or more (1.84 before the fix). A demoreel picture of the zh_CN
-  options page shows the titles clean.
-  **Layman:** Bold titles in Chinese, Japanese and Korean look blurred and heavy, and greyed-out ones are hard to read.
-  Kind: fix.
-  Source: in-session-2026-10-08.
-  Lanes: translations, gui.
-
-- ✅ [GRND-0044] **Chinese text may be drawn with the Korean font's letter shapes.**
-  Seen 2026-10-08 in a probe program while locating GRND-0042: with
-  no language hint, Qt drew Chinese text with Noto Sans CJK KR rather
-  than SC. Some shared characters are drawn differently in each. Not
-  yet checked inside the wizard, which runs with a language chosen.
-  Check which CJK font the wizard picks in zh_CN, zh_TW and ja.
-  Resolved (2026-10-08): confirmed. Qt picks the face for shared
-  characters from the system's LANG; QLocale::setDefault does not
-  change it, so an English system drew zh_CN, zh_TW and ja with the
-  Korean face. A fallback face is also kept per family for the whole
-  run, so a second CJK language got the first one's shapes.
-  gw::fontFor() now puts the language's Noto Sans CJK face first, and
-  the wizard sets it as the application font for those languages
-  only. tst_boldtext became tst_cjktext and checks all four faces in
-  one run. Latin words in those languages now use the CJK face's
-  Latin letters, as a Chinese desktop does. After choosing one of them,
-  a live change to the system font may not be followed until restart;
-  not tested.
-  **Layman:** Some Chinese characters may show in their Korean shape, which a Chinese reader would notice.
-  Kind: investigate.
-  Source: in-session-2026-10-08.
-  Lanes: translations, gui.
-
-## Backlog — no version yet
-
-Items not yet placed in a release. Each moves into a version section once it is
-scheduled.
-
-- 📋 [GRND-0031] **RPM and OBS packaging.**
-  Serves S2. After 0.1.0 (ADR-0002 keeps only the AppImage in 0.1.0).
-  **Layman:** Makes the app installable from openSUSE's own software sources.
-  Kind: package.
-  Source: brief-2026-09-25.
-  Lanes: packaging.
-  Blocked-by: GRND-0012.
-
-- ✅ [GRND-0045] **Bundle Qt's Wayland plugin in the AppImage.**
-  Found in GRND-0013 on Tumbleweed (Plasma on Wayland): the terminal
-  printed Qt's "Could not find the Qt platform plugin wayland" and the
-  wizard ran through XWayland. It worked, but the AppImage carries no
-  wayland platform plugin.
-  Resolved (2026-10-10): the AppImage now carries Qt's wayland platform
-  plugins and its shell, decoration and graphics plugins. Checked on a
-  headless weston: Qt reported loading the wayland plugin, no errors.
-  **Layman:** On Wayland desktops the app runs through the older X11 route instead of natively.
-  Kind: package.
-  Source: release-check-2026-10-08.
-  Lanes: packaging.
-
-- ✅ [GRND-0046] **Say the password prompt in plain words, not sudo's raw line.**
-  Found in GRND-0013: under "Groundwork needs administrator rights"
-  the box shows sudo's own prompt, "[sudo] password for root:" on
-  Tumbleweed and "[sudo] password for tester:" on Leap 16. Tumbleweed
-  wants root's password, Leap the user's own, so the plain words should
-  say which.
-  Resolved (2026-10-10, f829538): sudo -p %p passes only whose
-  password it wants; the box says it in plain words.
-  **Layman:** The password box shows a technical line like "[sudo] password for root:".
-  Kind: ux.
-  Source: release-check-2026-10-08.
-  Lanes: gui.
-
-- ✅ [GRND-0047] **Clear the "Switched off because it needs" note when the needed item is switched back on.**
-  Found in GRND-0013 on Leap 16: unticking "Bring the system up to
-  date" switched off Media codecs and Flathub with the note "Switched
-  off because it needs Bring the system up to date." Ticking the
-  update again left both off, and the note stayed, even after Media
-  codecs was ticked again by hand.
-  Resolved (2026-10-10, 9e5bec8): the note clears once the item it
-  names, or the row itself, is switched back. Codecs stays off when the
-  update is re-ticked, as design.md says; only the stale note was wrong.
-  **Layman:** A row can say it was switched off for a reason that no longer holds.
-  Kind: fix.
-  Source: release-check-2026-10-08.
-  Lanes: gui.
-
-- ✅ [GRND-0048] **Tell the user when a restart is suggested after updates.**
-  Found in GRND-0013 on Leap 16: the update installed 391 packages and
-  zypper said "Reboot is suggested" because core libraries changed.
-  That line appears only under Show details; the summary says "All
-  done."
-  Resolved (2026-10-10, b95f0e4): after a run that changed anything,
-  the Worker asks zypper needs-rebooting; on 102 the run page says a
-  restart is suggested.
-  **Layman:** After a big update the app says "All done" without saying a restart would be wise.
-  Kind: ux.
-  Source: release-check-2026-10-08.
-  Lanes: gui, core.
-
-- ✅ [GRND-0049] **Open the wizard large enough to show a level's rows without scrolling.**
-  Found in GRND-0013: at its opening size on a 1280x960 screen the
-  Essentials page showed two of its six rows; maximised, all fit.
-  Resolved (2026-10-10, 19826ef): on the first level page shown, the
-  window grows to fit the fullest level's rows, within the screen.
-  **Layman:** The window opens small, so most choices on a page are hidden until you scroll.
-  Kind: ux.
-  Source: release-check-2026-10-08.
-  Lanes: gui.
 
 - 📋 [GRND-0050] **Offer colour themes, dark ones and high contrast among them, following the desktop unless one is chosen.**
   The user asked on 2026-10-10: they are partially sighted, light
@@ -832,3 +795,16 @@ scheduled.
   Kind: feature.
   Source: user-request-2026-10-10.
   Lanes: gui.
+
+## Backlog — no version yet
+
+Items not yet placed in a release. Each moves into a version section once it is
+scheduled.
+
+- 📋 [GRND-0031] **RPM and OBS packaging.**
+  Serves S2. After 0.1.0 (ADR-0002 keeps only the AppImage in 0.1.0).
+  **Layman:** Makes the app installable from openSUSE's own software sources.
+  Kind: package.
+  Source: brief-2026-09-25.
+  Lanes: packaging.
+  Blocked-by: GRND-0012.
