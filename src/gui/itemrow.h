@@ -1,4 +1,4 @@
-// One item's row: a toggle named for the item, its state, the sentence
+// One item's row: an on/off switch named for the item, its state, the sentence
 // saying what applying it would do (S3), and why it was switched on or off
 // for another item (docs/design.md, Dependencies are kept by both sides).
 #pragma once
@@ -38,8 +38,8 @@ protected:
     void changeEvent(QEvent *event) override;
 
 private:
-    // The name in bold, and a tick box as tall as the text, so both stay
-    // easy to see at large font sizes (design, Text).
+    // The name in bold, so it stays easy to see at large font sizes
+    // (design, Text). The switch sizes itself from the font.
     void applyFontScale();
 
     QString m_id;

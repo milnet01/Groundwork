@@ -86,6 +86,7 @@ add_library(groundwork_gui STATIC
     src/gui/askpassdialog.cpp
     src/gui/itemrow.cpp
     src/gui/runpage.cpp
+    src/gui/switch.cpp
     src/gui/themes.cpp
     src/gui/wizard.cpp)
 target_link_libraries(groundwork_gui PUBLIC groundwork_core Qt6::Widgets)

@@ -968,13 +968,18 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0069] **Use on/off switches instead of tick boxes in every row.**
+- ✅ [GRND-0069] **Use on/off switches instead of tick boxes in every row.**
   The user prefers switches to tick boxes (2026-10-10). Qt has no switch
   widget, so ItemRow gets a small painted one: it keeps the item's
   title as its label, works from the keyboard, grows with the font
   (as the enlarged tick box does now, itemrow.cpp), follows the
   colour theme, and reports itself to screen readers as a checkable
   control. Applies to every row, the 0.4.0 lists of choices included.
+  Shipped 2026-10-10: src/gui/switch.* paints a QCheckBox as a switch,
+  so keyboard and screen-reader behaviour are a tick box's. Test
+  eachRowIsAnOnOffSwitch (tst_wizard) proven red on the tick box, then
+  green. Every theme, the disabled state and right-to-left were checked
+  by eye in an offscreen render.
   **Layman:** Each choice is an on/off switch, like a light switch, instead of a tick box.
   Kind: ux.
   Source: user-request-2026-10-10.

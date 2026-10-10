@@ -1,6 +1,7 @@
 #include "itemrow.h"
 
 #include "core/checkrunner.h"
+#include "switch.h"
 
 #include <QCheckBox>
 #include <QEvent>
@@ -12,7 +13,7 @@
 namespace gw {
 
 ItemRow::ItemRow(const Item &item, const CheckResult &result, QWidget *parent)
-    : QWidget(parent), m_id(item.id()), m_toggle(new QCheckBox(item.title(), this)),
+    : QWidget(parent), m_id(item.id()), m_toggle(new Switch(item.title(), this)),
       m_reason(new QLabel(this))
 {
     auto *stateLabel = new QLabel(stateLine(item, result), this);
@@ -57,8 +58,6 @@ void ItemRow::applyFontScale()
     QFont bold = font();
     bold.setBold(true);
     m_toggle->setFont(bold);
-    const int side = fontMetrics().height();
-    m_toggle->setStyleSheet(QStringLiteral("QCheckBox::indicator { width: %1px; height: %1px; }").arg(side));
 }
 
 bool ItemRow::isChecked() const { return m_toggle->isChecked(); }

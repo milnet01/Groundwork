@@ -7,6 +7,7 @@
 #include "gui/themes.h"
 #include "gui/wizard.h"
 
+#include <QAccessible>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDir>
@@ -343,6 +344,54 @@ private slots:
         const QStringList args = w->workerArguments();
         QVERIFY(args.join(QLatin1Char(' ')).contains(QLatin1String("--set hostname=lounge-pc")));
         QVERIFY(w->row(QStringLiteral("codecs"))->valueField() == nullptr);
+    }
+
+    // Each row's choice is an on/off switch, not a tick box (GRND-0069):
+    // the track fills with the theme's accent when on and empty when off,
+    // grows with the font, toggles from the keyboard, and tells a screen
+    // reader it is a checkable control named for the item.
+    void eachRowIsAnOnOffSwitch()
+    {
+        gw::ItemRow row(codecs, {gw::CheckState::NotDone, {}});
+        QCheckBox *toggle = row.toggle();
+        QPalette palette = toggle->palette();
+        const QColor accent(0x12, 0xc4, 0x5a);
+        palette.setColor(QPalette::Highlight, accent);
+        toggle->setPalette(palette);
+        row.show();
+        QVERIFY(QTest::qWaitForWindowExposed(&row));
+
+        const auto accentPixels = [&] {
+            const QImage image = toggle->grab().toImage();
+            int count = 0;
+            for (int y = 0; y < image.height(); ++y)
+                for (int x = 0; x < image.width(); ++x)
+                    count += QColor(image.pixel(x, y)) == accent;
+            return count;
+        };
+        row.setChecked(false);
+        QCOMPARE(accentPixels(), 0);
+        row.setChecked(true);
+        const int side = toggle->fontMetrics().height();
+        const int onAtNormal = accentPixels();
+        // A track wider than it is tall; a tick box of the same height
+        // would hold at most side * side.
+        QVERIFY2(onAtNormal > side * side, qPrintable(QStringLiteral("%1 <= %2").arg(onAtNormal).arg(side * side)));
+
+        QFont large = row.font();
+        large.setPointSizeF(large.pointSizeF() * 2);
+        row.setFont(large);
+        QVERIFY2(accentPixels() > 2 * onAtNormal, qPrintable(QString::number(accentPixels())));
+
+        toggle->setFocus();
+        QTest::keyClick(toggle, Qt::Key_Space);
+        QVERIFY(!row.isChecked());
+
+        QAccessibleInterface *accessible = QAccessible::queryAccessibleInterface(toggle);
+        QVERIFY(accessible);
+        QCOMPARE(accessible->role(), QAccessible::CheckBox);
+        QVERIFY(accessible->state().checkable);
+        QCOMPARE(accessible->text(QAccessible::Name), codecs.title());
     }
 
     // The release check's Essentials page showed two of its six rows until
