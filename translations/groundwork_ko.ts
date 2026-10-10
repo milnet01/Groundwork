@@ -160,11 +160,11 @@
     </message>
     <message>
         <source>Type the administrator password (the password for root).</source>
-        <translation type="unfinished"></translation>
+        <translation>관리자 비밀번호(root의 비밀번호)를 입력하세요.</translation>
     </message>
     <message>
         <source>Type your password (the password for %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>내 비밀번호(%1의 비밀번호)를 입력하세요.</translation>
     </message>
     <message>
         <source>Password</source>
@@ -921,7 +921,7 @@
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>시스템의 핵심 부분이 업데이트되었습니다. 적용되도록 가능할 때 컴퓨터를 다시 시작하세요.</translation>
     </message>
 </context>
 </TS>

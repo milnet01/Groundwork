@@ -160,11 +160,11 @@
     </message>
     <message>
         <source>Type the administrator password (the password for root).</source>
-        <translation type="unfinished"></translation>
+        <translation>एडमिनिस्ट्रेटर पासवर्ड लिखें (root का पासवर्ड)।</translation>
     </message>
     <message>
         <source>Type your password (the password for %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>अपना पासवर्ड लिखें (%1 का पासवर्ड)।</translation>
     </message>
     <message>
         <source>Password</source>
@@ -924,7 +924,7 @@
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>सिस्टम के मुख्य हिस्से अपडेट हुए हैं। जब हो सके, कंप्यूटर को रीस्टार्ट करें, ताकि ये लागू हो जाएँ।</translation>
     </message>
 </context>
 </TS>

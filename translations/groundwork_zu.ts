@@ -160,11 +160,11 @@
     </message>
     <message>
         <source>Type the administrator password (the password for root).</source>
-        <translation type="unfinished"></translation>
+        <translation>Thayipha iphasiwedi yomphathi (iphasiwedi ka-root).</translation>
     </message>
     <message>
         <source>Type your password (the password for %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Thayipha iphasiwedi yakho (iphasiwedi ka-%1).</translation>
     </message>
     <message>
         <source>Password</source>
@@ -924,7 +924,7 @@
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izingxenye eziyinhloko zesistimu zibuyekeziwe. Qala kabusha ikhompyutha uma ukwazi, ukuze zisebenze.</translation>
     </message>
 </context>
 </TS>

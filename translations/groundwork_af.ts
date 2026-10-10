@@ -160,11 +160,11 @@
     </message>
     <message>
         <source>Type the administrator password (the password for root).</source>
-        <translation type="unfinished"></translation>
+        <translation>Tik die administrateurwagwoord in (die wagwoord vir root).</translation>
     </message>
     <message>
         <source>Type your password (the password for %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Tik jou wagwoord in (die wagwoord vir %1).</translation>
     </message>
     <message>
         <source>Password</source>
@@ -924,7 +924,7 @@
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kerndele van die stelsel is bygewerk. Herbegin die rekenaar wanneer jy kan, sodat dit in werking tree.</translation>
     </message>
 </context>
 </TS>

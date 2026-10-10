@@ -160,11 +160,11 @@
     </message>
     <message>
         <source>Type the administrator password (the password for root).</source>
-        <translation type="unfinished"></translation>
+        <translation>اكتب كلمة مرور المدير (كلمة المرور الخاصة بـ root).</translation>
     </message>
     <message>
         <source>Type your password (the password for %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>اكتب كلمة المرور الخاصة بك (كلمة المرور الخاصة بـ %1).</translation>
     </message>
     <message>
         <source>Password</source>
@@ -936,7 +936,7 @@
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم تحديث أجزاء أساسية من النظام. أعد تشغيل الحاسوب عندما تستطيع، لكي تصبح فعّالة.</translation>
     </message>
 </context>
 </TS>

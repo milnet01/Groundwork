@@ -160,11 +160,11 @@
     </message>
     <message>
         <source>Type the administrator password (the password for root).</source>
-        <translation type="unfinished"></translation>
+        <translation>输入管理员密码（root 的密码）。</translation>
     </message>
     <message>
         <source>Type your password (the password for %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>输入你的密码（%1 的密码）。</translation>
     </message>
     <message>
         <source>Password</source>
@@ -921,7 +921,7 @@
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>系统的核心部分已更新。方便时请重启电脑，使其生效。</translation>
     </message>
 </context>
 </TS>

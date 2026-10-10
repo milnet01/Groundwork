@@ -160,11 +160,11 @@
     </message>
     <message>
         <source>Type the administrator password (the password for root).</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribe la contraseña de administrador (la contraseña de root).</translation>
     </message>
     <message>
         <source>Type your password (the password for %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribe tu contraseña (la contraseña de %1).</translation>
     </message>
     <message>
         <source>Password</source>
@@ -924,7 +924,7 @@
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se actualizaron partes esenciales del sistema. Reinicia el ordenador cuando puedas para que surtan efecto.</translation>
     </message>
 </context>
 </TS>
