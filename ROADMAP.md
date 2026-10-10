@@ -991,11 +991,21 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0061] **Item: Ants Terminal, set as the terminal.**
+- ✅ [GRND-0061] **Item: Ants Terminal, set as the terminal.**
   The owner's own terminal, offered to everyone (user, 2026-10-10).
   Installed from its OBS repository, home:milnet:ants-terminal, which
   builds for Tumbleweed and Leap 16 (Ants Terminal README, Install).
   Setting it as the desktop's terminal runs as the user, not root.
+  Shipped 2026-10-10: AntsTerminalItem, in Nice to have. Repository
+  home:milnet:ants-terminal, openSUSE_Tumbleweed or openSUSE_Leap_16.0
+  (checked 2026-10-10: Slowroll and Leap 16.1 answer 404, so those read
+  not needed). A repository already pointing there is reused; the key
+  is trusted at refresh, as with Packman. On KDE (kwriteconfig6
+  present), two user steps set kdeglobals [General]
+  TerminalApplication=ants-terminal and
+  TerminalService=za.co.antsprojectshub.AntsTerminal.desktop, and the
+  check requires the latter. The owner's machine reads not done: it
+  runs a development build, not the package. tst_antsterminalitem.
   **Layman:** Installs Ants Terminal and makes it the terminal the desktop opens.
   Kind: feature.
   Source: user-request-2026-10-10.

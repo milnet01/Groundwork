@@ -2,6 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="af_ZA">
 <context>
+    <name>gw::AntsTerminalItem</name>
+    <message>
+        <source>Ants Terminal</source>
+        <translation>Ants Terminal</translation>
+    </message>
+    <message>
+        <source>Installs Ants Terminal, a terminal made by Groundwork&apos;s author. On KDE Plasma it also becomes the terminal the desktop opens.</source>
+        <translation>Installeer Ants Terminal, &apos;n terminaal gemaak deur Groundwork se skrywer. Op KDE Plasma word dit ook die terminaal wat die werkskerm oopmaak.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not built for this version of openSUSE.</source>
+        <translation>Ants Terminal word nie vir hierdie weergawe van openSUSE gebou nie.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Die geïnstalleerde pakkette kon nie gelys word nie.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not installed.</source>
+        <translation>Ants Terminal is nie geïnstalleer nie.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not the terminal the desktop opens.</source>
+        <translation>Ants Terminal is nie die terminaal wat die werkskerm oopmaak nie.</translation>
+    </message>
+    <message>
+        <source>Installing Ants Terminal</source>
+        <translation>Ants Terminal word geïnstalleer</translation>
+    </message>
+    <message>
+        <source>Making Ants Terminal the desktop&apos;s terminal</source>
+        <translation>Ants Terminal word die werkskerm se terminaal</translation>
+    </message>
+</context>
+<context>
     <name>gw::Apps</name>
     <message>
         <source>Flatpak is not installed.</source>

@@ -2,6 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="xh_ZA">
 <context>
+    <name>gw::AntsTerminalItem</name>
+    <message>
+        <source>Ants Terminal</source>
+        <translation>Ants Terminal</translation>
+    </message>
+    <message>
+        <source>Installs Ants Terminal, a terminal made by Groundwork&apos;s author. On KDE Plasma it also becomes the terminal the desktop opens.</source>
+        <translation>Ifaka i-Ants Terminal, itheminali eyenziwe ngumbhali we-Groundwork. Kwi-KDE Plasma ikwaba yitheminali evulwa yidesktop.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not built for this version of openSUSE.</source>
+        <translation>I-Ants Terminal ayakhelwanga olu hlobo lwe-openSUSE.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Uluhlu lweepakeji ezifakiweyo alukwazanga ukwenziwa.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not installed.</source>
+        <translation>I-Ants Terminal ayifakwanga.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not the terminal the desktop opens.</source>
+        <translation>I-Ants Terminal ayiyiyo itheminali evulwa yidesktop.</translation>
+    </message>
+    <message>
+        <source>Installing Ants Terminal</source>
+        <translation>Kufakwa i-Ants Terminal</translation>
+    </message>
+    <message>
+        <source>Making Ants Terminal the desktop&apos;s terminal</source>
+        <translation>I-Ants Terminal yenziwa itheminali yedesktop</translation>
+    </message>
+</context>
+<context>
     <name>gw::Apps</name>
     <message>
         <source>Flatpak is not installed.</source>

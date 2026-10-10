@@ -72,8 +72,9 @@ Wizard and the Worker apply the same one.
    Windows is also installed; NumLock on at the login screen, where
    that screen is SDDM.
 4. **Nice to have** — extras, each its own toggle. Everyday apps,
-   gaming, developer tools, a backup tool for the user's own files,
-   Microsoft-compatible fonts, and handy command-line programs.
+   gaming, developer tools, Ants Terminal, a backup tool for the user's
+   own files, Microsoft-compatible fonts, and handy command-line
+   programs.
 
 Which needs are common comes from the sources in
 `docs/research/2026-10-02-sources.md`. Desktop look and feel is left

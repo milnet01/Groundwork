@@ -2,6 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_TW">
 <context>
+    <name>gw::AntsTerminalItem</name>
+    <message>
+        <source>Ants Terminal</source>
+        <translation>Ants Terminal</translation>
+    </message>
+    <message>
+        <source>Installs Ants Terminal, a terminal made by Groundwork&apos;s author. On KDE Plasma it also becomes the terminal the desktop opens.</source>
+        <translation>安裝 Ants Terminal，這是 Groundwork 作者製作的終端機。在 KDE Plasma 上，它也會成為桌面開啟的終端機。</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not built for this version of openSUSE.</source>
+        <translation>Ants Terminal 沒有為此版本的 openSUSE 建置。</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>無法列出已安裝的套件。</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not installed.</source>
+        <translation>Ants Terminal 未安裝。</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not the terminal the desktop opens.</source>
+        <translation>Ants Terminal 不是桌面開啟的終端機。</translation>
+    </message>
+    <message>
+        <source>Installing Ants Terminal</source>
+        <translation>正在安裝 Ants Terminal</translation>
+    </message>
+    <message>
+        <source>Making Ants Terminal the desktop&apos;s terminal</source>
+        <translation>正在將 Ants Terminal 設為桌面終端機</translation>
+    </message>
+</context>
+<context>
     <name>gw::Apps</name>
     <message>
         <source>Flatpak is not installed.</source>

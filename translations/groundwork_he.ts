@@ -2,6 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="he_IL">
 <context>
+    <name>gw::AntsTerminalItem</name>
+    <message>
+        <source>Ants Terminal</source>
+        <translation>Ants Terminal</translation>
+    </message>
+    <message>
+        <source>Installs Ants Terminal, a terminal made by Groundwork&apos;s author. On KDE Plasma it also becomes the terminal the desktop opens.</source>
+        <translation>מתקין את Ants Terminal, מסוף שיצר מחבר Groundwork. ב־KDE Plasma הוא גם הופך למסוף ששולחן העבודה פותח.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not built for this version of openSUSE.</source>
+        <translation>התוכנה Ants Terminal אינה נבנית לגרסה זו של openSUSE.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not installed.</source>
+        <translation>התוכנה Ants Terminal אינה מותקנת.</translation>
+    </message>
+    <message>
+        <source>Ants Terminal is not the terminal the desktop opens.</source>
+        <translation>התוכנה Ants Terminal אינה המסוף ששולחן העבודה פותח.</translation>
+    </message>
+    <message>
+        <source>Installing Ants Terminal</source>
+        <translation>מתקין את Ants Terminal</translation>
+    </message>
+    <message>
+        <source>Making Ants Terminal the desktop&apos;s terminal</source>
+        <translation>הופך את Ants Terminal למסוף של שולחן העבודה</translation>
+    </message>
+</context>
+<context>
     <name>gw::Apps</name>
     <message>
         <source>Flatpak is not installed.</source>

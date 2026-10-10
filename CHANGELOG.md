@@ -14,6 +14,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Ants Terminal, set as the terminal** (GRND-0061)
+  Installs Ants Terminal from its own software source, on Tumbleweed
+  and Leap 16.0. On KDE Plasma it also becomes the terminal the
+  desktop opens.
+
 - **NumLock on at login** (GRND-0060)
   The number pad works straight away at the login screen. Offered
   where the login screen is SDDM; it takes effect the next time that
