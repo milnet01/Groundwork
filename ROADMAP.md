@@ -650,6 +650,10 @@ ship it all as 0.1.0 rather than as the four releases first planned.
   Essentials page showed two of its six rows; maximised, all fit.
   Resolved (2026-10-10, 19826ef): on the first level page shown, the
   window grows to fit the fullest level's rows, within the screen.
+  Not yet seen on a real desktop (2026-10-10): demoreel's display
+  maximises every window, and weston-screenshooter hung on a headless
+  weston. tst_wizard's aLevelsRowsShowWithoutScrolling is the only proof.
+  Look at it on the next VM or desktop check.
   **Layman:** The window opens small, so most choices on a page are hidden until you scroll.
   Kind: ux.
   Source: release-check-2026-10-08.
