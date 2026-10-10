@@ -922,5 +922,9 @@
         <source>Skipped: no valid value was given.</source>
         <translation>Kweqiwe: akunikezwanga nani elivumelekile.</translation>
     </message>
+    <message>
+        <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

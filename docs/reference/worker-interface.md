@@ -47,7 +47,7 @@ the output of a command the Worker ran.
 | `STEP_BEGIN` | id, position, total, title | An item starts |
 | `AUTH` | `ok` or `failed` | Once, before the first step that needs root |
 | `ACTION` | id, label | A step of the item starts |
-| `HINT` | id, text | Something the user should know, such as a skipped software source |
+| `HINT` | id, text | Something the user should know, such as a skipped software source. The id is empty for a note about the whole run, such as a suggested restart |
 | `STEP_END` | id, `ok`, `skip` or `fail`, detail | An item ends |
 | `DONE` | items ok, items failed, `1` if stopped else `0` | The run ends |
 

@@ -24,6 +24,7 @@ exec "$@"
 const QByteArray kZypper = R"(#!/bin/sh
 echo "zypper $*" >> "$FAKE_LOG"
 case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
+case " $* " in *" needs-rebooting "*) exit "${FAKE_REBOOT:-0}";; esac
 if [ -n "$FAKE_STOP_FILE" ]; then touch "$FAKE_STOP_FILE"; fi
 if [ -s "$FAKE_ZYPPER_CODES" ]; then
   code=$(head -n1 "$FAKE_ZYPPER_CODES"); sed -i 1d "$FAKE_ZYPPER_CODES"; exit "$code"
@@ -165,6 +166,41 @@ private slots:
         for (const auto &m : r.markers)
             hint = hint || m.name == QLatin1String("HINT");
         QVERIFY(hint);
+    }
+
+    static bool hasRestartHint(const Run &r)
+    {
+        for (const auto &m : r.markers)
+            if (m.name == QLatin1String("HINT") && m.fields.value(1).contains(QLatin1String("restart"), Qt::CaseInsensitive))
+                return true;
+        return false;
+    }
+
+    // zypper says a restart is suggested after core libraries changed; the
+    // summary alone said "All done." (GRND-0048).
+    void aSuggestedRestartIsSaid()
+    {
+        m_env.insert(QStringLiteral("FAKE_REBOOT"), QStringLiteral("102"));
+        const Run r = run({QStringLiteral("system-update")});
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.count(QStringLiteral("zypper needs-rebooting")), 1);
+        QVERIFY(hasRestartHint(r));
+    }
+
+    void noRestartIsSaidWhenNoneIsSuggested()
+    {
+        const Run r = run({QStringLiteral("system-update")});
+        QCOMPARE(r.count(QStringLiteral("zypper needs-rebooting")), 1);
+        QVERIFY(!hasRestartHint(r));
+    }
+
+    void aRunThatChangedNothingDoesNotAsk()
+    {
+        writeFile(m_flathub, "");
+        m_env.insert(QStringLiteral("FAKE_REBOOT"), QStringLiteral("102"));
+        const Run r = run({QStringLiteral("flathub")});
+        QCOMPARE(r.count(QStringLiteral("zypper needs-rebooting")), 0);
+        QVERIFY(!hasRestartHint(r));
     }
 
     void aFailureSkipsWhatDependsOnIt()

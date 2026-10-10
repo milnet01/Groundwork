@@ -919,5 +919,9 @@
         <source>Skipped: no valid value was given.</source>
         <translation>スキップしました：有効な値が指定されていません。</translation>
     </message>
+    <message>
+        <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

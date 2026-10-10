@@ -224,6 +224,13 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
     }
     m_privilege.stopKeepAlive();
 
+    // zypper's word for it is in its output alone, under the details; its
+    // own check for scripts says it by exit code (GRND-0048).
+    if (ok > 0 && runCommand({QStringLiteral("zypper"), QStringLiteral("needs-rebooting")}) == 102)
+        say(formatMarker(QStringLiteral("HINT"),
+                          {QString(), tr("Core parts of the system were updated. Restart the computer when you "
+                                         "can, so they take effect.")}));
+
     say(formatMarker(QStringLiteral("DONE"),
                       {QString::number(ok), QString::number(failed), stopped ? QStringLiteral("1") : QStringLiteral("0")}));
     if (stopped)

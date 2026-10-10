@@ -760,12 +760,14 @@ scheduled.
   Source: release-check-2026-10-08.
   Lanes: packaging.
 
-- 📋 [GRND-0046] **Say the password prompt in plain words, not sudo's raw line.**
+- ✅ [GRND-0046] **Say the password prompt in plain words, not sudo's raw line.**
   Found in GRND-0013: under "Groundwork needs administrator rights"
   the box shows sudo's own prompt, "[sudo] password for root:" on
   Tumbleweed and "[sudo] password for tester:" on Leap 16. Tumbleweed
   wants root's password, Leap the user's own, so the plain words should
   say which.
+  Resolved (2026-10-10, f829538): sudo -p %p passes only whose
+  password it wants; the box says it in plain words.
   **Layman:** The password box shows a technical line like "[sudo] password for root:".
   Kind: ux.
   Source: release-check-2026-10-08.
@@ -795,20 +797,31 @@ scheduled.
   Source: release-check-2026-10-08.
   Lanes: gui, core.
 
-- 📋 [GRND-0049] **Open the wizard large enough to show a level's rows without scrolling.**
+- ✅ [GRND-0049] **Open the wizard large enough to show a level's rows without scrolling.**
   Found in GRND-0013: at its opening size on a 1280x960 screen the
   Essentials page showed two of its six rows; maximised, all fit.
+  Resolved (2026-10-10, 19826ef): on the first level page shown, the
+  window grows to fit the fullest level's rows, within the screen.
   **Layman:** The window opens small, so most choices on a page are hidden until you scroll.
   Kind: ux.
   Source: release-check-2026-10-08.
   Lanes: gui.
 
-- 📋 [GRND-0050] **Offer a dark theme: follow the desktop, with a Light / Dark / Follow desktop choice.**
+- 📋 [GRND-0050] **Offer colour themes, dark ones and high contrast among them, following the desktop unless one is chosen.**
   The user asked on 2026-10-10: they are partially sighted, light
   sensitive, and prefer dark mode. Decided that day: the window opens
   dark when the desktop is dark, light otherwise, and the first page
   offers Light / Dark / Follow desktop to override it. It goes in the
   release after 0.1.0, not in 0.1.0.
+  Widened (2026-10-10, user): more themes than light and dark,
+  matching the user's other projects. Survey that day: the names most
+  shared are Follow system, Light, Dark, High contrast light and dark,
+  Midnight, Emerald, Nord, Dracula, Solarized Dark, Gruvbox, Monokai,
+  Tokyo Night and Catppuccin. The C++ source to copy from is
+  Ants_Terminal's src/themes.h and src/themes.cpp (eleven named themes,
+  a contrast check, follow-desktop wiring in mainwindow.cpp). The
+  contrast-tuned palettes, high-contrast pair included, are in
+  LocalWebServerManager's src/lwsm/theme.py (Python, values reusable).
   **Layman:** The app can be dark, which is easier on light-sensitive eyes; it follows the desktop unless you choose otherwise.
   Kind: feature.
   Source: user-request-2026-10-10.

@@ -922,5 +922,9 @@
         <source>Skipped: no valid value was given.</source>
         <translation>Oorgeslaan: geen geldige waarde is gegee nie.</translation>
     </message>
+    <message>
+        <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

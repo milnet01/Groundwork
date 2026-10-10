@@ -919,5 +919,9 @@
         <source>Skipped: no valid value was given.</source>
         <translation>已略過：未提供有效的值。</translation>
     </message>
+    <message>
+        <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
