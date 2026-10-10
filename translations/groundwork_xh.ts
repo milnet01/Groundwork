@@ -473,6 +473,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>Ukukhusela iRAM</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>Xa imemori isiba ncinci, igcina idesktop isebenza ize ivale i-app esebenzisa imemori eninzi, endaweni yokuba ikhompyutha yonke ibambeke. Isebenza ngokupheleleyo emva kokuba ungene kwakhona.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>Umphathi weenkonzo akaphendulanga.</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>Umlindi wememori, systemd-oomd, akafakwanga.</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>Akukho nto ivala i-app phambi kokuba imemori iphele.</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>Kubhalwa iisetingi zokukhusela iRAM</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>Kufakwa umlindi wememori</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>Kulayishwa kwakhona umphathi weenkonzo</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>Kuvulwa umlindi wememori</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

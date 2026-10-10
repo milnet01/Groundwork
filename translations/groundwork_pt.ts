@@ -473,6 +473,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>Proteção da RAM</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>Quando a memória fica curta, mantém a área de trabalho funcionando e fecha o aplicativo que usa mais memória, em vez de deixar o computador inteiro travar. Vale por completo depois que você entrar de novo na sessão.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>O gerenciador de serviços não respondeu.</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>O vigia de memória, systemd-oomd, não está instalado.</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>Nada fecha um aplicativo antes que a memória acabe.</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>Gravando as configurações de proteção da RAM</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>Instalando o vigia de memória</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>Recarregando o gerenciador de serviços</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>Ligando o vigia de memória</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

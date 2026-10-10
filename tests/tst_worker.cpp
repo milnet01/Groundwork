@@ -284,6 +284,35 @@ exit 0
         QCOMPARE(r.endsFor(QStringLiteral("computer-name")).value(1), QStringLiteral("skip"));
     }
 
+    // A step's text reaches its command's standard input: how an item writes
+    // a file as root with no shell (GRND-0052). The fake dd keeps what it
+    // was given, named after its target.
+    void aStepsTextReachesItsCommand()
+    {
+        const QString written = m_dir->filePath(QStringLiteral("written"));
+        m_env.insert(QStringLiteral("FAKE_WRITTEN"), written);
+        writeFile(m_bin + QStringLiteral("/systemctl"), R"(#!/bin/sh
+echo "systemctl $*" >> "$FAKE_LOG"
+case "$1" in is-enabled) echo disabled; exit 1;; is-active) echo inactive; exit 3;; esac
+exit 0
+)", true);
+        writeFile(m_bin + QStringLiteral("/mkdir"), "#!/bin/sh\necho \"mkdir $*\" >> \"$FAKE_LOG\"\n", true);
+        writeFile(m_bin + QStringLiteral("/dd"), R"(#!/bin/sh
+echo "dd $*" >> "$FAKE_LOG"
+out=$(printf '%s' "$1" | sed 's|^of=||; s|/|_|g')
+cat > "$FAKE_WRITTEN$out"
+)", true);
+        const Run r = run({QStringLiteral("memory-protection")});
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.endsFor(QStringLiteral("memory-protection")).value(1), QStringLiteral("ok"));
+        QVERIFY(r.calls.contains(QStringLiteral(
+            "sudo -n -- dd of=/etc/systemd/user/app.slice.d/50-groundwork-memory.conf status=none")));
+        QFile apps(written + QStringLiteral("_etc_systemd_user_app.slice.d_50-groundwork-memory.conf"));
+        QVERIFY(apps.open(QIODevice::ReadOnly));
+        QVERIFY(apps.readAll().contains("ManagedOOMMemoryPressure=kill\n"));
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- systemctl enable --now systemd-oomd")));
+    }
+
     void refusesAnUnknownItem()
     {
         QCOMPARE(run({QStringLiteral("no-such-item")}).exitCode, 2);

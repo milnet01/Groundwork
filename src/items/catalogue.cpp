@@ -9,6 +9,7 @@
 #include "flathubitem.h"
 #include "fontsitem.h"
 #include "hostnameitem.h"
+#include "memoryitem.h"
 #include "nvidiaitem.h"
 #include "poweritem.h"
 #include "snapshotsitem.h"
@@ -32,6 +33,7 @@ const Catalogue &catalogue()
     static const FirewallItem firewall;
     static const FirmwareItem firmware;
     static const PowerItem power;
+    static const MemoryItem memory;
     // Configuration
     static const HostnameItem hostname;
     static const SshItem ssh;
@@ -90,7 +92,7 @@ const Catalogue &catalogue()
     static const FontsItem fonts;
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
-                                &snapshots, &firewall, &firmware, &power,
+                                &snapshots, &firewall, &firmware, &power, &memory,
                                 &hostname, &ssh, &clock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles,
                                 &buildTools, &codium, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});

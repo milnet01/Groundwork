@@ -473,6 +473,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>Protection de la RAM</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>Quand la mémoire vient à manquer, garde le bureau utilisable et ferme l&apos;application qui utilise le plus de mémoire, au lieu de laisser tout l&apos;ordinateur se figer. Pleinement effectif après votre prochaine connexion.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>Le gestionnaire de services n&apos;a pas répondu.</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>Le gardien de mémoire, systemd-oomd, n&apos;est pas installé.</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>Rien ne ferme une application avant que la mémoire soit épuisée.</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>Écriture des réglages de protection de la RAM</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>Installation du gardien de mémoire</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>Rechargement du gestionnaire de services</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>Activation du gardien de mémoire</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

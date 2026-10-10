@@ -473,6 +473,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>RAM-beskerming</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>Wanneer geheue min raak, hou dit die werkskerm aan die gang en maak die toep toe wat die meeste geheue gebruik, eerder as om die hele rekenaar te laat vries. Werk ten volle nadat jy weer aanmeld.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>Die diensbestuurder het nie geantwoord nie.</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>Die geheuewaghond, systemd-oomd, is nie geïnstalleer nie.</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>Niks maak 'n toep toe voordat die geheue opraak nie.</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>Skryf die RAM-beskerming se instellings</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>Installeer die geheuewaghond</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>Herlaai die diensbestuurder</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>Skakel die geheuewaghond aan</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

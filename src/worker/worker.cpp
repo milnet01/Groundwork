@@ -47,7 +47,7 @@ void Worker::say(const QString &line)
     }
 }
 
-int Worker::runCommand(const QStringList &argv)
+int Worker::runCommand(const QStringList &argv, const QByteArray &input)
 {
     QProcess process;
     process.setProcessChannelMode(QProcess::MergedChannels);
@@ -68,6 +68,10 @@ int Worker::runCommand(const QStringList &argv)
             loop.quit();
     });
     process.start(argv.first(), argv.mid(1));
+    if (!input.isEmpty() && process.waitForStarted()) {
+        process.write(input);
+        process.closeWriteChannel();
+    }
     if (process.state() != QProcess::NotRunning || process.error() != QProcess::FailedToStart)
         loop.exec();
     drain();
@@ -94,10 +98,10 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail)
 {
     say(formatMarker(QStringLiteral("ACTION"), {itemId, step.label}));
     const QStringList argv = step.needsRoot ? Privilege::asRoot(step.argv) : step.argv;
-    int code = runCommand(argv);
+    int code = runCommand(argv, step.input);
     if (step.tool == Step::Tool::Zypper) {
         if (code == 103) // zypper updated itself; run once more to finish
-            code = runCommand(argv);
+            code = runCommand(argv, step.input);
         if (code == 106)
             say(formatMarker(QStringLiteral("HINT"),
                               {itemId, tr("A software source could not be read and was skipped.")}));

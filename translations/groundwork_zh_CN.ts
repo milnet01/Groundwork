@@ -472,6 +472,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>内存保护</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>当内存不足时，保持桌面正常运行，并关闭占用内存最多的应用，而不是让整台电脑卡死。你下次登录后完全生效。</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>服务管理器没有响应。</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>内存监视程序 systemd-oomd 未安装。</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>内存耗尽之前，没有任何机制会关闭应用。</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>正在写入内存保护设置</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>正在安装内存监视程序</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>正在重新加载服务管理器</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>正在开启内存监视程序</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

@@ -833,13 +833,22 @@ Simple on/off items drawn from the owner's own machine (decided 2026-10-10):
 they keep a computer responsive, tidy and ready for games, and set Ants Terminal
 as the terminal.
 
-- 📋 [GRND-0052] **Item: RAM protection, so a full memory closes the greediest app before the desktop freezes.**
+- ✅ [GRND-0052] **Item: RAM protection, so a full memory closes the greediest app before the desktop freezes.**
   From the owner's machine (SYSTEM_OPTIMISATIONS.md, section 10):
   systemd-oomd enabled, the memory controller delegated to the user
   session, a memory floor and higher CPU and I/O weight for the
   desktop's session.slice, and app.slice made the only kill candidate.
   On Tumbleweed systemd-oomd came from systemd-experimental; check
   that and Leap 16 when built. The user called this the main ask.
+  Resolved (2026-10-10): memoryitem.cpp, on the System setup page.
+  systemd-oomd is in systemd-experimental on both Tumbleweed (rpm -qf,
+  this machine) and Leap 16.0 (its oss repository lists it). The
+  desktop's memory floor scales: 2G from 8 GiB, 1G from 4 GiB, else
+  512M. The check reads any .conf file in the drop-in folders, so
+  protection set up by hand counts: check mode says "already done" on
+  the owner's machine. New for every item: a step may carry text for
+  its command's input, and writeFileStep writes a file with dd.
+  Not yet run for real on a fresh machine.
   **Layman:** When memory runs out, the desktop stays usable and the app using the most memory is closed, instead of the whole computer locking up.
   Kind: feature.
   Source: user-request-2026-10-10.

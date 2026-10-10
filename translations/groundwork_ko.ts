@@ -472,6 +472,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>메모리 보호</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>메모리가 부족해지면 컴퓨터 전체가 멈추는 대신 데스크톱은 계속 작동하게 하고 메모리를 가장 많이 쓰는 앱을 닫습니다. 다음에 로그인한 뒤부터 완전히 적용됩니다.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>서비스 관리자가 응답하지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>메모리 감시 도구 systemd-oomd가 설치되어 있지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>메모리가 바닥나기 전에 앱을 닫아 주는 것이 없습니다.</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>메모리 보호 설정을 기록하는 중</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>메모리 감시 도구를 설치하는 중</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>서비스 관리자를 다시 불러오는 중</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>메모리 감시 도구를 켜는 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

@@ -58,7 +58,8 @@ Wizard and the Worker apply the same one.
    firmware, Broadcom Wi-Fi.
 2. **System setup** — that the system can recover and is protected.
    Btrfs snapshots, the firewall, firmware updates, and laptop power
-   settings where there is a battery.
+   settings where there is a battery. RAM protection, which closes the
+   most memory-hungry app before the desktop freezes.
 3. **Configuration** — choices a new install asks of its owner. The
    computer's name; remote login over SSH; the clock setting, where
    Windows is also installed.
@@ -141,6 +142,9 @@ text it produces itself.
   through it. Nothing else may start a root process.
 - **No shell.** Every command is a fixed argument list. Nothing builds a
   command string for `sh -c`.
+  A step may carry text for its command's standard input; a file is
+  written that way, by `dd of=<path> status=none`, so its text stays
+  out of the log.
 - **Entry may depend on every part**; no part depends on Entry.
 - **The Wizard refuses to start as root.**
 

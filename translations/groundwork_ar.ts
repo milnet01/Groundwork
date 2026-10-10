@@ -477,6 +477,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>حماية الذاكرة</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>عندما تنفد الذاكرة، يُبقي سطح المكتب يعمل ويغلق التطبيق الذي يستهلك أكبر قدر من الذاكرة، بدلًا من أن يتجمّد الحاسوب بأكمله. يعمل بالكامل بعد تسجيل دخولك التالي.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>لم يستجب مدير الخدمات.</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>مراقب الذاكرة، ‎systemd-oomd‏، غير مثبّت.</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>لا شيء يغلق أي تطبيق قبل نفاد الذاكرة.</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>جارٍ كتابة إعدادات حماية الذاكرة</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>جارٍ تثبيت مراقب الذاكرة</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>جارٍ إعادة تحميل مدير الخدمات</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>جارٍ تشغيل مراقب الذاكرة</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

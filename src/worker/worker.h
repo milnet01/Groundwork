@@ -34,7 +34,7 @@ private:
     bool ensureRoot();
     // Runs one step; returns false on failure, with a detail line.
     bool runStep(const QString &itemId, const Step &step, QString *detail);
-    int runCommand(const QStringList &argv);
+    int runCommand(const QStringList &argv, const QByteArray &input = {});
 
     const Catalogue &m_catalogue;
     FileReader m_files;

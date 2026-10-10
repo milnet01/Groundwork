@@ -473,6 +473,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>RAM सुरक्षा</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>जब मेमोरी कम पड़ने लगती है, तो यह डेस्कटॉप को चलता रखता है और सबसे ज़्यादा मेमोरी लेने वाले ऐप को बंद कर देता है, ताकि पूरा कंप्यूटर अटक न जाए। आपके अगली बार लॉग इन करने के बाद पूरी तरह लागू होता है।</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>सेवा प्रबंधक ने जवाब नहीं दिया।</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>मेमोरी निगरानी, systemd-oomd, इंस्टॉल नहीं है।</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>मेमोरी खत्म होने से पहले कोई भी ऐप बंद नहीं होता।</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>RAM सुरक्षा की सेटिंग लिखी जा रही हैं</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>मेमोरी निगरानी इंस्टॉल की जा रही है</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>सेवा प्रबंधक फिर से लोड किया जा रहा है</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>मेमोरी निगरानी चालू की जा रही है</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>

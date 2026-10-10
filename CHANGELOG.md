@@ -14,6 +14,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **RAM protection: when memory runs short, the most memory-hungry app is closed before the desktop freezes.** (GRND-0052)
+  When memory runs out, the desktop stays usable and the app using the most memory is closed, instead of the whole computer locking up.
+
 - **Colour themes: the window follows the desktop's light or dark, and the first page offers others, high contrast among them.** (GRND-0050)
   The app can be dark, which is easier on light-sensitive eyes; it follows the desktop unless you choose otherwise.
 

@@ -46,7 +46,23 @@ struct Step
     // Exit codes besides 0 that mean success for a Generic step, such as
     // fwupdmgr's 2, "nothing to do" (measured 2026-10-02).
     QList<int> alsoOk = {};
+    // Fed to the command's standard input; how a step writes a file.
+    QByteArray input = {};
 };
+
+// A root step that makes each directory, with its parents.
+inline Step makeDirectoriesStep(const QStringList &dirs, const QString &label)
+{
+    return {QStringList{QStringLiteral("mkdir"), QStringLiteral("-p")} + dirs, true, Step::Tool::Generic, label};
+}
+
+// A root step that writes text to path, replacing it. dd prints nothing with
+// status=none, so the file's text stays out of the run's log.
+inline Step writeFileStep(const QString &path, const QByteArray &text, const QString &label)
+{
+    return {{QStringLiteral("dd"), QStringLiteral("of=") + path, QStringLiteral("status=none")},
+            true, Step::Tool::Generic, label, {}, text};
+}
 
 // What a check may ask of Core.
 class CheckContext

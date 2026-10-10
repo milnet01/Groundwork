@@ -473,6 +473,45 @@
     </message>
 </context>
 <context>
+    <name>gw::MemoryItem</name>
+    <message>
+        <source>RAM protection</source>
+        <translation>Protección de la RAM</translation>
+    </message>
+    <message>
+        <source>When memory runs short, keeps the desktop working and closes the app using the most memory, instead of letting the whole computer freeze. Takes full effect after you next log in.</source>
+        <translation>Cuando la memoria escasea, mantiene el escritorio funcionando y cierra la aplicación que más memoria usa, en lugar de dejar que todo el ordenador se congele. Surte pleno efecto tras tu próximo inicio de sesión.</translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation>El gestor de servicios no ha respondido.</translation>
+    </message>
+    <message>
+        <source>The memory watchdog, systemd-oomd, is not installed.</source>
+        <translation>El vigilante de memoria, systemd-oomd, no está instalado.</translation>
+    </message>
+    <message>
+        <source>Nothing closes an app before memory runs out.</source>
+        <translation>Nada cierra una aplicación antes de que se agote la memoria.</translation>
+    </message>
+    <message>
+        <source>Writing the RAM protection settings</source>
+        <translation>Escribiendo los ajustes de protección de la RAM</translation>
+    </message>
+    <message>
+        <source>Installing the memory watchdog</source>
+        <translation>Instalando el vigilante de memoria</translation>
+    </message>
+    <message>
+        <source>Reloading the service manager</source>
+        <translation>Recargando el gestor de servicios</translation>
+    </message>
+    <message>
+        <source>Switching the memory watchdog on</source>
+        <translation>Activando el vigilante de memoria</translation>
+    </message>
+</context>
+<context>
     <name>gw::NvidiaItem</name>
     <message>
         <source>NVIDIA graphics driver</source>
