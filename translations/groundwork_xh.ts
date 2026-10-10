@@ -910,6 +910,29 @@
     </message>
 </context>
 <context>
+    <name>gw::WakeItem</name>
+    <message>
+        <source>Calmer wake from hibernation</source>
+        <translation>Ukuvuka okuzolileyo ekulaleni okunzulu</translation>
+    </message>
+    <message>
+        <source>Spreads out the maintenance jobs that were missed while the computer slept, so they no longer all start the moment it wakes.</source>
+        <translation>Isasaza imisebenzi yolondolozo ephosiweyo ngelixa ikhompyutha ibilele, ukuze ingaqali yonke ngexesha elinye xa ivuka.</translation>
+    </message>
+    <message>
+        <source>None of the maintenance jobs this spreads out were found.</source>
+        <translation>Akukho nanye kwimisebenzi yolondolozo esasazwa ngulo ifunyenweyo.</translation>
+    </message>
+    <message>
+        <source>Some maintenance jobs all start at once after a wake.</source>
+        <translation>Eminye imisebenzi yolondolozo iqala yonke kanye emva kokuvuka.</translation>
+    </message>
+    <message>
+        <source>Spreading out the maintenance jobs</source>
+        <translation>Kusasazwa imisebenzi yolondolozo</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>

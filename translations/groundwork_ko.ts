@@ -907,6 +907,29 @@
     </message>
 </context>
 <context>
+    <name>gw::WakeItem</name>
+    <message>
+        <source>Calmer wake from hibernation</source>
+        <translation>최대 절전 모드에서 더 차분하게 깨어나기</translation>
+    </message>
+    <message>
+        <source>Spreads out the maintenance jobs that were missed while the computer slept, so they no longer all start the moment it wakes.</source>
+        <translation>컴퓨터가 잠든 동안 놓친 유지 관리 작업을 분산시켜, 깨어나는 순간 모두 한꺼번에 시작하지 않게 합니다.</translation>
+    </message>
+    <message>
+        <source>None of the maintenance jobs this spreads out were found.</source>
+        <translation>이 기능이 분산시키는 유지 관리 작업을 찾지 못했습니다.</translation>
+    </message>
+    <message>
+        <source>Some maintenance jobs all start at once after a wake.</source>
+        <translation>일부 유지 관리 작업이 깨어난 뒤 한꺼번에 시작됩니다.</translation>
+    </message>
+    <message>
+        <source>Spreading out the maintenance jobs</source>
+        <translation>유지 관리 작업을 분산시키는 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>

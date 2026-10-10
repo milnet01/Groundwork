@@ -910,6 +910,29 @@
     </message>
 </context>
 <context>
+    <name>gw::WakeItem</name>
+    <message>
+        <source>Calmer wake from hibernation</source>
+        <translation>התעוררות רגועה יותר ממצב שינה עמוקה</translation>
+    </message>
+    <message>
+        <source>Spreads out the maintenance jobs that were missed while the computer slept, so they no longer all start the moment it wakes.</source>
+        <translation>מפזר את משימות התחזוקה שהוחמצו בזמן שהמחשב ישן, כדי שלא יתחילו כולן ברגע שהוא מתעורר.</translation>
+    </message>
+    <message>
+        <source>None of the maintenance jobs this spreads out were found.</source>
+        <translation>לא נמצאה אף אחת ממשימות התחזוקה שזה מפזר.</translation>
+    </message>
+    <message>
+        <source>Some maintenance jobs all start at once after a wake.</source>
+        <translation>חלק ממשימות התחזוקה מתחילות כולן יחד אחרי התעוררות.</translation>
+    </message>
+    <message>
+        <source>Spreading out the maintenance jobs</source>
+        <translation>מפזר את משימות התחזוקה</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>

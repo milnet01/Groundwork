@@ -14,6 +14,8 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Calmer wake from hibernation: maintenance jobs missed while asleep are spread over half an hour instead of all starting at once.** (GRND-0055)
+
 - **Smoother spinning hard drives: every spinning drive uses the bfq scheduler, so the desktop stays smooth while one is busy.** (GRND-0054)
 
 - **Emergency keyboard escape: every Alt+SysRq key on, so a frozen computer can be restarted cleanly.** (GRND-0053)

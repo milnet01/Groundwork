@@ -922,6 +922,29 @@
     </message>
 </context>
 <context>
+    <name>gw::WakeItem</name>
+    <message>
+        <source>Calmer wake from hibernation</source>
+        <translation>استيقاظ أهدأ من السبات</translation>
+    </message>
+    <message>
+        <source>Spreads out the maintenance jobs that were missed while the computer slept, so they no longer all start the moment it wakes.</source>
+        <translation>يوزّع مهام الصيانة التي فاتت أثناء نوم الحاسوب، فلا تبدأ كلها لحظة استيقاظه.</translation>
+    </message>
+    <message>
+        <source>None of the maintenance jobs this spreads out were found.</source>
+        <translation>لم يُعثر على أي من مهام الصيانة التي يوزّعها هذا الخيار.</translation>
+    </message>
+    <message>
+        <source>Some maintenance jobs all start at once after a wake.</source>
+        <translation>بعض مهام الصيانة تبدأ كلها معًا بعد الاستيقاظ.</translation>
+    </message>
+    <message>
+        <source>Spreading out the maintenance jobs</source>
+        <translation>جارٍ توزيع مهام الصيانة</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>

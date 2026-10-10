@@ -18,6 +18,7 @@
 #include "sshitem.h"
 #include "sysrqitem.h"
 #include "updateitem.h"
+#include "wakeitem.h"
 
 namespace gw {
 
@@ -38,6 +39,7 @@ const Catalogue &catalogue()
     static const MemoryItem memory;
     static const SysrqItem sysrq;
     static const DiskSchedulerItem diskScheduler;
+    static const WakeItem calmWake;
     // Configuration
     static const HostnameItem hostname;
     static const SshItem ssh;
@@ -96,7 +98,7 @@ const Catalogue &catalogue()
     static const FontsItem fonts;
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
-                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler,
+                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake,
                                 &hostname, &ssh, &clock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles,
                                 &buildTools, &codium, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});

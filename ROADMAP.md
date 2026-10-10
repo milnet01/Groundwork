@@ -887,11 +887,17 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0055] **Item: calmer wake from hibernation, with maintenance timers spread out.**
+- ✅ [GRND-0055] **Item: calmer wake from hibernation, with maintenance timers spread out.**
   From SYSTEM_OPTIMISATIONS.md, section 3: RandomizedDelaySec=30min
   drop-ins on the catch-up-prone daily and weekly timers (snapper,
   logrotate, backup-rpmdb, backup-sysconfig and the like). Name only
   timers that exist on the machine.
+  Shipped 2026-10-10: WakeItem adds a RandomizedDelaySec=30min
+  drop-in (99-groundwork-spread.conf) only to listed timers that have
+  no delay. backup-rpmdb, backup-sysconfig and check-battery already
+  ship 2h and logrotate 1h, so the notes' 30min drop-ins shortened
+  them; this item never does. packagekit-background added to the list
+  (no delay, observed in the storm). tst_wakeitem.
   **Layman:** After waking, the computer no longer runs every missed maintenance job at once and slows to a crawl.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -998,6 +1004,18 @@ as the terminal.
   Kind: ux.
   Source: user-request-2026-10-10.
   Lanes: gui.
+
+- 📋 [GRND-0070] **Trailer footage for the website, after 0.3.0 is published.**
+  The website session asked for 3 to 6 demoreel clips plus notes.md
+  (hook lines, tagline, captions, feature lines, platforms, sound).
+  Brief: ~/.local/share/claude-handoff/ants-projects-hub-website-trailers-2026-10-10.md
+  (shared; do not delete). Deliver to /mnt/Games/Trailers/incoming/groundwork/,
+  then message ants-projects-hub-website. Deferred until 0.3.0 is out
+  because it replaces tick boxes with switches; told the website session so.
+  Released features only, demo data only (check mode prints the hostname).
+  **Layman:** A short video of Groundwork for its web page, recorded once the switches ship.
+  Kind: marketing.
+  Source: peer-request-2026-10-10 ants-projects-hub-website.
 
 ## 0.4.0 — Your own set-up
 
