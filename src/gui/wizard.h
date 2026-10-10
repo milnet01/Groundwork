@@ -78,6 +78,9 @@ private:
     bool m_checksDone = false;
     Selection m_selection;
     QHash<QString, ItemRow *> m_rows;
+    // Each shown reason: the item it names, and whether both were switched
+    // on or off. It holds only while both still are (GRND-0047).
+    QHash<QString, std::pair<QString, bool>> m_reasons;
     QHash<int, QWidget *> m_levelPages; // each level page's row area, keyed by Level
     RunPage *m_runPage;
 };

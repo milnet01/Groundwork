@@ -298,9 +298,21 @@ void Wizard::refreshRows(const QStringList &pulled, const QString &cause, bool o
         row->setChecked(m_selection.contains(row->id()));
     const QString causeTitle = cause.isEmpty() ? QString() : m_rows.value(cause)->toggle()->text();
     for (const QString &id : pulled) {
-        if (ItemRow *row = m_rows.value(id))
+        if (ItemRow *row = m_rows.value(id)) {
             row->setReason(on ? tr("Switched on because %1 needs it.").arg(causeTitle)
                               : tr("Switched off because it needs %1.").arg(causeTitle));
+            m_reasons.insert(id, {cause, on});
+        }
+    }
+    for (auto it = m_reasons.begin(); it != m_reasons.end();) {
+        const auto &[reasonCause, reasonOn] = it.value();
+        if (m_selection.contains(it.key()) == reasonOn && m_selection.contains(reasonCause) == reasonOn) {
+            ++it;
+            continue;
+        }
+        if (ItemRow *row = m_rows.value(it.key()))
+            row->setReason({});
+        it = m_reasons.erase(it);
     }
 }
 

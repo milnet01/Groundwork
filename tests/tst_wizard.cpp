@@ -200,6 +200,44 @@ private slots:
         QVERIFY(w->row(QStringLiteral("codecs"))->reason().contains(QLatin1String("Title of update")));
     }
 
+    // A note stays only while what it says is true (GRND-0047): switching
+    // the needed item back on, or the row itself, clears it.
+    void aSwitchedOffNoteGoesWhenItNoLongerHolds()
+    {
+        auto w = make();
+        QTRY_VERIFY(w->checksDone());
+        auto *codecsRow = w->row(QStringLiteral("codecs"));
+        w->row(QStringLiteral("update"))->toggle()->click();
+        QVERIFY(!codecsRow->reason().isEmpty());
+        w->row(QStringLiteral("update"))->toggle()->click();
+        QVERIFY(!codecsRow->isChecked()); // design: switching on pulls only what it needs
+        QVERIFY2(codecsRow->reason().isEmpty(), qPrintable(codecsRow->reason()));
+    }
+
+    void aSwitchedOffNoteGoesWhenItsRowIsSwitchedBackOn()
+    {
+        auto w = make();
+        QTRY_VERIFY(w->checksDone());
+        auto *codecsRow = w->row(QStringLiteral("codecs"));
+        w->row(QStringLiteral("update"))->toggle()->click();
+        QVERIFY(!codecsRow->reason().isEmpty());
+        codecsRow->toggle()->click(); // pulls the update back on
+        QVERIFY(codecsRow->isChecked());
+        QVERIFY2(codecsRow->reason().isEmpty(), qPrintable(codecsRow->reason()));
+    }
+
+    void aSwitchedOnNoteGoesWhenItNoLongerHolds()
+    {
+        auto w = make();
+        QTRY_VERIFY(w->checksDone());
+        auto *updateRow = w->row(QStringLiteral("update"));
+        updateRow->toggle()->click(); // everything off
+        w->row(QStringLiteral("fonts"))->toggle()->click();
+        QVERIFY(!updateRow->reason().isEmpty());
+        w->row(QStringLiteral("fonts"))->toggle()->click();
+        QVERIFY2(updateRow->reason().isEmpty(), qPrintable(updateRow->reason()));
+    }
+
     void switchingOnAnInstallPullsTheUpdateAndSaysWhy()
     {
         auto w = make();
