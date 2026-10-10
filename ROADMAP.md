@@ -959,10 +959,15 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0059] **Item: less eager swapping.**
+- ✅ [GRND-0059] **Item: less eager swapping.**
   From the owner's machine: vm.swappiness=10 in a sysctl.d file,
   from 60. Chosen by the user over the recommendation to leave it
   out (2026-10-10).
+  Shipped 2026-10-10: SwappinessItem reads /proc/sys/vm/swappiness;
+  done at 10 or lower. Apply writes
+  /etc/sysctl.d/99-groundwork-swappiness.conf and runs sysctl -p on
+  it, as SysrqItem does. The owner's machine reads done (its own
+  99-claude-tuning.conf sets 10). tst_swappinessitem.
   **Layman:** The computer keeps programs in memory longer before moving them to disk.
   Kind: feature.
   Source: user-request-2026-10-10.

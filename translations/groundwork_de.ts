@@ -860,6 +860,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>Weniger eifriges Auslagern</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>Behält Programme länger im Arbeitsspeicher, bevor sie auf das langsamere Laufwerk ausgelagert werden.</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>Die Einstellung des Kernels konnte nicht gelesen werden.</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>Programme werden früh aus dem Arbeitsspeicher auf das Laufwerk ausgelagert.</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>Programme bleiben länger im Arbeitsspeicher</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

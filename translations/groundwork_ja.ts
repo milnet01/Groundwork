@@ -858,6 +858,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>スワップを控えめに</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>プログラムを低速なディスクへ移す前に、より長くメモリに留めます。</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>カーネルの設定を読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>プログラムが早い段階でメモリからディスクへ移されます。</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>プログラムをより長くメモリに留めています</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

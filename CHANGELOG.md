@@ -14,6 +14,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Less eager swapping** (GRND-0059)
+  Programs stay in memory longer before the computer moves them to
+  disk (vm.swappiness 10, from the kernel's 60). A lower setting
+  already in place is left alone.
+
 - **The freeze recorder** (GRND-0058)
   A small protected service notes what is using memory whenever it
   runs short, in the journal and in /var/log/freeze-recorder.log, so

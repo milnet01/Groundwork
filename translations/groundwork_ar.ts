@@ -868,6 +868,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>تبديل أقل استعجالًا</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>يُبقي البرامج في الذاكرة مدة أطول قبل نقلها إلى القرص الأبطأ.</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>تعذّرت قراءة إعداد النواة.</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>تُنقل البرامج من الذاكرة إلى القرص مبكرًا.</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>جارٍ إبقاء البرامج في الذاكرة مدة أطول</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

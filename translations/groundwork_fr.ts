@@ -860,6 +860,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>Un swap moins empressé</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>Garde les programmes en mémoire plus longtemps avant de les déplacer vers le disque, plus lent.</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>Le réglage du noyau n&apos;a pas pu être lu.</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>Les programmes sont déplacés tôt de la mémoire vers le disque.</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>Maintien des programmes en mémoire plus longtemps</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

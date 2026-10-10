@@ -858,6 +858,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>덜 적극적인 스왑</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>프로그램을 느린 디스크로 옮기기 전에 메모리에 더 오래 둡니다.</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>커널 설정을 읽을 수 없었습니다.</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>프로그램이 일찍 메모리에서 디스크로 옮겨집니다.</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>프로그램을 메모리에 더 오래 두는 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

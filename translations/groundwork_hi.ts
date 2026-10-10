@@ -860,6 +860,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>कम उतावली स्वैपिंग</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>प्रोग्रामों को धीमी डिस्क पर ले जाने से पहले ज़्यादा देर तक मेमोरी में रखता है।</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>कर्नेल की सेटिंग पढ़ी नहीं जा सकी।</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>प्रोग्राम जल्दी ही मेमोरी से डिस्क पर भेज दिए जाते हैं।</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>प्रोग्रामों को ज़्यादा देर तक मेमोरी में रखा जा रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

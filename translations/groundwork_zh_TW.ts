@@ -858,6 +858,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>減少置換</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>讓程式在記憶體中停留更久，再移到較慢的磁碟上。</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>無法讀取核心的設定。</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>程式過早地從記憶體移到磁碟。</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>正在讓程式在記憶體中停留更久</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

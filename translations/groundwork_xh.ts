@@ -860,6 +860,29 @@
     </message>
 </context>
 <context>
+    <name>gw::SwappinessItem</name>
+    <message>
+        <source>Less eager swapping</source>
+        <translation>Ukutshintshiselana okungangxamanga kangako</translation>
+    </message>
+    <message>
+        <source>Keeps programs in memory longer before moving them out to the slower disk.</source>
+        <translation>Igcina iinkqubo kwimemori ixesha elide phambi kokuzisa kwidiski ecothayo.</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>Isetingi yekernel ayikwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>Programs are moved out of memory to the disk early.</source>
+        <translation>Iinkqubo zisuswa kwimemori ziye kwidiski kwangoko.</translation>
+    </message>
+    <message>
+        <source>Keeping programs in memory longer</source>
+        <translation>Kugcinwa iinkqubo kwimemori ixesha elide</translation>
+    </message>
+</context>
+<context>
     <name>gw::SysrqItem</name>
     <message>
         <source>Emergency keyboard escape</source>

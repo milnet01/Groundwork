@@ -65,7 +65,8 @@ Wizard and the Worker apply the same one.
    from hibernation, with missed maintenance jobs spread out. A 1 GB
    limit on the system log, which deletes the oldest entries first. A
    3-second wait at the boot menu. The freeze recorder, which notes what
-   was using memory before a freeze.
+   was using memory before a freeze. Less eager swapping, so programs
+   stay in memory longer.
 3. **Configuration** — choices a new install asks of its owner. The
    computer's name; remote login over SSH; the clock setting, where
    Windows is also installed.
