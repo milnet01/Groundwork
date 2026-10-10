@@ -1,0 +1,13 @@
+{
+  "$about": "The release recipe read by cut-release. CMakeLists.txt is the one version-bearing file: the program takes its version from PROJECT_VERSION through the GROUNDWORK_VERSION define, so there is nothing else to drift and no post_check.",
+  "version_source": "CMakeLists.txt",
+  "version_pattern": "project\\(groundwork VERSION ([0-9]+\\.[0-9]+\\.[0-9]+)",
+  "files": [
+    {
+      "path": "CMakeLists.txt",
+      "pattern": "project(groundwork VERSION {OLD} LANGUAGES CXX)",
+      "replace": "project(groundwork VERSION {NEW} LANGUAGES CXX)"
+    }
+  ],
+  "tag": "v{NEW}"
+}

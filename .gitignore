@@ -33,6 +33,8 @@ desktop.ini
 .claude/*
 # Team-shared Claude Code config that SHOULD be in version control:
 !.claude/settings.json
+# The release recipe cut-release reads (releases.md § 1).
+!.claude/bump.json
 # No `!.claude/workflow.md` here, deliberately. `workflow.md` § 1 forbids a
 # per-project workflow, and reserving the path reads as a prescription to
 # create one. That file is also `/app-workflow`'s trigger, so creating it
