@@ -827,6 +827,196 @@ were added on 2026-10-10 (GRND-0050).
   Source: website-session-2026-10-10.
   Lanes: gui, core.
 
+## 0.3.0 — A machine that keeps running
+
+Simple on/off items drawn from the owner's own machine (decided 2026-10-10):
+they keep a computer responsive, tidy and ready for games, and set Ants Terminal
+as the terminal.
+
+- 📋 [GRND-0052] **Item: RAM protection, so a full memory closes the greediest app before the desktop freezes.**
+  From the owner's machine (SYSTEM_OPTIMISATIONS.md, section 10):
+  systemd-oomd enabled, the memory controller delegated to the user
+  session, a memory floor and higher CPU and I/O weight for the
+  desktop's session.slice, and app.slice made the only kill candidate.
+  On Tumbleweed systemd-oomd came from systemd-experimental; check
+  that and Leap 16 when built. The user called this the main ask.
+  **Layman:** When memory runs out, the desktop stays usable and the app using the most memory is closed, instead of the whole computer locking up.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0053] **Item: the emergency keyboard escape, Alt+SysRq, fully on.**
+  From SYSTEM_OPTIMISATIONS.md, section 8: kernel.sysrq = 1 in a
+  sysctl.d file. The distro default was 184, which leaves out sync,
+  unmount, reboot and the OOM kill.
+  **Layman:** A frozen computer can be restarted safely from the keyboard instead of the power button.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0054] **Item: a smoother scheduler for spinning hard drives.**
+  Generalised from SYSTEM_OPTIMISATIONS.md, section 9, which set BFQ
+  on one SMR drive by serial. Here: a udev rule setting bfq on every
+  drive whose queue/rotational is 1; SSDs keep their scheduler.
+  Offered only where a spinning drive is found.
+  **Layman:** While a slow hard drive is busy, the desktop stays smooth.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0055] **Item: calmer wake from hibernation, with maintenance timers spread out.**
+  From SYSTEM_OPTIMISATIONS.md, section 3: RandomizedDelaySec=30min
+  drop-ins on the catch-up-prone daily and weekly timers (snapper,
+  logrotate, backup-rpmdb, backup-sysconfig and the like). Name only
+  timers that exist on the machine.
+  **Layman:** After waking, the computer no longer runs every missed maintenance job at once and slows to a crawl.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0056] **Item: cap the system log at 1 GB.**
+  From SYSTEM_OPTIMISATIONS.md, section 11: a journald.conf.d drop-in
+  with SystemMaxUse=1G, SystemKeepFree=2G, SystemMaxFileSize=128M and
+  MaxRetentionSec=3month. Check journald's real default when built;
+  the notes' 10% figure is unverified.
+  **Layman:** The system's log can no longer grow large enough to fill a small drive.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0057] **Item: a shorter wait at the boot menu.**
+  From SYSTEM_OPTIMISATIONS.md, section 6: sdbootutil set-timeout 3,
+  from 8. Find the right command for each bootloader openSUSE installs
+  (systemd-boot, grub2-bls, grub2) when built.
+  **Layman:** The computer starts a few seconds faster, with the boot menu still reachable.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0058] **Item: the freeze recorder, which notes what was using memory before a freeze.**
+  From SYSTEM_OPTIMISATIONS.md, section 11: a protected service
+  sampling memory and I/O pressure every 10 s, logging only when
+  pressure rises, to the journal and a size-capped file under
+  /var/log. Its script must ship inside Groundwork; no shell steps.
+  **Layman:** If the computer freezes, a small log shows afterwards what was eating its memory.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0059] **Item: less eager swapping.**
+  From the owner's machine: vm.swappiness=10 in a sysctl.d file,
+  from 60. Chosen by the user over the recommendation to leave it
+  out (2026-10-10).
+  **Layman:** The computer keeps programs in memory longer before moving them to disk.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0060] **Item: NumLock on at login.**
+  From the owner's set-up script: Numlock=on in /etc/sddm.conf.d.
+  Offered only where SDDM is the login screen.
+  **Layman:** The number pad works straight away at the login screen.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0061] **Item: Ants Terminal, set as the terminal.**
+  The owner's own terminal, offered to everyone (user, 2026-10-10).
+  Installed from its OBS repository, home:milnet:ants-terminal, which
+  builds for Tumbleweed and Leap 16 (Ants Terminal README, Install).
+  Setting it as the desktop's terminal runs as the user, not root.
+  **Layman:** Installs Ants Terminal and makes it the terminal the desktop opens.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0062] **Item: video acceleration on AMD graphics.**
+  From the owner's machine: Mesa's VA-API driver for radeonsi.
+  Offered only where an AMD graphics card is found. Check what the
+  media codecs item already brings in from Packman.
+  **Layman:** Videos play using the graphics card, which is smoother and saves power.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0063] **Item: gaming additions — game controllers, and SELinux's gaming policy.**
+  Adds to the gaming group (GRND-0026, which installs Steam and
+  Bottles from Flathub). Flatpak Steam needs the host's controller
+  rules (steam-devices). Where SELinux is enforcing, the owner's
+  machine has selinux-policy-targeted-gaming. GameMode too, if Flatpak
+  Steam can use the host's.
+  **Layman:** Game controllers work in Steam, and Windows games run where SELinux would block them.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0064] **Item: virtual machines.**
+  From the owner's machine: QEMU/KVM. Offered where the processor
+  supports virtualisation. Pick the openSUSE pattern and a graphical
+  manager when built.
+  **Layman:** Lets the computer run other operating systems in a window.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items.
+
+- 📋 [GRND-0069] **Use on/off switches instead of tick boxes in every row.**
+  The user prefers switches to tick boxes (2026-10-10). Qt has no switch
+  widget, so ItemRow gets a small painted one: it keeps the item's
+  title as its label, works from the keyboard, grows with the font
+  (as the enlarged tick box does now, itemrow.cpp), follows the
+  colour theme, and reports itself to screen readers as a checkable
+  control. Applies to every row, the 0.4.0 lists of choices included.
+  **Layman:** Each choice is an on/off switch, like a light switch, instead of a tick box.
+  Kind: ux.
+  Source: user-request-2026-10-10.
+  Lanes: gui.
+
+## 0.4.0 — Your own set-up
+
+Items that need the user's own choices in the window (decided 2026-10-10). Each
+has a written design before it is built.
+
+- 📋 [GRND-0065] **Item: your GitHub projects, copied into a folder you choose.**
+  The user liked this over a personal list (2026-10-10): sign in
+  once, list the user's repositories, tick which to copy, choose the
+  folder. Private ones work once signed in. Copying runs as the user,
+  not root. Needs a design first: signing in from a window, a list of
+  choices rather than one switch, and nothing personal in the source.
+  **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
+- 📋 [GRND-0066] **Item: share folders on the network.**
+  From the owner's machine: Samba (smb and nmb) with wsdd so Windows
+  finds it, and the firewall opened for it. Needs a design first: which
+  folders, who may open them, and a Samba password.
+  **Layman:** Lets other computers at home open folders you choose on this one.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
+- 📋 [GRND-0067] **Item: mount extra drives at start-up.**
+  From the owner's machine: fstab entries by UUID with nofail,
+  noatime, nosuid, nodev and x-gvfs-show, so a missing drive never
+  stops the boot. Needs a design first: which drives, where they
+  appear, and never touching a drive in use.
+  **Layman:** Second hard drives show up and are ready every time the computer starts.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
+- 📋 [GRND-0068] **Item: hibernate instead of sleep, where sleep is unreliable.**
+  From SYSTEM_OPTIMISATIONS.md, sections 1 and 2, and the owner's set-up
+  script: resume= on the kernel command line, HibernateMode=shutdown,
+  suspend masked. Needs a design first: swap at least as large as
+  memory, Secure Boot's lockdown blocks hibernation, and a wrong
+  resume= can stop the machine waking. Pairs with GRND-0055.
+  **Layman:** The computer can save everything and switch off, then carry on where it left off, for machines where sleep does not work.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
 ## Backlog — no version yet
 
 Items not yet placed in a release. Each moves into a version section once it is
