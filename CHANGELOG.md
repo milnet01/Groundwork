@@ -12,13 +12,17 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-10
+
+**Theme:** Every level, from essentials to extras.
+
 ### Added
 
 - **Languages nobody fluent has checked yet are labelled as drafts.** (GRND-0041)
   The language choice says so, and so does the first page while a draft
   is in use.
 
-- **Translation files for thirteen languages, built into the app.** (GRND-0038)
+- **Translation files for fourteen languages, built into the app.** (GRND-0038)
   Each language is offered once it has been translated.
 
 - **A step-by-step setup window: choose a language, pick items level by level, review, then apply with one password** (GRND-0008)
@@ -39,17 +43,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 - **Extras, each its own choice: popular apps from Flathub, gaming, developer tools, a backup tool, command-line programs, Microsoft fonts** (GRND-0025)
 
-- **Language support, including right-to-left layouts; translations to follow** (GRND-0032)
+- **Language support, including right-to-left layouts** (GRND-0032)
 
 - **A single-file AppImage that runs without installing anything first** (GRND-0012)
 
-### Changed
-
-- **Items that accept a licence (the NVIDIA driver, Microsoft fonts) no longer start switched on.** (GRND-0039)
+- **Items that accept a licence (the NVIDIA driver, Microsoft fonts) never start switched on.** (GRND-0039)
   You switch them on yourself, so nobody accepts a licence by accident.
-
-### Fixed
-
-- **Startup messages, system-check messages, Packman steps and the app extras could not have been translated.**
-  They were filed under the wrong name for translators, so a
-  translation would never have shown.
