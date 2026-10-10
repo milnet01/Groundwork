@@ -12,6 +12,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Added
+
+- **Colour themes: the window follows the desktop's light or dark, and the first page offers others, high contrast among them.** (GRND-0050)
+  The app can be dark, which is easier on light-sensitive eyes; it follows the desktop unless you choose otherwise.
+
 ### Fixed
 
 - **The update row no longer says "not done" beside "no updates were waiting".** (GRND-0051)

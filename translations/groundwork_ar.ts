@@ -752,6 +752,37 @@
     </message>
 </context>
 <context>
+    <name>gw::Themes</name>
+    <message>
+        <source>Follow the desktop</source>
+        <translation>اتباع سطح المكتب</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>فاتح</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>داكن</translation>
+    </message>
+    <message>
+        <source>High contrast, light</source>
+        <translation>تباين عالٍ، فاتح</translation>
+    </message>
+    <message>
+        <source>High contrast, dark</source>
+        <translation>تباين عالٍ، داكن</translation>
+    </message>
+    <message>
+        <source>Midnight</source>
+        <translation>منتصف الليل</translation>
+    </message>
+    <message>
+        <source>Emerald</source>
+        <translation>زمردي</translation>
+    </message>
+</context>
+<context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
@@ -854,6 +885,10 @@
     <message>
         <source>This translation is a draft: no native speaker has checked it yet.</source>
         <translation>هذه الترجمة مسودة: لم يراجعها أي متحدث أصلي بعد.</translation>
+    </message>
+    <message>
+        <source>Colours:</source>
+        <translation>الألوان:</translation>
     </message>
     <message>
         <source>Checking this computer…</source>

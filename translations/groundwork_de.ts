@@ -744,6 +744,37 @@
     </message>
 </context>
 <context>
+    <name>gw::Themes</name>
+    <message>
+        <source>Follow the desktop</source>
+        <translation>Dem Desktop folgen</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>Hell</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>Dunkel</translation>
+    </message>
+    <message>
+        <source>High contrast, light</source>
+        <translation>Hoher Kontrast, hell</translation>
+    </message>
+    <message>
+        <source>High contrast, dark</source>
+        <translation>Hoher Kontrast, dunkel</translation>
+    </message>
+    <message>
+        <source>Midnight</source>
+        <translation>Mitternacht</translation>
+    </message>
+    <message>
+        <source>Emerald</source>
+        <translation>Smaragd</translation>
+    </message>
+</context>
+<context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
@@ -842,6 +873,10 @@
     <message>
         <source>This translation is a draft: no native speaker has checked it yet.</source>
         <translation>Diese Übersetzung ist ein Entwurf: Noch hat sie kein Muttersprachler geprüft.</translation>
+    </message>
+    <message>
+        <source>Colours:</source>
+        <translation>Farben:</translation>
     </message>
     <message>
         <source>Checking this computer…</source>

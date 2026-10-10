@@ -742,6 +742,37 @@
     </message>
 </context>
 <context>
+    <name>gw::Themes</name>
+    <message>
+        <source>Follow the desktop</source>
+        <translation>데스크톱 설정 따르기</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>밝게</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>어둡게</translation>
+    </message>
+    <message>
+        <source>High contrast, light</source>
+        <translation>고대비, 밝게</translation>
+    </message>
+    <message>
+        <source>High contrast, dark</source>
+        <translation>고대비, 어둡게</translation>
+    </message>
+    <message>
+        <source>Midnight</source>
+        <translation>미드나잇</translation>
+    </message>
+    <message>
+        <source>Emerald</source>
+        <translation>에메랄드</translation>
+    </message>
+</context>
+<context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
@@ -839,6 +870,10 @@
     <message>
         <source>This translation is a draft: no native speaker has checked it yet.</source>
         <translation>이 번역은 초안입니다. 아직 원어민이 확인하지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>Colours:</source>
+        <translation>색상:</translation>
     </message>
     <message>
         <source>Checking this computer…</source>

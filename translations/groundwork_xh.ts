@@ -744,6 +744,37 @@
     </message>
 </context>
 <context>
+    <name>gw::Themes</name>
+    <message>
+        <source>Follow the desktop</source>
+        <translation>Landela idesktop</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>Ekhanyayo</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>Emnyama</translation>
+    </message>
+    <message>
+        <source>High contrast, light</source>
+        <translation>Umahluko ophezulu, ekhanyayo</translation>
+    </message>
+    <message>
+        <source>High contrast, dark</source>
+        <translation>Umahluko ophezulu, emnyama</translation>
+    </message>
+    <message>
+        <source>Midnight</source>
+        <translation>Ezinzulwini zobusuku</translation>
+    </message>
+    <message>
+        <source>Emerald</source>
+        <translation>I-Emerald</translation>
+    </message>
+</context>
+<context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
@@ -842,6 +873,10 @@
     <message>
         <source>This translation is a draft: no native speaker has checked it yet.</source>
         <translation>Le nguqulelo yidrafti: akukho sithethi solwimi lwenkobe esiyihlolileyo okwangoku.</translation>
+    </message>
+    <message>
+        <source>Colours:</source>
+        <translation>Imibala:</translation>
     </message>
     <message>
         <source>Checking this computer…</source>

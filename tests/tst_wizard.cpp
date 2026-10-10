@@ -4,6 +4,7 @@
 #include "core/translations.h"
 #include "gui/itemrow.h"
 #include "gui/runpage.h"
+#include "gui/themes.h"
 #include "gui/wizard.h"
 
 #include <QCheckBox>
@@ -361,6 +362,27 @@ private slots:
         auto *scroll = w->currentPage()->findChild<QScrollArea *>();
         QVERIFY(scroll);
         QTRY_COMPARE(scroll->verticalScrollBar()->maximum(), 0);
+    }
+
+    // The first page offers colours, following the desktop until one is
+    // chosen; a choice paints the window and outlives a change of language
+    // (GRND-0050).
+    void theFirstPageOffersColoursThatOutliveALanguageChange()
+    {
+        auto w = make();
+        auto *choice = w->page(0)->findChild<QComboBox *>(QStringLiteral("themes"));
+        QVERIFY(choice);
+        QCOMPARE(choice->currentData().toString(), QString::fromLatin1(gw::kFollowDesktop));
+        choice->setCurrentIndex(choice->findData(QStringLiteral("high-contrast-dark")));
+        QCOMPARE(QApplication::palette().color(QPalette::Window), QColor(Qt::black));
+        QCOMPARE(qgetenv("GROUNDWORK_THEME"), QByteArray("high-contrast-dark"));
+
+        auto rebuilt = make(QStringLiteral("af"));
+        auto *again = rebuilt->page(0)->findChild<QComboBox *>(QStringLiteral("themes"));
+        QCOMPARE(again->currentData().toString(), QStringLiteral("high-contrast-dark"));
+
+        gw::applyTheme(QString::fromLatin1(gw::kFollowDesktop));
+        qunsetenv("GROUNDWORK_THEME");
     }
 
     void closingMidRunAsksTheWorkerToStopAndWaits()

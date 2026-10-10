@@ -74,3 +74,8 @@ set_tests_properties(tst_wizard PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscree
 groundwork_test(tst_cjktext)
 target_link_libraries(tst_cjktext PRIVATE groundwork_gui Qt6::Widgets)
 set_tests_properties(tst_cjktext PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+
+# Colour themes, on Qt's offscreen display.
+groundwork_test(tst_themes)
+target_link_libraries(tst_themes PRIVATE groundwork_gui Qt6::Widgets)
+set_tests_properties(tst_themes PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")

@@ -200,6 +200,9 @@ text it produces itself.
   than in it. A right-to-left language mirrors the layout. Commands a check reads still run with
   `LC_ALL=C`, whatever the user's language. The window follows the
   system's font size and colour scheme, and works at large font sizes.
+  Where the desktop is dark but Qt's own colours are light, it opens
+  in its Dark theme. The first page offers other
+  themes, high contrast among them, for this run only.
 - **Tests never touch the real system.** Items name every command
   bare (`zypper`, never `/usr/bin/zypper`), so fakes placed first on
   `PATH` replace them. Core's file reader and every state path take a

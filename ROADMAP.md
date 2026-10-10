@@ -780,7 +780,7 @@ were added on 2026-10-10 (GRND-0050).
   Lanes: translations.
   Blocked-by: GRND-0032, GRND-0008, GRND-0038.
 
-- 📋 [GRND-0050] **Offer colour themes, dark ones and high contrast among them, following the desktop unless one is chosen.**
+- ✅ [GRND-0050] **Offer colour themes, dark ones and high contrast among them, following the desktop unless one is chosen.**
   The user asked on 2026-10-10: they are partially sighted, light
   sensitive, and prefer dark mode. Decided that day: the window opens
   dark when the desktop is dark, light otherwise, and the first page
@@ -795,6 +795,17 @@ were added on 2026-10-10 (GRND-0050).
   a contrast check, follow-desktop wiring in mainwindow.cpp). The
   contrast-tuned palettes, high-contrast pair included, are in
   LocalWebServerManager's src/lwsm/theme.py (Python, values reusable).
+  Resolved (2026-10-10): the first page offers Colours under Language:
+  Follow the desktop (the default), Light, Dark, High contrast light
+  and dark, Midnight, Emerald, Nord, Dracula, Solarized Dark, Gruvbox,
+  Monokai, Tokyo Night and Catppuccin Latte. Following a dark desktop
+  whose Qt colours are light uses the Dark theme. The choice lasts for
+  the run, like the language, and reaches the password box.
+  tst_themes checks every theme's text at 4.5:1 (7:1 for high
+  contrast); it caught Catppuccin Latte's blue, now darkened.
+  Seen on demoreel's display 2026-10-10: dark by default, High
+  contrast dark switched in place. Not yet seen: the AppImage on a dark
+  desktop, and the password box in a chosen theme.
   **Layman:** The app can be dark, which is easier on light-sensitive eyes; it follows the desktop unless you choose otherwise.
   Kind: feature.
   Source: user-request-2026-10-10.

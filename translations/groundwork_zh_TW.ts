@@ -742,6 +742,37 @@
     </message>
 </context>
 <context>
+    <name>gw::Themes</name>
+    <message>
+        <source>Follow the desktop</source>
+        <translation>跟隨桌面</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>淺色</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>深色</translation>
+    </message>
+    <message>
+        <source>High contrast, light</source>
+        <translation>高對比（淺色）</translation>
+    </message>
+    <message>
+        <source>High contrast, dark</source>
+        <translation>高對比（深色）</translation>
+    </message>
+    <message>
+        <source>Midnight</source>
+        <translation>午夜</translation>
+    </message>
+    <message>
+        <source>Emerald</source>
+        <translation>翡翠</translation>
+    </message>
+</context>
+<context>
     <name>gw::UpdateItem</name>
     <message>
         <source>Bring the system up to date</source>
@@ -839,6 +870,10 @@
     <message>
         <source>This translation is a draft: no native speaker has checked it yet.</source>
         <translation>此翻譯為草稿：尚未經過母語人士檢查。</translation>
+    </message>
+    <message>
+        <source>Colours:</source>
+        <translation>配色：</translation>
     </message>
     <message>
         <source>Checking this computer…</source>

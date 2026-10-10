@@ -5,6 +5,7 @@
 #include "core/systemidentity.h"
 #include "core/translations.h"
 #include "gui/askpassdialog.h"
+#include "gui/themes.h"
 #include "gui/wizard.h"
 #include "items/catalogue.h"
 #include "worker/worker.h"
@@ -76,6 +77,7 @@ int wizardMode(int argc, char *argv[])
     if (!gw::fontShowsLanguage(language))
         language = QStringLiteral("en"); // rather than a window of empty boxes
     gw::loadLanguage(language);
+    gw::applyTheme(QString::fromLatin1(gw::kFollowDesktop));
 
     if (geteuid() == 0) {
         tell(QMessageBox::Critical,
@@ -132,6 +134,8 @@ int main(int argc, char *argv[])
             language = QStringLiteral("en");
         gw::loadLanguage(language);
         QApplication::setLayoutDirection(gw::directionFor(language));
+        // The Wizard passes its theme down through the Worker (GRND-0050).
+        gw::applyTheme(qEnvironmentVariable("GROUNDWORK_THEME", QString::fromLatin1(gw::kFollowDesktop)));
         return gw::runAskpass(argc > 1 ? QString::fromLocal8Bit(argv[1]) : QString());
     }
 

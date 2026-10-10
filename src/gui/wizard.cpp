@@ -4,6 +4,7 @@
 #include "core/translations.h"
 #include "itemrow.h"
 #include "runpage.h"
+#include "themes.h"
 
 #include <QApplication>
 #include <QCheckBox>
@@ -91,6 +92,20 @@ public:
         connect(languages, &QComboBox::currentIndexChanged, this, [this, languages] {
             emit m_wizard->languageChangeRequested(languages->currentData().toString());
         });
+        // Colours change in place; nothing is rebuilt (GRND-0050).
+        auto *themeLabel = new QLabel(Wizard::tr("Colours:"), this);
+        auto *themeChoice = new QComboBox(this);
+        themeChoice->setObjectName(QStringLiteral("themes"));
+        themeLabel->setBuddy(themeChoice);
+        for (const Theme &theme : themes())
+            themeChoice->addItem(theme.name, theme.id);
+        themeChoice->setCurrentIndex(qMax(0, themeChoice->findData(currentTheme())));
+        connect(themeChoice, &QComboBox::currentIndexChanged, this, [themeChoice] {
+            const QString id = themeChoice->currentData().toString();
+            applyTheme(id);
+            // The password box is another process; it reads this.
+            qputenv("GROUNDWORK_THEME", id.toUtf8());
+        });
         m_status = new QLabel(Wizard::tr("Checking this computer…"), this);
         m_status->setWordWrap(true);
         connect(wizard, &Wizard::checksFinished, this, [this] {
@@ -104,6 +119,8 @@ public:
         layout->addWidget(languages);
         if (draftNotice)
             layout->addWidget(draftNotice);
+        layout->addWidget(themeLabel);
+        layout->addWidget(themeChoice);
         layout->addWidget(m_status);
         layout->addStretch();
     }
