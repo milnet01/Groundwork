@@ -805,6 +805,8 @@ were added on 2026-10-10 (GRND-0050).
   Resolved (2026-10-10): core's stateLine() now builds the line for
   both the row and check mode; a not-done preparation shows its detail
   alone.
+  Owed at the next release: send the website session a fresh Essentials
+  screenshot showing the new wording (promised 2026-10-10).
   **Layman:** The update row no longer says "not done" while also saying no updates are waiting.
   Kind: ux.
   Source: website-session-2026-10-10.
