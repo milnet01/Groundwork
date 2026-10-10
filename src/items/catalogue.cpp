@@ -1,6 +1,7 @@
 #include "catalogue.h"
 
 #include "appitems.h"
+#include "bootmenuitem.h"
 #include "broadcomitem.h"
 #include "clockitem.h"
 #include "codecsitem.h"
@@ -42,6 +43,7 @@ const Catalogue &catalogue()
     static const DiskSchedulerItem diskScheduler;
     static const WakeItem calmWake;
     static const LogCapItem logCap;
+    static const BootMenuItem bootMenu;
     // Configuration
     static const HostnameItem hostname;
     static const SshItem ssh;
@@ -100,7 +102,7 @@ const Catalogue &catalogue()
     static const FontsItem fonts;
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
-                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap,
+                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu,
                                 &hostname, &ssh, &clock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles,
                                 &buildTools, &codium, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});

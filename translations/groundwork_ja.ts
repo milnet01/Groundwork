@@ -180,6 +180,33 @@
     </message>
 </context>
 <context>
+    <name>gw::BootMenuItem</name>
+    <message>
+        <source>A shorter wait at the boot menu</source>
+        <translation>起動メニューの待ち時間を短く</translation>
+    </message>
+    <message>
+        <source>Shows the boot menu for 3 seconds, so the computer starts sooner. There is still time to choose from it.</source>
+        <translation>起動メニューを 3 秒間表示し、コンピューターがより早く起動するようにします。メニューから選ぶ時間は残ります。</translation>
+    </message>
+    <message>
+        <source>No boot menu this can change was found.</source>
+        <translation>これで変更できる起動メニューは見つかりませんでした。</translation>
+    </message>
+    <message>
+        <source>Only the administrator can read how long the boot menu waits.</source>
+        <translation>起動メニューの待ち時間を読み取れるのは管理者だけです。</translation>
+    </message>
+    <message>
+        <source>The boot menu waits longer than 3 seconds.</source>
+        <translation>起動メニューの待ち時間が 3 秒を超えています。</translation>
+    </message>
+    <message>
+        <source>Shortening the wait at the boot menu</source>
+        <translation>起動メニューの待ち時間を短くしています</translation>
+    </message>
+</context>
+<context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>

@@ -922,10 +922,19 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0057] **Item: a shorter wait at the boot menu.**
+- ✅ [GRND-0057] **Item: a shorter wait at the boot menu.**
   From SYSTEM_OPTIMISATIONS.md, section 6: sdbootutil set-timeout 3,
   from 8. Find the right command for each bootloader openSUSE installs
   (systemd-boot, grub2-bls, grub2) when built.
+  Shipped 2026-10-10: BootMenuItem reads LOADER_TYPE from
+  /etc/sysconfig/bootloader. systemd-boot and grub2-bls: the wait is
+  the firmware variable LoaderConfigTimeout (anyone can read it), else
+  `sdbootutil get-timeout`, which needs root, so only the Worker's
+  re-check gets an answer; apply is `sdbootutil set-timeout 3`, which
+  also updates TPM predictions. grub2 and grub2-efi: GRUB_TIMEOUT in
+  /etc/default/grub (5 when absent), set by sed, then grub2-mkconfig.
+  Done at 0 to 3 seconds or a hidden menu. The owner's machine
+  (grub2-bls) already has 3. tst_bootmenuitem.
   **Layman:** The computer starts a few seconds faster, with the boot menu still reachable.
   Kind: feature.
   Source: user-request-2026-10-10.

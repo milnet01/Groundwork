@@ -180,6 +180,33 @@
     </message>
 </context>
 <context>
+    <name>gw::BootMenuItem</name>
+    <message>
+        <source>A shorter wait at the boot menu</source>
+        <translation>बूट मेनू पर कम इंतज़ार</translation>
+    </message>
+    <message>
+        <source>Shows the boot menu for 3 seconds, so the computer starts sooner. There is still time to choose from it.</source>
+        <translation>बूट मेनू को 3 सेकंड तक दिखाता है, ताकि कंप्यूटर जल्दी शुरू हो। उसमें से चुनने का समय अब भी रहता है।</translation>
+    </message>
+    <message>
+        <source>No boot menu this can change was found.</source>
+        <translation>ऐसा कोई बूट मेनू नहीं मिला जिसे यह बदल सके।</translation>
+    </message>
+    <message>
+        <source>Only the administrator can read how long the boot menu waits.</source>
+        <translation>बूट मेनू कितनी देर इंतज़ार करता है, यह केवल व्यवस्थापक पढ़ सकता है।</translation>
+    </message>
+    <message>
+        <source>The boot menu waits longer than 3 seconds.</source>
+        <translation>बूट मेनू 3 सेकंड से ज़्यादा इंतज़ार करता है।</translation>
+    </message>
+    <message>
+        <source>Shortening the wait at the boot menu</source>
+        <translation>बूट मेनू पर इंतज़ार कम किया जा रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>

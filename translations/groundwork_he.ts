@@ -180,6 +180,33 @@
     </message>
 </context>
 <context>
+    <name>gw::BootMenuItem</name>
+    <message>
+        <source>A shorter wait at the boot menu</source>
+        <translation>המתנה קצרה יותר בתפריט האתחול</translation>
+    </message>
+    <message>
+        <source>Shows the boot menu for 3 seconds, so the computer starts sooner. There is still time to choose from it.</source>
+        <translation>מציג את תפריט האתחול למשך 3 שניות, כדי שהמחשב יופעל מהר יותר. עדיין יש זמן לבחור ממנו.</translation>
+    </message>
+    <message>
+        <source>No boot menu this can change was found.</source>
+        <translation>לא נמצא תפריט אתחול שאפשר לשנות כאן.</translation>
+    </message>
+    <message>
+        <source>Only the administrator can read how long the boot menu waits.</source>
+        <translation>רק מנהל המערכת יכול לקרוא כמה זמן תפריט האתחול ממתין.</translation>
+    </message>
+    <message>
+        <source>The boot menu waits longer than 3 seconds.</source>
+        <translation>תפריט האתחול ממתין יותר מ־3 שניות.</translation>
+    </message>
+    <message>
+        <source>Shortening the wait at the boot menu</source>
+        <translation>מקצר את ההמתנה בתפריט האתחול</translation>
+    </message>
+</context>
+<context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>

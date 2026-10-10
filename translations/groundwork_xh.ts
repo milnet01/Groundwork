@@ -180,6 +180,33 @@
     </message>
 </context>
 <context>
+    <name>gw::BootMenuItem</name>
+    <message>
+        <source>A shorter wait at the boot menu</source>
+        <translation>Ukulinda okufutshane kwimenyu yokuqalisa</translation>
+    </message>
+    <message>
+        <source>Shows the boot menu for 3 seconds, so the computer starts sooner. There is still time to choose from it.</source>
+        <translation>Ibonisa imenyu yokuqalisa imizuzwana emi-3, ukuze ikhompyutha iqale ngokukhawuleza. Kusekho ixesha lokukhetha kuyo.</translation>
+    </message>
+    <message>
+        <source>No boot menu this can change was found.</source>
+        <translation>Akufunyanwanga menyu yokuqalisa enokutshintshwa koku.</translation>
+    </message>
+    <message>
+        <source>Only the administrator can read how long the boot menu waits.</source>
+        <translation>Ngumlawuli kuphela onokufunda ukuba imenyu yokuqalisa ilinda ixesha elingakanani.</translation>
+    </message>
+    <message>
+        <source>The boot menu waits longer than 3 seconds.</source>
+        <translation>Imenyu yokuqalisa ilinda ngaphezu kwemizuzwana emi-3.</translation>
+    </message>
+    <message>
+        <source>Shortening the wait at the boot menu</source>
+        <translation>Kufinyezwa ukulinda kwimenyu yokuqalisa</translation>
+    </message>
+</context>
+<context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>

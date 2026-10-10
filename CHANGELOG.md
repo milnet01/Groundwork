@@ -14,6 +14,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **A shorter wait at the boot menu** (GRND-0057)
+  The boot menu shows for 3 seconds, so the computer starts sooner,
+  with time still to choose from it. Works with systemd-boot,
+  grub2-bls and grub2. A menu that already waits 3 seconds or less,
+  or is hidden, is left alone.
+
 - **A 1 GB limit on the system log** (GRND-0056)
   The system's log keeps at most 1 GB and deletes its oldest entries
   first, so it can no longer fill a small drive. A limit of 1 GB or

@@ -76,6 +76,7 @@ add_library(groundwork_items STATIC
     src/items/diskscheduleritem.cpp
     src/items/wakeitem.cpp
     src/items/logcapitem.cpp
+    src/items/bootmenuitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)
 

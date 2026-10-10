@@ -180,6 +180,33 @@
     </message>
 </context>
 <context>
+    <name>gw::BootMenuItem</name>
+    <message>
+        <source>A shorter wait at the boot menu</source>
+        <translation>Una espera más corta en el menú de arranque</translation>
+    </message>
+    <message>
+        <source>Shows the boot menu for 3 seconds, so the computer starts sooner. There is still time to choose from it.</source>
+        <translation>Muestra el menú de arranque durante 3 segundos, para que el ordenador arranque antes. Aún tienes tiempo de elegir en él.</translation>
+    </message>
+    <message>
+        <source>No boot menu this can change was found.</source>
+        <translation>No se encontró ningún menú de arranque que esto pueda cambiar.</translation>
+    </message>
+    <message>
+        <source>Only the administrator can read how long the boot menu waits.</source>
+        <translation>Solo el administrador puede leer cuánto espera el menú de arranque.</translation>
+    </message>
+    <message>
+        <source>The boot menu waits longer than 3 seconds.</source>
+        <translation>El menú de arranque espera más de 3 segundos.</translation>
+    </message>
+    <message>
+        <source>Shortening the wait at the boot menu</source>
+        <translation>Acortando la espera en el menú de arranque</translation>
+    </message>
+</context>
+<context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>

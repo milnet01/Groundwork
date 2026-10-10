@@ -180,6 +180,33 @@
     </message>
 </context>
 <context>
+    <name>gw::BootMenuItem</name>
+    <message>
+        <source>A shorter wait at the boot menu</source>
+        <translation>&apos;n Korter wag by die selflaaikieslys</translation>
+    </message>
+    <message>
+        <source>Shows the boot menu for 3 seconds, so the computer starts sooner. There is still time to choose from it.</source>
+        <translation>Wys die selflaaikieslys vir 3 sekondes, sodat die rekenaar gouer begin. Daar is steeds tyd om daaruit te kies.</translation>
+    </message>
+    <message>
+        <source>No boot menu this can change was found.</source>
+        <translation>Geen selflaaikieslys wat dit kan verander, is gevind nie.</translation>
+    </message>
+    <message>
+        <source>Only the administrator can read how long the boot menu waits.</source>
+        <translation>Slegs die administrateur kan lees hoe lank die selflaaikieslys wag.</translation>
+    </message>
+    <message>
+        <source>The boot menu waits longer than 3 seconds.</source>
+        <translation>Die selflaaikieslys wag langer as 3 sekondes.</translation>
+    </message>
+    <message>
+        <source>Shortening the wait at the boot menu</source>
+        <translation>Die wag by die selflaaikieslys word verkort</translation>
+    </message>
+</context>
+<context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>

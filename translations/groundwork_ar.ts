@@ -180,6 +180,33 @@
     </message>
 </context>
 <context>
+    <name>gw::BootMenuItem</name>
+    <message>
+        <source>A shorter wait at the boot menu</source>
+        <translation>انتظار أقصر في قائمة الإقلاع</translation>
+    </message>
+    <message>
+        <source>Shows the boot menu for 3 seconds, so the computer starts sooner. There is still time to choose from it.</source>
+        <translation>يعرض قائمة الإقلاع لمدة 3 ثوانٍ، فيبدأ الحاسوب أسرع. ويبقى هناك وقت للاختيار منها.</translation>
+    </message>
+    <message>
+        <source>No boot menu this can change was found.</source>
+        <translation>لم يُعثر على قائمة إقلاع يمكن لهذا تغييرها.</translation>
+    </message>
+    <message>
+        <source>Only the administrator can read how long the boot menu waits.</source>
+        <translation>لا يستطيع قراءة مدة انتظار قائمة الإقلاع إلا المسؤول.</translation>
+    </message>
+    <message>
+        <source>The boot menu waits longer than 3 seconds.</source>
+        <translation>تنتظر قائمة الإقلاع أكثر من 3 ثوانٍ.</translation>
+    </message>
+    <message>
+        <source>Shortening the wait at the boot menu</source>
+        <translation>جارٍ تقصير الانتظار في قائمة الإقلاع</translation>
+    </message>
+</context>
+<context>
     <name>gw::BroadcomItem</name>
     <message>
         <source>Broadcom Wi-Fi</source>
