@@ -72,6 +72,7 @@ add_library(groundwork_items STATIC
     src/items/snapshotsitem.cpp
     src/items/soundfirmwareitem.cpp
     src/items/sshitem.cpp
+    src/items/sysrqitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)
 

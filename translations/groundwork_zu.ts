@@ -764,6 +764,33 @@
     </message>
 </context>
 <context>
+    <name>gw::SysrqItem</name>
+    <message>
+        <source>Emergency keyboard escape</source>
+        <translation>Indlela yokuphuma ephuthumayo ngekhibhodi</translation>
+    </message>
+    <message>
+        <source>Lets you restart a frozen computer safely from the keyboard, instead of holding the power button.</source>
+        <translation>Ikuvumela ukuthi uqalise kabusha ngokuphephile ikhompyutha ebambekile usebenzisa ikhibhodi, esikhundleni sokubamba inkinobho yamandla.</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>Isilungiselelo se-kernel asikwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>The escape keys are switched off.</source>
+        <translation>Izinkinobho eziphuthumayo zivaliwe.</translation>
+    </message>
+    <message>
+        <source>Only some of the escape keys work.</source>
+        <translation>Ezinye kuphela zezinkinobho eziphuthumayo ezisebenzayo.</translation>
+    </message>
+    <message>
+        <source>Switching the emergency keys on</source>
+        <translation>Kuvulwa izinkinobho eziphuthumayo</translation>
+    </message>
+</context>
+<context>
     <name>gw::SystemIdentity</name>
     <message>
         <source>This is openSUSE Leap %1. Groundwork needs Leap 16 or later, or Tumbleweed.</source>

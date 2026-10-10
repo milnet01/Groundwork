@@ -762,6 +762,33 @@
     </message>
 </context>
 <context>
+    <name>gw::SysrqItem</name>
+    <message>
+        <source>Emergency keyboard escape</source>
+        <translation>键盘紧急出口</translation>
+    </message>
+    <message>
+        <source>Lets you restart a frozen computer safely from the keyboard, instead of holding the power button.</source>
+        <translation>让你在电脑卡死时用键盘安全地重新启动，而不必长按电源键。</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>无法读取内核的设置。</translation>
+    </message>
+    <message>
+        <source>The escape keys are switched off.</source>
+        <translation>紧急按键已关闭。</translation>
+    </message>
+    <message>
+        <source>Only some of the escape keys work.</source>
+        <translation>只有部分紧急按键可用。</translation>
+    </message>
+    <message>
+        <source>Switching the emergency keys on</source>
+        <translation>正在打开紧急按键</translation>
+    </message>
+</context>
+<context>
     <name>gw::SystemIdentity</name>
     <message>
         <source>This is openSUSE Leap %1. Groundwork needs Leap 16 or later, or Tumbleweed.</source>

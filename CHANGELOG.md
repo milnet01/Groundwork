@@ -14,6 +14,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Emergency keyboard escape: every Alt+SysRq key on, so a frozen computer can be restarted cleanly.** (GRND-0053)
+  A frozen computer can be restarted safely from the keyboard instead of the power button.
+
 - **RAM protection: when memory runs short, the most memory-hungry app is closed before the desktop freezes.** (GRND-0052)
   When memory runs out, the desktop stays usable and the app using the most memory is closed, instead of the whole computer locking up.
 

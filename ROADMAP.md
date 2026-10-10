@@ -854,10 +854,18 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0053] **Item: the emergency keyboard escape, Alt+SysRq, fully on.**
+- ✅ [GRND-0053] **Item: the emergency keyboard escape, Alt+SysRq, fully on.**
   From SYSTEM_OPTIMISATIONS.md, section 8: kernel.sysrq = 1 in a
   sysctl.d file. The distro default was 184, which leaves out sync,
   unmount, reboot and the OOM kill.
+  Resolved (2026-10-10): sysrqitem.cpp, on the System setup page.
+  Correction to the note above: by the kernel's bit list (repeated in
+  /usr/lib/sysctl.d/50-default.conf), 184 has sync, unmount and reboot;
+  it lacks the keyboard (R), signals (E, I) and the OOM kill (F). The
+  check counts 1, or any mask holding 4+16+32+64+128. It writes
+  /etc/sysctl.d/99-groundwork-sysrq.conf, which sorts after
+  50-default.conf, then runs sysctl -p on it. Check mode on the owner's
+  machine says "already done". Not yet run for real on a fresh machine.
   **Layman:** A frozen computer can be restarted safely from the keyboard instead of the power button.
   Kind: feature.
   Source: user-request-2026-10-10.

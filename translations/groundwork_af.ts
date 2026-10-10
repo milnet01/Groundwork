@@ -492,7 +492,7 @@
     </message>
     <message>
         <source>Nothing closes an app before memory runs out.</source>
-        <translation>Niks maak 'n toep toe voordat die geheue opraak nie.</translation>
+        <translation>Niks maak &apos;n toep toe voordat die geheue opraak nie.</translation>
     </message>
     <message>
         <source>Writing the RAM protection settings</source>
@@ -761,6 +761,33 @@
     <message>
         <source>Reloading the firewall</source>
         <translation>Besig om die brandmuur weer te laai</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SysrqItem</name>
+    <message>
+        <source>Emergency keyboard escape</source>
+        <translation>Noodontsnapping met die sleutelbord</translation>
+    </message>
+    <message>
+        <source>Lets you restart a frozen computer safely from the keyboard, instead of holding the power button.</source>
+        <translation>Laat jou toe om &apos;n rekenaar wat gevries het veilig van die sleutelbord af te herbegin, eerder as om die aan-knoppie in te hou.</translation>
+    </message>
+    <message>
+        <source>The kernel&apos;s setting could not be read.</source>
+        <translation>Die kern se instelling kon nie gelees word nie.</translation>
+    </message>
+    <message>
+        <source>The escape keys are switched off.</source>
+        <translation>Die ontsnappingsleutels is afgeskakel.</translation>
+    </message>
+    <message>
+        <source>Only some of the escape keys work.</source>
+        <translation>Net sommige van die ontsnappingsleutels werk.</translation>
+    </message>
+    <message>
+        <source>Switching the emergency keys on</source>
+        <translation>Skakel die noodsleutels aan</translation>
     </message>
 </context>
 <context>

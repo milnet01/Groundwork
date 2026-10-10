@@ -15,6 +15,7 @@
 #include "snapshotsitem.h"
 #include "soundfirmwareitem.h"
 #include "sshitem.h"
+#include "sysrqitem.h"
 #include "updateitem.h"
 
 namespace gw {
@@ -34,6 +35,7 @@ const Catalogue &catalogue()
     static const FirmwareItem firmware;
     static const PowerItem power;
     static const MemoryItem memory;
+    static const SysrqItem sysrq;
     // Configuration
     static const HostnameItem hostname;
     static const SshItem ssh;
@@ -92,7 +94,7 @@ const Catalogue &catalogue()
     static const FontsItem fonts;
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
-                                &snapshots, &firewall, &firmware, &power, &memory,
+                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq,
                                 &hostname, &ssh, &clock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles,
                                 &buildTools, &codium, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
