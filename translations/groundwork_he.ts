@@ -194,8 +194,12 @@
         <translation>לא נמצא תפריט אתחול שאפשר לשנות כאן.</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>רק מנהל המערכת יכול לקרוא כמה זמן תפריט האתחול ממתין.</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>תפריט האתחול שומר על זמן ההמתנה שאיתו הותקן, שעשוי להיות ארוך מ־3 שניות.</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>לא ניתן היה לקרוא כמה זמן תפריט האתחול ממתין.</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

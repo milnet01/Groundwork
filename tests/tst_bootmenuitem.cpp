@@ -94,18 +94,16 @@ private slots:
         QCOMPARE(state(), expected);
     }
 
-    // Without the variable only sdbootutil can read the setting, and only as
-    // root: the Worker's re-check.
-    void withoutTheVariableSdbootutilDecides()
+    // Without the variable the wait is the one installed on the root-only
+    // EFI partition, which neither the wizard nor the Worker can read: both
+    // run as the user. It is not done, so applying can set the variable.
+    void withoutTheVariableItIsNotDone()
     {
         loader("grub2-bls");
-        QCOMPARE(state(), gw::CheckState::CouldNotTell);
-        sdbootutil("[ \"$1\" = get-timeout ] && echo 8");
+        sdbootutil("[ \"$1\" = get-timeout ] && echo 2"); // never asked
         QCOMPARE(state(), gw::CheckState::NotDone);
-        sdbootutil("[ \"$1\" = get-timeout ] && echo 2");
-        QCOMPARE(state(), gw::CheckState::Done);
-        sdbootutil("echo 'ERROR: not root' >&2; exit 1");
-        QCOMPARE(state(), gw::CheckState::CouldNotTell);
+        loader("systemd-boot");
+        QCOMPARE(state(), gw::CheckState::NotDone);
     }
 
     // Plain grub2 waits 5 seconds when /etc/default/grub does not say.

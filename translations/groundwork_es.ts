@@ -194,8 +194,12 @@
         <translation>No se encontró ningún menú de arranque que esto pueda cambiar.</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>Solo el administrador puede leer cuánto espera el menú de arranque.</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>El menú de arranque mantiene la espera con la que se instaló, que puede ser de más de 3 segundos.</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>No se pudo leer cuánto espera el menú de arranque.</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

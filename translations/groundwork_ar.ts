@@ -194,8 +194,12 @@
         <translation>لم يُعثر على قائمة إقلاع يمكن لهذا تغييرها.</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>لا يستطيع قراءة مدة انتظار قائمة الإقلاع إلا المسؤول.</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>تحتفظ قائمة الإقلاع بمدة الانتظار التي ثُبّتت بها، وقد تزيد على 3 ثوانٍ.</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>تعذّرت قراءة مدة انتظار قائمة الإقلاع.</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

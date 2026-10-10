@@ -194,8 +194,12 @@
         <translation>Geen selflaaikieslys wat dit kan verander, is gevind nie.</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>Slegs die administrateur kan lees hoe lank die selflaaikieslys wag.</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>Die selflaaikieslys hou die wagtyd waarmee dit geïnstalleer is, wat langer as 3 sekondes kan wees.</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>Hoe lank die selflaaikieslys wag, kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

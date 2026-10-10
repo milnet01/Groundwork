@@ -194,8 +194,12 @@
         <translation>これで変更できる起動メニューは見つかりませんでした。</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>起動メニューの待ち時間を読み取れるのは管理者だけです。</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>起動メニューはインストール時の待ち時間のままで、3 秒より長い場合があります。</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>起動メニューの待ち時間を読み取れませんでした。</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

@@ -75,10 +75,8 @@ std::optional<int> wait(const CheckContext &context, Loader type)
         const QByteArray line = grubTimeoutLine(context);
         return line.isEmpty() ? 5 : seconds(QString::fromUtf8(line.mid(int(qstrlen("GRUB_TIMEOUT=")))));
     }
-    if (const auto data = context.readFile(kTimeoutVar))
-        return seconds(efiString(*data));
-    const CommandResult result = context.run({QStringLiteral("sdbootutil"), QStringLiteral("get-timeout")});
-    return result.ok() ? seconds(QString::fromUtf8(result.out)) : std::nullopt;
+    const auto data = context.readFile(kTimeoutVar);
+    return data ? seconds(efiString(*data)) : std::nullopt;
 }
 } // namespace
 
@@ -95,9 +93,15 @@ CheckResult BootMenuItem::check(const CheckContext &context) const
     const Loader type = loader(context);
     if (type == Loader::None)
         return {CheckState::NotNeeded, tr("No boot menu this can change was found.")};
+    // Without the variable the wait is the one installed on the root-only
+    // EFI partition, which the wizard and the Worker cannot read: both run
+    // as the user. Setting the variable is what the apply does.
+    if (type == Loader::Sdbootutil && !context.fileExists(kTimeoutVar))
+        return {CheckState::NotDone, tr("The boot menu keeps the wait it was installed with, which may be longer "
+                                        "than 3 seconds.")};
     const std::optional<int> s = wait(context, type);
     if (!s)
-        return {CheckState::CouldNotTell, tr("Only the administrator can read how long the boot menu waits.")};
+        return {CheckState::CouldNotTell, tr("How long the boot menu waits could not be read.")};
     if (*s >= 0 && *s <= kWait)
         return {CheckState::Done, {}};
     return {CheckState::NotDone, tr("The boot menu waits longer than 3 seconds.")};

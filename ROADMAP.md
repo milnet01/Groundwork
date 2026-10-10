@@ -928,9 +928,11 @@ as the terminal.
   (systemd-boot, grub2-bls, grub2) when built.
   Shipped 2026-10-10: BootMenuItem reads LOADER_TYPE from
   /etc/sysconfig/bootloader. systemd-boot and grub2-bls: the wait is
-  the firmware variable LoaderConfigTimeout (anyone can read it), else
-  `sdbootutil get-timeout`, which needs root, so only the Worker's
-  re-check gets an answer; apply is `sdbootutil set-timeout 3`, which
+  the firmware variable LoaderConfigTimeout (anyone can read it);
+  without it the wait is on the root-only EFI partition, which nothing
+  here can read (the Worker runs as the user too), so the item reads
+  not done and the apply sets the variable; apply is `sdbootutil
+  set-timeout 3`, which
   also updates TPM predictions. grub2 and grub2-efi: GRUB_TIMEOUT in
   /etc/default/grub (5 when absent), set by sed, then grub2-mkconfig.
   Done at 0 to 3 seconds or a hidden menu. The owner's machine

@@ -194,8 +194,12 @@
         <translation>이 항목으로 변경할 수 있는 부팅 메뉴를 찾지 못했습니다.</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>부팅 메뉴의 대기 시간은 관리자만 읽을 수 있습니다.</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>부팅 메뉴는 설치될 때의 대기 시간을 그대로 쓰며, 3초보다 길 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>부팅 메뉴의 대기 시간을 읽을 수 없습니다.</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

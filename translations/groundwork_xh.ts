@@ -194,8 +194,12 @@
         <translation>Akufunyanwanga menyu yokuqalisa enokutshintshwa koku.</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>Ngumlawuli kuphela onokufunda ukuba imenyu yokuqalisa ilinda ixesha elingakanani.</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>Imenyu yokuqalisa igcina ixesha lokulinda eyafakwa ngalo, elinokuba ngaphezu kwemizuzwana emi-3.</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>Akukwazekanga ukufunda ukuba imenyu yokuqalisa ilinda ixesha elingakanani.</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

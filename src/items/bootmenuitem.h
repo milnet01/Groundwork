@@ -4,8 +4,8 @@
 //
 // systemd-boot and grub2-bls keep the wait in sdbootutil's care: the
 // firmware variable LoaderConfigTimeout, which anyone can read, or else a
-// file on the root-only EFI partition, which only the Worker's re-check can
-// read through sdbootutil. Plain grub2 keeps it in /etc/default/grub.
+// file on the root-only EFI partition, which nothing here can read.
+// Plain grub2 keeps it in /etc/default/grub.
 #pragma once
 
 #include "core/item.h"

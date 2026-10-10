@@ -194,8 +194,12 @@
         <translation>ऐसा कोई बूट मेनू नहीं मिला जिसे यह बदल सके।</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>बूट मेनू कितनी देर इंतज़ार करता है, यह केवल व्यवस्थापक पढ़ सकता है।</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>बूट मेनू इंस्टॉल के समय तय इंतज़ार ही रखता है, जो 3 सेकंड से ज़्यादा हो सकता है।</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>बूट मेनू कितनी देर इंतज़ार करता है, यह पढ़ा नहीं जा सका।</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

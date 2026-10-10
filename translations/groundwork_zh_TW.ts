@@ -194,8 +194,12 @@
         <translation>找不到可由此變更的開機選單。</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>只有管理員才能讀取開機選單的等待時間。</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>開機選單仍使用安裝時的等待時間，可能超過 3 秒。</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>無法讀取開機選單的等待時間。</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>

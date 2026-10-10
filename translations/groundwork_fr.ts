@@ -194,8 +194,12 @@
         <translation>Aucun menu de démarrage que cette option puisse modifier n&apos;a été trouvé.</translation>
     </message>
     <message>
-        <source>Only the administrator can read how long the boot menu waits.</source>
-        <translation>Seul l&apos;administrateur peut lire combien de temps le menu de démarrage attend.</translation>
+        <source>The boot menu keeps the wait it was installed with, which may be longer than 3 seconds.</source>
+        <translation>Le menu de démarrage garde l&apos;attente définie à l&apos;installation, qui peut dépasser 3 secondes.</translation>
+    </message>
+    <message>
+        <source>How long the boot menu waits could not be read.</source>
+        <translation>La durée d&apos;attente du menu de démarrage n&apos;a pas pu être lue.</translation>
     </message>
     <message>
         <source>The boot menu waits longer than 3 seconds.</source>
