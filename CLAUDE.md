@@ -99,6 +99,16 @@ A translation checked only by a machine (Claude, Gemini) is still a
 draft (design.md, Text). A language leaves draft by adding its code to
 `kChecked` in `src/core/translations.cpp`.
 
+### Item checks never run as root
+
+The wizard and the Worker both run as the user; only a step with
+`needsRoot` goes through `sudo` (docs/design.md, Root). So the
+Worker's re-check before an apply cannot read a root-only file either.
+A check that needs root reads "couldn't tell" everywhere, and the
+Worker skips the item forever. Read only what the user can read, and
+treat an unreadable setting as "not done" where applying fixes it
+(GRND-0057's fix, 070964c).
+
 ### Roadmap IDs
 
 `GRND-NNNN`, per `roadmap-format.md` § 3.5.1. Commit subjects
