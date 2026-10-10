@@ -38,7 +38,7 @@ timeout 1500 podman run --rm \
     "$BUILD_IMAGE" bash -Eeuo pipefail -c '
         zypper -n --quiet install --no-recommends cmake ninja gcc-c++ \
             qt6-base-devel qt6-base-common-devel qt6-widgets-devel \
-            qt6-linguist-devel \
+            qt6-linguist-devel qt6-wayland \
             file findutils gzip >/dev/null
         cmake -S /src -B /tmp/build -G Ninja -DCMAKE_BUILD_TYPE=Release \
             -DGROUNDWORK_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr >/dev/null
@@ -46,12 +46,18 @@ timeout 1500 podman run --rm \
         DESTDIR=/tmp/AppDir cmake --install /tmp/build >/dev/null
         cd /out
         export APPIMAGE_EXTRACT_AND_RUN=1 QMAKE=/usr/bin/qmake6 \
-            LDAI_RUNTIME_FILE=/tools/runtime-x86_64 LDAI_NO_APPSTREAM=1
+            LDAI_RUNTIME_FILE=/tools/runtime-x86_64 LDAI_NO_APPSTREAM=1 \
+            EXTRA_PLATFORM_PLUGINS="libqwayland-egl.so;libqwayland-generic.so" \
+            EXTRA_QT_MODULES=waylandcompositor
         cp /tools/linuxdeploy-plugin-qt-x86_64.AppImage /tmp/
         PATH=/tmp:$PATH /tools/linuxdeploy-x86_64.AppImage --appdir /tmp/AppDir \
             --desktop-file /tmp/AppDir/usr/share/applications/groundwork.desktop \
             --icon-file /tmp/AppDir/usr/share/icons/hicolor/scalable/apps/groundwork.svg \
             --plugin qt --output appimage
         test -f Groundwork-x86_64.AppImage
+        # Without it, Plasma on Wayland runs the app through XWayland (GRND-0045).
+        test -f /tmp/AppDir/usr/plugins/platforms/libqwayland-generic.so
+        test -f /tmp/AppDir/usr/plugins/wayland-shell-integration/libxdg-shell.so
+        ls /tmp/AppDir/usr/plugins
     '
 echo "build-appimage: build/appimage/Groundwork-x86_64.AppImage"

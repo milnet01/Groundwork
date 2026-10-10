@@ -750,11 +750,14 @@ scheduled.
   Lanes: packaging.
   Blocked-by: GRND-0012.
 
-- 📋 [GRND-0045] **Bundle Qt's Wayland plugin in the AppImage.**
+- ✅ [GRND-0045] **Bundle Qt's Wayland plugin in the AppImage.**
   Found in GRND-0013 on Tumbleweed (Plasma on Wayland): the terminal
   printed Qt's "Could not find the Qt platform plugin wayland" and the
   wizard ran through XWayland. It worked, but the AppImage carries no
   wayland platform plugin.
+  Resolved (2026-10-10): the AppImage now carries Qt's wayland platform
+  plugins and its shell, decoration and graphics plugins. Checked on a
+  headless weston: Qt reported loading the wayland plugin, no errors.
   **Layman:** On Wayland desktops the app runs through the older X11 route instead of natively.
   Kind: package.
   Source: release-check-2026-10-08.
@@ -787,11 +790,14 @@ scheduled.
   Source: release-check-2026-10-08.
   Lanes: gui.
 
-- 📋 [GRND-0048] **Tell the user when a restart is suggested after updates.**
+- ✅ [GRND-0048] **Tell the user when a restart is suggested after updates.**
   Found in GRND-0013 on Leap 16: the update installed 391 packages and
   zypper said "Reboot is suggested" because core libraries changed.
   That line appears only under Show details; the summary says "All
   done."
+  Resolved (2026-10-10, b95f0e4): after a run that changed anything,
+  the Worker asks zypper needs-rebooting; on 102 the run page says a
+  restart is suggested.
   **Layman:** After a big update the app says "All done" without saying a restart would be wise.
   Kind: ux.
   Source: release-check-2026-10-08.
