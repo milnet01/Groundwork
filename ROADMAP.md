@@ -1,5 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
+<!-- ants-roadmap-id-high-water: GRND=70 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1046,10 +1047,19 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0064] **Item: virtual machines.**
+- ✅ [GRND-0064] **Item: virtual machines.**
   From the owner's machine: QEMU/KVM. Offered where the processor
   supports virtualisation. Pick the openSUSE pattern and a graphical
   manager when built.
+  Shipped 2026-10-12: VirtualMachinesItem, after the gaming additions.
+  Offered where a flags line in /proc/cpuinfo lists vmx or svm as a
+  whole word; otherwise "not needed here". Installs openSUSE's kvm_tools
+  pattern (main repository), which requires kvm_server, libvirt and
+  virt-manager. Done when virt-manager and libvirt-daemon-qemu are
+  installed. openSUSE's systemd presets enable virtqemud.service and
+  libvirt's sockets on install, so the sentence says it is ready after a
+  restart. Not run here: an install, and whether virt-manager then asks
+  for a password for qemu:///system. tst_virtualmachinesitem.
   **Layman:** Lets the computer run other operating systems in a window.
   Kind: feature.
   Source: user-request-2026-10-10.

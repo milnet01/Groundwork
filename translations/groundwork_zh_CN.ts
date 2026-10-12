@@ -1084,6 +1084,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>虚拟机</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>安装 Virtual Machine Manager，它可以在窗口中运行其他操作系统。重启后即可使用。</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>无法读取处理器的信息。</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>这台电脑的处理器无法运行虚拟机。</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>无法列出已安装的软件包。</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>Virtual Machine Manager 未安装。</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>正在安装 Virtual Machine Manager</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

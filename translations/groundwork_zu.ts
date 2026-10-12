@@ -1087,6 +1087,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>Imishini ebonakalayo</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>Ifaka i-Virtual Machine Manager, esebenzisa ezinye izinhlelo zokusebenza ewindini. Isilungile ngemuva kokuqala kabusha.</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>Imininingwane yeprosesa ayikwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>Iprosesa yale khompyutha ayikwazi ukusebenzisa imishini ebonakalayo.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Akukwazekanga ukubhala uhlu lwamaphakheji afakiwe.</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>I-Virtual Machine Manager ayifakiwe.</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>Kufakwa i-Virtual Machine Manager</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

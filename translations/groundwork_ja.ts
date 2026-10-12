@@ -1084,6 +1084,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>仮想マシン</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>Virtual Machine Manager をインストールします。ほかのオペレーティングシステムをウィンドウの中で動かせます。再起動後に使えます。</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>プロセッサーの情報を読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>このコンピューターのプロセッサーは仮想マシンを動かせません。</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>インストール済みのパッケージを一覧表示できませんでした。</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>Virtual Machine Manager がインストールされていません。</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>Virtual Machine Manager をインストールしています</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

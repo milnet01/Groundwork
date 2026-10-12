@@ -1087,6 +1087,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>Virtuelle Maschinen</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>Installiert Virtual Machine Manager, der andere Betriebssysteme in einem Fenster ausführt. Er ist nach einem Neustart bereit.</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>Die Angaben zum Prozessor konnten nicht gelesen werden.</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>Der Prozessor dieses Computers kann keine virtuellen Maschinen ausführen.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Die installierten Pakete konnten nicht aufgelistet werden.</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>Virtual Machine Manager ist nicht installiert.</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>Virtual Machine Manager wird installiert</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

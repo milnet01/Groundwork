@@ -1087,6 +1087,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>वर्चुअल मशीनें</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>Virtual Machine Manager इंस्टॉल करता है, जो दूसरे ऑपरेटिंग सिस्टम को एक विंडो में चलाता है। यह रीस्टार्ट के बाद तैयार होता है।</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>प्रोसेसर की जानकारी पढ़ी नहीं जा सकी।</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>इस कंप्यूटर का प्रोसेसर वर्चुअल मशीनें नहीं चला सकता।</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>इंस्टॉल किए गए पैकेजों की सूची नहीं बनाई जा सकी।</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>Virtual Machine Manager इंस्टॉल नहीं है।</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>Virtual Machine Manager इंस्टॉल हो रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

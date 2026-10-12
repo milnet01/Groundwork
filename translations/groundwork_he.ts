@@ -1087,6 +1087,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>מכונות וירטואליות</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>מתקין את התוכנה Virtual Machine Manager‎, שמריצה מערכות הפעלה אחרות בתוך חלון. היא מוכנה אחרי הפעלה מחדש.</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>לא ניתן היה לקרוא את פרטי המעבד.</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>המעבד של המחשב הזה אינו יכול להריץ מכונות וירטואליות.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>התוכנה Virtual Machine Manager‎ אינה מותקנת.</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>מתקין את Virtual Machine Manager</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

@@ -1099,6 +1099,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>الأجهزة الافتراضية</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>يثبّت برنامج Virtual Machine Manager‎، الذي يشغّل أنظمة تشغيل أخرى داخل نافذة. يصبح جاهزًا بعد إعادة التشغيل.</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>تعذّرت قراءة معلومات المعالج.</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>لا يستطيع معالج هذا الحاسوب تشغيل أجهزة افتراضية.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>تعذّر عرض قائمة الحزم المثبّتة.</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>برنامج Virtual Machine Manager‎ غير مثبّت.</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>جارٍ تثبيت برنامج Virtual Machine Manager</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

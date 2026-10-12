@@ -1084,6 +1084,37 @@
     </message>
 </context>
 <context>
+    <name>gw::VirtualMachinesItem</name>
+    <message>
+        <source>Virtual machines</source>
+        <translation>가상 머신</translation>
+    </message>
+    <message>
+        <source>Installs Virtual Machine Manager, which runs other operating systems in a window. It is ready after a restart.</source>
+        <translation>Virtual Machine Manager를 설치합니다. 다른 운영체제를 창 안에서 실행합니다. 다시 시작한 뒤에 사용할 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>The processor&apos;s details could not be read.</source>
+        <translation>프로세서 정보를 읽을 수 없었습니다.</translation>
+    </message>
+    <message>
+        <source>This computer&apos;s processor cannot run virtual machines.</source>
+        <translation>이 컴퓨터의 프로세서는 가상 머신을 실행할 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>설치된 패키지 목록을 가져올 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Virtual Machine Manager is not installed.</source>
+        <translation>Virtual Machine Manager가 설치되어 있지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Installing Virtual Machine Manager</source>
+        <translation>Virtual Machine Manager 설치 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::WakeItem</name>
     <message>
         <source>Calmer wake from hibernation</source>

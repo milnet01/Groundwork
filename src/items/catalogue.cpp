@@ -13,6 +13,7 @@
 #include "freezerecorderitem.h"
 #include "fontsitem.h"
 #include "gamingextrasitem.h"
+#include "virtualmachinesitem.h"
 #include "hostnameitem.h"
 #include "logcapitem.h"
 #include "numlockitem.h"
@@ -85,6 +86,7 @@ const Catalogue &catalogue()
         QStringLiteral("com.usebottles.bottles"),
         {QStringLiteral("bottles")});
     static const GamingExtrasItem gamingExtras; // GRND-0063
+    static const VirtualMachinesItem virtualMachines; // GRND-0064
     // Developer tools (GRND-0027)
     static const PackageItem buildTools(QStringLiteral("dev-build-tools"), QT_TRANSLATE_NOOP("gw::Apps", "Build tools"),
         QT_TRANSLATE_NOOP("gw::Apps", "Installs the C and C++ compilers and make, for building software."),
@@ -114,7 +116,7 @@ const Catalogue &catalogue()
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
                                 &hostname, &ssh, &clock, &numlock,
-                                &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras,
+                                &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
                                 &buildTools, &codium, &antsTerminal, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;
 }

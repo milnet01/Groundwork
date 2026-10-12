@@ -14,6 +14,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Virtual machines: installs Virtual Machine Manager, on computers whose processor can run them** (GRND-0064)
+  openSUSE's kvm_tools pattern: QEMU/KVM, libvirt and Virtual Machine
+  Manager. It is ready after a restart.
+
 - **Game controllers and GameMode** (GRND-0063)
   Steam can reach game controllers and VR headsets, and GameMode
   tunes the computer while a game runs. Where SELinux is on, its

@@ -82,6 +82,7 @@ add_library(groundwork_items STATIC
     src/items/numlockitem.cpp
     src/items/antsterminalitem.cpp
     src/items/gamingextrasitem.cpp
+    src/items/virtualmachinesitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)
 # The freeze recorder's script (GRND-0058) is built in at :/items, so the
