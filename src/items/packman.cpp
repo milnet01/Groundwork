@@ -6,12 +6,13 @@ namespace gw {
 namespace {
 
 const QString kReposDir = QStringLiteral("/etc/zypp/repos.d");
-const QString kEssentialsAlias = QStringLiteral("packman-essentials");
+const QString kAlias = QStringLiteral("packman");
 const QString kMirror = QStringLiteral("https://ftp.gwdg.de/pub/linux/misc/packman/suse/");
 
-} // namespace
-
-QString repositoryAlias(const CheckContext &context, const QString &urlPart)
+// The alias of the first enabled repository whose baseurl line passes
+// matches; empty when there is none.
+template<typename Matches>
+QString aliasWhere(const CheckContext &context, Matches baseurlMatches)
 {
     for (const QString &name : context.entries(kReposDir)) {
         if (!name.endsWith(QLatin1String(".repo")))
@@ -33,7 +34,7 @@ QString repositoryAlias(const CheckContext &context, const QString &urlPart)
                 matches = false;
                 enabled = true;
             } else if (line.startsWith(QLatin1String("baseurl="))) {
-                matches = line.contains(urlPart, Qt::CaseInsensitive);
+                matches = baseurlMatches(line);
             } else if (line.startsWith(QLatin1String("enabled="))) {
                 enabled = line.mid(8).trimmed() == QLatin1String("1");
             }
@@ -44,9 +45,19 @@ QString repositoryAlias(const CheckContext &context, const QString &urlPart)
     return {};
 }
 
+} // namespace
+
+QString repositoryAlias(const CheckContext &context, const QString &urlPart)
+{
+    return aliasWhere(context, [&](const QString &line) { return line.contains(urlPart, Qt::CaseInsensitive); });
+}
+
 QString packmanAlias(const CheckContext &context)
 {
-    return repositoryAlias(context, QStringLiteral("packman"));
+    return aliasWhere(context, [](const QString &line) {
+        return line.contains(QLatin1String("packman"), Qt::CaseInsensitive)
+            && !line.contains(QLatin1String("/Essentials"), Qt::CaseInsensitive);
+    });
 }
 
 QList<Step> packmanSteps(const SystemIdentity &system, const CheckContext &context, QString *alias)
@@ -54,7 +65,7 @@ QList<Step> packmanSteps(const SystemIdentity &system, const CheckContext &conte
     QList<Step> steps;
     *alias = packmanAlias(context);
     if (alias->isEmpty()) {
-        *alias = kEssentialsAlias;
+        *alias = kAlias;
         QString tree;
         if (system.id == QLatin1String("opensuse-slowroll"))
             tree = QStringLiteral("openSUSE_Slowroll");
@@ -64,8 +75,8 @@ QList<Step> packmanSteps(const SystemIdentity &system, const CheckContext &conte
             tree = QStringLiteral("openSUSE_Tumbleweed");
         steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("addrepo"),
                        QStringLiteral("-cfp"), QStringLiteral("90"),
-                       kMirror + tree + QStringLiteral("/Essentials/"), *alias},
-                      true, Step::Tool::Zypper, QCoreApplication::translate("gw::Packman", "Adding the Packman Essentials software source")});
+                       kMirror + tree + QLatin1Char('/'), *alias},
+                      true, Step::Tool::Zypper, QCoreApplication::translate("gw::Packman", "Adding the Packman software source")});
     }
     steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"),
                    QStringLiteral("--gpg-auto-import-keys"), QStringLiteral("refresh"), *alias},

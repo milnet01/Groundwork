@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>Accélération vidéo pour les cartes graphiques AMD</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>Installe le pilote vidéo de Packman pour les cartes graphiques AMD, afin que les vidéos de tous les formats courants soient lues par la carte graphique, ce qui est plus fluide et économise de l&apos;énergie.</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>Aucune carte graphique AMD n&apos;a été trouvée.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Impossible d&apos;obtenir la liste des paquets installés.</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>Les vidéos de certains formats courants ne sont pas encore lues par la carte graphique.</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>Installation du pilote vidéo de Packman pour les cartes graphiques AMD</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>Codecs multimédia</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>Ajoute la source de logiciels Packman Essentials, fait confiance à sa clé de signature et installe les codecs qui permettent de lire vidéos et musique, y compris dans le navigateur.</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>Ajoute la source de logiciels Packman, fait confiance à sa clé de signature, fait passer le système aux paquets de Packman et installe les codecs qui permettent de lire vidéos et musique, y compris dans le navigateur.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>Packman est ajouté, mais les codecs n&apos;en sont pas encore installés.</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>La source de logiciels complète de Packman n&apos;est pas encore ajoutée.</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>Les vidéos et la musique aux formats courants ne se liront pas encore.</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>Passage du système aux paquets de Packman</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -742,8 +777,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>Ajout de la source de logiciels Packman Essentials</translation>
+        <source>Adding the Packman software source</source>
+        <translation>Ajout de la source de logiciels Packman</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>

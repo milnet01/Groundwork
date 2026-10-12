@@ -14,6 +14,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Video acceleration on AMD graphics: Packman's video driver, so every common video format plays on the graphics card** (GRND-0062)
+  Offered where AMD graphics is found.
+
 - **Virtual machines: installs Virtual Machine Manager, on computers whose processor can run them** (GRND-0064)
   openSUSE's kvm_tools pattern: QEMU/KVM, libvirt and Virtual Machine
   Manager. It is ready after a restart.
@@ -69,6 +72,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   The app can be dark, which is easier on light-sensitive eyes; it follows the desktop unless you choose otherwise.
 
 ### Changed
+
+- **Media codecs now come from Packman's full repository, and the system is switched to Packman's builds** (GRND-0071)
+  As opi does. A system set up with Packman Essentials alone reads
+  "not done" until it is switched. ADR-0004 replaces ADR-0003.
 
 - **Each item's choice is an on/off switch instead of a tick box.** (GRND-0069)
   The switch fills with the colour theme's accent when on, grows with the

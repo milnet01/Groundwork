@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zu_ZA">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>Ukusheshisa ividiyo kumagrafiki e-AMD</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>Ifaka umshayeli wevidiyo we-Packman wamagrafiki e-AMD, ukuze amavidiyo azo zonke izinhlobo ezivamile adlale ekhadini lamagrafiki, okushelela kakhulu futhi konga ugesi.</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>Awekho amagrafiki e-AMD atholakele.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Akukwazekanga ukubhala uhlu lwamaphakheji afakiwe.</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>Amavidiyo ezinye izinhlobo ezivamile awakadlali ekhadini lamagrafiki.</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>Kufakwa umshayeli wevidiyo we-Packman wamagrafiki e-AMD</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>Ama-codec emidiya</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>Ingeza umthombo wesofthiwe i-Packman Essentials, ithembe ukhiye wawo wokusayina, bese ifaka ama-codec avumela amavidiyo nomculo ukuthi kudlale, nakusiphequluli.</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>Yengeza umthombo wesofthiwe i-Packman, yethembe ukhiye wayo wokusayina, ishintshele uhlelo emaphaketheni e-Packman, bese ifaka ama-codec avumela amavidiyo nomculo ukuthi kudlale, nasesipheqululini.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>I-Packman yengeziwe, kodwa ama-codec awakafakwa kuyo.</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>Umthombo wesofthiwe ophelele we-Packman awukangezwa.</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>Amavidiyo nomculo ngamafomethi avamile ngeke kudlale okwamanje.</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>Kushintshelwa uhlelo emaphaketheni e-Packman</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -742,8 +777,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>Kungezwa umthombo wesofthiwe i-Packman Essentials</translation>
+        <source>Adding the Packman software source</source>
+        <translation>Kungezwa umthombo wesofthiwe i-Packman</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>

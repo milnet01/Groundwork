@@ -1,6 +1,6 @@
 # ADR-0003: Codecs come from Packman's Essentials repository
 
-- **Status:** Accepted
+- **Status:** Superseded by ADR-0004
 - **Date:** 2026-10-02
 
 ## Context

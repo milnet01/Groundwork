@@ -76,12 +76,12 @@ private slots:
         QCOMPARE(steps[0].argv, QStringList({"zypper", "-n", "install", "broadcom-wl"}));
     }
 
-    void leapInstallsFromPackmanEssentials()
+    void leapInstallsFromPackman()
     {
         const auto steps = gw::BroadcomItem().applySteps(gw::parseOsRelease("ID=opensuse-leap\nVERSION_ID=16.0\n"), context());
-        QCOMPARE(steps.size(), 3); // add Essentials, refresh, install
-        QCOMPARE(steps[0].argv.last(), QStringLiteral("packman-essentials"));
-        QCOMPARE(steps[2].argv, QStringList({"zypper", "-n", "install", "--from", "packman-essentials", "broadcom-wl"}));
+        QCOMPARE(steps.size(), 3); // add Packman, refresh, install
+        QCOMPARE(steps[0].argv.last(), QStringLiteral("packman"));
+        QCOMPARE(steps[2].argv, QStringList({"zypper", "-n", "install", "--from", "packman", "broadcom-wl"}));
         QVERIFY(gw::catalogue().find(QStringLiteral("broadcom-wifi")));
         QVERIFY(gw::catalogue().orderProblems().isEmpty());
     }

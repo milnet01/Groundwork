@@ -1,5 +1,5 @@
 // The codecs item: Packman repository detection from repos.d, the codec
-// library's vendor from a fake rpm, and steps per system (ADR-0003).
+// library's vendor from a fake rpm, and steps per system (ADR-0004).
 #include "items/catalogue.h"
 #include "items/codecsitem.h"
 #include "items/packman.h"
@@ -62,10 +62,20 @@ private slots:
 
     void repoWithoutItsLibraryIsNotDone()
     {
-        repo(QStringLiteral("packman-essentials.repo"),
-             "[packman-essentials]\nbaseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/\n");
+        repo(QStringLiteral("packman.repo"),
+             "[packman]\nbaseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/\n");
         fakeRpm(openSuseLibrary());
         QCOMPARE(gw::CodecsItem().check(context()).state, gw::CheckState::NotDone);
+    }
+
+    // A system set up under ADR-0003: Essentials only, its codecs Packman's.
+    void essentialsOnlyIsNotDone()
+    {
+        repo(QStringLiteral("packman-essentials.repo"),
+             "[packman-essentials]\nbaseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/\n");
+        fakeRpm(packmanLibrary());
+        QCOMPARE(gw::CodecsItem().check(context()).state, gw::CheckState::NotDone);
+        QVERIFY(gw::packmanAlias(context()).isEmpty());
     }
 
     void disabledRepoDoesNotCount()
@@ -81,7 +91,8 @@ private slots:
     {
         repo(QStringLiteral("mixed.repo"),
              "[oss]\nbaseurl=https://download.opensuse.org/tumbleweed/repo/oss/\n\n"
-             "[pm]\nbaseurl=https://ftp.fau.de/packman/suse/openSUSE_Tumbleweed/Essentials/\n");
+             "[pm-ess]\nbaseurl=https://ftp.fau.de/packman/suse/openSUSE_Tumbleweed/Essentials/\n\n"
+             "[pm]\nbaseurl=https://ftp.fau.de/packman/suse/openSUSE_Tumbleweed/\n");
         QCOMPARE(gw::packmanAlias(context()), QStringLiteral("pm"));
     }
 
@@ -91,38 +102,52 @@ private slots:
         QCOMPARE(gw::CodecsItem().check(context()).state, gw::CheckState::CouldNotTell);
     }
 
-    void addsEssentialsForEachSystem_data()
+    void addsFullPackmanForEachSystem_data()
     {
         QTest::addColumn<QByteArray>("osRelease");
         QTest::addColumn<QString>("url");
         QTest::newRow("tumbleweed") << QByteArray("ID=opensuse-tumbleweed\n")
-            << "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/";
+            << "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/";
         QTest::newRow("slowroll") << QByteArray("ID=opensuse-slowroll\n")
-            << "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Slowroll/Essentials/";
+            << "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Slowroll/";
         QTest::newRow("leap 16") << QByteArray("ID=opensuse-leap\nVERSION_ID=16.0\n")
-            << "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/Essentials/";
+            << "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/";
     }
-    void addsEssentialsForEachSystem()
+    void addsFullPackmanForEachSystem()
     {
         QFETCH(QByteArray, osRelease);
         QFETCH(QString, url);
         const auto steps = gw::CodecsItem().applySteps(gw::parseOsRelease(osRelease), context());
-        QCOMPARE(steps.size(), 3);
-        QCOMPARE(steps[0].argv, QStringList({"zypper", "-n", "addrepo", "-cfp", "90", url, "packman-essentials"}));
-        QVERIFY(steps[2].argv.contains(QStringLiteral("--allow-vendor-change")));
-        QCOMPARE(steps[2].argv.mid(4, 2), QStringList({"--from", "packman-essentials"}));
+        QCOMPARE(steps.size(), 4); // add, refresh, switch to Packman's builds, install
+        QCOMPARE(steps[0].argv, QStringList({"zypper", "-n", "addrepo", "-cfp", "90", url, "packman"}));
+        QCOMPARE(steps[2].argv, QStringList({"zypper", "-n", "dup", "--from", "packman", "--allow-downgrade",
+                                             "--allow-vendor-change"}));
+        QVERIFY(steps[3].argv.contains(QStringLiteral("--allow-vendor-change")));
+        QCOMPARE(steps[3].argv.mid(4, 2), QStringList({"--from", "packman"}));
         for (const auto &s : steps)
             QVERIFY(s.needsRoot && s.tool == gw::Step::Tool::Zypper);
     }
 
-    void reusesAnExistingPackmanRepository() // ADR-0003: never add Essentials beside it
+    void reusesAnExistingPackmanRepository()
     {
-        repo(QStringLiteral("packman.repo"),
-             "[packman]\nbaseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/\n");
+        repo(QStringLiteral("pm.repo"),
+             "[pm]\nbaseurl=https://ftp.fau.de/packman/suse/openSUSE_Tumbleweed/\n");
         const auto steps = gw::CodecsItem().applySteps(gw::parseOsRelease("ID=opensuse-tumbleweed\n"), context());
-        QCOMPARE(steps.size(), 2);
+        QCOMPARE(steps.size(), 3);
+        QCOMPARE(steps[0].argv.last(), QStringLiteral("pm"));
+        QCOMPARE(steps[1].argv.mid(3, 2), QStringList({"--from", "pm"}));
+        QCOMPARE(steps[2].argv.mid(4, 2), QStringList({"--from", "pm"}));
+    }
+
+    // ADR-0004: Essentials is left in place, and the full repository added.
+    void addsFullPackmanBesideEssentials()
+    {
+        repo(QStringLiteral("packman-essentials.repo"),
+             "[packman-essentials]\nbaseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials/\n");
+        const auto steps = gw::CodecsItem().applySteps(gw::parseOsRelease("ID=opensuse-tumbleweed\n"), context());
+        QCOMPARE(steps.size(), 4);
         QCOMPARE(steps[0].argv.last(), QStringLiteral("packman"));
-        QCOMPARE(steps[1].argv.mid(4, 2), QStringList({"--from", "packman"}));
+        QCOMPARE(steps[3].argv.mid(4, 2), QStringList({"--from", "packman"}));
     }
 
     void catalogueStaysOrdered() { QVERIFY(gw::catalogue().orderProblems().isEmpty()); }

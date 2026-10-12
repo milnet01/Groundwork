@@ -1,8 +1,9 @@
-// Media codecs from Packman (GRND-0011, ADR-0003). Commands follow
-// openSUSE's SDB:Installing_codecs_from_Packman_repositories, Essentials
-// option, read from its web.archive.org snapshot of 2026-05-11 because the
-// live page refused automated reads (docs/research/2026-10-02-sources.md).
-// GRND-0013 checks them against the live page and on fresh systems.
+// Media codecs from Packman (GRND-0011, ADR-0004). The codec packages
+// follow openSUSE's SDB:Installing_codecs_from_Packman_repositories, read
+// from its web.archive.org snapshot of 2026-05-11 because the live page
+// refused automated reads (docs/research/2026-10-02-sources.md).
+// GRND-0013 checked them on fresh systems. The full repository and the
+// switch to Packman's builds follow opi 5.16.0's add_packman_repo.
 //
 // Browser video needs nothing more: Firefox plays H.264 through the
 // system's libavcodec, which this item makes Packman's; OpenH264 covers

@@ -4,7 +4,7 @@
 // every Broadcom Wi-Fi chip, so the list gates it.
 //
 // Where the package is: Tumbleweed and Slowroll, openSUSE's NON-OSS
-// repository; Leap 16, Packman Essentials
+// repository; Leap 16, Packman
 // (docs/research/2026-10-02-hardware.md).
 #pragma once
 

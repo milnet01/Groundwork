@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>AMD 显卡视频加速</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>安装 Packman 的 AMD 显卡视频驱动，让所有常见格式的视频都由显卡播放，更流畅也更省电。</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>未找到 AMD 显卡。</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>无法列出已安装的软件包。</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>部分常见格式的视频还不能由显卡播放。</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>正在安装 Packman 的 AMD 显卡视频驱动</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>媒体解码器</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>添加 Packman Essentials 软件源，信任其签名密钥，并安装解码器，让视频和音乐能够播放，在浏览器中也一样。</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>添加 Packman 软件源，信任其签名密钥，把系统切换到 Packman 的软件包，并安装让视频和音乐能够播放的编解码器，浏览器中也可以。</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>已添加 Packman，但尚未从中安装解码器。</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>尚未添加 Packman 的完整软件源。</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>常见格式的视频和音乐暂时还无法播放。</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>正在把系统切换到 Packman 的软件包</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -741,8 +776,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>正在添加 Packman Essentials 软件源</translation>
+        <source>Adding the Packman software source</source>
+        <translation>正在添加 Packman 软件源</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>

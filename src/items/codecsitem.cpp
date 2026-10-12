@@ -16,8 +16,8 @@ QString CodecsItem::title() const { return tr("Media codecs"); }
 
 QString CodecsItem::applySentence() const
 {
-    return tr("Adds the Packman Essentials software source, trusts its signing key, and "
-              "installs the codecs that let videos and music play, in the browser too.");
+    return tr("Adds the Packman software source, trusts its signing key, switches the system to "
+              "Packman's builds, and installs the codecs that let videos and music play, in the browser too.");
 }
 
 CheckResult CodecsItem::check(const CheckContext &context) const
@@ -42,6 +42,8 @@ CheckResult CodecsItem::check(const CheckContext &context) const
         return {CheckState::Done, {}};
     if (repo)
         return {CheckState::NotDone, tr("Packman is added, but the codecs are not installed from it yet.")};
+    if (fromPackman)
+        return {CheckState::NotDone, tr("Packman's full software source is not added yet.")};
     return {CheckState::NotDone, tr("Videos and music in common formats will not play yet.")};
 }
 
@@ -49,6 +51,9 @@ QList<Step> CodecsItem::applySteps(const SystemIdentity &system, const CheckCont
 {
     QString alias;
     QList<Step> steps = packmanSteps(system, context, &alias);
+    steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("dup"), QStringLiteral("--from"), alias,
+                   QStringLiteral("--allow-downgrade"), QStringLiteral("--allow-vendor-change")},
+                  true, Step::Tool::Zypper, tr("Switching the system to Packman's builds")});
     steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("install"),
                    QStringLiteral("--allow-vendor-change"), QStringLiteral("--from"), alias,
                    QStringLiteral("ffmpeg"), QStringLiteral("gstreamer-plugins-good"),

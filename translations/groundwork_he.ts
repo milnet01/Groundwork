@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="he_IL">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>האצת וידאו בגרפיקה של AMD</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>מתקין את מנהל ההתקן לווידאו של Packman לגרפיקה של AMD‎, כדי שסרטונים בכל תבנית נפוצה יתנגנו בכרטיס הגרפי, שזה חלק יותר וחוסך בחשמל.</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>לא נמצאה גרפיקה של AMD‎.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>לא ניתן היה להציג את רשימת החבילות המותקנות.</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>סרטונים בחלק מהתבניות הנפוצות עדיין לא מתנגנים בכרטיס הגרפי.</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>מתקין את מנהל ההתקן לווידאו של Packman לגרפיקה של AMD</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>מקודדי מדיה</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>מוסיף את מקור התוכנה Packman Essentials, סומך על מפתח החתימה שלו ומתקין את המקודדים שמאפשרים לנגן וידאו ומוזיקה, גם בדפדפן.</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>מוסיף את מקור התוכנה Packman‎, סומך על מפתח החתימה שלו, מעביר את המערכת לחבילות של Packman‎, ומתקין את המקודדים שמאפשרים לנגן סרטונים ומוזיקה, גם בדפדפן.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>‏Packman נוסף, אבל המקודדים עדיין לא הותקנו ממנו.</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>מקור התוכנה המלא של Packman עדיין לא נוסף.</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>וידאו ומוזיקה בפורמטים נפוצים עדיין לא יתנגנו.</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>מעביר את המערכת לחבילות של Packman</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -742,8 +777,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>מוסיף את מקור התוכנה Packman Essentials</translation>
+        <source>Adding the Packman software source</source>
+        <translation>מוסיף את מקור התוכנה Packman</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>

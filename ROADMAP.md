@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=70 -->
+<!-- ants-roadmap-id-high-water: GRND=74 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1012,7 +1012,7 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: items.
 
-- 📋 [GRND-0062] **Item: video acceleration on AMD graphics.**
+- ✅ [GRND-0062] **Item: video acceleration on AMD graphics.**
   From the owner's machine: Mesa's VA-API driver for radeonsi.
   Offered only where an AMD graphics card is found. Check what the
   media codecs item already brings in from Packman.
@@ -1023,6 +1023,13 @@ as the terminal.
   ADR-0003 rules the full repository out. openSUSE's own Mesa-libva
   leaves those formats out. Waiting on the user: openSUSE's driver
   only, an ADR-0003 exception for Mesa, or drop the item.
+  Shipped 2026-10-12, under ADR-0004: AmdVideoItem, Essentials, after
+  NVIDIA. Offered where a PCI device of vendor 0x1002 has a display
+  class (0x03...). Depends on media-codecs, whose dup switches Mesa to
+  Packman's builds; then installs Mesa-libva --from the Packman alias
+  with --allow-vendor-change. Done when Mesa-libva's vendor names
+  Packman. Check mode on the owner's machine: already done. Not run
+  here: an install on a fresh system. tst_amdvideoitem.
   **Layman:** Videos play using the graphics card, which is smoother and saves power.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -1094,6 +1101,37 @@ as the terminal.
   Kind: marketing.
   Source: peer-request-2026-10-10 ants-projects-hub-website.
 
+- ✅ [GRND-0071] **Packman: the full repository, with the system switched to its builds.**
+  The user ruled on 2026-10-12 that a repository rule applies to
+  everything: where software is in another repository, use it. ADR-0004
+  supersedes ADR-0003 (Essentials only). The codecs item adds the full
+  Packman repository and switches the system to Packman's builds, as
+  opi 5.16.0 does (zypper dup --from packman --allow-downgrade
+  --allow-vendor-change). Unblocks GRND-0062.
+  Shipped 2026-10-12: packmanAlias now counts only a full Packman
+  repository; packmanSteps adds it (alias packman, priority 90) where
+  none is configured, leaving Essentials in place. The codecs item adds
+  opi's dup step (zypper -n dup --from <alias> --allow-downgrade
+  --allow-vendor-change) before installing the codecs, and reads "not
+  done" on an Essentials-only system. Broadcom on Leap installs from the
+  full repository too. Not run here: the dup on a fresh system.
+  **Layman:** Groundwork uses Packman's full software source, so programs and drivers it offers are not held back.
+  Kind: feature.
+  Source: user-request-2026-10-12.
+  Lanes: items.
+
+- 📋 [GRND-0074] **Item: OneUp, offered beside the built-in updates.**
+  From the user, 2026-10-12: offer the owner's OneUp
+  (/mnt/Games/Scripts/Linux/OneUp) as an option for updates. It sits
+  beside openSUSE's own updates and never replaces them: removing those
+  would break things. OneUp installs from the home:milnet OBS repository
+  (OneUp README, Install & run), as Ants Terminal does; copy
+  AntsTerminalItem.
+  **Layman:** Offers OneUp, which updates everything on the computer with one click.
+  Kind: feature.
+  Source: user-request-2026-10-12.
+  Lanes: items.
+
 ## 0.4.0 — Your own set-up
 
 Items that need the user's own choices in the window (decided 2026-10-10). Each
@@ -1139,6 +1177,25 @@ has a written design before it is built.
   Kind: feature.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
+
+- 📋 [GRND-0072] **Remember the chosen colour theme between runs.**
+  The user ruled on 2026-10-12: yes. Their reason: Groundwork will hold
+  more of the user's own settings over time. Design with write-spec
+  first, beside the scan-and-restore item.
+  **Layman:** The wizard opens in the colour theme you picked last time.
+  Kind: feature.
+  Source: user-request-2026-10-12.
+  Lanes: gui.
+
+- 📋 [GRND-0073] **Scan a system's settings, and put them back after a reinstall.**
+  From the user, 2026-10-12: Groundwork should scan the system for its
+  configurations, so that after a reinstall it can reinstate them.
+  Needs a write-spec design first: what is recorded, where the record
+  lives so it survives a reinstall, and how restoring maps onto items.
+  **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
+  Kind: feature.
+  Source: user-request-2026-10-12.
+  Lanes: items, core.
 
 ## Backlog — no version yet
 

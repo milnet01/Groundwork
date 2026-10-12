@@ -54,8 +54,8 @@ Wizard and the Worker apply the same one.
 1. **Essentials** — what a desktop user needs for things to work.
    Bring the system up to date; media codecs, including video in the
    browser; Flatpak and Flathub. Hardware support, offered only where
-   the hardware is found and lacks it: the NVIDIA driver, sound
-   firmware, Broadcom Wi-Fi.
+   the hardware is found and lacks it: the NVIDIA driver, video
+   acceleration on AMD graphics, sound firmware, Broadcom Wi-Fi.
 2. **System setup** — that the system can recover and is protected.
    Btrfs snapshots, the firewall, firmware updates, and laptop power
    settings where there is a battery. RAM protection, which closes the
@@ -255,7 +255,10 @@ text it produces itself.
 - [ADR-0002](decisions/ADR-0002-appimage-in-0-1-0.md) — the AppImage
   ships in 0.1.0.
 - [ADR-0003](decisions/ADR-0003-packman-essentials.md) — codecs come
-  from Packman's Essentials repository, not the full one.
+  from Packman's Essentials repository, not the full one. Superseded by
+  ADR-0004.
+- [ADR-0004](decisions/ADR-0004-packman-full.md) — the full Packman
+  repository, with the system switched to its builds.
 
 ## Cold-eyes loop log
 

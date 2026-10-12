@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="hi_IN">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>AMD ग्राफ़िक्स पर वीडियो एक्सेलेरेशन</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>AMD ग्राफ़िक्स के लिए Packman का वीडियो ड्राइवर इंस्टॉल करता है, ताकि हर आम फ़ॉर्मेट के वीडियो ग्राफ़िक्स कार्ड पर चलें, जो ज़्यादा सहज है और बिजली बचाता है।</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>कोई AMD ग्राफ़िक्स नहीं मिला।</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>इंस्टॉल किए गए पैकेजों की सूची नहीं बनाई जा सकी।</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>कुछ आम फ़ॉर्मेट के वीडियो अभी ग्राफ़िक्स कार्ड पर नहीं चलते।</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>AMD ग्राफ़िक्स के लिए Packman का वीडियो ड्राइवर इंस्टॉल हो रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>मीडिया कोडेक</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>Packman Essentials सॉफ़्टवेयर स्रोत जोड़ता है, उसकी साइनिंग कुंजी पर भरोसा करता है, और वे कोडेक इंस्टॉल करता है जिनसे वीडियो और संगीत चलते हैं, ब्राउज़र में भी।</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>Packman सॉफ़्टवेयर स्रोत जोड़ता है, उसकी हस्ताक्षर कुंजी पर भरोसा करता है, सिस्टम को Packman के पैकेजों पर बदलता है, और वे कोडेक इंस्टॉल करता है जिनसे वीडियो और संगीत चलते हैं, ब्राउज़र में भी।</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>Packman जोड़ा गया है, लेकिन उससे कोडेक अभी इंस्टॉल नहीं किए गए हैं।</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>Packman का पूरा सॉफ़्टवेयर स्रोत अभी नहीं जोड़ा गया है।</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>आम फ़ॉर्मेट के वीडियो और संगीत अभी नहीं चलेंगे।</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>सिस्टम को Packman के पैकेजों पर बदला जा रहा है</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -742,8 +777,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>Packman Essentials सॉफ़्टवेयर स्रोत जोड़ा जा रहा है</translation>
+        <source>Adding the Packman software source</source>
+        <translation>Packman सॉफ़्टवेयर स्रोत जोड़ा जा रहा है</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>

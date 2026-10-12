@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ar_EG">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>تسريع الفيديو على رسوميات AMD</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>يثبّت برنامج تشغيل الفيديو من Packman لرسوميات AMD‎، لتُعرض مقاطع الفيديو بكل الصيغ الشائعة على بطاقة الرسوميات، وهذا أكثر سلاسة ويوفّر الطاقة.</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>لم يُعثر على رسوميات AMD‎.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>تعذّر عرض قائمة الحزم المثبّتة.</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>لا تُعرض مقاطع الفيديو ببعض الصيغ الشائعة على بطاقة الرسوميات بعد.</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>جارٍ تثبيت برنامج تشغيل الفيديو من Packman لرسوميات AMD</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>برامج ترميز الوسائط</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>يضيف مصدر البرامج Packman Essentials، ويثق بمفتاح توقيعه، ويثبّت برامج الترميز التي تتيح تشغيل الفيديو والموسيقى، في المتصفح أيضًا.</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>يضيف مصدر البرامج Packman‎، ويثق بمفتاح توقيعه، ويحوّل النظام إلى حزم Packman‎، ويثبّت المرمّزات التي تُشغّل الفيديو والموسيقى، في المتصفح أيضًا.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>تمت إضافة Packman، لكن برامج الترميز لم تُثبَّت منه بعد.</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>لم يُضف مصدر برامج Packman‎ الكامل بعد.</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>لن يعمل الفيديو والموسيقى بالصيغ الشائعة بعد.</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>جارٍ تحويل النظام إلى حزم Packman</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -746,8 +781,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>جارٍ إضافة مصدر البرامج Packman Essentials</translation>
+        <source>Adding the Packman software source</source>
+        <translation>جارٍ إضافة مصدر البرامج Packman</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>

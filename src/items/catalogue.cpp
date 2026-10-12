@@ -19,6 +19,7 @@
 #include "numlockitem.h"
 #include "memoryitem.h"
 #include "nvidiaitem.h"
+#include "amdvideoitem.h"
 #include "poweritem.h"
 #include "snapshotsitem.h"
 #include "soundfirmwareitem.h"
@@ -37,6 +38,7 @@ const Catalogue &catalogue()
     static const CodecsItem codecs;
     static const FlathubItem flathub;
     static const NvidiaItem nvidia;
+    static const AmdVideoItem amdVideo; // GRND-0062
     static const SoundFirmwareItem soundFirmware;
     static const BroadcomItem broadcom;
     // System setup
@@ -113,7 +115,7 @@ const Catalogue &catalogue()
         {QStringLiteral("fastfetch")});
     static const FontsItem fonts;
 
-    static const Catalogue all({&update, &codecs, &flathub, &nvidia, &soundFirmware, &broadcom,
+    static const Catalogue all({&update, &codecs, &flathub, &nvidia, &amdVideo, &soundFirmware, &broadcom,
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
                                 &hostname, &ssh, &clock, &numlock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,

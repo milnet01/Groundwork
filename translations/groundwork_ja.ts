@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ja_JP">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>AMD グラフィックスの動画アクセラレーション</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>AMD グラフィックス用の Packman の動画ドライバーをインストールします。一般的な形式の動画をすべてグラフィックスカードで再生でき、なめらかで省電力になります。</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>AMD グラフィックスが見つかりませんでした。</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>インストール済みのパッケージを一覧表示できませんでした。</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>一部の一般的な形式の動画は、まだグラフィックスカードで再生されません。</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>AMD グラフィックス用の Packman の動画ドライバーをインストールしています</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>メディアコーデック</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>Packman Essentials ソフトウェアソースを追加してその署名鍵を信頼し、動画や音楽をブラウザー内でも再生できるようにするコーデックをインストールします。</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>Packman ソフトウェアソースを追加し、その署名鍵を信頼し、システムを Packman のパッケージに切り替えて、動画や音楽を再生できるコーデックをインストールします。ブラウザーでも再生できます。</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>Packman は追加されていますが、そこからコーデックはまだインストールされていません。</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>Packman の完全なソフトウェアソースはまだ追加されていません。</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>一般的な形式の動画や音楽はまだ再生できません。</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>システムを Packman のパッケージに切り替えています</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -741,8 +776,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>Packman Essentials ソフトウェアソースを追加しています</translation>
+        <source>Adding the Packman software source</source>
+        <translation>Packman ソフトウェアソースを追加しています</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>

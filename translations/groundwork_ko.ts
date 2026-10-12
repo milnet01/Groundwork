@@ -2,6 +2,33 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ko_KR">
 <context>
+    <name>gw::AmdVideoItem</name>
+    <message>
+        <source>Video acceleration on AMD graphics</source>
+        <translation>AMD 그래픽 동영상 가속</translation>
+    </message>
+    <message>
+        <source>Installs Packman&apos;s video driver for AMD graphics, so videos in every common format play on the graphics card, which is smoother and saves power.</source>
+        <translation>AMD 그래픽용 Packman 동영상 드라이버를 설치합니다. 모든 일반적인 형식의 동영상을 그래픽 카드로 재생하여 더 부드럽고 전력을 아낍니다.</translation>
+    </message>
+    <message>
+        <source>No AMD graphics was found.</source>
+        <translation>AMD 그래픽을 찾지 못했습니다.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>설치된 패키지 목록을 가져올 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Videos in some common formats are not played on the graphics card yet.</source>
+        <translation>일부 일반적인 형식의 동영상은 아직 그래픽 카드로 재생되지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Installing Packman&apos;s video driver for AMD graphics</source>
+        <translation>AMD 그래픽용 Packman 동영상 드라이버 설치 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::AntsTerminalItem</name>
     <message>
         <source>Ants Terminal</source>
@@ -329,8 +356,8 @@
         <translation>미디어 코덱</translation>
     </message>
     <message>
-        <source>Adds the Packman Essentials software source, trusts its signing key, and installs the codecs that let videos and music play, in the browser too.</source>
-        <translation>Packman Essentials 소프트웨어 소스를 추가하고 그 서명 키를 신뢰한 뒤, 브라우저에서도 동영상과 음악을 재생할 수 있게 해 주는 코덱을 설치합니다.</translation>
+        <source>Adds the Packman software source, trusts its signing key, switches the system to Packman&apos;s builds, and installs the codecs that let videos and music play, in the browser too.</source>
+        <translation>Packman 소프트웨어 소스를 추가하고, 서명 키를 신뢰하고, 시스템을 Packman의 패키지로 전환한 뒤, 동영상과 음악을 재생할 수 있는 코덱을 설치합니다. 브라우저에서도 재생됩니다.</translation>
     </message>
     <message>
         <source>The installed packages could not be listed.</source>
@@ -341,8 +368,16 @@
         <translation>Packman은 추가되었지만 아직 그곳에서 코덱을 설치하지 않았습니다.</translation>
     </message>
     <message>
+        <source>Packman&apos;s full software source is not added yet.</source>
+        <translation>Packman의 전체 소프트웨어 소스가 아직 추가되지 않았습니다.</translation>
+    </message>
+    <message>
         <source>Videos and music in common formats will not play yet.</source>
         <translation>흔히 쓰는 형식의 동영상과 음악은 아직 재생되지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Switching the system to Packman&apos;s builds</source>
+        <translation>시스템을 Packman의 패키지로 전환하는 중</translation>
     </message>
     <message>
         <source>Installing the media codecs</source>
@@ -741,8 +776,8 @@
 <context>
     <name>gw::Packman</name>
     <message>
-        <source>Adding the Packman Essentials software source</source>
-        <translation>Packman Essentials 소프트웨어 소스 추가 중</translation>
+        <source>Adding the Packman software source</source>
+        <translation>Packman 소프트웨어 소스 추가 중</translation>
     </message>
     <message>
         <source>Reading Packman&apos;s software list</source>
