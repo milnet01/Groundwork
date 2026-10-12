@@ -73,7 +73,8 @@ Wizard and the Worker apply the same one.
    that screen is SDDM.
 4. **Nice to have** — extras, each its own toggle. Everyday apps,
    gaming with game controllers and GameMode, virtual machines where the
-   processor supports them, developer tools, Ants Terminal, a backup tool for the user's
+   processor supports them, developer tools, Ants Terminal, the OneUp update app
+   beside openSUSE's own updates, a backup tool for the user's
    own files, Microsoft-compatible fonts, and handy command-line
    programs.
 

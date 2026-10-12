@@ -38,6 +38,7 @@ groundwork_test(tst_antsterminalitem)
 groundwork_test(tst_gamingextrasitem)
 groundwork_test(tst_virtualmachinesitem)
 groundwork_test(tst_amdvideoitem)
+groundwork_test(tst_oneupitem)
 # The built program itself: --version answers and exits 0.
 add_test(NAME cli_version COMMAND groundwork --version)
 set_tests_properties(cli_version PROPERTIES

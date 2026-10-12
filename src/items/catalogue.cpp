@@ -1,6 +1,7 @@
 #include "catalogue.h"
 
 #include "antsterminalitem.h"
+#include "oneupitem.h"
 #include "appitems.h"
 #include "bootmenuitem.h"
 #include "broadcomitem.h"
@@ -97,6 +98,7 @@ const Catalogue &catalogue()
         QT_TRANSLATE_NOOP("gw::Apps", "Installs VSCodium, a code editor, from Flathub."), QStringLiteral("com.vscodium.codium"),
         {QStringLiteral("codium")});
     static const AntsTerminalItem antsTerminal; // GRND-0061
+    static const OneUpItem oneUp; // GRND-0074
     // Backup of the user's own files (GRND-0028)
     static const FlathubAppItem dejaDup(QStringLiteral("backup-deja-dup"), QT_TRANSLATE_NOOP("gw::Apps", "Déjà Dup backups"),
         QT_TRANSLATE_NOOP("gw::Apps", "Installs Déjà Dup, which backs up your documents and photos; system snapshots do not."),
@@ -119,7 +121,7 @@ const Catalogue &catalogue()
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
                                 &hostname, &ssh, &clock, &numlock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
-                                &buildTools, &codium, &antsTerminal, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
+                                &buildTools, &codium, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;
 }
 

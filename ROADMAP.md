@@ -1120,13 +1120,21 @@ as the terminal.
   Source: user-request-2026-10-12.
   Lanes: items.
 
-- 📋 [GRND-0074] **Item: OneUp, offered beside the built-in updates.**
+- ✅ [GRND-0074] **Item: OneUp, offered beside the built-in updates.**
   From the user, 2026-10-12: offer the owner's OneUp
   (/mnt/Games/Scripts/Linux/OneUp) as an option for updates. It sits
   beside openSUSE's own updates and never replaces them: removing those
   would break things. OneUp installs from the home:milnet OBS repository
   (OneUp README, Install & run), as Ants Terminal does; copy
   AntsTerminalItem.
+  Shipped 2026-10-12: OneUpItem, Nice to have, after Ants Terminal.
+  Offered on Tumbleweed and Leap 16.0; home:milnet answers 404 for
+  Slowroll and Leap 16.1 (checked 2026-10-12), and its package list holds
+  oneup on both built systems. Adds the repository as home_milnet, the
+  alias the README's .repo file gives, unless a repository at
+  home:/milnet/ is already there; then refreshes and installs oneup.
+  Touches nothing of openSUSE's own updates. Not run here: an install.
+  tst_oneupitem.
   **Layman:** Offers OneUp, which updates everything on the computer with one click.
   Kind: feature.
   Source: user-request-2026-10-12.

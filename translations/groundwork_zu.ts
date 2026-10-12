@@ -775,6 +775,33 @@
     </message>
 </context>
 <context>
+    <name>gw::OneUpItem</name>
+    <message>
+        <source>OneUp updates</source>
+        <translation>Izibuyekezo nge-OneUp</translation>
+    </message>
+    <message>
+        <source>Installs OneUp, an update app made by Groundwork&apos;s author: one window that updates the system, Flatpak apps and firmware. openSUSE&apos;s own updates stay as they are.</source>
+        <translation>Ifaka i-OneUp, uhlelo lokubuyekeza olwenziwe ngumbhali we-Groundwork: iwindi elilodwa elibuyekeza uhlelo, izinhlelo ze-Flatpak ne-firmware. Izibuyekezo zika-openSUSE uqobo zihlala zinjalo.</translation>
+    </message>
+    <message>
+        <source>OneUp is not built for this version of openSUSE.</source>
+        <translation>I-OneUp ayakhelwe lolu hlobo lwe-openSUSE.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Akukwazekanga ukubhala uhlu lwamaphakheji afakiwe.</translation>
+    </message>
+    <message>
+        <source>OneUp is not installed.</source>
+        <translation>I-OneUp ayifakiwe.</translation>
+    </message>
+    <message>
+        <source>Installing OneUp</source>
+        <translation>Kufakwa i-OneUp</translation>
+    </message>
+</context>
+<context>
     <name>gw::Packman</name>
     <message>
         <source>Adding the Packman software source</source>

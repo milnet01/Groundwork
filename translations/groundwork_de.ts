@@ -775,6 +775,33 @@
     </message>
 </context>
 <context>
+    <name>gw::OneUpItem</name>
+    <message>
+        <source>OneUp updates</source>
+        <translation>OneUp-Updates</translation>
+    </message>
+    <message>
+        <source>Installs OneUp, an update app made by Groundwork&apos;s author: one window that updates the system, Flatpak apps and firmware. openSUSE&apos;s own updates stay as they are.</source>
+        <translation>Installiert OneUp, eine Update-App von Groundworks Autor: ein Fenster, das das System, Flatpak-Apps und die Firmware aktualisiert. Die eigenen Updates von openSUSE bleiben, wie sie sind.</translation>
+    </message>
+    <message>
+        <source>OneUp is not built for this version of openSUSE.</source>
+        <translation>OneUp wird für diese openSUSE-Version nicht gebaut.</translation>
+    </message>
+    <message>
+        <source>The installed packages could not be listed.</source>
+        <translation>Die installierten Pakete konnten nicht aufgelistet werden.</translation>
+    </message>
+    <message>
+        <source>OneUp is not installed.</source>
+        <translation>OneUp ist nicht installiert.</translation>
+    </message>
+    <message>
+        <source>Installing OneUp</source>
+        <translation>OneUp wird installiert</translation>
+    </message>
+</context>
+<context>
     <name>gw::Packman</name>
     <message>
         <source>Adding the Packman software source</source>

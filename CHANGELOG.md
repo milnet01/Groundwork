@@ -14,6 +14,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **OneUp: the author's one-window update app, offered beside openSUSE's own updates** (GRND-0074)
+  On Tumbleweed and Leap 16.0, where its repository builds it.
+
 - **Video acceleration on AMD graphics: Packman's video driver, so every common video format plays on the graphics card** (GRND-0062)
   Offered where AMD graphics is found.
 
