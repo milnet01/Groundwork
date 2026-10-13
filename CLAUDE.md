@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 4 — Between items.
-**In flight:** nothing; 0.3.0 is released, GRND-0070's trailer footage is owed; GRND-0033 waits for a fluent reader.
+**In flight:** nothing; 0.3.0 is released. GRND-0033 waits for a fluent reader.
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where

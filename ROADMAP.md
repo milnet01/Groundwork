@@ -1089,7 +1089,7 @@ as the terminal.
   Source: user-request-2026-10-10.
   Lanes: gui.
 
-- 📋 [GRND-0070] **Trailer footage for the website, after 0.3.0 is published.**
+- ✅ [GRND-0070] **Trailer footage for the website, after 0.3.0 is published.**
   The website session asked for 3 to 6 demoreel clips plus notes.md
   (hook lines, tagline, captions, feature lines, platforms, sound).
   Brief: ~/.local/share/claude-handoff/ants-projects-hub-website-trailers-2026-10-10.md
@@ -1097,6 +1097,10 @@ as the terminal.
   then message ants-projects-hub-website. Deferred until 0.3.0 is out
   because it replaces tick boxes with switches; told the website session so.
   Released features only, demo data only (check mode prints the hostname).
+  Resolved (2026-10-13): five clips and notes.md delivered to
+  /mnt/Games/Trailers/incoming/groundwork/, recorded from the 0.3.0
+  build; ants-projects-hub-website told. The Configuration page, which
+  shows the hostname, is cut from every clip.
   **Layman:** A short video of Groundwork for its web page, recorded once the switches ship.
   Kind: marketing.
   Source: peer-request-2026-10-10 ants-projects-hub-website.
