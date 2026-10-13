@@ -121,7 +121,7 @@ Source files are under `src/`; tests and packaging are at the top level.
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
 | **Entry** | Choosing the mode: from the command line, or, for askpass, from an environment variable the Worker sets, because `SUDO_ASKPASS` names a program path and carries no option (`man sudo`, `-A`); check mode, which prints Core's results for the catalogue's checks | `main.cpp` |
 | **Tests** | Unit tests and the fake-command scenarios | `tests/` |
-| **Packaging** | The AppImage build | `packaging/appimage/` |
+| **Packaging** | The AppImage build; the RPM spec, and the scripts that build it on OBS | `packaging/appimage/`, `packaging/opensuse/`, `packaging/obs/` |
 
 The marker format is OneUp's: `@@NAME@@|field|field`, one per line, on
 standard output.

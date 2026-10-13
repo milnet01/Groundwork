@@ -1,5 +1,5 @@
 {
-  "$about": "The release recipe read by cut-release. CMakeLists.txt is the one version-bearing file: the program takes its version from PROJECT_VERSION through the GROUNDWORK_VERSION define, so there is nothing else to drift and no post_check.",
+  "$about": "The release recipe read by cut-release. The program takes its version from PROJECT_VERSION through the GROUNDWORK_VERSION define. The RPM spec's Version: and the OBS _service tag move with it, because packaging/obs/obs-submit.sh refuses them out of step (GRND-0031).",
   "version_source": "CMakeLists.txt",
   "version_pattern": "project\\(groundwork VERSION ([0-9]+\\.[0-9]+\\.[0-9]+)",
   "files": [
@@ -7,6 +7,16 @@
       "path": "CMakeLists.txt",
       "pattern": "project(groundwork VERSION {OLD} LANGUAGES CXX)",
       "replace": "project(groundwork VERSION {NEW} LANGUAGES CXX)"
+    },
+    {
+      "path": "packaging/opensuse/groundwork.spec",
+      "pattern": "Version:        {OLD}",
+      "replace": "Version:        {NEW}"
+    },
+    {
+      "path": "packaging/obs/_service",
+      "pattern": "<param name=\"revision\">v{OLD}</param>",
+      "replace": "<param name=\"revision\">v{NEW}</param>"
     }
   ],
   "tag": "v{NEW}"

@@ -1,0 +1,27 @@
+<services>
+  <!-- How OBS gets Groundwork's source (home:milnet:groundwork).
+
+       obs_scm runs on the OBS server, which clones the tag named in
+       <revision> from GitHub. tar and recompress then run inside the build
+       machine and make groundwork-<version>.tar.gz, the spec's Source0.
+       The version comes from the tag with its leading v removed, so it
+       must equal the spec's Version: field; obs-submit.sh checks this.
+
+       <revision> moves with every release: .claude/bump.json lists this
+       file, so cut-release changes it with CMakeLists.txt. -->
+  <service name="obs_scm">
+    <param name="scm">git</param>
+    <param name="url">https://github.com/milnet01/Groundwork.git</param>
+    <param name="revision">v0.3.0</param>
+    <param name="match-tag">v*</param>
+    <param name="versionformat">@PARENT_TAG@</param>
+    <param name="versionrewrite-pattern">v(.*)</param>
+    <param name="versionrewrite-replacement">\1</param>
+    <param name="filename">groundwork</param>
+  </service>
+  <service name="tar" mode="buildtime"/>
+  <service name="recompress" mode="buildtime">
+    <param name="file">groundwork-*.tar</param>
+    <param name="compression">gz</param>
+  </service>
+</services>

@@ -1,0 +1,11 @@
+# rpmlint filters for groundwork. OBS's rpmlint loads any *-rpmlintrc it
+# finds beside the spec, so obs-submit.sh copies this file there.
+
+# E: branding-requires-unversioned hicolor-icon-theme
+# rpmlint misreads "hicolor-icon-theme" as a branding package named
+# "hicolor-icon" plus "-theme", and asks for an exact-version Requires,
+# which would break this package on the theme's next update. Ants
+# Terminal's ants-terminal-rpmlintrc traces it to rpmlint's
+# BrandingPolicyCheck. If rpmlint fixes it, this filter reports
+# unused-rpmlintrc-filter, and can go.
+addFilter("branding-requires-unversioned hicolor-icon-theme")
