@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-13
+
+**Theme:** A machine that keeps running.
+
 ### Added
 
 - **OneUp: the author's one-window update app, offered beside openSUSE's own updates** (GRND-0074)

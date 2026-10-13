@@ -11,14 +11,19 @@ and Leap 16 or later.
 
 ## Status
 
-Not released yet. The wizard and its items are built and tested. The
-first release, 0.1.0, waits on a test run on fresh Tumbleweed and
-Leap 16 machines (GRND-0013). Translations are drafts until a fluent
-speaker checks them.
+Released. What each version added is in [CHANGELOG.md](CHANGELOG.md).
+Translations are drafts until a fluent speaker checks them.
 
 ## Install
 
-(Once there is something to install.)
+Download `Groundwork-x86_64.AppImage` from the
+[latest release](https://github.com/milnet01/Groundwork/releases/latest),
+then run it:
+
+```bash
+chmod +x Groundwork-x86_64.AppImage
+./Groundwork-x86_64.AppImage
+```
 
 ## Usage
 
