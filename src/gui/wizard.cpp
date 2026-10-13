@@ -20,6 +20,7 @@
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QStandardItemModel>
+#include <QStyle>
 #include <QThread>
 #include <QVBoxLayout>
 
@@ -326,10 +327,19 @@ void Wizard::fitRows()
     if (extra <= 0)
         return;
     const QRect screen = this->screen()->availableGeometry();
-    const int frame = frameGeometry().height() - height();
+    // Wayland draws the title bar outside Qt's sight, so leave room for one.
+    const int frame = qMax(frameGeometry().height() - height(),
+                           style()->pixelMetric(QStyle::PM_TitleBarHeight, nullptr, this));
     resize(width(), qMin(height() + extra, screen.height() - frame));
-    if (frameGeometry().bottom() > screen.bottom())
+    if (QGuiApplication::platformName().startsWith(QLatin1String("wayland"))) {
+        // Wayland lets no window move itself, so the grown window kept its top
+        // edge and ran off the screen, buttons and all (GRND-0075). Shown
+        // again, it is placed afresh by the desktop at its new size.
+        hide();
+        show();
+    } else if (frameGeometry().bottom() > screen.bottom()) {
         move(x(), screen.top());
+    }
 }
 
 void Wizard::userToggled(const QString &id, bool on)

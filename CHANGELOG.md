@@ -87,6 +87,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Fixed
 
+- **The window stays on screen on Wayland, so Back, Next and Apply can be clicked** (GRND-0075)
+  On a fresh install the window grew past the bottom of the screen
+  from the second page on, hiding its buttons.
+
 - **The update row no longer says "not done" beside "no updates were waiting".** (GRND-0051)
   It shows what the check found, in the window and in --check.
 

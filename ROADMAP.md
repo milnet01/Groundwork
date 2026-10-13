@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=74 -->
+<!-- ants-roadmap-id-high-water: GRND=75 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1139,6 +1139,38 @@ as the terminal.
   Kind: feature.
   Source: user-request-2026-10-12.
   Lanes: items.
+
+- ✅ [GRND-0075] **Keep the window on screen on Wayland, so Back, Next and Apply can be clicked.**
+  Found in the fresh-Tumbleweed VM check before 0.3.0 (snapshot
+  20261011, KDE on Wayland, 1280x1024). From the System setup page on,
+  the window runs past the screen's bottom edge and its buttons cannot
+  be clicked; only Alt+N and Enter reach them. Reproduced without
+  touching the window.
+  Cause: Wizard::fitRows (src/gui/wizard.cpp) grows the window, then
+  calls move() to pull it up. Wayland lets no window move itself, so
+  move() does nothing. Qt also reports no title bar height there, so the
+  height cap can overshoot by a title bar.
+  Planned fix: on Wayland, hide() and show() after growing so the
+  desktop places the window afresh; leave room for a title bar when Qt
+  reports none. Proof is the VM: buttons visible after the fix.
+  The user ruled 2026-10-12: fix before releasing 0.3.0.
+  VM check, rest of the run, all passed: system update; codecs (Packman
+  added, dup ran clean, ffmpeg/vlc/Mesa/libheif from Packman, gst plays
+  H.264, H.265, AAC, zypper verify clean); boot menu on systemd-boot
+  (LoaderConfigTimeout EFI variable = 3); virtual machines; OneUp.
+  AMD video not testable (no AMD GPU in the VM). Note, not a defect:
+  the codecs install names gstreamer-plugins-bad/ugly/libav with --from
+  packman; Packman lacks those names, so zypper took openSUSE's, which
+  play everything on Packman's libavcodec.
+  Resolved 2026-10-13: fitRows hides and re-shows the window on Wayland
+  after growing it, and leaves room for a title bar Qt cannot see.
+  Re-checked in the same VM: Essentials, System setup and
+  Configuration each show the whole window, and a mouse click on Next
+  works.
+  **Layman:** On a fresh install the wizard's window grew past the bottom of the screen, hiding its buttons.
+  Kind: fix.
+  Source: vm-release-check-2026-10-12.
+  Lanes: gui.
 
 ## 0.4.0 — Your own set-up
 
