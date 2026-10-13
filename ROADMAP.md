@@ -1248,6 +1248,14 @@ scheduled.
 
 - 📋 [GRND-0031] **RPM and OBS packaging.**
   Serves S2. After 0.1.0 (ADR-0002 keeps only the AppImage in 0.1.0).
+  User request (2026-10-13): publish Groundwork on OBS as a
+  subproject of home:milnet (as home:milnet:ants-terminal is), building
+  for all three openSUSE flavours: Tumbleweed, Slowroll and Leap 16.
+  Include the OBS publish in every release from now on. Ants Terminal's
+  session already runs an OBS subproject; ask it for its spec file,
+  _service and osc steps before building ours. Note: home:milnet and
+  home:milnet:ants-terminal build no Slowroll tree today (404 checked
+  2026-10-13), so the Slowroll repository must be added here.
   **Layman:** Makes the app installable from openSUSE's own software sources.
   Kind: package.
   Source: brief-2026-09-25.
