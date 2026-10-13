@@ -1059,8 +1059,8 @@
 <context>
     <name>gw::SystemIdentity</name>
     <message>
-        <source>This is openSUSE Leap %1. Groundwork needs Leap 16 or later, or Tumbleweed.</source>
-        <translation>Esto es openSUSE Leap %1. Groundwork necesita Leap 16 o posterior, o Tumbleweed.</translation>
+        <source>This is openSUSE Leap %1. Groundwork needs Leap 16 or later, Tumbleweed or Slowroll.</source>
+        <translation>Esto es openSUSE Leap %1. Groundwork necesita Leap 16 o posterior, Tumbleweed o Slowroll.</translation>
     </message>
     <message>
         <source>Groundwork could not tell which system this is.</source>

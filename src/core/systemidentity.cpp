@@ -53,7 +53,7 @@ SystemIdentity parseOsRelease(const QByteArray &text)
             identity.family = SystemIdentity::Family::Leap;
         else
             identity.reason = QCoreApplication::translate("gw::SystemIdentity", "This is openSUSE Leap %1. Groundwork needs Leap 16 or later, "
-                                 "or Tumbleweed.").arg(identity.versionId);
+                                 "Tumbleweed or Slowroll.").arg(identity.versionId);
     } else if (identity.id.isEmpty()) {
         identity.reason = QCoreApplication::translate("gw::SystemIdentity", "Groundwork could not tell which system this is.");
     } else {

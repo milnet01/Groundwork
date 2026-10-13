@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Fixed
+
+- **The message shown on an older Leap now names Slowroll too, beside Leap 16 and Tumbleweed.**
+
 ## [0.3.0] - 2026-10-13
 
 **Theme:** A machine that keeps running.
