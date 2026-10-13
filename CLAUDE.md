@@ -2,8 +2,8 @@
 
 ## Where this project is
 
-**State:** 4 — Between items.
-**In flight:** nothing; 0.3.0 is released. Next: GRND-0031, OBS publishing (user asked 2026-10-13). GRND-0033 waits for a fluent reader.
+**State:** 5 — On an item.
+**In flight:** GRND-0031, OBS publishing: builds green on OBS; release docs and 0.3.1 left (its roadmap note lists them). GRND-0033 waits for a fluent reader.
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where

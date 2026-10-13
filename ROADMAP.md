@@ -1246,7 +1246,7 @@ has a written design before it is built.
 Items not yet placed in a release. Each moves into a version section once it is
 scheduled.
 
-- 📋 [GRND-0031] **RPM and OBS packaging.**
+- 🚧 [GRND-0031] **RPM and OBS packaging.**
   Serves S2. After 0.1.0 (ADR-0002 keeps only the AppImage in 0.1.0).
   User request (2026-10-13): publish Groundwork on OBS as a
   subproject of home:milnet (as home:milnet:ants-terminal is), building
@@ -1256,6 +1256,21 @@ scheduled.
   _service and osc steps before building ours. Note: home:milnet and
   home:milnet:ants-terminal build no Slowroll tree today (404 checked
   2026-10-13), so the Slowroll repository must be added here.
+  Progress (2026-10-13, 9d437fc): spec at packaging/opensuse/,
+  scripts at packaging/obs/. home:milnet:groundwork exists (obs-setup.sh);
+  OBS revision 2 (v0.3.0 source) built green on Tumbleweed, Slowroll and
+  Leap 16.0, ctest 44/44 on each. Decisions: no staging project (a broken
+  OBS build after a tag means a patch release); spec Version: and
+  _service tag move through .claude/bump.json, and obs-submit.sh refuses
+  them out of step; .changes lives on OBS only (osc vc), so no email in
+  git. Left: (1) check the published repo answers at
+  download.opensuse.org/repositories/home:/milnet:/groundwork/ (404 just
+  after the build, publishing pending) and that rpmlint's
+  branding-requires-unversioned filter took; (2) README Install gains the
+  zypper addrepo route, and docs/ say how releases run the OBS step
+  (after the tag is pushed: obs-submit.sh then obs-status.sh); (3) cut
+  0.3.1 with cut-release, then run the OBS step, so the Slowroll fix
+  ships everywhere.
   **Layman:** Makes the app installable from openSUSE's own software sources.
   Kind: package.
   Source: brief-2026-09-25.
