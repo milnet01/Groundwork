@@ -67,37 +67,10 @@ installs those versions, and the gate warns locally when yours differ.
 
 ### Translations
 
-Each language has `translations/groundwork_<code>.ts`, compiled into the
-program at `:/i18n`. A language is offered only once its file has
-translations. After changing any text a user sees, refresh the files:
-
-```bash
-cmake --build build --target update_translations
-```
-
-`tst_translations` fails until they match the source.
-
-The trap: `lupdate` files a string under a context only from what it can
-see at the call. A local `tr` helper in a free function gets the wrong
-context, or none, so that text is never translated. Inside a free
-function, name the context at the call:
-`QCoreApplication::translate("gw::Name", "...")`. `tst_translations`
-checks every context the code looks up. Two more of the same kind: a
-count must be passed at that named call, or the string gets no plural
-forms; and after a named call inside `?:`, `lupdate` filed the other
-branch's `tr()` under `QCoreApplication`, so give each its own
-statement (`updateitem.cpp`).
-
-Right-to-left text has a trap of its own. Qt sets a label's direction
-from its first letter. A translation that starts with a Latin name or a
-`%1` lays out left to right, and its full stop lands at the wrong end.
-Start such a translation with U+200F, the right-to-left mark. Put U+200E,
-the left-to-right mark, after "C++" and before ".7z", or their symbols
-land on the wrong side. Only a look at the window shows either fault.
-
-A translation checked only by a machine (Claude, Gemini) is still a
-draft (design.md, Text). A language leaves draft by adding its code to
-`kChecked` in `src/core/translations.cpp`.
+Before changing any text a user sees, or a `translations/*.ts` file,
+read `docs/reference/translations.md`: refreshing the files, the
+`lupdate` context trap, right-to-left marks, and when a language leaves
+draft.
 
 ### Item checks never run as root
 
