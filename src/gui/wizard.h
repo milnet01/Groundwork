@@ -12,6 +12,7 @@
 #include <QWizard>
 
 #include <functional>
+#include <optional>
 
 namespace gw {
 
@@ -32,6 +33,10 @@ void useFontsOwnBold();
 // characters take that language's shapes (GRND-0044). Otherwise base.
 QFont fontFor(const QString &code, const QFont &base);
 
+// The jobs the first page offers (docs/design.md, The shape in one
+// paragraph). Each joins WizardSetup::jobs once it is built.
+enum class Job { SetUp, CarryOver, PrepareDrive };
+
 struct WizardSetup
 {
     const Catalogue *catalogue = nullptr;
@@ -40,6 +45,8 @@ struct WizardSetup
     QString workerProgram;      // this program, in use
     QStringList workerPrefix;   // arguments before --worker; tests use it
     QString stateDir;
+    QList<Job> jobs = {Job::SetUp}; // the jobs built, in the order offered
+    bool liveSystem = false;        // nothing set up there lasts a restart
 };
 
 class Wizard : public QWizard
@@ -49,6 +56,11 @@ public:
     explicit Wizard(WizardSetup setup, QWidget *parent = nullptr);
 
     bool checksDone() const { return m_checksDone; }
+    // The jobs this system is offered: on a live system only preparing a
+    // drive, since nothing else there lasts (GRND-0077).
+    const QList<Job> &offeredJobs() const { return m_offeredJobs; }
+    std::optional<Job> chosenJob() const { return m_chosenJob; }
+    void chooseJob(Job job) { m_chosenJob = job; }
     const Selection &selection() const { return m_selection; }
     ItemRow *row(const QString &id) const { return m_rows.value(id); }
     RunPage *runPage() const { return m_runPage; }
@@ -75,6 +87,8 @@ private:
     bool stopForClose();
 
     WizardSetup m_setup;
+    QList<Job> m_offeredJobs;
+    std::optional<Job> m_chosenJob;
     CheckResults m_results;
     bool m_checksDone = false;
     Selection m_selection;

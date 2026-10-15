@@ -1237,6 +1237,18 @@
         <translation>Okwengeziwe. Ngamunye uyisinqumo sakhe.</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>Setha le khompyutha</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>Thatha lokhu kusetha ukuyise ekufakweni okusha</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>Lungisa idrayivu yokufaka i-openSUSE</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>Siyakwamukela ku-Groundwork</translation>
     </message>
@@ -1265,8 +1277,16 @@
         <translation>Imibala:</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>Ungathanda ukwenzani?</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>Kuhlolwa le khompyutha…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>Lolu uhlelo oluphilayo, oluqalwe ku-USB stick noma kudiski. Noma yini esethwe lapha iyanyamalala ngemva kokuqala kabusha, ngakho i-Groundwork ayinalutho lokwenza lapha.</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

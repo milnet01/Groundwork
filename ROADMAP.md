@@ -1247,13 +1247,22 @@ Preparing a drive and carrying a setup over (discovery S5, S6; design.md,
 Preparing a drive and Carrying a setup over). Split from GRND-0076 on
 2026-10-15.
 
-- 📋 [GRND-0077] **First page offers three jobs.**
+- ✅ [GRND-0077] **First page offers three jobs.**
   Serves S5 and S6 (design.md, The shape in one paragraph). Set up this
   machine, carry this setup over, prepare a drive. On a live system only
   preparing is offered: detect a live system. Measure first, in a VM,
   whether the AppImage starts on openSUSE's live images (it needs FUSE 2,
   which a live image may lack); if it does not, say how the prepare job
   reaches a live system. No spec: one subsystem, cheap to redo.
+  Done (2026-10-15). Measured in a VM: the 0.3.1 AppImage starts on
+  Tumbleweed's XFCE live image and its Rescue CD. Both carry fuse3 and
+  libfuse2, and the AppImage's runtime needs neither library. Leap 16
+  publishes no live image. A live system is told by rd.live.image in
+  /proc/cmdline (isLiveSystem). The first page offers the jobs that are
+  built, as a choice once there are two; a live system is offered only
+  preparing a drive, and until that is built the page says there is
+  nothing to do. GRND-0076 and GRND-0078 each add their job to
+  WizardSetup::jobs.
   **Layman:** Groundwork's first page lets you choose: set up this machine, carry its setup to a new install, or prepare a drive.
   Kind: feature.
   Source: user-request-2026-10-15.

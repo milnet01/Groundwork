@@ -31,4 +31,10 @@ SystemIdentity parseOsRelease(const QByteArray &text);
 // missing; the two are never combined (man os-release).
 SystemIdentity readSystemIdentity(const FileReader &files);
 
+// True on a live system, started from a USB stick or disc, which keeps
+// nothing after a restart. dracut's live boot puts rd.live.image on the
+// kernel command line (measured on Tumbleweed's XFCE live image,
+// 2026-10-15).
+bool isLiveSystem(const FileReader &files);
+
 } // namespace gw

@@ -76,4 +76,10 @@ SystemIdentity readSystemIdentity(const FileReader &files)
     return parseOsRelease(*text);
 }
 
+bool isLiveSystem(const FileReader &files)
+{
+    const auto cmdline = files.read(QStringLiteral("/proc/cmdline"));
+    return cmdline && cmdline->simplified().split(' ').contains("rd.live.image");
+}
+
 } // namespace gw

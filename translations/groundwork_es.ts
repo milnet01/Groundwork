@@ -1237,6 +1237,18 @@
         <translation>Extras. Cada uno es una decisión aparte.</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>Configurar este equipo</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>Llevar esta configuración a una instalación nueva</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>Preparar una unidad para instalar openSUSE</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>Te damos la bienvenida a Groundwork</translation>
     </message>
@@ -1265,8 +1277,16 @@
         <translation>Colores:</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>¿Qué quiere hacer?</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>Comprobando este ordenador…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>Este es un sistema live, iniciado desde una memoria USB o un disco. Todo lo que se configure aquí se pierde al reiniciar, así que Groundwork no tiene nada que hacer aquí.</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

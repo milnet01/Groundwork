@@ -108,6 +108,7 @@ int wizardMode(int argc, char *argv[])
         setup.language = language;
         setup.workerProgram = QApplication::applicationFilePath();
         setup.stateDir = gw::defaultStateDir();
+        setup.liveSystem = gw::isLiveSystem(files);
         wizard = std::make_unique<gw::Wizard>(setup);
         QObject::connect(wizard.get(), &gw::Wizard::languageChangeRequested, wizard.get(),
                          [&](const QString &next) {

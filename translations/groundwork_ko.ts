@@ -1234,6 +1234,18 @@
         <translation>추가 항목. 하나하나 따로 고를 수 있습니다.</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>이 컴퓨터 설정하기</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>이 설정을 새 설치로 옮기기</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>openSUSE 설치를 위해 드라이브 준비하기</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>Groundwork에 오신 것을 환영합니다</translation>
     </message>
@@ -1262,8 +1274,16 @@
         <translation>색상:</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>무엇을 하시겠습니까?</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>이 컴퓨터를 확인하는 중…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>USB 메모리나 디스크로 시작한 라이브 시스템입니다. 여기서 설정한 것은 다시 시작하면 사라지므로 Groundwork가 여기서 할 일이 없습니다.</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

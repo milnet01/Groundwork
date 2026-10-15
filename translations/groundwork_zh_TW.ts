@@ -1234,6 +1234,18 @@
         <translation>附加內容。每一項都可單獨選擇。</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>設定這台電腦</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>將此設定帶到新的安裝</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>準備用於安裝 openSUSE 的磁碟機</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>歡迎使用 Groundwork</translation>
     </message>
@@ -1262,8 +1274,16 @@
         <translation>配色：</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>您想做什麼？</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>正在檢查這台電腦…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>這是一個從 USB 隨身碟或光碟啟動的 Live 系統。在這裡設定的任何內容在重新開機後都會消失，因此 Groundwork 在這裡無事可做。</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

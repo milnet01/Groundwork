@@ -1237,6 +1237,18 @@
         <translation>Ekstras. Elkeen is sy eie keuse.</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>Stel hierdie rekenaar op</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>Neem hierdie opstelling oor na ’n nuwe installasie</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>Berei ’n skyf voor om openSUSE te installeer</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>Welkom by Groundwork</translation>
     </message>
@@ -1265,8 +1277,16 @@
         <translation>Kleure:</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>Wat wil jy doen?</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>Besig om hierdie rekenaar te kontroleer…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>Dit is ’n lewendige stelsel, begin vanaf ’n USB-stokkie of ’n skyf. Enigiets wat hier opgestel word, is weg ná ’n herbegin, so Groundwork het niks hier om te doen nie.</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

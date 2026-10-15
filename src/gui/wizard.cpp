@@ -7,6 +7,7 @@
 #include "themes.h"
 
 #include <QApplication>
+#include <QButtonGroup>
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QComboBox>
@@ -16,6 +17,7 @@
 #include <QHash>
 #include <QLabel>
 #include <QLocale>
+#include <QRadioButton>
 #include <QScreen>
 #include <QScrollArea>
 #include <QScrollBar>
@@ -45,6 +47,16 @@ QString levelSubTitle(Level level)
     case Level::SystemSetup: return Wizard::tr("That the system can recover and is protected.");
     case Level::Configuration: return Wizard::tr("Choices a new install asks of its owner.");
     case Level::NiceToHave: return Wizard::tr("Extras. Each one is its own choice.");
+    }
+    return {};
+}
+
+QString jobTitle(Job job)
+{
+    switch (job) {
+    case Job::SetUp: return Wizard::tr("Set up this computer");
+    case Job::CarryOver: return Wizard::tr("Carry this setup over to a new install");
+    case Job::PrepareDrive: return Wizard::tr("Prepare a drive for installing openSUSE");
     }
     return {};
 }
@@ -107,8 +119,37 @@ public:
             // The password box is another process; it reads this.
             qputenv("GROUNDWORK_THEME", id.toUtf8());
         });
-        m_status = new QLabel(Wizard::tr("Checking this computer…"), this);
+        // More than one job: the user picks one (GRND-0077).
+        QLabel *jobsLabel = nullptr;
+        QWidget *jobs = nullptr;
+        if (wizard->offeredJobs().size() > 1) {
+            jobsLabel = new QLabel(Wizard::tr("What would you like to do?"), this);
+            jobs = new QWidget(this);
+            jobs->setObjectName(QStringLiteral("jobs"));
+            auto *jobsLayout = new QVBoxLayout(jobs);
+            jobsLayout->setContentsMargins(0, 0, 0, 0);
+            auto *group = new QButtonGroup(jobs);
+            for (Job job : wizard->offeredJobs()) {
+                auto *choice = new QRadioButton(jobTitle(job), jobs);
+                choice->setChecked(wizard->chosenJob() == job);
+                group->addButton(choice);
+                jobsLayout->addWidget(choice);
+                connect(choice, &QRadioButton::toggled, this, [this, job](bool on) {
+                    if (!on)
+                        return;
+                    m_wizard->chooseJob(job);
+                    emit completeChanged();
+                });
+            }
+        }
+        m_status = new QLabel(this);
         m_status->setWordWrap(true);
+        if (wizard->offeredJobs().contains(Job::SetUp))
+            m_status->setText(Wizard::tr("Checking this computer…"));
+        else if (wizard->offeredJobs().isEmpty())
+            m_status->setText(Wizard::tr("This is a live system, started from a USB stick or a disc. "
+                                         "Anything set up here is gone after a restart, so Groundwork "
+                                         "has nothing to do here."));
         connect(wizard, &Wizard::checksFinished, this, [this] {
             m_status->setText(Wizard::tr("Checked. Press Next to choose what to set up."));
             emit completeChanged();
@@ -122,10 +163,19 @@ public:
             layout->addWidget(draftNotice);
         layout->addWidget(themeLabel);
         layout->addWidget(themeChoice);
+        if (jobs) {
+            layout->addWidget(jobsLabel);
+            layout->addWidget(jobs);
+        }
         layout->addWidget(m_status);
         layout->addStretch();
     }
-    bool isComplete() const override { return m_wizard->checksDone(); }
+    // The other jobs bring their own pages and their own rule here as each
+    // is built (GRND-0076, GRND-0078).
+    bool isComplete() const override
+    {
+        return m_wizard->chosenJob() == Job::SetUp && m_wizard->checksDone();
+    }
 
 private:
     Wizard *m_wizard;
@@ -248,6 +298,12 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     setButtonText(QWizard::FinishButton, tr("&Finish"));
     setButtonText(QWizard::CancelButton, tr("Cancel"));
 
+    for (Job job : std::as_const(m_setup.jobs)) {
+        if (!m_setup.liveSystem || job == Job::PrepareDrive)
+            m_offeredJobs << job;
+    }
+    if (!m_offeredJobs.isEmpty())
+        m_chosenJob = m_offeredJobs.first();
     addPage(new WelcomePage(this, m_setup.language));
     for (Level level : {Level::Essentials, Level::SystemSetup, Level::Configuration, Level::NiceToHave}) {
         bool any = false;
@@ -279,6 +335,8 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
             qApp->quit();
     });
 
+    if (!m_offeredJobs.contains(Job::SetUp))
+        return; // nothing here is set up, so nothing is checked
     // Checks run off the window's thread so the window stays responsive.
     QThread *thread = QThread::create([this] {
         const CheckResults results = m_setup.runChecks();

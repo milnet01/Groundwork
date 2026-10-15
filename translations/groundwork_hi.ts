@@ -1237,6 +1237,18 @@
         <translation>अतिरिक्त चीज़ें। हर एक का चुनाव अलग है।</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>इस कंप्यूटर को सेट करें</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>इस सेटअप को नए इंस्टॉल पर ले जाएँ</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>openSUSE इंस्टॉल करने के लिए ड्राइव तैयार करें</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>Groundwork में आपका स्वागत है</translation>
     </message>
@@ -1265,8 +1277,16 @@
         <translation>रंग:</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>आप क्या करना चाहेंगे?</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>इस कंप्यूटर की जाँच की जा रही है…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>यह एक लाइव सिस्टम है, जो USB स्टिक या डिस्क से शुरू हुआ है। यहाँ जो भी सेट किया जाए, वह रीस्टार्ट के बाद मिट जाता है, इसलिए Groundwork के पास यहाँ करने को कुछ नहीं है।</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

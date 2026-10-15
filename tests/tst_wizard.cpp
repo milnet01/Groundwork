@@ -15,6 +15,7 @@
 #include <QLocale>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QRadioButton>
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QStandardItemModel>
@@ -83,7 +84,8 @@ class TstWizard : public QObject
     QTemporaryDir m_dir;
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
-                                     const gw::Catalogue *items = &catalogue)
+                                     const gw::Catalogue *items = &catalogue,
+                                     QList<gw::Job> jobs = {gw::Job::SetUp}, bool live = false)
     {
         const QString worker = m_dir.filePath(QStringLiteral("fake-worker"));
         if (!QFile::exists(worker)) {
@@ -106,6 +108,8 @@ class TstWizard : public QObject
         setup.language = language;
         setup.workerProgram = worker;
         setup.stateDir = m_dir.filePath(QStringLiteral("state"));
+        setup.jobs = jobs;
+        setup.liveSystem = live;
         auto w = std::make_unique<gw::Wizard>(setup);
         w->show();
         return w;
@@ -435,6 +439,58 @@ private slots:
 
         gw::applyTheme(QString::fromLatin1(gw::kFollowDesktop));
         qunsetenv("GROUNDWORK_THEME");
+    }
+
+    // GRND-0077: one job built, so the first page shows no choice.
+    void oneJobShowsNoChoice()
+    {
+        auto w = make();
+        QVERIFY(!w->currentPage()->findChild<QWidget *>(QStringLiteral("jobs")));
+        QCOMPARE(w->chosenJob(), gw::Job::SetUp);
+        QTRY_VERIFY(w->checksDone());
+        QVERIFY(w->button(QWizard::NextButton)->isEnabled());
+    }
+
+    // GRND-0077: with more than one job built, the first page offers each,
+    // the first chosen.
+    void severalJobsAreOfferedAsAChoice()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue,
+                      {gw::Job::SetUp, gw::Job::CarryOver, gw::Job::PrepareDrive});
+        auto *jobs = w->currentPage()->findChild<QWidget *>(QStringLiteral("jobs"));
+        QVERIFY(jobs);
+        const auto choices = jobs->findChildren<QRadioButton *>();
+        QCOMPARE(choices.size(), 3);
+        QVERIFY(choices[0]->isChecked());
+        QCOMPARE(w->chosenJob(), gw::Job::SetUp);
+        choices[2]->setChecked(true);
+        QCOMPARE(w->chosenJob(), gw::Job::PrepareDrive);
+    }
+
+    // GRND-0077: a live system keeps nothing, so it is offered only
+    // preparing a drive; its checks never run.
+    void aLiveSystemIsOfferedOnlyPreparingADrive()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue,
+                      {gw::Job::SetUp, gw::Job::CarryOver, gw::Job::PrepareDrive}, true);
+        QCOMPARE(w->offeredJobs(), QList<gw::Job>{gw::Job::PrepareDrive});
+        QVERIFY(!w->currentPage()->findChild<QWidget *>(QStringLiteral("jobs")));
+        QTest::qWait(200);
+        QVERIFY(!w->checksDone());
+    }
+
+    // GRND-0077: until preparing a drive is built, a live system is offered
+    // nothing, and the first page says why.
+    void aLiveSystemWithNothingBuiltSaysWhy()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp}, true);
+        QVERIFY(w->offeredJobs().isEmpty());
+        QVERIFY(!w->chosenJob());
+        bool said = false;
+        for (auto *label : w->currentPage()->findChildren<QLabel *>())
+            said = said || label->text().contains(QStringLiteral("live system"));
+        QVERIFY(said);
+        QVERIFY(!w->button(QWizard::NextButton)->isEnabled());
     }
 
     void closingMidRunAsksTheWorkerToStopAndWaits()

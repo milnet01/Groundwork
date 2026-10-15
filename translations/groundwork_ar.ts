@@ -1249,6 +1249,18 @@
         <translation>إضافات. كل واحدة منها خيار مستقل.</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>إعداد هذا الحاسوب</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>نقل هذا الإعداد إلى تثبيت جديد</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>تجهيز قرص لتثبيت openSUSE</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>مرحبًا بك في Groundwork</translation>
     </message>
@@ -1277,8 +1289,16 @@
         <translation>الألوان:</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>ماذا تريد أن تفعل؟</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>جارٍ فحص هذا الحاسوب…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>هذا نظام حي، بدأ من ذاكرة USB أو قرص. كل ما يُعدّ هنا يضيع بعد إعادة التشغيل، لذا لا يوجد ما يفعله Groundwork هنا.</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

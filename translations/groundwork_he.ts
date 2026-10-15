@@ -1237,6 +1237,18 @@
         <translation>תוספות. כל אחת מהן היא בחירה נפרדת.</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>הגדרת המחשב הזה</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>העברת ההגדרות האלה להתקנה חדשה</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>הכנת כונן להתקנת openSUSE</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>ברוכים הבאים ל־Groundwork</translation>
     </message>
@@ -1265,8 +1277,16 @@
         <translation>צבעים:</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>מה ברצונך לעשות?</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>בודק את המחשב הזה…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>זוהי מערכת חיה, שהופעלה מהתקן USB או מתקליטור. כל מה שמוגדר כאן נעלם אחרי הפעלה מחדש, ולכן ל-Groundwork אין כאן מה לעשות.</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>

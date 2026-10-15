@@ -95,6 +95,38 @@ private slots:
         QVERIFY(!identity.supported());
         QVERIFY(!identity.reason.isEmpty());
     }
+
+    // GRND-0077: the live image's command line, as read on Tumbleweed's
+    // XFCE live image (2026-10-15), and an installed system's.
+    void tellsALiveSystem_data()
+    {
+        QTest::addColumn<QByteArray>("cmdline");
+        QTest::addColumn<bool>("live");
+        QTest::newRow("live image")
+            << QByteArray("BOOT_IMAGE=(cd)/boot/x86_64/loader/linux splash=silent quiet "
+                          "root=live:CDLABEL=openSUSE_Tumbleweed_XFCE_Live rd.live.image "
+                          "rd.live.overlay.persistent rd.live.overlay.cowfs=ext4\n")
+            << true;
+        QTest::newRow("installed")
+            << QByteArray("BOOT_IMAGE=/boot/vmlinuz root=UUID=1234 splash=silent quiet\n") << false;
+        QTest::newRow("a longer word is not the flag")
+            << QByteArray("root=UUID=1234 rd.live.image.extra\n") << false;
+    }
+
+    void tellsALiveSystem()
+    {
+        QFETCH(QByteArray, cmdline);
+        QFETCH(bool, live);
+        QTemporaryDir root;
+        write(root, QStringLiteral("/proc/cmdline"), cmdline);
+        QCOMPARE(gw::isLiveSystem(gw::FileReader(root.path())), live);
+    }
+
+    void noCommandLineIsNotLive()
+    {
+        QTemporaryDir root;
+        QVERIFY(!gw::isLiveSystem(gw::FileReader(root.path())));
+    }
 };
 
 QTEST_GUILESS_MAIN(TstSystemIdentity)

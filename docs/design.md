@@ -119,11 +119,11 @@ An item that does not exist on a system is "not needed here", not an
 error. For example, `fetchmsttfonts` was not found in Leap 16.0's main
 repository.
 
-A live system of a supported openSUSE runs the prepare job only. Whether
-the AppImage starts on openSUSE's live images is not yet measured: an
-AppImage needs FUSE 2, which a live image may lack
-(Source: https://github.com/AppImage/AppImageKit/wiki/FUSE). The item
-that adds the jobs measures it before relying on it.
+A live system of a supported openSUSE runs the prepare job only. It is
+told by `rd.live.image` on the kernel command line. The AppImage starts
+on Tumbleweed's XFCE live image and its Rescue CD (0.3.1, measured in
+a VM 2026-10-15, GRND-0077). Leap 16 publishes no live image, only
+its installer.
 
 ## Preparing a drive
 

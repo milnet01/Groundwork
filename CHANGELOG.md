@@ -12,6 +12,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Changed
+
+- On a live system, started from a USB stick or a disc, Groundwork no
+  longer checks or sets anything up, since nothing there lasts a
+  restart; its first page says so (GRND-0077).
+
 ## [0.3.1] - 2026-10-15
 
 **Theme:** A machine that keeps running.

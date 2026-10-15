@@ -1234,6 +1234,18 @@
         <translation>追加機能。それぞれ個別に選べます。</translation>
     </message>
     <message>
+        <source>Set up this computer</source>
+        <translation>このコンピューターを設定する</translation>
+    </message>
+    <message>
+        <source>Carry this setup over to a new install</source>
+        <translation>この設定を新しいインストールに引き継ぐ</translation>
+    </message>
+    <message>
+        <source>Prepare a drive for installing openSUSE</source>
+        <translation>openSUSE をインストールするためにドライブを準備する</translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>Groundwork へようこそ</translation>
     </message>
@@ -1262,8 +1274,16 @@
         <translation>配色：</translation>
     </message>
     <message>
+        <source>What would you like to do?</source>
+        <translation>何をしますか？</translation>
+    </message>
+    <message>
         <source>Checking this computer…</source>
         <translation>このコンピューターを確認しています…</translation>
+    </message>
+    <message>
+        <source>This is a live system, started from a USB stick or a disc. Anything set up here is gone after a restart, so Groundwork has nothing to do here.</source>
+        <translation>これは USB メモリーまたはディスクから起動したライブシステムです。ここで設定したものは再起動すると消えるため、Groundwork がここですることはありません。</translation>
     </message>
     <message>
         <source>Checked. Press Next to choose what to set up.</source>
