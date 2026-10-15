@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 5 — On an item.
-**In flight:** translations awaiting checks. GRND-0033 waits for a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu and xh wait for a Gemini check.
+**In flight:** 0.5.0 design: GRND-0076's spec accepted; GRND-0078's spec (the saved setup file) is next. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a Gemini check).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where
