@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=79 -->
+<!-- ants-roadmap-id-high-water: GRND=80 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1372,3 +1372,16 @@ scheduled.
   Source: brief-2026-09-25.
   Lanes: packaging.
   Blocked-by: GRND-0012.
+
+- ✅ [GRND-0080] **tst_wizard's OneUp test fails on a machine with OneUp installed.**
+  offersOneUpOnlyWhenItIsInstalled sets PATH to /usr/bin:/bin for its
+  "no oneup" half, but OneUp installs /usr/bin/oneup, so the button shows
+  and the test fails there (seen 2026-10-15 on the code before GRND-0077).
+  CI passes only because its runner has no OneUp. Fix: a PATH holding no
+  oneup at all.
+  Resolved (2026-10-15): the no-OneUp half now runs with an empty folder
+  as PATH. Failed three times on the old test here, passes now.
+  **Layman:** A check in Groundwork's tests wrongly fails on computers that already have OneUp.
+  Kind: fix.
+  Source: in-session-2026-10-15.
+  Lanes: tests.

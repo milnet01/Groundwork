@@ -305,7 +305,10 @@ private slots:
         QVERIFY(f.setPermissions(f.permissions() | QFile::ExeOwner));
         const QByteArray oldPath = qgetenv("PATH");
 
-        qputenv("PATH", "/usr/bin:/bin"); // no oneup
+        // No oneup: not /usr/bin, where OneUp installs it (GRND-0080).
+        const QString empty = m_dir.filePath(QStringLiteral("empty-bin"));
+        QDir().mkpath(empty);
+        qputenv("PATH", empty.toUtf8());
         {
             auto w = make();
             QTRY_VERIFY(w->checksDone());
