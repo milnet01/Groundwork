@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-15
+
+**Theme:** A machine that keeps running.
+
 ### Added
 
 - **Groundwork can now be installed as an openSUSE package, from its own repository for Tumbleweed, Slowroll and Leap 16.0.**
