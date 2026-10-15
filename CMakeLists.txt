@@ -93,6 +93,10 @@ qt_add_resources(groundwork_items groundwork_scripts
     PREFIX /items BASE src/items FILES src/items/freeze-recorder.sh)
 
 # The Worker depends on Core and Items, never on the Wizard.
+add_library(groundwork_drives STATIC
+    src/drives/drives.cpp)
+target_link_libraries(groundwork_drives PUBLIC groundwork_core)
+
 add_library(groundwork_worker STATIC
     src/worker/privilege.cpp
     src/worker/worker.cpp)

@@ -62,7 +62,7 @@ What may depend on what). Three things make it expensive to get wrong:
 Drives reads one command, without root:
 
 ```
-lsblk --json --bytes --output NAME,PATH,TYPE,SIZE,START,PTTYPE,PTUUID,PARTTYPE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS,RM,ROTA,TRAN,MODEL,SERIAL,LOG-SEC
+lsblk --json --bytes --output NAME,PATH,TYPE,SIZE,START,PTTYPE,PTUUID,PARTTYPE,FSTYPE,LABEL,PARTLABEL,MOUNTPOINTS,RM,RO,ROTA,TRAN,MODEL,SERIAL,LOG-SEC
 ```
 
 Measured 2026-10-15 on util-linux 2.42.4: every column is readable
