@@ -1308,6 +1308,9 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   holding secrets start switched off and warn when switched on (user
   ruling 2026-10-15). Needs a spec first (write-spec): the saved file's
   format is a contract between two jobs and two installs.
+  Spec accepted (2026-10-15): docs/specs/GRND-0078-saved-setup-file.md.
+  Claude's calls there, open to the user: an uncompressed tar file,
+  .local/share mostly left out, settings over 100 MiB start off.
   **Layman:** Groundwork can list what is set up on this machine, let you keep or drop each part, and save it for your next install.
   Kind: feature.
   Source: user-request-2026-10-15.
