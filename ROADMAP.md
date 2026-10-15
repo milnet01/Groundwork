@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=76 -->
+<!-- ants-roadmap-id-high-water: GRND=79 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1241,6 +1241,89 @@ has a written design before it is built.
   Source: user-request-2026-10-12.
   Lanes: items, core.
 
+## 0.5.0 — Ready for the next install
+
+Preparing a drive and carrying a setup over (discovery S5, S6; design.md,
+Preparing a drive and Carrying a setup over). Split from GRND-0076 on
+2026-10-15.
+
+- 📋 [GRND-0077] **First page offers three jobs.**
+  Serves S5 and S6 (design.md, The shape in one paragraph). Set up this
+  machine, carry this setup over, prepare a drive. On a live system only
+  preparing is offered: detect a live system. Measure first, in a VM,
+  whether the AppImage starts on openSUSE's live images (it needs FUSE 2,
+  which a live image may lack); if it does not, say how the prepare job
+  reaches a live system. No spec: one subsystem, cheap to redo.
+  **Layman:** Groundwork's first page lets you choose: set up this machine, carry its setup to a new install, or prepare a drive.
+  Kind: feature.
+  Source: user-request-2026-10-15.
+  Lanes: wizard, core.
+
+- 📋 [GRND-0076] **Prepare a drive for installing openSUSE.**
+  User request (2026-10-15): a second job beside first-run setup. The
+  two work alone; when both are used, the first informs the second.
+  Answers given the same day:
+  - Runs from a live USB stick and on a working Linux machine
+    preparing another drive.
+  - Gathers what the machine has (graphics, Wi-Fi and the like) and the
+    user's choices into a saved file; setup reads it after the install
+    and sets the switches.
+  - Suggests partition layouts; the user may build a custom one instead.
+  - Where Windows is on the drive, advise before anything shrinks:
+    back up, turn off Fast Startup, check for BitLocker, shrink from
+    Windows' own Disk Management. Defragmenting is optional, for spinning
+    disks (the user asked for it; it eases shrinking, it protects nothing).
+  - The openSUSE installer stays a full alternative; preparing is
+    optional.
+  Changes scope: brief.md and discovery.md both say "Not an installer".
+  Update those first, then design it with write-spec (wiping a drive
+  cannot be undone).
+  Widened (2026-10-15, user): on an installed machine, Groundwork
+  gathers that machine's setup, asks which parts to keep for the next
+  install, and saves them. After the install, setup starts from that
+  file, plus Groundwork's usual items. Parts carried: Groundwork's own
+  items, programs the user added, extra software sources, and desktop
+  and app settings (lifts "no dotfile management"). Discovery amended
+  and agreed the same day: S5 (prepare a drive), S6 (carry a setup
+  over), and "Not a backup tool". Next: write-spec.
+  Split (2026-10-15): design.md amended and agreed by the user. This
+  item is now preparing a drive only (design.md, Preparing a drive; S5).
+  The three-job first page is GRND-0077, gathering and saving a setup
+  GRND-0078, starting from a saved setup GRND-0079. Wiping is confirmed
+  with a switch (user, 2026-10-15). Needs a spec first (write-spec).
+  **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
+  Kind: feature.
+  Source: user-request-2026-10-15.
+  Lanes: core, wizard, packaging.
+  Blocked-by: GRND-0077.
+
+- 📋 [GRND-0078] **Gather a setup and save it to a file.**
+  Serves S6 (design.md, Carrying a setup over). Gathers Groundwork's done
+  items, programs zypper marks as asked for (i+), Flatpak apps, added
+  software sources, and desktop and app settings app by app. Settings
+  holding secrets start switched off and warn when switched on (user
+  ruling 2026-10-15). Needs a spec first (write-spec): the saved file's
+  format is a contract between two jobs and two installs.
+  **Layman:** Groundwork can list what is set up on this machine, let you keep or drop each part, and save it for your next install.
+  Kind: feature.
+  Source: user-request-2026-10-15.
+  Lanes: carry, wizard.
+  Blocked-by: GRND-0077.
+
+- 📋 [GRND-0079] **Start a new install from a saved setup.**
+  Serves S6 (design.md, Carrying a setup over). The setup job's first
+  page offers a saved file; kept items start switched on; programs and
+  sources become items, sources first; settings are copied as the user
+  after the programs, keeping any file they replace. Where the file holds
+  secrets, the last page warns again and offers to remove them or delete
+  the file, only on the user's say-so. Built under the saved file's spec
+  from the item that gathers a setup.
+  **Layman:** After reinstalling, Groundwork can read your saved file and switch on everything you kept.
+  Kind: feature.
+  Source: user-request-2026-10-15.
+  Lanes: carry, wizard, worker.
+  Blocked-by: GRND-0078.
+
 ## Backlog — no version yet
 
 Items not yet placed in a release. Each moves into a version section once it is
@@ -1282,35 +1365,3 @@ scheduled.
   Source: brief-2026-09-25.
   Lanes: packaging.
   Blocked-by: GRND-0012.
-
-- 📋 [GRND-0076] **Prepare a drive for installing openSUSE.**
-  User request (2026-10-15): a second job beside first-run setup. The
-  two work alone; when both are used, the first informs the second.
-  Answers given the same day:
-  - Runs from a live USB stick and on a working Linux machine
-    preparing another drive.
-  - Gathers what the machine has (graphics, Wi-Fi and the like) and the
-    user's choices into a saved file; setup reads it after the install
-    and sets the switches.
-  - Suggests partition layouts; the user may build a custom one instead.
-  - Where Windows is on the drive, advise before anything shrinks:
-    back up, turn off Fast Startup, check for BitLocker, shrink from
-    Windows' own Disk Management. Defragmenting is optional, for spinning
-    disks (the user asked for it; it eases shrinking, it protects nothing).
-  - The openSUSE installer stays a full alternative; preparing is
-    optional.
-  Changes scope: brief.md and discovery.md both say "Not an installer".
-  Update those first, then design it with write-spec (wiping a drive
-  cannot be undone).
-  Widened (2026-10-15, user): on an installed machine, Groundwork
-  gathers that machine's setup, asks which parts to keep for the next
-  install, and saves them. After the install, setup starts from that
-  file, plus Groundwork's usual items. Parts carried: Groundwork's own
-  items, programs the user added, extra software sources, and desktop
-  and app settings (lifts "no dotfile management"). Discovery amended
-  and agreed the same day: S5 (prepare a drive), S6 (carry a setup
-  over), and "Not a backup tool". Next: write-spec.
-  **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
-  Kind: feature.
-  Source: user-request-2026-10-15.
-  Lanes: core, wizard, packaging.

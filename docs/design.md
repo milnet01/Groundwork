@@ -8,8 +8,11 @@ agreed — `~/.claude/workflow.md` § 4 says when it passes.
 
 **Status:** agreed (2026-10-02). The user delegated the approval to
 Claude, which gave it after the independent review reached its cap.
+Amended 2026-10-15 for preparing a drive and carrying a setup over
+(GRND-0076 to GRND-0079), and agreed by the user the same day from a
+summary.
 
-What it serves: `docs/discovery.md`, signs S1–S4.
+What it serves: `docs/discovery.md`, signs S1–S6.
 
 ## The shape, in one paragraph
 
@@ -23,6 +26,12 @@ still use it; there, with no display, `sudo` asks for the password on
 the terminal. A **check** mode prints every item's state in a terminal
 and changes nothing. An **askpass** mode is the password box `sudo`
 calls, so the app needs no desktop's own password helper.
+
+The wizard's first page offers three jobs: **set up this machine**,
+**carry this setup over** to a new install, and **prepare a drive**. On a
+live system only preparing a drive is offered, since nothing there
+lasts. Each job is its own run of pages, and all root work goes through
+the worker.
 
 ## The levels
 
@@ -79,9 +88,10 @@ Wizard and the Worker apply the same one.
    programs.
 
 Which needs are common comes from the sources in
-`docs/research/2026-10-02-sources.md`. Desktop look and feel is left
-out: it differs between desktops, and each desktop's own settings
-cover it.
+`docs/research/2026-10-02-sources.md`. Desktop look and feel is not an
+item: it differs between desktops, and each desktop's own settings
+cover it. A user's own desktop settings can still be carried over from
+an old install (§ Carrying a setup over).
 
 After a run, if OneUp is installed, the last page offers to open it.
 
@@ -109,6 +119,85 @@ An item that does not exist on a system is "not needed here", not an
 error. For example, `fetchmsttfonts` was not found in Leap 16.0's main
 repository.
 
+A live system of a supported openSUSE runs the prepare job only. Whether
+the AppImage starts on openSUSE's live images is not yet measured: an
+AppImage needs FUSE 2, which a live image may lack
+(Source: https://github.com/AppImage/AppImageKit/wiki/FUSE). The item
+that adds the jobs measures it before relying on it.
+
+## Preparing a drive
+
+The prepare job partitions one drive so that an installer can use it.
+It never installs a system, and the openSUSE installer can still do all
+of this itself.
+
+- **Choosing the drive.** It lists the drives as `lsblk` reports them,
+  without root: name, size, and each partition's size, label and
+  filesystem. The drive holding the running system cannot be chosen, nor
+  can the stick a live system started from.
+- **The layout.** It suggests layouts, and the user may build their own
+  instead. The suggestions: the whole drive for openSUSE (start-up
+  partition, Btrfs system with snapshots, swap); the same with a
+  separate home; and openSUSE in the free space beside Windows. A custom
+  layout lists partitions with a size and a use each.
+- **Windows.** Where it finds Windows on the drive, it shows a
+  checklist before any layout: back up; turn off Fast Startup; check for
+  BitLocker; shrink Windows from Windows' own Disk Management. It never
+  shrinks Windows itself. Defragmenting is offered as optional advice
+  for spinning disks.
+- **Confirming.** Nothing is written until the user has seen the drive's
+  name, size and contents again, with what will be lost, and switched
+  on a switch saying they understand. Then the worker writes the layout
+  with root steps.
+- **Afterwards.** It reads the drive back and shows the result. It then
+  says in plain words what to pick in the installer: which partition is
+  which, and which not to format. Agama, Leap 16's installer, can do
+  this, but the option is not obvious
+  (Source: https://forums.opensuse.org/t/how-to-install-16-0-while-keeping-the-existing-partition-scheme/194202).
+
+Preparing is not an item: it has no "already done", and running it
+twice erases twice. Its spec (S5) holds the layouts' sizes and the
+exact commands.
+
+## Carrying a setup over
+
+On an installed machine, the carry job gathers four kinds of setup, all
+without root:
+
+- **Groundwork's own items** whose check says done.
+- **Programs the user asked for**: packages zypper marks as asked for
+  (`i+` in `zypper search --installed-only`, readable without root,
+  measured 2026-10-15), and Flatpak apps. The list includes some
+  packages the installer asked for, such as the kernel; on the new
+  install those report "already done".
+- **Software sources the user added**: repositories that a fresh
+  install and Groundwork's items do not add themselves.
+- **Desktop and app settings**: the user's own settings folders, offered
+  app by app. Settings that hold secrets (saved passwords, keyrings,
+  SSH keys, browser profiles) are marked as such and start switched
+  off. Switching one on warns that the saved file will then hold
+  secrets; the user decides (ruled by the user, 2026-10-15).
+
+The user keeps or drops each part with a switch, and saves the result to
+one file wherever they choose; a USB stick is the usual place. It holds
+settings and choices, never documents or photos.
+
+On the new install, the setup job's first page offers to start from a
+saved file. Each kept Groundwork item starts switched on. Programs and
+software sources become items of their own, each switched on, with the
+sources before the programs that need them. Settings are copied into the
+user's home as the user, never as root, after the programs; a file they
+would replace is kept beside it first. Anything the new system lacks is
+"not needed here". Groundwork's other items are offered as usual.
+
+Where the saved file holds secrets, the last page of that run warns
+again, and offers to remove the secrets from the file or to delete the
+file. It does either only when the user says so; a user who keeps the
+file as it is keeps it (ruled by the user, 2026-10-15).
+
+The saved file's format is a contract between two jobs and two
+installs; its spec (S6) holds it.
+
 ## The parts
 
 Source files are under `src/`; tests and packaging are at the top level.
@@ -119,6 +208,8 @@ Source files are under `src/`; tests and packaging are at the top level.
 | **Items** | One file per item: its check, a plain sentence saying what its apply would do, whether that apply accepts a licence, and the steps its apply would run; the catalogue listing every item | `items/` |
 | **Worker** | Getting root once and keeping it; running steps in order; stopping only between items; the log | `worker/` |
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
+| **Drives** | Reading the drives; the suggested layouts; the steps that write a layout | `drives/` |
+| **Carry** | Gathering a setup; reading and writing the saved file; turning a saved file into a selection | `carry/` |
 | **Entry** | Choosing the mode: from the command line, or, for askpass, from an environment variable the Worker sets, because `SUDO_ASKPASS` names a program path and carries no option (`man sudo`, `-A`); check mode, which prints Core's results for the catalogue's checks | `main.cpp` |
 | **Tests** | Unit tests and the fake-command scenarios | `tests/` |
 | **Packaging** | The AppImage build; the RPM spec, and the scripts that build it on OBS | `packaging/appimage/`, `packaging/opensuse/`, `packaging/obs/` |
@@ -135,7 +226,10 @@ the system's. It runs items in catalogue order, whatever order the ids
 arrive in, and the catalogue lists every item after what it depends on.
 The Wizard never starts it with an empty selection: Apply is
 unavailable until an item is switched on. The Worker translates the
-text it produces itself.
+text it produces itself. Given a saved setup file as well, it builds
+that file's items with Carry, and their ids can be named like any
+other. The prepare job starts it with a layout to write instead of
+items.
 
 ## What may depend on what
 
@@ -145,6 +239,8 @@ text it produces itself.
   a file itself. Its check names the read-only commands and system
   files it needs, and how to read them; Core runs and reads them. Its
   apply returns a list of steps, which the Worker runs.
+- **Drives and Carry depend on Core and Items only**, as Items do on
+  Core: they name commands and return steps, and run nothing themselves.
 - **Worker and Wizard depend on Core and Items, never on each other.**
   They meet only through a child process: the Wizard starts the Worker,
   reads its markers, and asks it to stop by writing a file. No shared
@@ -201,8 +297,9 @@ text it produces itself.
   box; without one, `sudo` asks on the terminal.
 - **Logging** goes to one file per run under the user's state directory,
   and the Worker's output is mirrored there.
-- **Persistence:** none, beyond the logs and the window's own settings.
-  Every run starts from fresh checks.
+- **Persistence:** none, beyond the logs, the window's own settings, and
+  a saved setup file written where the user chooses. Every run starts
+  from fresh checks, a run started from a saved file included.
 - **Text** is plain words, written for someone new to openSUSE, and
   every string a user sees is translatable at its source, items'
   titles, sentences and details included. The language follows the
@@ -231,6 +328,8 @@ text it produces itself.
 | S2 — one button and one password on a fresh system, video plays | The whole: the Essentials items, the Worker, the Wizard, the AppImage |
 | S3 — each row says what it would do, in the user's language | Each item's translatable sentence; the translations; the Wizard's rows |
 | S4 — levels in order, any item switched on or off, only those run | The Wizard's pages and toggles; the Worker runs only the items it is given |
+| S5 — a drive changes only after the user confirms it | Drives; the Wizard's prepare pages; the Worker |
+| S6 — a setup carried over starts the new install | Carry; the Wizard's carry pages and its first page |
 
 ## The stack, and what it rules out
 
