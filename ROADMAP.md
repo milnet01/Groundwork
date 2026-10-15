@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=75 -->
+<!-- ants-roadmap-id-high-water: GRND=76 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1282,3 +1282,27 @@ scheduled.
   Source: brief-2026-09-25.
   Lanes: packaging.
   Blocked-by: GRND-0012.
+
+- 📋 [GRND-0076] **Prepare a drive for installing openSUSE.**
+  User request (2026-10-15): a second job beside first-run setup. The
+  two work alone; when both are used, the first informs the second.
+  Answers given the same day:
+  - Runs from a live USB stick and on a working Linux machine
+    preparing another drive.
+  - Gathers what the machine has (graphics, Wi-Fi and the like) and the
+    user's choices into a saved file; setup reads it after the install
+    and sets the switches.
+  - Suggests partition layouts; the user may build a custom one instead.
+  - Where Windows is on the drive, advise before anything shrinks:
+    back up, turn off Fast Startup, check for BitLocker, shrink from
+    Windows' own Disk Management. Defragmenting is optional, for spinning
+    disks (the user asked for it; it eases shrinking, it protects nothing).
+  - The openSUSE installer stays a full alternative; preparing is
+    optional.
+  Changes scope: brief.md and discovery.md both say "Not an installer".
+  Update those first, then design it with write-spec (wiping a drive
+  cannot be undone).
+  **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
+  Kind: feature.
+  Source: user-request-2026-10-15.
+  Lanes: core, wizard, packaging.
