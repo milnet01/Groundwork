@@ -1246,7 +1246,7 @@ has a written design before it is built.
 Items not yet placed in a release. Each moves into a version section once it is
 scheduled.
 
-- 🚧 [GRND-0031] **RPM and OBS packaging.**
+- ✅ [GRND-0031] **RPM and OBS packaging.**
   Serves S2. After 0.1.0 (ADR-0002 keeps only the AppImage in 0.1.0).
   User request (2026-10-13): publish Groundwork on OBS as a
   subproject of home:milnet (as home:milnet:ants-terminal is), building
@@ -1271,6 +1271,12 @@ scheduled.
   (after the tag is pushed: obs-submit.sh then obs-status.sh); (3) cut
   0.3.1 with cut-release, then run the OBS step, so the Slowroll fix
   ships everywhere.
+  Resolved (2026-10-15, 0.3.1): the published repository answers on
+  all three targets, and rpmlint's filter took (0 errors). README Install
+  offers zypper addrepo per system (858889f); .claude/bump.json names the
+  OBS step and checks osc in publish_precheck. 0.3.1 tagged and released
+  with the AppImage; OBS revision 3 (v0.3.1) built green on Tumbleweed,
+  Slowroll and Leap 16.0, ctest 44/44 on each (obs-status.sh exit 0).
   **Layman:** Makes the app installable from openSUSE's own software sources.
   Kind: package.
   Source: brief-2026-09-25.

@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 5 — On an item.
-**In flight:** GRND-0031, OBS publishing: builds green on OBS; release docs and 0.3.1 left (its roadmap note lists them). GRND-0033 waits for a fluent reader.
+**In flight:** translations awaiting checks. GRND-0033 waits for a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu and xh wait for a Gemini check.
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where
