@@ -1291,6 +1291,10 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   The three-job first page is GRND-0077, gathering and saving a setup
   GRND-0078, starting from a saved setup GRND-0079. Wiping is confirmed
   with a switch (user, 2026-10-15). Needs a spec first (write-spec).
+  Spec accepted (2026-10-15): docs/specs/GRND-0076-prepare-a-drive.md.
+  User rulings the same day: beside Windows, a new start-up partition;
+  room to hibernate on every layout, starting on when memory-sized swap
+  is at most 5 % of the space, with the share stated otherwise.
   **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
   Kind: feature.
   Source: user-request-2026-10-15.
