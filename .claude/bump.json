@@ -1,5 +1,6 @@
 {
-  "$about": "The release recipe read by cut-release. The program takes its version from PROJECT_VERSION through the GROUNDWORK_VERSION define. The RPM spec's Version: and the OBS _service tag move with it, because packaging/obs/obs-submit.sh refuses them out of step (GRND-0031).",
+  "$about": "The release recipe read by cut-release. The program takes its version from PROJECT_VERSION through the GROUNDWORK_VERSION define. The RPM spec's Version: and the OBS _service tag move with it, because packaging/obs/obs-submit.sh refuses them out of step (GRND-0031). Every release ends with the OBS step, by hand, after the tag is on GitHub: run packaging/obs/obs-submit.sh, then packaging/obs/obs-status.sh, whose exit 0 means every target built and ran the tests. publish_precheck checks osc can reach the OBS package before anything is bumped.",
+  "publish_precheck": "command -v osc >/dev/null && osc -A https://api.opensuse.org api /source/home:milnet:groundwork/groundwork/_meta >/dev/null",
   "version_source": "CMakeLists.txt",
   "version_pattern": "project\\(groundwork VERSION ([0-9]+\\.[0-9]+\\.[0-9]+)",
   "files": [

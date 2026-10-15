@@ -16,6 +16,23 @@ Translations are drafts until a fluent speaker checks them.
 
 ## Install
 
+There are two ways: the openSUSE package, or the AppImage.
+
+### openSUSE package
+
+Add the repository for your system, then install. On Tumbleweed:
+
+```bash
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/milnet:/groundwork/openSUSE_Tumbleweed/home:milnet:groundwork.repo
+sudo zypper install groundwork
+```
+
+On Slowroll, replace `openSUSE_Tumbleweed` with `openSUSE_Slowroll`.
+On Leap 16.0, replace it with `openSUSE_Leap_16.0`.
+`zypper` asks you once to trust the repository's signing key.
+
+### AppImage
+
 Download `Groundwork-x86_64.AppImage` from the
 [latest release](https://github.com/milnet01/Groundwork/releases/latest),
 then run it:

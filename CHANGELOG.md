@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Added
+
+- **Groundwork can now be installed as an openSUSE package, from its own repository for Tumbleweed, Slowroll and Leap 16.0.**
+
 ### Fixed
 
 - **The message shown on an older Leap now names Slowroll too, beside Leap 16 and Tumbleweed.**
