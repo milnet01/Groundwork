@@ -1302,6 +1302,14 @@ scheduled.
   Changes scope: brief.md and discovery.md both say "Not an installer".
   Update those first, then design it with write-spec (wiping a drive
   cannot be undone).
+  Widened (2026-10-15, user): on an installed machine, Groundwork
+  gathers that machine's setup, asks which parts to keep for the next
+  install, and saves them. After the install, setup starts from that
+  file, plus Groundwork's usual items. Parts carried: Groundwork's own
+  items, programs the user added, extra software sources, and desktop
+  and app settings (lifts "no dotfile management"). Discovery amended
+  and agreed the same day: S5 (prepare a drive), S6 (carry a setup
+  over), and "Not a backup tool". Next: write-spec.
   **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
   Kind: feature.
   Source: user-request-2026-10-15.

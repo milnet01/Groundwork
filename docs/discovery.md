@@ -9,7 +9,9 @@ Design does not start until it is agreed — `~/.claude/workflow.md` § 2.
 **Status:** agreed by the user, 2026-10-02. Amended the same day for
 levels and configuration, and agreed again. S1, S2 and the supported
 systems narrowed the same day to match the design; S3 widened to the
-user's language at the user's request. It is expected to change as the
+user's language at the user's request. Widened on 2026-10-15 to two
+more jobs, preparing a drive and carrying a setup over (GRND-0076),
+and agreed by the user the same day from a summary. It is expected to change as the
 work goes on. A change is made here, with the user's agreement
 (`~/.claude/workflow.md` §§ 4 and 7).
 
@@ -33,6 +35,15 @@ configure the system. Each item has a toggle, a plain explanation
 in the user's language, and a status. Every item checks itself first,
 so re-running it is safe.
 
+Groundwork also helps before an install, in two jobs that each work
+alone. **Prepare a drive:** it suggests partition layouts, or lets the
+user build their own, and creates them, from a live USB stick or from
+another Linux system. **Carry a setup over:** on a machine already
+installed, it gathers that machine's setup, asks which parts to keep,
+and saves them to a file. After the new install, setup starts from that
+file, and Groundwork's usual items are offered on top. Preparing is
+optional: the openSUSE installer can still do all of it.
+
 ## Who it is for
 
 - **The author, or anyone, setting up a fresh install.** Someone who
@@ -44,6 +55,9 @@ so re-running it is safe.
 - **A person re-checking a machine.** Someone who runs it now and then to
   ask "is this machine still set up right?" A secondary use: it does not
   drive the design.
+- **A person about to install or reinstall.** Someone who wants the drive
+  ready before the installer starts, or wants the new install set up like
+  the old one.
 
 ## Signs it is working
 
@@ -62,15 +76,27 @@ labels.
 - **S4** — Items are shown in levels, essentials first. Before anything
   runs, the user can switch any item on or off, and only the switched-on
   items run.
+- **S5** — Preparing a drive changes nothing until the user has
+  confirmed the drive, shown by name, size and what is on it. Afterwards
+  the openSUSE installer offers the new partitions. Where Windows is on
+  the drive, the user is first told to back up, turn off Fast Startup,
+  check for BitLocker and shrink Windows from Windows itself.
+- **S6** — On an installed machine, Groundwork lists its own items that
+  are on, programs the user added, extra software sources, and desktop
+  and app settings. The user keeps or drops each. After a fresh install,
+  every kept part is switched on, and Groundwork's other items are
+  offered as usual.
 
 ## What it deliberately does not do
 
-- **Not an installer.** The system is already installed.
+- **Not an installer.** It prepares a drive and carries a setup over;
+  the openSUSE installer installs the system.
+- **Not a backup tool.** It carries settings and choices, not documents,
+  photos or other personal files.
 - **Not a replacement for YaST.** It configures the common choices a new
   install needs, each explained. It does not offer every setting.
 - **Not other distributions.** openSUSE only: Tumbleweed, Slowroll, and Leap 16
   or later.
-- **No dotfile or app-preference management.**
 - **Not a tab inside OneUp.** A separate app that reuses OneUp's engine
   patterns.
 - **Never asks which openSUSE it is on.** It detects which supported openSUSE
