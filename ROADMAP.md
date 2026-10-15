@@ -1268,7 +1268,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: user-request-2026-10-15.
   Lanes: wizard, core.
 
-- 📋 [GRND-0076] **Prepare a drive for installing openSUSE.**
+- 🚧 [GRND-0076] **Prepare a drive for installing openSUSE.**
   User request (2026-10-15): a second job beside first-run setup. The
   two work alone; when both are used, the first informs the second.
   Answers given the same day:
@@ -1304,6 +1304,29 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   User rulings the same day: beside Windows, a new start-up partition;
   room to hibernate on every layout, starting on when memory-sized swap
   is at most 5 % of the space, with the share stated otherwise.
+  Progress (2026-10-15): stage 1 of 4 committed (eb716bc, not pushed):
+  src/drives/ and tst_drives, 31 passing; scripts checked with real
+  sfdisk on image files. Stage 2 written but UNCOMMITTED:
+  Worker::prepareDrive and --worker --prepare-drive FILE (worker.cpp/.h,
+  main.cpp, CMakeLists.txt), plus partitionSizes and addedPartitions in
+  drives. It builds; it has no tests yet; tst_translations fails until
+  update_translations runs and the new gw::Drives / gw::Worker strings
+  get translations (it also reports a context named "gw", not yet
+  diagnosed). Next: tst_worker cases for INV-3, INV-4, INV-6 with fake
+  lsblk, sfdisk, udevadm and mkfs.*; then stage 3, the wizard's prepare
+  pages (INV-2) and Job::PrepareDrive in main.cpp's jobs; then stage 4,
+  a VM run. Live images and 64 GiB / 100 GiB test images are in
+  /mnt/Emulators/claude-scratch/grnd-live; the QMP helper is
+  /mnt/Emulators/claude-scratch/grnd-vm/qmp.py.
+  Progress (2026-10-15, later): stage 2 committed. tst_worker covers
+  INV-3, INV-4 and INV-6 with fake lsblk, sfdisk, udevadm and mkfs.*,
+  plus a whole-drive run that ends ok; each guard was broken in turn and
+  its test went red. The "gw" context was Drives' free functions calling
+  a local tr(), which lupdate filed under "gw"; each call now names
+  gw::Drives. New strings drafted in all 14 languages.
+  worker-interface.md names --prepare-drive. Next: stage 3, the wizard's
+  prepare pages (INV-2: Apply needs the "I understand" switch) and
+  Job::PrepareDrive in main.cpp's jobs; then stage 4, a VM run.
   **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
   Kind: feature.
   Source: user-request-2026-10-15.

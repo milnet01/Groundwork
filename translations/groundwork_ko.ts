@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>사용 중: %1이(가) %2에 마운트되어 있습니다.</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>사용 중: %1이(가) 스왑으로 쓰이고 있습니다.</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>드라이브 전체를 openSUSE에</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>드라이브 전체를 openSUSE에, home 분리</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>Windows 옆의 빈 공간에 openSUSE</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>openSUSE는 GPT 드라이브에서만 Windows 옆에 둘 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>각 크기는 MiB 단위의 정수여야 합니다.</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>%1 파티션이 최소 크기보다 작습니다.</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>레이아웃에는 시스템 파티션이 정확히 하나 있어야 합니다.</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>이 컴퓨터는 UEFI로 시작하므로 레이아웃에 시작 파티션이 하나 필요합니다.</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>이 컴퓨터는 BIOS로 시작하므로 레이아웃에 BIOS 부트 파티션이 하나 필요합니다.</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>레이아웃에는 %1 파티션을 하나만 둘 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>남은 공간 전체는 파티션 하나만 차지할 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>레이아웃이 이 드라이브의 공간에 맞지 않습니다.</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>이 버전의 Groundwork는 이 레이아웃 파일을 읽을 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>레이아웃 파일에 드라이브가 지정되어 있지 않습니다.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>처음부터 켜져 있을 항목: %1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>사용법: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>Groundwork는 root가 아닌 본인 계정으로 실행하세요. 비밀번호가 필요하면 그때 묻습니다.</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>사용법: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1363,6 +1430,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>시스템의 핵심 부분이 업데이트되었습니다. 적용되도록 가능할 때 컴퓨터를 다시 시작하세요.</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>드라이브 준비 중</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>아무것도 쓰지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>레이아웃 파일을 읽을 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>선택한 드라이브가 아닙니다. 바뀌었거나 분리되었을 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>이 레이아웃은 시작 방식이 다른 컴퓨터용으로 만들어졌습니다.</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>파티션 테이블 쓰는 중</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>드라이브에 이제 파티션이 없을 수 있습니다. 다시 준비하세요.</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>드라이브에 새 파티션이 보이지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>%1 포맷하는 중</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>드라이브는 파티션이 나뉘었지만 포맷이 끝나지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>드라이브를 다시 읽은 결과가 계획과 다릅니다.</translation>
     </message>
 </context>
 </TS>

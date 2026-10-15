@@ -11,8 +11,6 @@
 namespace gw {
 namespace {
 
-QString tr(const char *text) { return QCoreApplication::translate("gw::Drives", text); }
-
 // The sizes of spec 4.3's table, and each use's minimum in a custom layout.
 constexpr qint64 kEfiSize = 4 * kGiB;
 constexpr qint64 kBiosBootSize = 8 * kMiB;
@@ -79,11 +77,11 @@ QString inUseBelow(const QJsonObject &device, const QSet<QString> &swaps)
 {
     for (const QJsonValue &mount : device.value(QStringLiteral("mountpoints")).toArray()) {
         if (!mount.toString().isEmpty())
-            return tr("In use: %1 is mounted at %2.")
+            return QCoreApplication::translate("gw::Drives", "In use: %1 is mounted at %2.")
                 .arg(device.value(QStringLiteral("path")).toString(), mount.toString());
     }
     if (swaps.contains(device.value(QStringLiteral("path")).toString()))
-        return tr("In use: %1 is swap.").arg(device.value(QStringLiteral("path")).toString());
+        return QCoreApplication::translate("gw::Drives", "In use: %1 is swap.").arg(device.value(QStringLiteral("path")).toString());
     for (const QJsonValue &child : device.value(QStringLiteral("children")).toArray()) {
         if (const QString why = inUseBelow(child.toObject(), swaps); !why.isEmpty())
             return why;
@@ -238,9 +236,9 @@ bool hibernateStartsOn(qint64 swapSize, qint64 space) { return swapSize * 20 <= 
 QString suggestionTitle(Suggestion suggestion)
 {
     switch (suggestion) {
-    case Suggestion::Whole: return tr("The whole drive for openSUSE");
-    case Suggestion::WholeWithHome: return tr("The whole drive for openSUSE, with a separate home");
-    case Suggestion::Beside: return tr("openSUSE in the free space beside Windows");
+    case Suggestion::Whole: return QCoreApplication::translate("gw::Drives", "The whole drive for openSUSE");
+    case Suggestion::WholeWithHome: return QCoreApplication::translate("gw::Drives", "The whole drive for openSUSE, with a separate home");
+    case Suggestion::Beside: return QCoreApplication::translate("gw::Drives", "openSUSE in the free space beside Windows");
     }
     return {};
 }
@@ -281,7 +279,7 @@ QString validate(const Layout &layout, const Drive &drive)
     if (!drive.inUse.isEmpty())
         return drive.inUse;
     if (layout.kind == LayoutKind::Beside && drive.pttype != QLatin1String("gpt"))
-        return tr("openSUSE can go beside Windows only on a GPT drive.");
+        return QCoreApplication::translate("gw::Drives", "openSUSE can go beside Windows only on a GPT drive.");
     QHash<Use, int> count;
     int rests = 0;
     qint64 needed = 0;
@@ -293,28 +291,51 @@ QString validate(const Layout &layout, const Drive &drive)
             continue;
         }
         if (*p.size % kMiB != 0)
-            return tr("Each size must be a whole number of MiB.");
+            return QCoreApplication::translate("gw::Drives", "Each size must be a whole number of MiB.");
         if (*p.size < minimumFor(p.use))
-            return tr("The %1 partition is smaller than its minimum.").arg(useName(p.use));
+            return QCoreApplication::translate("gw::Drives", "The %1 partition is smaller than its minimum.").arg(useName(p.use));
         needed += *p.size;
     }
     if (count.value(Use::System) != 1)
-        return tr("A layout needs exactly one system partition.");
+        return QCoreApplication::translate("gw::Drives", "A layout needs exactly one system partition.");
     const Use boot = layout.firmware == Firmware::Uefi ? Use::Efi : Use::BiosBoot;
     const Use other = layout.firmware == Firmware::Uefi ? Use::BiosBoot : Use::Efi;
     if (count.value(boot) != 1 || count.value(other) != 0)
         return layout.firmware == Firmware::Uefi
-                   ? tr("This computer starts with UEFI, so the layout needs one start-up partition.")
-                   : tr("This computer starts with BIOS, so the layout needs one BIOS boot partition.");
+                   ? QCoreApplication::translate("gw::Drives", "This computer starts with UEFI, so the layout needs one start-up partition.")
+                   : QCoreApplication::translate("gw::Drives", "This computer starts with BIOS, so the layout needs one BIOS boot partition.");
     for (Use use : {Use::Swap, Use::Home}) {
         if (count.value(use) > 1)
-            return tr("A layout may have only one %1 partition.").arg(useName(use));
+            return QCoreApplication::translate("gw::Drives", "A layout may have only one %1 partition.").arg(useName(use));
     }
     if (rests > 1)
-        return tr("Only one partition may take the rest of the space.");
+        return QCoreApplication::translate("gw::Drives", "Only one partition may take the rest of the space.");
     if (needed > usableSpace(drive, layout.kind))
-        return tr("The layout does not fit in the space on this drive.");
+        return QCoreApplication::translate("gw::Drives", "The layout does not fit in the space on this drive.");
     return {};
+}
+
+QList<qint64> partitionSizes(const Layout &layout, const Drive &drive)
+{
+    const qint64 rest = restSize(layout, usableSpace(drive, layout.kind));
+    QList<qint64> sizes;
+    for (const PlannedPartition &p : layout.partitions)
+        sizes << p.size.value_or(rest);
+    return sizes;
+}
+
+QList<Partition> addedPartitions(const Layout &layout, const Drive &before, const Drive &after)
+{
+    if (layout.kind == LayoutKind::Whole)
+        return after.partitions;
+    QList<Partition> added;
+    for (const Partition &p : after.partitions) {
+        const bool old = std::any_of(before.partitions.cbegin(), before.partitions.cend(),
+                                     [&](const Partition &b) { return b.start == p.start; });
+        if (!old)
+            added << p;
+    }
+    return added;
 }
 
 QStringList sfdiskArguments(const Layout &layout, const Drive &drive)
@@ -330,29 +351,28 @@ QByteArray sfdiskScript(const Layout &layout, const Drive &drive)
     QString script;
     if (layout.kind == LayoutKind::Whole) {
         script += QStringLiteral("label: gpt\n");
-        const qint64 rest = restSize(layout, usableSpace(drive, layout.kind));
+        const QList<qint64> sizes = partitionSizes(layout, drive);
         for (qsizetype i = 0; i < layout.partitions.size(); ++i) {
             const PlannedPartition &p = layout.partitions[i];
             // The last partition taking the rest is left to sfdisk, which
             // knows the drive's last usable sector exactly.
             if (p.size || i + 1 < layout.partitions.size())
-                script += QStringLiteral("size=%1MiB, ").arg(p.size.value_or(rest) / kMiB);
+                script += QStringLiteral("size=%1MiB, ").arg(sizes[i] / kMiB);
             script += QStringLiteral("type=%1, name=%2\n").arg(sfdiskType(p.use), partitionName(p.use));
         }
         return script.toUtf8();
     }
     // Beside Windows: every new partition placed inside the free space,
     // in sectors, so nothing existing moves (INV-5).
-    const FreeSpace free = largestFreeSpace(drive);
-    const qint64 rest = restSize(layout, free.size);
-    qint64 cursor = free.start;
-    for (const PlannedPartition &p : layout.partitions) {
-        const qint64 size = p.size.value_or(rest);
+    const QList<qint64> sizes = partitionSizes(layout, drive);
+    qint64 cursor = largestFreeSpace(drive).start;
+    for (qsizetype i = 0; i < layout.partitions.size(); ++i) {
+        const Use use = layout.partitions[i].use;
         script += QStringLiteral("start=%1, size=%2, type=%3, name=%4\n")
                       .arg(cursor / drive.sectorSize)
-                      .arg(size / drive.sectorSize)
-                      .arg(sfdiskType(p.use), partitionName(p.use));
-        cursor += size;
+                      .arg(sizes[i] / drive.sectorSize)
+                      .arg(sfdiskType(use), partitionName(use));
+        cursor += sizes[i];
     }
     return script.toUtf8();
 }
@@ -405,7 +425,7 @@ std::optional<LayoutFile> readLayoutFile(const QByteArray &json, QString *why)
     };
     const QJsonObject root = QJsonDocument::fromJson(json).object();
     if (root.value(QStringLiteral("format")).toInt() != 1)
-        return refuse(tr("The layout file is not one this Groundwork can read."));
+        return refuse(QCoreApplication::translate("gw::Drives", "The layout file is not one this Groundwork can read."));
     LayoutFile file;
     const QJsonObject drive = root.value(QStringLiteral("drive")).toObject();
     file.drive.path = drive.value(QStringLiteral("path")).toString();
@@ -414,12 +434,12 @@ std::optional<LayoutFile> readLayoutFile(const QByteArray &json, QString *why)
     file.drive.serial = drive.value(QStringLiteral("serial")).toString();
     file.drive.ptuuid = drive.value(QStringLiteral("ptuuid")).toString();
     if (!file.drive.path.startsWith(QLatin1String("/dev/")) || file.drive.size <= 0)
-        return refuse(tr("The layout file names no drive."));
+        return refuse(QCoreApplication::translate("gw::Drives", "The layout file names no drive."));
     const QString firmware = root.value(QStringLiteral("firmware")).toString();
     const QString kind = root.value(QStringLiteral("kind")).toString();
     if ((firmware != QLatin1String("uefi") && firmware != QLatin1String("bios"))
         || (kind != QLatin1String("whole") && kind != QLatin1String("beside")))
-        return refuse(tr("The layout file is not one this Groundwork can read."));
+        return refuse(QCoreApplication::translate("gw::Drives", "The layout file is not one this Groundwork can read."));
     file.layout.firmware = firmware == QLatin1String("uefi") ? Firmware::Uefi : Firmware::Bios;
     file.layout.kind = kind == QLatin1String("beside") ? LayoutKind::Beside : LayoutKind::Whole;
     for (const QJsonValue &v : root.value(QStringLiteral("partitions")).toArray()) {
@@ -427,7 +447,7 @@ std::optional<LayoutFile> readLayoutFile(const QByteArray &json, QString *why)
         const auto use = useFromName(p.value(QStringLiteral("use")).toString());
         const QJsonValue size = p.value(QStringLiteral("size"));
         if (!use || !(size.isNull() || size.isDouble()) || (size.isDouble() && size.toDouble() <= 0))
-            return refuse(tr("The layout file is not one this Groundwork can read."));
+            return refuse(QCoreApplication::translate("gw::Drives", "The layout file is not one this Groundwork can read."));
         file.layout.partitions << PlannedPartition{*use, size.isNull() ? std::nullopt
                                                                         : std::optional<qint64>(number(size))};
     }

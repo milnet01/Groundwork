@@ -166,6 +166,10 @@ int main(int argc, char *argv[])
         // The window may close while a run goes on: writing to a closed
         // output must not end it (design, Stopping).
         std::signal(SIGPIPE, SIG_IGN);
+        const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
+        gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::defaultStateDir());
+        if (const qsizetype at = args.indexOf(QStringLiteral("--prepare-drive")); at > 0 && at + 1 < args.size())
+            return worker.prepareDrive(args[at + 1]);
         QStringList ids;
         QHash<QString, QString> values;
         for (qsizetype i = args.indexOf(QStringLiteral("--worker")) + 1; i < args.size(); ++i) {
@@ -180,11 +184,9 @@ int main(int argc, char *argv[])
             }
             ids << args[i];
         }
-        const QString root = qEnvironmentVariable("GROUNDWORK_ROOT", QStringLiteral("/"));
-        gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::defaultStateDir());
         return worker.run(ids, values);
     }
-    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version")
+    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version")
                         << '\n';
     return 2;
 }

@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>Iyasetyenziswa: i-%1 ifakwe ku-%2.</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>Iyasetyenziswa: i-%1 isetyenziswa njenge-swap.</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>Yonke idrayivu ye-openSUSE</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>Yonke idrayivu ye-openSUSE, ene-home eyahlukileyo</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>I-openSUSE kwindawo engenanto ecaleni kwe-Windows</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>I-openSUSE ingabekwa ecaleni kwe-Windows kuphela kwidrayivu ye-GPT.</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>Ubungakanani ngabunye kufuneka bube linani elipheleleyo le-MiB.</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>Ipartishini ye-%1 incinci kunobuncinci bayo.</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>Ulungiselelo ludinga ipartishini yenkqubo enye kuphela.</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>Le khompyutha iqala nge-UEFI, ngoko ulungiselelo ludinga ipartishini yokuqalisa enye.</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>Le khompyutha iqala nge-BIOS, ngoko ulungiselelo ludinga ipartishini ye-BIOS boot enye.</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>Ulungiselelo lunokuba nepartishini ye-%1 enye kuphela.</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>Yipartishini enye kuphela enokuthatha indawo eseleyo.</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>Ulungiselelo alungeni kwindawo ekule drayivu.</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>Le Groundwork ayikwazi ukufunda le fayile yolungiselelo.</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>Ifayile yolungiselelo ayichazi drayivu.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>Oko kuya kuqala kuvuliwe: %1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>Indlela yokusebenzisa: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>Nceda uqalise i-Groundwork njengawe, hayi njenge-root. Icela iphaswedi xa iyidinga.</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>Indlela yokusebenzisa: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1366,6 +1433,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>Iinxalenye ezingundoqo zenkqubo zihlaziyiwe. Qalisa kwakhona ikhompyutha xa ukwazi, ukuze zisebenze.</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>Ilungiselela idrayivu</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>Akukho nto ibhaliweyo.</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>Ifayile yolungiselelo ayikwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>Le asiyiyo idrayivu oyikhethileyo: isenokuba itshintshiwe okanye ikhutshiwe.</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>Ulungiselelo lwenzelwe ikhompyutha eqala ngenye indlela.</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>Ibhala itheyibhile yeepartishini</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>Idrayivu ngoku isenokuba ayinazo iipartishini; yilungiselele kwakhona.</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>Idrayivu ayibonisi iipartishini ezintsha.</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>Ifomatha i-%1</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>Idrayivu inezipartishini kodwa ayifomathwanga ngokupheleleyo.</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>Idrayivu ayifundeki njengoko kucwangcisiwe.</translation>
     </message>
 </context>
 </TS>

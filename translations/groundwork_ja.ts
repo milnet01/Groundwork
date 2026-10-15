@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>使用中：%1 は %2 にマウントされています。</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>使用中：%1 はスワップとして使われています。</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>ドライブ全体を openSUSE に</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>ドライブ全体を openSUSE に（home を分ける）</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>Windows の隣の空き領域に openSUSE を</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>openSUSE を Windows の隣に置けるのは GPT ドライブだけです。</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>サイズはそれぞれ MiB 単位の整数にしてください。</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>%1 パーティションが最小サイズより小さいです。</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>レイアウトにはシステムパーティションがちょうど 1 つ必要です。</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>このコンピューターは UEFI で起動するため、レイアウトにはスタートアップパーティションが 1 つ必要です。</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>このコンピューターは BIOS で起動するため、レイアウトには BIOS ブートパーティションが 1 つ必要です。</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>レイアウトに置ける %1 パーティションは 1 つだけです。</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>残りの領域をすべて使えるパーティションは 1 つだけです。</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>レイアウトがこのドライブの容量に収まりません。</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>このバージョンの Groundwork では、このレイアウトファイルを読めません。</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>レイアウトファイルにドライブが指定されていません。</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>最初からオンになる項目：%1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>使い方：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>Groundwork は root ではなく、ご自身のユーザーで起動してください。パスワードは必要なときに求められます。</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>使い方：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1363,6 +1430,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>システムの中核部分が更新されました。反映させるため、都合のよいときにコンピューターを再起動してください。</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>ドライブを準備しています</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>何も書き込んでいません。</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>レイアウトファイルを読み込めませんでした。</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>選んだドライブではありません。交換されたか、取り外された可能性があります。</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>このレイアウトは、起動方式の違うコンピューター用に作られています。</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>パーティションテーブルを書き込んでいます</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>ドライブにパーティションが残っていない可能性があります。もう一度準備してください。</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>ドライブに新しいパーティションが表示されません。</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>%1 をフォーマットしています</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>ドライブはパーティション分割済みですが、フォーマットが完了していません。</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>ドライブを読み直した結果が計画と一致しません。</translation>
     </message>
 </context>
 </TS>

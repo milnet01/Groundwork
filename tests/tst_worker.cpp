@@ -5,6 +5,9 @@
 
 #include <QDir>
 #include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QProcess>
 #include <QTemporaryDir>
 #include <QtTest>
@@ -40,6 +43,79 @@ case "$1" in
 esac
 exit 0
 )";
+
+// Preparing a drive (GRND-0076): lsblk shows the drive as it was until the
+// fake sfdisk has written a table, then as it is after.
+const QByteArray kLsblk = R"(#!/bin/sh
+echo "lsblk $*" >> "$FAKE_LOG"
+if [ -f "$FAKE_TABLE" ]; then cat "$FAKE_LSBLK_AFTER"; else cat "$FAKE_LSBLK"; fi
+)";
+
+const QByteArray kSfdisk = R"(#!/bin/sh
+echo "sfdisk $*" >> "$FAKE_LOG"
+cat > "$FAKE_TABLE"
+)";
+
+// udevadm and every mkfs: record the call, succeed.
+const QByteArray kRecord = R"(#!/bin/sh
+echo "${0##*/} $*" >> "$FAKE_LOG"
+)";
+
+constexpr qint64 kMiB = qint64(1) << 20;
+constexpr qint64 kGiB = qint64(1) << 30;
+
+struct FakePart
+{
+    qint64 size;
+    QString fstype, label;
+};
+
+// One GPT drive, /dev/sdb, in the shape lsblk --json --bytes prints; its
+// partitions laid end to end from 1 MiB.
+QByteArray lsblkJson(qint64 size, const QList<FakePart> &parts, const QString &serial = QStringLiteral("S123"))
+{
+    auto orNull = [](const QString &s) { return s.isEmpty() ? QJsonValue() : QJsonValue(s); };
+    QJsonArray children;
+    qint64 start = kMiB;
+    for (qsizetype i = 0; i < parts.size(); ++i) {
+        const FakePart &p = parts[i];
+        children.append(QJsonObject{{"name", QStringLiteral("sdb%1").arg(i + 1)},
+                                    {"path", QStringLiteral("/dev/sdb%1").arg(i + 1)},
+                                    {"type", "part"}, {"size", double(p.size)}, {"start", double(start) / 512},
+                                    {"fstype", orNull(p.fstype)}, {"label", orNull(p.label)},
+                                    {"mountpoints", QJsonArray{QJsonValue()}}});
+        start += p.size;
+    }
+    QJsonObject disk{{"name", "sdb"}, {"path", "/dev/sdb"}, {"type", "disk"}, {"size", double(size)},
+                     {"pttype", "gpt"}, {"ptuuid", "af947acd-e52f-4faf-a236-48385a2a8a58"},
+                     {"mountpoints", QJsonArray{QJsonValue()}}, {"rm", false}, {"ro", false}, {"rota", false},
+                     {"tran", "usb"}, {"model", "Test Disk"}, {"serial", serial}, {"log-sec", 512}};
+    if (!children.isEmpty())
+        disk.insert("children", children);
+    return QJsonDocument(QJsonObject{{"blockdevices", QJsonArray{disk}}}).toJson();
+}
+
+// A blank 30 GiB drive: the whole-drive layout leaves the system 24 GiB
+// less the 2 MiB GPT keeps at its two ends.
+constexpr qint64 kDriveSize = 30 * kGiB;
+constexpr qint64 kSystemSize = 24 * kGiB - 2 * kMiB;
+
+QList<FakePart> preparedParts()
+{
+    return {{4 * kGiB, "vfat", "EFI"}, {2 * kGiB, "swap", "swap"}, {kSystemSize, "btrfs", "openSUSE"}};
+}
+
+QJsonObject wholeDriveLayout()
+{
+    return {{"format", 1},
+            {"drive", QJsonObject{{"path", "/dev/sdb"}, {"size", double(kDriveSize)}, {"model", "Test Disk"},
+                                  {"serial", "S123"}, {"ptuuid", "af947acd-e52f-4faf-a236-48385a2a8a58"}}},
+            {"firmware", "uefi"},
+            {"kind", "whole"},
+            {"partitions", QJsonArray{QJsonObject{{"use", "efi"}, {"size", double(4 * kGiB)}},
+                                      QJsonObject{{"use", "swap"}, {"size", double(2 * kGiB)}},
+                                      QJsonObject{{"use", "system"}, {"size", QJsonValue()}}}}};
+}
 
 } // namespace
 
@@ -88,6 +164,44 @@ class TstWorker : public QObject
         QProcess p;
         p.setProcessEnvironment(m_env);
         p.start(QStringLiteral(GROUNDWORK_BIN), QStringList{QStringLiteral("--worker")} + ids);
+        return finish(p);
+    }
+
+    // A UEFI computer whose lsblk shows a blank drive, then `after` once a
+    // table is written; the layout file to prepare it with.
+    void setUpDrive(const QJsonObject &layout, const QByteArray &after)
+    {
+        for (const char *tool : {"udevadm", "mkfs.fat", "mkfs.btrfs", "mkfs.xfs", "mkswap"})
+            writeFile(m_bin + QLatin1Char('/') + QLatin1String(tool), kRecord, true);
+        writeFile(m_bin + QStringLiteral("/lsblk"), kLsblk, true);
+        writeFile(m_bin + QStringLiteral("/sfdisk"), kSfdisk, true);
+        writeFile(m_dir->filePath(QStringLiteral("lsblk-before")), lsblkJson(kDriveSize, {}));
+        writeFile(m_dir->filePath(QStringLiteral("lsblk-after")), after);
+        QVERIFY(QDir().mkpath(m_root + QStringLiteral("/sys/firmware/efi")));
+        writeFile(m_dir->filePath(QStringLiteral("layout.json")), QJsonDocument(layout).toJson());
+        m_env.insert(QStringLiteral("FAKE_LSBLK"), m_dir->filePath(QStringLiteral("lsblk-before")));
+        m_env.insert(QStringLiteral("FAKE_LSBLK_AFTER"), m_dir->filePath(QStringLiteral("lsblk-after")));
+        m_env.insert(QStringLiteral("FAKE_TABLE"), m_dir->filePath(QStringLiteral("table")));
+    }
+
+    Run prepare()
+    {
+        QProcess p;
+        p.setProcessEnvironment(m_env);
+        p.start(QStringLiteral(GROUNDWORK_BIN), {QStringLiteral("--worker"), QStringLiteral("--prepare-drive"),
+                                                 m_dir->filePath(QStringLiteral("layout.json"))});
+        return finish(p);
+    }
+
+    // What the fake sfdisk was given on standard input.
+    QByteArray tableWritten() const
+    {
+        QFile f(m_dir->filePath(QStringLiteral("table")));
+        return f.open(QIODevice::ReadOnly) ? f.readAll() : QByteArray();
+    }
+
+    Run finish(QProcess &p)
+    {
         p.waitForFinished(30000);
         Run r;
         r.exitCode = p.exitCode();
@@ -311,6 +425,78 @@ cat > "$FAKE_WRITTEN$out"
         QVERIFY(apps.open(QIODevice::ReadOnly));
         QVERIFY(apps.readAll().contains("ManagedOOMMemoryPressure=kill\n"));
         QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- systemctl enable --now systemd-oomd")));
+    }
+
+    // GRND-0076: a whole drive is written, then each partition formatted,
+    // and the drive reads back as planned.
+    void preparesAWholeDrive()
+    {
+        setUpDrive(wholeDriveLayout(), lsblkJson(kDriveSize, preparedParts()));
+        const Run r = prepare();
+        QCOMPARE(r.endsFor(QStringLiteral("prepare-drive")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.exitCode, 0);
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- sfdisk --wipe always --wipe-partitions always /dev/sdb")));
+        QVERIFY(tableWritten().startsWith("label: gpt\n"));
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkfs.fat -F 32 -n EFI /dev/sdb1")));
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkswap -L swap /dev/sdb2")));
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkfs.btrfs -f -L openSUSE /dev/sdb3")));
+    }
+
+    // INV-3: a drive at the same path with another serial is not the drive
+    // the user saw; nothing is written and no password is asked.
+    void refusesADriveThatIsNotTheOneChosen()
+    {
+        QJsonObject layout = wholeDriveLayout();
+        QJsonObject drive = layout.value("drive").toObject();
+        drive.insert("serial", "S999");
+        layout.insert("drive", drive);
+        setUpDrive(layout, lsblkJson(kDriveSize, preparedParts()));
+        const Run r = prepare();
+        QVERIFY(r.count(QStringLiteral("lsblk")) > 0); // the drive was read
+        QCOMPARE(r.endsFor(QStringLiteral("prepare-drive")).value(1), QStringLiteral("fail"));
+        QCOMPARE(r.exitCode, 1);
+        QCOMPARE(r.count(QStringLiteral("sudo")), 0);
+        QVERIFY(!QFile::exists(m_dir->filePath(QStringLiteral("table"))));
+    }
+
+    // INV-4: the Worker checks the layout itself; two system partitions
+    // are refused before any root step.
+    void refusesAnInvalidLayout()
+    {
+        QJsonObject layout = wholeDriveLayout();
+        layout.insert("partitions", QJsonArray{QJsonObject{{"use", "efi"}, {"size", double(4 * kGiB)}},
+                                               QJsonObject{{"use", "system"}, {"size", double(10 * kGiB)}},
+                                               QJsonObject{{"use", "system"}, {"size", QJsonValue()}}});
+        setUpDrive(layout, lsblkJson(kDriveSize, preparedParts()));
+        const Run r = prepare();
+        QVERIFY(r.count(QStringLiteral("lsblk")) > 0);
+        QCOMPARE(r.endsFor(QStringLiteral("prepare-drive")).value(1), QStringLiteral("fail"));
+        QCOMPARE(r.exitCode, 1);
+        QCOMPARE(r.count(QStringLiteral("sudo")), 0);
+        QVERIFY(!QFile::exists(m_dir->filePath(QStringLiteral("table"))));
+    }
+
+    // INV-6: a partition missing after writing fails the run.
+    void aMissingPartitionFails()
+    {
+        setUpDrive(wholeDriveLayout(), lsblkJson(kDriveSize, preparedParts().mid(0, 2)));
+        const Run r = prepare();
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- sfdisk --wipe always --wipe-partitions always /dev/sdb")));
+        QCOMPARE(r.endsFor(QStringLiteral("prepare-drive")).value(1), QStringLiteral("fail"));
+        QCOMPARE(r.exitCode, 1);
+    }
+
+    // INV-6: a format that reports success but leaves no filesystem fails
+    // the run when the drive is read back.
+    void aFormatThatLeftNoFilesystemFails()
+    {
+        QList<FakePart> parts = preparedParts();
+        parts[1].fstype.clear();
+        setUpDrive(wholeDriveLayout(), lsblkJson(kDriveSize, parts));
+        const Run r = prepare();
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkswap -L swap /dev/sdb2")));
+        QCOMPARE(r.endsFor(QStringLiteral("prepare-drive")).value(1), QStringLiteral("fail"));
+        QCOMPARE(r.exitCode, 1);
     }
 
     void refusesAnUnknownItem()

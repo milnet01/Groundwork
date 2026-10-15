@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>בשימוש: %1 מעוגן ב־%2.</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>בשימוש: %1 משמש כ־swap.</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>כל הכונן ל־openSUSE</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>כל הכונן ל־openSUSE, עם מחיצת home נפרדת</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>המקום הפנוי לצד Windows עבור openSUSE</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>אפשר להתקין את openSUSE לצד Windows רק בכונן GPT.</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>כל גודל חייב להיות מספר שלם של MiB.</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>המחיצה %1 קטנה מהמינימום שלה.</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>פריסה צריכה בדיוק מחיצת מערכת אחת.</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>המחשב הזה מופעל עם UEFI, לכן הפריסה צריכה מחיצת הפעלה אחת.</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>המחשב הזה מופעל עם BIOS, לכן הפריסה צריכה מחיצת BIOS boot אחת.</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>פריסה יכולה לכלול רק מחיצת %1 אחת.</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>רק מחיצה אחת יכולה לקחת את שאר המקום.</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>הפריסה לא נכנסת למקום שבכונן הזה.</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>גרסה זו של Groundwork לא יכולה לקרוא את קובץ הפריסה הזה.</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>קובץ הפריסה לא מציין כונן.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>יתחילו כשהם מופעלים: %1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>‏Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>יש להפעיל את Groundwork מהמשתמש שלך, לא כ־root. הוא יבקש את הסיסמה כשיצטרך אותה.</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1366,6 +1433,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>חלקים מרכזיים במערכת עודכנו. הפעל מחדש את המחשב כשתוכל, כדי שייכנסו לתוקף.</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>הכנת כונן</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>שום דבר לא נכתב.</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>לא ניתן היה לקרוא את קובץ הפריסה.</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>זה לא הכונן שבחרת: ייתכן שהוחלף או נותק.</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>הפריסה נוצרה למחשב שמופעל בצורה אחרת.</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>כתיבת טבלת המחיצות</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>ייתכן שהכונן נשאר כעת בלי מחיצות; הכן אותו שוב.</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>הכונן לא מציג את המחיצות החדשות.</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>פרמוט %1</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>הכונן מחולק למחיצות אך לא פורמט במלואו.</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>הכונן לא נקרא בחזרה כמתוכנן.</translation>
     </message>
 </context>
 </TS>

@@ -23,6 +23,20 @@ groundwork --worker [--lang LANG] [--set ITEM=VALUE]... [ITEM...]
   `computer-name=lounge-pc`. The value replaces `{value}` in that item's
   commands. Without a valid value the item is skipped, saying why.
 
+A second form prepares a drive (GRND-0076):
+
+```
+groundwork --worker [--lang LANG] --prepare-drive LAYOUT_FILE
+```
+
+- **`LAYOUT_FILE`** — the layout the Wizard wrote. Its format is in
+  `docs/specs/GRND-0076-prepare-a-drive.md` § 4.4.
+- It runs as one item, id `prepare-drive`, with the same markers.
+- Item ids and `--set` are ignored in this form.
+- It trusts nothing in the file. It ends `fail` before any root step
+  when the drive read now is not the one named, or the layout is not
+  valid for that drive and this computer.
+
 ## Exit codes
 
 | Code | Meaning |

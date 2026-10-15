@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>正在使用：%1 挂载在 %2。</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>正在使用：%1 正用作交换空间。</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>整个驱动器用于 openSUSE</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>整个驱动器用于 openSUSE，并单独分出 home</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>在 Windows 旁边的空闲空间安装 openSUSE</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>只有在 GPT 驱动器上，openSUSE 才能放在 Windows 旁边。</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>每个大小都必须是整数个 MiB。</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>%1 分区小于其最小值。</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>布局必须恰好有一个系统分区。</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>这台电脑以 UEFI 方式启动，因此布局需要一个启动分区。</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>这台电脑以 BIOS 方式启动，因此布局需要一个 BIOS 引导分区。</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>布局只能有一个 %1 分区。</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>只能有一个分区占用剩余空间。</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>布局放不进这个驱动器的空间。</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>这个版本的 Groundwork 无法读取此布局文件。</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>布局文件没有指明驱动器。</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>会预先开启的项目：%1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>请以你自己的身份启动 Groundwork，而不是以 root 身份。它会在需要时询问密码。</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1363,6 +1430,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>系统的核心部分已更新。方便时请重启电脑，使其生效。</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>正在准备驱动器</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>没有写入任何内容。</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>无法读取布局文件。</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>这不是你选择的驱动器：它可能已被更换或拔出。</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>此布局是为启动方式不同的电脑制作的。</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>正在写入分区表</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>驱动器现在可能没有分区；请重新准备。</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>驱动器没有显示新的分区。</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>正在格式化 %1</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>驱动器已分区，但未完全格式化。</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>重新读取后，驱动器与计划不符。</translation>
     </message>
 </context>
 </TS>

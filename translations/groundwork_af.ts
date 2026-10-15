@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>In gebruik: %1 is by %2 gekoppel.</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>In gebruik: %1 is aktiewe ruilspasie.</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>Die hele skyf vir openSUSE</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>Die hele skyf vir openSUSE, met &apos;n aparte home-partisie</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>openSUSE in die vrye spasie langs Windows</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>openSUSE kan net op &apos;n GPT-skyf langs Windows gaan.</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>Elke grootte moet &apos;n heel getal MiB wees.</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>Die %1-partisie is kleiner as sy minimum.</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>&apos;n Uitleg het presies een stelselpartisie nodig.</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>Hierdie rekenaar begin met UEFI, so die uitleg het een opstartpartisie nodig.</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>Hierdie rekenaar begin met BIOS, so die uitleg het een BIOS-opstartpartisie nodig.</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>&apos;n Uitleg mag net een %1-partisie hê.</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>Net een partisie mag die res van die spasie kry.</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>Die uitleg pas nie in die spasie op hierdie skyf nie.</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>Hierdie Groundwork kan nie dié uitleglêer lees nie.</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>Die uitleglêer noem geen skyf nie.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>Sou aangeskakel begin: %1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>Gebruik: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>Begin asseblief Groundwork as jouself, nie as root nie. Dit vra die wagwoord wanneer dit nodig is.</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>Gebruik: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1366,6 +1433,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>Kerndele van die stelsel is bygewerk. Herbegin die rekenaar wanneer jy kan, sodat dit in werking tree.</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>Berei &apos;n skyf voor</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>Niks is geskryf nie.</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>Die uitleglêer kon nie gelees word nie.</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>Dit is nie die skyf wat jy gekies het nie: dit is dalk verruil of uitgeprop.</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>Die uitleg is gemaak vir &apos;n rekenaar wat anders begin.</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>Skryf die partisietabel</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>Die skyf is dalk nou sonder partisies; berei dit weer voor.</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>Die skyf wys nie die nuwe partisies nie.</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>Formateer %1</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>Die skyf is gepartisioneer, maar nie heeltemal geformateer nie.</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>Die skyf lees nie terug soos beplan nie.</translation>
     </message>
 </context>
 </TS>

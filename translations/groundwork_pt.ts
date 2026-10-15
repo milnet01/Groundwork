@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>Em uso: %1 está montado em %2.</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>Em uso: %1 está ativo como swap.</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>O disco inteiro para o openSUSE</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>O disco inteiro para o openSUSE, com uma partição home separada</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>openSUSE no espaço livre ao lado do Windows</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>O openSUSE só pode ficar ao lado do Windows em um disco GPT.</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>Cada tamanho deve ser um número inteiro de MiB.</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>A partição %1 é menor que o seu mínimo.</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>Um esquema precisa de exatamente uma partição de sistema.</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>Este computador inicia com UEFI, então o esquema precisa de uma partição de inicialização.</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>Este computador inicia com BIOS, então o esquema precisa de uma partição de inicialização BIOS.</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>Um esquema pode ter só uma partição %1.</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>Só uma partição pode ocupar o resto do espaço.</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>O esquema não cabe no espaço deste disco.</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>Este Groundwork não consegue ler este arquivo de esquema.</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>O arquivo de esquema não indica nenhum disco.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>Começaria ativado: %1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>Uso: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>Inicie o Groundwork com o seu próprio usuário, não como root. Ele pede a senha quando precisa.</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>Uso: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1366,6 +1433,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>Partes essenciais do sistema foram atualizadas. Reinicie o computador quando puder, para que elas entrem em vigor.</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>Preparando um disco</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>Nada foi gravado.</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>Não foi possível ler o arquivo de esquema.</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>Este não é o disco que você escolheu: ele pode ter sido trocado ou desconectado.</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>O esquema foi feito para um computador que inicia de outro jeito.</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>Gravando a tabela de partições</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>O disco pode ter ficado sem partições; prepare-o de novo.</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>O disco não mostra as novas partições.</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>Formatando %1</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>O disco está particionado, mas não totalmente formatado.</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>O disco relido não corresponde ao planejado.</translation>
     </message>
 </context>
 </TS>

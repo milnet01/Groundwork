@@ -100,7 +100,7 @@ target_link_libraries(groundwork_drives PUBLIC groundwork_core)
 add_library(groundwork_worker STATIC
     src/worker/privilege.cpp
     src/worker/worker.cpp)
-target_link_libraries(groundwork_worker PUBLIC groundwork_items groundwork_core)
+target_link_libraries(groundwork_worker PUBLIC groundwork_drives groundwork_items groundwork_core)
 
 # The Wizard's widgets; never depended on by the Worker.
 add_library(groundwork_gui STATIC

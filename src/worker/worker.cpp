@@ -4,6 +4,7 @@
 #include "core/markers.h"
 #include "core/statepaths.h"
 #include "core/systemidentity.h"
+#include "drives/drives.h"
 #include "privilege.h"
 
 #include <QCoreApplication>
@@ -114,7 +115,7 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail)
     return false;
 }
 
-int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
+void Worker::openLog()
 {
     (void)QDir().mkpath(m_stateDir + QStringLiteral("/logs"));
     // A stop file left by an earlier run must not stop this one.
@@ -124,6 +125,11 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
                       + QStringLiteral(".log"));
     // Without a log the run goes on; standard output still carries it all.
     (void)m_log.open(QIODevice::WriteOnly | QIODevice::Append);
+}
+
+int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
+{
+    openLog();
 
     const SystemIdentity system = readSystemIdentity(m_files);
     if (!system.supported()) {
@@ -240,6 +246,97 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
     if (stopped)
         return Stopped;
     return failed > 0 ? Failed : Ok;
+}
+
+int Worker::prepareDrive(const QString &layoutPath)
+{
+    openLog();
+    const SystemIdentity system = readSystemIdentity(m_files);
+    if (!system.supported()) {
+        say(formatMarker(QStringLiteral("UNSUPPORTED"), {system.reason}));
+        return Unsupported;
+    }
+    const CheckContext context(m_files);
+    const QString id = QStringLiteral("prepare-drive");
+    say(formatMarker(QStringLiteral("STEP_BEGIN"), {id, QStringLiteral("1"), QStringLiteral("1"), tr("Preparing a drive")}));
+    auto end = [&](bool ok, const QString &detail) {
+        m_privilege.stopKeepAlive();
+        if (m_auth == Auth::Failed) {
+            say(formatMarker(QStringLiteral("AUTH"), {QStringLiteral("failed")}));
+            return int(AuthFailed);
+        }
+        say(formatMarker(QStringLiteral("STEP_END"), {id, ok ? QStringLiteral("ok") : QStringLiteral("fail"), detail}));
+        say(formatMarker(QStringLiteral("DONE"),
+                         {ok ? QStringLiteral("1") : QStringLiteral("0"), ok ? QStringLiteral("0") : QStringLiteral("1"),
+                          QStringLiteral("0")}));
+        return int(ok ? Ok : Failed);
+    };
+    const QString nothing = tr("Nothing was written.");
+    QString why = tr("The layout file could not be read.");
+    std::optional<LayoutFile> planned;
+    if (QFile file(layoutPath); file.open(QIODevice::ReadOnly))
+        planned = readLayoutFile(file.readAll(), &why);
+    if (!planned)
+        return end(false, why + QLatin1Char(' ') + nothing);
+    const Layout &layout = planned->layout;
+    auto driveNow = [&]() -> std::optional<Drive> {
+        for (const Drive &d : readDrives(context)) {
+            if (d.path == planned->drive.path)
+                return d;
+        }
+        return std::nullopt;
+    };
+
+    // Only the drive the user saw (INV-3), with a layout that is valid for
+    // it as it is now (INV-4).
+    const std::optional<Drive> before = driveNow();
+    if (!before || before->size != planned->drive.size || before->model != planned->drive.model
+        || before->serial != planned->drive.serial || before->ptuuid != planned->drive.ptuuid)
+        return end(false, tr("This is not the drive you chose: it may have been changed or unplugged.")
+                              + QLatin1Char(' ') + nothing);
+    if (layout.firmware != readFirmware(context))
+        return end(false, tr("The layout was made for a computer that starts differently.") + QLatin1Char(' ') + nothing);
+    if (const QString bad = validate(layout, *before); !bad.isEmpty())
+        return end(false, bad + QLatin1Char(' ') + nothing);
+
+    const QList<qint64> sizes = partitionSizes(layout, *before);
+    QString detail;
+    if (!ensureRoot())
+        return end(false, {});
+    const Step write{sfdiskArguments(layout, *before), true, Step::Tool::Generic,
+                     tr("Writing the partition table"), {}, sfdiskScript(layout, *before)};
+    if (!runStep(id, write, &detail))
+        return end(false, detail + QLatin1Char(' ') + tr("The drive may now be left without partitions; prepare it again."));
+
+    // The new partitions' paths, by order of start; then their filesystems.
+    (void)runCommand({QStringLiteral("udevadm"), QStringLiteral("settle")});
+    std::optional<Drive> after = driveNow();
+    QList<Partition> added = after ? addedPartitions(layout, *before, *after) : QList<Partition>();
+    if (added.size() != layout.partitions.size())
+        return end(false, tr("The drive does not show the new partitions."));
+    for (qsizetype i = 0; i < added.size(); ++i) {
+        const Format format = formatFor(layout.partitions[i].use);
+        if (format.argv.isEmpty())
+            continue;
+        const Step mkfs{format.argv + QStringList{added[i].path}, true, Step::Tool::Generic,
+                        tr("Formatting %1").arg(added[i].path)};
+        if (!runStep(id, mkfs, &detail))
+            return end(false, detail + QLatin1Char(' ') + tr("The drive is partitioned but not fully formatted."));
+    }
+
+    // It ends ok only when the drive reads back as planned (INV-6).
+    (void)runCommand({QStringLiteral("udevadm"), QStringLiteral("settle")});
+    after = driveNow();
+    added = after ? addedPartitions(layout, *before, *after) : QList<Partition>();
+    bool matches = added.size() == layout.partitions.size();
+    for (qsizetype i = 0; matches && i < added.size(); ++i) {
+        const Format format = formatFor(layout.partitions[i].use);
+        matches = qAbs(added[i].size - sizes[i]) <= kMiB && added[i].fstype == format.fstype
+                  && added[i].label == format.label;
+    }
+    if (!matches)
+        return end(false, tr("The drive does not read back as planned."));
+    return end(true, {});
 }
 
 } // namespace gw

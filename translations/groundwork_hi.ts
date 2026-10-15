@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>उपयोग में: %1, %2 पर माउंट है।</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>उपयोग में: %1 स्वैप के रूप में चालू है।</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>openSUSE के लिए पूरी ड्राइव</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>openSUSE के लिए पूरी ड्राइव, अलग होम पार्टीशन के साथ</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>Windows के बगल की खाली जगह में openSUSE</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>openSUSE को Windows के बगल में केवल GPT ड्राइव पर रखा जा सकता है।</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>हर आकार MiB की पूरी संख्या होना चाहिए।</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>%1 पार्टीशन अपने न्यूनतम से छोटा है।</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>लेआउट में ठीक एक सिस्टम पार्टीशन होना चाहिए।</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>यह कंप्यूटर UEFI से शुरू होता है, इसलिए लेआउट में एक स्टार्ट-अप पार्टीशन चाहिए।</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>यह कंप्यूटर BIOS से शुरू होता है, इसलिए लेआउट में एक BIOS बूट पार्टीशन चाहिए।</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>लेआउट में केवल एक %1 पार्टीशन हो सकता है।</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>केवल एक पार्टीशन बाकी जगह ले सकता है।</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>लेआउट इस ड्राइव की जगह में नहीं समाता।</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>यह Groundwork इस लेआउट फ़ाइल को नहीं पढ़ सकता।</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>लेआउट फ़ाइल में कोई ड्राइव नहीं है।</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>चालू होकर शुरू होंगे: %1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>उपयोग: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>कृपया Groundwork को root के रूप में नहीं, अपने खाते से शुरू करें। ज़रूरत पड़ने पर यह पासवर्ड माँगता है।</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>उपयोग: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1366,6 +1433,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>सिस्टम के मुख्य हिस्से अपडेट हुए हैं। जब हो सके, कंप्यूटर को रीस्टार्ट करें, ताकि ये लागू हो जाएँ।</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>ड्राइव तैयार की जा रही है</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>कुछ भी नहीं लिखा गया।</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>लेआउट फ़ाइल पढ़ी नहीं जा सकी।</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>यह वह ड्राइव नहीं है जो आपने चुनी थी: शायद इसे बदला या निकाला गया है।</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>यह लेआउट ऐसे कंप्यूटर के लिए बना था जो अलग तरह से शुरू होता है।</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>पार्टीशन टेबल लिखी जा रही है</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>हो सकता है ड्राइव में अब कोई पार्टीशन न हो; इसे फिर से तैयार करें।</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>ड्राइव नए पार्टीशन नहीं दिखा रही।</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>%1 फ़ॉर्मैट किया जा रहा है</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>ड्राइव पर पार्टीशन बन गए हैं, पर यह पूरी तरह फ़ॉर्मैट नहीं हुई।</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>दोबारा पढ़ने पर ड्राइव योजना के अनुसार नहीं है।</translation>
     </message>
 </context>
 </TS>

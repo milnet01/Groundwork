@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>قيد الاستخدام: %1 موصول على %2.</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>قيد الاستخدام: %1 مستخدم كذاكرة تبديل (swap).</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>القرص كله لـ openSUSE</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>القرص كله لـ openSUSE، مع قسم home منفصل</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>المساحة الحرة بجانب Windows لـ openSUSE</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>لا يمكن وضع openSUSE بجانب Windows إلا على قرص GPT.</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>يجب أن يكون كل حجم عددًا صحيحًا من MiB.</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>القسم %1 أصغر من حده الأدنى.</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>يحتاج التخطيط إلى قسم نظام واحد بالضبط.</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>يبدأ هذا الحاسوب بـ UEFI، لذا يحتاج التخطيط إلى قسم إقلاع واحد.</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>يبدأ هذا الحاسوب بـ BIOS، لذا يحتاج التخطيط إلى قسم إقلاع BIOS واحد.</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>لا يجوز أن يحتوي التخطيط إلا على قسم %1 واحد.</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>لا يجوز إلا لقسم واحد أن يأخذ بقية المساحة.</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>لا يتسع التخطيط في المساحة المتاحة على هذا القرص.</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>لا يستطيع Groundwork هذا قراءة ملف التخطيط هذا.</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>لا يذكر ملف التخطيط أي قرص.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>System: %1</source>
@@ -426,6 +493,10 @@
         <translation>سيبدأ مفعّلًا: %1</translation>
     </message>
     <message>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>الاستخدام: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>‏Groundwork</translation>
     </message>
@@ -436,10 +507,6 @@
     <message>
         <source>Please start Groundwork as yourself, not as root. It asks for the password when it needs it.</source>
         <translation>يُرجى تشغيل Groundwork بحسابك أنت، لا بحساب root. سيطلب كلمة المرور عند الحاجة إليها.</translation>
-    </message>
-    <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>الاستخدام: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
     </message>
 </context>
 <context>
@@ -1378,6 +1445,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>تم تحديث أجزاء أساسية من النظام. أعد تشغيل الحاسوب عندما تستطيع، لكي تصبح فعّالة.</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>تجهيز قرص</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>لم يُكتب أي شيء.</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>تعذرت قراءة ملف التخطيط.</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>هذا ليس القرص الذي اخترته: ربما تم تغييره أو فصله.</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>صُنع التخطيط لحاسوب يبدأ بطريقة مختلفة.</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>كتابة جدول الأقسام</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>قد يكون القرص الآن بلا أقسام؛ جهّزه مرة أخرى.</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>لا يُظهر القرص الأقسام الجديدة.</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>تهيئة %1</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>القرص مقسّم لكنه غير مهيأ بالكامل.</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>لا يطابق القرص الخطة عند إعادة قراءته.</translation>
     </message>
 </context>
 </TS>

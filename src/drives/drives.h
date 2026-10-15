@@ -103,6 +103,14 @@ Layout layoutFor(Suggestion suggestion, Firmware firmware, qint64 hibernateSwap)
 // can (spec 4.3's rules, which the Worker applies again, INV-4).
 QString validate(const Layout &layout, const Drive &drive);
 
+// Each planned partition's size in bytes on this drive, "the rest"
+// worked out. Valid layouts only.
+QList<qint64> partitionSizes(const Layout &layout, const Drive &drive);
+
+// The partitions a layout written to this drive added, by order of start:
+// every partition after a whole-drive layout, the new ones beside Windows.
+QList<Partition> addedPartitions(const Layout &layout, const Drive &before, const Drive &after);
+
 // The sfdisk arguments and script that write the layout (spec 4.5). Built
 // from fixed names and computed numbers only (INV-8). Valid layouts only.
 QStringList sfdiskArguments(const Layout &layout, const Drive &drive);

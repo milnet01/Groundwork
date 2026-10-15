@@ -25,9 +25,14 @@ public:
     // values: what the user gave items that take one, keyed by item id.
     int run(const QStringList &ids, const QHash<QString, QString> &values = {});
 
+    // Writes the layout in the file to the drive it names, as one item,
+    // prepare-drive (GRND-0076). It trusts nothing in the file.
+    int prepareDrive(const QString &layoutPath);
+
 private:
     enum class Outcome { Ok, SkippedDone, SkippedNotNeeded, SkippedOther, Failed };
 
+    void openLog();
     void say(const QString &line);
     bool stopRequested() const;
     // Asks for the password the first time a root step is about to run.

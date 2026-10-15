@@ -412,6 +412,73 @@
     </message>
 </context>
 <context>
+    <name>gw::Drives</name>
+    <message>
+        <source>In use: %1 is mounted at %2.</source>
+        <translation>使用中：%1 掛載於 %2。</translation>
+    </message>
+    <message>
+        <source>In use: %1 is swap.</source>
+        <translation>使用中：%1 正作為交換空間使用。</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE</source>
+        <translation>整個磁碟機給 openSUSE</translation>
+    </message>
+    <message>
+        <source>The whole drive for openSUSE, with a separate home</source>
+        <translation>整個磁碟機給 openSUSE，並另外分出 home</translation>
+    </message>
+    <message>
+        <source>openSUSE in the free space beside Windows</source>
+        <translation>在 Windows 旁的可用空間安裝 openSUSE</translation>
+    </message>
+    <message>
+        <source>openSUSE can go beside Windows only on a GPT drive.</source>
+        <translation>只有在 GPT 磁碟機上，openSUSE 才能放在 Windows 旁邊。</translation>
+    </message>
+    <message>
+        <source>Each size must be a whole number of MiB.</source>
+        <translation>每個大小都必須是整數個 MiB。</translation>
+    </message>
+    <message>
+        <source>The %1 partition is smaller than its minimum.</source>
+        <translation>%1 分割區小於其最小值。</translation>
+    </message>
+    <message>
+        <source>A layout needs exactly one system partition.</source>
+        <translation>配置必須剛好有一個系統分割區。</translation>
+    </message>
+    <message>
+        <source>This computer starts with UEFI, so the layout needs one start-up partition.</source>
+        <translation>這台電腦以 UEFI 開機，因此配置需要一個開機分割區。</translation>
+    </message>
+    <message>
+        <source>This computer starts with BIOS, so the layout needs one BIOS boot partition.</source>
+        <translation>這台電腦以 BIOS 開機，因此配置需要一個 BIOS 開機分割區。</translation>
+    </message>
+    <message>
+        <source>A layout may have only one %1 partition.</source>
+        <translation>配置只能有一個 %1 分割區。</translation>
+    </message>
+    <message>
+        <source>Only one partition may take the rest of the space.</source>
+        <translation>只能有一個分割區使用剩餘空間。</translation>
+    </message>
+    <message>
+        <source>The layout does not fit in the space on this drive.</source>
+        <translation>配置放不進這個磁碟機的空間。</translation>
+    </message>
+    <message>
+        <source>The layout file is not one this Groundwork can read.</source>
+        <translation>這個版本的 Groundwork 無法讀取此配置檔。</translation>
+    </message>
+    <message>
+        <source>The layout file names no drive.</source>
+        <translation>配置檔沒有指定磁碟機。</translation>
+    </message>
+</context>
+<context>
     <name>gw::Entry</name>
     <message>
         <source>Groundwork</source>
@@ -438,8 +505,8 @@
         <translation>請以您自己的身分啟動 Groundwork，而不是以 root 身分。它會在需要時詢問密碼。</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</source>
-        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
+        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
     </message>
 </context>
 <context>
@@ -1363,6 +1430,50 @@
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
         <translation>系統的核心部分已更新。方便時請重新啟動電腦，讓更新生效。</translation>
+    </message>
+    <message>
+        <source>Preparing a drive</source>
+        <translation>正在準備磁碟機</translation>
+    </message>
+    <message>
+        <source>Nothing was written.</source>
+        <translation>沒有寫入任何內容。</translation>
+    </message>
+    <message>
+        <source>The layout file could not be read.</source>
+        <translation>無法讀取配置檔。</translation>
+    </message>
+    <message>
+        <source>This is not the drive you chose: it may have been changed or unplugged.</source>
+        <translation>這不是您選擇的磁碟機：它可能已被更換或拔除。</translation>
+    </message>
+    <message>
+        <source>The layout was made for a computer that starts differently.</source>
+        <translation>此配置是為開機方式不同的電腦製作的。</translation>
+    </message>
+    <message>
+        <source>Writing the partition table</source>
+        <translation>正在寫入分割表</translation>
+    </message>
+    <message>
+        <source>The drive may now be left without partitions; prepare it again.</source>
+        <translation>磁碟機現在可能沒有分割區；請重新準備。</translation>
+    </message>
+    <message>
+        <source>The drive does not show the new partitions.</source>
+        <translation>磁碟機沒有顯示新的分割區。</translation>
+    </message>
+    <message>
+        <source>Formatting %1</source>
+        <translation>正在格式化 %1</translation>
+    </message>
+    <message>
+        <source>The drive is partitioned but not fully formatted.</source>
+        <translation>磁碟機已分割，但尚未完全格式化。</translation>
+    </message>
+    <message>
+        <source>The drive does not read back as planned.</source>
+        <translation>重新讀取後，磁碟機與計畫不符。</translation>
     </message>
 </context>
 </TS>
