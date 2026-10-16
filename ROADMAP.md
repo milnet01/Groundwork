@@ -1428,7 +1428,7 @@ scheduled.
   Source: in-session-2026-10-15.
   Lanes: tests.
 
-- 📋 [GRND-0081] **Item: tree-sitter, for tools that read and trace code.**
+- 📋 [GRND-0081] **Item: developer tools for Claude Code and Ants Terminal, tree-sitter first.**
   User request (2026-10-16): offer developer tools, including the code
   tracer whose name was "tree something", as a step a non-developer can
   skip. It joins GRND-0027's developer tools group on the Nice to have
@@ -1438,10 +1438,14 @@ scheduled.
   per language (tree-sitter-c, -cpp, -python, -bash, -rust, -lua, -json
   among them). Before building: pick the language set; check each
   package exists on Leap 16 and Slowroll, and leave out what does not.
-  Ants Terminal plans to build its own grammars into its tracer
-  (ANTS-5734, claude-config message 2026-10-16), so this item serves a
-  developer's own editors and tools, not Ants Terminal.
-  **Layman:** A switch among the developer tools that installs tree-sitter, which lets code editors and AI coding helpers understand the structure of code; anyone who is not a developer leaves it off.
+  Widened (user, 2026-10-16): Ants Terminal, and through it Claude
+  Code, will use tree-sitter, so it needs installing; the item also
+  installs any other tool that helps Claude Code, in particular by
+  cutting its token use. This conflicts with claude-config's message the
+  same day (ANTS-5734 to vendor its grammars, no system packages); asked
+  ants-terminal the same day for the packages it needs or prefers, which
+  languages, and which are required. Build from its answer.
+  **Layman:** A switch among the developer tools that installs what Claude Code and Ants Terminal use to read code, so they work better and cheaper; anyone who is not a developer leaves it off.
   Kind: feature.
   Source: user-request-2026-10-16.
   Lanes: items.
