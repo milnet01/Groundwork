@@ -591,6 +591,19 @@ private slots:
         QVERIFY(blank->currentPage()->findChild<QWidget *>(QStringLiteral("hibernate")));
     }
 
+    // The user, 2026-10-16: on a drive with Windows, the layout page starts
+    // on the choice that keeps it; wiping it takes a deliberate click.
+    void aDriveWithWindowsStartsBesideIt()
+    {
+        auto w = pickDrive(QStringLiteral("/dev/sdc"));
+        QVERIFY(w);
+        w->next(); // past Windows' checklist
+        auto *beside = w->currentPage()->findChild<QRadioButton *>(
+            QStringLiteral("suggestion%1").arg(int(gw::Suggestion::Beside)));
+        QVERIFY(beside);
+        QVERIFY(beside->isChecked());
+    }
+
     // GRND-0076, INV-9 on the page: 8 GiB of swap is more than 5 % of a
     // 100 GiB stick, so the switch starts off and says its share; on a
     // 500 GiB disk it starts on.

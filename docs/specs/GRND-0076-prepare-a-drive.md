@@ -134,7 +134,9 @@ the user types no text that reaches a command.
 
 Windows is on a drive when any partition's `FSTYPE` is `ntfs` or
 `BitLocker`. The checklist page comes first then, and its "Continue"
-needs no switch: it advises, it does not gate.
+needs no switch: it advises, it does not gate. The layout page then
+starts on "beside Windows" where it fits, so erasing Windows takes a
+deliberate choice (the user, 2026-10-16).
 
 ### 4.4 The layout file
 

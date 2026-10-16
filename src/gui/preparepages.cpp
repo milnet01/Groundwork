@@ -339,6 +339,9 @@ void LayoutPage::initializePage()
     const Drive &drive = *m_choice->drive;
     const QList<Suggestion> offered = suggestionsFor(drive, m_choice->found.firmware, 0);
     m_suggestion = offered.isEmpty() ? std::nullopt : std::optional<Suggestion>(offered.first());
+    // With Windows on the drive, start on keeping it (the user, 2026-10-16).
+    if (drive.hasWindows() && offered.contains(Suggestion::Beside))
+        m_suggestion = Suggestion::Beside;
     m_custom->setPartitions(layoutFor(Suggestion::Whole, m_choice->found.firmware, 0).partitions);
     // Memory unread: no switch, and the swap stays 2 GiB.
     m_hibernate->setVisible(m_choice->found.memorySwap > 0);
