@@ -491,6 +491,17 @@ private slots:
         qunsetenv("GROUNDWORK_THEME");
     }
 
+    // The first page says Groundwork is not an openSUSE or SUSE product
+    // (user request, 2026-10-16).
+    void theFirstPageSaysItIsIndependent()
+    {
+        auto w = make();
+        auto *disclaimer = w->page(0)->findChild<QLabel *>(QStringLiteral("disclaimer"));
+        QVERIFY(disclaimer);
+        QVERIFY(!disclaimer->isHidden());
+        QVERIFY(disclaimer->text().contains(QLatin1String("not endorsed")));
+    }
+
     // GRND-0077: one job built, so the first page shows no choice.
     void oneJobShowsNoChoice()
     {

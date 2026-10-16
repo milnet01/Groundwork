@@ -12,6 +12,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Added
+
+- The first page and the README say that Groundwork is an independent
+  project, not an official openSUSE or SUSE product, and not endorsed
+  by the openSUSE Project or SUSE.
+
 ### Changed
 
 - On a live system, started from a USB stick or a disc, Groundwork no

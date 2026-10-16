@@ -1582,6 +1582,10 @@
         <translation>Nagesien. Klik Volgende om te kies wat om op te stel.</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>Groundwork is &apos;n onafhanklike projek, nie &apos;n amptelike openSUSE- of SUSE-produk nie, en word nie deur die openSUSE-projek of SUSE onderskryf nie.</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>Gereed om toe te pas</translation>
     </message>

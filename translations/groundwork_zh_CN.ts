@@ -1579,6 +1579,10 @@
         <translation>检查完成。按“下一步”选择要设置的内容。</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>Groundwork 是一个独立项目，不是 openSUSE 或 SUSE 的官方产品，也未获得 openSUSE 项目或 SUSE 的认可。</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>准备应用</translation>
     </message>

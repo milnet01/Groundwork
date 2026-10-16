@@ -169,6 +169,12 @@ public:
         }
         layout->addWidget(m_status);
         layout->addStretch();
+        auto *disclaimer = new QLabel(Wizard::tr("Groundwork is an independent project, not an official openSUSE "
+                                                 "or SUSE product, and is not endorsed by the openSUSE Project or "
+                                                 "SUSE."), this);
+        disclaimer->setObjectName(QStringLiteral("disclaimer"));
+        disclaimer->setWordWrap(true);
+        layout->addWidget(disclaimer);
     }
     // The other jobs bring their own pages and their own rule here as each
     // is built (GRND-0078). Preparing a drive needs no checks.

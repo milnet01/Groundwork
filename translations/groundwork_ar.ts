@@ -1594,6 +1594,10 @@
         <translation>اكتمل الفحص. اضغط التالي لاختيار ما تريد إعداده.</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>‏Groundwork مشروع مستقل، وليس منتجًا رسميًا من openSUSE أو SUSE، ولا يحظى بتأييد مشروع openSUSE أو SUSE.</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>جاهز للتطبيق</translation>
     </message>

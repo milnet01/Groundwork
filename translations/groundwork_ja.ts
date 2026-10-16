@@ -1579,6 +1579,10 @@
         <translation>確認が終わりました。「次へ」を押して、セットアップする項目を選んでください。</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>Groundwork は独立したプロジェクトであり、openSUSE や SUSE の公式製品ではなく、openSUSE プロジェクトや SUSE の承認も受けていません。</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>適用の準備完了</translation>
     </message>

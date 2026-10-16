@@ -1582,6 +1582,10 @@
         <translation>जाँच हो गई। क्या सेट अप करना है, यह चुनने के लिए “आगे” दबाएँ।</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>Groundwork एक स्वतंत्र परियोजना है, openSUSE या SUSE का आधिकारिक उत्पाद नहीं है, और openSUSE प्रोजेक्ट या SUSE द्वारा समर्थित नहीं है।</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>लागू करने के लिए तैयार</translation>
     </message>

@@ -1582,6 +1582,10 @@
         <translation>הבדיקה הסתיימה. יש ללחוץ על הבא כדי לבחור מה להגדיר.</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>‏Groundwork הוא פרויקט עצמאי, אינו מוצר רשמי של openSUSE או של SUSE, ואינו נתמך על ידי פרויקט openSUSE או SUSE.</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>מוכן להחלה</translation>
     </message>

@@ -1582,6 +1582,10 @@
         <translation>Kuhloliwe. Cofa “Okulandelayo” ukuze ukhethe into ekufuneka isetwe.</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>IGroundwork yiprojekthi ezimeleyo, ayiyomveliso esemthethweni ye-openSUSE okanye yeSUSE, kwaye ayixhaswanga yiProjekthi ye-openSUSE okanye yiSUSE.</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>Kulungele ukusetyenziswa</translation>
     </message>

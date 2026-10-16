@@ -1582,6 +1582,10 @@
         <translation>Comprobado. Pulsa Siguiente para elegir qué configurar.</translation>
     </message>
     <message>
+        <source>Groundwork is an independent project, not an official openSUSE or SUSE product, and is not endorsed by the openSUSE Project or SUSE.</source>
+        <translation>Groundwork es un proyecto independiente, no un producto oficial de openSUSE ni de SUSE, y no cuenta con el respaldo del Proyecto openSUSE ni de SUSE.</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>Listo para aplicar</translation>
     </message>
