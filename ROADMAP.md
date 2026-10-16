@@ -1364,6 +1364,10 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   layout page starts on "the whole drive", which erases Windows.
   Done (2026-10-16): stages 1 to 4 committed; both VM runs of spec § 7
   passed, after the fixes in b135b11 and 0358218.
+  Resolved (2026-10-16, the user's ruling): a drive with Windows now
+  starts on "beside Windows" where it fits (93a8a50). Also fixed after
+  the runs: the run page crashed when closed with the Worker's output
+  unread (a069ac9).
   **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
   Kind: feature.
   Source: user-request-2026-10-15.
