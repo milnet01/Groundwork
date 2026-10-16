@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=80 -->
+<!-- ants-roadmap-id-high-water: GRND=81 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1427,3 +1427,21 @@ scheduled.
   Kind: fix.
   Source: in-session-2026-10-15.
   Lanes: tests.
+
+- 📋 [GRND-0081] **Item: tree-sitter, for tools that read and trace code.**
+  User request (2026-10-16): offer developer tools, including the code
+  tracer whose name was "tree something", as a step a non-developer can
+  skip. It joins GRND-0027's developer tools group on the Nice to have
+  page, where each item is its own switch and starts off unless chosen.
+  Packages on Tumbleweed (zypper search, 2026-10-16): tree-sitter (the
+  command), libtree-sitter0_27, and one tree-sitter-<language> package
+  per language (tree-sitter-c, -cpp, -python, -bash, -rust, -lua, -json
+  among them). Before building: pick the language set; check each
+  package exists on Leap 16 and Slowroll, and leave out what does not.
+  Ants Terminal plans to build its own grammars into its tracer
+  (ANTS-5734, claude-config message 2026-10-16), so this item serves a
+  developer's own editors and tools, not Ants Terminal.
+  **Layman:** A switch among the developer tools that installs tree-sitter, which lets code editors and AI coding helpers understand the structure of code; anyone who is not a developer leaves it off.
+  Kind: feature.
+  Source: user-request-2026-10-16.
+  Lanes: items.
