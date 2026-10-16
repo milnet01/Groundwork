@@ -106,11 +106,12 @@ target_link_libraries(groundwork_worker PUBLIC groundwork_drives groundwork_item
 add_library(groundwork_gui STATIC
     src/gui/askpassdialog.cpp
     src/gui/itemrow.cpp
+    src/gui/preparepages.cpp
     src/gui/runpage.cpp
     src/gui/switch.cpp
     src/gui/themes.cpp
     src/gui/wizard.cpp)
-target_link_libraries(groundwork_gui PUBLIC groundwork_core Qt6::Widgets)
+target_link_libraries(groundwork_gui PUBLIC groundwork_drives groundwork_core Qt6::Widgets)
 
 add_executable(groundwork src/main.cpp)
 target_link_libraries(groundwork PRIVATE groundwork_gui groundwork_worker groundwork_items groundwork_core Qt6::Core Qt6::Widgets)

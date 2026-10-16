@@ -173,6 +173,27 @@ Firmware readFirmware(const CheckContext &context)
     return context.fileExists(QStringLiteral("/sys/firmware/efi")) ? Firmware::Uefi : Firmware::Bios;
 }
 
+DriveSurvey surveyDrives(const CheckContext &context)
+{
+    return {readDrives(context), readFirmware(context),
+            memorySwapSize(context.readFile(QStringLiteral("/proc/meminfo")).value_or(QByteArray()))};
+}
+
+QList<Use> allUses() { return {Use::Efi, Use::BiosBoot, Use::Swap, Use::System, Use::Home, Use::Data}; }
+
+QString useTitle(Use use)
+{
+    switch (use) {
+    case Use::Efi: return QCoreApplication::translate("gw::Drives", "Start-up");
+    case Use::BiosBoot: return QCoreApplication::translate("gw::Drives", "BIOS boot");
+    case Use::Swap: return QCoreApplication::translate("gw::Drives", "Swap");
+    case Use::System: return QCoreApplication::translate("gw::Drives", "System");
+    case Use::Home: return QCoreApplication::translate("gw::Drives", "Home");
+    case Use::Data: return QCoreApplication::translate("gw::Drives", "Data");
+    }
+    return {};
+}
+
 QString useName(Use use)
 {
     switch (use) {
@@ -188,7 +209,7 @@ QString useName(Use use)
 
 std::optional<Use> useFromName(const QString &name)
 {
-    for (Use use : {Use::Efi, Use::BiosBoot, Use::Swap, Use::System, Use::Home, Use::Data}) {
+    for (Use use : allUses()) {
         if (useName(use) == name)
             return use;
     }
@@ -243,16 +264,21 @@ QString suggestionTitle(Suggestion suggestion)
     return {};
 }
 
-QList<Suggestion> suggestionsFor(const Drive &drive, Firmware, qint64 hibernateSwap)
+qint64 suggestionMinimum(Suggestion suggestion, qint64 hibernateSwap)
 {
     const qint64 extra = qMax<qint64>(0, hibernateSwap - kSwapSize);
+    return (suggestion == Suggestion::WholeWithHome ? kWholeWithHomeMin : kWholeMin) + extra;
+}
+
+QList<Suggestion> suggestionsFor(const Drive &drive, Firmware, qint64 hibernateSwap)
+{
     QList<Suggestion> out;
-    if (drive.size >= kWholeMin + extra)
+    if (drive.size >= suggestionMinimum(Suggestion::Whole, hibernateSwap))
         out << Suggestion::Whole;
-    if (drive.size >= kWholeWithHomeMin + extra)
+    if (drive.size >= suggestionMinimum(Suggestion::WholeWithHome, hibernateSwap))
         out << Suggestion::WholeWithHome;
     if (drive.hasWindows() && drive.pttype == QLatin1String("gpt")
-        && largestFreeSpace(drive).size >= kWholeMin + extra)
+        && largestFreeSpace(drive).size >= suggestionMinimum(Suggestion::Beside, hibernateSwap))
         out << Suggestion::Beside;
     return out;
 }
@@ -395,6 +421,26 @@ Format formatFor(Use use)
     case Use::Data:
         return {QStringLiteral("xfs"), QStringLiteral("data"),
                 {QStringLiteral("mkfs.xfs"), QStringLiteral("-f"), QStringLiteral("-L"), QStringLiteral("data")}};
+    }
+    return {};
+}
+
+QString installerAdvice(const Partition &partition, Use use)
+{
+    const QString &path = partition.path;
+    switch (use) {
+    case Use::Efi:
+        return QCoreApplication::translate("gw::Drives", "%1, start-up: mount it at /boot/efi and format it.").arg(path);
+    case Use::BiosBoot:
+        return QCoreApplication::translate("gw::Drives", "%1, BIOS boot: leave it as it is.").arg(path);
+    case Use::Swap:
+        return QCoreApplication::translate("gw::Drives", "%1, swap: use it as swap.").arg(path);
+    case Use::System:
+        return QCoreApplication::translate("gw::Drives", "%1, system: mount it at / and format it as Btrfs.").arg(path);
+    case Use::Home:
+        return QCoreApplication::translate("gw::Drives", "%1, home: mount it at /home, and do not format it.").arg(path);
+    case Use::Data:
+        return QCoreApplication::translate("gw::Drives", "%1, data: do not mount it or format it.").arg(path);
     }
     return {};
 }

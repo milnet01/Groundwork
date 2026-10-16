@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>我已了解</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>檢查後再確認</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>套用</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>這個磁碟機上已有的內容都不會改變。請先開啟「我已了解」，再按「套用」。</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>上面的分割區維持不變。openSUSE 的分割區會放在可用空間中。</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>這個磁碟機上的所有內容都將被清除，而且無法復原。請先開啟「我已了解」，再按「套用」。</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>這個磁碟機目前沒有分割區。</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>上面的每個分割區都將被清除，連同其中的所有內容。</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>之後磁碟機上將有：</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>無法將配置儲存到 %1，因此沒有寫入任何內容。</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>新增分割區</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>用途</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>大小</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>其餘全部</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>移除</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>選擇磁碟機</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>Groundwork 只準備一個磁碟機。使用中的磁碟機無法選擇。</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>重新尋找</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>找不到磁碟機。請接上一個，然後按「重新尋找」。</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>使用中：%1 正作為交換空間使用。</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>開機</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>BIOS 開機</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>交換空間</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>系統</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>家目錄</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>資料</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>配置放不進這個磁碟機的空間。</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>%1，開機：掛載到 /boot/efi 並格式化。</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>%1，BIOS 開機：保持原樣。</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>%1，交換空間：當作交換空間使用。</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>%1，系統：掛載到 / 並格式化為 Btrfs。</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>%1，家目錄：掛載到 /home，不要格式化。</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>%1，資料：不要掛載，也不要格式化。</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -713,6 +846,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>休眠空間</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>選擇配置</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>Groundwork 會建議適合這個磁碟機的配置。您也可以自行建立。</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>「休眠空間」會依這台電腦的記憶體（%1）設定交換空間的大小。要為另一台電腦準備磁碟機嗎？請自行建立配置，讓交換空間和那台電腦的記憶體一樣大。</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>自行建立配置</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>這個磁碟機上有 Windows，但使用的是較舊的 MBR 分割表，所以 Groundwork 無法把 openSUSE 放在它旁邊。openSUSE 安裝程式可以做到。</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>Windows 旁邊的可用空間不夠：openSUSE 需要 %1。請先在 Windows 內建的「磁碟管理」中縮小 Windows，然後再回來。</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>「休眠空間」佔用 %1，也就是此配置所用空間的 %2 %。</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>磁碟機上將有：</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -903,6 +1075,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>正在安裝電源設定檔</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>未命名的磁碟機</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>沒有分割區。</translation>
     </message>
 </context>
 <context>
@@ -1267,6 +1450,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>這個磁碟機上有 Windows</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>繼續之前，請在 Windows 中完成以下事項。這些只是建議：「繼續」不需要其中任何一項。</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>繼續</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>備份這個磁碟機上您想保留的所有內容。</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>在 Windows 的「電源選項」中關閉「快速啟動」。否則 Windows 會讓它的分割區處於半關閉狀態，Linux 就不能碰它。</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>檢查 BitLocker 是否開啟。如果開啟，請記下它的修復金鑰。</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>%1 已開啟 BitLocker。請記下它的修復金鑰。</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>要把 openSUSE 放在 Windows 旁邊，請先騰出空間：在 Windows 內建的「磁碟管理」中縮小 Windows。Groundwork 自己從不縮小 Windows。</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>選用，適用於像這樣的傳統硬碟：先對 Windows 進行磁碟重組。這能讓 Windows 縮得更小；但它不保護任何東西。</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1373,6 +1595,10 @@
         <translation>輸入一次密碼後，將依以下順序執行這些項目。</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>正在準備磁碟機</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1474,6 +1700,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>重新讀取後，磁碟機與計畫不符。</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>在安裝程式中，選擇使用現有的分割區，而不是它自己的建議方案，並依照下面的說明設定每個分割區。</translation>
     </message>
 </context>
 </TS>

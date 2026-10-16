@@ -336,6 +336,13 @@ int Worker::prepareDrive(const QString &layoutPath)
     }
     if (!matches)
         return end(false, tr("The drive does not read back as planned."));
+
+    // What to pick in the installer, read off the drive as it now is (spec 4.6).
+    say(formatMarker(QStringLiteral("HINT"),
+                     {id, tr("In the installer, choose to use the existing partitions rather than its own "
+                             "proposal, and set each one as below.")}));
+    for (qsizetype i = 0; i < added.size(); ++i)
+        say(formatMarker(QStringLiteral("HINT"), {id, installerAdvice(added[i], layout.partitions[i].use)}));
     return end(true, {});
 }
 

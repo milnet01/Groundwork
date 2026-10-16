@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>Ndiyaqonda</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>Jonga, emva koko uqinisekise</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Sebenzisa</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>Akukho nto sele ikule drayivu iza kutshintsha. Cofa &quot;Sebenzisa&quot; kuphela emva kokuba uvule &quot;Ndiyaqonda&quot;.</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>Izipartishini ezingentla zihlala zinjalo. Izipartishini ze-openSUSE ziya kwindawo engenanto.</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>Yonke into ekule drayivu iza kucinywa, kwaye oku akunakubuyiselwa umva. Cofa &quot;Sebenzisa&quot; kuphela emva kokuba uvule &quot;Ndiyaqonda&quot;.</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>Le drayivu ayinazo izipartishini ngoku.</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>Yonke ipartishini engentla iza kucinywa, kunye nayo yonke into ekuyo.</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>Emva koko idrayivu iya kuba nezi:</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>Ulungiselelo alukwazanga ukugcinwa ku-%1, ngoko akukho nto ibhaliweyo.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>Yongeza ipartishini</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>Usetyenziso</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Ubungakanani</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>Indawo eseleyo</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Susa</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>Khetha idrayivu</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>I-Groundwork ilungiselela idrayivu enye. Idrayivu esetyenziswayo ayinakukhethwa.</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>Jonga kwakhona</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>Akukho drayivu ifunyenweyo. Faka enye, emva koko ucofe &quot;Jonga kwakhona&quot;.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>Iyasetyenziswa: i-%1 isetyenziswa njenge-swap.</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>Ukuqalisa</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>BIOS boot</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>Swap</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>Inkqubo</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Home</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>Idatha</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>Ulungiselelo alungeni kwindawo ekule drayivu.</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>%1, ukuqalisa: yifake ku-/boot/efi uze uyifomathe.</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>%1, BIOS boot: yiyeke injalo.</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>%1, swap: yisebenzise njenge-swap.</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>%1, inkqubo: yifake ku-/ uze uyifomathe njenge-Btrfs.</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>%1, home: yifake ku-/home, kwaye ungayifomathi.</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>%1, idatha: ungayifaki kwaye ungayifomathi.</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -714,6 +847,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>Indawo yokulala okunzulu</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>Khetha ulungiselelo</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>I-Groundwork icebisa ulungiselelo olungena kule drayivu. Ungazakhela olwakho endaweni yoko.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>&quot;Indawo yokulala okunzulu&quot; ilinganisa i-swap nememori yale khompyutha, %1. Ulungiselela idrayivu yenye ikhompyutha? Zakhele olwakho ulungiselelo, ne-swap elingana nememori yaloo khompyutha.</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>Yakha olwam ulungiselelo</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>I-Windows ikule drayivu, kodwa kwitheyibhile yezipartishini endala ye-MBR, ngoko i-Groundwork ayinakuyibeka i-openSUSE ecaleni kwayo. Isifaki se-openSUSE sona singakwazi.</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>Akukho ndawo yaneleyo engenanto ecaleni kwe-Windows: i-openSUSE idinga i-%1. Qala unciphise i-Windows kwi-Disk Management yayo, emva koko ubuye.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>&quot;Indawo yokulala okunzulu&quot; ithatha i-%1, i-%2 % yendawo esetyenziswa lolu lungiselelo.</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>Idrayivu iya kuba nezi:</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -904,6 +1076,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>Kufakwa iiprofayili zamandla</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>Idrayivu engenagama</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>Akukho zipartishini.</translation>
     </message>
 </context>
 <context>
@@ -1270,6 +1453,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>I-Windows ikule drayivu</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>Phambi kokuqhubeka, yenza ezi zinto kwi-Windows. Ziingcebiso nje: &quot;Qhubeka&quot; ayifuni nanye yazo.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Qhubeka</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>Yenza ikopi yogcino yayo yonke into ekule drayivu ofuna ukuyigcina.</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>Cima i-Fast Startup, kwi-Power Options ye-Windows. Kungenjalo i-Windows ishiya ipartishini yayo ivaleke isiqingatha, kwaye i-Linux akufuneki iyichukumise.</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>Jonga ukuba i-BitLocker ivuliwe na. Ukuba ivuliwe, bhala phantsi isitshixo sayo sokubuyisela.</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>I-BitLocker ivuliwe ku-%1. Bhala phantsi isitshixo sayo sokubuyisela.</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>Ukubeka i-openSUSE ecaleni kwe-Windows, qala wenze indawo: nciphisa i-Windows kwi-Disk Management ye-Windows ngokwayo. I-Groundwork ayize iyinciphise i-Windows ngokwayo.</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>Ukuba uyathanda, kwidiski ejikelezayo efana nale: qala u-defragment i-Windows. Oko kuvumela i-Windows inciphe ngakumbi; akukhuseli nto.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1376,6 +1598,10 @@
         <translation>Ezi zisebenza ngolu landelelwano emva kwephaswedi enye.</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>Kulungiselelwa idrayivu</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1477,6 +1703,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>Idrayivu ayifundeki njengoko kucwangcisiwe.</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>Kwisifaki, khetha ukusebenzisa izipartishini esele zikhona endaweni yesindululo saso, uze usete nganye njengoko kubonisiwe ngezantsi.</translation>
     </message>
 </context>
 </TS>

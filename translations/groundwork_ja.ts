@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>理解しました</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>確認してから確定</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>適用</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>このドライブにすでにあるものは何も変わりません。「理解しました」をオンにしてから「適用」を押してください。</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>上のパーティションはそのまま残ります。openSUSE のパーティションは空き領域に作られます。</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>このドライブの内容はすべて消去され、元に戻せません。「理解しました」をオンにしてから「適用」を押してください。</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>このドライブには今パーティションがありません。</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>上のパーティションはすべて、中身ごと消去されます。</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>その後、ドライブは次のようになります：</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>レイアウトを %1 に保存できなかったため、何も書き込まれていません。</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>パーティションを追加</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>用途</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>サイズ</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>残りすべて</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>削除</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>ドライブを選ぶ</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>Groundwork が準備するドライブは 1 つです。使用中のドライブは選べません。</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>もう一度探す</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>ドライブが見つかりませんでした。ドライブをつないでから「もう一度探す」を押してください。</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>使用中：%1 はスワップとして使われています。</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>スタートアップ</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>BIOS ブート</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>スワップ</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>システム</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>ホーム</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>データ</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>レイアウトがこのドライブの容量に収まりません。</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>%1、スタートアップ：/boot/efi にマウントし、フォーマットしてください。</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>%1、BIOS ブート：そのままにしてください。</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>%1、スワップ：スワップとして使ってください。</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>%1、システム：/ にマウントし、Btrfs でフォーマットしてください。</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>%1、ホーム：/home にマウントし、フォーマットはしないでください。</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>%1、データ：マウントもフォーマットもしないでください。</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -713,6 +846,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>休止状態用の領域</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>レイアウトを選ぶ</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>Groundwork はこのドライブに合うレイアウトを提案します。代わりに自分で作ることもできます。</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>「休止状態用の領域」は、スワップをこのコンピューターのメモリ（%1）と同じサイズにします。別のコンピューター用にドライブを準備していますか？ 自分でレイアウトを作り、スワップをそのコンピューターのメモリと同じサイズにしてください。</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>自分でレイアウトを作る</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>このドライブには Windows がありますが、古い MBR パーティションテーブルのため、Groundwork は openSUSE をその隣に置けません。openSUSE のインストーラーならできます。</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>Windows の隣に十分な空き領域がありません。openSUSE には %1 必要です。先に Windows 自身の「ディスクの管理」で Windows を縮小してから、戻ってきてください。</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>「休止状態用の領域」は %1 を使います。このレイアウトが使う領域の %2 % です。</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>ドライブは次のようになります：</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -903,6 +1075,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>電源プロファイルをインストールしています</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>名前のないドライブ</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>パーティションはありません。</translation>
     </message>
 </context>
 <context>
@@ -1267,6 +1450,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>このドライブには Windows があります</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>先に進む前に、Windows で次のことを行ってください。これらは助言です。「続行」にはどれも必要ありません。</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>続行</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>このドライブの残しておきたいものをすべてバックアップしてください。</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>Windows の「電源オプション」で「高速スタートアップ」をオフにしてください。そうしないと Windows はパーティションを半分閉じたままにするので、Linux はそれに触れてはいけません。</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>BitLocker がオンかどうか確認してください。オンなら、回復キーを書き留めてください。</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>%1 では BitLocker がオンです。回復キーを書き留めてください。</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>openSUSE を Windows の隣に置くには、まず空きを作ってください。Windows 自身の「ディスクの管理」で Windows を縮小します。Groundwork が Windows を縮小することはありません。</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>任意：このような回転式ディスクでは、先に Windows をデフラグしてください。Windows をさらに縮小できるようになります。何かを守るものではありません。</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1373,6 +1595,10 @@
         <translation>パスワードを一度入力すると、これらが次の順序で実行されます。</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>ドライブを準備しています</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1474,6 +1700,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>ドライブを読み直した結果が計画と一致しません。</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>インストーラーでは、インストーラー自身の提案ではなく既存のパーティションを使うよう選び、それぞれを下のとおりに設定してください。</translation>
     </message>
 </context>
 </TS>

@@ -191,8 +191,8 @@ btrfsprogs, xfsprogs).
 
 ### 4.6 Afterwards
 
-The run page reads the drive back and lists, per new partition, what to
-set in the installer: mount point (`/boot/efi`, `/`, `/home`, swap, or
+From its last read of the drive (§ 4.5 step 6), the Worker prints, per
+new partition, what to set in the installer, and the run page lists it: mount point (`/boot/efi`, `/`, `/home`, swap, or
 none for `data`), and whether to format it. Format the start-up,
 system and swap partitions; do not format home or data. The same page
 says that the installer must be told to use these partitions rather

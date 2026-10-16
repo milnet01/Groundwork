@@ -171,10 +171,11 @@ public:
         layout->addStretch();
     }
     // The other jobs bring their own pages and their own rule here as each
-    // is built (GRND-0076, GRND-0078).
+    // is built (GRND-0078). Preparing a drive needs no checks.
     bool isComplete() const override
     {
-        return m_wizard->chosenJob() == Job::SetUp && m_wizard->checksDone();
+        return (m_wizard->chosenJob() == Job::SetUp && m_wizard->checksDone())
+               || m_wizard->chosenJob() == Job::PrepareDrive;
     }
 
 private:
@@ -237,6 +238,25 @@ public:
 
 private:
     QString rowTitle(const QString &id) const { return m_wizard->row(id)->toggle()->text(); }
+    Wizard *m_wizard;
+    QString m_program;
+};
+
+class PrepareRunWizardPage : public RunPage
+{
+public:
+    explicit PrepareRunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard)
+    {
+        setTitle(Wizard::tr("Preparing the drive"));
+        setOffersOneUp(false);
+    }
+    void initializePage() override
+    {
+        start(m_program, m_wizard->prepareArguments(), {{QStringLiteral("prepare-drive"), title()}});
+    }
+    void configure(const QString &program) { m_program = program; }
+
+private:
     Wizard *m_wizard;
     QString m_program;
 };
@@ -329,11 +349,27 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     run->configure(m_setup.workerProgram);
     m_runPage = run;
     addPage(run);
+    if (m_offeredJobs.contains(Job::PrepareDrive)) {
+        m_prepare.survey = m_setup.surveyDrives;
+        m_prepare.layoutPath = m_setup.stateDir + QStringLiteral("/layout.json");
+        m_drivePageId = addPage(new DrivePage(&m_prepare, this));
+        m_windowsPageId = addPage(new WindowsPage(&m_prepare, this));
+        m_layoutPageId = addPage(new LayoutPage(&m_prepare, this));
+        addPage(new ConfirmPage(&m_prepare, this));
+        auto *prepareRun = new PrepareRunWizardPage(this);
+        prepareRun->configure(m_setup.workerProgram);
+        m_prepareRunPage = prepareRun;
+        addPage(prepareRun);
+    }
     connect(this, &QWizard::currentIdChanged, this, &Wizard::fitRows);
-    connect(m_runPage, &RunPage::runFinished, this, [this] {
-        if (!isVisible()) // closed during the run: quit once the Worker is done
-            qApp->quit();
-    });
+    for (RunPage *page : {m_runPage, m_prepareRunPage}) {
+        if (!page)
+            continue;
+        connect(page, &RunPage::runFinished, this, [this] {
+            if (!isVisible()) // closed during the run: quit once the Worker is done
+                qApp->quit();
+        });
+    }
 
     if (!m_offeredJobs.contains(Job::SetUp))
         return; // nothing here is set up, so nothing is checked
@@ -444,6 +480,28 @@ QStringList Wizard::workerArguments() const
     return args + order;
 }
 
+QStringList Wizard::prepareArguments() const
+{
+    return m_setup.workerPrefix
+           + QStringList{QStringLiteral("--worker"), QStringLiteral("--prepare-drive"), m_prepare.layoutPath,
+                         QStringLiteral("--lang"), m_setup.language};
+}
+
+int Wizard::nextId() const
+{
+    // Set up: the welcome page, the levels, review, run. Prepare: the
+    // welcome page, the drive, Windows' checklist where Windows is on it,
+    // the layout, confirm, run (docs/design.md, Preparing a drive).
+    const int id = currentId();
+    if (id == 0 && m_chosenJob == Job::PrepareDrive)
+        return m_drivePageId;
+    if (currentPage() == m_runPage || currentPage() == m_prepareRunPage)
+        return -1;
+    if (id >= 0 && id == m_drivePageId)
+        return m_prepare.drive && m_prepare.drive->hasWindows() ? m_windowsPageId : m_layoutPageId;
+    return QWizard::nextId();
+}
+
 bool Wizard::valuesValid() const
 {
     for (const QString &id : runOrder()) {
@@ -456,7 +514,7 @@ bool Wizard::valuesValid() const
 
 bool Wizard::stopForClose()
 {
-    if (!m_runPage->isRunning())
+    if (!m_runPage->isRunning() && !(m_prepareRunPage && m_prepareRunPage->isRunning()))
         return false;
     // Ask the Worker to stop between items, and keep this process until it
     // has, so neither Qt nor the AppImage's mount ends it early (design,

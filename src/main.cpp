@@ -109,6 +109,8 @@ int wizardMode(int argc, char *argv[])
         setup.workerProgram = QApplication::applicationFilePath();
         setup.stateDir = gw::defaultStateDir();
         setup.liveSystem = gw::isLiveSystem(files);
+        setup.jobs = {gw::Job::SetUp, gw::Job::PrepareDrive};
+        setup.surveyDrives = [files] { return gw::surveyDrives(gw::CheckContext(files)); };
         wizard = std::make_unique<gw::Wizard>(setup);
         QObject::connect(wizard.get(), &gw::Wizard::languageChangeRequested, wizard.get(),
                          [&](const QString &next) {

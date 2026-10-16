@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>이해했습니다</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>확인한 뒤 확정하기</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>적용</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>이 드라이브에 이미 있는 것은 아무것도 바뀌지 않습니다. &quot;이해했습니다&quot;를 켠 뒤에만 &quot;적용&quot;을 누르세요.</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>위의 파티션은 그대로 남습니다. openSUSE의 파티션은 빈 공간에 들어갑니다.</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>이 드라이브의 모든 내용이 지워지며, 되돌릴 수 없습니다. &quot;이해했습니다&quot;를 켠 뒤에만 &quot;적용&quot;을 누르세요.</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>지금 이 드라이브에는 파티션이 없습니다.</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>위의 모든 파티션이 그 안의 내용과 함께 지워집니다.</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>그러면 드라이브는 다음과 같이 됩니다:</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>레이아웃을 %1에 저장하지 못해 아무것도 쓰지 않았습니다.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>파티션 추가</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>용도</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>크기</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>나머지 전체</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>제거</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>드라이브 선택</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>Groundwork는 드라이브 하나를 준비합니다. 사용 중인 드라이브는 고를 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>다시 찾기</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>드라이브를 찾지 못했습니다. 드라이브를 연결한 뒤 &quot;다시 찾기&quot;를 누르세요.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>사용 중: %1이(가) 스왑으로 쓰이고 있습니다.</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>시작</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>BIOS 부트</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>스왑</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>시스템</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>홈</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>데이터</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>레이아웃이 이 드라이브의 공간에 맞지 않습니다.</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>%1, 시작: /boot/efi에 마운트하고 포맷하세요.</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>%1, BIOS 부트: 그대로 두세요.</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>%1, 스왑: 스왑으로 사용하세요.</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>%1, 시스템: /에 마운트하고 Btrfs로 포맷하세요.</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>%1, 홈: /home에 마운트하고, 포맷하지 마세요.</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>%1, 데이터: 마운트하지도, 포맷하지도 마세요.</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -713,6 +846,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>최대 절전 모드용 공간</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>레이아웃 선택</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>Groundwork가 이 드라이브에 맞는 레이아웃을 제안합니다. 대신 직접 만들 수도 있습니다.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>&quot;최대 절전 모드용 공간&quot;은 스왑 크기를 이 컴퓨터의 메모리인 %1에 맞춥니다. 다른 컴퓨터용으로 드라이브를 준비하나요? 직접 레이아웃을 만들고, 스왑을 그 컴퓨터의 메모리 크기로 하세요.</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>직접 레이아웃 만들기</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>이 드라이브에 Windows가 있지만, 오래된 MBR 파티션 테이블에 있어서 Groundwork가 그 옆에 openSUSE를 둘 수 없습니다. openSUSE 설치 프로그램은 할 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>Windows 옆에 빈 공간이 부족합니다. openSUSE에는 %1이(가) 필요합니다. 먼저 Windows의 디스크 관리에서 Windows를 줄인 다음 돌아오세요.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>&quot;최대 절전 모드용 공간&quot;은 %1을(를) 차지합니다. 이 레이아웃이 쓰는 공간의 %2 %입니다.</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>드라이브는 다음과 같이 됩니다:</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -903,6 +1075,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>전원 프로필 설치 중</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>이름 없는 드라이브</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>파티션 없음.</translation>
     </message>
 </context>
 <context>
@@ -1267,6 +1450,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>이 드라이브에 Windows가 있습니다</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>계속하기 전에 Windows에서 다음을 하세요. 권장 사항일 뿐입니다. &quot;계속&quot;에는 이 중 어느 것도 필요하지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>계속</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>이 드라이브에서 남기고 싶은 것을 모두 백업하세요.</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>Windows의 전원 옵션에서 빠른 시작을 끄세요. 그러지 않으면 Windows가 파티션을 반쯤 닫힌 채로 두며, Linux는 그 파티션을 건드리면 안 됩니다.</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>BitLocker가 켜져 있는지 확인하세요. 켜져 있다면 복구 키를 적어 두세요.</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>%1에 BitLocker가 켜져 있습니다. 복구 키를 적어 두세요.</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>openSUSE를 Windows 옆에 두려면 먼저 공간을 만드세요. Windows의 디스크 관리에서 Windows를 줄이면 됩니다. Groundwork는 Windows를 직접 줄이지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>선택 사항(이런 회전식 디스크인 경우): 먼저 Windows를 조각 모음하세요. Windows를 더 줄일 수 있게 해 줍니다. 아무것도 보호하지는 않습니다.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1373,6 +1595,10 @@
         <translation>비밀번호를 한 번 입력하면 다음 순서로 실행됩니다.</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>드라이브 준비 중</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1474,6 +1700,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>드라이브를 다시 읽은 결과가 계획과 다릅니다.</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>설치 프로그램에서 자체 제안 대신 기존 파티션을 사용하도록 선택하고, 각 파티션을 아래와 같이 설정하세요.</translation>
     </message>
 </context>
 </TS>

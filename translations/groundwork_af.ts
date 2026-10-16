@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>Ek verstaan</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>Kontroleer, en bevestig dan</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Pas toe</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>Niks wat reeds op hierdie skyf is, verander nie. Druk Pas toe eers wanneer jy “Ek verstaan” aangeskakel het.</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>Die partisies hierbo bly soos hulle is. openSUSE se partisies gaan in die vrye spasie.</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>Alles op hierdie skyf sal uitgevee word, en dit kan nie ongedaan gemaak word nie. Druk Pas toe eers wanneer jy “Ek verstaan” aangeskakel het.</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>Die skyf het nou geen partisies nie.</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>Elke partisie hierbo sal uitgevee word, met alles daarop.</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>Die skyf sal dan dit bevat:</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>Die uitleg kon nie in %1 gestoor word nie, so niks is geskryf nie.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>Voeg &apos;n partisie by</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>Gebruik</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Grootte</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>Die res</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Verwyder</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>Kies die skyf</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>Groundwork berei een skyf voor. &apos;n Skyf wat in gebruik is, kan nie gekies word nie.</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>Kyk weer</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>Geen skyf is gevind nie. Prop een in, en druk dan Kyk weer.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>In gebruik: %1 is aktiewe ruilspasie.</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>Opstart</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>BIOS-opstart</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>Ruilspasie</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>Stelsel</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Home</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>Data</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>Die uitleg pas nie in die spasie op hierdie skyf nie.</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>%1, opstart: koppel dit by /boot/efi en formateer dit.</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>%1, BIOS-opstart: los dit soos dit is.</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>%1, ruilspasie: gebruik dit as ruilspasie.</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>%1, stelsel: koppel dit by / en formateer dit as Btrfs.</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>%1, home: koppel dit by /home, en moenie dit formateer nie.</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>%1, data: moenie dit koppel of formateer nie.</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -714,6 +847,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>Ruimte vir hibernasie</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>Kies &apos;n uitleg</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>Groundwork stel die uitlegte voor wat op hierdie skyf pas. Jy kan eerder jou eie bou.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>Ruimte vir hibernasie maak die ruilspasie so groot soos hierdie rekenaar se geheue, %1. Berei jy die skyf vir &apos;n ander rekenaar voor? Bou dan jou eie uitleg, met ruilspasie so groot soos daardie rekenaar se geheue.</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>Bou my eie uitleg</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>Windows is op hierdie skyf, maar op &apos;n ouer MBR-partisietabel, so Groundwork kan openSUSE nie langsaan sit nie. Die openSUSE-installeerder kan.</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>Daar is nie genoeg vrye spasie langs Windows nie: openSUSE het %1 nodig. Krimp Windows eers in sy eie Disk Management, en kom dan terug.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>Ruimte vir hibernasie neem %1, %2 % van die spasie wat hierdie uitleg gebruik.</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>Die skyf sal dit bevat:</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -904,6 +1076,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>Besig om kragprofiele te installeer</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>Naamlose skyf</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>Geen partisies nie.</translation>
     </message>
 </context>
 <context>
@@ -1270,6 +1453,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>Windows is op hierdie skyf</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>Doen dit in Windows voordat jy verder gaan. Dit is net raad: Gaan voort het niks daarvan nodig nie.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Gaan voort</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>Maak &apos;n rugsteun van alles op hierdie skyf wat jy wil hou.</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>Skakel Fast Startup af, in Windows se Power Options. Anders laat Windows sy partisie halfoop, en Linux mag dit nie aanraak nie.</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>Kyk of BitLocker aan is. As dit aan is, skryf sy herstelsleutel neer.</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>BitLocker is aan vir %1. Skryf sy herstelsleutel neer.</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>Om openSUSE langs Windows te sit, maak eers plek: krimp Windows in Windows se eie Disk Management. Groundwork krimp Windows nooit self nie.</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>Opsioneel, op &apos;n draaiende skyf soos hierdie een: defragmenteer Windows eers. Dit laat Windows verder krimp; dit beskerm niks nie.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1376,6 +1598,10 @@
         <translation>Hierdie loop na een wagwoord in hierdie volgorde.</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>Die skyf word voorberei</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1477,6 +1703,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>Die skyf lees nie terug soos beplan nie.</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>Kies in die installeerder om die bestaande partisies te gebruik eerder as sy eie voorstel, en stel elkeen soos hieronder.</translation>
     </message>
 </context>
 </TS>

@@ -75,6 +75,37 @@ done
 echo "@@DONE@@|$#|0|0"
 )";
 
+constexpr qint64 kGiB = gw::kGiB;
+
+// A UEFI computer with 8 GiB of memory and three drives: a blank USB stick,
+// the system's own drive, and a spinning disk with Windows and free space.
+gw::DriveSurvey fakeSurvey()
+{
+    gw::Drive stick;
+    stick.path = QStringLiteral("/dev/sdb");
+    stick.model = QStringLiteral("Blank Stick");
+    stick.serial = QStringLiteral("B1");
+    stick.tran = QStringLiteral("usb");
+    stick.size = 100 * kGiB;
+    gw::Drive system;
+    system.path = QStringLiteral("/dev/nvme0n1");
+    system.model = QStringLiteral("System Drive");
+    system.tran = QStringLiteral("nvme");
+    system.size = 500 * kGiB;
+    system.inUse = QStringLiteral("In use: /dev/nvme0n1p2 is mounted at /.");
+    gw::Drive windows;
+    windows.path = QStringLiteral("/dev/sdc");
+    windows.model = QStringLiteral("Windows Disk");
+    windows.pttype = QStringLiteral("gpt");
+    windows.ptuuid = QStringLiteral("0b6f8a37-1c2d-4e5f-9a0b-1c2d3e4f5a6b");
+    windows.size = 500 * kGiB;
+    windows.rotational = true;
+    windows.partitions = {{QStringLiteral("/dev/sdc1"), gw::kMiB, 100 * gw::kMiB, QStringLiteral("vfat"), {}, {}, {}},
+                          {QStringLiteral("/dev/sdc2"), 101 * gw::kMiB, 200 * kGiB, QStringLiteral("ntfs"),
+                           QStringLiteral("Windows"), {}, {}}};
+    return {{stick, system, windows}, gw::Firmware::Uefi, 8 * kGiB};
+}
+
 } // namespace
 
 class TstWizard : public QObject
@@ -110,9 +141,28 @@ class TstWizard : public QObject
         setup.stateDir = m_dir.filePath(QStringLiteral("state"));
         setup.jobs = jobs;
         setup.liveSystem = live;
+        setup.surveyDrives = fakeSurvey;
         auto w = std::make_unique<gw::Wizard>(setup);
         w->show();
         return w;
+    }
+    // The prepare job, from the first page to the page after choosing drive.
+    std::unique_ptr<gw::Wizard> pickDrive(const QString &path)
+    {
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp, gw::Job::PrepareDrive});
+        w->chooseJob(gw::Job::PrepareDrive);
+        w->next();
+        auto *pick = w->currentPage()->findChild<QRadioButton *>(path);
+        if (!pick)
+            return nullptr;
+        pick->click();
+        w->next();
+        return w;
+    }
+    static QLabel *shownLabel(QWidget *page, const QString &name)
+    {
+        auto *label = page->findChild<QLabel *>(name);
+        return label && !label->isHidden() ? label : nullptr;
     }
     static void goToRunPage(gw::Wizard &w)
     {
@@ -491,6 +541,115 @@ private slots:
             said = said || label->text().contains(QStringLiteral("live system"));
         QVERIFY(said);
         QVERIFY(!w->button(QWizard::NextButton)->isEnabled());
+    }
+
+    // GRND-0076, INV-1 shown: a drive in use is listed, greyed, saying why.
+    void aDriveInUseCannotBeChosen()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp, gw::Job::PrepareDrive});
+        w->chooseJob(gw::Job::PrepareDrive);
+        w->next();
+        auto *system = w->currentPage()->findChild<QRadioButton *>(QStringLiteral("/dev/nvme0n1"));
+        QVERIFY(system);
+        QVERIFY(!system->isEnabled());
+        bool said = false;
+        for (auto *label : w->currentPage()->findChildren<QLabel *>())
+            said = said || label->text().contains(QLatin1String("mounted at /"));
+        QVERIFY(said);
+        QVERIFY(!w->currentPage()->isComplete()); // nothing chosen yet
+        w->currentPage()->findChild<QRadioButton *>(QStringLiteral("/dev/sdb"))->click();
+        QVERIFY(w->currentPage()->isComplete());
+    }
+
+    // GRND-0076, spec 4.3: Windows on the drive brings its checklist first,
+    // and Continue needs no switch; a blank drive goes straight to layouts.
+    void windowsOnTheDriveShowsTheChecklistFirst()
+    {
+        auto w = pickDrive(QStringLiteral("/dev/sdc"));
+        QVERIFY(w);
+        QCOMPARE(w->currentPage()->objectName(), QStringLiteral("windowsChecklist"));
+        QVERIFY(w->currentPage()->isComplete());
+        QVERIFY(w->currentPage()->findChildren<QCheckBox *>().isEmpty());
+        w->next();
+        QVERIFY(w->currentPage()->findChild<QWidget *>(QStringLiteral("hibernate")));
+        // Beside Windows is offered, in the free space.
+        QVERIFY(w->currentPage()->findChild<QRadioButton *>(
+            QStringLiteral("suggestion%1").arg(int(gw::Suggestion::Beside))));
+
+        auto blank = pickDrive(QStringLiteral("/dev/sdb"));
+        QVERIFY(blank->currentPage()->findChild<QWidget *>(QStringLiteral("hibernate")));
+    }
+
+    // GRND-0076, INV-9 on the page: 8 GiB of swap is more than 5 % of a
+    // 100 GiB stick, so the switch starts off and says its share; on a
+    // 500 GiB disk it starts on.
+    void roomToHibernateStartsByItsShare()
+    {
+        auto w = pickDrive(QStringLiteral("/dev/sdb"));
+        auto *hibernate = w->currentPage()->findChild<QCheckBox *>(QStringLiteral("hibernate"));
+        QVERIFY(hibernate);
+        QVERIFY(!hibernate->isChecked());
+        QLabel *note = shownLabel(w->currentPage(), QStringLiteral("hibernateNote"));
+        QVERIFY(note);
+        QVERIFY2(note->text().contains(QLatin1String("GiB")) && note->text().contains(QLatin1String("%")),
+                 qPrintable(note->text()));
+
+        auto big = pickDrive(QStringLiteral("/dev/sdc"));
+        big->next(); // past Windows' checklist
+        QVERIFY(big->currentPage()->findChild<QCheckBox *>(QStringLiteral("hibernate"))->isChecked());
+        QVERIFY(!shownLabel(big->currentPage(), QStringLiteral("hibernateNote")));
+    }
+
+    // GRND-0076, spec 4.3: a custom layout goes on only when it is valid.
+    void aCustomLayoutMustBeValid()
+    {
+        auto w = pickDrive(QStringLiteral("/dev/sdb"));
+        w->currentPage()->findChild<QRadioButton *>(QStringLiteral("custom"))->click();
+        auto *editor = w->currentPage()->findChild<gw::CustomLayoutEditor *>();
+        QVERIFY(editor && !editor->isHidden());
+        QVERIFY(w->currentPage()->isComplete()); // it starts as the whole-drive layout
+        editor->removePartition(editor->count() - 1); // the system partition
+        QVERIFY(!w->currentPage()->isComplete());
+        QVERIFY(shownLabel(w->currentPage(), QStringLiteral("layoutProblem")));
+        editor->addPartition({gw::Use::System, std::nullopt});
+        QVERIFY(w->currentPage()->isComplete());
+        QVERIFY(!shownLabel(w->currentPage(), QStringLiteral("layoutProblem")));
+    }
+
+    // GRND-0076, INV-2: Apply on the confirm page is unavailable until the
+    // "I understand" switch is on. Then the layout file is written and the
+    // Worker started with it.
+    void applyWaitsForTheIUnderstandSwitch()
+    {
+        auto w = pickDrive(QStringLiteral("/dev/sdb"));
+        w->next();
+        QVERIFY(w->currentPage()->isCommitPage());
+        auto *understand = w->currentPage()->findChild<QCheckBox *>(QStringLiteral("understand"));
+        QVERIFY(understand);
+        QVERIFY(!understand->isChecked());
+        QVERIFY(!w->currentPage()->isComplete());
+        QVERIFY(!w->button(QWizard::CommitButton)->isEnabled());
+        understand->click();
+        QVERIFY(w->currentPage()->isComplete());
+        QVERIFY(w->button(QWizard::CommitButton)->isEnabled());
+        understand->click();
+        QVERIFY(!w->button(QWizard::CommitButton)->isEnabled());
+        understand->click();
+
+        const QString layoutPath = m_dir.filePath(QStringLiteral("state/layout.json"));
+        QFile::remove(layoutPath);
+        w->button(QWizard::CommitButton)->click();
+        QCOMPARE(w->currentPage(), w->prepareRunPage());
+        QFile file(layoutPath);
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        QString why;
+        const auto read = gw::readLayoutFile(file.readAll(), &why);
+        QVERIFY2(read, qPrintable(why));
+        QCOMPARE(read->drive.path, QStringLiteral("/dev/sdb"));
+        QCOMPARE(read->drive.serial, QStringLiteral("B1"));
+        QCOMPARE(w->prepareArguments(),
+                 QStringList({"--worker", "--prepare-drive", layoutPath, "--lang", "en"}));
+        QTRY_VERIFY(w->prepareRunPage()->isComplete());
     }
 
     void closingMidRunAsksTheWorkerToStopAndWaits()

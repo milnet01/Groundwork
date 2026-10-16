@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>فهمت</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>راجِع، ثم أكِّد</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>تطبيق</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>لن يتغير شيء موجود على هذا القرص. لا تضغط تطبيق إلا بعد تشغيل «فهمت».</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>تبقى الأقسام أعلاه كما هي. توضع أقسام openSUSE في المساحة الحرة.</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>سيُمحى كل شيء على هذا القرص، ولا يمكن التراجع عن ذلك. لا تضغط تطبيق إلا بعد تشغيل «فهمت».</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>لا يحتوي القرص على أي أقسام الآن.</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>سيُمحى كل قسم أعلاه، مع كل ما عليه.</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>سيحتوي القرص بعد ذلك على:</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>تعذّر حفظ التخطيط في %1، لذا لم يُكتب أي شيء.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>إضافة قسم</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>الاستخدام</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>الحجم</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>الباقي</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>إزالة</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>اختر القرص</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>يجهّز Groundwork قرصًا واحدًا. لا يمكن اختيار قرص قيد الاستخدام.</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>ابحث مجددًا</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>لم يُعثر على أي قرص. صِل قرصًا، ثم اضغط ابحث مجددًا.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>قيد الاستخدام: %1 مستخدم كذاكرة تبديل (swap).</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>الإقلاع</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>إقلاع BIOS</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>ذاكرة التبديل</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>النظام</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>المنزل (home)</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>البيانات</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>لا يتسع التخطيط في المساحة المتاحة على هذا القرص.</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>‏%1، الإقلاع: اربطه في /boot/efi وهيّئه.</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>‏%1، إقلاع BIOS: اتركه كما هو.</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>‏%1، ذاكرة التبديل: استخدمه كذاكرة تبديل.</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>‏%1، النظام: اربطه في / وهيّئه بنظام Btrfs.</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>‏%1، المنزل: اربطه في /home، ولا تهيّئه.</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>‏%1، البيانات: لا تربطه ولا تهيّئه.</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -718,6 +851,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>مساحة للسبات</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>اختر تخطيطًا</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>يقترح Groundwork التخطيطات التي تناسب هذا القرص. يمكنك إنشاء تخطيطك الخاص بدلًا منها.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>يجعل خيار مساحة للسبات ذاكرة التبديل بحجم ذاكرة هذا الحاسوب، %1. هل تجهّز القرص لحاسوب آخر؟ أنشئ تخطيطك الخاص، مع ذاكرة تبديل بحجم ذاكرة ذلك الحاسوب.</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>أنشئ تخطيطي الخاص</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>‏Windows موجود على هذا القرص، لكن على جدول أقسام MBR قديم، لذا لا يستطيع Groundwork وضع openSUSE بجانبه. يستطيع ذلك مثبّت openSUSE.</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>لا توجد مساحة حرة كافية بجانب Windows: يحتاج openSUSE إلى %1. قلّص Windows أولًا من أداة إدارة الأقراص الخاصة به، ثم عُد.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>تأخذ مساحة للسبات %1، أي %2 % من المساحة التي يستخدمها هذا التخطيط.</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>سيحتوي القرص على:</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -908,6 +1080,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>جارٍ تثبيت أوضاع الطاقة</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>قرص بلا اسم</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>لا توجد أقسام.</translation>
     </message>
 </context>
 <context>
@@ -1282,6 +1465,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>‏Windows موجود على هذا القرص</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>قبل المتابعة، افعل هذه الأمور في Windows. إنها نصائح فقط: لا تحتاج متابعة إلى أي منها.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>متابعة</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>انسخ احتياطيًا كل ما تريد الاحتفاظ به على هذا القرص.</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>أوقف بدء التشغيل السريع، من خيارات الطاقة في Windows. وإلا يترك Windows قسمه نصف مغلق، ويجب ألا يلمسه Linux.</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>تحقق مما إذا كان BitLocker مفعّلًا. إن كان مفعّلًا، فاكتب مفتاح الاسترداد الخاص به.</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>‏BitLocker مفعّل على %1. اكتب مفتاح الاسترداد الخاص به.</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>لوضع openSUSE بجانب Windows، أفسح مكانًا أولًا: قلّص Windows من أداة إدارة الأقراص في Windows نفسه. لا يقلّص Groundwork نظام Windows بنفسه أبدًا.</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>اختياري، على قرص دوّار مثل هذا: ألغِ تجزئة Windows أولًا. يتيح ذلك تقليص Windows أكثر؛ ولا يحمي أي شيء.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1388,6 +1610,10 @@
         <translation>تعمل هذه بهذا الترتيب بعد إدخال كلمة مرور واحدة.</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>جارٍ تجهيز القرص</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>‏Groundwork</translation>
     </message>
@@ -1489,6 +1715,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>لا يطابق القرص الخطة عند إعادة قراءته.</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>في المثبّت، اختر استخدام الأقسام الموجودة بدلًا من اقتراحه الخاص، واضبط كل قسم كما في الأسفل.</translation>
     </message>
 </context>
 </TS>

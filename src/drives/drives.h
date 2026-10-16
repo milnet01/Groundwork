@@ -51,9 +51,24 @@ QList<Drive> readDrives(const CheckContext &context);
 enum class Firmware { Uefi, Bios };
 Firmware readFirmware(const CheckContext &context);
 
+// MemTotal from /proc/meminfo, rounded up to a whole GiB; 0 when unreadable.
+qint64 memorySwapSize(const QByteArray &meminfo);
+
+// Everything the prepare pages read, in one call: the drives, how this
+// computer starts, and the swap size with room to hibernate.
+struct DriveSurvey
+{
+    QList<Drive> drives;
+    Firmware firmware = Firmware::Uefi;
+    qint64 memorySwap = 0;
+};
+DriveSurvey surveyDrives(const CheckContext &context);
+
 enum class Use { Efi, BiosBoot, Swap, System, Home, Data };
-QString useName(Use use); // as the layout file writes it
+QString useName(Use use);  // as the layout file writes it
+QString useTitle(Use use); // as the user reads it
 std::optional<Use> useFromName(const QString &name);
+QList<Use> allUses();
 
 struct PlannedPartition
 {
@@ -80,9 +95,6 @@ struct FreeSpace
 // inside the area GPT leaves usable, aligned to 1 MiB.
 FreeSpace largestFreeSpace(const Drive &drive);
 
-// MemTotal from /proc/meminfo, rounded up to a whole GiB; 0 when unreadable.
-qint64 memorySwapSize(const QByteArray &meminfo);
-
 // The space a layout may use on this drive: the whole drive, or the
 // largest free space beside Windows.
 qint64 usableSpace(const Drive &drive, LayoutKind kind);
@@ -97,6 +109,8 @@ QString suggestionTitle(Suggestion suggestion);
 // The suggestions that fit this drive (INV-7). hibernateSwap is the swap
 // size with room to hibernate, or 0 when that switch is off.
 QList<Suggestion> suggestionsFor(const Drive &drive, Firmware firmware, qint64 hibernateSwap);
+// The space a suggestion needs (spec 4.3), grown by the extra swap.
+qint64 suggestionMinimum(Suggestion suggestion, qint64 hibernateSwap);
 Layout layoutFor(Suggestion suggestion, Firmware firmware, qint64 hibernateSwap);
 
 // Plain words saying why the layout cannot go on this drive; empty when it
@@ -124,6 +138,10 @@ struct Format
     QStringList argv; // the partition's path is appended
 };
 Format formatFor(Use use);
+
+// What to set in the installer for a new partition (spec 4.6): its mount
+// point, and whether to format it.
+QString installerAdvice(const Partition &partition, Use use);
 
 // The layout file (spec 4.4).
 QJsonObject layoutFile(const Layout &layout, const Drive &drive);

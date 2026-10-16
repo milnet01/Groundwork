@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>मुझे समझ आ गया</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>जाँचें, फिर पुष्टि करें</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>लागू करें</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>इस ड्राइव पर पहले से मौजूद कुछ भी नहीं बदलेगा। &quot;मुझे समझ आ गया&quot; चालू करने के बाद ही &quot;लागू करें&quot; दबाएँ।</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>ऊपर के पार्टीशन जैसे हैं वैसे ही रहेंगे। openSUSE के पार्टीशन खाली जगह में बनेंगे।</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>इस ड्राइव पर सब कुछ मिट जाएगा, और इसे वापस नहीं लाया जा सकता। &quot;मुझे समझ आ गया&quot; चालू करने के बाद ही &quot;लागू करें&quot; दबाएँ।</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>इस ड्राइव पर अभी कोई पार्टीशन नहीं है।</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>ऊपर का हर पार्टीशन मिट जाएगा, उस पर रखी हर चीज़ के साथ।</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>इसके बाद ड्राइव पर ये होंगे:</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>लेआउट %1 में सेव नहीं हो सका, इसलिए कुछ भी नहीं लिखा गया।</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>पार्टीशन जोड़ें</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>उपयोग</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>आकार</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>बाकी जगह</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>हटाएँ</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>ड्राइव चुनें</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>Groundwork एक ड्राइव तैयार करता है। उपयोग में चल रही ड्राइव नहीं चुनी जा सकती।</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>फिर से देखें</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>कोई ड्राइव नहीं मिली। एक ड्राइव लगाएँ, फिर &quot;फिर से देखें&quot; दबाएँ।</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>उपयोग में: %1 स्वैप के रूप में चालू है।</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>स्टार्ट-अप</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>BIOS बूट</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>स्वैप</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>सिस्टम</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>होम</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>डेटा</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>लेआउट इस ड्राइव की जगह में नहीं समाता।</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>%1, स्टार्ट-अप: इसे /boot/efi पर माउंट करें और फ़ॉर्मैट करें।</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>%1, BIOS बूट: इसे जैसा है वैसा ही छोड़ दें।</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>%1, स्वैप: इसे स्वैप के रूप में इस्तेमाल करें।</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>%1, सिस्टम: इसे / पर माउंट करें और Btrfs के रूप में फ़ॉर्मैट करें।</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>%1, होम: इसे /home पर माउंट करें, और फ़ॉर्मैट न करें।</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>%1, डेटा: इसे न माउंट करें, न फ़ॉर्मैट करें।</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -714,6 +847,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>हाइबरनेट के लिए जगह</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>लेआउट चुनें</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>Groundwork इस ड्राइव में समाने वाले लेआउट सुझाता है। आप इसकी जगह अपना लेआउट बना सकते हैं।</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>&quot;हाइबरनेट के लिए जगह&quot; स्वैप को इस कंप्यूटर की मेमोरी, %1, के बराबर रखता है। किसी दूसरे कंप्यूटर के लिए ड्राइव तैयार कर रहे हैं? अपना लेआउट बनाएँ, और स्वैप को उस कंप्यूटर की मेमोरी जितना रखें।</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>अपना लेआउट बनाएँ</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>इस ड्राइव पर Windows है, पर पुरानी MBR पार्टीशन तालिका पर, इसलिए Groundwork openSUSE को उसके बगल में नहीं रख सकता। openSUSE इंस्टॉलर यह कर सकता है।</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>Windows के बगल में पर्याप्त खाली जगह नहीं है: openSUSE को %1 चाहिए। पहले Windows के अपने डिस्क प्रबंधन (Disk Management) में Windows को छोटा करें, फिर वापस आएँ।</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>&quot;हाइबरनेट के लिए जगह&quot; %1 लेता है, यानी इस लेआउट की जगह का %2 %।</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>ड्राइव पर ये होंगे:</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -904,6 +1076,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>पावर प्रोफ़ाइल इंस्टॉल किए जा रहे हैं</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>बिना नाम की ड्राइव</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>कोई पार्टीशन नहीं।</translation>
     </message>
 </context>
 <context>
@@ -1270,6 +1453,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>इस ड्राइव पर Windows है</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>आगे बढ़ने से पहले, Windows में ये काम करें। ये सिर्फ़ सलाह हैं: &quot;जारी रखें&quot; के लिए इनमें से कोई ज़रूरी नहीं।</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>जारी रखें</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>इस ड्राइव पर जो कुछ भी रखना चाहते हैं, उसका बैकअप लें।</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>Windows के पावर विकल्प (Power Options) में फ़ास्ट स्टार्टअप (Fast Startup) बंद करें। नहीं तो Windows अपना पार्टीशन आधा बंद छोड़ देता है, और Linux को उसे छूना नहीं चाहिए।</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>देखें कि BitLocker चालू है या नहीं। अगर है, तो उसकी रिकवरी कुंजी लिख लें।</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>%1 पर BitLocker चालू है। उसकी रिकवरी कुंजी लिख लें।</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>openSUSE को Windows के बगल में रखने के लिए, पहले जगह बनाएँ: Windows के अपने डिस्क प्रबंधन (Disk Management) में Windows को छोटा करें। Groundwork खुद कभी Windows को छोटा नहीं करता।</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>वैकल्पिक, इस जैसी घूमने वाली डिस्क पर: पहले Windows को डीफ़्रैगमेंट करें। इससे Windows और छोटा हो पाता है; यह किसी चीज़ की सुरक्षा नहीं करता।</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1376,6 +1598,10 @@
         <translation>ये एक पासवर्ड के बाद इसी क्रम में चलेंगे।</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>ड्राइव तैयार की जा रही है</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1477,6 +1703,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>दोबारा पढ़ने पर ड्राइव योजना के अनुसार नहीं है।</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>इंस्टॉलर में, उसके अपने सुझाव की जगह मौजूदा पार्टीशन इस्तेमाल करना चुनें, और हर एक को नीचे दिए अनुसार सेट करें।</translation>
     </message>
 </context>
 </TS>

@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>הבנתי</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>בדיקה ואז אישור</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>החלה</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>שום דבר שכבר נמצא בכונן הזה לא משתנה. לחץ על החלה רק אחרי שהפעלת את &quot;הבנתי&quot;.</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>המחיצות שלמעלה נשארות כמו שהן. המחיצות של openSUSE ייכנסו למקום הפנוי.</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>כל מה שבכונן הזה יימחק, ואי אפשר לבטל את זה. לחץ על החלה רק אחרי שהפעלת את &quot;הבנתי&quot;.</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>אין כרגע מחיצות בכונן.</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>כל מחיצה שלמעלה תימחק, עם כל מה שעליה.</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>הכונן יכיל אז:</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>לא ניתן היה לשמור את הפריסה ב־%1, לכן שום דבר לא נכתב.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>הוספת מחיצה</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>שימוש</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>גודל</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>השאר</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>הסרה</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>בחירת הכונן</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>‏Groundwork מכין כונן אחד. אי אפשר לבחור כונן שנמצא בשימוש.</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>חיפוש חוזר</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>לא נמצא כונן. חבר כונן, ואז לחץ על חיפוש חוזר.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>בשימוש: %1 משמש כ־swap.</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>הפעלה</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>‏BIOS boot</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>‏Swap</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>מערכת</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>‏Home</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>נתונים</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>הפריסה לא נכנסת למקום שבכונן הזה.</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>‏%1, הפעלה: לעגן ב־/boot/efi ולאתחל.</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>‏%1, BIOS boot: להשאיר כמו שהיא.</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>‏%1, swap: להשתמש בה כ־swap.</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>‏%1, מערכת: לעגן ב־/ ולאתחל כ־Btrfs.</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>‏%1, home: לעגן ב־/home, ולא לאתחל.</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>‏%1, נתונים: לא לעגן ולא לאתחל.</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -714,6 +847,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>מקום לשינה עמוקה</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>בחירת פריסה</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>‏Groundwork מציע את הפריסות שמתאימות לכונן הזה. אפשר גם לבנות פריסה משלך.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>מקום לשינה עמוקה קובע את גודל ה־swap לפי הזיכרון של המחשב הזה, %1. מכין את הכונן למחשב אחר? בנה פריסה משלך, עם swap בגודל הזיכרון של אותו מחשב.</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>בניית פריסה משלי</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>‏Windows נמצא בכונן הזה, אבל בטבלת מחיצות MBR ישנה, לכן Groundwork לא יכול להתקין את openSUSE לצדו. תוכנית ההתקנה של openSUSE יכולה.</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>אין מספיק מקום פנוי לצד Windows: openSUSE צריך %1. כווץ קודם את Windows בכלי ניהול הדיסקים שלו, ואז חזור.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>מקום לשינה עמוקה תופס %1, %2 % מהמקום שהפריסה הזו משתמשת בו.</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>הכונן יכיל:</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -904,6 +1076,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>מתקין פרופילי צריכת חשמל</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>כונן ללא שם</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>אין מחיצות.</translation>
     </message>
 </context>
 <context>
@@ -1270,6 +1453,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>‏Windows נמצא בכונן הזה</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>לפני שממשיכים, עשה את הדברים האלה ב־Windows. אלה עצות בלבד: המשך לא דורש אף אחת מהן.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>המשך</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>גבה את כל מה שבכונן הזה שאתה רוצה לשמור.</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>כבה את ההפעלה המהירה, באפשרויות צריכת החשמל של Windows. אחרת Windows משאיר את המחיצה שלו סגורה למחצה, ואסור ל־Linux לגעת בה.</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>בדוק אם BitLocker מופעל. אם כן, רשום את מפתח השחזור שלו.</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>‏BitLocker מופעל עבור %1. רשום את מפתח השחזור שלו.</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>כדי להתקין את openSUSE לצד Windows, פנה קודם מקום: כווץ את Windows בכלי ניהול הדיסקים של Windows עצמו. Groundwork אף פעם לא מכווץ את Windows בעצמו.</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>אופציונלי, בכונן מסתובב כמו זה: בצע קודם איחוי ל־Windows. זה מאפשר לכווץ את Windows יותר; זה לא מגן על שום דבר.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1376,6 +1598,10 @@
         <translation>אלה ירוצו בסדר הזה אחרי סיסמה אחת.</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>מכין את הכונן</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>‏Groundwork</translation>
     </message>
@@ -1477,6 +1703,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>הכונן לא נקרא בחזרה כמתוכנן.</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>בתוכנית ההתקנה, בחר להשתמש במחיצות הקיימות במקום בהצעה שלה, והגדר כל אחת כמו למטה.</translation>
     </message>
 </context>
 </TS>

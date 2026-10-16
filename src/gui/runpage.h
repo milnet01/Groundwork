@@ -30,6 +30,8 @@ public:
     QStringList hints() const { return m_hints; }
     // Offered when a run ends and OneUp is installed (GRND-0024).
     QPushButton *oneUpButton() const { return m_oneUp; }
+    // Off where nothing was set up to keep up to date, as after preparing a drive.
+    void setOffersOneUp(bool offers) { m_offersOneUp = offers; }
 
 signals:
     void runFinished();
@@ -48,6 +50,7 @@ private:
     QLabel *m_summary;
     QPlainTextEdit *m_details;
     QPushButton *m_oneUp;
+    bool m_offersOneUp = true;
 };
 
 } // namespace gw

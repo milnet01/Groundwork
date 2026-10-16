@@ -53,7 +53,7 @@ RunPage::RunPage(QWidget *parent)
         m_pending.clear();
         if (m_summary->text().isEmpty())
             m_summary->setText(tr("Groundwork stopped unexpectedly. The details below say why."));
-        m_oneUp->setVisible(!QStandardPaths::findExecutable(QStringLiteral("oneup")).isEmpty());
+        m_oneUp->setVisible(m_offersOneUp && !QStandardPaths::findExecutable(QStringLiteral("oneup")).isEmpty());
         emit completeChanged();
         emit runFinished();
     });

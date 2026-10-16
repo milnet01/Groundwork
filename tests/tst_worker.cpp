@@ -440,6 +440,16 @@ cat > "$FAKE_WRITTEN$out"
         QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkfs.fat -F 32 -n EFI /dev/sdb1")));
         QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkswap -L swap /dev/sdb2")));
         QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkfs.btrfs -f -L openSUSE /dev/sdb3")));
+        // Spec 4.6: then what to pick in the installer, partition by partition.
+        QStringList hints;
+        for (const auto &m : r.markers)
+            if (m.name == QLatin1String("HINT"))
+                hints << m.fields.value(1);
+        const QString said = hints.join(QLatin1Char('\n'));
+        QVERIFY2(said.contains(QLatin1String("/dev/sdb1")) && said.contains(QLatin1String("/boot/efi")), qPrintable(said));
+        QVERIFY2(said.contains(QLatin1String("/dev/sdb2")) && said.contains(QLatin1String("swap")), qPrintable(said));
+        QVERIFY2(said.contains(QLatin1String("/dev/sdb3, system: mount it at /")), qPrintable(said));
+        QVERIFY2(said.contains(QLatin1String("installer")), qPrintable(said));
     }
 
     // INV-3: a drive at the same path with another serial is not the drive

@@ -36,6 +36,8 @@ groundwork --worker [--lang LANG] --prepare-drive LAYOUT_FILE
 - It trusts nothing in the file. It ends `fail` before any root step
   when the drive read now is not the one named, or the layout is not
   valid for that drive and this computer.
+- On success it prints `HINT` lines saying what to set in the installer
+  for each new partition (spec § 4.6).
 
 ## Exit codes
 

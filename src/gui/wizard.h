@@ -1,11 +1,13 @@
 // The Wizard (GRND-0008; docs/design.md, The levels): a welcome page that
 // checks the system, one page per level, a review page, and the run page.
+// The prepare job has its own pages after those (GRND-0076).
 // It never runs as root and never depends on the Worker: it starts it as a
 // child process and stops it by writing the stop file.
 #pragma once
 
 #include "core/checkrunner.h"
 #include "core/selection.h"
+#include "preparepages.h"
 
 #include <QFont>
 #include <QHash>
@@ -47,6 +49,7 @@ struct WizardSetup
     QString stateDir;
     QList<Job> jobs = {Job::SetUp}; // the jobs built, in the order offered
     bool liveSystem = false;        // nothing set up there lasts a restart
+    std::function<DriveSurvey()> surveyDrives; // when the prepare job's drive page opens
 };
 
 class Wizard : public QWizard
@@ -64,7 +67,13 @@ public:
     const Selection &selection() const { return m_selection; }
     ItemRow *row(const QString &id) const { return m_rows.value(id); }
     RunPage *runPage() const { return m_runPage; }
+    RunPage *prepareRunPage() const { return m_prepareRunPage; }
     QStringList workerArguments() const;
+    // The Worker's arguments for preparing the drive (spec 4.4).
+    QStringList prepareArguments() const;
+    const PrepareChoice &prepareChoice() const { return m_prepare; }
+    // Routes each job through its own pages.
+    int nextId() const override;
     QStringList runOrder() const { return m_setup.catalogue->runOrder(m_selection); }
     // Every switched-on item that takes a value has a valid one.
     bool valuesValid() const;
@@ -98,6 +107,9 @@ private:
     QHash<QString, std::pair<QString, bool>> m_reasons;
     QHash<int, QWidget *> m_levelPages; // each level page's row area, keyed by Level
     RunPage *m_runPage;
+    PrepareChoice m_prepare;
+    int m_drivePageId = -1, m_layoutPageId = -1, m_windowsPageId = -1;
+    RunPage *m_prepareRunPage = nullptr;
 };
 
 } // namespace gw

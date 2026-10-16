@@ -385,6 +385,72 @@
     </message>
 </context>
 <context>
+    <name>gw::ConfirmPage</name>
+    <message>
+        <source>I understand</source>
+        <translation>Entendo</translation>
+    </message>
+    <message>
+        <source>Check, then confirm</source>
+        <translation>Confira e depois confirme</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Aplicar</translation>
+    </message>
+    <message>
+        <source>Nothing already on this drive changes. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>Nada do que já está neste disco muda. Pressione Aplicar só depois de ativar “Entendo”.</translation>
+    </message>
+    <message>
+        <source>The partitions above stay as they are. openSUSE&apos;s partitions go in the free space.</source>
+        <translation>As partições acima ficam como estão. As partições do openSUSE vão no espaço livre.</translation>
+    </message>
+    <message>
+        <source>Everything on this drive will be erased, and this cannot be undone. Press Apply only once you have switched on &quot;I understand&quot;.</source>
+        <translation>Tudo neste disco será apagado, e isso não pode ser desfeito. Pressione Aplicar só depois de ativar “Entendo”.</translation>
+    </message>
+    <message>
+        <source>The drive holds no partitions now.</source>
+        <translation>O disco não tem partições agora.</translation>
+    </message>
+    <message>
+        <source>Every partition above will be erased, with everything on it.</source>
+        <translation>Todas as partições acima serão apagadas, com tudo o que há nelas.</translation>
+    </message>
+    <message>
+        <source>The drive will then hold:</source>
+        <translation>O disco terá então:</translation>
+    </message>
+    <message>
+        <source>The layout could not be saved to %1, so nothing was written.</source>
+        <translation>Não foi possível salvar o esquema em %1, então nada foi gravado.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::CustomLayoutEditor</name>
+    <message>
+        <source>Add a partition</source>
+        <translation>Adicionar uma partição</translation>
+    </message>
+    <message>
+        <source>Use</source>
+        <translation>Uso</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Tamanho</translation>
+    </message>
+    <message>
+        <source>The rest</source>
+        <translation>O resto</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Remover</translation>
+    </message>
+</context>
+<context>
     <name>gw::DiskSchedulerItem</name>
     <message>
         <source>Smoother spinning hard drives</source>
@@ -412,6 +478,25 @@
     </message>
 </context>
 <context>
+    <name>gw::DrivePage</name>
+    <message>
+        <source>Choose the drive</source>
+        <translation>Escolha o disco</translation>
+    </message>
+    <message>
+        <source>Groundwork prepares one drive. A drive in use cannot be chosen.</source>
+        <translation>O Groundwork prepara um disco. Um disco em uso não pode ser escolhido.</translation>
+    </message>
+    <message>
+        <source>Look again</source>
+        <translation>Procurar de novo</translation>
+    </message>
+    <message>
+        <source>No drive was found. Plug one in, then press Look again.</source>
+        <translation>Nenhum disco foi encontrado. Conecte um e pressione Procurar de novo.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Drives</name>
     <message>
         <source>In use: %1 is mounted at %2.</source>
@@ -420,6 +505,30 @@
     <message>
         <source>In use: %1 is swap.</source>
         <translation>Em uso: %1 está ativo como swap.</translation>
+    </message>
+    <message>
+        <source>Start-up</source>
+        <translation>Inicialização</translation>
+    </message>
+    <message>
+        <source>BIOS boot</source>
+        <translation>Inicialização BIOS</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>Swap</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>Sistema</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Home</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation>Dados</translation>
     </message>
     <message>
         <source>The whole drive for openSUSE</source>
@@ -468,6 +577,30 @@
     <message>
         <source>The layout does not fit in the space on this drive.</source>
         <translation>O esquema não cabe no espaço deste disco.</translation>
+    </message>
+    <message>
+        <source>%1, start-up: mount it at /boot/efi and format it.</source>
+        <translation>%1, inicialização: monte em /boot/efi e formate.</translation>
+    </message>
+    <message>
+        <source>%1, BIOS boot: leave it as it is.</source>
+        <translation>%1, inicialização BIOS: deixe como está.</translation>
+    </message>
+    <message>
+        <source>%1, swap: use it as swap.</source>
+        <translation>%1, swap: use como swap.</translation>
+    </message>
+    <message>
+        <source>%1, system: mount it at / and format it as Btrfs.</source>
+        <translation>%1, sistema: monte em / e formate como Btrfs.</translation>
+    </message>
+    <message>
+        <source>%1, home: mount it at /home, and do not format it.</source>
+        <translation>%1, home: monte em /home e não formate.</translation>
+    </message>
+    <message>
+        <source>%1, data: do not mount it or format it.</source>
+        <translation>%1, dados: não monte nem formate.</translation>
     </message>
     <message>
         <source>The layout file is not one this Groundwork can read.</source>
@@ -714,6 +847,45 @@
     </message>
 </context>
 <context>
+    <name>gw::LayoutPage</name>
+    <message>
+        <source>Room to hibernate</source>
+        <translation>Espaço para hibernar</translation>
+    </message>
+    <message>
+        <source>Choose a layout</source>
+        <translation>Escolha um esquema</translation>
+    </message>
+    <message>
+        <source>Groundwork suggests the layouts that fit this drive. You can build your own instead.</source>
+        <translation>O Groundwork sugere os esquemas que cabem neste disco. Você também pode criar o seu.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate sizes the swap to this computer&apos;s memory, %1. Preparing the drive for another computer? Build your own layout, with swap the size of that computer&apos;s memory.</source>
+        <translation>Espaço para hibernar ajusta a swap à memória deste computador, %1. Vai preparar o disco para outro computador? Crie seu próprio esquema, com uma swap do tamanho da memória daquele computador.</translation>
+    </message>
+    <message>
+        <source>Build my own layout</source>
+        <translation>Criar meu próprio esquema</translation>
+    </message>
+    <message>
+        <source>Windows is on this drive, but on an older MBR partition table, so Groundwork cannot put openSUSE beside it. The openSUSE installer can.</source>
+        <translation>O Windows está neste disco, mas em uma tabela de partições MBR antiga, então o Groundwork não pode colocar o openSUSE ao lado dele. O instalador do openSUSE pode.</translation>
+    </message>
+    <message>
+        <source>There is not enough free space beside Windows: openSUSE needs %1. Shrink Windows in its own Disk Management first, then come back.</source>
+        <translation>Não há espaço livre suficiente ao lado do Windows: o openSUSE precisa de %1. Reduza o Windows primeiro no próprio Gerenciamento de Disco dele e depois volte.</translation>
+    </message>
+    <message>
+        <source>Room to hibernate takes %1, %2 % of the space this layout uses.</source>
+        <translation>Espaço para hibernar ocupa %1, %2 % do espaço que este esquema usa.</translation>
+    </message>
+    <message>
+        <source>The drive will hold:</source>
+        <translation>O disco terá:</translation>
+    </message>
+</context>
+<context>
     <name>gw::LogCapItem</name>
     <message>
         <source>A size limit on the system log</source>
@@ -904,6 +1076,17 @@
     <message>
         <source>Installing power profiles</source>
         <translation>Instalando os perfis de energia</translation>
+    </message>
+</context>
+<context>
+    <name>gw::PreparePages</name>
+    <message>
+        <source>Unnamed drive</source>
+        <translation>Disco sem nome</translation>
+    </message>
+    <message>
+        <source>No partitions.</source>
+        <translation>Sem partições.</translation>
     </message>
 </context>
 <context>
@@ -1270,6 +1453,45 @@
     </message>
 </context>
 <context>
+    <name>gw::WindowsPage</name>
+    <message>
+        <source>Windows is on this drive</source>
+        <translation>O Windows está neste disco</translation>
+    </message>
+    <message>
+        <source>Before going on, do these in Windows. They are advice: Continue needs none of them.</source>
+        <translation>Antes de continuar, faça isto no Windows. São conselhos: Continuar não precisa de nenhum deles.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Continuar</translation>
+    </message>
+    <message>
+        <source>Back up everything on this drive you want to keep.</source>
+        <translation>Faça backup de tudo neste disco que você quer manter.</translation>
+    </message>
+    <message>
+        <source>Turn off Fast Startup, in Windows&apos; Power Options. Otherwise Windows leaves its partition half-closed, and Linux must not touch it.</source>
+        <translation>Desative a Inicialização rápida, nas Opções de Energia do Windows. Senão o Windows deixa a partição dele meio fechada, e o Linux não deve mexer nela.</translation>
+    </message>
+    <message>
+        <source>Check whether BitLocker is on. If it is, write down its recovery key.</source>
+        <translation>Verifique se o BitLocker está ativado. Se estiver, anote a chave de recuperação.</translation>
+    </message>
+    <message>
+        <source>BitLocker is on for %1. Write down its recovery key.</source>
+        <translation>O BitLocker está ativado em %1. Anote a chave de recuperação.</translation>
+    </message>
+    <message>
+        <source>To put openSUSE beside Windows, make room first: shrink Windows in Windows&apos; own Disk Management. Groundwork never shrinks Windows itself.</source>
+        <translation>Para colocar o openSUSE ao lado do Windows, primeiro abra espaço: reduza o Windows no próprio Gerenciamento de Disco do Windows. O Groundwork nunca reduz o Windows sozinho.</translation>
+    </message>
+    <message>
+        <source>Optional, on a spinning disk like this one: defragment Windows first. It lets Windows shrink further; it protects nothing.</source>
+        <translation>Opcional, em um disco giratório como este: desfragmente o Windows primeiro. Isso deixa o Windows reduzir mais; não protege nada.</translation>
+    </message>
+</context>
+<context>
     <name>gw::Wizard</name>
     <message>
         <source>Essentials</source>
@@ -1376,6 +1598,10 @@
         <translation>Estes serão executados nesta ordem depois de uma única senha.</translation>
     </message>
     <message>
+        <source>Preparing the drive</source>
+        <translation>Preparando o disco</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1477,6 +1703,10 @@
     <message>
         <source>The drive does not read back as planned.</source>
         <translation>O disco relido não corresponde ao planejado.</translation>
+    </message>
+    <message>
+        <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
+        <translation>No instalador, escolha usar as partições existentes em vez da proposta dele, e configure cada uma como abaixo.</translation>
     </message>
 </context>
 </TS>
