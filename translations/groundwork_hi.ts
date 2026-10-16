@@ -170,6 +170,22 @@
         <translation>Flathub से कोड एडिटर VSCodium इंस्टॉल करता है।</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>Claude Code के लिए टूल</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>ripgrep, Git और कोड जाँचने वाले टूल इंस्टॉल करता है, जिनसे Claude Code और Ants Terminal कोड खोजते और जाँचते हैं।</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>tree-sitter इंस्टॉल करता है, जो सोर्स कोड की बनावट पढ़ता है, साथ में C, C++, Python, shell, Rust, Lua और JSON के व्याकरण।</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>Déjà Dup बैकअप</translation>
     </message>
@@ -1632,6 +1648,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>बंद किया गया क्योंकि इसे %1 की ज़रूरत है।</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>बंद किया गया क्योंकि %1 में यह शामिल है।</translation>
     </message>
 </context>
 <context>

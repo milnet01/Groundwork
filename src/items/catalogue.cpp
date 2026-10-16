@@ -97,6 +97,21 @@ const Catalogue &catalogue()
     static const FlathubAppItem codium(QStringLiteral("dev-vscodium"), QT_TRANSLATE_NOOP("gw::Apps", "VSCodium"),
         QT_TRANSLATE_NOOP("gw::Apps", "Installs VSCodium, a code editor, from Flathub."), QStringLiteral("com.vscodium.codium"),
         {QStringLiteral("codium")});
+    // What Claude Code and Ants Terminal use where present (GRND-0081). Every
+    // name was found with zypper search on Tumbleweed, Leap 16.0 and Slowroll
+    // (2026-10-16); mypy's package carries the Python version, 3.13 then.
+    static const PackageItem claudeTools(QStringLiteral("dev-claude-tools"),
+        QT_TRANSLATE_NOOP("gw::Apps", "Tools for Claude Code"),
+        QT_TRANSLATE_NOOP("gw::Apps", "Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use "
+                                      "to search and check code."),
+        {QStringLiteral("ripgrep"), QStringLiteral("git"), QStringLiteral("clang-tools"), QStringLiteral("cppcheck"),
+         QStringLiteral("ShellCheck"), QStringLiteral("jq"), QStringLiteral("gh"), QStringLiteral("python313-mypy")});
+    static const PackageItem treeSitter(QStringLiteral("dev-tree-sitter"), QT_TRANSLATE_NOOP("gw::Apps", "tree-sitter"),
+        QT_TRANSLATE_NOOP("gw::Apps", "Installs tree-sitter, which reads the structure of source code, with its C, C++, "
+                                      "Python, shell, Rust, Lua and JSON grammars."),
+        {QStringLiteral("tree-sitter"), QStringLiteral("tree-sitter-c"), QStringLiteral("tree-sitter-cpp"),
+         QStringLiteral("tree-sitter-python"), QStringLiteral("tree-sitter-bash"), QStringLiteral("tree-sitter-rust"),
+         QStringLiteral("tree-sitter-lua"), QStringLiteral("tree-sitter-json")});
     static const AntsTerminalItem antsTerminal; // GRND-0061
     static const OneUpItem oneUp; // GRND-0074
     // Backup of the user's own files (GRND-0028)
@@ -121,7 +136,7 @@ const Catalogue &catalogue()
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
                                 &hostname, &ssh, &clock, &numlock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
-                                &buildTools, &codium, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
+                                &buildTools, &codium, &claudeTools, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;
 }
 

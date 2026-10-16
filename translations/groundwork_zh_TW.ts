@@ -170,6 +170,22 @@
         <translation>從 Flathub 安裝程式碼編輯器 VSCodium。</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>Claude Code 工具</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>安裝 ripgrep、Git 和程式碼檢查工具，Claude Code 和 Ants Terminal 用它們搜尋和檢查程式碼。</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>安裝 tree-sitter，它讀取原始碼的結構，並附帶 C、C++、Python、shell、Rust、Lua 和 JSON 的語法。</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>Déjà Dup 備份</translation>
     </message>
@@ -1629,6 +1645,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>已關閉，因為它需要 %1。</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>已關閉，因為 %1 已包含它。</translation>
     </message>
 </context>
 <context>

@@ -404,7 +404,7 @@ void Wizard::showResults(const CheckResults &results)
     for (QWidget *inner : std::as_const(m_levelPages))
         static_cast<QVBoxLayout *>(inner->layout())->addStretch();
     m_selection = m_setup.catalogue->defaultSelection(results);
-    refreshRows({}, {}, true);
+    refreshRows({}, {}, {}, true);
     m_checksDone = true;
     emit checksFinished();
 }
@@ -454,12 +454,13 @@ void Wizard::fitRows()
 
 void Wizard::userToggled(const QString &id, bool on)
 {
-    const QStringList pulled = on ? m_setup.catalogue->switchOn(m_selection, id, m_results)
+    QStringList included;
+    const QStringList pulled = on ? m_setup.catalogue->switchOn(m_selection, id, m_results, &included)
                                   : m_setup.catalogue->switchOff(m_selection, id);
-    refreshRows(pulled, id, on);
+    refreshRows(pulled, included, id, on);
 }
 
-void Wizard::refreshRows(const QStringList &pulled, const QString &cause, bool on)
+void Wizard::refreshRows(const QStringList &pulled, const QStringList &included, const QString &cause, bool on)
 {
     for (ItemRow *row : std::as_const(m_rows))
         row->setChecked(m_selection.contains(row->id()));
@@ -468,12 +469,18 @@ void Wizard::refreshRows(const QStringList &pulled, const QString &cause, bool o
         if (ItemRow *row = m_rows.value(id)) {
             row->setReason(on ? tr("Switched on because %1 needs it.").arg(causeTitle)
                               : tr("Switched off because it needs %1.").arg(causeTitle));
-            m_reasons.insert(id, {cause, on});
+            m_reasons.insert(id, {cause, on, on});
+        }
+    }
+    for (const QString &id : included) {
+        if (ItemRow *row = m_rows.value(id)) {
+            row->setReason(tr("Switched off because %1 includes it.").arg(causeTitle));
+            m_reasons.insert(id, {cause, false, true});
         }
     }
     for (auto it = m_reasons.begin(); it != m_reasons.end();) {
-        const auto &[reasonCause, reasonOn] = it.value();
-        if (m_selection.contains(it.key()) == reasonOn && m_selection.contains(reasonCause) == reasonOn) {
+        const Reason &reason = it.value();
+        if (m_selection.contains(it.key()) == reason.rowOn && m_selection.contains(reason.cause) == reason.causeOn) {
             ++it;
             continue;
         }

@@ -17,6 +17,9 @@ public:
     QString title() const override;
     QString applySentence() const override;
     bool installsPackages() const override { return true; }
+    // Ants Terminal builds tree-sitter in, so it needs no system copy
+    // (GRND-0081; ants-terminal session, 2026-10-16).
+    QStringList includes() const override { return {QStringLiteral("dev-tree-sitter")}; }
     CheckResult check(const CheckContext &context) const override;
     QList<Step> applySteps(const SystemIdentity &system,
                            const CheckContext &context) const override;

@@ -170,6 +170,22 @@
         <translation>يثبّت VSCodium، وهو محرّر للشيفرة البرمجية، من Flathub.</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>أدوات لـ Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>يثبّت ripgrep وGit وأدوات فحص الشيفرة، التي يستخدمها Claude Code وAnts Terminal للبحث في الشيفرة وفحصها.</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>‏tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>يثبّت tree-sitter، الذي يقرأ بنية الشيفرة المصدرية، مع قواعده للغات C وC++‎ وPython وshell وRust وLua وJSON.</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>النسخ الاحتياطي بـ Déjà Dup</translation>
     </message>
@@ -1644,6 +1660,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>غير مفعّل لأنه يحتاج إلى %1.</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>غير مفعّل لأن %1 يتضمّنه.</translation>
     </message>
 </context>
 <context>

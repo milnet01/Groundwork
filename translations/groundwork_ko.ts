@@ -170,6 +170,22 @@
         <translation>Flathub에서 코드 편집기 VSCodium을 설치합니다.</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>Claude Code용 도구</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>Claude Code와 Ants Terminal이 코드를 검색하고 검사하는 데 쓰는 ripgrep, Git, 코드 검사 도구를 설치합니다.</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>소스 코드의 구조를 읽는 tree-sitter를 C, C++, Python, shell, Rust, Lua, JSON 문법과 함께 설치합니다.</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>Déjà Dup 백업</translation>
     </message>
@@ -1629,6 +1645,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>%1이(가) 필요하므로 꺼졌습니다.</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>%1에 포함되어 있으므로 꺼졌습니다.</translation>
     </message>
 </context>
 <context>

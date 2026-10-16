@@ -57,6 +57,15 @@ public:
 const FakeValueItem hostname(QStringLiteral("hostname"), gw::Level::Configuration, false);
 const FakeItem fonts(QStringLiteral("fonts"), gw::Level::NiceToHave, true);
 const gw::Catalogue catalogue({&update, &codecs, &hostname, &fonts});
+class FakeIncluder : public FakeItem
+{
+public:
+    using FakeItem::FakeItem;
+    QStringList includes() const override { return {QStringLiteral("parser")}; }
+};
+const FakeItem parser(QStringLiteral("parser"), gw::Level::NiceToHave, false);
+const FakeIncluder terminal(QStringLiteral("terminal"), gw::Level::NiceToHave, false);
+const gw::Catalogue including({&parser, &terminal});
 
 const QByteArray kFakeWorker = R"(#!/bin/sh
 shift 3
@@ -311,6 +320,23 @@ private slots:
         QVERIFY(!updateRow->reason().isEmpty());
         w->row(QStringLiteral("fonts"))->toggle()->click();
         QVERIFY2(updateRow->reason().isEmpty(), qPrintable(updateRow->reason()));
+    }
+
+    // GRND-0081: switching on an item that includes a switched-on one
+    // switches it off and says why, until the includer is switched off.
+    void switchingOnAnIncluderSwitchesOffWhatItIncludesAndSaysWhy()
+    {
+        auto w = make(QStringLiteral("en"), &including);
+        QTRY_VERIFY(w->checksDone());
+        auto *parserRow = w->row(QStringLiteral("parser"));
+        parserRow->toggle()->click();
+        QVERIFY(parserRow->isChecked());
+        w->row(QStringLiteral("terminal"))->toggle()->click();
+        QVERIFY(!parserRow->isChecked());
+        QVERIFY2(parserRow->reason().contains(QLatin1String("Title of terminal includes it")),
+                 qPrintable(parserRow->reason()));
+        w->row(QStringLiteral("terminal"))->toggle()->click();
+        QVERIFY2(parserRow->reason().isEmpty(), qPrintable(parserRow->reason()));
     }
 
     void switchingOnAnInstallPullsTheUpdateAndSaysWhy()

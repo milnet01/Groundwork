@@ -170,6 +170,22 @@
         <translation>Installe VSCodium, un éditeur de code, depuis Flathub.</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>Outils pour Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>Installe ripgrep, Git et des vérificateurs de code, que Claude Code et Ants Terminal utilisent pour chercher dans le code et le vérifier.</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>Installe tree-sitter, qui lit la structure du code source, avec ses grammaires pour C, C++, Python, shell, Rust, Lua et JSON.</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>Sauvegardes Déjà Dup</translation>
     </message>
@@ -1632,6 +1648,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>Désactivé parce qu&apos;il a besoin de %1.</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>Désactivé parce que %1 l&apos;inclut.</translation>
     </message>
 </context>
 <context>

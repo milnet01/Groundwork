@@ -79,6 +79,10 @@ private slots:
             notDone.insert(item->id(), {gw::CheckState::NotDone, {}});
         for (const QString &id : all.defaultSelection(notDone))
             QVERIFY2(all.find(id)->level() == gw::Level::Essentials, qPrintable(id));
+        // Ants Terminal includes tree-sitter (GRND-0081).
+        QCOMPARE(all.find(QStringLiteral("ants-terminal"))->includes(), QStringList{"dev-tree-sitter"});
+        for (const char *id : {"dev-claude-tools", "dev-tree-sitter"})
+            QVERIFY2(all.find(QLatin1String(id)) && all.find(QLatin1String(id))->installsPackages(), id);
         // Ids are unique.
         QSet<QString> ids;
         for (const gw::Item *item : all.items())

@@ -170,6 +170,22 @@
         <translation>מתקין את VSCodium, עורך קוד, מ־Flathub.</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>כלים ל־Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>מתקין את ripgrep, את Git ובודקי קוד, שבהם Claude Code ו־Ants Terminal משתמשים כדי לחפש בקוד ולבדוק אותו.</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>‏tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>מתקין את tree-sitter, שקורא את המבנה של קוד מקור, עם הדקדוקים שלו ל־C, C++‎, Python, shell, Rust, Lua ו־JSON.</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>גיבויים עם Déjà Dup</translation>
     </message>
@@ -1632,6 +1648,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>כבוי כי הוא צריך את %1.</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>כבוי כי %1 כולל אותו.</translation>
     </message>
 </context>
 <context>

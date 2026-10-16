@@ -91,7 +91,7 @@ protected:
 
 private:
     void showResults(const CheckResults &results);
-    void refreshRows(const QStringList &pulled, const QString &cause, bool on);
+    void refreshRows(const QStringList &pulled, const QStringList &included, const QString &cause, bool on);
     void fitRows();
     bool stopForClose();
 
@@ -102,9 +102,16 @@ private:
     bool m_checksDone = false;
     Selection m_selection;
     QHash<QString, ItemRow *> m_rows;
-    // Each shown reason: the item it names, and whether both were switched
-    // on or off. It holds only while both still are (GRND-0047).
-    QHash<QString, std::pair<QString, bool>> m_reasons;
+    // Each shown reason: the item it names, whether the row was switched on,
+    // and whether that item was. It holds only while both still are
+    // (GRND-0047).
+    struct Reason
+    {
+        QString cause;
+        bool rowOn;
+        bool causeOn;
+    };
+    QHash<QString, Reason> m_reasons;
     QHash<int, QWidget *> m_levelPages; // each level page's row area, keyed by Level
     RunPage *m_runPage;
     PrepareChoice m_prepare;

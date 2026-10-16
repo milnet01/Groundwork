@@ -1,6 +1,7 @@
 // Which items start switched on, what switching one on or off pulls with
-// it, and the order the Worker runs them in. Core owns this one rule so the
-// Wizard and the Worker apply the same one (docs/design.md, The levels).
+// it or switches off, and the order the Worker runs them in. Core owns this
+// one rule so the Wizard and the Worker apply the same one (docs/design.md,
+// The levels).
 #pragma once
 
 #include "checkrunner.h"
@@ -31,9 +32,11 @@ public:
     Selection defaultSelection(const CheckResults &results) const;
 
     // Switch an item on, with each dependency not already done or not
-    // needed. Returns the ids switched on because something needed them.
+    // needed, and switch off what those items include. Returns the ids
+    // switched on because something needed them; switchedOff, when given,
+    // gets the ids switched off because something included them.
     QStringList switchOn(Selection &selection, const QString &id,
-                         const CheckResults &results) const;
+                         const CheckResults &results, QStringList *switchedOff = nullptr) const;
 
     // Switch an item off, with everything that depends on it. Returns the
     // ids switched off because they needed it.
@@ -43,8 +46,9 @@ public:
     QStringList runOrder(const Selection &selection) const;
 
     // Items listed before something they depend on, depending on an id the
-    // catalogue lacks, or depending on an item that accepts a licence. Empty
-    // when the catalogue is well formed.
+    // catalogue lacks, depending on an item that accepts a licence, or
+    // including an id the catalogue lacks. Empty when the catalogue is well
+    // formed.
     QStringList orderProblems() const;
 
 private:

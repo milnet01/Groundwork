@@ -60,6 +60,10 @@ dependency is neither done nor in its list, skips it and says why. **Core owns t
 on and for closing dependencies, over the items it is given, so the
 Wizard and the Worker apply the same one.
 
+**An item can include another.** Switching it on switches the included
+item off, and that row says why; the user may switch it back on. Ants
+Terminal includes tree-sitter, which it has built in.
+
 1. **Essentials** — what a desktop user needs for things to work.
    Bring the system up to date; media codecs, including video in the
    browser; Flatpak and Flathub. Hardware support, offered only where

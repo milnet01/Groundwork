@@ -170,6 +170,22 @@
         <translation>Ifaka i-VSCodium, umhleli wekhowudi, ukusuka kwi-Flathub.</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>Izixhobo ze-Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>Ifaka i-ripgrep, i-Git nezixhobo zokuhlola ikhowudi, ezisetyenziswa yi-Claude Code ne-Ants Terminal ukukhangela nokuhlola ikhowudi.</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>Ifaka i-tree-sitter, efunda ubume bekhowudi yomthombo, kunye negrama zayo ze-C, C++, Python, shell, Rust, Lua ne-JSON.</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>Iikopi zogcino ze-Déjà Dup</translation>
     </message>
@@ -1632,6 +1648,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>Kuvaliwe kuba kufuna i-%1.</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>Kuvaliwe kuba i-%1 iyakuquka.</translation>
     </message>
 </context>
 <context>

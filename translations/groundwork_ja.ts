@@ -170,6 +170,22 @@
         <translation>コードエディター VSCodium を Flathub からインストールします。</translation>
     </message>
     <message>
+        <source>Tools for Claude Code</source>
+        <translation>Claude Code 用のツール</translation>
+    </message>
+    <message>
+        <source>Installs ripgrep, Git and code checkers, which Claude Code and Ants Terminal use to search and check code.</source>
+        <translation>Claude Code と Ants Terminal がコードの検索とチェックに使う ripgrep、Git、コードチェッカーをインストールします。</translation>
+    </message>
+    <message>
+        <source>tree-sitter</source>
+        <translation>tree-sitter</translation>
+    </message>
+    <message>
+        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
+        <translation>ソースコードの構造を読み取る tree-sitter を、C、C++、Python、shell、Rust、Lua、JSON の文法とともにインストールします。</translation>
+    </message>
+    <message>
         <source>Déjà Dup backups</source>
         <translation>Déjà Dup によるバックアップ</translation>
     </message>
@@ -1629,6 +1645,10 @@
     <message>
         <source>Switched off because it needs %1.</source>
         <translation>%1 が必要なため、オフになっています。</translation>
+    </message>
+    <message>
+        <source>Switched off because %1 includes it.</source>
+        <translation>%1 に含まれているため、オフになっています。</translation>
     </message>
 </context>
 <context>

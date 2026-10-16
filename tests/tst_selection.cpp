@@ -1,5 +1,5 @@
-// Default selection, dependency closure and run order (docs/design.md,
-// The levels; S1 and S4).
+// Default selection, dependency closure, items that include others, and
+// run order (docs/design.md, The levels; S1 and S4).
 #include "core/selection.h"
 
 #include <QtTest>
@@ -10,9 +10,9 @@ class FakeItem : public gw::Item
 {
 public:
     FakeItem(QString id, gw::Level level, bool installs = false, bool preparation = false,
-             QStringList deps = {}, bool licence = false)
+             QStringList deps = {}, bool licence = false, QStringList includes = {})
         : m_id(std::move(id)), m_level(level), m_installs(installs), m_prep(preparation),
-          m_deps(std::move(deps)), m_licence(licence) {}
+          m_deps(std::move(deps)), m_licence(licence), m_includes(std::move(includes)) {}
     QString id() const override { return m_id; }
     gw::Level level() const override { return m_level; }
     QString title() const override { return m_id; }
@@ -21,6 +21,7 @@ public:
     bool installsPackages() const override { return m_installs; }
     bool isPreparation() const override { return m_prep; }
     bool acceptsLicence() const override { return m_licence; }
+    QStringList includes() const override { return m_includes; }
     gw::CheckResult check(const gw::CheckContext &) const override { return {}; }
     QList<gw::Step> applySteps(const gw::SystemIdentity &, const gw::CheckContext &) const override { return {}; }
 
@@ -30,6 +31,7 @@ private:
     bool m_installs, m_prep;
     QStringList m_deps;
     bool m_licence;
+    QStringList m_includes;
 };
 
 const FakeItem update(QStringLiteral("update"), gw::Level::Essentials, false, true);
@@ -38,8 +40,14 @@ const FakeItem flathub(QStringLiteral("flathub"), gw::Level::Essentials, true);
 const FakeItem nvidia(QStringLiteral("nvidia"), gw::Level::Essentials, true, false, {}, true);
 const FakeItem fonts(QStringLiteral("fonts"), gw::Level::NiceToHave, true);
 const FakeItem hostname(QStringLiteral("hostname"), gw::Level::Configuration);
+const FakeItem parser(QStringLiteral("parser"), gw::Level::NiceToHave, true);
+const FakeItem terminal(QStringLiteral("terminal"), gw::Level::NiceToHave, true, false, {}, false,
+                        {QStringLiteral("parser")});
 
-gw::Catalogue catalogue() { return gw::Catalogue({&update, &codecs, &flathub, &nvidia, &hostname, &fonts}); }
+gw::Catalogue catalogue()
+{
+    return gw::Catalogue({&update, &codecs, &flathub, &nvidia, &hostname, &fonts, &parser, &terminal});
+}
 
 gw::CheckResults results(std::initializer_list<std::pair<const char *, gw::CheckState>> states)
 {
@@ -127,6 +135,47 @@ private slots:
         gw::Selection s;
         QCOMPARE(catalogue().switchOn(s, QStringLiteral("nvidia"), r), QStringList{"update"});
         QCOMPARE(sorted(s), QStringList({"nvidia", "update"}));
+    }
+
+    // GRND-0081: an item that includes another switches it off when it is
+    // switched on, and says which it switched off.
+    void switchingOnAnItemSwitchesOffWhatItIncludes()
+    {
+        const auto r = results({{"update", S::Done}, {"parser", S::NotDone}, {"terminal", S::NotDone}});
+        gw::Selection s;
+        catalogue().switchOn(s, QStringLiteral("parser"), r);
+        QStringList off;
+        QVERIFY(catalogue().switchOn(s, QStringLiteral("terminal"), r, &off).isEmpty());
+        QCOMPARE(off, QStringList{"parser"});
+        QCOMPARE(sorted(s), QStringList{"terminal"});
+    }
+
+    void anIncludedItemThatIsOffIsNotReported()
+    {
+        const auto r = results({{"update", S::Done}, {"terminal", S::NotDone}});
+        gw::Selection s;
+        QStringList off;
+        catalogue().switchOn(s, QStringLiteral("terminal"), r, &off);
+        QVERIFY(off.isEmpty());
+    }
+
+    // Including is one way: the user may still want the included item.
+    void anIncludedItemCanBeSwitchedBackOn()
+    {
+        const auto r = results({{"update", S::Done}, {"parser", S::NotDone}, {"terminal", S::NotDone}});
+        gw::Selection s;
+        catalogue().switchOn(s, QStringLiteral("terminal"), r);
+        QStringList off;
+        catalogue().switchOn(s, QStringLiteral("parser"), r, &off);
+        QVERIFY(off.isEmpty());
+        QCOMPARE(sorted(s), QStringList({"parser", "terminal"}));
+    }
+
+    void orderProblemsFindsAnIncludeOfAnUnknownItem()
+    {
+        const FakeItem stray(QStringLiteral("stray"), gw::Level::NiceToHave, false, false, {}, false,
+                             {QStringLiteral("missing")});
+        QCOMPARE(gw::Catalogue({&stray}).orderProblems(), QStringList{"stray includes unknown missing"});
     }
 
     void orderProblemsFindsADependencyOnALicenceItem()

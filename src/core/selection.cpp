@@ -33,9 +33,10 @@ Selection Catalogue::defaultSelection(const CheckResults &results) const
 }
 
 QStringList Catalogue::switchOn(Selection &selection, const QString &id,
-                                const CheckResults &results) const
+                                const CheckResults &results, QStringList *switchedOff) const
 {
     QStringList pulled;
+    QStringList on;
     QStringList pending{id};
     bool first = true;
     while (!pending.isEmpty()) {
@@ -51,7 +52,17 @@ QStringList Catalogue::switchOn(Selection &selection, const QString &id,
         }
         first = false;
         selection.insert(current);
+        on.append(current);
         pending.append(dependencies(*item));
+    }
+    for (const QString &current : std::as_const(on)) {
+        for (const QString &included : find(current)->includes()) {
+            if (!selection.contains(included))
+                continue;
+            switchOff(selection, included);
+            if (switchedOff)
+                switchedOff->append(included);
+        }
     }
     return pulled;
 }
@@ -98,6 +109,9 @@ QStringList Catalogue::orderProblems() const
             else if (!seen.contains(dep))
                 problems.append(item->id() + QStringLiteral(" is listed before ") + dep);
         }
+        for (const QString &included : item->includes())
+            if (!find(included))
+                problems.append(item->id() + QStringLiteral(" includes unknown ") + included);
         seen.insert(item->id());
     }
     return problems;
