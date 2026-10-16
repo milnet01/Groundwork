@@ -182,8 +182,8 @@
         <translation>‏tree-sitter</translation>
     </message>
     <message>
-        <source>Installs tree-sitter, which reads the structure of source code, with its C, C++, Python, shell, Rust, Lua and JSON grammars.</source>
-        <translation>يثبّت tree-sitter، الذي يقرأ بنية الشيفرة المصدرية، مع قواعده للغات C وC++‎ وPython وshell وRust وLua وJSON.</translation>
+        <source>Installs tree-sitter, which reads the structure of source code, with grammars for C, C++, Python, web pages and many more languages.</source>
+        <translation>يثبّت tree-sitter، الذي يقرأ بنية الشيفرة المصدرية، مع قواعد للغات C وC++‎ وPython وصفحات الويب ولغات أخرى كثيرة.</translation>
     </message>
     <message>
         <source>Déjà Dup backups</source>

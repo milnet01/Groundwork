@@ -35,9 +35,17 @@ QList<Step> FlathubAppItem::applySteps(const SystemIdentity &, const CheckContex
 QString PackageItem::title() const { return QCoreApplication::translate("gw::Apps", m_title); }
 QString PackageItem::applySentence() const { return QCoreApplication::translate("gw::Apps", m_sentence); }
 
+QStringList PackageItem::packages(const SystemIdentity &system) const
+{
+    return system.family == SystemIdentity::Family::Leap ? m_packages : m_packages + m_rollingOnly;
+}
+
 CheckResult PackageItem::check(const CheckContext &context) const
 {
-    for (const QString &package : m_packages) {
+    auto release = context.readFile(QStringLiteral("/etc/os-release"));
+    if (!release)
+        release = context.readFile(QStringLiteral("/usr/lib/os-release"));
+    for (const QString &package : packages(parseOsRelease(release.value_or(QByteArray())))) {
         const CommandResult r = context.run({QStringLiteral("rpm"), QStringLiteral("-q"), package});
         if (!r.started || r.timedOut)
             return {CheckState::CouldNotTell, QCoreApplication::translate("gw::Apps", "The installed packages could not be listed.")};
@@ -47,9 +55,9 @@ CheckResult PackageItem::check(const CheckContext &context) const
     return {CheckState::Done, {}};
 }
 
-QList<Step> PackageItem::applySteps(const SystemIdentity &, const CheckContext &) const
+QList<Step> PackageItem::applySteps(const SystemIdentity &system, const CheckContext &) const
 {
-    return {{QStringList{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("install")} + m_packages,
+    return {{QStringList{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("install")} + packages(system),
              true, Step::Tool::Zypper, QCoreApplication::translate("gw::Apps", "Installing %1").arg(title())}};
 }
 

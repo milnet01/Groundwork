@@ -7,7 +7,8 @@
 //    --noninteractive --system flathub APP` (flatpak install --help).
 //    Also done when the app's usual openSUSE package is installed, so an
 //    app installed the ordinary way is not offered twice.
-//  - an openSUSE package: done when `rpm -q` finds every package.
+//  - an openSUSE package: done when `rpm -q` finds every package. Some
+//    packages are built for the rolling family only, so Leap leaves them out.
 // Every app id was confirmed with `flatpak remote-info flathub`, and every
 // package name with `zypper info` on Tumbleweed and Leap 16.0 (2026-10-02).
 #pragma once
@@ -42,8 +43,10 @@ private:
 class PackageItem : public Item
 {
 public:
-    PackageItem(QString id, const char *title, const char *sentence, QStringList packages)
-        : m_id(std::move(id)), m_title(title), m_sentence(sentence), m_packages(std::move(packages)) {}
+    PackageItem(QString id, const char *title, const char *sentence, QStringList packages,
+                QStringList rollingOnly = {})
+        : m_id(std::move(id)), m_title(title), m_sentence(sentence), m_packages(std::move(packages)),
+          m_rollingOnly(std::move(rollingOnly)) {}
     QString id() const override { return m_id; }
     Level level() const override { return Level::NiceToHave; }
     QString title() const override;
@@ -57,6 +60,8 @@ private:
     const char *m_title;
     const char *m_sentence;
     QStringList m_packages;
+    QStringList m_rollingOnly; // not built for Leap
+    QStringList packages(const SystemIdentity &system) const;
 };
 
 } // namespace gw

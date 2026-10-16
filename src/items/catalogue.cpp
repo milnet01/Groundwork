@@ -107,11 +107,18 @@ const Catalogue &catalogue()
         {QStringLiteral("ripgrep"), QStringLiteral("git"), QStringLiteral("clang-tools"), QStringLiteral("cppcheck"),
          QStringLiteral("ShellCheck"), QStringLiteral("jq"), QStringLiteral("gh"), QStringLiteral("python313-mypy")});
     static const PackageItem treeSitter(QStringLiteral("dev-tree-sitter"), QT_TRANSLATE_NOOP("gw::Apps", "tree-sitter"),
-        QT_TRANSLATE_NOOP("gw::Apps", "Installs tree-sitter, which reads the structure of source code, with its C, C++, "
-                                      "Python, shell, Rust, Lua and JSON grammars."),
+        QT_TRANSLATE_NOOP("gw::Apps", "Installs tree-sitter, which reads the structure of source code, with grammars "
+                                      "for C, C++, Python, web pages and many more languages."),
         {QStringLiteral("tree-sitter"), QStringLiteral("tree-sitter-c"), QStringLiteral("tree-sitter-cpp"),
          QStringLiteral("tree-sitter-python"), QStringLiteral("tree-sitter-bash"), QStringLiteral("tree-sitter-rust"),
-         QStringLiteral("tree-sitter-lua"), QStringLiteral("tree-sitter-json")});
+         QStringLiteral("tree-sitter-lua"), QStringLiteral("tree-sitter-json"), QStringLiteral("tree-sitter-qmljs"),
+         QStringLiteral("tree-sitter-xml"), QStringLiteral("tree-sitter-markdown"),
+         QStringLiteral("tree-sitter-javascript"), QStringLiteral("tree-sitter-typescript"),
+         QStringLiteral("tree-sitter-html"), QStringLiteral("tree-sitter-css"), QStringLiteral("tree-sitter-go"),
+         QStringLiteral("tree-sitter-java"), QStringLiteral("tree-sitter-c-sharp"), QStringLiteral("tree-sitter-ruby")},
+        // Not built for Leap 16.0 (zypper search, 2026-10-16).
+        {QStringLiteral("tree-sitter-glsl"), QStringLiteral("tree-sitter-make"), QStringLiteral("tree-sitter-meson"),
+         QStringLiteral("tree-sitter-yaml"), QStringLiteral("tree-sitter-toml"), QStringLiteral("tree-sitter-php")});
     static const AntsTerminalItem antsTerminal; // GRND-0061
     static const OneUpItem oneUp; // GRND-0074
     // Backup of the user's own files (GRND-0028)

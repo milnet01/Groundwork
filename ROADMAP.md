@@ -1384,6 +1384,9 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Spec accepted (2026-10-15): docs/specs/GRND-0078-saved-setup-file.md.
   Claude's calls there, open to the user: an uncompressed tar file,
   .local/share mostly left out, settings over 100 MiB start off.
+  User decision (2026-10-16): all three of Claude's calls accepted —
+  an uncompressed tar file, ~/.local/share left out except § 4.4's
+  settings folders, and a settings row over 100 MiB starts off.
   **Layman:** Groundwork can list what is set up on this machine, let you keep or drop each part, and save it for your next install.
   Kind: feature.
   Source: user-request-2026-10-15.
@@ -1447,6 +1450,9 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   search on Tumbleweed, Leap 16.0 and Slowroll the same day. New Core
   rule: an item includes another; switching Ants Terminal on switches
   tree-sitter off, and its row says so. Gate: 45 of 45 ctest.
+  User decision (2026-10-16): tree-sitter also installs the GLSL,
+  QML, Make, Meson, YAML, TOML, XML, Markdown, JavaScript, TypeScript,
+  HTML, CSS, Go, Java, C#, Ruby and PHP grammars.
   **Layman:** A switch among the developer tools that installs what Claude Code and Ants Terminal use to read code, so they work better and cheaper; anyone who is not a developer leaves it off.
   Kind: feature.
   Source: user-request-2026-10-16.
@@ -1557,6 +1563,8 @@ scheduled.
   guards it. Offered to the user 2026-10-16, not yet decided: on a drive
   with Windows, choose nothing then, so the user must pick. Follows the
   user's ruling that a Windows drive starts beside it (93a8a50).
+  User decision (2026-10-16): on a drive with Windows, choose nothing
+  when the chosen suggestion stops fitting, so the user must pick.
   **Layman:** If a bigger swap no longer fits beside Windows, the layout page should ask again rather than pick erasing the whole drive.
   Kind: ux.
   Source: in-session-2026-10-16.

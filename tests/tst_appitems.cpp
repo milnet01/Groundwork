@@ -3,6 +3,7 @@
 #include "items/appitems.h"
 #include "items/catalogue.h"
 
+#include <QDir>
 #include <QFile>
 #include <QTemporaryDir>
 #include <QtTest>
@@ -59,6 +60,28 @@ private slots:
         fake(QStringLiteral("rpm"), "exit 0");
         QCOMPARE(item.check(context()).state, gw::CheckState::Done);
         QCOMPARE(item.applySteps(tumbleweed(), context())[0].argv, QStringList({"zypper", "-n", "install", "a", "b"}));
+    }
+
+    // GRND-0081: a package Leap lacks is neither installed nor needed there.
+    void packageItemLeavesOutRollingOnlyPackagesOnLeap()
+    {
+        const gw::PackageItem item(QStringLiteral("dev-y"), "Y", "Installs Y.", {QStringLiteral("a")},
+                                   {QStringLiteral("r")});
+        const gw::SystemIdentity leap = gw::parseOsRelease("ID=opensuse-leap\nVERSION_ID=16.0\n");
+        QCOMPARE(item.applySteps(tumbleweed(), context())[0].argv, QStringList({"zypper", "-n", "install", "a", "r"}));
+        QCOMPARE(item.applySteps(leap, context())[0].argv, QStringList({"zypper", "-n", "install", "a"}));
+        fake(QStringLiteral("rpm"), "[ \"$2\" = a ] && exit 0; exit 1"); // a only
+        QVERIFY(QDir().mkpath(m_root.filePath(QStringLiteral("etc"))));
+        QFile release(m_root.filePath(QStringLiteral("etc/os-release")));
+        QVERIFY(release.open(QIODevice::WriteOnly | QIODevice::Truncate));
+        release.write("ID=opensuse-tumbleweed\n");
+        release.close();
+        QCOMPARE(item.check(context()).state, gw::CheckState::NotDone);
+        QVERIFY(release.open(QIODevice::WriteOnly | QIODevice::Truncate));
+        release.write("ID=opensuse-leap\nVERSION_ID=16.0\n");
+        release.close();
+        QCOMPARE(item.check(context()).state, gw::CheckState::Done);
+        QVERIFY(release.remove());
     }
 
     void catalogueShape()
