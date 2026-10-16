@@ -1414,6 +1414,34 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: user-request-2026-10-16.
   Lanes: items.
 
+- 📋 [GRND-0082] **Item: Claude Code.**
+  User request (2026-10-16): offer to install Claude Code. Ants Terminal
+  will offer it in its own first-run wizard; Groundwork offers it too,
+  for users who do not use Ants Terminal. Joins GRND-0027's developer
+  tools group.
+  Official methods (code.claude.com/docs/en/setup, read 2026-10-16):
+  the native installer, curl -fsSL https://claude.ai/install.sh | bash,
+  per user, no root, into ~/.local/bin and ~/.local/share/claude,
+  updating itself; or a signed RPM repository for Fedora and RHEL,
+  https://downloads.claude.ai/claude-code/rpm/stable, package
+  claude-code, updated by the package manager. openSUSE is not named;
+  listed systems are Ubuntu 20.04+, Debian 10+, Alpine 3.19+; 4 GB RAM,
+  x64 or ARM64. Needs a paid plan to use.
+  To settle before building: the method (the RPM repository through
+  zypper fits Groundwork's no-shell rule and its updates; the native
+  installer runs a downloaded script), and whether the RPM installs on
+  Tumbleweed, Leap 16 and Slowroll (a VM check). Check: already done
+  when claude is on PATH. With Ants Terminal switched on, say that Ants
+  Terminal offers it too.
+  User decisions (2026-10-16): 0.5.0, beside GRND-0081. Install from
+  Anthropic's signed RPM repository through zypper. First a VM check
+  that it installs on Tumbleweed, Leap 16 and Slowroll; where it does
+  not, fall back to the native installer there.
+  **Layman:** A switch among the developer tools that installs Claude Code, Anthropic's coding assistant, for people who do not get it through Ants Terminal.
+  Kind: feature.
+  Source: user-request-2026-10-16.
+  Lanes: items.
+
 ## Backlog — no version yet
 
 Items not yet placed in a release. Each moves into a version section once it is
@@ -1468,30 +1496,6 @@ scheduled.
   Kind: fix.
   Source: in-session-2026-10-15.
   Lanes: tests.
-
-- 📋 [GRND-0082] **Item: Claude Code.**
-  User request (2026-10-16): offer to install Claude Code. Ants Terminal
-  will offer it in its own first-run wizard; Groundwork offers it too,
-  for users who do not use Ants Terminal. Joins GRND-0027's developer
-  tools group.
-  Official methods (code.claude.com/docs/en/setup, read 2026-10-16):
-  the native installer, curl -fsSL https://claude.ai/install.sh | bash,
-  per user, no root, into ~/.local/bin and ~/.local/share/claude,
-  updating itself; or a signed RPM repository for Fedora and RHEL,
-  https://downloads.claude.ai/claude-code/rpm/stable, package
-  claude-code, updated by the package manager. openSUSE is not named;
-  listed systems are Ubuntu 20.04+, Debian 10+, Alpine 3.19+; 4 GB RAM,
-  x64 or ARM64. Needs a paid plan to use.
-  To settle before building: the method (the RPM repository through
-  zypper fits Groundwork's no-shell rule and its updates; the native
-  installer runs a downloaded script), and whether the RPM installs on
-  Tumbleweed, Leap 16 and Slowroll (a VM check). Check: already done
-  when claude is on PATH. With Ants Terminal switched on, say that Ants
-  Terminal offers it too.
-  **Layman:** A switch among the developer tools that installs Claude Code, Anthropic's coding assistant, for people who do not get it through Ants Terminal.
-  Kind: feature.
-  Source: user-request-2026-10-16.
-  Lanes: items.
 
 - 💭 [GRND-0083] **Item: Claude Desktop, with Cowork, once openSUSE is supported.**
   User request (2026-10-16): offer other Claude apps, such as Cowork.
