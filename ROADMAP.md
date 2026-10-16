@@ -1078,7 +1078,7 @@ as the terminal.
   title as its label, works from the keyboard, grows with the font
   (as the enlarged tick box does now, itemrow.cpp), follows the
   colour theme, and reports itself to screen readers as a checkable
-  control. Applies to every row, the 0.4.0 lists of choices included.
+  control. Applies to every row, the 0.6.0 lists of choices included (0.4.0 until 2026-10-16).
   Shipped 2026-10-10: src/gui/switch.* paints a QCheckBox as a switch,
   so keyboard and screen-reader behaviour are a tick box's. Test
   eachRowIsAnOnOffSwitch (tst_wizard) proven red on the tick box, then
@@ -1176,81 +1176,13 @@ as the terminal.
   Source: vm-release-check-2026-10-12.
   Lanes: gui.
 
-## 0.4.0 — Your own set-up
+## 0.4.0 — A drive ready for openSUSE
 
-Items that need the user's own choices in the window (decided 2026-10-10). Each
-has a written design before it is built.
+User decision (2026-10-16): ship what is done on main as 0.4.0.
 
-User decision (2026-10-16): ship what is done on main now as 0.4.0
-(GRND-0076, GRND-0081, fixes, and GRND-0084 once built). This
-section's unbuilt items move to a later version, and the version
-sections are renumbered to match, before the release is cut.
+These items were built for later versions and moved here; the unbuilt
 
-- 📋 [GRND-0065] **Item: your GitHub projects, copied into a folder you choose.**
-  The user liked this over a personal list (2026-10-10): sign in
-  once, list the user's repositories, tick which to copy, choose the
-  folder. Private ones work once signed in. Copying runs as the user,
-  not root. Needs a design first: signing in from a window, a list of
-  choices rather than one switch, and nothing personal in the source.
-  **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
-  Kind: feature.
-  Source: user-request-2026-10-10.
-  Lanes: items, gui.
-
-- 📋 [GRND-0066] **Item: share folders on the network.**
-  From the owner's machine: Samba (smb and nmb) with wsdd so Windows
-  finds it, and the firewall opened for it. Needs a design first: which
-  folders, who may open them, and a Samba password.
-  **Layman:** Lets other computers at home open folders you choose on this one.
-  Kind: feature.
-  Source: user-request-2026-10-10.
-  Lanes: items, gui.
-
-- 📋 [GRND-0067] **Item: mount extra drives at start-up.**
-  From the owner's machine: fstab entries by UUID with nofail,
-  noatime, nosuid, nodev and x-gvfs-show, so a missing drive never
-  stops the boot. Needs a design first: which drives, where they
-  appear, and never touching a drive in use.
-  **Layman:** Second hard drives show up and are ready every time the computer starts.
-  Kind: feature.
-  Source: user-request-2026-10-10.
-  Lanes: items, gui.
-
-- 📋 [GRND-0068] **Item: hibernate instead of sleep, where sleep is unreliable.**
-  From SYSTEM_OPTIMISATIONS.md, sections 1 and 2, and the owner's set-up
-  script: resume= on the kernel command line, HibernateMode=shutdown,
-  suspend masked. Needs a design first: swap at least as large as
-  memory, Secure Boot's lockdown blocks hibernation, and a wrong
-  resume= can stop the machine waking. Pairs with GRND-0055.
-  **Layman:** The computer can save everything and switch off, then carry on where it left off, for machines where sleep does not work.
-  Kind: feature.
-  Source: user-request-2026-10-10.
-  Lanes: items, gui.
-
-- 📋 [GRND-0072] **Remember the chosen colour theme between runs.**
-  The user ruled on 2026-10-12: yes. Their reason: Groundwork will hold
-  more of the user's own settings over time. Design with write-spec
-  first, beside the scan-and-restore item.
-  **Layman:** The wizard opens in the colour theme you picked last time.
-  Kind: feature.
-  Source: user-request-2026-10-12.
-  Lanes: gui.
-
-- 📋 [GRND-0073] **Scan a system's settings, and put them back after a reinstall.**
-  From the user, 2026-10-12: Groundwork should scan the system for its
-  configurations, so that after a reinstall it can reinstate them.
-  Needs a write-spec design first: what is recorded, where the record
-  lives so it survives a reinstall, and how restoring maps onto items.
-  **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
-  Kind: feature.
-  Source: user-request-2026-10-12.
-  Lanes: items, core.
-
-## 0.5.0 — Ready for the next install
-
-Preparing a drive and carrying a setup over (discovery S5, S6; design.md,
-Preparing a drive and Carrying a setup over). Split from GRND-0076 on
-2026-10-15.
+ones went to 0.5.0 and 0.6.0, renumbered to match.
 
 - ✅ [GRND-0077] **First page offers three jobs.**
   Serves S5 and S6 (design.md, The shape in one paragraph). Set up this
@@ -1379,39 +1311,6 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Lanes: core, wizard, packaging.
   Blocked-by: GRND-0077.
 
-- 📋 [GRND-0078] **Gather a setup and save it to a file.**
-  Serves S6 (design.md, Carrying a setup over). Gathers Groundwork's done
-  items, programs zypper marks as asked for (i+), Flatpak apps, added
-  software sources, and desktop and app settings app by app. Settings
-  holding secrets start switched off and warn when switched on (user
-  ruling 2026-10-15). Needs a spec first (write-spec): the saved file's
-  format is a contract between two jobs and two installs.
-  Spec accepted (2026-10-15): docs/specs/GRND-0078-saved-setup-file.md.
-  Claude's calls there, open to the user: an uncompressed tar file,
-  .local/share mostly left out, settings over 100 MiB start off.
-  User decision (2026-10-16): all three of Claude's calls accepted —
-  an uncompressed tar file, ~/.local/share left out except § 4.4's
-  settings folders, and a settings row over 100 MiB starts off.
-  **Layman:** Groundwork can list what is set up on this machine, let you keep or drop each part, and save it for your next install.
-  Kind: feature.
-  Source: user-request-2026-10-15.
-  Lanes: carry, wizard.
-  Blocked-by: GRND-0077.
-
-- 📋 [GRND-0079] **Start a new install from a saved setup.**
-  Serves S6 (design.md, Carrying a setup over). The setup job's first
-  page offers a saved file; kept items start switched on; programs and
-  sources become items, sources first; settings are copied as the user
-  after the programs, keeping any file they replace. Where the file holds
-  secrets, the last page warns again and offers to remove them or delete
-  the file, only on the user's say-so. Built under the saved file's spec
-  from the item that gathers a setup.
-  **Layman:** After reinstalling, Groundwork can read your saved file and switch on everything you kept.
-  Kind: feature.
-  Source: user-request-2026-10-15.
-  Lanes: carry, wizard, worker.
-  Blocked-by: GRND-0078.
-
 - ✅ [GRND-0081] **Items: developer tools for Claude Code (ripgrep, git), and tree-sitter.**
   User request (2026-10-16): offer developer tools, including the code
   tracer whose name was "tree something", as a step a non-developer can
@@ -1463,6 +1362,63 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: user-request-2026-10-16.
   Lanes: items.
 
+- ✅ [GRND-0084] **Prepare a drive: no silent fall-back to erasing Windows.**
+  LayoutPage::rebuildChoices (src/gui/preparepages.cpp): when the chosen
+  suggestion stops fitting, as when "room to hibernate" grows swap past
+  the free space beside Windows, it falls back to offered.first(), the
+  whole drive, which erases Windows. The "I understand" switch still
+  guards it. Offered to the user 2026-10-16, not yet decided: on a drive
+  with Windows, choose nothing then, so the user must pick. Follows the
+  user's ruling that a Windows drive starts beside it (93a8a50).
+  User decision (2026-10-16): on a drive with Windows, choose nothing
+  when the chosen suggestion stops fitting, so the user must pick.
+  Built 2026-10-16 (8c62f1e): on a drive with Windows, the layout page
+  chooses nothing when the chosen suggestion stops fitting; Next stays
+  off until the user picks.
+  **Layman:** If a bigger swap no longer fits beside Windows, the layout page should ask again rather than pick erasing the whole drive.
+  Kind: ux.
+  Source: in-session-2026-10-16.
+  Lanes: wizard.
+
+## 0.5.0 — Ready for the next install
+
+Preparing a drive and carrying a setup over (discovery S5, S6; design.md,
+Preparing a drive and Carrying a setup over). Split from GRND-0076 on
+2026-10-15.
+
+- 📋 [GRND-0078] **Gather a setup and save it to a file.**
+  Serves S6 (design.md, Carrying a setup over). Gathers Groundwork's done
+  items, programs zypper marks as asked for (i+), Flatpak apps, added
+  software sources, and desktop and app settings app by app. Settings
+  holding secrets start switched off and warn when switched on (user
+  ruling 2026-10-15). Needs a spec first (write-spec): the saved file's
+  format is a contract between two jobs and two installs.
+  Spec accepted (2026-10-15): docs/specs/GRND-0078-saved-setup-file.md.
+  Claude's calls there, open to the user: an uncompressed tar file,
+  .local/share mostly left out, settings over 100 MiB start off.
+  User decision (2026-10-16): all three of Claude's calls accepted —
+  an uncompressed tar file, ~/.local/share left out except § 4.4's
+  settings folders, and a settings row over 100 MiB starts off.
+  **Layman:** Groundwork can list what is set up on this machine, let you keep or drop each part, and save it for your next install.
+  Kind: feature.
+  Source: user-request-2026-10-15.
+  Lanes: carry, wizard.
+  Blocked-by: GRND-0077.
+
+- 📋 [GRND-0079] **Start a new install from a saved setup.**
+  Serves S6 (design.md, Carrying a setup over). The setup job's first
+  page offers a saved file; kept items start switched on; programs and
+  sources become items, sources first; settings are copied as the user
+  after the programs, keeping any file they replace. Where the file holds
+  secrets, the last page warns again and offers to remove them or delete
+  the file, only on the user's say-so. Built under the saved file's spec
+  from the item that gathers a setup.
+  **Layman:** After reinstalling, Groundwork can read your saved file and switch on everything you kept.
+  Kind: feature.
+  Source: user-request-2026-10-15.
+  Lanes: carry, wizard, worker.
+  Blocked-by: GRND-0078.
+
 - 📋 [GRND-0082] **Item: Claude Code.**
   User request (2026-10-16): offer to install Claude Code. Ants Terminal
   will offer it in its own first-run wizard; Groundwork offers it too,
@@ -1490,6 +1446,74 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Kind: feature.
   Source: user-request-2026-10-16.
   Lanes: items.
+
+## 0.6.0 — Your own set-up
+
+Items that need the user's own choices in the window (decided 2026-10-10). Each
+has a written design before it is built.
+
+Numbered 0.4.0 until 2026-10-16, when the user chose to ship what was
+built as 0.4.0 instead.
+
+- 📋 [GRND-0065] **Item: your GitHub projects, copied into a folder you choose.**
+  The user liked this over a personal list (2026-10-10): sign in
+  once, list the user's repositories, tick which to copy, choose the
+  folder. Private ones work once signed in. Copying runs as the user,
+  not root. Needs a design first: signing in from a window, a list of
+  choices rather than one switch, and nothing personal in the source.
+  **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
+- 📋 [GRND-0066] **Item: share folders on the network.**
+  From the owner's machine: Samba (smb and nmb) with wsdd so Windows
+  finds it, and the firewall opened for it. Needs a design first: which
+  folders, who may open them, and a Samba password.
+  **Layman:** Lets other computers at home open folders you choose on this one.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
+- 📋 [GRND-0067] **Item: mount extra drives at start-up.**
+  From the owner's machine: fstab entries by UUID with nofail,
+  noatime, nosuid, nodev and x-gvfs-show, so a missing drive never
+  stops the boot. Needs a design first: which drives, where they
+  appear, and never touching a drive in use.
+  **Layman:** Second hard drives show up and are ready every time the computer starts.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
+- 📋 [GRND-0068] **Item: hibernate instead of sleep, where sleep is unreliable.**
+  From SYSTEM_OPTIMISATIONS.md, sections 1 and 2, and the owner's set-up
+  script: resume= on the kernel command line, HibernateMode=shutdown,
+  suspend masked. Needs a design first: swap at least as large as
+  memory, Secure Boot's lockdown blocks hibernation, and a wrong
+  resume= can stop the machine waking. Pairs with GRND-0055.
+  **Layman:** The computer can save everything and switch off, then carry on where it left off, for machines where sleep does not work.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
+
+- 📋 [GRND-0072] **Remember the chosen colour theme between runs.**
+  The user ruled on 2026-10-12: yes. Their reason: Groundwork will hold
+  more of the user's own settings over time. Design with write-spec
+  first, beside the scan-and-restore item.
+  **Layman:** The wizard opens in the colour theme you picked last time.
+  Kind: feature.
+  Source: user-request-2026-10-12.
+  Lanes: gui.
+
+- 📋 [GRND-0073] **Scan a system's settings, and put them back after a reinstall.**
+  From the user, 2026-10-12: Groundwork should scan the system for its
+  configurations, so that after a reinstall it can reinstate them.
+  Needs a write-spec design first: what is recorded, where the record
+  lives so it survives a reinstall, and how restoring maps onto items.
+  **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
+  Kind: feature.
+  Source: user-request-2026-10-12.
+  Lanes: items, core.
 
 ## Backlog — no version yet
 
@@ -1559,18 +1583,3 @@ scheduled.
   Kind: feature.
   Source: user-request-2026-10-16.
   Lanes: items.
-
-- 💭 [GRND-0084] **Prepare a drive: no silent fall-back to erasing Windows.**
-  LayoutPage::rebuildChoices (src/gui/preparepages.cpp): when the chosen
-  suggestion stops fitting, as when "room to hibernate" grows swap past
-  the free space beside Windows, it falls back to offered.first(), the
-  whole drive, which erases Windows. The "I understand" switch still
-  guards it. Offered to the user 2026-10-16, not yet decided: on a drive
-  with Windows, choose nothing then, so the user must pick. Follows the
-  user's ruling that a Windows drive starts beside it (93a8a50).
-  User decision (2026-10-16): on a drive with Windows, choose nothing
-  when the chosen suggestion stops fitting, so the user must pick.
-  **Layman:** If a bigger swap no longer fits beside Windows, the layout page should ask again rather than pick erasing the whole drive.
-  Kind: ux.
-  Source: in-session-2026-10-16.
-  Lanes: wizard.

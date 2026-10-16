@@ -19,6 +19,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   choose for each partition in the installer.** A drive in use cannot
   be chosen, and nothing is written until "I understand" is switched
   on. (GRND-0076)
+- **Two developer switches: "Tools for Claude Code" installs ripgrep,
+  Git and code checkers, and "tree-sitter" installs tree-sitter with
+  grammars for common languages.** Tumbleweed and Slowroll get more
+  grammars than Leap, which lacks some. Switching on Ants Terminal
+  switches tree-sitter off, since Ants Terminal includes it, and the
+  row says why. (GRND-0081)
 - The first page and the README say that Groundwork is an independent
   project, not an official openSUSE or SUSE product, and not endorsed
   by the openSUSE Project or SUSE.
