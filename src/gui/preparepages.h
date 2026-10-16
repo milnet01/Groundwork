@@ -103,6 +103,7 @@ private:
 
     PrepareChoice *m_choice;
     std::optional<Suggestion> m_suggestion; // none: the custom layout
+    bool m_nothingChosen = false;           // the user must pick (GRND-0084)
     bool m_hibernateTouched = false;
     QWidget *m_choices;
     QButtonGroup *m_group;

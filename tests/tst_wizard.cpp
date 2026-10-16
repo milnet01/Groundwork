@@ -86,8 +86,9 @@ echo "@@DONE@@|$#|0|0"
 
 constexpr qint64 kGiB = gw::kGiB;
 
-// A UEFI computer with 8 GiB of memory and three drives: a blank USB stick,
-// the system's own drive, and a spinning disk with Windows and free space.
+// A UEFI computer with 8 GiB of memory and four drives: a blank USB stick,
+// the system's own drive, a spinning disk with Windows and free space, and
+// a Windows disk whose free space fits openSUSE only without hibernating.
 gw::DriveSurvey fakeSurvey()
 {
     gw::Drive stick;
@@ -112,7 +113,14 @@ gw::DriveSurvey fakeSurvey()
     windows.partitions = {{QStringLiteral("/dev/sdc1"), gw::kMiB, 100 * gw::kMiB, QStringLiteral("vfat"), {}, {}, {}},
                           {QStringLiteral("/dev/sdc2"), 101 * gw::kMiB, 200 * kGiB, QStringLiteral("ntfs"),
                            QStringLiteral("Windows"), {}, {}}};
-    return {{stick, system, windows}, gw::Firmware::Uefi, 8 * kGiB};
+    gw::Drive tight = windows;
+    tight.path = QStringLiteral("/dev/sdd");
+    tight.model = QStringLiteral("Tight Windows Disk");
+    tight.ptuuid = QStringLiteral("5d2e9c41-7a3b-4c8d-9e0f-2a3b4c5d6e7f");
+    tight.size = 229 * kGiB; // about 29 GiB free: 24 needed, 30 to hibernate
+    for (gw::Partition &p : tight.partitions)
+        p.path.replace(QLatin1String("sdc"), QLatin1String("sdd"));
+    return {{stick, system, windows, tight}, gw::Firmware::Uefi, 8 * kGiB};
 }
 
 } // namespace
@@ -628,6 +636,31 @@ private slots:
             QStringLiteral("suggestion%1").arg(int(gw::Suggestion::Beside)));
         QVERIFY(beside);
         QVERIFY(beside->isChecked());
+    }
+
+    // GRND-0084, the user 2026-10-16: when room to hibernate grows swap past
+    // the free space beside Windows, the page chooses nothing, rather than
+    // falling back to the whole drive, which erases Windows.
+    void besideWindowsThatStopsFittingChoosesNothing()
+    {
+        auto w = pickDrive(QStringLiteral("/dev/sdd"));
+        QVERIFY(w);
+        w->next(); // past Windows' checklist
+        QWizardPage *page = w->currentPage();
+        const QString besideName = QStringLiteral("suggestion%1").arg(int(gw::Suggestion::Beside));
+        QVERIFY(page->findChild<QRadioButton *>(besideName)->isChecked());
+        auto *hibernate = page->findChild<QCheckBox *>(QStringLiteral("hibernate"));
+        QVERIFY(!hibernate->isChecked());
+        hibernate->click();
+        QVERIFY(!page->findChild<QRadioButton *>(besideName)); // no longer fits
+        for (auto *pick : page->findChildren<QRadioButton *>())
+            QVERIFY2(!pick->isChecked(), qPrintable(pick->objectName()));
+        QVERIFY(!page->isComplete());
+        QVERIFY(hibernate->isEnabled()); // so the user can turn it back off
+
+        hibernate->click();
+        QVERIFY(page->findChild<QRadioButton *>(besideName));
+        QVERIFY(!page->isComplete()); // still the user's pick
     }
 
     // GRND-0076, INV-9 on the page: 8 GiB of swap is more than 5 % of a

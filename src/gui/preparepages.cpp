@@ -355,6 +355,7 @@ void LayoutPage::initializePage()
 void LayoutPage::choose(std::optional<Suggestion> suggestion)
 {
     m_suggestion = suggestion;
+    m_nothingChosen = false;
     // Until the user sets it, the switch starts by its share of the space
     // this layout uses (spec 4.3, INV-9).
     if (!m_hibernateTouched && m_suggestion) {
@@ -369,15 +370,20 @@ void LayoutPage::rebuildChoices()
 {
     const Drive &drive = *m_choice->drive;
     const QList<Suggestion> offered = suggestionsFor(drive, m_choice->found.firmware, hibernateSwap());
-    if (m_suggestion && !offered.contains(*m_suggestion))
-        m_suggestion = offered.isEmpty() ? std::nullopt : std::optional<Suggestion>(offered.first());
+    if (m_suggestion && !offered.contains(*m_suggestion)) {
+        // With Windows here, the first one left erases it: choose nothing,
+        // so the user picks (the user, 2026-10-16).
+        m_nothingChosen = drive.hasWindows();
+        m_suggestion = offered.isEmpty() || m_nothingChosen ? std::nullopt
+                                                            : std::optional<Suggestion>(offered.first());
+    }
     clear(m_choices, m_group);
     auto add = [this](const QString &title, const QString &name, std::optional<Suggestion> s) {
         auto *pick = new QRadioButton(title, m_choices);
         pick->setObjectName(name);
         m_group->addButton(pick);
         m_choices->layout()->addWidget(pick);
-        pick->setChecked(m_suggestion == s);
+        pick->setChecked(!m_nothingChosen && m_suggestion == s);
         connect(pick, &QRadioButton::toggled, this, [this, s](bool on) {
             if (on)
                 choose(s);
@@ -405,9 +411,16 @@ void LayoutPage::rebuildChoices()
 void LayoutPage::refresh()
 {
     const Drive &drive = *m_choice->drive;
-    const bool custom = !m_suggestion;
+    const bool custom = !m_suggestion && !m_nothingChosen;
     m_custom->setVisible(custom);
     m_hibernate->setEnabled(!custom); // a custom layout sizes its own swap
+    if (m_nothingChosen) {
+        m_hibernateNote->hide();
+        m_plan->clear();
+        m_problem->hide();
+        emit completeChanged();
+        return;
+    }
     const qint64 space = usableSpace(drive, chosenKind());
     const qint64 swap = m_choice->found.memorySwap;
     m_hibernateNote->setVisible(!custom && swap > 0 && !hibernateStartsOn(swap, space));
@@ -430,7 +443,7 @@ void LayoutPage::refresh()
 
 bool LayoutPage::isComplete() const
 {
-    return m_choice->drive && validate(m_choice->layout, *m_choice->drive).isEmpty();
+    return !m_nothingChosen && m_choice->drive && validate(m_choice->layout, *m_choice->drive).isEmpty();
 }
 
 ConfirmPage::ConfirmPage(PrepareChoice *choice, QWidget *parent)
