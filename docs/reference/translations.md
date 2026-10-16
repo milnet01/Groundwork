@@ -32,7 +32,10 @@ from its first letter. A translation that starts with a Latin name or a
 `%1` lays out left to right, and its full stop lands at the wrong end.
 Start such a translation with U+200F, the right-to-left mark. Put U+200E,
 the left-to-right mark, after "C++" and before ".7z", or their symbols
-land on the wrong side. Only a look at the window shows either fault.
+land on the wrong side. A path breaks the same way: "/dev/vda3" showed
+as "dev/vda3/". Wrap a path written into a translation in U+2066 and
+U+2069; code wraps a path, name or filesystem it inserts with
+`gw::isolated()`. Only a look at the window shows any of these faults.
 
 A translation checked only by a machine (Claude, Gemini) is still a
 draft (design.md, Text). A language leaves draft by adding its code to

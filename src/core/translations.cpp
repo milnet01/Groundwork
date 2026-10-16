@@ -99,4 +99,9 @@ Qt::LayoutDirection directionFor(const QString &code)
     return QLocale(code).textDirection();
 }
 
+QString isolated(const QString &text)
+{
+    return QChar(0x2068) + text + QChar(0x2069); // first-strong isolate, then its end
+}
+
 } // namespace gw

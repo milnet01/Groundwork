@@ -580,7 +580,7 @@
     </message>
     <message>
         <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
-        <translation>‏%1، الإقلاع: اربطه في /boot/efi، ولا تهيّئه.</translation>
+        <translation>‏%1، الإقلاع: اربطه في ⁦/boot/efi⁩، ولا تهيّئه.</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -592,11 +592,11 @@
     </message>
     <message>
         <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
-        <translation>‏%1، النظام: اربطه في / وهيّئه بنظام Btrfs، مع تفعيل اللقطات.</translation>
+        <translation>‏%1، النظام: اربطه في ⁦/⁩ وهيّئه بنظام Btrfs، مع تفعيل اللقطات.</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>
-        <translation>‏%1، المنزل: اربطه في /home، ولا تهيّئه.</translation>
+        <translation>‏%1، المنزل: اربطه في ⁦/home⁩، ولا تهيّئه.</translation>
     </message>
     <message>
         <source>%1, data: do not mount it or format it.</source>

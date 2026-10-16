@@ -1,5 +1,7 @@
 #include "drives.h"
 
+#include "core/translations.h"
+
 #include <QCoreApplication>
 #include <QHash>
 #include <QJsonArray>
@@ -78,10 +80,11 @@ QString inUseBelow(const QJsonObject &device, const QSet<QString> &swaps)
     for (const QJsonValue &mount : device.value(QStringLiteral("mountpoints")).toArray()) {
         if (!mount.toString().isEmpty())
             return QCoreApplication::translate("gw::Drives", "In use: %1 is mounted at %2.")
-                .arg(device.value(QStringLiteral("path")).toString(), mount.toString());
+                .arg(isolated(device.value(QStringLiteral("path")).toString()), isolated(mount.toString()));
     }
     if (swaps.contains(device.value(QStringLiteral("path")).toString()))
-        return QCoreApplication::translate("gw::Drives", "In use: %1 is swap.").arg(device.value(QStringLiteral("path")).toString());
+        return QCoreApplication::translate("gw::Drives", "In use: %1 is swap.")
+            .arg(isolated(device.value(QStringLiteral("path")).toString()));
     for (const QJsonValue &child : device.value(QStringLiteral("children")).toArray()) {
         if (const QString why = inUseBelow(child.toObject(), swaps); !why.isEmpty())
             return why;
@@ -427,7 +430,7 @@ Format formatFor(Use use)
 
 QString installerAdvice(const Partition &partition, Use use)
 {
-    const QString &path = partition.path;
+    const QString path = isolated(partition.path);
     switch (use) {
     case Use::Efi:
         return QCoreApplication::translate("gw::Drives", "%1, start-up: mount it at /boot/efi, and do not format it.").arg(path);

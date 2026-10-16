@@ -646,6 +646,32 @@ private slots:
         }
     }
 
+    // GRND-0076's VM run, in Arabic: the drive's partition lines put their
+    // bullets on the wrong side and showed "/dev/vda3" as "dev/vda3/". Each
+    // line runs the window's way, and its path, filesystem and label keep
+    // their own direction.
+    void aDrivesLinesReadRightToLeft()
+    {
+        QApplication::setLayoutDirection(Qt::RightToLeft);
+        auto w = pickDrive(QStringLiteral("/dev/sdc"));
+        QApplication::setLayoutDirection(Qt::LeftToRight);
+        QVERIFY(w);
+        w->back(); // the drive page, where the lines were read right to left
+        bool seen = false;
+        for (QLabel *label : w->currentPage()->findChildren<QLabel *>()) {
+            if (!label->text().contains(QLatin1String("/dev/sdc1")))
+                continue;
+            seen = true;
+            for (const QString &line : label->text().split(QLatin1Char('\n'))) {
+                QVERIFY2(line.startsWith(QChar(0x200F)), qPrintable(line));
+                if (line.contains(QLatin1String("/dev/sdc")))
+                    QVERIFY2(line.contains(QRegularExpression(QStringLiteral(u"⁨/dev/sdc\\d*⁩"))),
+                             qPrintable(line));
+            }
+        }
+        QVERIFY(seen);
+    }
+
     // GRND-0076, spec 4.3: a custom layout goes on only when it is valid.
     void aCustomLayoutMustBeValid()
     {

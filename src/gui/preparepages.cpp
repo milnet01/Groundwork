@@ -2,12 +2,15 @@
 
 #include "switch.h"
 
+#include "core/translations.h"
+
 #include <QButtonGroup>
 #include <QComboBox>
 #include <QCoreApplication>
 #include <QDir>
 #include <QDoubleSpinBox>
 #include <QFileInfo>
+#include <QGuiApplication>
 #include <QHBoxLayout>
 #include <QJsonDocument>
 #include <QLabel>
@@ -36,16 +39,19 @@ QString connection(const QString &tran)
     return tran.toUpper();
 }
 
+// Each line runs the window's way, whatever text it starts with.
+QString lineMark() { return QGuiApplication::isRightToLeft() ? QString(QChar(0x200F)) : QString(); }
+
 QString driveTitle(const Drive &drive)
 {
     const QString model = drive.model.isEmpty()
                               ? QCoreApplication::translate("gw::PreparePages", "Unnamed drive")
-                              : drive.model;
+                              : isolated(drive.model);
     QStringList facts{gb(drive.size)};
     if (!drive.tran.isEmpty())
-        facts << connection(drive.tran);
-    facts << drive.path;
-    return QStringLiteral("%1 — %2").arg(model, facts.join(QStringLiteral(", ")));
+        facts << isolated(connection(drive.tran));
+    facts << isolated(drive.path);
+    return lineMark() + QStringLiteral("%1 — %2").arg(model, facts.join(QStringLiteral(", ")));
 }
 
 // One line per partition the drive holds now: size, filesystem and label.
@@ -57,10 +63,10 @@ QString partitionLines(const Drive &drive)
     for (const Partition &p : drive.partitions) {
         QStringList facts{gb(p.size)};
         if (!p.fstype.isEmpty())
-            facts << p.fstype;
+            facts << isolated(p.fstype);
         if (!p.label.isEmpty())
-            facts << QStringLiteral("“%1”").arg(p.label);
-        lines << QStringLiteral("• %1 — %2").arg(p.path, facts.join(QStringLiteral(", ")));
+            facts << QStringLiteral("“%1”").arg(isolated(p.label));
+        lines << lineMark() + QStringLiteral("• %1 — %2").arg(isolated(p.path), facts.join(QStringLiteral(", ")));
     }
     return lines.join(QLatin1Char('\n'));
 }

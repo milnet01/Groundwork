@@ -287,6 +287,19 @@ private slots:
         f["partitions"] = parts;
         QVERIFY(!gw::readLayoutFile(QJsonDocument(f).toJson(), &why));
     }
+
+    // GRND-0076's VM run, in Arabic: a path inside right-to-left text came
+    // out as "dev/vda5/". Each path is isolated, so it keeps its own
+    // direction in any language.
+    void pathsKeepTheirOwnDirection()
+    {
+        gw::Partition p;
+        p.path = QStringLiteral("/dev/sdb1");
+        for (gw::Use use : {gw::Use::Efi, gw::Use::System, gw::Use::Home}) {
+            const QString said = gw::installerAdvice(p, use);
+            QVERIFY2(said.contains(QStringLiteral(u"⁨/dev/sdb1⁩")), qPrintable(said));
+        }
+    }
 };
 
 QTEST_GUILESS_MAIN(TstDrives)

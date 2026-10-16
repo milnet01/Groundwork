@@ -31,4 +31,9 @@ bool isDraft(const QString &code);
 
 Qt::LayoutDirection directionFor(const QString &code);
 
+// A path, filesystem or name keeps its own direction inside translated
+// text. Unmarked, "/dev/vda3" in right-to-left text came out as
+// "dev/vda3/" (GRND-0076's VM run).
+QString isolated(const QString &text);
+
 } // namespace gw
