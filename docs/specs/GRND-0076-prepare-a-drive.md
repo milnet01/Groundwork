@@ -193,8 +193,12 @@ btrfsprogs, xfsprogs).
 
 From its last read of the drive (§ 4.5 step 6), the Worker prints, per
 new partition, what to set in the installer, and the run page lists it: mount point (`/boot/efi`, `/`, `/home`, swap, or
-none for `data`), and whether to format it. Format the start-up,
-system and swap partitions; do not format home or data. The same page
+none for `data`), and whether to format it. Format the system, with
+snapshots on, and swap; do not format start-up, home or data. The
+installer leaves snapshots off on a partition it is told to format,
+and formatting the start-up partition made it a Windows data
+partition, so the boot menu could not be written (VM run,
+2026-10-16). The same page
 says that the installer must be told to use these partitions rather
 than its own proposal.
 

@@ -579,8 +579,8 @@
         <translation>Die Aufteilung passt nicht in den Platz auf diesem Laufwerk.</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1, Start: unter /boot/efi einhängen und formatieren.</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1, Start: unter /boot/efi einhängen und nicht formatieren.</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1, Swap: als Swap verwenden.</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1, System: unter / einhängen und als Btrfs formatieren.</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1, System: unter / einhängen und als Btrfs formatieren, mit eingeschalteten Snapshots.</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

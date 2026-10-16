@@ -579,8 +579,8 @@
         <translation>레이아웃이 이 드라이브의 공간에 맞지 않습니다.</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1, 시작: /boot/efi에 마운트하고 포맷하세요.</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1, 시작: /boot/efi에 마운트하고, 포맷하지 마세요.</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1, 스왑: 스왑으로 사용하세요.</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1, 시스템: /에 마운트하고 Btrfs로 포맷하세요.</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1, 시스템: /에 마운트하고 스냅샷을 켠 채 Btrfs로 포맷하세요.</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

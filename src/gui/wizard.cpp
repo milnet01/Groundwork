@@ -360,7 +360,10 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         m_prepare.layoutPath = m_setup.stateDir + QStringLiteral("/layout.json");
         m_drivePageId = addPage(new DrivePage(&m_prepare, this));
         m_windowsPageId = addPage(new WindowsPage(&m_prepare, this));
-        m_layoutPageId = addPage(new LayoutPage(&m_prepare, this));
+        auto *layoutPage = new LayoutPage(&m_prepare, this);
+        m_layoutPageId = addPage(layoutPage);
+        // Its list of partitions changes with the choice.
+        connect(layoutPage, &QWizardPage::completeChanged, this, &Wizard::fitRows);
         addPage(new ConfirmPage(&m_prepare, this));
         auto *prepareRun = new PrepareRunWizardPage(this);
         prepareRun->configure(m_setup.workerProgram);
@@ -411,16 +414,23 @@ void Wizard::fitRows()
     // The window opens at the welcome page's size, which shows a level's
     // rows only after scrolling (GRND-0049). On a level page, where the
     // header is its own height, grow it to the fullest level, within the
-    // screen.
+    // screen. A page of preparing a drive grows to show itself whole.
     if (!currentPage())
         return;
     auto *shown = currentPage()->findChild<QScrollArea *>();
-    if (!shown || !m_levelPages.values().contains(shown->widget()))
+    if (!shown)
+        return;
+    QList<QWidget *> fitted;
+    if (m_levelPages.values().contains(shown->widget()))
+        fitted = m_levelPages.values();
+    else if (shown->objectName() == QLatin1String("preparePage"))
+        fitted = {shown->widget()};
+    else
         return;
     QCoreApplication::sendPostedEvents(nullptr, QEvent::LayoutRequest); // settle the shown page
     const int viewWidth = shown->viewport()->width();
     int extra = 0;
-    for (QWidget *inner : std::as_const(m_levelPages)) {
+    for (QWidget *inner : std::as_const(fitted)) {
         const int need = inner->hasHeightForWidth() ? inner->heightForWidth(viewWidth) : inner->sizeHint().height();
         extra = qMax(extra, need - shown->viewport()->height());
     }

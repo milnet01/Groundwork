@@ -430,13 +430,13 @@ QString installerAdvice(const Partition &partition, Use use)
     const QString &path = partition.path;
     switch (use) {
     case Use::Efi:
-        return QCoreApplication::translate("gw::Drives", "%1, start-up: mount it at /boot/efi and format it.").arg(path);
+        return QCoreApplication::translate("gw::Drives", "%1, start-up: mount it at /boot/efi, and do not format it.").arg(path);
     case Use::BiosBoot:
         return QCoreApplication::translate("gw::Drives", "%1, BIOS boot: leave it as it is.").arg(path);
     case Use::Swap:
         return QCoreApplication::translate("gw::Drives", "%1, swap: use it as swap.").arg(path);
     case Use::System:
-        return QCoreApplication::translate("gw::Drives", "%1, system: mount it at / and format it as Btrfs.").arg(path);
+        return QCoreApplication::translate("gw::Drives", "%1, system: mount it at / and format it as Btrfs, with snapshots on.").arg(path);
     case Use::Home:
         return QCoreApplication::translate("gw::Drives", "%1, home: mount it at /home, and do not format it.").arg(path);
     case Use::Data:

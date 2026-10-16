@@ -611,6 +611,41 @@ private slots:
         QVERIFY(!shownLabel(big->currentPage(), QStringLiteral("hibernateNote")));
     }
 
+    // GRND-0076's VM run: at the window's first size, the layout page
+    // squeezed its wrapped text, overlapping the notes and cutting off the
+    // last partition. Every page of the job shows each line at its full
+    // height. A live system, as in the run: only this job's pages size the
+    // window. The text is half as large again, as a larger desktop font
+    // makes it.
+    void thePreparePagesSqueezeNoText()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp, gw::Job::PrepareDrive}, true);
+        QFont large = w->font();
+        large.setPointSizeF(large.pointSizeF() * 1.5);
+        w->setFont(large);
+        w->show();
+        w->next();
+        w->currentPage()->findChild<QRadioButton *>(QStringLiteral("/dev/sdc"))->click();
+        w->next();
+        for (int page = 0; page < 3; ++page) { // Windows' checklist, the layout, confirm
+            if (page == 1) // the layout with the most lines
+                w->currentPage()->findChild<QRadioButton *>(
+                                     QStringLiteral("suggestion%1").arg(int(gw::Suggestion::Beside)))
+                    ->click();
+            QCoreApplication::sendPostedEvents(nullptr, QEvent::LayoutRequest);
+            int checked = 0;
+            for (QLabel *label : w->currentPage()->findChildren<QLabel *>()) {
+                if (!label->isVisible() || !label->wordWrap())
+                    continue;
+                ++checked;
+                QVERIFY2(label->height() >= label->heightForWidth(label->width()),
+                         qPrintable(w->currentPage()->title() + QStringLiteral(": ") + label->text()));
+            }
+            QVERIFY(checked > 0);
+            w->next();
+        }
+    }
+
     // GRND-0076, spec 4.3: a custom layout goes on only when it is valid.
     void aCustomLayoutMustBeValid()
     {

@@ -579,8 +579,8 @@
         <translation>レイアウトがこのドライブの容量に収まりません。</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1、スタートアップ：/boot/efi にマウントし、フォーマットしてください。</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1、スタートアップ：/boot/efi にマウントし、フォーマットはしないでください。</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1、スワップ：スワップとして使ってください。</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1、システム：/ にマウントし、Btrfs でフォーマットしてください。</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1、システム：/ にマウントし、スナップショットを有効にして Btrfs でフォーマットしてください。</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

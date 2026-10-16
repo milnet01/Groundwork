@@ -579,8 +579,8 @@
         <translation>لا يتسع التخطيط في المساحة المتاحة على هذا القرص.</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>‏%1، الإقلاع: اربطه في /boot/efi وهيّئه.</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>‏%1، الإقلاع: اربطه في /boot/efi، ولا تهيّئه.</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>‏%1، ذاكرة التبديل: استخدمه كذاكرة تبديل.</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>‏%1، النظام: اربطه في / وهيّئه بنظام Btrfs.</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>‏%1، النظام: اربطه في / وهيّئه بنظام Btrfs، مع تفعيل اللقطات.</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

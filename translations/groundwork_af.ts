@@ -579,8 +579,8 @@
         <translation>Die uitleg pas nie in die spasie op hierdie skyf nie.</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1, opstart: koppel dit by /boot/efi en formateer dit.</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1, opstart: koppel dit by /boot/efi, en moenie dit formateer nie.</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1, ruilspasie: gebruik dit as ruilspasie.</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1, stelsel: koppel dit by / en formateer dit as Btrfs.</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1, stelsel: koppel dit by / en formateer dit as Btrfs, met kiekies aan.</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

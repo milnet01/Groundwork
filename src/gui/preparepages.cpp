@@ -15,6 +15,7 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSaveFile>
+#include <QScrollArea>
 #include <QStyle>
 #include <QVBoxLayout>
 
@@ -82,6 +83,24 @@ QLabel *wrapped(QWidget *parent, const QString &text = {})
     return label;
 }
 
+// A page's content scrolls rather than squeezing its wrapped text; the
+// wizard grows the window to show it whole where the screen allows
+// (Wizard::fitRows).
+QVBoxLayout *scrolled(QWizardPage *page)
+{
+    auto *inner = new QWidget;
+    auto *layout = new QVBoxLayout(inner);
+    auto *scroll = new QScrollArea(page);
+    scroll->setObjectName(QStringLiteral("preparePage"));
+    scroll->setFrameShape(QFrame::NoFrame);
+    scroll->setWidgetResizable(true);
+    scroll->setWidget(inner);
+    auto *outer = new QVBoxLayout(page);
+    outer->setContentsMargins(0, 0, 0, 0);
+    outer->addWidget(scroll);
+    return layout;
+}
+
 // Empties a list of choices. A choice may be the one whose signal asked for
 // this, so each leaves the page now and is deleted later.
 void clear(QWidget *box, QButtonGroup *group)
@@ -106,7 +125,7 @@ DrivePage::DrivePage(PrepareChoice *choice, QWidget *parent)
     auto *again = new QPushButton(tr("Look again"), this);
     again->setObjectName(QStringLiteral("lookAgain"));
     connect(again, &QPushButton::clicked, this, &DrivePage::lookAgain);
-    auto *layout = new QVBoxLayout(this);
+    auto *layout = scrolled(this);
     layout->addWidget(m_list);
     layout->addWidget(again, 0, Qt::AlignLeading);
     layout->addStretch();
@@ -154,7 +173,7 @@ WindowsPage::WindowsPage(PrepareChoice *choice, QWidget *parent)
     setTitle(tr("Windows is on this drive"));
     setSubTitle(tr("Before going on, do these in Windows. They are advice: Continue needs none of them."));
     setButtonText(QWizard::NextButton, tr("Continue"));
-    auto *layout = new QVBoxLayout(this);
+    auto *layout = scrolled(this);
     layout->addWidget(m_steps);
     layout->addStretch();
 }
@@ -286,7 +305,7 @@ LayoutPage::LayoutPage(PrepareChoice *choice, QWidget *parent)
     });
     connect(m_custom, &CustomLayoutEditor::changed, this, &LayoutPage::refresh);
 
-    auto *layout = new QVBoxLayout(this);
+    auto *layout = scrolled(this);
     layout->addWidget(m_choices);
     layout->addWidget(m_windowsNote);
     layout->addWidget(m_custom);
@@ -415,7 +434,7 @@ ConfirmPage::ConfirmPage(PrepareChoice *choice, QWidget *parent)
     m_understand->setObjectName(QStringLiteral("understand"));
     connect(m_understand, &QCheckBox::toggled, this, &ConfirmPage::completeChanged);
     m_error->hide();
-    auto *layout = new QVBoxLayout(this);
+    auto *layout = scrolled(this);
     layout->addWidget(m_drive);
     layout->addWidget(m_loss);
     layout->addWidget(m_plan);

@@ -579,8 +579,8 @@
         <translation>Le schéma ne tient pas dans l&apos;espace de ce disque.</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1, démarrage : la monter sur /boot/efi et la formater.</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1, démarrage : la monter sur /boot/efi, sans la formater.</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1, swap : l&apos;utiliser comme swap.</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1, système : la monter sur / et la formater en Btrfs.</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1, système : la monter sur / et la formater en Btrfs, avec les instantanés activés.</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

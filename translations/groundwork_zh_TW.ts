@@ -579,8 +579,8 @@
         <translation>配置放不進這個磁碟機的空間。</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1，開機：掛載到 /boot/efi 並格式化。</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1，開機：掛載到 /boot/efi，不要格式化。</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1，交換空間：當作交換空間使用。</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1，系統：掛載到 / 並格式化為 Btrfs。</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1，系統：掛載到 / 並格式化為 Btrfs，同時啟用快照。</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

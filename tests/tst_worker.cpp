@@ -449,6 +449,14 @@ cat > "$FAKE_WRITTEN$out"
         QVERIFY2(said.contains(QLatin1String("/dev/sdb1")) && said.contains(QLatin1String("/boot/efi")), qPrintable(said));
         QVERIFY2(said.contains(QLatin1String("/dev/sdb2")) && said.contains(QLatin1String("swap")), qPrintable(said));
         QVERIFY2(said.contains(QLatin1String("/dev/sdb3, system: mount it at /")), qPrintable(said));
+        // The VM run: formatting the start-up partition in the installer
+        // made it a Windows data partition, and the boot menu could not be
+        // written.
+        const QStringList startUp = hints.filter(QStringLiteral("/dev/sdb1"));
+        QVERIFY2(startUp.size() == 1 && startUp.first().contains(QLatin1String("do not format")), qPrintable(said));
+        // Formatting the system there leaves snapshots off unless asked.
+        const QStringList system = hints.filter(QStringLiteral("/dev/sdb3"));
+        QVERIFY2(system.size() == 1 && system.first().contains(QLatin1String("snapshots")), qPrintable(said));
         QVERIFY2(said.contains(QLatin1String("installer")), qPrintable(said));
     }
 

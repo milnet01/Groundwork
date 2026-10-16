@@ -579,8 +579,8 @@
         <translation>O esquema não cabe no espaço deste disco.</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1, inicialização: monte em /boot/efi e formate.</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1, inicialização: monte em /boot/efi e não formate.</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1, swap: use como swap.</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1, sistema: monte em / e formate como Btrfs.</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1, sistema: monte em / e formate como Btrfs, com os snapshots ativados.</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>

@@ -579,8 +579,8 @@
         <translation>लेआउट इस ड्राइव की जगह में नहीं समाता।</translation>
     </message>
     <message>
-        <source>%1, start-up: mount it at /boot/efi and format it.</source>
-        <translation>%1, स्टार्ट-अप: इसे /boot/efi पर माउंट करें और फ़ॉर्मैट करें।</translation>
+        <source>%1, start-up: mount it at /boot/efi, and do not format it.</source>
+        <translation>%1, स्टार्ट-अप: इसे /boot/efi पर माउंट करें, और फ़ॉर्मैट न करें।</translation>
     </message>
     <message>
         <source>%1, BIOS boot: leave it as it is.</source>
@@ -591,8 +591,8 @@
         <translation>%1, स्वैप: इसे स्वैप के रूप में इस्तेमाल करें।</translation>
     </message>
     <message>
-        <source>%1, system: mount it at / and format it as Btrfs.</source>
-        <translation>%1, सिस्टम: इसे / पर माउंट करें और Btrfs के रूप में फ़ॉर्मैट करें।</translation>
+        <source>%1, system: mount it at / and format it as Btrfs, with snapshots on.</source>
+        <translation>%1, सिस्टम: इसे / पर माउंट करें और स्नैपशॉट चालू रखकर Btrfs के रूप में फ़ॉर्मैट करें।</translation>
     </message>
     <message>
         <source>%1, home: mount it at /home, and do not format it.</source>
