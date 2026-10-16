@@ -59,6 +59,13 @@ RunPage::RunPage(QWidget *parent)
     });
 }
 
+RunPage::~RunPage()
+{
+    // m_process outlives the other members, and its destructor waits for
+    // the Worker and may read its last output; this page must not hear it.
+    m_process.disconnect(this);
+}
+
 void RunPage::start(const QString &program, const QStringList &arguments,
                     const QList<QPair<QString, QString>> &titles)
 {

@@ -632,6 +632,8 @@ private slots:
                 w->currentPage()->findChild<QRadioButton *>(
                                      QStringLiteral("suggestion%1").arg(int(gw::Suggestion::Beside)))
                     ->click();
+            if (page == 2)
+                QVERIFY(w->currentPage()->isCommitPage()); // read it, never apply it
             QCoreApplication::sendPostedEvents(nullptr, QEvent::LayoutRequest);
             int checked = 0;
             for (QLabel *label : w->currentPage()->findChildren<QLabel *>()) {
@@ -642,8 +644,22 @@ private slots:
                          qPrintable(w->currentPage()->title() + QStringLiteral(": ") + label->text()));
             }
             QVERIFY(checked > 0);
-            w->next();
+            if (page < 2)
+                w->next();
         }
+    }
+
+    // The pre-push gate, GRND-0076: a run page destroyed while its Worker's
+    // output was still unread read that output during its own destruction,
+    // after its rows were gone, and crashed.
+    void aRunPageClosedWithOutputWaitingDoesNotCrash()
+    {
+        auto *page = new gw::RunPage;
+        page->start(QStringLiteral("sh"),
+                    {QStringLiteral("-c"), QStringLiteral("echo '@@STEP_BEGIN@@|a|1|1|a'; echo '@@HINT@@|a|b'; sleep 5")},
+                    {{QStringLiteral("a"), QStringLiteral("A")}});
+        QThread::msleep(300); // the lines wait in the pipe; no event reads them
+        delete page;
     }
 
     // GRND-0076's VM run, in Arabic: the drive's partition lines put their

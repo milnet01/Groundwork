@@ -18,6 +18,7 @@ class RunPage : public QWizardPage
     Q_OBJECT
 public:
     explicit RunPage(QWidget *parent = nullptr);
+    ~RunPage() override;
 
     // Starts the Worker; titles name the rows, in run order.
     void start(const QString &program, const QStringList &arguments,
