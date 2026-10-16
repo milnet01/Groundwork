@@ -1404,7 +1404,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Lanes: carry, wizard, worker.
   Blocked-by: GRND-0078.
 
-- 📋 [GRND-0081] **Items: developer tools for Claude Code (ripgrep, git), and tree-sitter.**
+- ✅ [GRND-0081] **Items: developer tools for Claude Code (ripgrep, git), and tree-sitter.**
   User request (2026-10-16): offer developer tools, including the code
   tracer whose name was "tree something", as a step a non-developer can
   skip. It joins GRND-0027's developer tools group on the Nice to have
@@ -1440,6 +1440,13 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   ripgrep and git, with the checked extras. Building it needs a new rule
   in Selection: switching one item on switches another off, with a
   reason, alongside today's needs-and-pulls.
+  Built 2026-10-16 (1c08316). Switches "Tools for Claude Code"
+  (ripgrep, git, clang-tools, cppcheck, ShellCheck, jq, gh,
+  python313-mypy) and "tree-sitter" (the command, with C, C++, Python,
+  bash, Rust, Lua and JSON grammars). Every name found with zypper
+  search on Tumbleweed, Leap 16.0 and Slowroll the same day. New Core
+  rule: an item includes another; switching Ants Terminal on switches
+  tree-sitter off, and its row says so. Gate: 45 of 45 ctest.
   **Layman:** A switch among the developer tools that installs what Claude Code and Ants Terminal use to read code, so they work better and cheaper; anyone who is not a developer leaves it off.
   Kind: feature.
   Source: user-request-2026-10-16.
