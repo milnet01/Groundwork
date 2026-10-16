@@ -1373,6 +1373,47 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Lanes: carry, wizard, worker.
   Blocked-by: GRND-0078.
 
+- 📋 [GRND-0081] **Items: developer tools for Claude Code (ripgrep, git), and tree-sitter.**
+  User request (2026-10-16): offer developer tools, including the code
+  tracer whose name was "tree something", as a step a non-developer can
+  skip. It joins GRND-0027's developer tools group on the Nice to have
+  page, where each item is its own switch and starts off unless chosen.
+  Packages on Tumbleweed (zypper search, 2026-10-16): tree-sitter (the
+  command), libtree-sitter0_27, and one tree-sitter-<language> package
+  per language (tree-sitter-c, -cpp, -python, -bash, -rust, -lua, -json
+  among them). Before building: pick the language set; check each
+  package exists on Leap 16 and Slowroll, and leave out what does not.
+  Widened (user, 2026-10-16): Ants Terminal, and through it Claude
+  Code, will use tree-sitter, so it needs installing; the item also
+  installs any other tool that helps Claude Code, in particular by
+  cutting its token use. This conflicts with claude-config's message the
+  same day (ANTS-5734 to vendor its grammars, no system packages); asked
+  ants-terminal the same day for the packages it needs or prefers, which
+  languages, and which are required. Build from its answer.
+  ants-terminal's answer (2026-10-16): Ants Terminal uses tree-sitter
+  compiled into ants-mcpd (ANTS-5734 spec, its INV-17 tests that the
+  system library is NOT linked), so users need no tree-sitter packages;
+  they help only someone developing Ants Terminal. Effectively required
+  for Claude Code with Ants: ripgrep (workspace_search and cited_by refuse
+  without it) and git. Helpful, used where present: the audit lints
+  mypy, cppcheck, clang-tidy, ShellCheck; jq and gh. No verb calls fd,
+  universal-ctags or clangd. Tumbleweed names checked with zypper search
+  the same day: ripgrep, git, clang-tools, cppcheck, ShellCheck, jq, gh,
+  and python313-mypy (python3-mypy does not exist); ruff and semgrep are
+  not in openSUSE's main repository. Open for the user: keep tree-sitter
+  in the switch or not.
+  User decisions (2026-10-16): 0.5.0, after GRND-0076. Keep
+  tree-sitter, as its own switch, since a user may not use Ants Terminal.
+  When Ants Terminal is switched on, tree-sitter switches off (if it was
+  on) with a note saying Ants Terminal includes it. The core switch is
+  ripgrep and git, with the checked extras. Building it needs a new rule
+  in Selection: switching one item on switches another off, with a
+  reason, alongside today's needs-and-pulls.
+  **Layman:** A switch among the developer tools that installs what Claude Code and Ants Terminal use to read code, so they work better and cheaper; anyone who is not a developer leaves it off.
+  Kind: feature.
+  Source: user-request-2026-10-16.
+  Lanes: items.
+
 ## Backlog — no version yet
 
 Items not yet placed in a release. Each moves into a version section once it is
@@ -1427,37 +1468,3 @@ scheduled.
   Kind: fix.
   Source: in-session-2026-10-15.
   Lanes: tests.
-
-- 📋 [GRND-0081] **Item: developer tools for Claude Code and Ants Terminal, tree-sitter first.**
-  User request (2026-10-16): offer developer tools, including the code
-  tracer whose name was "tree something", as a step a non-developer can
-  skip. It joins GRND-0027's developer tools group on the Nice to have
-  page, where each item is its own switch and starts off unless chosen.
-  Packages on Tumbleweed (zypper search, 2026-10-16): tree-sitter (the
-  command), libtree-sitter0_27, and one tree-sitter-<language> package
-  per language (tree-sitter-c, -cpp, -python, -bash, -rust, -lua, -json
-  among them). Before building: pick the language set; check each
-  package exists on Leap 16 and Slowroll, and leave out what does not.
-  Widened (user, 2026-10-16): Ants Terminal, and through it Claude
-  Code, will use tree-sitter, so it needs installing; the item also
-  installs any other tool that helps Claude Code, in particular by
-  cutting its token use. This conflicts with claude-config's message the
-  same day (ANTS-5734 to vendor its grammars, no system packages); asked
-  ants-terminal the same day for the packages it needs or prefers, which
-  languages, and which are required. Build from its answer.
-  ants-terminal's answer (2026-10-16): Ants Terminal uses tree-sitter
-  compiled into ants-mcpd (ANTS-5734 spec, its INV-17 tests that the
-  system library is NOT linked), so users need no tree-sitter packages;
-  they help only someone developing Ants Terminal. Effectively required
-  for Claude Code with Ants: ripgrep (workspace_search and cited_by refuse
-  without it) and git. Helpful, used where present: the audit lints
-  mypy, cppcheck, clang-tidy, ShellCheck; jq and gh. No verb calls fd,
-  universal-ctags or clangd. Tumbleweed names checked with zypper search
-  the same day: ripgrep, git, clang-tools, cppcheck, ShellCheck, jq, gh,
-  and python313-mypy (python3-mypy does not exist); ruff and semgrep are
-  not in openSUSE's main repository. Open for the user: keep tree-sitter
-  in the switch or not.
-  **Layman:** A switch among the developer tools that installs what Claude Code and Ants Terminal use to read code, so they work better and cheaper; anyone who is not a developer leaves it off.
-  Kind: feature.
-  Source: user-request-2026-10-16.
-  Lanes: items.
