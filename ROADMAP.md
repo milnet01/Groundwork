@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=83 -->
+<!-- ants-roadmap-id-high-water: GRND=84 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1541,3 +1541,16 @@ scheduled.
   Kind: feature.
   Source: user-request-2026-10-16.
   Lanes: items.
+
+- 💭 [GRND-0084] **Prepare a drive: no silent fall-back to erasing Windows.**
+  LayoutPage::rebuildChoices (src/gui/preparepages.cpp): when the chosen
+  suggestion stops fitting, as when "room to hibernate" grows swap past
+  the free space beside Windows, it falls back to offered.first(), the
+  whole drive, which erases Windows. The "I understand" switch still
+  guards it. Offered to the user 2026-10-16, not yet decided: on a drive
+  with Windows, choose nothing then, so the user must pick. Follows the
+  user's ruling that a Windows drive starts beside it (93a8a50).
+  **Layman:** If a bigger swap no longer fits beside Windows, the layout page should ask again rather than pick erasing the whole drive.
+  Kind: ux.
+  Source: in-session-2026-10-16.
+  Lanes: wizard.
