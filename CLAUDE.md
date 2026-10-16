@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 5 — On an item.
-**In flight:** 0.5.0: GRND-0076 (preparing a drive) mid-build, stages 1 and 2 of 4 committed, stage 3 (the wizard's pages) next; its roadmap body's last Progress note says where. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a Gemini check).
+**In flight:** 0.5.0: GRND-0076 (preparing a drive) mid-build, stages 1 to 3 of 4 committed, stage 4 (the VM runs) next; its roadmap body's last Progress note says where. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a Gemini check).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where

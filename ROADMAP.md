@@ -1327,6 +1327,16 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   worker-interface.md names --prepare-drive. Next: stage 3, the wizard's
   prepare pages (INV-2: Apply needs the "I understand" switch) and
   Job::PrepareDrive in main.cpp's jobs; then stage 4, a VM run.
+  Progress (2026-10-16): stage 3 committed and pushed (42fa72a). The
+  first page offers preparing a drive; its pages are the drive, Windows'
+  checklist, the layout (suggestions or custom, with the
+  room-to-hibernate switch) and confirm, whose Apply waits for "I
+  understand" (INV-2). The Worker prints what to set in the installer
+  per new partition (spec 4.6). Five tst_wizard cases and one tst_worker
+  check, each seen red; gate 45 of 45. 52 new strings drafted in all 14
+  languages, not yet looked at right to left. Next: stage 4, a VM run on
+  a blank virtual disk (whole drive with separate home), then NTFS plus
+  free space (beside), each followed by the installer.
   **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
   Kind: feature.
   Source: user-request-2026-10-15.
