@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 4 — Between items.
-**In flight:** nothing; 0.5.0 has GRND-0076 and GRND-0081 done, GRND-0078 waiting on its spec's three calls. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
+**In flight:** nothing; GRND-0076 and GRND-0081 done, to ship as 0.4.0 with GRND-0084 (roadmap 0.4.0 intro, user 2026-10-16); GRND-0078 blocked by GRND-0077. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where

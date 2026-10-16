@@ -1181,6 +1181,11 @@ as the terminal.
 Items that need the user's own choices in the window (decided 2026-10-10). Each
 has a written design before it is built.
 
+User decision (2026-10-16): ship what is done on main now as 0.4.0
+(GRND-0076, GRND-0081, fixes, and GRND-0084 once built). This
+section's unbuilt items move to a later version, and the version
+sections are renumbered to match, before the release is cut.
+
 - 📋 [GRND-0065] **Item: your GitHub projects, copied into a folder you choose.**
   The user liked this over a personal list (2026-10-10): sign in
   once, list the user's repositories, tick which to copy, choose the
