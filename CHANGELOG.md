@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-16
+
+**Theme:** A drive ready for openSUSE.
+
 ### Added
 
 - **Preparing a drive for installing openSUSE: Groundwork lays out a
