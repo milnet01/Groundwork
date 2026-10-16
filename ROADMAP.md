@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=81 -->
+<!-- ants-roadmap-id-high-water: GRND=83 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1468,3 +1468,41 @@ scheduled.
   Kind: fix.
   Source: in-session-2026-10-15.
   Lanes: tests.
+
+- 📋 [GRND-0082] **Item: Claude Code.**
+  User request (2026-10-16): offer to install Claude Code. Ants Terminal
+  will offer it in its own first-run wizard; Groundwork offers it too,
+  for users who do not use Ants Terminal. Joins GRND-0027's developer
+  tools group.
+  Official methods (code.claude.com/docs/en/setup, read 2026-10-16):
+  the native installer, curl -fsSL https://claude.ai/install.sh | bash,
+  per user, no root, into ~/.local/bin and ~/.local/share/claude,
+  updating itself; or a signed RPM repository for Fedora and RHEL,
+  https://downloads.claude.ai/claude-code/rpm/stable, package
+  claude-code, updated by the package manager. openSUSE is not named;
+  listed systems are Ubuntu 20.04+, Debian 10+, Alpine 3.19+; 4 GB RAM,
+  x64 or ARM64. Needs a paid plan to use.
+  To settle before building: the method (the RPM repository through
+  zypper fits Groundwork's no-shell rule and its updates; the native
+  installer runs a downloaded script), and whether the RPM installs on
+  Tumbleweed, Leap 16 and Slowroll (a VM check). Check: already done
+  when claude is on PATH. With Ants Terminal switched on, say that Ants
+  Terminal offers it too.
+  **Layman:** A switch among the developer tools that installs Claude Code, Anthropic's coding assistant, for people who do not get it through Ants Terminal.
+  Kind: feature.
+  Source: user-request-2026-10-16.
+  Lanes: items.
+
+- 💭 [GRND-0083] **Item: Claude Desktop, with Cowork, once openSUSE is supported.**
+  User request (2026-10-16): offer other Claude apps, such as Cowork.
+  claude.com/download (read 2026-10-16): Claude Desktop for Linux is in
+  beta for Ubuntu and Debian only, x64 and arm64; Chat, Claude Code and
+  Cowork included; Computer Use and dictation not yet. "Support for
+  additional distributions is coming in the future." Not offered until
+  Anthropic supports openSUSE; community repackagings are not
+  Groundwork's to install. Re-check the download page before each
+  release.
+  **Layman:** Install Anthropic's Claude Desktop app, which includes Cowork, once Anthropic makes it for openSUSE.
+  Kind: feature.
+  Source: user-request-2026-10-16.
+  Lanes: items.
