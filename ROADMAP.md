@@ -1268,7 +1268,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: user-request-2026-10-15.
   Lanes: wizard, core.
 
-- 🚧 [GRND-0076] **Prepare a drive for installing openSUSE.**
+- ✅ [GRND-0076] **Prepare a drive for installing openSUSE.**
   User request (2026-10-15): a second job beside first-run setup. The
   two work alone; when both are used, the first informs the second.
   Answers given the same day:
@@ -1337,6 +1337,33 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   languages, not yet looked at right to left. Next: stage 4, a VM run on
   a blank virtual disk (whole drive with separate home), then NTFS plus
   free space (beside), each followed by the installer.
+  Stage 4, run 1 (2026-10-16): passed after fixes. Live Tumbleweed
+  XFCE (20261013) in QEMU, UEFI, blank 100 GiB disk; whole drive with
+  separate home and room to hibernate. Groundwork wrote start-up 4 GiB,
+  swap 4 GiB, system 52.5 GiB, home 39.5 GiB, as the page said. The
+  YaST NET installer (20261014), Expert Partitioner from existing
+  partitions, set as the run page said: it installed and booted;
+  systemd-boot on the start-up partition, snapper's first snapshot,
+  swap on, home XFS at /home. Three faults found and fixed (b135b11):
+  the prepare pages squeezed their text at the window's first size;
+  the installer leaves snapshots off unless the hint asks; formatting
+  the start-up partition there made it a Windows data partition and
+  the boot menu could not be written, so the hint now says not to.
+  Stage 4, run 2 (2026-10-16): passed. A 100 GiB GPT disk holding a
+  Windows layout (start-up 100 MiB, reserved 16 MiB, NTFS 40 GiB,
+  recovery 10 GiB at the end) with about 50 GiB free between them;
+  beside Windows, in Arabic. Groundwork added start-up 4 GiB, swap
+  2 GiB and system 43.9 GiB in the free space; the Windows partitions
+  kept their starts and sizes, and the NTFS volume its serial. The
+  YaST installer, set as the hints said, installed and booted with
+  systemd-boot on the new start-up partition; afterwards Windows'
+  start-up partition and the NTFS partition's first 256 MiB hashed the
+  same as before the install. Right to left: the drive lines and the
+  hints scrambled paths ("dev/vda3/"); fixed (0358218) and seen fixed
+  in Arabic. Hebrew was not viewed. Open: on a drive with Windows the
+  layout page starts on "the whole drive", which erases Windows.
+  Done (2026-10-16): stages 1 to 4 committed; both VM runs of spec § 7
+  passed, after the fixes in b135b11 and 0358218.
   **Layman:** Groundwork can get a new drive ready before openSUSE is installed, and remember what it found to make setup afterwards smoother.
   Kind: feature.
   Source: user-request-2026-10-15.

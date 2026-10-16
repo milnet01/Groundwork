@@ -14,6 +14,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Added
 
+- **Preparing a drive for installing openSUSE: Groundwork lays out a
+  whole drive, or the free space beside Windows, then lists what to
+  choose for each partition in the installer.** A drive in use cannot
+  be chosen, and nothing is written until "I understand" is switched
+  on. (GRND-0076)
 - The first page and the README say that Groundwork is an independent
   project, not an official openSUSE or SUSE product, and not endorsed
   by the openSUSE Project or SUSE.
