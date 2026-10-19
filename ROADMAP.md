@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=84 -->
+<!-- ants-roadmap-id-high-water: GRND=85 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1386,7 +1386,7 @@ Preparing a drive and carrying a setup over (discovery S5, S6; design.md,
 Preparing a drive and Carrying a setup over). Split from GRND-0076 on
 2026-10-15.
 
-- 📋 [GRND-0078] **Gather a setup and save it to a file.**
+- ✅ [GRND-0078] **Gather a setup and save it to a file.**
   Serves S6 (design.md, Carrying a setup over). Gathers Groundwork's done
   items, programs zypper marks as asked for (i+), Flatpak apps, added
   software sources, and desktop and app settings app by app. Settings
@@ -1399,6 +1399,9 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   User decision (2026-10-16): all three of Claude's calls accepted —
   an uncompressed tar file, ~/.local/share left out except § 4.4's
   settings folders, and a settings row over 100 MiB starts off.
+  Built 2026-10-19 in bd12241: src/carry/, the wizard's carry pages, and
+  the Worker's --save-setup. Gate 46 of 46. Not yet run on a real
+  machine or a vfat stick (spec § 7's manual check, before release).
   **Layman:** Groundwork can list what is set up on this machine, let you keep or drop each part, and save it for your next install.
   Kind: feature.
   Source: user-request-2026-10-15.
@@ -1446,6 +1449,17 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Kind: feature.
   Source: user-request-2026-10-16.
   Lanes: items.
+
+- 📋 [GRND-0085] **One unreadable file under a setting fails the whole save.**
+  Found while building GRND-0078, not measured on a real home. The
+  spec's tar --create (§ 4.5) exits 2 on a file it cannot read, so the
+  run ends fail. Candidate: tar --ignore-failed-read, which turns it
+  into a warning, plus a HINT naming the setting. That changes the
+  spec's argument list, so it needs the user's say first.
+  **Layman:** If one settings file cannot be read, such as a file left owned by root, saving the setup fails instead of skipping that file.
+  Kind: fix.
+  Source: claude-2026-10-19.
+  Lanes: carry, worker.
 
 ## 0.6.0 — Your own set-up
 
