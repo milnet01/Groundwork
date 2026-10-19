@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>已略過「%1」：這不是 Groundwork 能使用的名稱。</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>無法執行 zypper。</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>另一個程式正在使用 zypper。請關閉它，然後返回再試一次。</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>zypper 無法列出已安裝的程式（結束代碼 %1）。</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>未安裝 Flatpak。</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>Flatpak 無法列出它的應用程式。</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>Flatpak 無法列出它的軟體來源。</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>Groundwork 無法判斷這個資料夾還有多少空間。請選擇另一個資料夾。</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>這個磁碟機使用 FAT，無法存放大於 4 GiB 的檔案，而已開啟的設定需要 %1。請關閉一些，或選擇另一個磁碟機上的資料夾。</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>這裡空間不足：已開啟的設定需要 %1，而可用空間只有 %2。請關閉一些，或選擇另一個資料夾。</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>這不是 Groundwork 組態檔案。</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>這個檔案是由較新版本的 Groundwork 儲存的。請先更新 Groundwork 再讀取它。</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>檔案中有一項設定位於個人資料夾之外：%1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>檔案中的組態清單已損毀。</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>檔案中沒有組態清單。</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>檔案中有不只一份組態清單。</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>檔案中包含 %1，它位於個人資料夾之外。</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>檔案中包含 %1，但組態清單中沒有列出它。</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>檔案中缺少 %1。</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>無法將這個檔案讀取為 Groundwork 組態檔案。</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>KDE Plasma 桌面</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>您自己的選單項目</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>您新增的字型</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>Bash shell</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>SSH 金鑰</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>GnuPG 金鑰</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -654,8 +761,8 @@
         <translation>請以您自己的身分啟動 Groundwork，而不是以 root 身分。它會在需要時詢問密碼。</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
 </context>
 <context>
@@ -828,6 +935,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>正在安裝遊戲控制器支援和 GameMode</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>要帶過去的內容</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>Groundwork 在這台電腦上找到了以下內容。新安裝中不想要的，請關閉。</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>正在查看這台電腦的組態…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>無法判斷：%1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>Groundwork 中已完成的項目</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>還沒有已完成的項目。</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>您要求安裝的程式</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>%1（Flatpak）</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>您新增的軟體來源</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>無法判斷：無法讀取 %1。</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>找不到。</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>%1（Flatpak）— %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>依應用程式分類的設定</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>每一項一開始都是開啟的，但儲存了密碼或金鑰的設定，以及大於 100 MiB 的設定除外。</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>儲存的檔案將包含這個應用程式儲存的密碼或金鑰。任何拿到這個檔案的人都能讀取它們。</translation>
     </message>
 </context>
 <context>
@@ -1167,6 +1337,57 @@
     <message>
         <source>All done.</source>
         <translation>全部完成。</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>儲存組態</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>Groundwork 會把它儲存為一個檔案，通常存放在 USB 隨身碟上。</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>儲存</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>選擇資料夾…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>選擇資料夾</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>檔案儲存的是設定現在的狀態。Groundwork 不認識的應用程式中儲存的密碼不會被標示，所以除非您確實想帶過去，否則請關閉所有會儲存密碼的應用程式。</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>檔案：%1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>資料夾：%1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>已開啟的設定共佔 %1。</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>這個資料夾有 %1 可用空間，位於 %2 磁碟機上。</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>最大的一項：%1。</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>無法將要儲存的內容寫入 %1，因此沒有儲存任何內容。</translation>
     </message>
 </context>
 <context>
@@ -1619,6 +1840,10 @@
         <translation>正在準備磁碟機</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>正在儲存組態</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1728,6 +1953,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>在安裝程式中，選擇使用現有的分割區，而不是它自己的建議方案，並依照下面的說明設定每個分割區。</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>正在儲存組態</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>%1 留下了一個未寫完的檔案，可以刪除它。</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>沒有儲存任何內容。</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>無法讀取要儲存的內容清單。</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>找不到要儲存到的資料夾。</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>%1 已不在個人資料夾中。</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>無法將組態清單寫入 %1。</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>正在寫入組態檔案</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>以下設定在儲存期間發生了變更，可能是因為應用程式正開著：%1。請關閉它並重新儲存，以確保無誤。</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>正在檢查組態檔案</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>正在將組態檔案放到定位</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>已儲存到 %1。</translation>
     </message>
 </context>
 </TS>

@@ -73,7 +73,8 @@ public:
 
     std::optional<QByteArray> readFile(const QString &path) const { return m_files.read(path); }
     bool fileExists(const QString &path) const { return m_files.exists(path); }
-    QStringList entries(const QString &dir) const { return m_files.entries(dir); }
+    // Hidden entries, such as a home folder's dot-files, only when asked.
+    QStringList entries(const QString &dir, bool hidden = false) const { return m_files.entries(dir, hidden); }
     QString linkTargetName(const QString &path) const { return m_files.linkTargetName(path); }
     CommandResult run(const QStringList &argv,
                       int timeoutMs = CommandRunner::DefaultTimeoutMs) const

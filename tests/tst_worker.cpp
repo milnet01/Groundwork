@@ -61,6 +61,13 @@ const QByteArray kRecord = R"(#!/bin/sh
 echo "${0##*/} $*" >> "$FAKE_LOG"
 )";
 
+// Saving a setup (GRND-0078): the real tar, unless told to fail writing.
+const QByteArray kTar = R"(#!/bin/sh
+echo "tar $*" >> "$FAKE_LOG"
+if [ "$1" = --create ] && [ -n "$FAKE_TAR_FAIL" ]; then cat > /dev/null; exit 2; fi
+exec /usr/bin/tar "$@"
+)";
+
 constexpr qint64 kMiB = qint64(1) << 20;
 constexpr qint64 kGiB = qint64(1) << 30;
 
@@ -190,6 +197,30 @@ class TstWorker : public QObject
         p.setProcessEnvironment(m_env);
         p.start(QStringLiteral(GROUNDWORK_BIN), {QStringLiteral("--worker"), QStringLiteral("--prepare-drive"),
                                                  m_dir->filePath(QStringLiteral("layout.json"))});
+        return finish(p);
+    }
+
+    // A home with a Dolphin setting and an SSH key; the choices file that
+    // saves the settings at paths to output.
+    QString saveSetup(const QJsonArray &paths, const QString &output)
+    {
+        writeFile(m_bin + QStringLiteral("/tar"), kTar, true);
+        writeFile(m_dir->filePath(QStringLiteral(".config/dolphinrc")), "[General]\n");
+        writeFile(m_dir->filePath(QStringLiteral(".ssh/id_ed25519")), "not a real key\n");
+        const QJsonObject manifest{
+            {"format", 1},
+            {"packages", QJsonArray{"act"}},
+            {"settings", QJsonArray{QJsonObject{{"name", "Mine"}, {"paths", paths}, {"secret", true}, {"bytes", 30}}}}};
+        const QString choices = m_dir->filePath(QStringLiteral("setup-choices.json"));
+        writeFile(choices, QJsonDocument(QJsonObject{{"output", output}, {"manifest", manifest}}).toJson());
+        return choices;
+    }
+
+    Run save(const QString &choices)
+    {
+        QProcess p;
+        p.setProcessEnvironment(m_env);
+        p.start(QStringLiteral(GROUNDWORK_BIN), {QStringLiteral("--worker"), QStringLiteral("--save-setup"), choices});
         return finish(p);
     }
 
@@ -516,6 +547,52 @@ cat > "$FAKE_WRITTEN$out"
         QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- mkswap -L swap /dev/sdb2")));
         QCOMPARE(r.endsFor(QStringLiteral("prepare-drive")).value(1), QStringLiteral("fail"));
         QCOMPARE(r.exitCode, 1);
+    }
+
+    // GRND-0078, spec 4.5: the settings and the manifest are written to one
+    // file at the output, as the user, through a .partial file.
+    void savesASetupToOneFile()
+    {
+        QVERIFY(QDir().mkpath(m_dir->filePath(QStringLiteral("stick"))));
+        const QString output = m_dir->filePath(QStringLiteral("stick/groundwork-setup-pc-2026-10-19.tar"));
+        const Run r = save(saveSetup({".config/dolphinrc", ".ssh"}, output));
+        QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.count(QStringLiteral("sudo")), 0);
+        QVERIFY(r.count(QStringLiteral("tar --create")) == 1 && r.count(QStringLiteral("tar --list")) == 1);
+        QVERIFY(QFile::exists(output));
+        QVERIFY(!QFile::exists(output + QStringLiteral(".partial")));
+        QProcess list;
+        list.start(QStringLiteral("/usr/bin/tar"), {QStringLiteral("--list"), QStringLiteral("--file"), output});
+        list.waitForFinished();
+        const QStringList members = QString::fromUtf8(list.readAllStandardOutput()).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
+        QCOMPARE(members.value(0), QStringLiteral("groundwork-setup.json"));
+        QVERIFY(members.contains(QStringLiteral(".config/dolphinrc")));
+        QVERIFY(members.contains(QStringLiteral(".ssh/id_ed25519")));
+    }
+
+    // INV-3: a settings path outside the home folder is refused before any
+    // step; tar is never run.
+    void refusesASettingOutsideTheHomeFolder()
+    {
+        const QString output = m_dir->filePath(QStringLiteral("out.tar"));
+        const Run r = save(saveSetup({"../x"}, output));
+        QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("fail"));
+        QCOMPARE(r.exitCode, 1);
+        QCOMPARE(r.count(QStringLiteral("tar")), 0);
+        QVERIFY(!QFile::exists(output));
+    }
+
+    // INV-5: when tar fails, nothing is left at the output.
+    void aFailedWriteLeavesNoFile()
+    {
+        m_env.insert(QStringLiteral("FAKE_TAR_FAIL"), QStringLiteral("1"));
+        const QString output = m_dir->filePath(QStringLiteral("out.tar"));
+        const Run r = save(saveSetup({".config/dolphinrc"}, output));
+        QCOMPARE(r.count(QStringLiteral("tar --create")), 1);
+        QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("fail"));
+        QCOMPARE(r.exitCode, 1);
+        QVERIFY(!QFile::exists(output));
     }
 
     void refusesAnUnknownItem()

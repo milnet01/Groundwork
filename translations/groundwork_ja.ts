@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>「%1」をスキップしました：Groundwork で使える名前ではありません。</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>zypper を実行できませんでした。</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>別のプログラムが zypper を使っています。そのプログラムを閉じてから、戻ってもう一度お試しください。</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>zypper がインストール済みのプログラムを一覧表示できませんでした（終了コード %1）。</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>Flatpak がインストールされていません。</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>Flatpak がアプリを一覧表示できませんでした。</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>Flatpak がソースを一覧表示できませんでした。</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>このフォルダーの空き容量を Groundwork が判定できませんでした。別のフォルダーを選んでください。</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>このドライブは FAT を使っているため 4 GiB より大きいファイルを保存できませんが、オンにした設定には %1 が必要です。いくつかをオフにするか、別のドライブのフォルダーを選んでください。</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>ここには十分な空きがありません：オンにした設定には %1 が必要ですが、空きは %2 です。いくつかをオフにするか、別のフォルダーを選んでください。</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>これは Groundwork のセットアップファイルではありません。</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>このファイルは新しいバージョンの Groundwork で保存されています。読み込むには Groundwork を更新してください。</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>ファイルにホームフォルダーの外の設定が含まれています：%1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>ファイル内のセットアップ一覧が壊れています。</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>ファイルにセットアップ一覧がありません。</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>ファイルにセットアップ一覧が複数あります。</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>ファイルに %1 が含まれていますが、これはホームフォルダーの外にあります。</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>ファイルに %1 が含まれていますが、セットアップ一覧には載っていません。</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>ファイルに %1 がありません。</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>ファイルを Groundwork のセットアップファイルとして読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>KDE Plasma デスクトップ</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>自分で作ったメニュー項目</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>追加したフォント</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>Bash シェル</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>SSH 鍵</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>GnuPG 鍵</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>最初からオンになる項目：%1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>使い方：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>使い方：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -828,6 +935,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>ゲームコントローラーのサポートと GameMode をインストールしています</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>引き継ぐもの</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>Groundwork がこのコンピューターで次のものを見つけました。新しいインストールに不要なものはオフにしてください。</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>このコンピューターのセットアップを確認しています…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>判定できません：%1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>完了している Groundwork の項目</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>まだ完了しているものはありません。</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>自分でインストールしたプログラム</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>%1（Flatpak）</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>追加したソフトウェアソース</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>判定できません：%1 を読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>見つかりませんでした。</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>%1（Flatpak）— %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>アプリごとの設定</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>どれも最初はオンになっています。ただし、保存されたパスワードや鍵を含む設定と、100 MiB より大きい設定は除きます。</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>保存するファイルには、このアプリに保存されたパスワードや鍵が含まれます。ファイルを持っている人は誰でも読めます。</translation>
     </message>
 </context>
 <context>
@@ -1167,6 +1337,57 @@
     <message>
         <source>All done.</source>
         <translation>すべて完了しました。</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>セットアップを保存</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>Groundwork は 1 つのファイルとして保存します。保存先には USB メモリーがよく使われます。</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>フォルダーを選ぶ…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>フォルダーを選ぶ</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>ファイルには、今の状態の設定が保存されます。Groundwork が知らないアプリに保存されたパスワードには印が付きません。パスワードを保存するアプリは、引き継ぐつもりがなければオフにしてください。</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>ファイル：%1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>フォルダー：%1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>オンにした設定の容量は %1 です。</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>このフォルダーの空きは %1 です（%2 ドライブ）。</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>最大のもの：%1。</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>保存する内容を %1 に書き込めなかったため、何も保存されませんでした。</translation>
     </message>
 </context>
 <context>
@@ -1619,6 +1840,10 @@
         <translation>ドライブを準備しています</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>セットアップを保存しています</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1728,6 +1953,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>インストーラーでは、インストーラー自身の提案ではなく既存のパーティションを使うよう選び、それぞれを下のとおりに設定してください。</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>セットアップを保存しています</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>書きかけのファイルが %1 に残っています。削除してかまいません。</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>何も保存されませんでした。</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>保存するものの一覧を読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>保存先のフォルダーが見つかりませんでした。</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>%1 はもうホームフォルダーの中にありません。</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>セットアップ一覧を %1 に書き込めませんでした。</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>セットアップファイルを書き込んでいます</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>保存中に次の設定が変わりました。アプリが開いていたのかもしれません：%1。確実にするには、アプリを閉じてからもう一度保存してください。</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>セットアップファイルを確認しています</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>セットアップファイルを所定の場所に置いています</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>%1 に保存しました。</translation>
     </message>
 </context>
 </TS>

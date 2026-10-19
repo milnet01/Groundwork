@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>Oorgeslaan: “%1” is nie &apos;n naam wat Groundwork kan gebruik nie.</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>zypper kon nie uitgevoer word nie.</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>&apos;n Ander program gebruik zypper. Maak dit toe, gaan dan terug en probeer weer.</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>zypper kon nie die geïnstalleerde programme lys nie (uittreekode %1).</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>Flatpak is nie geïnstalleer nie.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>Flatpak kon nie sy toepe lys nie.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>Flatpak kon nie sy bronne lys nie.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>Groundwork kon nie vasstel hoeveel plek hierdie vouer het nie. Kies &apos;n ander vouer.</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>Hierdie skyf gebruik FAT, wat nie &apos;n lêer groter as 4 GiB kan hou nie, en die instellings wat aangeskakel is, het %1 nodig. Skakel sommige af, of kies &apos;n vouer op &apos;n ander skyf.</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>Daar is nie genoeg plek hier nie: die instellings wat aangeskakel is, het %1 nodig, en %2 is vry. Skakel sommige af, of kies &apos;n ander vouer.</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>Dit is nie &apos;n Groundwork-opstellingslêer nie.</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>Hierdie lêer is deur &apos;n nuwer Groundwork gestoor. Dateer Groundwork op om dit te lees.</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>Die lêer noem &apos;n instelling buite die tuisvouer: %1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>Die opstellingslys in die lêer is beskadig.</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>Die lêer bevat geen opstellingslys nie.</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>Die lêer bevat meer as een opstellingslys.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>Die lêer bevat %1, wat buite die tuisvouer is.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>Die lêer bevat %1, wat sy opstellingslys nie noem nie.</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>Die lêer kort %1.</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>Die lêer kon nie as &apos;n Groundwork-opstellingslêer gelees word nie.</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>KDE Plasma-werkskerm</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>Jou eie kieslysinskrywings</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>Lettertipes wat jy bygevoeg het</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>Die Bash-dop</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>SSH-sleutels</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>GnuPG-sleutels</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>Sou aangeskakel begin: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>Gebruik: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>Gebruik: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -829,6 +936,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>Ondersteuning vir speletjiebeheerders en GameMode word geïnstalleer</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>Wat om oor te dra</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>Groundwork het hierdie dinge op hierdie rekenaar gevind. Skakel enigiets af wat jy nie op die nuwe installasie wil hê nie.</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>Besig om na hierdie rekenaar se opstelling te kyk…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>Kon nie vasstel nie: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>Groundwork se items wat klaar is</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>Nog niks is klaar nie.</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>Programme waarvoor jy gevra het</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>%1 (Flatpak)</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>Sagtewarebronne wat jy bygevoeg het</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>Kon nie vasstel nie: %1 kon nie gelees word nie.</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>Niks gevind nie.</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>%1 (Flatpak) — %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>Instellings, toep vir toep</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>Elkeen begin aangeskakel, behalwe instellings wat gestoorde wagwoorde of sleutels bevat, en instellings groter as 100 MiB.</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>Die gestoorde lêer sal hierdie toep se gestoorde wagwoorde of sleutels bevat. Enigiemand met die lêer kan hulle lees.</translation>
     </message>
 </context>
 <context>
@@ -1169,6 +1339,57 @@
     <message>
         <source>All done.</source>
         <translation>Alles klaar.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>Stoor die opstelling</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>Groundwork stoor dit as een lêer. &apos;n USB-stokkie is die gewone plek.</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Stoor</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>Kies &apos;n vouer…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>Kies &apos;n vouer</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>Die lêer bevat die instellings soos hulle nou is. Gestoorde wagwoorde in &apos;n toep wat Groundwork nie ken nie, word nie gemerk nie, so skakel enige toep af wat wagwoorde hou, tensy jy hulle wil oordra.</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Lêer: %1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>Vouer: %1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>Die instellings wat aangeskakel is, neem %1 op.</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>Hierdie vouer het %1 vry, op &apos;n %2-skyf.</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>Die grootstes: %1.</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>Wat gestoor moet word, kon nie na %1 geskryf word nie, so niks is gestoor nie.</translation>
     </message>
 </context>
 <context>
@@ -1622,6 +1843,10 @@
         <translation>Die skyf word voorberei</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>Besig om die opstelling te stoor</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1731,6 +1956,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>Kies in die installeerder om die bestaande partisies te gebruik eerder as sy eie voorstel, en stel elkeen soos hieronder.</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>Besig om die opstelling te stoor</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>&apos;n Halfgeskrewe lêer is by %1 gelaat; dit kan uitgevee word.</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>Niks is gestoor nie.</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>Die lys van wat gestoor moet word, kon nie gelees word nie.</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>Die vouer om in te stoor is nie gevind nie.</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>%1 is nie meer in die tuisvouer nie.</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>Die opstellingslys kon nie na %1 geskryf word nie.</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>Besig om die opstellingslêer te skryf</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>Hierdie instellings het verander terwyl hulle gestoor is, dalk omdat die toep oop was: %1. Maak dit toe en stoor weer om seker te wees.</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>Besig om die opstellingslêer te kontroleer</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>Besig om die opstellingslêer in plek te sit</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>Gestoor in %1.</translation>
     </message>
 </context>
 </TS>

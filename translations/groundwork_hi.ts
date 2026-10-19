@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>“%1” छोड़ दिया गया: यह ऐसा नाम नहीं है जिसे Groundwork इस्तेमाल कर सके।</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>zypper चलाया नहीं जा सका।</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>कोई दूसरा प्रोग्राम zypper का उपयोग कर रहा है। उसे बंद करें, फिर वापस जाकर दोबारा कोशिश करें।</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>zypper इंस्टॉल किए गए प्रोग्रामों की सूची नहीं दे सका (एग्ज़िट कोड %1)।</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>Flatpak इंस्टॉल नहीं है।</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>Flatpak अपने ऐप की सूची नहीं दे सका।</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>Flatpak अपने स्रोतों की सूची नहीं दे सका।</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>Groundwork पता नहीं लगा सका कि इस फ़ोल्डर में कितनी जगह है। कोई दूसरा फ़ोल्डर चुनें।</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>यह ड्राइव FAT का उपयोग करती है, जिसमें 4 GiB से बड़ी फ़ाइल नहीं रह सकती, और चालू की गई सेटिंग को %1 चाहिए। कुछ बंद करें, या किसी दूसरी ड्राइव पर फ़ोल्डर चुनें।</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>यहाँ पर्याप्त जगह नहीं है: चालू की गई सेटिंग को %1 चाहिए, और %2 खाली है। कुछ बंद करें, या कोई दूसरा फ़ोल्डर चुनें।</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>यह Groundwork की सेटअप फ़ाइल नहीं है।</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>यह फ़ाइल Groundwork के नए संस्करण से सेव की गई थी। इसे पढ़ने के लिए Groundwork अपडेट करें।</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>फ़ाइल में होम फ़ोल्डर से बाहर की एक सेटिंग है: %1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>फ़ाइल में सेटअप सूची खराब है।</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>फ़ाइल में कोई सेटअप सूची नहीं है।</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>फ़ाइल में एक से ज़्यादा सेटअप सूचियाँ हैं।</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>फ़ाइल में %1 है, जो होम फ़ोल्डर से बाहर है।</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>फ़ाइल में %1 है, जिसका नाम उसकी सेटअप सूची में नहीं है।</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>फ़ाइल में %1 नहीं है।</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>फ़ाइल को Groundwork की सेटअप फ़ाइल के रूप में पढ़ा नहीं जा सका।</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>KDE Plasma डेस्कटॉप</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>आपकी अपनी मेनू प्रविष्टियाँ</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>आपके जोड़े गए फ़ॉन्ट</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>Bash शेल</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>SSH कुंजियाँ</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>GnuPG कुंजियाँ</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>चालू होकर शुरू होंगे: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>उपयोग: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>उपयोग: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -829,6 +936,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>गेम कंट्रोलर सपोर्ट और GameMode इंस्टॉल किए जा रहे हैं</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>क्या साथ ले जाना है</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>Groundwork को इस कंप्यूटर पर ये मिले। नई इंस्टॉलेशन में जो नहीं चाहिए, उसे बंद करें।</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>इस कंप्यूटर का सेटअप देखा जा रहा है…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>पता नहीं चल सका: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>Groundwork के पूरे हो चुके आइटम</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>अभी तक कोई पूरा नहीं हुआ है।</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>आपके माँगे हुए प्रोग्राम</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>%1 (Flatpak)</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>आपके जोड़े गए सॉफ़्टवेयर स्रोत</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>पता नहीं चल सका: %1 पढ़ा नहीं जा सका।</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>कुछ नहीं मिला।</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>%1 (Flatpak) — %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>सेटिंग, हर ऐप की अलग</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>हर एक चालू होकर शुरू होती है, सिवाय उन सेटिंग के जिनमें सेव किए गए पासवर्ड या कुंजियाँ हैं, और 100 MiB से बड़ी सेटिंग के।</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>सेव की गई फ़ाइल में इस ऐप के सेव किए गए पासवर्ड या कुंजियाँ होंगी। जिसके पास भी यह फ़ाइल हो, वह उन्हें पढ़ सकता है।</translation>
     </message>
 </context>
 <context>
@@ -1169,6 +1339,57 @@
     <message>
         <source>All done.</source>
         <translation>सब हो गया।</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>सेटअप सेव करें</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>Groundwork इसे एक फ़ाइल के रूप में सेव करता है। आम तौर पर इसे USB स्टिक पर रखा जाता है।</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>सेव करें</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>फ़ोल्डर चुनें…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>फ़ोल्डर चुनें</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>फ़ाइल में सेटिंग वैसी ही रहती हैं जैसी अभी हैं। जिस ऐप को Groundwork नहीं जानता, उसमें सेव किए गए पासवर्ड चिह्नित नहीं होते, इसलिए पासवर्ड रखने वाला हर ऐप बंद करें, जब तक आप उन्हें साथ ले जाना न चाहें।</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>फ़ाइल: %1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>फ़ोल्डर: %1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>चालू की गई सेटिंग %1 लेती हैं।</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>इस फ़ोल्डर में %1 खाली है, एक %2 ड्राइव पर।</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>सबसे बड़ी: %1।</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>क्या सेव करना है, यह %1 में लिखा नहीं जा सका, इसलिए कुछ भी सेव नहीं हुआ।</translation>
     </message>
 </context>
 <context>
@@ -1622,6 +1843,10 @@
         <translation>ड्राइव तैयार की जा रही है</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>सेटअप सेव किया जा रहा है</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1731,6 +1956,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>इंस्टॉलर में, उसके अपने सुझाव की जगह मौजूदा पार्टीशन इस्तेमाल करना चुनें, और हर एक को नीचे दिए अनुसार सेट करें।</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>सेटअप सेव किया जा रहा है</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>%1 पर एक अधूरी लिखी फ़ाइल रह गई है; उसे हटाया जा सकता है।</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>कुछ भी सेव नहीं हुआ।</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>क्या सेव करना है, उसकी सूची पढ़ी नहीं जा सकी।</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>सेव करने के लिए चुना गया फ़ोल्डर नहीं मिला।</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>%1 अब होम फ़ोल्डर में नहीं है।</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>सेटअप सूची %1 में लिखी नहीं जा सकी।</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>सेटअप फ़ाइल लिखी जा रही है</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>ये सेटिंग सेव होते समय बदल गईं, शायद इसलिए कि ऐप खुला था: %1। पक्का करने के लिए उसे बंद करें और फिर से सेव करें।</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>सेटअप फ़ाइल जाँची जा रही है</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>सेटअप फ़ाइल को उसकी जगह रखा जा रहा है</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>%1 में सेव किया गया।</translation>
     </message>
 </context>
 </TS>

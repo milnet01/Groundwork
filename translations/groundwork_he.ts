@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>דולג על &quot;%1&quot;: זה לא שם ש־Groundwork יכול להשתמש בו.</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>לא ניתן היה להפעיל את zypper.</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>תוכנה אחרת משתמשת ב־zypper. סגור אותה, ואז חזור ונסה שוב.</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>‏zypper לא הצליח להציג את התוכנות המותקנות (קוד יציאה %1).</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>‏Flatpak אינו מותקן.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>‏Flatpak לא הצליח להציג את רשימת האפליקציות שלו.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>‏Flatpak לא הצליח להציג את רשימת המקורות שלו.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>‏Groundwork לא הצליח לקבוע כמה מקום יש בתיקייה הזו. בחר תיקייה אחרת.</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>הכונן הזה משתמש ב־FAT‎, שלא יכול להכיל קובץ גדול מ־4 GiB‎, וההגדרות המופעלות צריכות %1. כבה חלק מהן, או בחר תיקייה בכונן אחר.</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>אין כאן מספיק מקום: ההגדרות המופעלות צריכות %1, ופנויים %2. כבה חלק מהן, או בחר תיקייה אחרת.</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>זה לא קובץ תצורה של Groundwork.</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>הקובץ הזה נשמר בגרסה חדשה יותר של Groundwork. עדכן את Groundwork כדי לקרוא אותו.</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>הקובץ מציין הגדרה מחוץ לתיקיית הבית: %1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>רשימת התצורה בקובץ פגומה.</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>אין בקובץ רשימת תצורה.</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>בקובץ יש יותר מרשימת תצורה אחת.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>הקובץ מכיל את %1, שנמצא מחוץ לתיקיית הבית.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>הקובץ מכיל את %1, שרשימת התצורה שלו לא מציינת.</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>חסר בקובץ %1.</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>לא ניתן היה לקרוא את הקובץ כקובץ תצורה של Groundwork.</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>שולחן העבודה KDE Plasma</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>פריטי התפריט שלך</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>גופנים שהוספת</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>מעטפת Bash</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>מפתחות SSH</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>מפתחות GnuPG</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>יתחילו כשהם מופעלים: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -829,6 +936,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>מתקין תמיכה בבקרי משחק ואת GameMode</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>מה להעביר</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>‏Groundwork מצא את אלה במחשב הזה. כבה כל מה שאינך רוצה בהתקנה החדשה.</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>בודק את התצורה של המחשב הזה…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>לא ניתן לקבוע: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>הפריטים של Groundwork שהושלמו</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>אף אחד עוד לא הושלם.</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>תוכנות שביקשת</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>‏%1 (Flatpak)</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>מקורות תוכנה שהוספת</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>לא ניתן לקבוע: לא ניתן היה לקרוא את %1.</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>לא נמצא דבר.</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>‏%1 (Flatpak) — %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>הגדרות, אפליקציה אחר אפליקציה</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>כל אחת מתחילה כשהיא מופעלת, חוץ מהגדרות שמכילות סיסמאות או מפתחות שמורים, והגדרות גדולות מ־100 MiB.</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>הקובץ השמור יכיל את הסיסמאות או המפתחות השמורים של האפליקציה הזו. כל מי שיש לו את הקובץ יכול לקרוא אותם.</translation>
     </message>
 </context>
 <context>
@@ -1169,6 +1339,57 @@
     <message>
         <source>All done.</source>
         <translation>הכול הושלם.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>שמירת התצורה</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>‏Groundwork שומר אותה כקובץ אחד. התקן USB הוא המקום הרגיל.</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>שמירה</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>בחירת תיקייה…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>בחירת תיקייה</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>הקובץ מכיל את ההגדרות כפי שהן עכשיו. סיסמאות שמורות באפליקציה ש־Groundwork לא מכיר אינן מסומנות, לכן כבה כל אפליקציה ששומרת סיסמאות, אלא אם אתה מתכוון להעביר אותן.</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>קובץ: %1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>תיקייה: %1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>ההגדרות המופעלות תופסות %1.</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>בתיקייה הזו יש %1 פנויים, בכונן %2.</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>הגדולה ביותר: %1.</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>לא ניתן היה לכתוב ל־%1 את מה שיש לשמור, לכן שום דבר לא נשמר.</translation>
     </message>
 </context>
 <context>
@@ -1622,6 +1843,10 @@
         <translation>מכין את הכונן</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>שומר את התצורה</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>‏Groundwork</translation>
     </message>
@@ -1731,6 +1956,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>בתוכנית ההתקנה, בחר להשתמש במחיצות הקיימות במקום בהצעה שלה, והגדר כל אחת כמו למטה.</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>שומר את התצורה</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>קובץ שנכתב בחלקו נשאר ב־%1; אפשר למחוק אותו.</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>שום דבר לא נשמר.</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>לא ניתן היה לקרוא את רשימת מה שיש לשמור.</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>התיקייה לשמירה לא נמצאה.</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>‏%1 כבר לא נמצא בתיקיית הבית.</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>לא ניתן היה לכתוב את רשימת התצורה ל־%1.</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>כותב את קובץ התצורה</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>ההגדרות האלה השתנו בזמן שנשמרו, אולי כי האפליקציה הייתה פתוחה: %1. סגור אותה ושמור שוב כדי להיות בטוח.</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>בודק את קובץ התצורה</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>מציב את קובץ התצורה במקומו</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>נשמר ב־%1.</translation>
     </message>
 </context>
 </TS>

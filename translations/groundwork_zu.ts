@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>Kweqiwe “%1”: akulona igama i-Groundwork engalisebenzisa.</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>I-zypper ayikwazanga ukuqaliswa.</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>Olunye uhlelo lusebenzisa i-zypper. Luvale, bese ubuyela emuva uzame futhi.</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>I-zypper ayikwazanga ukubhala uhlu lwezinhlelo ezifakiwe (ikhodi yokuphuma %1).</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>I-Flatpak ayifakiwe.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>I-Flatpak ayikwazanga ukubhala uhlu lwezinhlelo zayo.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>I-Flatpak ayikwazanga ukubhala uhlu lwemithombo yayo.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>I-Groundwork ayikwazanga ukubona ukuthi le folda inesikhala esingakanani. Khetha enye ifolda.</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>Le drive isebenzisa i-FAT, engakwazi ukuphatha ifayela elikhulu kuno-4 GiB, futhi izilungiselelo ezivuliwe zidinga i-%1. Vala ezinye, noma ukhethe ifolda kwenye i-drive.</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>Asikho isikhala esanele lapha: izilungiselelo ezivuliwe zidinga i-%1, futhi kukhona i-%2 engenalutho. Vala ezinye, noma ukhethe enye ifolda.</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>Leli akulona ifayela lokusetha le-Groundwork.</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>Leli fayela lilondolozwe yi-Groundwork entsha kunale. Buyekeza i-Groundwork ukuze ulifunde.</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>Ifayela lisho isilungiselelo esingaphandle kwefolda yasekhaya: %1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>Uhlu lokusetha olusefayeleni lonakele.</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>Ifayela alinalo uhlu lokusetha.</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>Ifayela linohlu lokusetha olungaphezu kolulodwa.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>Ifayela line-%1, engaphandle kwefolda yasekhaya.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>Ifayela line-%1, engashiwongo ohlwini lwalo lokusetha.</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>Ifayela alinayo i-%1.</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>Ifayela alikwazanga ukufundwa njengefayela lokusetha le-Groundwork.</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>Ideskithophu ye-KDE Plasma</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>Izinto zakho zemenyu</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>Amafonti owengezile</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>I-shell ye-Bash</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>Okhiye be-SSH</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>Okhiye be-GnuPG</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>Okuzoqala kuvuliwe: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>Ukusetshenziswa: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>Ukusetshenziswa: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -829,6 +936,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>Kufakwa ukusekelwa kwezilawuli zemidlalo ne-GameMode</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>Okufanele kuthathwe</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>I-Groundwork ithole lokhu kule khompyutha. Vala noma yini ongayifuni ekufakweni okusha.</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>Kubhekwa ukusetha kwale khompyutha…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>Akwaziwa: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>Izinto ze-Groundwork esezenziwe</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>Akukho esekwenziwe okwamanje.</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>Izinhlelo ozicelile</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>%1 (Flatpak)</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>Imithombo yesofthiwe oyengezile</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>Akwaziwa: i-%1 ayikwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>Akukho okutholakele.</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>%1 (Flatpak) — %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>Izilungiselelo, uhlelo ngalunye</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>Ngakunye kuqala kuvuliwe, ngaphandle kwezilungiselelo eziqukethe amaphasiwedi agciniwe noma okhiye, nezilungiselelo ezinkulu kuno-100 MiB.</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>Ifayela elilondoloziwe lizoqukatha amaphasiwedi agciniwe noma okhiye balolu hlelo. Noma ubani onefayela angakufunda.</translation>
     </message>
 </context>
 <context>
@@ -1169,6 +1339,57 @@
     <message>
         <source>All done.</source>
         <translation>Konke kwenziwe.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>Londoloza ukusetha</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>I-Groundwork ikulondoloza njengefayela elilodwa. I-USB stick iyindawo evamile.</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Londoloza</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>Khetha ifolda…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>Khetha ifolda</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>Ifayela liqukethe izilungiselelo njengoba zinjalo manje. Amaphasiwedi agciniwe ohlelweni i-Groundwork engalwazi awamakiwe, ngakho vala noma yiluphi uhlelo olugcina amaphasiwedi ngaphandle uma uhlose ukuwathatha.</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Ifayela: %1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>Ifolda: %1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>Izilungiselelo ezivuliwe zithatha i-%1.</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>Le folda ine-%1 engenalutho, ku-drive ye-%2.</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>Ezinkulu kunazo zonke: %1.</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>Okufanele kulondolozwe akukwazanga ukubhalwa ku-%1, ngakho akukho okulondoloziwe.</translation>
     </message>
 </context>
 <context>
@@ -1622,6 +1843,10 @@
         <translation>Kulungiswa i-drive</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>Kulondolozwa ukusetha</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1731,6 +1956,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>Kusifaki, khetha ukusebenzisa ama-partition asevele ekhona esikhundleni sesiphakamiso saso, bese usetha ngayinye njengoba kukhonjisiwe ngezansi.</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>Kulondolozwa ukusetha</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>Ifayela elibhalwe ingxenye lishiywe ku-%1; lingasulwa.</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>Akukho okulondoloziwe.</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>Uhlu lwalokho okufanele kulondolozwe alukwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>Ifolda okufanele kulondolozwe kuyo ayitholakalanga.</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>I-%1 ayisekho efolda yasekhaya.</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>Uhlu lokusetha alukwazanga ukubhalwa ku-%1.</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>Kubhalwa ifayela lokusetha</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>Lezi zilungiselelo zishintshile ngenkathi zilondolozwa, mhlawumbe ngoba uhlelo lwaluvuliwe: %1. Luvale bese ulondoloza futhi ukuze uqiniseke.</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>Kuhlolwa ifayela lokusetha</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>Kubekwa ifayela lokusetha endaweni yalo</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>Kulondolozwe ku-%1.</translation>
     </message>
 </context>
 </TS>

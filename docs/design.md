@@ -245,8 +245,8 @@ items.
   apply returns a list of steps, which the Worker runs.
 - **Drives and Carry depend on Core and Items only**, as Items do on
   Core: they name commands and return steps, and run nothing themselves.
-- **Worker and Wizard depend on Core, Items and Drives, never on each
-  other.**
+- **Worker and Wizard depend on Core, Items, Drives and Carry, never on
+  each other.**
   They meet only through a child process: the Wizard starts the Worker,
   reads its markers, and asks it to stop by writing a file. No shared
   memory, no signals.

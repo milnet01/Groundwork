@@ -20,8 +20,8 @@ public:
     std::optional<QByteArray> read(const QString &absolutePath) const;
     bool exists(const QString &absolutePath) const;
     // Names of the entries directly inside a directory, sorted; empty if
-    // the directory is absent.
-    QStringList entries(const QString &absoluteDir) const;
+    // the directory is absent. Hidden entries only when asked.
+    QStringList entries(const QString &absoluteDir, bool hidden = false) const;
     // The file name a symbolic link points at, such as a sysfs device's
     // driver; empty if the path is not a link.
     QString linkTargetName(const QString &absolutePath) const;

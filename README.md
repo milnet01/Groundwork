@@ -9,6 +9,10 @@ toggle, a plain explanation and a status. Every item checks itself
 first, so running it again is safe. It works on Tumbleweed, Slowroll
 and Leap 16 or later.
 
+It can also save this computer's setup to one file: the programs you
+asked for, the software sources you added, and your settings app by
+app. Settings that hold saved passwords or keys start switched off.
+
 ## Status
 
 Released. What each version added is in [CHANGELOG.md](CHANGELOG.md).

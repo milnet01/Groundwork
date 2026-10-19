@@ -144,7 +144,7 @@ public:
         }
         m_status = new QLabel(this);
         m_status->setWordWrap(true);
-        if (wizard->offeredJobs().contains(Job::SetUp))
+        if (wizard->offeredJobs().contains(Job::SetUp) || wizard->offeredJobs().contains(Job::CarryOver))
             m_status->setText(Wizard::tr("Checking this computer…"));
         else if (wizard->offeredJobs().isEmpty())
             m_status->setText(Wizard::tr("This is a live system, started from a USB stick or a disc. "
@@ -176,11 +176,12 @@ public:
         disclaimer->setWordWrap(true);
         layout->addWidget(disclaimer);
     }
-    // The other jobs bring their own pages and their own rule here as each
-    // is built (GRND-0078). Preparing a drive needs no checks.
+    // Carrying a setup over records the items done, so it waits for the
+    // checks too. Preparing a drive needs none.
     bool isComplete() const override
     {
-        return (m_wizard->chosenJob() == Job::SetUp && m_wizard->checksDone())
+        return ((m_wizard->chosenJob() == Job::SetUp || m_wizard->chosenJob() == Job::CarryOver)
+                && m_wizard->checksDone())
                || m_wizard->chosenJob() == Job::PrepareDrive;
     }
 
@@ -259,6 +260,25 @@ public:
     void initializePage() override
     {
         start(m_program, m_wizard->prepareArguments(), {{QStringLiteral("prepare-drive"), title()}});
+    }
+    void configure(const QString &program) { m_program = program; }
+
+private:
+    Wizard *m_wizard;
+    QString m_program;
+};
+
+class CarryRunWizardPage : public RunPage
+{
+public:
+    explicit CarryRunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard)
+    {
+        setTitle(Wizard::tr("Saving the setup"));
+        setOffersOneUp(false);
+    }
+    void initializePage() override
+    {
+        start(m_program, m_wizard->carryArguments(), {{QStringLiteral("save-setup"), title()}});
     }
     void configure(const QString &program) { m_program = program; }
 
@@ -370,8 +390,24 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         m_prepareRunPage = prepareRun;
         addPage(prepareRun);
     }
+    if (m_offeredJobs.contains(Job::CarryOver)) {
+        m_carry.gather = m_setup.gatherSetup;
+        m_carry.space = m_setup.folderSpace;
+        m_carry.choicesPath = m_setup.stateDir + QStringLiteral("/setup-choices.json");
+        m_carry.version = QCoreApplication::applicationVersion();
+        m_carry.system = m_setup.system;
+        auto *gather = new GatherPage(&m_carry, this);
+        m_gatherPageId = addPage(gather);
+        // Its rows arrive once gathered.
+        connect(gather, &QWizardPage::completeChanged, this, &Wizard::fitRows);
+        addPage(new SavePage(&m_carry, this));
+        auto *carryRun = new CarryRunWizardPage(this);
+        carryRun->configure(m_setup.workerProgram);
+        m_carryRunPage = carryRun;
+        addPage(carryRun);
+    }
     connect(this, &QWizard::currentIdChanged, this, &Wizard::fitRows);
-    for (RunPage *page : {m_runPage, m_prepareRunPage}) {
+    for (RunPage *page : {m_runPage, m_prepareRunPage, m_carryRunPage}) {
         if (!page)
             continue;
         connect(page, &RunPage::runFinished, this, [this] {
@@ -380,8 +416,8 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         });
     }
 
-    if (!m_offeredJobs.contains(Job::SetUp))
-        return; // nothing here is set up, so nothing is checked
+    if (!m_offeredJobs.contains(Job::SetUp) && !m_offeredJobs.contains(Job::CarryOver))
+        return; // nothing here is set up or carried, so nothing is checked
     // Checks run off the window's thread so the window stays responsive.
     QThread *thread = QThread::create([this] {
         const CheckResults results = m_setup.runChecks();
@@ -405,6 +441,8 @@ void Wizard::showResults(const CheckResults &results)
         static_cast<QVBoxLayout *>(inner->layout())->addStretch();
     m_selection = m_setup.catalogue->defaultSelection(results);
     refreshRows({}, {}, {}, true);
+    for (const QString &id : gatherItems(*m_setup.catalogue, results))
+        m_carry.items.append({id, m_setup.catalogue->find(id)->title()});
     m_checksDone = true;
     emit checksFinished();
 }
@@ -423,7 +461,7 @@ void Wizard::fitRows()
     QList<QWidget *> fitted;
     if (m_levelPages.values().contains(shown->widget()))
         fitted = m_levelPages.values();
-    else if (shown->objectName() == QLatin1String("preparePage"))
+    else if (shown->objectName() == QLatin1String("preparePage") || shown->objectName() == QLatin1String("carryPage"))
         fitted = {shown->widget()};
     else
         return;
@@ -510,15 +548,25 @@ QStringList Wizard::prepareArguments() const
                          QStringLiteral("--lang"), m_setup.language};
 }
 
+QStringList Wizard::carryArguments() const
+{
+    return m_setup.workerPrefix
+           + QStringList{QStringLiteral("--worker"), QStringLiteral("--save-setup"), m_carry.choicesPath,
+                         QStringLiteral("--lang"), m_setup.language};
+}
+
 int Wizard::nextId() const
 {
     // Set up: the welcome page, the levels, review, run. Prepare: the
     // welcome page, the drive, Windows' checklist where Windows is on it,
-    // the layout, confirm, run (docs/design.md, Preparing a drive).
+    // the layout, confirm, run (docs/design.md, Preparing a drive). Carry:
+    // the welcome page, what to carry, where to save it, run.
     const int id = currentId();
     if (id == 0 && m_chosenJob == Job::PrepareDrive)
         return m_drivePageId;
-    if (currentPage() == m_runPage || currentPage() == m_prepareRunPage)
+    if (id == 0 && m_chosenJob == Job::CarryOver)
+        return m_gatherPageId;
+    if (currentPage() == m_runPage || currentPage() == m_prepareRunPage || currentPage() == m_carryRunPage)
         return -1;
     if (id >= 0 && id == m_drivePageId)
         return m_prepare.drive && m_prepare.drive->hasWindows() ? m_windowsPageId : m_layoutPageId;
@@ -537,7 +585,8 @@ bool Wizard::valuesValid() const
 
 bool Wizard::stopForClose()
 {
-    if (!m_runPage->isRunning() && !(m_prepareRunPage && m_prepareRunPage->isRunning()))
+    if (!m_runPage->isRunning() && !(m_prepareRunPage && m_prepareRunPage->isRunning())
+        && !(m_carryRunPage && m_carryRunPage->isRunning()))
         return false;
     // Ask the Worker to stop between items, and keep this process until it
     // has, so neither Qt nor the AppImage's mount ends it early (design,

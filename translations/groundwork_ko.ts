@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>“%1” 건너뜀: Groundwork가 사용할 수 있는 이름이 아닙니다.</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>zypper를 실행할 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>다른 프로그램이 zypper를 사용하고 있습니다. 그 프로그램을 닫은 뒤, 뒤로 돌아가 다시 시도하세요.</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>zypper가 설치된 프로그램 목록을 가져올 수 없습니다(종료 코드 %1).</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>Flatpak이 설치되어 있지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>Flatpak이 앱 목록을 가져올 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>Flatpak이 소스 목록을 가져올 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>Groundwork가 이 폴더의 남은 공간을 판단할 수 없습니다. 다른 폴더를 선택하세요.</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>이 드라이브는 FAT를 사용하므로 4 GiB보다 큰 파일을 담을 수 없는데, 켜 둔 설정에는 %1이(가) 필요합니다. 일부를 끄거나 다른 드라이브의 폴더를 선택하세요.</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>여기에는 공간이 부족합니다: 켜 둔 설정에는 %1이(가) 필요한데, 남은 공간은 %2입니다. 일부를 끄거나 다른 폴더를 선택하세요.</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>Groundwork 구성 파일이 아닙니다.</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>이 파일은 더 새로운 Groundwork에서 저장되었습니다. 읽으려면 Groundwork를 업데이트하세요.</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>파일에 홈 폴더 밖의 설정이 들어 있습니다: %1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>파일의 구성 목록이 손상되었습니다.</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>파일에 구성 목록이 없습니다.</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>파일에 구성 목록이 둘 이상 있습니다.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>파일에 %1이(가) 들어 있는데, 홈 폴더 밖에 있습니다.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>파일에 %1이(가) 들어 있는데, 구성 목록에는 없습니다.</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>파일에 %1이(가) 없습니다.</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>파일을 Groundwork 구성 파일로 읽을 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>KDE Plasma 데스크톱</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>직접 만든 메뉴 항목</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>추가한 글꼴</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>Bash 셸</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>SSH 키</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>GnuPG 키</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>처음부터 켜져 있을 항목: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>사용법: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>사용법: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -828,6 +935,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>게임 컨트롤러 지원과 GameMode 설치 중</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>가져갈 항목</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>Groundwork가 이 컴퓨터에서 다음을 찾았습니다. 새 설치에 원하지 않는 것은 끄세요.</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>이 컴퓨터의 구성을 살펴보는 중…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>판단할 수 없음: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>완료된 Groundwork 항목</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>아직 완료된 항목이 없습니다.</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>직접 설치한 프로그램</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>%1 (Flatpak)</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>추가한 소프트웨어 소스</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>판단할 수 없음: %1을(를) 읽을 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>찾지 못했습니다.</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>%1 (Flatpak) — %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>앱별 설정</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>모두 켜진 상태로 시작합니다. 단, 저장된 비밀번호나 키가 들어 있는 설정과 100 MiB보다 큰 설정은 꺼진 상태로 시작합니다.</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>저장되는 파일에 이 앱에 저장된 비밀번호나 키가 들어갑니다. 파일을 가진 사람은 누구나 읽을 수 있습니다.</translation>
     </message>
 </context>
 <context>
@@ -1167,6 +1337,57 @@
     <message>
         <source>All done.</source>
         <translation>모두 완료되었습니다.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>구성 저장</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>Groundwork는 파일 하나로 저장합니다. 보통 USB 메모리에 저장합니다.</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>저장</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>폴더 선택…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>폴더 선택</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>파일에는 지금 상태의 설정이 담깁니다. Groundwork가 모르는 앱에 저장된 비밀번호는 표시되지 않으므로, 비밀번호를 저장하는 앱은 가져갈 생각이 아니라면 끄세요.</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>파일: %1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>폴더: %1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>켜 둔 설정의 크기는 %1입니다.</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>이 폴더는 %2 드라이브에 있으며, 남은 공간은 %1입니다.</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>가장 큰 항목: %1.</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>저장할 항목을 %1에 기록할 수 없어, 아무것도 저장하지 않았습니다.</translation>
     </message>
 </context>
 <context>
@@ -1619,6 +1840,10 @@
         <translation>드라이브 준비 중</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>구성 저장 중</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1728,6 +1953,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>설치 프로그램에서 자체 제안 대신 기존 파티션을 사용하도록 선택하고, 각 파티션을 아래와 같이 설정하세요.</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>구성 저장 중</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>쓰다 만 파일이 %1에 남아 있습니다. 지워도 됩니다.</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>아무것도 저장하지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>저장할 항목 목록을 읽을 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>저장할 폴더를 찾지 못했습니다.</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>%1은(는) 더 이상 홈 폴더 안에 없습니다.</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>구성 목록을 %1에 기록할 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>구성 파일을 기록하는 중</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>저장하는 동안 다음 설정이 바뀌었습니다. 앱이 열려 있었을 수 있습니다: %1. 확실히 하려면 앱을 닫고 다시 저장하세요.</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>구성 파일을 확인하는 중</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>구성 파일을 제자리에 두는 중</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>%1에 저장했습니다.</translation>
     </message>
 </context>
 </TS>

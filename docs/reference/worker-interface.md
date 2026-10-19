@@ -39,6 +39,24 @@ groundwork --worker [--lang LANG] --prepare-drive LAYOUT_FILE
 - On success it prints `HINT` lines saying what to set in the installer
   for each new partition (spec § 4.6).
 
+A third form saves a setup to one file (GRND-0078):
+
+```
+groundwork --worker [--lang LANG] --save-setup CHOICES_FILE
+```
+
+- **`CHOICES_FILE`** — what the Wizard wrote: `{"output": PATH,
+  "manifest": {…}}`. The manifest's format is in
+  `docs/specs/GRND-0078-saved-setup-file.md` § 4.6.
+- It runs as one item, id `save-setup`, with the same markers, and asks
+  for no password.
+- It trusts nothing in the file. It ends `fail` before writing anything
+  when the manifest breaks the spec's rules, a settings path leaves the
+  home folder or is gone, or the output's folder is missing.
+- It writes `PATH.partial`, checks its list against the manifest, then
+  renames it to `PATH`. On failure nothing is left at `PATH`.
+- On success it prints a `HINT` naming the file.
+
 ## Exit codes
 
 | Code | Meaning |

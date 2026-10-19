@@ -1,5 +1,6 @@
 // Groundwork's entry point: chooses the mode (docs/design.md, Entry). The
 // wizard, worker and askpass modes land here as each is built.
+#include "carry/carry.h"
 #include "core/checkrunner.h"
 #include "core/statepaths.h"
 #include "core/systemidentity.h"
@@ -12,6 +13,7 @@
 
 #include <QApplication>
 #include <QCoreApplication>
+#include <QDir>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QTextStream>
@@ -71,6 +73,7 @@ int wizardMode(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     QApplication::setApplicationName(QStringLiteral("groundwork"));
+    QApplication::setApplicationVersion(QStringLiteral(GROUNDWORK_VERSION)); // a saved setup records it
     const QFont systemFont = QApplication::font();
     const QStringList args = QApplication::arguments();
     QString language = args.size() == 3 ? args[2] : gw::systemLanguage();
@@ -109,8 +112,18 @@ int wizardMode(int argc, char *argv[])
         setup.workerProgram = QApplication::applicationFilePath();
         setup.stateDir = gw::defaultStateDir();
         setup.liveSystem = gw::isLiveSystem(files);
-        setup.jobs = {gw::Job::SetUp, gw::Job::PrepareDrive};
+        setup.jobs = {gw::Job::SetUp, gw::Job::CarryOver, gw::Job::PrepareDrive};
         setup.surveyDrives = [files] { return gw::surveyDrives(gw::CheckContext(files)); };
+        // Settings are the user's own, read from the real home folder.
+        setup.gatherSetup = [files] {
+            gw::Gathered found;
+            gw::gatherPrograms(gw::CheckContext(files), &found);
+            gw::gatherSources(gw::CheckContext(files), &found);
+            found.settings = gw::gatherSettings(gw::CheckContext(gw::FileReader()), QDir::homePath());
+            return found;
+        };
+        setup.folderSpace = [](const QString &dir) { return gw::readFolderSpace(gw::CheckContext(gw::FileReader()), dir); };
+        setup.system = identity;
         wizard = std::make_unique<gw::Wizard>(setup);
         QObject::connect(wizard.get(), &gw::Wizard::languageChangeRequested, wizard.get(),
                          [&](const QString &next) {
@@ -172,6 +185,8 @@ int main(int argc, char *argv[])
         gw::Worker worker(gw::catalogue(), gw::FileReader(root), gw::defaultStateDir());
         if (const qsizetype at = args.indexOf(QStringLiteral("--prepare-drive")); at > 0 && at + 1 < args.size())
             return worker.prepareDrive(args[at + 1]);
+        if (const qsizetype at = args.indexOf(QStringLiteral("--save-setup")); at > 0 && at + 1 < args.size())
+            return worker.saveSetup(args[at + 1]);
         QStringList ids;
         QHash<QString, QString> values;
         for (qsizetype i = args.indexOf(QStringLiteral("--worker")) + 1; i < args.size(); ++i) {
@@ -188,7 +203,7 @@ int main(int argc, char *argv[])
         }
         return worker.run(ids, values);
     }
-    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version")
+    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version")
                         << '\n';
     return 2;
 }

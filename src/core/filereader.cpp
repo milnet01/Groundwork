@@ -30,10 +30,10 @@ bool FileReader::exists(const QString &absolutePath) const
     return QFileInfo::exists(resolve(absolutePath));
 }
 
-QStringList FileReader::entries(const QString &absoluteDir) const
+QStringList FileReader::entries(const QString &absoluteDir, bool hidden) const
 {
-    return QDir(resolve(absoluteDir))
-        .entryList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::System, QDir::Name);
+    const QDir::Filters filters = QDir::AllEntries | QDir::NoDotAndDotDot | QDir::System;
+    return QDir(resolve(absoluteDir)).entryList(hidden ? filters | QDir::Hidden : filters, QDir::Name);
 }
 
 QString FileReader::linkTargetName(const QString &absolutePath) const

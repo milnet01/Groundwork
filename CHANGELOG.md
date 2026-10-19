@@ -12,6 +12,17 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Added
+
+- **Carrying a setup over: Groundwork lists what is set up on this
+  computer, lets you keep or drop each part, and saves it to one file,
+  a USB stick being the usual place.** The file holds Groundwork's items
+  that are done, the programs you asked for, the software sources you
+  added, and your settings app by app. Settings that hold saved
+  passwords or keys start switched off, and switching one on says the
+  file will then hold them. Starting a new install from the file is not
+  built yet (GRND-0079). (GRND-0078)
+
 ## [0.4.0] - 2026-10-16
 
 **Theme:** A drive ready for openSUSE.

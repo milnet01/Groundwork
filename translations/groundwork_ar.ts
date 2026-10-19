@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>تم تخطي «%1»: ليس اسمًا يمكن أن يستخدمه Groundwork.</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>تعذّر تشغيل zypper.</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>برنامج آخر يستخدم zypper. أغلقه، ثم ارجع وحاول مجددًا.</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>تعذّر على zypper عرض قائمة البرامج المثبّتة (رمز الخروج %1).</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>‏Flatpak غير مثبّت.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>تعذّر على Flatpak عرض قائمة تطبيقاته.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>تعذّر على Flatpak عرض قائمة مصادره.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>تعذّر على Groundwork معرفة المساحة المتاحة في هذا المجلد. اختر مجلدًا آخر.</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>يستخدم هذا القرص نظام FAT‎، الذي لا يتسع لملف أكبر من 4 GiB‎، والإعدادات المفعّلة تحتاج إلى %1. عطّل بعضها، أو اختر مجلدًا على قرص آخر.</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>لا توجد مساحة كافية هنا: الإعدادات المفعّلة تحتاج إلى %1، والمساحة الحرة %2. عطّل بعضها، أو اختر مجلدًا آخر.</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>هذا ليس ملف إعداد من Groundwork.</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>حُفظ هذا الملف بإصدار أحدث من Groundwork. حدّث Groundwork لقراءته.</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>يذكر الملف إعدادًا خارج مجلد المنزل: %1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>قائمة الإعداد في الملف تالفة.</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>لا يحتوي الملف على قائمة إعداد.</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>يحتوي الملف على أكثر من قائمة إعداد واحدة.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>يحتوي الملف على %1، وهو خارج مجلد المنزل.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>يحتوي الملف على %1، ولا تذكره قائمة الإعداد فيه.</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>يفتقد الملف إلى %1.</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>تعذّرت قراءة الملف كملف إعداد من Groundwork.</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>سطح المكتب KDE Plasma</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>عناصر القائمة التي أضفتها</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>الخطوط التي أضفتها</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>صدفة Bash</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>مفاتيح SSH</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>مفاتيح GnuPG</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>سيبدأ مفعّلًا: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>الاستخدام: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>الاستخدام: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -833,6 +940,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>جارٍ تثبيت دعم أذرع التحكم و GameMode</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>ما الذي تريد نقله</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>وجد Groundwork هذه العناصر على هذا الحاسوب. عطّل أي شيء لا تريده في التثبيت الجديد.</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>جارٍ فحص إعداد هذا الحاسوب…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>تعذّر التحديد: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>عناصر Groundwork المكتملة</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>لم يكتمل أي منها بعد.</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>البرامج التي طلبتها</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>‏%1 (Flatpak)</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>مصادر البرامج التي أضفتها</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>تعذّر التحديد: تعذّرت قراءة %1.</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>لم يُعثر على شيء.</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>‏%1 (Flatpak) — %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>الإعدادات، تطبيقًا تطبيقًا</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>يبدأ كل منها مفعّلًا، باستثناء الإعدادات التي تحتوي على كلمات مرور أو مفاتيح محفوظة، والإعدادات الأكبر من 100 MiB.</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>سيحتوي الملف المحفوظ على كلمات المرور أو المفاتيح المحفوظة لهذا التطبيق. يستطيع أي شخص لديه الملف قراءتها.</translation>
     </message>
 </context>
 <context>
@@ -1177,6 +1347,57 @@
     <message>
         <source>All done.</source>
         <translation>اكتمل كل شيء.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>حفظ الإعداد</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>يحفظه Groundwork في ملف واحد. ذاكرة USB هي المكان المعتاد.</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>حفظ</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>اختر مجلدًا…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>اختر مجلدًا</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>يحتوي الملف على الإعدادات كما هي الآن. لا تُميَّز كلمات المرور المحفوظة في تطبيق لا يعرفه Groundwork‎، لذا عطّل أي تطبيق يحتفظ بكلمات مرور ما لم تكن تقصد نقلها.</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>الملف: %1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>المجلد: %1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>تشغل الإعدادات المفعّلة %1.</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>في هذا المجلد %1 من المساحة الحرة، على قرص %2.</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>الأكبر: %1.</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>تعذّرت كتابة قائمة ما يجب حفظه في %1، لذا لم يُحفظ أي شيء.</translation>
     </message>
 </context>
 <context>
@@ -1634,6 +1855,10 @@
         <translation>جارٍ تجهيز القرص</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>جارٍ حفظ الإعداد</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>‏Groundwork</translation>
     </message>
@@ -1743,6 +1968,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>في المثبّت، اختر استخدام الأقسام الموجودة بدلًا من اقتراحه الخاص، واضبط كل قسم كما في الأسفل.</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>جارٍ حفظ الإعداد</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>بقي ملف مكتوب جزئيًا في %1؛ يمكن حذفه.</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>لم يُحفظ أي شيء.</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>تعذّرت قراءة قائمة ما يجب حفظه.</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>لم يُعثر على المجلد المطلوب الحفظ فيه.</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>لم يعد %1 في مجلد المنزل.</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>تعذّرت كتابة قائمة الإعداد في %1.</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>جارٍ كتابة ملف الإعداد</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>تغيّرت هذه الإعدادات أثناء حفظها، ربما لأن التطبيق كان مفتوحًا: %1. أغلقه واحفظ مجددًا لتتأكد.</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>جارٍ فحص ملف الإعداد</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>جارٍ وضع ملف الإعداد في مكانه</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>حُفظ في %1.</translation>
     </message>
 </context>
 </TS>

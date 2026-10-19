@@ -316,6 +316,113 @@
     </message>
 </context>
 <context>
+    <name>gw::Carry</name>
+    <message>
+        <source>Skipped “%1”: it is not a name Groundwork can use.</source>
+        <translation>Omitido «%1»: no es un nombre que Groundwork pueda usar.</translation>
+    </message>
+    <message>
+        <source>zypper could not be run.</source>
+        <translation>No se ha podido ejecutar zypper.</translation>
+    </message>
+    <message>
+        <source>Another program is using zypper. Close it, then go back and try again.</source>
+        <translation>Otro programa está usando zypper. Ciérralo, vuelve atrás e inténtalo de nuevo.</translation>
+    </message>
+    <message>
+        <source>zypper could not list the installed programs (exit code %1).</source>
+        <translation>zypper no ha podido mostrar los programas instalados (código de salida %1).</translation>
+    </message>
+    <message>
+        <source>Flatpak is not installed.</source>
+        <translation>Flatpak no está instalado.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its apps.</source>
+        <translation>Flatpak no ha podido mostrar sus aplicaciones.</translation>
+    </message>
+    <message>
+        <source>Flatpak could not list its sources.</source>
+        <translation>Flatpak no ha podido mostrar sus fuentes.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
+        <translation>Groundwork no ha podido saber cuánto espacio tiene esta carpeta. Elige otra carpeta.</translation>
+    </message>
+    <message>
+        <source>This drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose a folder on another drive.</source>
+        <translation>Este disco usa FAT, que no admite archivos de más de 4 GiB, y los ajustes activados necesitan %1. Desactiva algunos o elige una carpeta en otro disco.</translation>
+    </message>
+    <message>
+        <source>There is not enough room here: the settings switched on need %1, and %2 is free. Switch some off, or choose another folder.</source>
+        <translation>Aquí no hay espacio suficiente: los ajustes activados necesitan %1 y hay %2 libres. Desactiva algunos o elige otra carpeta.</translation>
+    </message>
+    <message>
+        <source>This is not a Groundwork setup file.</source>
+        <translation>Este no es un archivo de configuración de Groundwork.</translation>
+    </message>
+    <message>
+        <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
+        <translation>Este archivo se guardó con una versión más reciente de Groundwork. Actualiza Groundwork para leerlo.</translation>
+    </message>
+    <message>
+        <source>The file names a setting outside the home folder: %1</source>
+        <translation>El archivo nombra un ajuste fuera de la carpeta personal: %1</translation>
+    </message>
+    <message>
+        <source>The setup list in the file is damaged.</source>
+        <translation>La lista de configuración del archivo está dañada.</translation>
+    </message>
+    <message>
+        <source>The file holds no setup list.</source>
+        <translation>El archivo no contiene ninguna lista de configuración.</translation>
+    </message>
+    <message>
+        <source>The file holds more than one setup list.</source>
+        <translation>El archivo contiene más de una lista de configuración.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which is outside the home folder.</source>
+        <translation>El archivo contiene %1, que está fuera de la carpeta personal.</translation>
+    </message>
+    <message>
+        <source>The file holds %1, which its setup list does not name.</source>
+        <translation>El archivo contiene %1, que su lista de configuración no nombra.</translation>
+    </message>
+    <message>
+        <source>The file is missing %1.</source>
+        <translation>Al archivo le falta %1.</translation>
+    </message>
+    <message>
+        <source>The file could not be read as a Groundwork setup file.</source>
+        <translation>No se ha podido leer el archivo como archivo de configuración de Groundwork.</translation>
+    </message>
+    <message>
+        <source>KDE Plasma desktop</source>
+        <translation>Escritorio KDE Plasma</translation>
+    </message>
+    <message>
+        <source>Your own menu entries</source>
+        <translation>Tus propias entradas de menú</translation>
+    </message>
+    <message>
+        <source>Fonts you added</source>
+        <translation>Tipos de letra que has añadido</translation>
+    </message>
+    <message>
+        <source>The Bash shell</source>
+        <translation>El shell Bash</translation>
+    </message>
+    <message>
+        <source>SSH keys</source>
+        <translation>Claves SSH</translation>
+    </message>
+    <message>
+        <source>GnuPG keys</source>
+        <translation>Claves GnuPG</translation>
+    </message>
+</context>
+<context>
     <name>gw::CheckRunner</name>
     <message>
         <source>The check gave no reason.</source>
@@ -642,8 +749,8 @@
         <translation>Empezaría activado: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</source>
-        <translation>Uso: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
+        <translation>Uso: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -829,6 +936,69 @@
     <message>
         <source>Installing game controller support and GameMode</source>
         <translation>Instalando el soporte para mandos y GameMode</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GatherPage</name>
+    <message>
+        <source>What to carry over</source>
+        <translation>Qué llevarte</translation>
+    </message>
+    <message>
+        <source>Groundwork found these on this computer. Switch off anything you do not want on the new install.</source>
+        <translation>Groundwork ha encontrado esto en este ordenador. Desactiva todo lo que no quieras en la nueva instalación.</translation>
+    </message>
+    <message>
+        <source>Looking at this computer&apos;s setup…</source>
+        <translation>Revisando la configuración de este ordenador…</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1</source>
+        <translation>No se ha podido saber: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork&apos;s items that are done</source>
+        <translation>Elementos de Groundwork ya hechos</translation>
+    </message>
+    <message>
+        <source>None are done yet.</source>
+        <translation>Todavía no hay ninguno hecho.</translation>
+    </message>
+    <message>
+        <source>Programs you asked for</source>
+        <translation>Programas que pediste</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak)</source>
+        <translation>%1 (Flatpak)</translation>
+    </message>
+    <message>
+        <source>Software sources you added</source>
+        <translation>Fuentes de software que has añadido</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t tell: %1 could not be read.</source>
+        <translation>No se ha podido saber: no se ha podido leer %1.</translation>
+    </message>
+    <message>
+        <source>None found.</source>
+        <translation>No se ha encontrado ninguno.</translation>
+    </message>
+    <message>
+        <source>%1 (Flatpak) — %2</source>
+        <translation>%1 (Flatpak) — %2</translation>
+    </message>
+    <message>
+        <source>Settings, app by app</source>
+        <translation>Ajustes, aplicación por aplicación</translation>
+    </message>
+    <message>
+        <source>Each starts switched on, except settings that hold saved passwords or keys, and settings bigger than 100 MiB.</source>
+        <translation>Todos empiezan activados, excepto los ajustes que guardan contraseñas o claves, y los ajustes de más de 100 MiB.</translation>
+    </message>
+    <message>
+        <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>El archivo guardado contendrá las contraseñas o claves guardadas de esta aplicación. Cualquiera que tenga el archivo podrá leerlas.</translation>
     </message>
 </context>
 <context>
@@ -1169,6 +1339,57 @@
     <message>
         <source>All done.</source>
         <translation>Todo listo.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::SavePage</name>
+    <message>
+        <source>Save the setup</source>
+        <translation>Guardar la configuración</translation>
+    </message>
+    <message>
+        <source>Groundwork saves it as one file. A USB stick is the usual place.</source>
+        <translation>Groundwork la guarda en un solo archivo. Lo habitual es una memoria USB.</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation>Elige una carpeta…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation>Elige una carpeta</translation>
+    </message>
+    <message>
+        <source>The file holds the settings as they are now. Saved passwords in an app Groundwork does not know are not marked, so switch off any app that keeps passwords unless you mean to carry them.</source>
+        <translation>El archivo contiene los ajustes tal como están ahora. Las contraseñas guardadas en una aplicación que Groundwork no conoce no se marcan, así que desactiva cualquier aplicación que guarde contraseñas, a menos que quieras llevártelas.</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Archivo: %1</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation>Carpeta: %1</translation>
+    </message>
+    <message>
+        <source>The settings switched on take %1.</source>
+        <translation>Los ajustes activados ocupan %1.</translation>
+    </message>
+    <message>
+        <source>This folder has %1 free, on a %2 drive.</source>
+        <translation>Esta carpeta tiene %1 libres, en un disco %2.</translation>
+    </message>
+    <message>
+        <source>The largest: %1.</source>
+        <translation>Los más grandes: %1.</translation>
+    </message>
+    <message>
+        <source>What to save could not be written to %1, so nothing was saved.</source>
+        <translation>No se ha podido escribir en %1 qué guardar, así que no se ha guardado nada.</translation>
     </message>
 </context>
 <context>
@@ -1622,6 +1843,10 @@
         <translation>Preparando el disco</translation>
     </message>
     <message>
+        <source>Saving the setup</source>
+        <translation>Guardando la configuración</translation>
+    </message>
+    <message>
         <source>Groundwork</source>
         <translation>Groundwork</translation>
     </message>
@@ -1731,6 +1956,54 @@
     <message>
         <source>In the installer, choose to use the existing partitions rather than its own proposal, and set each one as below.</source>
         <translation>En el instalador, elige usar las particiones existentes en lugar de su propia propuesta, y configura cada una como se indica abajo.</translation>
+    </message>
+    <message>
+        <source>Saving the setup</source>
+        <translation>Guardando la configuración</translation>
+    </message>
+    <message>
+        <source>A part-written file is left at %1; it can be deleted.</source>
+        <translation>Queda un archivo a medio escribir en %1; se puede borrar.</translation>
+    </message>
+    <message>
+        <source>Nothing was saved.</source>
+        <translation>No se ha guardado nada.</translation>
+    </message>
+    <message>
+        <source>The list of what to save could not be read.</source>
+        <translation>No se ha podido leer la lista de qué guardar.</translation>
+    </message>
+    <message>
+        <source>The folder to save in was not found.</source>
+        <translation>No se ha encontrado la carpeta donde guardar.</translation>
+    </message>
+    <message>
+        <source>%1 is no longer in the home folder.</source>
+        <translation>%1 ya no está en la carpeta personal.</translation>
+    </message>
+    <message>
+        <source>The setup list could not be written to %1.</source>
+        <translation>No se ha podido escribir la lista de configuración en %1.</translation>
+    </message>
+    <message>
+        <source>Writing the setup file</source>
+        <translation>Escribiendo el archivo de configuración</translation>
+    </message>
+    <message>
+        <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
+        <translation>Estos ajustes cambiaron mientras se guardaban, quizá porque la aplicación estaba abierta: %1. Ciérrala y vuelve a guardar para asegurarte.</translation>
+    </message>
+    <message>
+        <source>Checking the setup file</source>
+        <translation>Comprobando el archivo de configuración</translation>
+    </message>
+    <message>
+        <source>Putting the setup file in place</source>
+        <translation>Colocando el archivo de configuración en su sitio</translation>
+    </message>
+    <message>
+        <source>Saved to %1.</source>
+        <translation>Guardado en %1.</translation>
     </message>
 </context>
 </TS>

@@ -20,6 +20,9 @@
 #include <QScrollBar>
 #include <QStandardItemModel>
 #include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QTemporaryDir>
 #include <QtTest>
 
@@ -130,6 +133,7 @@ class TstWizard : public QObject
     Q_OBJECT
 
     QTemporaryDir m_dir;
+    qint64 m_free = 100 * kGiB; // the save folder's free space
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
                                      const gw::Catalogue *items = &catalogue,
@@ -159,6 +163,14 @@ class TstWizard : public QObject
         setup.jobs = jobs;
         setup.liveSystem = live;
         setup.surveyDrives = fakeSurvey;
+        setup.gatherSetup = [] {
+            gw::Gathered found;
+            found.packages = {QStringLiteral("act")};
+            found.settings = {{QStringLiteral("Dolphin"), {QStringLiteral(".config/dolphinrc")}, false, 300},
+                              {QStringLiteral("SSH keys"), {QStringLiteral(".ssh")}, true, 20}};
+            return found;
+        };
+        setup.folderSpace = [this](const QString &) { return gw::FolderSpace{m_free, QStringLiteral("ext4")}; };
         auto w = std::make_unique<gw::Wizard>(setup);
         w->show();
         return w;
@@ -188,7 +200,11 @@ class TstWizard : public QObject
     }
 
 private slots:
-    void cleanup() { gw::loadLanguage(QStringLiteral("en")); }
+    void cleanup()
+    {
+        gw::loadLanguage(QStringLiteral("en"));
+        m_free = 100 * kGiB;
+    }
 
     // Qt has no words of its own for Afrikaans, so the Wizard labels its
     // own buttons (GRND-0033). None may keep Qt's English.
@@ -586,6 +602,74 @@ private slots:
             said = said || label->text().contains(QStringLiteral("live system"));
         QVERIFY(said);
         QVERIFY(!w->button(QWizard::NextButton)->isEnabled());
+    }
+
+    // The carry job, from the first page to what was gathered.
+    std::unique_ptr<gw::Wizard> gathered()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp, gw::Job::CarryOver});
+        w->chooseJob(gw::Job::CarryOver);
+        if (!QTest::qWaitFor([&] { return w->checksDone(); }))
+            return nullptr;
+        w->next();
+        if (!QTest::qWaitFor([&] { return w->currentPage()->isComplete(); }))
+            return nullptr;
+        return w;
+    }
+
+    // GRND-0078, INV-2: a secret starts switched off; switched on, it says
+    // the file will hold its passwords or keys.
+    void aSecretStartsOffAndWarnsWhenSwitchedOn()
+    {
+        auto w = gathered();
+        QVERIFY(w);
+        auto *dolphin = w->currentPage()->findChild<QCheckBox *>(QStringLiteral("setting:Dolphin"));
+        auto *ssh = w->currentPage()->findChild<QCheckBox *>(QStringLiteral("setting:SSH keys"));
+        auto *warning = w->currentPage()->findChild<QLabel *>(QStringLiteral("secretWarning:SSH keys"));
+        QVERIFY(dolphin && ssh && warning);
+        QVERIFY(dolphin->isChecked());
+        QVERIFY(!ssh->isChecked());
+        QVERIFY(warning->isHidden());
+        ssh->click();
+        QVERIFY(!warning->isHidden());
+        QVERIFY(warning->text().contains(QLatin1String("Anyone with the file can read them.")));
+        QVERIFY(!w->currentPage()->findChild<QLabel *>(QStringLiteral("secretWarning:Dolphin")));
+    }
+
+    // GRND-0078, spec 4.5: Save writes what the switches keep to the
+    // choices file, and the Worker is started with it.
+    void saveWritesTheChoicesAndStartsTheWorker()
+    {
+        auto w = gathered();
+        QVERIFY(w);
+        w->next(); // the save page
+        QVERIFY(w->currentPage()->isComplete());
+        w->next(); // Save
+        QCOMPARE(w->currentPage(), w->carryRunPage());
+        QVERIFY(w->carryArguments().contains(QStringLiteral("--save-setup")));
+        QFile file(w->carryChoice().choicesPath);
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        const QJsonObject choices = QJsonDocument::fromJson(file.readAll()).object();
+        QVERIFY(choices.value("output").toString().endsWith(QLatin1String(".tar")));
+        const QJsonObject manifest = choices.value("manifest").toObject();
+        QCOMPARE(manifest.value("format").toInt(), 1);
+        QCOMPARE(manifest.value("packages").toArray(), QJsonArray{"act"});
+        const QJsonArray settings = manifest.value("settings").toArray();
+        QCOMPARE(settings.size(), 1); // the secret stayed off
+        QCOMPARE(settings.first().toObject().value("name").toString(), QStringLiteral("Dolphin"));
+    }
+
+    // GRND-0078, INV-9 shown: Save waits for room, and says why.
+    void saveWaitsForRoom()
+    {
+        m_free = 100; // bytes; cleanup() puts it back
+        auto w = gathered();
+        QVERIFY(w);
+        w->next();
+        QVERIFY(!w->currentPage()->isComplete());
+        QLabel *problem = shownLabel(w->currentPage(), QStringLiteral("saveProblem"));
+        QVERIFY(problem);
+        QVERIFY2(problem->text().contains(QLatin1String("Dolphin")), qPrintable(problem->text()));
     }
 
     // GRND-0076, INV-1 shown: a drive in use is listed, greyed, saying why.

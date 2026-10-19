@@ -97,21 +97,27 @@ add_library(groundwork_drives STATIC
     src/drives/drives.cpp)
 target_link_libraries(groundwork_drives PUBLIC groundwork_core)
 
+add_library(groundwork_carry STATIC
+    src/carry/carry.cpp
+    src/carry/settingsgroups.cpp)
+target_link_libraries(groundwork_carry PUBLIC groundwork_core)
+
 add_library(groundwork_worker STATIC
     src/worker/privilege.cpp
     src/worker/worker.cpp)
-target_link_libraries(groundwork_worker PUBLIC groundwork_drives groundwork_items groundwork_core)
+target_link_libraries(groundwork_worker PUBLIC groundwork_carry groundwork_drives groundwork_items groundwork_core)
 
 # The Wizard's widgets; never depended on by the Worker.
 add_library(groundwork_gui STATIC
     src/gui/askpassdialog.cpp
+    src/gui/carrypages.cpp
     src/gui/itemrow.cpp
     src/gui/preparepages.cpp
     src/gui/runpage.cpp
     src/gui/switch.cpp
     src/gui/themes.cpp
     src/gui/wizard.cpp)
-target_link_libraries(groundwork_gui PUBLIC groundwork_drives groundwork_core Qt6::Widgets)
+target_link_libraries(groundwork_gui PUBLIC groundwork_carry groundwork_drives groundwork_core Qt6::Widgets)
 
 add_executable(groundwork src/main.cpp)
 target_link_libraries(groundwork PRIVATE groundwork_gui groundwork_worker groundwork_items groundwork_core Qt6::Core Qt6::Widgets)

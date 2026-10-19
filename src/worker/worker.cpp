@@ -1,5 +1,6 @@
 #include "worker.h"
 
+#include "carry/carry.h"
 #include "core/checkrunner.h"
 #include "core/markers.h"
 #include "core/statepaths.h"
@@ -11,10 +12,15 @@
 #include <QDateTime>
 #include <QDir>
 #include <QEventLoop>
+#include <QFileInfo>
 #include <QHash>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QProcess>
+#include <QSaveFile>
 #include <QTextStream>
 
+#include <algorithm>
 #include <cstdio>
 
 namespace gw {
@@ -48,16 +54,22 @@ void Worker::say(const QString &line)
     }
 }
 
-int Worker::runCommand(const QStringList &argv, const QByteArray &input)
+int Worker::runCommand(const QStringList &argv, const QByteArray &input, QStringList *lines, bool echo)
 {
     QProcess process;
     process.setProcessChannelMode(QProcess::MergedChannels);
     QString pending;
+    auto take = [&](const QString &line) {
+        if (lines)
+            *lines << line;
+        if (echo)
+            say(line);
+    };
     auto drain = [&] {
         pending += QString::fromUtf8(process.readAll());
         qsizetype nl;
         while ((nl = pending.indexOf(QLatin1Char('\n'))) >= 0) {
-            say(pending.left(nl));
+            take(pending.left(nl));
             pending.remove(0, nl + 1);
         }
     };
@@ -77,7 +89,7 @@ int Worker::runCommand(const QStringList &argv, const QByteArray &input)
         loop.exec();
     drain();
     if (!pending.isEmpty())
-        say(pending);
+        take(pending);
     if (process.error() == QProcess::FailedToStart)
         return -1;
     return process.exitStatus() == QProcess::NormalExit ? process.exitCode() : -1;
@@ -95,11 +107,11 @@ bool Worker::ensureRoot()
     return m_auth == Auth::Ok;
 }
 
-bool Worker::runStep(const QString &itemId, const Step &step, QString *detail)
+bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, QStringList *lines, bool echo)
 {
     say(formatMarker(QStringLiteral("ACTION"), {itemId, step.label}));
     const QStringList argv = step.needsRoot ? Privilege::asRoot(step.argv) : step.argv;
-    int code = runCommand(argv, step.input);
+    int code = runCommand(argv, step.input, lines, echo);
     if (step.tool == Step::Tool::Zypper) {
         if (code == 103) // zypper updated itself; run once more to finish
             code = runCommand(argv, step.input);
@@ -343,6 +355,101 @@ int Worker::prepareDrive(const QString &layoutPath)
                              "proposal, and set each one as below.")}));
     for (qsizetype i = 0; i < added.size(); ++i)
         say(formatMarker(QStringLiteral("HINT"), {id, installerAdvice(added[i], layout.partitions[i].use)}));
+    return end(true, {});
+}
+
+int Worker::saveSetup(const QString &choicesPath)
+{
+    openLog();
+    const SystemIdentity system = readSystemIdentity(m_files);
+    if (!system.supported()) {
+        say(formatMarker(QStringLiteral("UNSUPPORTED"), {system.reason}));
+        return Unsupported;
+    }
+    const QString id = QStringLiteral("save-setup");
+    say(formatMarker(QStringLiteral("STEP_BEGIN"), {id, QStringLiteral("1"), QStringLiteral("1"), tr("Saving the setup")}));
+    QString partial;
+    auto end = [&](bool ok, QString detail) {
+        // The file at the output is whole or absent (INV-5).
+        if (!ok && !partial.isEmpty() && !QFile::remove(partial) && QFile::exists(partial))
+            detail += QLatin1Char(' ') + tr("A part-written file is left at %1; it can be deleted.").arg(partial);
+        say(formatMarker(QStringLiteral("STEP_END"), {id, ok ? QStringLiteral("ok") : QStringLiteral("fail"), detail}));
+        say(formatMarker(QStringLiteral("DONE"),
+                         {ok ? QStringLiteral("1") : QStringLiteral("0"), ok ? QStringLiteral("0") : QStringLiteral("1"),
+                          QStringLiteral("0")}));
+        return int(ok ? Ok : Failed);
+    };
+    const QString nothing = tr("Nothing was saved.");
+
+    // Every check before anything is written (spec 4.5, step 1; INV-3).
+    QJsonObject choices;
+    if (QFile file(choicesPath); file.open(QIODevice::ReadOnly))
+        choices = QJsonDocument::fromJson(file.readAll()).object();
+    QString why = tr("The list of what to save could not be read.");
+    QStringList skipped;
+    std::optional<Manifest> manifest;
+    if (choices.value("manifest").isObject())
+        manifest = readManifest(choices.value("manifest").toObject(), &why, &skipped);
+    if (!manifest)
+        return end(false, why + QLatin1Char(' ') + nothing);
+    if (!skipped.isEmpty())
+        return end(false, skipped.first() + QLatin1Char(' ') + nothing);
+    const QString output = choices.value("output").toString();
+    const QFileInfo outputInfo(output);
+    if (output.isEmpty() || !outputInfo.isAbsolute() || !outputInfo.dir().exists())
+        return end(false, tr("The folder to save in was not found.") + QLatin1Char(' ') + nothing);
+    const QString home = QDir::homePath();
+    for (const SettingsRow &row : std::as_const(manifest->settings)) {
+        for (const QString &path : row.paths) {
+            const QFileInfo info(home + QLatin1Char('/') + path);
+            if (!info.exists() && !info.isSymLink())
+                return end(false, tr("%1 is no longer in the home folder.").arg(path) + QLatin1Char(' ') + nothing);
+        }
+    }
+
+    // The manifest, as it will be read back, goes first in the archive.
+    QSaveFile list(m_stateDir + QLatin1Char('/') + kManifestName);
+    if (!list.open(QIODevice::WriteOnly) || list.write(QJsonDocument(manifestJson(*manifest)).toJson()) < 0
+        || !list.commit())
+        return end(false, tr("The setup list could not be written to %1.").arg(m_stateDir) + QLatin1Char(' ') + nothing);
+
+    // tar exits 1 when a file changed as it was read, a running browser say;
+    // its only output is such a warning, which names the file.
+    partial = output + QStringLiteral(".partial");
+    QString detail;
+    QStringList warnings;
+    const Step create{QStringList{QStringLiteral("tar")} + createArguments(partial, m_stateDir, home), false,
+                      Step::Tool::Generic, tr("Writing the setup file"), {1}, createInput(*manifest)};
+    if (!runStep(id, create, &detail, &warnings))
+        return end(false, detail);
+    QStringList changed;
+    for (const SettingsRow &row : std::as_const(manifest->settings)) {
+        for (const QString &path : row.paths) {
+            if (!changed.contains(row.name)
+                && std::any_of(warnings.cbegin(), warnings.cend(), [&](const QString &w) { return w.contains(path); }))
+                changed << row.name;
+        }
+    }
+    if (!changed.isEmpty())
+        say(formatMarker(QStringLiteral("HINT"),
+                         {id, tr("These settings changed while they were saved, perhaps because the app was open: %1. "
+                                 "Close it and save again to be sure.")
+                                  .arg(changed.join(QStringLiteral(", ")))}));
+
+    // It ends ok only when the file lists what the manifest names (INV-5).
+    QStringList members;
+    const Step check{QStringList{QStringLiteral("tar")} + listArguments(partial), false, Step::Tool::Generic,
+                     tr("Checking the setup file")};
+    if (!runStep(id, check, &detail, &members, false))
+        return end(false, detail);
+    if (const QString problem = membersProblem(members, *manifest); !problem.isEmpty())
+        return end(false, problem);
+
+    const Step move{{QStringLiteral("mv"), QStringLiteral("-f"), QStringLiteral("--"), partial, output}, false,
+                    Step::Tool::Generic, tr("Putting the setup file in place")};
+    if (!runStep(id, move, &detail))
+        return end(false, detail);
+    say(formatMarker(QStringLiteral("HINT"), {id, tr("Saved to %1.").arg(output)}));
     return end(true, {});
 }
 

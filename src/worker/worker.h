@@ -29,6 +29,11 @@ public:
     // prepare-drive (GRND-0076). It trusts nothing in the file.
     int prepareDrive(const QString &layoutPath);
 
+    // Saves the settings and choices in the choices file to one file, as
+    // one item, save-setup, with no root step (GRND-0078). It trusts nothing
+    // in the choices file.
+    int saveSetup(const QString &choicesPath);
+
 private:
     enum class Outcome { Ok, SkippedDone, SkippedNotNeeded, SkippedOther, Failed };
 
@@ -38,8 +43,12 @@ private:
     // Asks for the password the first time a root step is about to run.
     bool ensureRoot();
     // Runs one step; returns false on failure, with a detail line.
-    bool runStep(const QString &itemId, const Step &step, QString *detail);
-    int runCommand(const QStringList &argv, const QByteArray &input = {});
+    // lines, when given, collects the output; echo off keeps it out of the
+    // run's output and log, as a long listing would fill them.
+    bool runStep(const QString &itemId, const Step &step, QString *detail, QStringList *lines = nullptr,
+                 bool echo = true);
+    int runCommand(const QStringList &argv, const QByteArray &input = {}, QStringList *lines = nullptr,
+                   bool echo = true);
 
     const Catalogue &m_catalogue;
     FileReader m_files;

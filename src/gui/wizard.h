@@ -5,6 +5,7 @@
 // child process and stops it by writing the stop file.
 #pragma once
 
+#include "carrypages.h"
 #include "core/checkrunner.h"
 #include "core/selection.h"
 #include "preparepages.h"
@@ -50,6 +51,9 @@ struct WizardSetup
     QList<Job> jobs = {Job::SetUp}; // the jobs built, in the order offered
     bool liveSystem = false;        // nothing set up there lasts a restart
     std::function<DriveSurvey()> surveyDrives; // when the prepare job's drive page opens
+    std::function<Gathered()> gatherSetup;     // when the carry job's first page opens
+    std::function<FolderSpace(const QString &)> folderSpace;
+    SystemIdentity system;                     // recorded in a saved setup
 };
 
 class Wizard : public QWizard
@@ -68,9 +72,13 @@ public:
     ItemRow *row(const QString &id) const { return m_rows.value(id); }
     RunPage *runPage() const { return m_runPage; }
     RunPage *prepareRunPage() const { return m_prepareRunPage; }
+    RunPage *carryRunPage() const { return m_carryRunPage; }
     QStringList workerArguments() const;
     // The Worker's arguments for preparing the drive (spec 4.4).
     QStringList prepareArguments() const;
+    // The Worker's arguments for saving the setup (GRND-0078 spec 4.5).
+    QStringList carryArguments() const;
+    const CarryChoice &carryChoice() const { return m_carry; }
     const PrepareChoice &prepareChoice() const { return m_prepare; }
     // Routes each job through its own pages.
     int nextId() const override;
@@ -117,6 +125,9 @@ private:
     PrepareChoice m_prepare;
     int m_drivePageId = -1, m_layoutPageId = -1, m_windowsPageId = -1;
     RunPage *m_prepareRunPage = nullptr;
+    CarryChoice m_carry;
+    int m_gatherPageId = -1;
+    RunPage *m_carryRunPage = nullptr;
 };
 
 } // namespace gw
