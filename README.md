@@ -12,6 +12,7 @@ and Leap 16 or later.
 It can also save this computer's setup to one file: the programs you
 asked for, the software sources you added, and your settings app by
 app. Settings that hold saved passwords or keys start switched off.
+On a new install, it can start from that file and put it all back.
 
 ## Status
 

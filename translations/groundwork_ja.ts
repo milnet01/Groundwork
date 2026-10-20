@@ -337,9 +337,95 @@
         <source>Flatpak is not installed.</source>
         <translation>Flatpak がインストールされていません。</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1 ほか %n 件</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>このシステムで見つかりません：%1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>ソフトウェアソース：%1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>古いコンピューターと同じ %1 にこのソースを追加し、その署名鍵を信頼します。</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>ソフトウェアソース %1 を追加しています</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>%1 のソフトウェア一覧を読み込んでいます</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>保存したファイルのプログラム</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>以前使っていたプログラムをまとめてインストールします。このシステムで見つからないものはスキップし、最後に名前を表示します。</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>インストール済みのプログラムを一覧表示できませんでした。</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>プログラムをインストールしています</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>保存したファイルの Flatpak アプリ</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>以前使っていた Flatpak アプリを 1 つずつインストールします。インストールできなかったものは最後に名前を表示します。</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>Flatpak がアプリを一覧表示できませんでした。</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>%1 をインストールしています</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>保存したファイルの設定</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>アプリの設定を、ご自身のユーザーとしてホームフォルダーにコピーします。置き換えるファイルは、番号付きのコピーとしてその隣に残します。</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>設定は root ではなく、常にユーザーとしてコピーされます。</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>保存したファイルをホームフォルダーと比較できませんでした。</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>設定をコピーしています</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>オフ：このソースはプログラムの署名を確認しません。</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>オフ：別のシステムで追加されたもので、このシステムに合わない可能性があります。</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>保存したファイルに %1 は含まれていません。</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +835,8 @@
         <translation>最初からオンになる項目：%1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>使い方：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>使い方：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1391,6 +1477,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>保存したセットアップ</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>保存したものは最初からオンになっています。戻したくないものはオフにしてください。</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>ファイル：%1、保存日時：%2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>ファイル：%1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>別のシステムで保存されました：%1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>このバージョンでは提供されていません：%1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>保存されていますが、ここでは不要です：%1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>鍵がないため、Groundwork はこれらの Flatpak ソースを追加できません。必要な場合はご自身で追加してください：%1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>保存されたパスワードや鍵を含みます。</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1820,6 +1945,26 @@
         <translation>Groundwork は独立したプロジェクトであり、openSUSE や SUSE の公式製品ではなく、openSUSE プロジェクトや SUSE の承認も受けていません。</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>保存したセットアップから始める</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>保存したセットアップファイル</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>参照…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>保存したセットアップを選ぶ</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>保存したセットアップ (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>適用の準備完了</translation>
     </message>
@@ -1834,6 +1979,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>パスワードを一度入力すると、これらが次の順序で実行されます。</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>復元する内容を %1 に書き込めなかったため、何も変更されていません。</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>この保存したファイルには、保存されたパスワードや鍵が含まれています。ファイルを持っている人は誰でも読めます。</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>ファイルから削除する</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>ファイルを削除する</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>はい、削除します</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>保存されたパスワードと鍵を削除しています</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>%1 を削除しますか？元に戻せません。</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>保存したファイルを削除しています</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1875,6 +2052,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>%1 に含まれているため、オフになっています。</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>先に保存したセットアップファイルを選んでください。</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>以前使っていたものです。</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1901,6 +2086,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>スキップしました：有効な値が指定されていません。</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>開いているアプリが復元した設定を読み込めるように、一度ログアウトしてから再びログインしてください。</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2001,6 +2190,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>%1 に保存しました。</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>復元するものの一覧を読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>保存されたパスワードと鍵を削除しています</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>ファイルは読み取れなくなっている可能性があります。設定はすでにこのコンピューターにあるので、削除してかまいません。</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>保存したファイルを読み込んでいます</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>ファイルから削除しています</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>保存されたパスワードや鍵の一部が、まだファイルに残っています。</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>%1 から保存されたパスワードと鍵を削除しました。</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>保存したファイルを削除しています</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>%1 を削除しました。</translation>
     </message>
 </context>
 </TS>

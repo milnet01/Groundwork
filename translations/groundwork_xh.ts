@@ -337,9 +337,96 @@
         <source>Flatpak is not installed.</source>
         <translation>I-Flatpak ayifakwanga.</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1 kunye nenye e-%n</numerusform>
+            <numerusform>%1 kunye nezinye ezi-%n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>Akufunyanwanga kule sistim: %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>Umthombo wesoftwe: %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>Yongeza lo mthombo njengoko wawunjalo kwikhompyutha yakho endala, ku-%1, kwaye ithembe isitshixo sawo sokutyikitya.</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>Kongezwa umthombo wesoftwe %1</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>Kufundwa uluhlu lwesoftwe lwe-%1</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>Iinkqubo ezivela kwifayile yakho egciniweyo</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>Ifaka iinkqubo obunazo, ngaxeshanye. Nayiphi na le sistim engayifumaniyo iyatsitywa kwaye ichazwe ekugqibeleni.</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>Uluhlu lweenkqubo ezifakiweyo alukwazanga ukwenziwa.</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>Kufakwa iinkqubo zakho</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>Usetyenziso lwe-Flatpak oluvela kwifayile yakho egciniweyo</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>Ifaka usetyenziso lwe-Flatpak obunalo, olunye emva kolunye. Nalupi na olungakwazi ukufakwa luchazwa ekugqibeleni.</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>I-Flatpak ayikwazanga ukubhala uluhlu losetyenziso lwayo.</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>Kufakwa i-%1</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>Iisetingi ezivela kwifayile yakho egciniweyo</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>Ikopisha iisetingi zosetyenziso lwakho kwifolda yakho yasekhaya, njengawe. Ifayile ethatyathelwa indawo igcinwa ecaleni kwayo njengekopi enenombolo.</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>Iisetingi zikopishwa njengomsebenzisi, zingaze zikopishwe njenge-root.</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>Ifayile egciniweyo ayikwazanga ukuthelekiswa nefolda yakho yasekhaya.</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>Kukopishwa iisetingi zakho</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>Kuvaliwe: lo mthombo awujongi imisayino yeenkqubo zawo.</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>Kuvaliwe: wongezwa kwenye isistim, kwaye usenokungayilungeli le.</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>Ifayile egciniweyo ayinayo i-%1.</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +836,8 @@
         <translation>Oko kuya kuqala kuvuliwe: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>Indlela yokusebenzisa: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>Indlela yokusebenzisa: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1393,6 +1480,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>Useto lwakho olugciniweyo</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>Oko ukugcinileyo kuqala kuvuliwe. Vala nantoni na ongafuni ukuba ibuye.</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>Ifayile: %1, igcinwe ngo-%2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Ifayile: %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>Kugcinwe kwenye isistim: %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>Akunikezelwa lolu hlobo: %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>Kugciniwe, kodwa akufuneki apha: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>I-Groundwork ayinakuyongeza le mithombo ye-Flatpak ngaphandle kwezitshixo zayo. Yongeze ngokwakho ukuba uyayidinga: %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>Ineephaswedi ezigciniweyo okanye izitshixo.</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1823,6 +1949,26 @@
         <translation>IGroundwork yiprojekthi ezimeleyo, ayiyomveliso esemthethweni ye-openSUSE okanye yeSUSE, kwaye ayixhaswanga yiProjekthi ye-openSUSE okanye yiSUSE.</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>Qala ngoseto olugciniweyo</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>Ifayile yoseto egciniweyo</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>Khangela…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>Khetha useto olugciniweyo</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>Useto olugciniweyo (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>Kulungele ukusetyenziswa</translation>
     </message>
@@ -1837,6 +1983,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>Ezi zisebenza ngolu landelelwano emva kwephaswedi enye.</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>Uluhlu lwento ekufuneka ibuyiselwe alukwazanga ukubhalwa ku-%1, ngoko akukho nto itshintshiweyo.</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>Le fayile egciniweyo ineephaswedi ezigciniweyo okanye izitshixo. Nabani na onefayile angazifunda.</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>Zisuse kwifayile</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>Cima ifayile</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>Ewe, yicime</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Kususwa iiphaswedi ezigciniweyo nezitshixo</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>Cima i-%1? Oku akunakubuyiselwa umva.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Kucinywa ifayile egciniweyo</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1878,6 +2056,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>Kuvaliwe kuba i-%1 iyakuquka.</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>Qala ukhethe ifayile yoseto egciniweyo.</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>Ubunale nto ngaphambili.</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1904,6 +2090,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>Kutsitywe: akukho xabiso lisebenzayo linikiweyo.</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>Phuma uze ungene kwakhona, ukuze usetyenziso oluvuliweyo lufunde iisetingi ezibuyiselweyo.</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2004,6 +2194,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>Kugcinwe ku-%1.</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>Uluhlu lwento ekufuneka ibuyiselwe alukwazanga ukufundwa.</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Kususwa iiphaswedi ezigciniweyo nezitshixo</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>Ifayile ngoku isenokungafundeki. Iisetingi zakho sele zikule khompyutha, ngoko ingacinywa.</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>Kufundwa ifayile egciniweyo</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>Kususwa kwifayile</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>Ezinye iiphaswedi ezigciniweyo okanye izitshixo zisekwifayile.</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>Iiphaswedi ezigciniweyo nezitshixo zisusiwe ku-%1.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Kucinywa ifayile egciniweyo</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>Kucinywe i-%1.</translation>
     </message>
 </context>
 </TS>

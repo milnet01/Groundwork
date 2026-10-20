@@ -1,6 +1,7 @@
 #include "worker.h"
 
 #include "carry/carry.h"
+#include "carry/carrieditems.h"
 #include "core/checkrunner.h"
 #include "core/markers.h"
 #include "core/statepaths.h"
@@ -21,6 +22,7 @@
 #include <QTextStream>
 
 #include <algorithm>
+#include <utility>
 #include <cstdio>
 
 namespace gw {
@@ -35,7 +37,7 @@ bool zypperSucceeded(int code) { return code == 0 || (code >= 100 && code <= 103
 } // namespace
 
 Worker::Worker(const Catalogue &catalogue, FileReader files, QString stateDir)
-    : m_catalogue(catalogue), m_files(std::move(files)), m_stateDir(std::move(stateDir))
+    : m_catalogue(&catalogue), m_files(std::move(files)), m_stateDir(std::move(stateDir))
 {
 }
 
@@ -152,17 +154,17 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
 
     Selection selection;
     if (ids.isEmpty()) {
-        selection = m_catalogue.defaultSelection(runChecks(m_catalogue.items(), context));
+        selection = m_catalogue->defaultSelection(runChecks(m_catalogue->items(), context));
     } else {
         for (const QString &id : ids) {
-            if (!m_catalogue.find(id)) {
+            if (!m_catalogue->find(id)) {
                 say(formatMarker(QStringLiteral("UNKNOWN_ITEM"), {id}));
                 return Usage;
             }
             selection.insert(id);
         }
     }
-    const QStringList order = m_catalogue.runOrder(selection);
+    const QStringList order = m_catalogue->runOrder(selection);
 
     QHash<QString, Outcome> outcomes;
     int ok = 0;
@@ -173,7 +175,7 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
             stopped = true;
             break;
         }
-        const Item *item = m_catalogue.find(order[i]);
+        const Item *item = m_catalogue->find(order[i]);
         const QString id = item->id();
         say(formatMarker(QStringLiteral("STEP_BEGIN"),
                           {id, QString::number(i + 1), QString::number(order.size()), item->title()}));
@@ -197,14 +199,14 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         // done" or "not needed here", or is neither done nor in the list,
         // skips this item (design, Step results).
         QString blockedBy;
-        for (const QString &dep : m_catalogue.dependencies(*item)) {
+        for (const QString &dep : m_catalogue->dependencies(*item)) {
             const auto o = outcomes.constFind(dep);
             if (o != outcomes.constEnd()) {
                 if (*o == Outcome::Failed || *o == Outcome::SkippedOther)
-                    blockedBy = m_catalogue.find(dep)->title();
+                    blockedBy = m_catalogue->find(dep)->title();
             } else if (!selection.contains(dep)
-                       && m_catalogue.find(dep)->check(context).state == CheckState::NotDone) {
-                blockedBy = m_catalogue.find(dep)->title();
+                       && m_catalogue->find(dep)->check(context).state == CheckState::NotDone) {
+                blockedBy = m_catalogue->find(dep)->title();
             }
         }
         if (!blockedBy.isEmpty()) {
@@ -243,6 +245,16 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         success ? ++ok : ++failed;
         say(formatMarker(QStringLiteral("STEP_END"),
                           {id, success ? QStringLiteral("ok") : QStringLiteral("fail"), detail}));
+        // What a carried item could not put back, such as a program this
+        // system lacks, is named (GRND-0079 spec 4.4, INV-4).
+        if (success && isCarriedId(id)) {
+            const CheckResult after = item->check(context);
+            if (after.state != CheckState::Done && !after.detail.isEmpty())
+                say(formatMarker(QStringLiteral("HINT"), {id, after.detail}));
+            if (id == kCarriedSettingsId)
+                say(formatMarker(QStringLiteral("HINT"),
+                                 {id, tr("Log out and back in, so apps that are open read the restored settings.")}));
+        }
     }
     m_privilege.stopKeepAlive();
 
@@ -451,6 +463,126 @@ int Worker::saveSetup(const QString &choicesPath)
         return end(false, detail);
     say(formatMarker(QStringLiteral("HINT"), {id, tr("Saved to %1.").arg(output)}));
     return end(true, {});
+}
+
+int Worker::runFromSetup(const QString &choicesPath, const QStringList &ids, const QHash<QString, QString> &values)
+{
+    // Nothing from the choices file reaches a command unless the saved
+    // file holds it too (INV-2).
+    auto refuse = [&](const QString &why) {
+        openLog();
+        say(formatMarker(QStringLiteral("SETUP_REFUSED"), {why}));
+        return int(Usage);
+    };
+    QJsonObject choices;
+    if (QFile file(choicesPath); file.open(QIODevice::ReadOnly))
+        choices = QJsonDocument::fromJson(file.readAll()).object();
+    QString why = tr("The list of what to restore could not be read.");
+    QStringList skipped;
+    std::optional<Manifest> chosen;
+    if (choices.value("manifest").isObject())
+        chosen = readManifest(choices.value("manifest").toObject(), &why, &skipped);
+    if (!chosen)
+        return refuse(why);
+    if (!skipped.isEmpty())
+        return refuse(skipped.first());
+    const QString file = choices.value("file").toString();
+    QStringList fileSkipped;
+    const std::optional<Manifest> saved = readSetupFile(CheckContext(m_files), file, &why, &fileSkipped);
+    if (!saved)
+        return refuse(why);
+    if (const QString lacks = notInFile(*chosen, *saved); !lacks.isEmpty())
+        return refuse(lacks);
+
+    const CarriedItems carried = carriedItems(*chosen, file, *m_catalogue);
+    const Catalogue all = withCarried(*m_catalogue, carried);
+    const Catalogue *own = std::exchange(m_catalogue, &all);
+    const int code = run(ids, values);
+    m_catalogue = own;
+    return code;
+}
+
+void Worker::beginOne(const QString &id, const QString &title)
+{
+    say(formatMarker(QStringLiteral("STEP_BEGIN"), {id, QStringLiteral("1"), QStringLiteral("1"), title}));
+}
+
+int Worker::endOne(const QString &id, bool ok, const QString &detail)
+{
+    say(formatMarker(QStringLiteral("STEP_END"), {id, ok ? QStringLiteral("ok") : QStringLiteral("fail"), detail}));
+    say(formatMarker(QStringLiteral("DONE"),
+                     {ok ? QStringLiteral("1") : QStringLiteral("0"), ok ? QStringLiteral("0") : QStringLiteral("1"),
+                      QStringLiteral("0")}));
+    return ok ? Ok : Failed;
+}
+
+int Worker::removeSecrets(const QString &file)
+{
+    openLog();
+    const QString id = QStringLiteral("remove-secrets");
+    beginOne(id, tr("Removing saved passwords and keys"));
+    const CheckContext context(m_files);
+    QString why;
+    QStringList skipped;
+    const std::optional<Manifest> manifest = readSetupFile(context, file, &why, &skipped);
+    if (!manifest)
+        return endOne(id, false, why);
+    const Manifest kept = withoutSecrets(*manifest);
+    if (kept == *manifest)
+        return endOne(id, true, {});
+
+    // tar --delete edits the file in place (GRND-0078 INV-4), so a step
+    // that fails may leave it part done.
+    const QString partDone = tr("The file may now be unreadable. Your settings are already on this computer, so "
+                                "it can be deleted.");
+    QString detail;
+    QStringList members;
+    const Step list{QStringList{QStringLiteral("tar")} + listArguments(file), false, Step::Tool::Generic,
+                    tr("Reading the saved file")};
+    if (!runStep(id, list, &detail, &members, false))
+        return endOne(id, false, detail);
+    QSaveFile text(m_stateDir + QLatin1Char('/') + kManifestName);
+    if (!text.open(QIODevice::WriteOnly) || text.write(QJsonDocument(manifestJson(kept)).toJson()) < 0 || !text.commit())
+        return endOne(id, false, tr("The setup list could not be written to %1.").arg(m_stateDir));
+    const QString label = tr("Removing them from the file");
+    const QList<Step> steps{
+        {QStringList{QStringLiteral("tar"), QStringLiteral("--delete"), QStringLiteral("--file"), file}
+             + secretMembers(members, *manifest),
+         false, Step::Tool::Generic, label},
+        {{QStringLiteral("tar"), QStringLiteral("--delete"), QStringLiteral("--file"), file, kManifestName}, false,
+         Step::Tool::Generic, label},
+        {{QStringLiteral("tar"), QStringLiteral("--append"), QStringLiteral("--file"), file, QStringLiteral("-C"),
+          m_stateDir, kManifestName},
+         false, Step::Tool::Generic, label}};
+    for (const Step &step : steps) {
+        if (!runStep(id, step, &detail))
+            return endOne(id, false, detail + QLatin1Char(' ') + partDone);
+    }
+
+    // It ends ok only when no member is under a secret setting (INV-9).
+    members.clear();
+    if (!runStep(id, list, &detail, &members, false))
+        return endOne(id, false, detail + QLatin1Char(' ') + partDone);
+    if (!secretMembers(members, *manifest).isEmpty())
+        return endOne(id, false, tr("Some saved passwords or keys are still in the file.") + QLatin1Char(' ') + partDone);
+    if (const QString problem = membersProblem(members, kept); !problem.isEmpty())
+        return endOne(id, false, problem + QLatin1Char(' ') + partDone);
+    say(formatMarker(QStringLiteral("HINT"), {id, tr("The saved passwords and keys were removed from %1.").arg(file)}));
+    return endOne(id, true, {});
+}
+
+int Worker::deleteSetupFile(const QString &file)
+{
+    openLog();
+    const QString id = QStringLiteral("delete-setup-file");
+    beginOne(id, tr("Deleting the saved file"));
+    QString detail;
+    const Step remove{{QStringLiteral("rm"), QStringLiteral("-f"), QStringLiteral("--"), file}, false,
+                      Step::Tool::Generic, tr("Deleting the saved file")};
+    if (!runStep(id, remove, &detail))
+        return endOne(id, false, detail);
+    say(formatMarker(QStringLiteral("HINT"), {id, tr("Deleted %1.").arg(file)}));
+    return endOne(id, true, {});
 }
 
 } // namespace gw

@@ -337,9 +337,96 @@
         <source>Flatpak is not installed.</source>
         <translation>Flatpak n&apos;est pas installé.</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1 et %n autre</numerusform>
+            <numerusform>%1 et %n autres</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>Introuvable sur ce système : %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>Source de logiciels : %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>Ajoute cette source telle que votre ancien ordinateur l&apos;avait, à l&apos;adresse %1, et fait confiance à sa clé de signature.</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>Ajout de la source de logiciels %1</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>Lecture de la liste de logiciels de %1</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>Programmes de votre fichier enregistré</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>Installe les programmes que vous aviez, en une seule fois. Ceux que ce système ne trouve pas sont ignorés et nommés à la fin.</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>Les programmes installés n&apos;ont pas pu être listés.</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>Installation de vos programmes</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>Applications Flatpak de votre fichier enregistré</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>Installe les applications Flatpak que vous aviez, une par une. Celles qui ne peuvent pas être installées sont nommées à la fin.</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>Flatpak n&apos;a pas pu lister ses applications.</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>Installation de %1</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>Réglages de votre fichier enregistré</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>Copie les réglages de vos applications dans votre dossier personnel, avec votre propre compte. Un fichier remplacé est conservé à côté sous forme de copie numérotée.</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>Les réglages sont copiés avec le compte de l&apos;utilisateur, jamais en tant que root.</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>Le fichier enregistré n&apos;a pas pu être comparé à votre dossier personnel.</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>Copie de vos réglages</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>Désactivé : cette source ne vérifie pas les signatures de ses programmes.</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>Désactivé : elle a été ajoutée sur un autre système et peut ne pas convenir à celui-ci.</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>Le fichier enregistré ne contient pas %1.</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +836,8 @@
         <translation>Serait activé au départ&#xa0;: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>Utilisation&#xa0;: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>Utilisation : groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1393,6 +1480,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>Votre configuration enregistrée</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>Ce que vous avez gardé est activé au départ. Désactivez tout ce que vous ne voulez pas récupérer.</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>Fichier : %1, enregistré %2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Fichier : %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>Enregistré sur un autre système : %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>Non proposé par cette version : %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>Gardé, mais inutile ici : %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>Groundwork ne peut pas ajouter ces sources Flatpak sans leurs clés. Ajoutez-les vous-même si vous en avez besoin : %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>Contient des mots de passe ou des clés enregistrés.</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1823,6 +1949,26 @@
         <translation>Groundwork est un projet indépendant, et non un produit officiel d&apos;openSUSE ou de SUSE ; il n&apos;est approuvé ni par le projet openSUSE ni par SUSE.</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>Partir d&apos;une configuration enregistrée</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>Fichier de configuration enregistré</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>Parcourir…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>Choisir une configuration enregistrée</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>Configurations enregistrées (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>Prêt à appliquer</translation>
     </message>
@@ -1837,6 +1983,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>Ces éléments s&apos;exécutent dans cet ordre après un seul mot de passe.</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>La liste de ce qu&apos;il faut restaurer n&apos;a pas pu être écrite dans %1, donc rien n&apos;a été modifié.</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>Ce fichier enregistré contient des mots de passe ou des clés enregistrés. Toute personne qui a le fichier peut les lire.</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>Les retirer du fichier</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>Supprimer le fichier</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>Oui, le supprimer</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Retrait des mots de passe et des clés enregistrés</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>Supprimer %1 ? Cette action ne peut pas être annulée.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Suppression du fichier enregistré</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1878,6 +2056,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>Désactivé parce que %1 l&apos;inclut.</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>Choisissez d&apos;abord le fichier de configuration enregistré.</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>Vous aviez ceci avant.</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1904,6 +2090,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>Ignoré&#xa0;: aucune valeur valide n&apos;a été donnée.</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>Déconnectez-vous puis reconnectez-vous, pour que les applications ouvertes lisent les réglages restaurés.</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2004,6 +2194,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>Enregistré dans %1.</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>La liste de ce qu&apos;il faut restaurer n&apos;a pas pu être lue.</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Retrait des mots de passe et des clés enregistrés</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>Le fichier est peut-être illisible maintenant. Vos réglages sont déjà sur cet ordinateur, il peut donc être supprimé.</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>Lecture du fichier enregistré</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>Retrait des mots de passe et des clés du fichier</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>Certains mots de passe ou clés enregistrés sont encore dans le fichier.</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>Les mots de passe et les clés enregistrés ont été retirés de %1.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Suppression du fichier enregistré</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>%1 a été supprimé.</translation>
     </message>
 </context>
 </TS>

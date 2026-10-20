@@ -97,10 +97,12 @@ add_library(groundwork_drives STATIC
     src/drives/drives.cpp)
 target_link_libraries(groundwork_drives PUBLIC groundwork_core)
 
+# Carry builds a saved file's items, so it uses Items (GRND-0079).
 add_library(groundwork_carry STATIC
     src/carry/carry.cpp
+    src/carry/carrieditems.cpp
     src/carry/settingsgroups.cpp)
-target_link_libraries(groundwork_carry PUBLIC groundwork_core)
+target_link_libraries(groundwork_carry PUBLIC groundwork_items groundwork_core)
 
 add_library(groundwork_worker STATIC
     src/worker/privilege.cpp
@@ -114,6 +116,7 @@ add_library(groundwork_gui STATIC
     src/gui/itemrow.cpp
     src/gui/preparepages.cpp
     src/gui/runpage.cpp
+    src/gui/savedsetuppage.cpp
     src/gui/switch.cpp
     src/gui/themes.cpp
     src/gui/wizard.cpp)

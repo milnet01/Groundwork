@@ -130,7 +130,7 @@ void RunPage::handleLine(const QString &line)
         m_hintLabel->setText(m_hints.join(QLatin1Char('\n')));
     } else if (marker->name == QLatin1String("AUTH") && f.value(0) == QLatin1String("failed")) {
         m_summary->setText(tr("The password was not accepted, so nothing was changed."));
-    } else if (marker->name == QLatin1String("UNSUPPORTED")) {
+    } else if (marker->name == QLatin1String("UNSUPPORTED") || marker->name == QLatin1String("SETUP_REFUSED")) {
         m_summary->setText(f.value(0));
     } else if (marker->name == QLatin1String("DONE")) {
         const int failed = f.value(1).toInt();

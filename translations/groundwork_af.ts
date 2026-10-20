@@ -337,9 +337,96 @@
         <source>Flatpak is not installed.</source>
         <translation>Flatpak is nie geïnstalleer nie.</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1 en nog %n</numerusform>
+            <numerusform>%1 en nog %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>Nie op hierdie stelsel gevind nie: %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>Sagtewarebron: %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>Voeg hierdie bron by soos jou ou rekenaar dit gehad het, by %1, en vertrou sy ondertekeningsleutel.</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>Besig om die sagtewarebron %1 by te voeg</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>Besig om die sagtewarelys van %1 te lees</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>Programme uit jou gestoorde lêer</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>Installeer die programme wat jy gehad het, in een slag. Enige wat hierdie stelsel nie kan vind nie, word oorgeslaan en aan die einde genoem.</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>Die geïnstalleerde programme kon nie gelys word nie.</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>Besig om jou programme te installeer</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>Flatpak-toepe uit jou gestoorde lêer</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>Installeer die Flatpak-toepe wat jy gehad het, een vir een. Enige wat nie geïnstalleer kan word nie, word aan die einde genoem.</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>Flatpak kon nie sy toepe lys nie.</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>Besig om %1 te installeer</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>Instellings uit jou gestoorde lêer</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>Kopieer jou toepe se instellings na jou tuisvouer, as jy. &apos;n Lêer wat dit vervang, word langsaan as &apos;n genommerde kopie gehou.</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>Instellings word as die gebruiker gekopieer, nooit as root nie.</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>Die gestoorde lêer kon nie met jou tuisvouer vergelyk word nie.</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>Besig om jou instellings te kopieer</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>Af: hierdie bron kontroleer nie sy programme se handtekeninge nie.</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>Af: dit is op &apos;n ander stelsel bygevoeg en pas dalk nie by hierdie een nie.</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>Die gestoorde lêer bevat nie %1 nie.</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +836,8 @@
         <translation>Sou aangeskakel begin: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>Gebruik: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>Gebruik: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1393,6 +1480,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>Jou gestoorde opstelling</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>Wat jy gehou het, begin aangeskakel. Skakel enigiets af wat jy nie terug wil hê nie.</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>Lêer: %1, gestoor %2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Lêer: %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>Op &apos;n ander stelsel gestoor: %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>Nie deur hierdie weergawe aangebied nie: %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>Gehou, maar nie hier nodig nie: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>Groundwork kan nie hierdie Flatpak-bronne sonder hulle sleutels byvoeg nie. Voeg hulle self by as jy hulle nodig het: %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>Bevat gestoorde wagwoorde of sleutels.</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1823,6 +1949,26 @@
         <translation>Groundwork is &apos;n onafhanklike projek, nie &apos;n amptelike openSUSE- of SUSE-produk nie, en word nie deur die openSUSE-projek of SUSE onderskryf nie.</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>Begin van &apos;n gestoorde opstelling af</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>Gestoorde opstellingslêer</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>Blaai…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>Kies &apos;n gestoorde opstelling</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>Gestoorde opstellings (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>Gereed om toe te pas</translation>
     </message>
@@ -1837,6 +1983,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>Hierdie loop na een wagwoord in hierdie volgorde.</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>Wat herstel moet word, kon nie na %1 geskryf word nie, so niks is verander nie.</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>Hierdie gestoorde lêer bevat gestoorde wagwoorde of sleutels. Enigiemand met die lêer kan hulle lees.</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>Verwyder hulle uit die lêer</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>Vee die lêer uit</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>Ja, vee dit uit</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Besig om gestoorde wagwoorde en sleutels te verwyder</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>Vee %1 uit? Dit kan nie ongedaan gemaak word nie.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Besig om die gestoorde lêer uit te vee</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1878,6 +2056,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>Afgeskakel omdat %1 dit insluit.</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>Kies eers die gestoorde opstellingslêer.</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>Jy het dit voorheen gehad.</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1904,6 +2090,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>Oorgeslaan: geen geldige waarde is gegee nie.</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>Meld af en weer aan, sodat toepe wat oop is die herstelde instellings lees.</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2004,6 +2194,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>Gestoor in %1.</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>Die lys van wat herstel moet word, kon nie gelees word nie.</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Besig om gestoorde wagwoorde en sleutels te verwyder</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>Die lêer is dalk nou onleesbaar. Jou instellings is reeds op hierdie rekenaar, so dit kan uitgevee word.</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>Besig om die gestoorde lêer te lees</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>Besig om hulle uit die lêer te verwyder</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>Sommige gestoorde wagwoorde of sleutels is nog in die lêer.</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>Die gestoorde wagwoorde en sleutels is uit %1 verwyder.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Besig om die gestoorde lêer uit te vee</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>%1 is uitgevee.</translation>
     </message>
 </context>
 </TS>

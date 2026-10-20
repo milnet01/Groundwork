@@ -337,9 +337,100 @@
         <source>Flatpak is not installed.</source>
         <translation>‏Flatpak غير مثبّت.</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>‏%1</numerusform>
+            <numerusform>‏%1 وعنصر آخر</numerusform>
+            <numerusform>‏%1 وعنصران آخران</numerusform>
+            <numerusform>‏%1 و%n عناصر أخرى</numerusform>
+            <numerusform>‏%1 و%n عنصرًا آخر</numerusform>
+            <numerusform>‏%1 و%n عنصر آخر</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>غير موجود على هذا النظام: %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>مصدر البرامج: %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>يضيف هذا المصدر كما كان في حاسوبك القديم، في %1، ويثق بمفتاح توقيعه.</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>جارٍ إضافة مصدر البرامج %1</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>جارٍ قراءة قائمة برامج %1</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>البرامج من ملفك المحفوظ</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>يثبّت البرامج التي كانت لديك دفعة واحدة. ما لا يجده هذا النظام يُتخطّى ويُذكر في النهاية.</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>تعذّر عرض قائمة البرامج المثبّتة.</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>جارٍ تثبيت برامجك</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>تطبيقات Flatpak من ملفك المحفوظ</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>يثبّت تطبيقات Flatpak التي كانت لديك، واحدًا تلو الآخر. ما يتعذّر تثبيته يُذكر في النهاية.</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>تعذّر على Flatpak عرض قائمة تطبيقاته.</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>جارٍ تثبيت %1</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>الإعدادات من ملفك المحفوظ</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>ينسخ إعدادات تطبيقاتك إلى مجلد المنزل بحسابك أنت. أي ملف يُستبدل يُحتفظ به بجانبه كنسخة مرقّمة.</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>تُنسخ الإعدادات بحساب المستخدم، ولا تُنسخ بحساب root أبدًا.</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>تعذّرت مقارنة الملف المحفوظ بمجلد المنزل.</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>جارٍ نسخ إعداداتك</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>غير مفعّل: هذا المصدر لا يتحقق من تواقيع برامجه.</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>غير مفعّل: أُضيف على نظام مختلف، وقد لا يناسب هذا النظام.</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>لا يحتوي الملف المحفوظ على %1.</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +840,8 @@
         <translation>سيبدأ مفعّلًا: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>الاستخدام: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>الاستخدام: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1401,6 +1492,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>إعدادك المحفوظ</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>ما احتفظت به يبدأ مفعّلًا. عطّل أي شيء لا تريد استعادته.</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>الملف: %1، حُفظ في %2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>الملف: %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>حُفظ على نظام مختلف: %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>لا يقدّمه هذا الإصدار: %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>محفوظ، لكن لا حاجة إليه هنا: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>لا يستطيع Groundwork إضافة مصادر Flatpak هذه بدون مفاتيحها. أضفها بنفسك إن كنت تحتاج إليها: %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>يحتوي على كلمات مرور أو مفاتيح محفوظة.</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1835,6 +1965,26 @@
         <translation>‏Groundwork مشروع مستقل، وليس منتجًا رسميًا من openSUSE أو SUSE، ولا يحظى بتأييد مشروع openSUSE أو SUSE.</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>البدء من إعداد محفوظ</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>ملف الإعداد المحفوظ</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>استعراض…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>اختر إعدادًا محفوظًا</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>الإعدادات المحفوظة (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>جاهز للتطبيق</translation>
     </message>
@@ -1849,6 +1999,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>تعمل هذه بهذا الترتيب بعد إدخال كلمة مرور واحدة.</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>تعذّرت كتابة ما يجب استعادته في %1، لذا لم يتغير أي شيء.</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>يحتوي هذا الملف المحفوظ على كلمات مرور أو مفاتيح محفوظة. يستطيع أي شخص لديه الملف قراءتها.</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>إزالتها من الملف</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>حذف الملف</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>نعم، احذفه</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>جارٍ إزالة كلمات المرور والمفاتيح المحفوظة</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>هل تريد حذف %1؟ لا يمكن التراجع عن ذلك.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>جارٍ حذف الملف المحفوظ</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1890,6 +2072,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>غير مفعّل لأن %1 يتضمّنه.</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>اختر ملف الإعداد المحفوظ أولًا.</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>كان هذا لديك من قبل.</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1916,6 +2106,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>تم التخطي: لم تُعطَ قيمة صالحة.</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>سجّل الخروج ثم سجّل الدخول مجددًا، لكي تقرأ التطبيقات المفتوحة الإعدادات المستعادة.</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2016,6 +2210,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>حُفظ في %1.</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>تعذّرت قراءة قائمة ما يجب استعادته.</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>جارٍ إزالة كلمات المرور والمفاتيح المحفوظة</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>قد تتعذّر قراءة الملف الآن. إعداداتك موجودة بالفعل على هذا الحاسوب، لذا يمكن حذفه.</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>جارٍ قراءة الملف المحفوظ</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>جارٍ إزالتها من الملف</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>لا تزال بعض كلمات المرور أو المفاتيح المحفوظة في الملف.</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>أُزيلت كلمات المرور والمفاتيح المحفوظة من %1.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>جارٍ حذف الملف المحفوظ</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>حُذف %1.</translation>
     </message>
 </context>
 </TS>

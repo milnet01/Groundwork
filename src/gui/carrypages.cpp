@@ -58,15 +58,14 @@ qint64 settingsBytes(const Manifest &manifest)
     return total;
 }
 
-// A USB stick first, as the usual place (spec 4.5); else the home folder.
-QString firstFolder()
+} // namespace
+
+QString usualSetupFolder()
 {
     const QDir media(QStringLiteral("/run/media/") + qEnvironmentVariable("USER"));
     const QStringList sticks = media.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
     return sticks.isEmpty() ? QDir::homePath() : media.filePath(sticks.first());
 }
-
-} // namespace
 
 QString CarryChoice::output() const
 {
@@ -228,7 +227,7 @@ SavePage::SavePage(CarryChoice *choice, QWidget *parent)
 void SavePage::initializePage()
 {
     if (m_choice->folder.isEmpty())
-        m_choice->folder = firstFolder();
+        m_choice->folder = usualSetupFolder();
     m_error->hide();
     refresh();
 }

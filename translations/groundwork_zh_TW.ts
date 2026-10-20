@@ -337,9 +337,95 @@
         <source>Flatpak is not installed.</source>
         <translation>未安裝 Flatpak。</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1，以及另外 %n 項</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>在這個系統上找不到：%1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>軟體來源：%1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>依照舊電腦上的設定，在 %1 新增這個來源，並信任它的簽署金鑰。</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>正在新增軟體來源 %1</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>正在讀取 %1 的軟體清單</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>儲存的檔案中的程式</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>一次安裝您以前的程式。這個系統找不到的程式會被略過，並在最後列出。</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>無法列出已安裝的程式。</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>正在安裝您的程式</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>儲存的檔案中的 Flatpak 應用程式</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>逐一安裝您以前的 Flatpak 應用程式。無法安裝的會在最後列出。</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>Flatpak 無法列出它的應用程式。</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>正在安裝 %1</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>儲存的檔案中的設定</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>以您自己的身分，將應用程式的設定複製到您的個人資料夾。被取代的檔案會以編號副本的形式保留在旁邊。</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>設定以使用者身分複製，絕不以 root 身分複製。</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>無法將儲存的檔案與您的個人資料夾進行比較。</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>正在複製您的設定</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>已關閉：這個來源不檢查其程式的簽章。</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>已關閉：它是在另一個系統上新增的，可能不適合這個系統。</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>儲存的檔案中沒有 %1。</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -761,8 +847,8 @@
         <translation>請以您自己的身分啟動 Groundwork，而不是以 root 身分。它會在需要時詢問密碼。</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
 </context>
 <context>
@@ -1391,6 +1477,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>您儲存的組態</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>您保留的內容一開始都是開啟的。不想還原的，請關閉。</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>檔案：%1，儲存於 %2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>檔案：%1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>在另一個系統上儲存：%1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>此版本不提供：%1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>已保留，但這裡不需要：%1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>沒有金鑰，Groundwork 無法新增這些 Flatpak 來源。如有需要，請自行新增：%1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>包含儲存的密碼或金鑰。</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1820,6 +1945,26 @@
         <translation>Groundwork 是獨立專案，並非 openSUSE 或 SUSE 的官方產品，也未獲得 openSUSE 專案或 SUSE 的認可。</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>從儲存的組態開始</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>儲存的組態檔案</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>瀏覽…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>選擇儲存的組態</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>儲存的組態 (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>準備套用</translation>
     </message>
@@ -1834,6 +1979,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>輸入一次密碼後，將依以下順序執行這些項目。</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>無法將要還原的內容寫入 %1，因此沒有進行任何變更。</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>這個儲存的檔案包含儲存的密碼或金鑰。任何拿到這個檔案的人都能讀取它們。</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>從檔案中移除它們</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>刪除檔案</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>是，刪除它</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>正在移除儲存的密碼和金鑰</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>要刪除 %1 嗎？此動作無法復原。</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>正在刪除儲存的檔案</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1875,6 +2052,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>已關閉，因為 %1 已包含它。</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>請先選擇儲存的組態檔案。</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>您以前用過這個。</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1901,6 +2086,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>已略過：未提供有效的值。</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>請登出再重新登入，讓已開啟的應用程式讀取還原的設定。</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2001,6 +2190,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>已儲存到 %1。</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>無法讀取要還原的內容清單。</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>正在移除儲存的密碼和金鑰</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>這個檔案現在可能已無法讀取。您的設定已經在這台電腦上，所以可以刪除它。</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>正在讀取儲存的檔案</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>正在從檔案中移除它們</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>檔案中仍有部分儲存的密碼或金鑰。</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>已從 %1 中移除儲存的密碼和金鑰。</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>正在刪除儲存的檔案</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>已刪除 %1。</translation>
     </message>
 </context>
 </TS>

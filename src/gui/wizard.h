@@ -5,6 +5,7 @@
 // child process and stops it by writing the stop file.
 #pragma once
 
+#include "carry/carrieditems.h"
 #include "carrypages.h"
 #include "core/checkrunner.h"
 #include "core/selection.h"
@@ -15,7 +16,10 @@
 #include <QWizard>
 
 #include <functional>
+#include <memory>
 #include <optional>
+
+class QCheckBox;
 
 namespace gw {
 
@@ -54,6 +58,33 @@ struct WizardSetup
     std::function<Gathered()> gatherSetup;     // when the carry job's first page opens
     std::function<FolderSpace(const QString &)> folderSpace;
     SystemIdentity system;                     // recorded in a saved setup
+    // Starting from a saved setup (GRND-0079): reading the file, and
+    // checking the items it becomes.
+    std::function<std::optional<Manifest>(const QString &file, QString *why, QStringList *skipped)> readSetup;
+    std::function<CheckResults(const QList<const Item *> &)> checkItems;
+};
+
+// A saved file the setup job starts from (GRND-0079 spec 4.1): what it
+// holds, the items it becomes, and the switches inside their rows.
+struct SavedSetup
+{
+    QString file;
+    Manifest manifest;
+    QStringList skipped;
+    CarriedItems carried;
+    std::optional<Catalogue> all; // the Wizard's catalogue, then the carried items
+    // One switch inside a carried row, and the entry it keeps. A source's
+    // row is its own entry, with no switch.
+    struct Entry
+    {
+        QString id;
+        QCheckBox *on;
+        std::function<void(Manifest &)> keep;
+    };
+    QList<Entry> entries;
+    bool rowsMade = false;    // the page has made its rows
+    bool keptSwitched = false; // the kept items were switched on, once (INV-1)
+    bool holdsSecrets() const;
 };
 
 class Wizard : public QWizard
@@ -68,6 +99,9 @@ public:
     const QList<Job> &offeredJobs() const { return m_offeredJobs; }
     std::optional<Job> chosenJob() const { return m_chosenJob; }
     void chooseJob(Job job) { m_chosenJob = job; }
+    // The setup job may start from a saved file (GRND-0079).
+    bool offersSavedSetup() const { return bool(m_setup.readSetup); }
+    const QString &systemId() const { return m_setup.system.id; }
     const Selection &selection() const { return m_selection; }
     ItemRow *row(const QString &id) const { return m_rows.value(id); }
     RunPage *runPage() const { return m_runPage; }
@@ -82,7 +116,29 @@ public:
     const PrepareChoice &prepareChoice() const { return m_prepare; }
     // Routes each job through its own pages.
     int nextId() const override;
-    QStringList runOrder() const { return m_setup.catalogue->runOrder(m_selection); }
+    // The selected ids in run order; a carried row with every switch inside
+    // it off keeps nothing, so it is left out.
+    QStringList runOrder() const;
+    // The catalogue with a saved setup's items, once one is read.
+    const Catalogue &catalogue() const;
+    const CheckResults &results() const { return m_results; }
+
+    // Reads a saved file and builds its items (spec 4.1); on refusal, why
+    // says so and nothing changes. clearSavedSetup forgets it.
+    bool loadSavedSetup(const QString &file, QString *why);
+    void clearSavedSetup();
+    SavedSetup *savedSetup() const { return m_saved.get(); }
+    // A carried row the saved setup page made; then the carried items'
+    // switches start as spec 4.2 and INV-8 say.
+    void addCarriedRow(ItemRow *row);
+    void startCarried();
+    // On leaving the saved setup page, once: kept items switched on (INV-1).
+    void switchOnKept();
+    QString restoreChoicesPath() const;
+    // Writes what stays switched on from the saved file (spec 4.6).
+    bool writeRestoreChoices() const;
+    // The Worker's arguments for removing the file's secrets, or deleting it.
+    QStringList secretsArguments(bool remove) const;
     // Every switched-on item that takes a value has a valid one.
     bool valuesValid() const;
 
@@ -127,6 +183,8 @@ private:
     RunPage *m_prepareRunPage = nullptr;
     CarryChoice m_carry;
     int m_gatherPageId = -1;
+    std::unique_ptr<SavedSetup> m_saved;
+    int m_savedPageId = -1, m_firstLevelId = -1;
     RunPage *m_carryRunPage = nullptr;
 };
 

@@ -69,8 +69,20 @@ public:
 const FakeItem parser(QStringLiteral("parser"), gw::Level::NiceToHave, false);
 const FakeIncluder terminal(QStringLiteral("terminal"), gw::Level::NiceToHave, false);
 const gw::Catalogue including({&parser, &terminal});
+// Starting from a saved setup (GRND-0079): a kept item that is not on by
+// default, and one that accepts a licence.
+class FakeLicenceItem : public FakeItem
+{
+public:
+    using FakeItem::FakeItem;
+    bool acceptsLicence() const override { return true; }
+};
+const FakeItem firewall(QStringLiteral("firewall"), gw::Level::SystemSetup, false);
+const FakeLicenceItem nvidia(QStringLiteral("nvidia"), gw::Level::Essentials, true);
+const gw::Catalogue restoring({&update, &nvidia, &firewall});
 
 const QByteArray kFakeWorker = R"(#!/bin/sh
+if [ -n "$FAKE_WORKER_LOG" ]; then echo "$*" >> "$FAKE_WORKER_LOG"; fi
 shift 3
 n=0
 for id in "$@"; do
@@ -134,6 +146,7 @@ class TstWizard : public QObject
 
     QTemporaryDir m_dir;
     qint64 m_free = 100 * kGiB; // the save folder's free space
+    gw::Manifest m_saved;       // what the saved file holds
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
                                      const gw::Catalogue *items = &catalogue,
@@ -155,8 +168,18 @@ class TstWizard : public QObject
             r.insert(QStringLiteral("codecs"), {gw::CheckState::NotDone, {}});
             r.insert(QStringLiteral("hostname"), {gw::CheckState::NotDone, {}});
             r.insert(QStringLiteral("fonts"), {gw::CheckState::NotDone, {}});
+            r.insert(QStringLiteral("firewall"), {gw::CheckState::NotDone, {}});
+            r.insert(QStringLiteral("nvidia"), {gw::CheckState::NotDone, {}});
             return r;
         };
+        setup.readSetup = [this](const QString &, QString *, QStringList *) { return std::optional(m_saved); };
+        setup.checkItems = [](const QList<const gw::Item *> &items) {
+            gw::CheckResults r;
+            for (const gw::Item *item : items)
+                r.insert(item->id(), {gw::CheckState::NotDone, {}});
+            return r;
+        };
+        setup.system.id = QStringLiteral("opensuse-tumbleweed");
         setup.language = language;
         setup.workerProgram = worker;
         setup.stateDir = m_dir.filePath(QStringLiteral("state"));
@@ -193,6 +216,30 @@ class TstWizard : public QObject
         auto *label = page->findChild<QLabel *>(name);
         return label && !label->isHidden() ? label : nullptr;
     }
+    // The setup job started from m_saved, on the saved setup page.
+    std::unique_ptr<gw::Wizard> fromSaved()
+    {
+        auto w = make(QStringLiteral("en"), &restoring);
+        if (!QTest::qWaitFor([&] { return w->checksDone(); }))
+            return nullptr;
+        auto *on = w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"));
+        auto *file = w->currentPage()->findChild<QLineEdit *>(QStringLiteral("savedFile"));
+        if (!on || !file)
+            return nullptr;
+        on->click();
+        file->setText(m_dir.filePath(QStringLiteral("groundwork-setup-pc-2026-10-20.tar")));
+        w->next();
+        return w->currentPage()->title() == QLatin1String("Your saved setup") ? std::move(w) : nullptr;
+    }
+    static gw::ZypperSource source(const QString &alias, bool gpgcheck)
+    {
+        gw::ZypperSource s;
+        s.alias = alias;
+        s.name = alias;
+        s.baseurl = QStringLiteral("https://download.opensuse.org/repositories/") + alias + QLatin1Char('/');
+        s.gpgcheck = gpgcheck;
+        return s;
+    }
     static void goToRunPage(gw::Wizard &w)
     {
         for (int i = 0; i < 10 && w.currentPage() != w.runPage(); ++i)
@@ -204,6 +251,8 @@ private slots:
     {
         gw::loadLanguage(QStringLiteral("en"));
         m_free = 100 * kGiB;
+        m_saved = {};
+        qunsetenv("FAKE_WORKER_LOG");
     }
 
     // Qt has no words of its own for Afrikaans, so the Wizard labels its
@@ -910,6 +959,104 @@ private slots:
         QVERIFY(!w->isVisible());
         QTRY_VERIFY(!w->runPage()->isRunning()); // the Worker finished its step and stopped
         qunsetenv("FAKE_STOP");
+    }
+
+    // GRND-0079, INV-1: a kept item not done starts switched on on leaving
+    // the saved setup page; one that accepts a licence waits, noted.
+    void keptItemsStartOnButALicenceWaits()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.items = {QStringLiteral("firewall"), QStringLiteral("nvidia"), QStringLiteral("gone-item")};
+        auto w = fromSaved();
+        QVERIFY(w);
+        QVERIFY(!w->selection().contains(QStringLiteral("firewall")));
+        bool named = false;
+        for (auto *label : w->currentPage()->findChildren<QLabel *>())
+            named = named || (label->text().startsWith(QLatin1String("Not offered by this version: "))
+                              && label->text().contains(QLatin1String("gone-item")));
+        QVERIFY(named);
+        w->next();
+        QVERIFY(w->selection().contains(QStringLiteral("firewall")));
+        QVERIFY(!w->selection().contains(QStringLiteral("nvidia")));
+        QCOMPARE(w->row(QStringLiteral("nvidia"))->reason(), QStringLiteral("You had this before."));
+    }
+
+    // GRND-0079, INV-8: a source with signatures unchecked, or from a file
+    // saved on another system, starts switched off, saying why; programs
+    // start on, with the update they need.
+    void aDoubtfulSourceStartsOffSayingWhy()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-leap");
+        m_saved.packages = {QStringLiteral("act")};
+        m_saved.zypperSources = {source(QStringLiteral("unsigned"), false), source(QStringLiteral("games"), true)};
+        auto w = fromSaved();
+        QVERIFY(w);
+        QVERIFY(!w->selection().contains(QStringLiteral("carried-source:unsigned")));
+        QVERIFY(!w->selection().contains(QStringLiteral("carried-source:games")));
+        QVERIFY(w->row(QStringLiteral("carried-source:unsigned"))->reason().contains(QLatin1String("signatures")));
+        QVERIFY(w->row(QStringLiteral("carried-source:games"))->reason().contains(QLatin1String("different system")));
+        QVERIFY(w->selection().contains(QStringLiteral("carried-packages")));
+        QVERIFY(w->selection().contains(QStringLiteral("update")));
+        auto *act = w->currentPage()->findChild<QCheckBox *>(QStringLiteral("carried-packages/\u2068act\u2069"));
+        QVERIFY(act && act->isChecked());
+    }
+
+    // GRND-0079, INV-9: after a run from a file holding secrets, nothing is
+    // removed or deleted until a button is pressed.
+    void secretsAreRemovedOrTheFileDeletedOnlyWhenPressed()
+    {
+        const QString log = m_dir.filePath(QStringLiteral("worker-calls"));
+        QFile::remove(log);
+        qputenv("FAKE_WORKER_LOG", log.toUtf8());
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.settings = {{QStringLiteral("SSH keys"), {QStringLiteral(".ssh")}, true, 20}};
+        auto w = fromSaved();
+        QVERIFY(w);
+        QVERIFY(w->currentPage()->findChild<QLabel *>(QStringLiteral("secretMark:SSH keys")));
+        goToRunPage(*w);
+        QVERIFY(QTest::qWaitFor([&] { return w->runPage()->isComplete(); }));
+        auto calls = [&] {
+            QFile f(log);
+            return f.open(QIODevice::ReadOnly) ? QString::fromUtf8(f.readAll()).split(QLatin1Char('\n'), Qt::SkipEmptyParts)
+                                               : QStringList();
+        };
+        QCOMPARE(calls().size(), 1);
+        QVERIFY(calls().first().contains(QLatin1String("--setup-choices")));
+        QFile choices(w->restoreChoicesPath());
+        QVERIFY(choices.open(QIODevice::ReadOnly));
+        QVERIFY(QJsonDocument::fromJson(choices.readAll()).object().value("manifest").toObject().contains("settings"));
+
+        auto *offer = w->runPage()->findChild<QWidget *>(QStringLiteral("secretsOffer"));
+        QVERIFY(offer && !offer->isHidden());
+        w->runPage()->findChild<QPushButton *>(QStringLiteral("deleteSetupFile"))->click();
+        auto *confirm = w->runPage()->findChild<QPushButton *>(QStringLiteral("confirmDelete"));
+        QVERIFY(confirm && !confirm->isHidden());
+        QCOMPARE(calls().size(), 1); // asked once more first
+        w->runPage()->findChild<QPushButton *>(QStringLiteral("removeSecrets"))->click();
+        QVERIFY(QTest::qWaitFor([&] { return calls().size() == 2 && w->runPage()->isComplete(); }));
+        QVERIFY(calls().last().contains(QLatin1String("--remove-secrets")));
+        QVERIFY(offer->isHidden());
+    }
+
+    // GRND-0079: confirming the deletion runs it.
+    void deletingTheFileRunsOnceConfirmed()
+    {
+        const QString log = m_dir.filePath(QStringLiteral("worker-calls"));
+        QFile::remove(log);
+        qputenv("FAKE_WORKER_LOG", log.toUtf8());
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.settings = {{QStringLiteral("SSH keys"), {QStringLiteral(".ssh")}, true, 20}};
+        auto w = fromSaved();
+        QVERIFY(w);
+        goToRunPage(*w);
+        QVERIFY(QTest::qWaitFor([&] { return w->runPage()->isComplete(); }));
+        w->runPage()->findChild<QPushButton *>(QStringLiteral("deleteSetupFile"))->click();
+        w->runPage()->findChild<QPushButton *>(QStringLiteral("confirmDelete"))->click();
+        QFile f(log);
+        QVERIFY(QTest::qWaitFor([&] {
+            return w->runPage()->isComplete() && f.open(QIODevice::ReadOnly)
+                   && QString::fromUtf8(f.readAll()).contains(QLatin1String("--delete-setup-file"));
+        }));
     }
 };
 

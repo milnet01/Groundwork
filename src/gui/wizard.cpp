@@ -4,6 +4,8 @@
 #include "core/translations.h"
 #include "itemrow.h"
 #include "runpage.h"
+#include "savedsetuppage.h"
+#include "switch.h"
 #include "themes.h"
 
 #include <QApplication>
@@ -13,11 +15,18 @@
 #include <QComboBox>
 #include <QDir>
 #include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
 #include <QFontDatabase>
+#include <QHBoxLayout>
 #include <QHash>
+#include <QJsonDocument>
 #include <QLabel>
+#include <QLineEdit>
 #include <QLocale>
+#include <QPushButton>
 #include <QRadioButton>
+#include <QSaveFile>
 #include <QScreen>
 #include <QScrollArea>
 #include <QScrollBar>
@@ -25,6 +34,8 @@
 #include <QStyle>
 #include <QThread>
 #include <QVBoxLayout>
+
+#include <algorithm>
 
 namespace gw {
 namespace {
@@ -138,10 +149,15 @@ public:
                     if (!on)
                         return;
                     m_wizard->chooseJob(job);
+                    if (m_saved)
+                        m_saved->setVisible(job == Job::SetUp);
                     emit completeChanged();
                 });
             }
         }
+        // The setup job may start from a saved file (GRND-0079 spec 4.1).
+        if (wizard->offeredJobs().contains(Job::SetUp) && wizard->offersSavedSetup())
+            makeSavedChoice();
         m_status = new QLabel(this);
         m_status->setWordWrap(true);
         if (wizard->offeredJobs().contains(Job::SetUp) || wizard->offeredJobs().contains(Job::CarryOver))
@@ -167,6 +183,8 @@ public:
             layout->addWidget(jobsLabel);
             layout->addWidget(jobs);
         }
+        if (m_saved)
+            layout->addWidget(m_saved);
         layout->addWidget(m_status);
         layout->addStretch();
         auto *disclaimer = new QLabel(Wizard::tr("Groundwork is an independent project, not an official openSUSE "
@@ -184,30 +202,84 @@ public:
                 && m_wizard->checksDone())
                || m_wizard->chosenJob() == Job::PrepareDrive;
     }
+    // A saved file is read on Next; one refused keeps the page, saying why.
+    bool validatePage() override
+    {
+        if (m_wizard->chosenJob() != Job::SetUp || !m_fromSaved || !m_fromSaved->isChecked()) {
+            m_wizard->clearSavedSetup();
+            return true;
+        }
+        QString why;
+        const bool read = m_wizard->loadSavedSetup(m_savedFile->text().trimmed(), &why);
+        m_savedProblem->setText(why);
+        m_savedProblem->setVisible(!read);
+        return read;
+    }
 
 private:
+    void makeSavedChoice()
+    {
+        m_saved = new QWidget(this);
+        m_saved->setVisible(m_wizard->chosenJob() == Job::SetUp);
+        m_fromSaved = new Switch(Wizard::tr("Start from a saved setup"), m_saved);
+        m_fromSaved->setObjectName(QStringLiteral("fromSaved"));
+        m_savedFile = new QLineEdit(m_saved);
+        m_savedFile->setObjectName(QStringLiteral("savedFile"));
+        m_savedFile->setAccessibleName(Wizard::tr("Saved setup file"));
+        auto *browse = new QPushButton(Wizard::tr("Browse…"), m_saved);
+        m_savedProblem = new QLabel(m_saved);
+        m_savedProblem->setObjectName(QStringLiteral("savedProblem"));
+        m_savedProblem->setWordWrap(true);
+        m_savedProblem->hide();
+        for (QWidget *w : {static_cast<QWidget *>(m_savedFile), static_cast<QWidget *>(browse)})
+            w->setEnabled(false);
+        connect(m_fromSaved, &QCheckBox::toggled, m_savedFile, &QWidget::setEnabled);
+        connect(m_fromSaved, &QCheckBox::toggled, browse, &QWidget::setEnabled);
+        connect(browse, &QPushButton::clicked, this, [this] {
+            const QString file = QFileDialog::getOpenFileName(this, Wizard::tr("Choose a saved setup"), usualSetupFolder(),
+                                                              Wizard::tr("Saved setups (groundwork-setup-*.tar)"));
+            if (!file.isEmpty())
+                m_savedFile->setText(file);
+        });
+        auto *fileRow = new QHBoxLayout;
+        fileRow->addWidget(m_savedFile, 1);
+        fileRow->addWidget(browse);
+        auto *layout = new QVBoxLayout(m_saved);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->addWidget(m_fromSaved);
+        layout->addLayout(fileRow);
+        layout->addWidget(m_savedProblem);
+    }
+
     Wizard *m_wizard;
     QLabel *m_status;
+    QWidget *m_saved = nullptr;
+    QCheckBox *m_fromSaved = nullptr;
+    QLineEdit *m_savedFile = nullptr;
+    QLabel *m_savedProblem = nullptr;
 };
 
 class ReviewPage : public QWizardPage
 {
 public:
-    ReviewPage(Wizard *wizard, const Catalogue &catalogue)
-        : QWizardPage(wizard), m_wizard(wizard), m_catalogue(catalogue), m_list(new QLabel(this))
+    explicit ReviewPage(Wizard *wizard) : QWizardPage(wizard), m_wizard(wizard), m_list(new QLabel(this)), m_error(new QLabel(this))
     {
         setTitle(Wizard::tr("Ready to apply"));
         setCommitPage(true);
         setButtonText(QWizard::CommitButton, Wizard::tr("Apply"));
         m_list->setWordWrap(true);
         m_list->setTextFormat(Qt::PlainText);
+        m_error->setWordWrap(true);
+        m_error->hide();
         auto *layout = new QVBoxLayout(this);
         layout->addWidget(m_list);
+        layout->addWidget(m_error);
         layout->addStretch();
     }
     void initializePage() override
     {
-        const QStringList order = m_catalogue.runOrder(m_wizard->selection());
+        m_error->hide();
+        const QStringList order = m_wizard->runOrder();
         if (order.isEmpty()) {
             setSubTitle(Wizard::tr("Nothing is switched on. Go back to choose what to set up."));
             m_list->clear();
@@ -216,24 +288,34 @@ public:
         setSubTitle(Wizard::tr("These run in this order after one password."));
         QStringList lines;
         for (const QString &id : order) {
-            const Item *item = m_catalogue.find(id);
+            const Item *item = m_wizard->catalogue().find(id);
             lines << QStringLiteral("• ") + item->title() + QStringLiteral(" — ") + item->applySentence();
         }
         m_list->setText(lines.join(QLatin1Char('\n')));
     }
     // Apply is unavailable until an item is switched on (design, Worker's interface).
-    bool isComplete() const override { return !m_wizard->selection().isEmpty() && m_wizard->valuesValid(); }
+    bool isComplete() const override { return !m_wizard->runOrder().isEmpty() && m_wizard->valuesValid(); }
+    // What stays on from a saved file goes to the Worker in a file (spec 4.6).
+    bool validatePage() override
+    {
+        if (!m_wizard->savedSetup() || m_wizard->writeRestoreChoices())
+            return true;
+        m_error->setText(Wizard::tr("What to restore could not be written to %1, so nothing was changed.")
+                             .arg(isolated(m_wizard->restoreChoicesPath())));
+        m_error->show();
+        return false;
+    }
 
 private:
     Wizard *m_wizard;
-    const Catalogue &m_catalogue;
     QLabel *m_list;
+    QLabel *m_error;
 };
 
 class RunWizardPage : public RunPage
 {
 public:
-    explicit RunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard) {}
+    explicit RunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard) { makeSecretsOffer(); }
     void initializePage() override
     {
         QList<QPair<QString, QString>> titles;
@@ -245,8 +327,67 @@ public:
 
 private:
     QString rowTitle(const QString &id) const { return m_wizard->row(id)->toggle()->text(); }
+    // A saved file holding secrets: after the run, the user may remove them
+    // from it or delete it. Neither runs unless pressed (spec 4.8, INV-9).
+    void makeSecretsOffer()
+    {
+        auto *offer = new QWidget(this);
+        offer->setObjectName(QStringLiteral("secretsOffer"));
+        offer->hide();
+        auto *text = new QLabel(Wizard::tr("This saved file holds saved passwords or keys. Anyone with the file can "
+                                           "read them."),
+                                offer);
+        text->setWordWrap(true);
+        auto *remove = new QPushButton(Wizard::tr("Remove them from the file"), offer);
+        remove->setObjectName(QStringLiteral("removeSecrets"));
+        auto *erase = new QPushButton(Wizard::tr("Delete the file"), offer);
+        erase->setObjectName(QStringLiteral("deleteSetupFile"));
+        // Asked once more, on the page, naming the file.
+        auto *confirm = new QWidget(offer);
+        confirm->hide();
+        auto *confirmText = new QLabel(confirm);
+        confirmText->setWordWrap(true);
+        auto *yes = new QPushButton(Wizard::tr("Yes, delete it"), confirm);
+        yes->setObjectName(QStringLiteral("confirmDelete"));
+        auto *confirmLayout = new QVBoxLayout(confirm);
+        confirmLayout->setContentsMargins(0, 0, 0, 0);
+        confirmLayout->addWidget(confirmText);
+        confirmLayout->addWidget(yes, 0, Qt::AlignLeading);
+        auto *layout = new QVBoxLayout(offer);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->addWidget(text);
+        layout->addWidget(remove, 0, Qt::AlignLeading);
+        layout->addWidget(erase, 0, Qt::AlignLeading);
+        layout->addWidget(confirm);
+        static_cast<QVBoxLayout *>(this->layout())->addWidget(offer);
+
+        connect(this, &RunPage::runFinished, offer, [this, offer] {
+            const SavedSetup *saved = m_wizard->savedSetup();
+            if (m_offered || !saved || !saved->holdsSecrets())
+                return;
+            m_offered = true;
+            offer->show();
+        });
+        connect(remove, &QPushButton::clicked, offer, [this, offer] {
+            offer->hide();
+            start(m_program, m_wizard->secretsArguments(true),
+                  {{QStringLiteral("remove-secrets"), Wizard::tr("Removing saved passwords and keys")}});
+        });
+        connect(erase, &QPushButton::clicked, confirm, [this, confirm, confirmText] {
+            confirmText->setText(Wizard::tr("Delete %1? It cannot be undone.")
+                                     .arg(isolated(QFileInfo(m_wizard->savedSetup()->file).fileName())));
+            confirm->show();
+        });
+        connect(yes, &QPushButton::clicked, offer, [this, offer] {
+            offer->hide();
+            start(m_program, m_wizard->secretsArguments(false),
+                  {{QStringLiteral("delete-setup-file"), Wizard::tr("Deleting the saved file")}});
+        });
+    }
+
     Wizard *m_wizard;
     QString m_program;
+    bool m_offered = false;
 };
 
 class PrepareRunWizardPage : public RunPage
@@ -367,10 +508,12 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         scroll->setWidget(inner);
         auto *layout = new QVBoxLayout(page);
         layout->addWidget(scroll);
-        addPage(page);
+        const int id = addPage(page);
+        if (m_firstLevelId < 0)
+            m_firstLevelId = id;
         m_levelPages.insert(int(level), inner);
     }
-    addPage(new ReviewPage(this, *m_setup.catalogue));
+    addPage(new ReviewPage(this));
     auto *run = new RunWizardPage(this);
     run->configure(m_setup.workerProgram);
     m_runPage = run;
@@ -406,6 +549,8 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         m_carryRunPage = carryRun;
         addPage(carryRun);
     }
+    if (m_offeredJobs.contains(Job::SetUp) && offersSavedSetup())
+        m_savedPageId = addPage(new SavedSetupPage(this));
     connect(this, &QWizard::currentIdChanged, this, &Wizard::fitRows);
     for (RunPage *page : {m_runPage, m_prepareRunPage, m_carryRunPage}) {
         if (!page)
@@ -493,8 +638,8 @@ void Wizard::fitRows()
 void Wizard::userToggled(const QString &id, bool on)
 {
     QStringList included;
-    const QStringList pulled = on ? m_setup.catalogue->switchOn(m_selection, id, m_results, &included)
-                                  : m_setup.catalogue->switchOff(m_selection, id);
+    const QStringList pulled = on ? catalogue().switchOn(m_selection, id, m_results, &included)
+                                  : catalogue().switchOff(m_selection, id);
     refreshRows(pulled, included, id, on);
 }
 
@@ -532,6 +677,8 @@ QStringList Wizard::workerArguments() const
 {
     QStringList args = m_setup.workerPrefix
         + QStringList{QStringLiteral("--worker"), QStringLiteral("--lang"), m_setup.language};
+    if (m_saved)
+        args << QStringLiteral("--setup-choices") << restoreChoicesPath();
     const QStringList order = runOrder();
     for (const QString &id : order) {
         const ItemRow *row = m_rows.value(id);
@@ -566,6 +713,10 @@ int Wizard::nextId() const
         return m_drivePageId;
     if (id == 0 && m_chosenJob == Job::CarryOver)
         return m_gatherPageId;
+    if (id == 0 && m_chosenJob == Job::SetUp && m_saved)
+        return m_savedPageId;
+    if (id >= 0 && id == m_savedPageId)
+        return m_firstLevelId;
     if (currentPage() == m_runPage || currentPage() == m_prepareRunPage || currentPage() == m_carryRunPage)
         return -1;
     if (id >= 0 && id == m_drivePageId)
@@ -577,10 +728,149 @@ bool Wizard::valuesValid() const
 {
     for (const QString &id : runOrder()) {
         const ItemRow *row = m_rows.value(id);
-        if (row && row->valueField() && !m_setup.catalogue->find(id)->isValidValue(row->value()))
+        if (row && row->valueField() && !catalogue().find(id)->isValidValue(row->value()))
             return false;
     }
     return true;
+}
+
+bool SavedSetup::holdsSecrets() const
+{
+    return std::any_of(manifest.settings.cbegin(), manifest.settings.cend(),
+                       [](const SettingsRow &row) { return row.secret; });
+}
+
+const Catalogue &Wizard::catalogue() const { return m_saved ? *m_saved->all : *m_setup.catalogue; }
+
+QStringList Wizard::runOrder() const
+{
+    QStringList order = catalogue().runOrder(m_selection);
+    if (!m_saved)
+        return order;
+    order.removeIf([this](const QString &id) {
+        return isCarriedId(id) && std::none_of(m_saved->entries.cbegin(), m_saved->entries.cend(), [&](const auto &e) {
+                   return e.id == id && (!e.on || e.on->isChecked());
+               });
+    });
+    return order;
+}
+
+bool Wizard::loadSavedSetup(const QString &file, QString *why)
+{
+    if (m_saved && m_saved->file == file)
+        return true; // read already; the switches keep what the user chose
+    if (file.isEmpty()) {
+        *why = tr("Choose the saved setup file first.");
+        return false;
+    }
+    QStringList skipped;
+    const std::optional<Manifest> manifest = m_setup.readSetup(file, why, &skipped);
+    if (!manifest)
+        return false;
+    clearSavedSetup();
+    auto saved = std::make_unique<SavedSetup>();
+    saved->file = file;
+    saved->manifest = *manifest;
+    saved->skipped = skipped;
+    saved->carried = carriedItems(*manifest, file, *m_setup.catalogue);
+    saved->all.emplace(withCarried(*m_setup.catalogue, saved->carried));
+    QList<const Item *> items;
+    for (const std::unique_ptr<Item> &item : saved->carried.owned)
+        items << item.get();
+    const CheckResults found = m_setup.checkItems ? m_setup.checkItems(items) : CheckResults();
+    for (auto it = found.cbegin(); it != found.cend(); ++it)
+        m_results.insert(it.key(), it.value());
+    m_saved = std::move(saved);
+    return true;
+}
+
+void Wizard::clearSavedSetup()
+{
+    if (!m_saved)
+        return;
+    // The page deletes the rows when it is made afresh.
+    for (const std::unique_ptr<Item> &item : m_saved->carried.owned) {
+        m_selection.remove(item->id());
+        m_rows.remove(item->id());
+        m_results.remove(item->id());
+    }
+    m_saved.reset();
+    refreshRows({}, {}, {}, true);
+}
+
+void Wizard::addCarriedRow(ItemRow *row)
+{
+    m_rows.insert(row->id(), row);
+    connect(row, &ItemRow::toggledByUser, this, &Wizard::userToggled);
+}
+
+void Wizard::startCarried()
+{
+    for (const std::unique_ptr<Item> &item : m_saved->carried.owned) {
+        const QString id = item->id();
+        QString off;
+        for (const ZypperSource &source : std::as_const(m_saved->manifest.zypperSources)) {
+            if (kCarriedSourcePrefix + source.alias == id)
+                off = sourceStartsOffWhy(source, m_saved->manifest.systemId, m_setup.system.id);
+        }
+        if (!off.isEmpty()) {
+            m_rows.value(id)->setReason(off);
+            continue;
+        }
+        const CheckState state = m_results.value(id).state;
+        if (state != CheckState::NotDone && state != CheckState::CouldNotTell)
+            continue;
+        QStringList included;
+        const QStringList pulled = catalogue().switchOn(m_selection, id, m_results, &included);
+        refreshRows(pulled, included, id, true);
+    }
+}
+
+void Wizard::switchOnKept()
+{
+    if (!m_saved || m_saved->keptSwitched)
+        return;
+    m_saved->keptSwitched = true;
+    for (const QString &id : std::as_const(m_saved->carried.keptItems)) {
+        if (m_results.value(id).state != CheckState::NotDone)
+            continue;
+        // One that accepts a licence waits for the user's own say (INV-1).
+        if (catalogue().find(id)->acceptsLicence()) {
+            if (ItemRow *row = m_rows.value(id))
+                row->setReason(tr("You had this before."));
+            continue;
+        }
+        QStringList included;
+        const QStringList pulled = catalogue().switchOn(m_selection, id, m_results, &included);
+        refreshRows(pulled, included, id, true);
+    }
+}
+
+QString Wizard::restoreChoicesPath() const { return m_setup.stateDir + QStringLiteral("/restore-choices.json"); }
+
+bool Wizard::writeRestoreChoices() const
+{
+    Manifest kept;
+    for (const QString &id : std::as_const(m_saved->carried.keptItems)) {
+        if (m_selection.contains(id))
+            kept.items << id;
+    }
+    for (const SavedSetup::Entry &entry : std::as_const(m_saved->entries)) {
+        if (m_selection.contains(entry.id) && (!entry.on || entry.on->isChecked()))
+            entry.keep(kept);
+    }
+    (void)QDir().mkpath(m_setup.stateDir);
+    QSaveFile file(restoreChoicesPath());
+    const QJsonObject choices{{"file", m_saved->file}, {"manifest", manifestJson(kept)}};
+    return file.open(QIODevice::WriteOnly) && file.write(QJsonDocument(choices).toJson()) >= 0 && file.commit();
+}
+
+QStringList Wizard::secretsArguments(bool remove) const
+{
+    return m_setup.workerPrefix
+           + QStringList{QStringLiteral("--worker"),
+                         remove ? QStringLiteral("--remove-secrets") : QStringLiteral("--delete-setup-file"),
+                         m_saved->file, QStringLiteral("--lang"), m_setup.language};
 }
 
 bool Wizard::stopForClose()

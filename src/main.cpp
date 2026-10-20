@@ -124,6 +124,13 @@ int wizardMode(int argc, char *argv[])
         };
         setup.folderSpace = [](const QString &dir) { return gw::readFolderSpace(gw::CheckContext(gw::FileReader()), dir); };
         setup.system = identity;
+        // A saved file is the user's, read as the user (GRND-0079 spec 4.1).
+        setup.readSetup = [](const QString &file, QString *why, QStringList *skipped) {
+            return gw::readSetupFile(gw::CheckContext(gw::FileReader()), file, why, skipped);
+        };
+        setup.checkItems = [files](const QList<const gw::Item *> &items) {
+            return gw::runChecks(items, gw::CheckContext(files));
+        };
         wizard = std::make_unique<gw::Wizard>(setup);
         QObject::connect(wizard.get(), &gw::Wizard::languageChangeRequested, wizard.get(),
                          [&](const QString &next) {
@@ -187,11 +194,20 @@ int main(int argc, char *argv[])
             return worker.prepareDrive(args[at + 1]);
         if (const qsizetype at = args.indexOf(QStringLiteral("--save-setup")); at > 0 && at + 1 < args.size())
             return worker.saveSetup(args[at + 1]);
+        if (const qsizetype at = args.indexOf(QStringLiteral("--remove-secrets")); at > 0 && at + 1 < args.size())
+            return worker.removeSecrets(args[at + 1]);
+        if (const qsizetype at = args.indexOf(QStringLiteral("--delete-setup-file")); at > 0 && at + 1 < args.size())
+            return worker.deleteSetupFile(args[at + 1]);
+        QString setupChoices;
         QStringList ids;
         QHash<QString, QString> values;
         for (qsizetype i = args.indexOf(QStringLiteral("--worker")) + 1; i < args.size(); ++i) {
             if (args[i] == QLatin1String("--lang")) {
                 ++i; // loaded above
+                continue;
+            }
+            if (args[i] == QLatin1String("--setup-choices") && i + 1 < args.size()) {
+                setupChoices = args[++i];
                 continue;
             }
             if (args[i] == QLatin1String("--set") && i + 1 < args.size()) {
@@ -201,9 +217,9 @@ int main(int argc, char *argv[])
             }
             ids << args[i];
         }
-        return worker.run(ids, values);
+        return setupChoices.isEmpty() ? worker.run(ids, values) : worker.runFromSetup(setupChoices, ids, values);
     }
-    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version")
+    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version")
                         << '\n';
     return 2;
 }

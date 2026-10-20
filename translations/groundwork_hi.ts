@@ -337,9 +337,96 @@
         <source>Flatpak is not installed.</source>
         <translation>Flatpak इंस्टॉल नहीं है।</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1 और %n अन्य</numerusform>
+            <numerusform>%1 और %n अन्य</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>इस सिस्टम पर नहीं मिला: %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>सॉफ़्टवेयर स्रोत: %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>यह स्रोत वैसे ही जोड़ता है जैसे आपके पुराने कंप्यूटर पर था, %1 पर, और उसकी हस्ताक्षर कुंजी पर भरोसा करता है।</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>सॉफ़्टवेयर स्रोत %1 जोड़ा जा रहा है</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>%1 की सॉफ़्टवेयर सूची पढ़ी जा रही है</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>आपकी सेव की गई फ़ाइल से प्रोग्राम</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>आपके पास जो प्रोग्राम थे, उन्हें एक साथ इंस्टॉल करता है। जो इस सिस्टम पर नहीं मिलते, उन्हें छोड़ दिया जाता है और अंत में उनके नाम बताए जाते हैं।</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>इंस्टॉल किए गए प्रोग्रामों की सूची नहीं मिल सकी।</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>आपके प्रोग्राम इंस्टॉल किए जा रहे हैं</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>आपकी सेव की गई फ़ाइल से Flatpak ऐप</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>आपके पास जो Flatpak ऐप थे, उन्हें एक-एक करके इंस्टॉल करता है। जो इंस्टॉल नहीं हो सकते, उनके नाम अंत में बताए जाते हैं।</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>Flatpak अपने ऐप की सूची नहीं दे सका।</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>%1 इंस्टॉल किया जा रहा है</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>आपकी सेव की गई फ़ाइल से सेटिंग</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>आपके ऐप की सेटिंग आपके ही खाते से आपके होम फ़ोल्डर में कॉपी करता है। जिस फ़ाइल की जगह नई आती है, वह उसके बगल में एक क्रमांकित कॉपी के रूप में रखी जाती है।</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>सेटिंग उपयोगकर्ता के रूप में कॉपी की जाती हैं, कभी भी root के रूप में नहीं।</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>सेव की गई फ़ाइल की तुलना आपके होम फ़ोल्डर से नहीं की जा सकी।</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>आपकी सेटिंग कॉपी की जा रही हैं</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>बंद: यह स्रोत अपने प्रोग्रामों के हस्ताक्षर नहीं जाँचता।</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>बंद: इसे किसी दूसरे सिस्टम पर जोड़ा गया था, और शायद यह इस सिस्टम के लिए ठीक न हो।</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>सेव की गई फ़ाइल में %1 नहीं है।</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +836,8 @@
         <translation>चालू होकर शुरू होंगे: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>उपयोग: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>उपयोग: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1393,6 +1480,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>आपका सेव किया गया सेटअप</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>आपने जो रखा था, वह चालू होकर शुरू होता है। जो आपको वापस नहीं चाहिए, उसे बंद करें।</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>फ़ाइल: %1, %2 को सेव की गई</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>फ़ाइल: %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>किसी दूसरे सिस्टम पर सेव किया गया: %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>यह संस्करण इन्हें नहीं देता: %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>रखा गया, लेकिन यहाँ ज़रूरी नहीं: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>Groundwork इन Flatpak स्रोतों को उनकी कुंजियों के बिना नहीं जोड़ सकता। ज़रूरत हो तो इन्हें खुद जोड़ें: %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>इसमें सेव किए गए पासवर्ड या कुंजियाँ हैं।</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1823,6 +1949,26 @@
         <translation>Groundwork एक स्वतंत्र परियोजना है, openSUSE या SUSE का आधिकारिक उत्पाद नहीं है, और openSUSE प्रोजेक्ट या SUSE द्वारा समर्थित नहीं है।</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>सेव किए गए सेटअप से शुरू करें</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>सेव की गई सेटअप फ़ाइल</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>ब्राउज़ करें…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>सेव किया गया सेटअप चुनें</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>सेव किए गए सेटअप (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>लागू करने के लिए तैयार</translation>
     </message>
@@ -1837,6 +1983,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>ये एक पासवर्ड के बाद इसी क्रम में चलेंगे।</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>क्या बहाल करना है, यह %1 में लिखा नहीं जा सका, इसलिए कुछ भी नहीं बदला गया।</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>इस सेव की गई फ़ाइल में सेव किए गए पासवर्ड या कुंजियाँ हैं। जिसके पास भी यह फ़ाइल हो, वह उन्हें पढ़ सकता है।</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>उन्हें फ़ाइल से निकालें</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>फ़ाइल हटाएँ</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>हाँ, इसे हटाएँ</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>सेव किए गए पासवर्ड और कुंजियाँ निकाली जा रही हैं</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>%1 हटाएँ? इसे वापस नहीं लाया जा सकता।</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>सेव की गई फ़ाइल हटाई जा रही है</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1878,6 +2056,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>बंद किया गया क्योंकि %1 में यह शामिल है।</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>पहले सेव की गई सेटअप फ़ाइल चुनें।</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>यह आपके पास पहले था।</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1904,6 +2090,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>छोड़ा गया: कोई मान्य मान नहीं दिया गया।</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>लॉग आउट करके फिर से लॉग इन करें, ताकि खुले हुए ऐप बहाल की गई सेटिंग पढ़ें।</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2004,6 +2194,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>%1 में सेव किया गया।</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>क्या बहाल करना है, इसकी सूची पढ़ी नहीं जा सकी।</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>सेव किए गए पासवर्ड और कुंजियाँ निकाली जा रही हैं</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>हो सकता है अब फ़ाइल पढ़ी न जा सके। आपकी सेटिंग पहले से इस कंप्यूटर पर हैं, इसलिए इसे हटाया जा सकता है।</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>सेव की गई फ़ाइल पढ़ी जा रही है</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>उन्हें फ़ाइल से निकाला जा रहा है</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>कुछ सेव किए गए पासवर्ड या कुंजियाँ अब भी फ़ाइल में हैं।</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>सेव किए गए पासवर्ड और कुंजियाँ %1 से निकाल दी गईं।</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>सेव की गई फ़ाइल हटाई जा रही है</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>%1 हटा दिया गया।</translation>
     </message>
 </context>
 </TS>

@@ -68,6 +68,27 @@ if [ "$1" = --create ] && [ -n "$FAKE_TAR_FAIL" ]; then cat > /dev/null; exit 2;
 exec /usr/bin/tar "$@"
 )";
 
+// Restoring a setup (GRND-0079): rpm finds what the fake zypper installed;
+// zypper installs every name but those starting "nosuch".
+const QByteArray kRpm = R"(#!/bin/sh
+echo "rpm $*" >> "$FAKE_LOG"
+shift
+missing=0
+for name in "$@"; do
+  if grep -qx "$name" "$FAKE_INSTALLED" 2>/dev/null; then echo "$name-1.0"; else echo "package $name is not installed"; missing=$((missing+1)); fi
+done
+exit $missing
+)";
+
+const QByteArray kZypperInstalls = R"(#!/bin/sh
+echo "zypper $*" >> "$FAKE_LOG"
+case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
+case " $* " in *" install "*)
+  for name in "$@"; do case "$name" in -*|install|nosuch*) ;; *) echo "$name" >> "$FAKE_INSTALLED";; esac; done;;
+esac
+exit 0
+)";
+
 constexpr qint64 kMiB = qint64(1) << 20;
 constexpr qint64 kGiB = qint64(1) << 30;
 
@@ -222,6 +243,57 @@ class TstWorker : public QObject
         p.setProcessEnvironment(m_env);
         p.start(QStringLiteral(GROUNDWORK_BIN), {QStringLiteral("--worker"), QStringLiteral("--save-setup"), choices});
         return finish(p);
+    }
+
+    // A saved file (GRND-0078's format, written with the real tar) holding
+    // Dolphin's settings and an SSH key, and keeping two programs.
+    QString savedFile()
+    {
+        writeFile(m_bin + QStringLiteral("/tar"), kTar, true);
+        writeFile(m_dir->filePath(QStringLiteral(".config/dolphinrc")), "[General]\nShowFullPath=true\n");
+        writeFile(m_dir->filePath(QStringLiteral(".ssh/id_ed25519")), "not a real key\n");
+        const QString staged = m_dir->filePath(QStringLiteral("staged"));
+        writeFile(staged + QStringLiteral("/groundwork-setup.json"), QJsonDocument(savedManifest()).toJson());
+        const QString file = m_dir->filePath(QStringLiteral("groundwork-setup-pc-2026-10-20.tar"));
+        QProcess tar;
+        tar.start(QStringLiteral("/usr/bin/tar"), {QStringLiteral("--create"), QStringLiteral("--format=posix"),
+                                                   QStringLiteral("--file"), file, QStringLiteral("-C"), staged,
+                                                   QStringLiteral("groundwork-setup.json"), QStringLiteral("-C"),
+                                                   m_dir->path(), QStringLiteral(".config/dolphinrc"), QStringLiteral(".ssh")});
+        tar.waitForFinished();
+        return tar.exitCode() == 0 ? file : QString();
+    }
+    static QJsonObject savedManifest()
+    {
+        return {{"format", 1},
+                {"system", QJsonObject{{"id", "opensuse-tumbleweed"}}},
+                {"packages", QJsonArray{"act", "nosuch-thing"}},
+                {"settings", QJsonArray{QJsonObject{{"name", "Dolphin"}, {"paths", QJsonArray{".config/dolphinrc"}},
+                                                    {"secret", false}, {"bytes", 30}},
+                                        QJsonObject{{"name", "SSH keys"}, {"paths", QJsonArray{".ssh"}},
+                                                    {"secret", true}, {"bytes", 15}}}}};
+    }
+    // The wizard's choices for file (spec 4.6), keeping manifest.
+    QString restoreChoices(const QString &file, const QJsonObject &manifest)
+    {
+        const QString choices = m_dir->filePath(QStringLiteral("restore-choices.json"));
+        writeFile(choices, QJsonDocument(QJsonObject{{"file", file}, {"manifest", manifest}}).toJson());
+        return choices;
+    }
+    Run worker(const QStringList &args)
+    {
+        QProcess p;
+        p.setProcessEnvironment(m_env);
+        p.start(QStringLiteral(GROUNDWORK_BIN), QStringList{QStringLiteral("--worker")} + args);
+        return finish(p);
+    }
+    QStringList hintsFor(const Run &r, const QString &id) const
+    {
+        QStringList hints;
+        for (const auto &m : r.markers)
+            if (m.name == QLatin1String("HINT") && m.fields.value(0) == id)
+                hints << m.fields.value(1);
+        return hints;
     }
 
     // What the fake sfdisk was given on standard input.
@@ -598,6 +670,97 @@ cat > "$FAKE_WRITTEN$out"
     void refusesAnUnknownItem()
     {
         QCOMPARE(run({QStringLiteral("no-such-item")}).exitCode, 2);
+    }
+
+    // GRND-0079, INV-2: an entry the choices name that the saved file
+    // lacks refuses the run before any step.
+    void anEntryTheSavedFileLacksRefusesTheRun()
+    {
+        const QString file = savedFile();
+        QVERIFY(!file.isEmpty());
+        QJsonObject chosen = savedManifest();
+        chosen.insert("packages", QJsonArray{"act", "evil"});
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("carried-packages")});
+        QCOMPARE(r.exitCode, 2);
+        QCOMPARE(r.markers.value(0).name, QStringLiteral("SETUP_REFUSED"));
+        QVERIFY(r.markers.value(0).fields.value(0).contains(QLatin1String("evil")));
+        QCOMPARE(r.count(QStringLiteral("zypper")), 0);
+        QCOMPARE(r.count(QStringLiteral("sudo")), 0);
+    }
+
+    // GRND-0079, INV-3: a carried id is accepted only from a saved file.
+    void aCarriedIdNeedsASavedFile()
+    {
+        const Run r = run({QStringLiteral("carried-packages")});
+        QCOMPARE(r.exitCode, 2);
+        QCOMPARE(r.markers.value(0).name, QStringLiteral("UNKNOWN_ITEM"));
+    }
+
+    // GRND-0079, INV-4: a program the system lacks does not stop the others,
+    // and is named after the run.
+    void aProgramTheSystemLacksIsSkippedAndNamed()
+    {
+        writeFile(m_bin + QStringLiteral("/rpm"), kRpm, true);
+        writeFile(m_bin + QStringLiteral("/zypper"), kZypperInstalls, true);
+        m_env.insert(QStringLiteral("FAKE_INSTALLED"), m_dir->filePath(QStringLiteral("installed")));
+        const QString file = savedFile();
+        QJsonObject chosen = savedManifest();
+        chosen.remove("settings");
+        // The wizard pulls in the update, as every install needs it.
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("system-update"), QStringLiteral("carried-packages")});
+        QVERIFY2(r.endsFor(QStringLiteral("carried-packages")).value(1) == QLatin1String("ok"),
+                 qPrintable(r.endsFor(QStringLiteral("carried-packages")).join(QLatin1Char('|'))));
+        QCOMPARE(r.exitCode, 0);
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- zypper -n --ignore-unknown install act nosuch-thing")));
+        const QStringList hints = hintsFor(r, QStringLiteral("carried-packages"));
+        QCOMPARE(hints.size(), 1);
+        QVERIFY(hints.first().contains(QLatin1String("nosuch-thing")));
+        QVERIFY(!hints.first().contains(QLatin1String("act")));
+    }
+
+    // GRND-0079, INV-5: settings are copied as the user, into the home
+    // folder, keeping the file they replace.
+    void settingsAreRestoredAsTheUser()
+    {
+        const QString file = savedFile();
+        writeFile(m_dir->filePath(QStringLiteral(".config/dolphinrc")), "the new install's own\n");
+        QJsonObject chosen = savedManifest();
+        chosen.remove("packages");
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("carried-settings")});
+        QCOMPARE(r.endsFor(QStringLiteral("carried-settings")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.count(QStringLiteral("tar --extract --file")), 1); // not the setup list's read
+        QCOMPARE(r.count(QStringLiteral("sudo")), 0);
+        QVERIFY(QFile::exists(m_dir->filePath(QStringLiteral(".config/dolphinrc.~1~"))));
+        QFile restored(m_dir->filePath(QStringLiteral(".config/dolphinrc")));
+        QVERIFY(restored.open(QIODevice::ReadOnly));
+        QCOMPARE(restored.readAll(), QByteArray("[General]\nShowFullPath=true\n"));
+        QVERIFY(!hintsFor(r, QStringLiteral("carried-settings")).isEmpty()); // log out and back in
+    }
+
+    // GRND-0079, INV-9: removing secrets leaves no member under a secret
+    // setting; deleting removes the file.
+    void secretsAreRemovedOrTheFileDeleted()
+    {
+        const QString file = savedFile();
+        const Run removed = worker({QStringLiteral("--remove-secrets"), file});
+        QCOMPARE(removed.endsFor(QStringLiteral("remove-secrets")).value(1), QStringLiteral("ok"));
+        QCOMPARE(removed.exitCode, 0);
+        QCOMPARE(removed.count(QStringLiteral("sudo")), 0);
+        QProcess list;
+        list.start(QStringLiteral("/usr/bin/tar"), {QStringLiteral("--list"), QStringLiteral("--file"), file});
+        list.waitForFinished();
+        const QString members = QString::fromUtf8(list.readAllStandardOutput());
+        QVERIFY(!members.contains(QLatin1String(".ssh")));
+        QVERIFY(members.contains(QLatin1String(".config/dolphinrc")));
+        QVERIFY(members.contains(QLatin1String("groundwork-setup.json")));
+
+        const Run deleted = worker({QStringLiteral("--delete-setup-file"), file});
+        QCOMPARE(deleted.endsFor(QStringLiteral("delete-setup-file")).value(1), QStringLiteral("ok"));
+        QVERIFY(!QFile::exists(file));
     }
 };
 

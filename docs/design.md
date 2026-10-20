@@ -195,7 +195,10 @@ before programs. A program the new system cannot find is skipped and
 named at the end. Settings are copied into the user's home as the user,
 never as root, after the programs; a file they would replace is kept
 beside it as a numbered copy. Groundwork's other items are offered as
-usual (ruled by the user, 2026-10-20; spec GRND-0079).
+usual (ruled by the user, 2026-10-20; spec GRND-0079). A Flatpak source
+other than Flathub is named for the user to add, not added: `flatpak
+remote-add` of its address alone fails for want of its key (ruled by
+the user, 2026-10-20).
 
 Where the saved file holds secrets, the last page of that run warns
 again, and offers to remove the secrets from the file or to delete the

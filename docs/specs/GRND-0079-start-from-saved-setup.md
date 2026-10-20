@@ -113,9 +113,14 @@ Carried items come after every Groundwork item, in this order:
 | Id | One per | Check | Apply |
 |---|---|---|---|
 | `carried-source:<alias>` | zypper source | Done when `/etc/zypp/repos.d` holds a source with this alias or this `baseurl` (`parseRepoFile`) | § 4.3 |
-| `carried-remote:<name>` | Flatpak remote | Done when `flatpak remotes --columns=name,options` lists it in its installation | `flatpak remote-add --if-not-exists --system` or `--user` `NAME URL`; root only for `system` |
 | `carried-packages` | file | Done when `rpm -q` finds every kept name; the detail names the rest | § 4.4 |
 | `carried-flatpaks` | file | Done when `flatpak list --app --columns=application,installation` lists every kept app | one `flatpak install -y --noninteractive --system` or `--user` `REMOTE APP` step per missing app, `alsoOk = {1}` |
+
+A Flatpak remote becomes no item. `flatpak remote-add` of its URL alone
+exits 1, "public key not found", and the manifest holds no key (measured
+2026-10-20 in a Tumbleweed container with Flathub's beta repository).
+The page names each one for the user to add (user, 2026-10-20). An app
+from it fails its step and is named by the `HINT`.
 | `carried-settings` | file | `tar --diff` of the kept paths: 0 Done, 1 not done, 2 couldn't tell | § 4.5 |
 
 The colon in a carried id cannot clash with a Groundwork id: none has one,
@@ -132,17 +137,28 @@ An item with nothing kept is not built.
 ### 4.3 Software sources
 
 Each zypper source is written whole, as the old machine had it,
-`$releasever` and all:
+`$releasever` and all. It is refreshed from a folder of its own first,
+and moved into place only when that works, so a source that fails is
+never added:
 
-1. `writeFileStep("/etc/zypp/repos.d/<alias>.repo", …)`, holding
+1. `mkdir -p /run/groundwork/repos.d`.
+2. `writeFileStep("/run/groundwork/repos.d/<alias>.repo", …)`, holding
    `[alias]`, `name`, `baseurl`, `priority`, `enabled`, `autorefresh`,
    `gpgcheck` and, when set, `gpgkey`. Every value has passed § 4.7 of
    the saved file's spec, and a name holds no control character
    (`readManifest`), so no value can add a line.
-2. `zypper -n --gpg-auto-import-keys refresh <alias>`, `Tool::Zypper`.
+3. `zypper -n -D /run/groundwork/repos.d --gpg-auto-import-keys refresh
+   <alias>`, `Tool::Zypper`.
+4. `mv -f -- /run/groundwork/repos.d/<alias>.repo
+   /etc/zypp/repos.d/<alias>.repo`.
 
-A source whose refresh fails is left disabled, so it cannot stop later
-installs. How is settled while building; § 13.
+Measured 2026-10-20 in a `registry.opensuse.org/opensuse/tumbleweed`
+container: the staged refresh of an unreachable source exits 4 and
+`/etc/zypp/repos.d` stays without it; a reachable one exits 0, and after
+the move `zypper refresh` finds it up to date. A source written disabled
+is skipped by `zypper refresh` with exit 0, so refreshing it proves
+nothing. An enabled source that fails does not stop installs: `zypper
+install` exits 106, which the Worker counts as success.
 
 A source Groundwork's own item already added, such as Packman, reads
 Done by its `baseurl`, so it is not added twice.
@@ -237,6 +253,7 @@ the carried items from the choices' manifest, and runs the ids as
 - the kept Groundwork items this version lacks, as "Not offered by this
   version: …";
 - the entries the reader skipped (`readSetupFile`'s `skipped`);
+- the Flatpak remotes, for the user to add (§ 4.2);
 - a row per carried item, with its switch and inner switches.
 
 On leaving the page, each kept Groundwork item whose check says not done
@@ -341,14 +358,14 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
 ## 6. Failure modes
 
 - **The stick is pulled during the run:** the settings item's `tar`
-  fails, and the item fails, saying which file. Items before it are
-  unaffected.
-- **A source cannot be reached:** its item fails, and it is left
-  disabled (§ 4.3). Programs only it carries are named by the `HINT`.
+  fails, and the item fails. Pulled before that item starts, its check
+  cannot compare the file, so the item is skipped, saying so. Items
+  before it are unaffected.
+- **A source cannot be reached:** its item fails, and it is never added
+  (§ 4.3). Programs only it carries are named by the `HINT`.
 - **The file changed between the page and the run:** INV-2 refuses the
-  run if an entry is gone; the page is shown again.
-- **A Flatpak remote has no key** on `remote-add`: the item fails with
-  `flatpak`'s words. § 13.
+  run if an entry is gone; the run page shows the reason.
+- **A Flatpak remote:** named on the page, never added (§ 4.2).
 - **A setting cannot be written** (a link out of the home folder, a full
   disk): `tar` exits 2; the files before it are written, with their
   copies; the item fails, naming the path.
@@ -429,11 +446,6 @@ Rows live in `../reviews/GRND-0079-start-from-saved-setup-loop-log.md`.
 
 ## 13. Open questions
 
-- **A failed source left disabled:** write the `.repo` with
-  `enabled=0`, refresh, then enable; or remove it on failure. A step
-  list cannot branch, so the first is likelier. Settled by a container
-  run while building.
-- **Flatpak remotes without a key:** `flatpak remotes` gives the repo
-  URL, not a `.flatpakrepo` file with its key. Whether `remote-add`
-  of that URL verifies installs is unmeasured; measure in a container
-  before building `carried-remote`.
+None. Both were settled by container runs on 2026-10-20: a failed
+source is never added (§ 4.3), and a Flatpak remote is named, not added
+(§ 4.2).

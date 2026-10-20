@@ -337,9 +337,96 @@
         <source>Flatpak is not installed.</source>
         <translation>O Flatpak não está instalado.</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1 e mais %n</numerusform>
+            <numerusform>%1 e mais %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>Não encontrado neste sistema: %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>Fonte de software: %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>Adiciona esta fonte como o seu computador antigo a tinha, em %1, e confia na chave de assinatura dela.</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>Adicionando a fonte de software %1</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>Lendo a lista de software de %1</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>Programas do seu arquivo salvo</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>Instala os programas que você tinha, de uma só vez. Os que este sistema não encontrar são ignorados e indicados no final.</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>Não foi possível listar os programas instalados.</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>Instalando os seus programas</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>Aplicativos Flatpak do seu arquivo salvo</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>Instala os aplicativos Flatpak que você tinha, um de cada vez. Os que não puderem ser instalados são indicados no final.</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>O Flatpak não conseguiu listar os seus aplicativos.</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>Instalando %1</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>Configurações do seu arquivo salvo</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>Copia as configurações dos seus aplicativos para a sua pasta pessoal, com o seu próprio usuário. Um arquivo substituído fica ao lado, como uma cópia numerada.</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>As configurações são copiadas com o usuário, nunca como root.</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>Não foi possível comparar o arquivo salvo com a sua pasta pessoal.</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>Copiando as suas configurações</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>Desativado: esta fonte não verifica as assinaturas dos programas dela.</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>Desativado: ela foi adicionada em outro sistema e pode não servir para este.</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>O arquivo salvo não contém %1.</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +836,8 @@
         <translation>Começaria ativado: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>Uso: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>Uso: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1393,6 +1480,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>A sua configuração salva</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>O que você guardou começa ativado. Desative o que você não quiser de volta.</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>Arquivo: %1, salvo em %2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Arquivo: %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>Salvo em outro sistema: %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>Não oferecido por esta versão: %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>Guardado, mas não necessário aqui: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>O Groundwork não consegue adicionar estas fontes Flatpak sem as chaves delas. Adicione-as você mesmo, se precisar delas: %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>Guarda senhas ou chaves salvas.</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1823,6 +1949,26 @@
         <translation>O Groundwork é um projeto independente, não um produto oficial do openSUSE ou da SUSE, e não é endossado pelo Projeto openSUSE nem pela SUSE.</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>Começar a partir de uma configuração salva</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>Arquivo da configuração salva</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>Procurar…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>Escolha uma configuração salva</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>Configurações salvas (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>Pronto para aplicar</translation>
     </message>
@@ -1837,6 +1983,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>Estes serão executados nesta ordem depois de uma única senha.</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>Não foi possível gravar o que restaurar em %1, então nada foi alterado.</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>Este arquivo salvo guarda senhas ou chaves salvas. Qualquer pessoa com o arquivo pode lê-las.</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>Removê-las do arquivo</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>Apagar o arquivo</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>Sim, apagar</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Removendo as senhas e chaves salvas</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>Apagar %1? Isso não pode ser desfeito.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Apagando o arquivo salvo</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1878,6 +2056,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>Desativado porque %1 o inclui.</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>Escolha primeiro o arquivo da configuração salva.</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>Você tinha isto antes.</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1904,6 +2090,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>Ignorado: nenhum valor válido foi informado.</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>Saia da sessão e entre de novo, para que os aplicativos abertos leiam as configurações restauradas.</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2004,6 +2194,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>Salvo em %1.</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>Não foi possível ler a lista do que restaurar.</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>Removendo as senhas e chaves salvas</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>Agora o arquivo pode estar ilegível. As suas configurações já estão neste computador, então ele pode ser apagado.</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>Lendo o arquivo salvo</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>Removendo-as do arquivo</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>Algumas senhas ou chaves salvas ainda estão no arquivo.</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>As senhas e chaves salvas foram removidas de %1.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>Apagando o arquivo salvo</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>%1 foi apagado.</translation>
     </message>
 </context>
 </TS>

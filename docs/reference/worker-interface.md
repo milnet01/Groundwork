@@ -57,13 +57,46 @@ groundwork --worker [--lang LANG] --save-setup CHOICES_FILE
   renames it to `PATH`. On failure nothing is left at `PATH`.
 - On success it prints a `HINT` naming the file.
 
+A fourth form runs items with a saved setup's (GRND-0079):
+
+```
+groundwork --worker [--lang LANG] --setup-choices CHOICES_FILE [--set ITEM=VALUE]... ITEM...
+```
+
+- **`CHOICES_FILE`** — what the Wizard wrote: `{"file": PATH,
+  "manifest": {…}}`, the manifest holding only what stayed switched on.
+  Its format is in `docs/specs/GRND-0079-start-from-saved-setup.md`
+  § 4.6.
+- The Worker reads the saved file at `PATH` again. An entry in the
+  manifest that the saved file lacks refuses the run with
+  `SETUP_REFUSED`, before any step, and exit 2.
+- The manifest's parts become items with ids `carried-source:ALIAS`,
+  `carried-packages`, `carried-flatpaks` and `carried-settings`. They are
+  accepted only in this form.
+- After a carried item ends `ok`, its check runs again. A `HINT` with
+  its id names what it could not put back, such as a program this
+  system lacks.
+
+Two more forms act on a saved file, each as one item asking for no
+password (GRND-0079 spec § 4.8):
+
+```
+groundwork --worker [--lang LANG] --remove-secrets FILE
+groundwork --worker [--lang LANG] --delete-setup-file FILE
+```
+
+- `--remove-secrets`, id `remove-secrets`, deletes every member under a
+  setting marked secret, and replaces the manifest with one without
+  them. It ends `ok` only when no such member is left.
+- `--delete-setup-file`, id `delete-setup-file`, deletes the file.
+
 ## Exit codes
 
 | Code | Meaning |
 |---|---|
 | 0 | Every item ended ok or skipped |
 | 1 | At least one item failed |
-| 2 | Bad usage, or an unknown item id |
+| 2 | Bad usage, an unknown item id, or a saved setup refused |
 | 3 | Unsupported system |
 | 4 | The password was not accepted |
 | 5 | Stopped between items |
@@ -78,6 +111,7 @@ the output of a command the Worker ran.
 |---|---|---|
 | `UNSUPPORTED` | reason | The system is not supported; the Worker exits 3 |
 | `UNKNOWN_ITEM` | id | An id is not in the catalogue; the Worker exits 2 |
+| `SETUP_REFUSED` | reason | The choices name what the saved file lacks, or either cannot be read; the Worker exits 2 |
 | `STEP_BEGIN` | id, position, total, title | An item starts |
 | `AUTH` | `ok` or `failed` | Once, before the first step that needs root |
 | `ACTION` | id, label | A step of the item starts |

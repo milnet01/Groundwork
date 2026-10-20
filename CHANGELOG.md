@@ -20,8 +20,19 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   that are done, the programs you asked for, the software sources you
   added, and your settings app by app. Settings that hold saved
   passwords or keys start switched off, and switching one on says the
-  file will then hold them. Starting a new install from the file is not
-  built yet (GRND-0079). (GRND-0078)
+  file will then hold them. (GRND-0078)
+- **Starting a new install from a saved setup: on the first page, switch
+  on "Start from a saved setup" and choose the file.** What you kept
+  starts switched on: Groundwork's items, your software sources, your
+  programs, Flatpak apps and settings, each list with a switch per
+  entry. One run puts them back, settings last and as you. A program
+  this system cannot find is skipped and named at the end, and a
+  settings file that would be replaced is kept as a numbered copy. A
+  software source that does not check signatures, or comes from another
+  system, starts switched off, saying why. Flatpak sources other than
+  Flathub are named for you to add. Where the file holds saved
+  passwords or keys, the last page offers to remove them from it or
+  delete it. (GRND-0079)
 
 ## [0.4.0] - 2026-10-16
 

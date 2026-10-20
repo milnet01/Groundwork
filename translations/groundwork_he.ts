@@ -337,9 +337,96 @@
         <source>Flatpak is not installed.</source>
         <translation>‏Flatpak אינו מותקן.</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>‏%1 ועוד אחד</numerusform>
+            <numerusform>‏%1 ועוד %n</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>לא נמצא במערכת הזו: %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>מקור תוכנה: %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>מוסיף את המקור הזה כפי שהיה במחשב הישן שלך, ב־%1, וסומך על מפתח החתימה שלו.</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>מוסיף את מקור התוכנה %1</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>קורא את רשימת התוכנה של %1</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>תוכנות מהקובץ השמור שלך</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>מתקין את התוכנות שהיו לך, בבת אחת. כל מה שהמערכת הזו לא מוצאת מדולג ומצוין בסוף.</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>לא ניתן היה להציג את רשימת התוכנות המותקנות.</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>מתקין את התוכנות שלך</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>אפליקציות Flatpak מהקובץ השמור שלך</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>מתקין את אפליקציות ה־Flatpak שהיו לך, אחת אחרי השנייה. כל מה שלא ניתן להתקין מצוין בסוף.</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>‏Flatpak לא הצליח להציג את רשימת האפליקציות שלו.</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>מתקין את %1</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>הגדרות מהקובץ השמור שלך</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>מעתיק את ההגדרות של האפליקציות שלך לתיקיית הבית שלך, מהמשתמש שלך. קובץ שמוחלף נשמר לידו כעותק ממוספר.</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>ההגדרות מועתקות מהמשתמש, אף פעם לא כ־root.</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>לא ניתן היה להשוות את הקובץ השמור לתיקיית הבית שלך.</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>מעתיק את ההגדרות שלך</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>כבוי: המקור הזה לא בודק את החתימות של התוכנות שלו.</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>כבוי: הוא נוסף במערכת אחרת, וייתכן שלא יתאים לזו.</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>הקובץ השמור לא מכיל את %1.</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +836,8 @@
         <translation>יתחילו כשהם מופעלים: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1393,6 +1480,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>התצורה השמורה שלך</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>מה ששמרת מתחיל כשהוא מופעל. כבה כל מה שאינך רוצה לקבל בחזרה.</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>קובץ: %1, נשמר ב־%2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>קובץ: %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>נשמר במערכת אחרת: %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>לא מוצע בגרסה הזו: %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>נשמר, אבל לא נחוץ כאן: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>‏Groundwork לא יכול להוסיף את מקורות ה־Flatpak האלה בלי המפתחות שלהם. הוסף אותם בעצמך אם אתה צריך אותם: %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>מכיל סיסמאות או מפתחות שמורים.</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1823,6 +1949,26 @@
         <translation>‏Groundwork הוא פרויקט עצמאי, אינו מוצר רשמי של openSUSE או של SUSE, ואינו נתמך על ידי פרויקט openSUSE או SUSE.</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>התחלה מתצורה שמורה</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>קובץ תצורה שמורה</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>עיון…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>בחירת תצורה שמורה</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>תצורות שמורות (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>מוכן להחלה</translation>
     </message>
@@ -1837,6 +1983,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>אלה ירוצו בסדר הזה אחרי סיסמה אחת.</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>לא ניתן היה לכתוב ל־%1 את מה שיש לשחזר, ולכן שום דבר לא השתנה.</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>הקובץ השמור הזה מכיל סיסמאות או מפתחות שמורים. כל מי שיש לו את הקובץ יכול לקרוא אותם.</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>הסר אותם מהקובץ</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>מחק את הקובץ</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>כן, מחק אותו</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>מסיר את הסיסמאות והמפתחות השמורים</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>למחוק את %1? אי אפשר לבטל את זה.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>מוחק את הקובץ השמור</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1878,6 +2056,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>כבוי כי %1 כולל אותו.</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>בחר קודם את קובץ התצורה השמורה.</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>זה היה לך בעבר.</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1904,6 +2090,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>דולג: לא ניתן ערך תקין.</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>צא מהמערכת והיכנס שוב, כדי שאפליקציות פתוחות יקראו את ההגדרות המשוחזרות.</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2004,6 +2194,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>נשמר ב־%1.</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>לא ניתן היה לקרוא את רשימת מה שיש לשחזר.</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>מסיר את הסיסמאות והמפתחות השמורים</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>ייתכן שעכשיו לא ניתן לקרוא את הקובץ. ההגדרות שלך כבר נמצאות במחשב הזה, ולכן אפשר למחוק אותו.</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>קורא את הקובץ השמור</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>מסיר אותם מהקובץ</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>חלק מהסיסמאות או המפתחות השמורים עדיין נמצאים בקובץ.</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>הסיסמאות והמפתחות השמורים הוסרו מ־%1.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>מוחק את הקובץ השמור</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>‏%1 נמחק.</translation>
     </message>
 </context>
 </TS>

@@ -337,9 +337,95 @@
         <source>Flatpak is not installed.</source>
         <translation>Flatpak이 설치되어 있지 않습니다.</translation>
     </message>
+    <message numerus="yes">
+        <source>%1 and %n more</source>
+        <translation>
+            <numerusform>%1 외 %n개</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Not found on this system: %1</source>
+        <translation>이 시스템에서 찾을 수 없음: %1</translation>
+    </message>
+    <message>
+        <source>Software source: %1</source>
+        <translation>소프트웨어 소스: %1</translation>
+    </message>
+    <message>
+        <source>Adds this source as your old computer had it, at %1, and trusts its signing key.</source>
+        <translation>이전 컴퓨터에 있던 그대로 %1에 이 소스를 추가하고, 서명 키를 신뢰합니다.</translation>
+    </message>
+    <message>
+        <source>Adding the software source %1</source>
+        <translation>소프트웨어 소스 %1 추가 중</translation>
+    </message>
+    <message>
+        <source>Reading the software list of %1</source>
+        <translation>%1의 소프트웨어 목록을 읽는 중</translation>
+    </message>
+    <message>
+        <source>Programs from your saved file</source>
+        <translation>저장한 파일의 프로그램</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
+        <translation>이전에 쓰던 프로그램을 한 번에 설치합니다. 이 시스템에서 찾을 수 없는 것은 건너뛰고 마지막에 이름을 알려 줍니다.</translation>
+    </message>
+    <message>
+        <source>The installed programs could not be listed.</source>
+        <translation>설치된 프로그램 목록을 가져올 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Installing your programs</source>
+        <translation>프로그램 설치 중</translation>
+    </message>
+    <message>
+        <source>Flatpak apps from your saved file</source>
+        <translation>저장한 파일의 Flatpak 앱</translation>
+    </message>
+    <message>
+        <source>Installs the Flatpak apps you had, one at a time. Any that cannot be installed is named at the end.</source>
+        <translation>이전에 쓰던 Flatpak 앱을 하나씩 설치합니다. 설치할 수 없는 것은 마지막에 이름을 알려 줍니다.</translation>
+    </message>
     <message>
         <source>Flatpak could not list its apps.</source>
         <translation>Flatpak이 앱 목록을 가져올 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Installing %1</source>
+        <translation>%1 설치 중</translation>
+    </message>
+    <message>
+        <source>Settings from your saved file</source>
+        <translation>저장한 파일의 설정</translation>
+    </message>
+    <message>
+        <source>Copies your apps&apos; settings into your home folder, as you. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation>앱 설정을 본인 계정으로 홈 폴더에 복사합니다. 덮어쓰는 파일은 번호를 붙인 사본으로 옆에 남겨 둡니다.</translation>
+    </message>
+    <message>
+        <source>Settings are copied as the user, never as root.</source>
+        <translation>설정은 root가 아닌 사용자 계정으로만 복사됩니다.</translation>
+    </message>
+    <message>
+        <source>The saved file could not be compared with your home folder.</source>
+        <translation>저장한 파일을 홈 폴더와 비교할 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Copying your settings</source>
+        <translation>설정 복사 중</translation>
+    </message>
+    <message>
+        <source>Off: this source does not check its programs&apos; signatures.</source>
+        <translation>꺼짐: 이 소스는 프로그램의 서명을 확인하지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Off: it was added on a different system, and may not suit this one.</source>
+        <translation>꺼짐: 다른 시스템에서 추가된 것이라 이 시스템에 맞지 않을 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>The saved file does not hold %1.</source>
+        <translation>저장한 파일에 %1이(가) 없습니다.</translation>
     </message>
     <message>
         <source>Flatpak could not list its sources.</source>
@@ -749,8 +835,8 @@
         <translation>처음부터 켜져 있을 항목: %1</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</source>
-        <translation>사용법: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --save-setup CHOICES_FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
+        <translation>사용법: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1391,6 +1477,45 @@
     </message>
 </context>
 <context>
+    <name>gw::SavedSetupPage</name>
+    <message>
+        <source>Your saved setup</source>
+        <translation>저장한 구성</translation>
+    </message>
+    <message>
+        <source>What you kept starts switched on. Switch off anything you do not want back.</source>
+        <translation>저장해 둔 항목은 켜진 상태로 시작합니다. 되살리고 싶지 않은 것은 끄세요.</translation>
+    </message>
+    <message>
+        <source>File: %1, saved %2</source>
+        <translation>파일: %1, 저장 시각: %2</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>파일: %1</translation>
+    </message>
+    <message>
+        <source>Saved on a different system: %1</source>
+        <translation>다른 시스템에서 저장됨: %1</translation>
+    </message>
+    <message>
+        <source>Not offered by this version: %1</source>
+        <translation>이 버전에서 제공하지 않음: %1</translation>
+    </message>
+    <message>
+        <source>Kept, but not needed here: %1</source>
+        <translation>저장되어 있지만 여기서는 필요 없음: %1</translation>
+    </message>
+    <message>
+        <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
+        <translation>Groundwork는 키가 없어서 이 Flatpak 소스를 추가할 수 없습니다. 필요하면 직접 추가하세요: %1</translation>
+    </message>
+    <message>
+        <source>Holds saved passwords or keys.</source>
+        <translation>저장된 비밀번호나 키가 들어 있습니다.</translation>
+    </message>
+</context>
+<context>
     <name>gw::SnapshotsItem</name>
     <message>
         <source>System snapshots</source>
@@ -1820,6 +1945,26 @@
         <translation>Groundwork는 독립 프로젝트이며, openSUSE나 SUSE의 공식 제품이 아니고, openSUSE 프로젝트나 SUSE의 보증을 받지 않았습니다.</translation>
     </message>
     <message>
+        <source>Start from a saved setup</source>
+        <translation>저장한 구성에서 시작</translation>
+    </message>
+    <message>
+        <source>Saved setup file</source>
+        <translation>저장한 구성 파일</translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation>찾아보기…</translation>
+    </message>
+    <message>
+        <source>Choose a saved setup</source>
+        <translation>저장한 구성 선택</translation>
+    </message>
+    <message>
+        <source>Saved setups (groundwork-setup-*.tar)</source>
+        <translation>저장한 구성 (groundwork-setup-*.tar)</translation>
+    </message>
+    <message>
         <source>Ready to apply</source>
         <translation>적용 준비 완료</translation>
     </message>
@@ -1834,6 +1979,38 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>비밀번호를 한 번 입력하면 다음 순서로 실행됩니다.</translation>
+    </message>
+    <message>
+        <source>What to restore could not be written to %1, so nothing was changed.</source>
+        <translation>복원할 항목을 %1에 기록할 수 없어, 아무것도 바꾸지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
+        <translation>이 저장한 파일에는 저장된 비밀번호나 키가 들어 있습니다. 파일을 가진 사람은 누구나 읽을 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>Remove them from the file</source>
+        <translation>파일에서 제거</translation>
+    </message>
+    <message>
+        <source>Delete the file</source>
+        <translation>파일 삭제</translation>
+    </message>
+    <message>
+        <source>Yes, delete it</source>
+        <translation>예, 삭제합니다</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>저장된 비밀번호와 키 제거 중</translation>
+    </message>
+    <message>
+        <source>Delete %1? It cannot be undone.</source>
+        <translation>%1을(를) 삭제할까요? 되돌릴 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>저장한 파일 삭제 중</translation>
     </message>
     <message>
         <source>Preparing the drive</source>
@@ -1875,6 +2052,14 @@
         <source>Switched off because %1 includes it.</source>
         <translation>%1에 포함되어 있으므로 꺼졌습니다.</translation>
     </message>
+    <message>
+        <source>Choose the saved setup file first.</source>
+        <translation>먼저 저장한 구성 파일을 선택하세요.</translation>
+    </message>
+    <message>
+        <source>You had this before.</source>
+        <translation>이전에 있던 항목입니다.</translation>
+    </message>
 </context>
 <context>
     <name>gw::Worker</name>
@@ -1901,6 +2086,10 @@
     <message>
         <source>Skipped: no valid value was given.</source>
         <translation>건너뜀: 올바른 값이 주어지지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>Log out and back in, so apps that are open read the restored settings.</source>
+        <translation>열려 있는 앱이 복원된 설정을 읽도록 로그아웃했다가 다시 로그인하세요.</translation>
     </message>
     <message>
         <source>Core parts of the system were updated. Restart the computer when you can, so they take effect.</source>
@@ -2001,6 +2190,42 @@
     <message>
         <source>Saved to %1.</source>
         <translation>%1에 저장했습니다.</translation>
+    </message>
+    <message>
+        <source>The list of what to restore could not be read.</source>
+        <translation>복원할 항목 목록을 읽을 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>Removing saved passwords and keys</source>
+        <translation>저장된 비밀번호와 키 제거 중</translation>
+    </message>
+    <message>
+        <source>The file may now be unreadable. Your settings are already on this computer, so it can be deleted.</source>
+        <translation>이제 파일을 읽지 못할 수 있습니다. 설정은 이미 이 컴퓨터에 있으므로 파일을 지워도 됩니다.</translation>
+    </message>
+    <message>
+        <source>Reading the saved file</source>
+        <translation>저장한 파일을 읽는 중</translation>
+    </message>
+    <message>
+        <source>Removing them from the file</source>
+        <translation>파일에서 제거하는 중</translation>
+    </message>
+    <message>
+        <source>Some saved passwords or keys are still in the file.</source>
+        <translation>저장된 비밀번호나 키 일부가 아직 파일에 남아 있습니다.</translation>
+    </message>
+    <message>
+        <source>The saved passwords and keys were removed from %1.</source>
+        <translation>%1에서 저장된 비밀번호와 키를 제거했습니다.</translation>
+    </message>
+    <message>
+        <source>Deleting the saved file</source>
+        <translation>저장한 파일 삭제 중</translation>
+    </message>
+    <message>
+        <source>Deleted %1.</source>
+        <translation>%1을(를) 삭제했습니다.</translation>
     </message>
 </context>
 </TS>

@@ -34,6 +34,10 @@ struct CarryChoice
     QString output() const;
 };
 
+// A USB stick first, as the usual place for a saved setup (GRND-0078 spec
+// 4.5); else the home folder.
+QString usualSetupFolder();
+
 class GatherPage : public QWizardPage
 {
     Q_OBJECT

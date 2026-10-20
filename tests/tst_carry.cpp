@@ -1,7 +1,10 @@
 // Carry (GRND-0078): gathering a setup and the saved file's format. Fake
 // zypper and flatpak come first on PATH; tar is the real one, so the round
-// trip is the file a user would get (spec § 7).
+// trip is the file a user would get (spec § 7). GRND-0079 adds the items a
+// saved file becomes, restored with the same real tar.
 #include "carry/carry.h"
+#include "carry/carrieditems.h"
+#include "items/catalogue.h"
 
 #include <QDir>
 #include <QFile>
@@ -462,6 +465,138 @@ private slots:
         QCOMPARE(skipped.size(), 2);
         QVERIFY(skipped.join(QLatin1Char('\n')).contains(QLatin1String("-oRoot")));
         QVERIFY(skipped.join(QLatin1Char('\n')).contains(QLatin1String("--gpg-auto-import-keys")));
+    }
+
+    // GRND-0079, INV-3: a carried id holds a colon or starts "carried-",
+    // and none is a Groundwork id.
+    void aCarriedIdIsNeverAGroundworkId()
+    {
+        const gw::CarriedItems carried = gw::carriedItems(homeAndManifest(), QStringLiteral("f.tar"), gw::catalogue());
+        QCOMPARE(carried.owned.size(), size_t(4)); // a source, programs, Flatpak apps, settings
+        for (const auto &item : carried.owned) {
+            QVERIFY2(item->id().contains(QLatin1Char(':')) || item->id().startsWith(QLatin1String("carried-")),
+                     qPrintable(item->id()));
+            QVERIFY(gw::isCarriedId(item->id()));
+            QVERIFY(!gw::catalogue().find(item->id()));
+        }
+        for (const gw::Item *item : gw::catalogue().items())
+            QVERIFY2(!gw::isCarriedId(item->id()), qPrintable(item->id()));
+        QVERIFY(gw::withCarried(gw::catalogue(), carried).orderProblems().isEmpty());
+    }
+
+    // GRND-0079, INV-7: a source already present under another alias reads
+    // done by its baseurl; a new one is written whole, $releasever and all.
+    void aSourceIsWrittenWholeAndOnce()
+    {
+        const QByteArray packman = "[packman-gwdg]\nname=Packman\nenabled=1\n"
+                                   "baseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/\n";
+        writeFile(m_root + QStringLiteral("/etc/zypp/repos.d/packman-gwdg.repo"), packman);
+        gw::Manifest m;
+        gw::ZypperSource kept;
+        kept.alias = QStringLiteral("packman");
+        kept.name = QStringLiteral("Packman");
+        kept.baseurl = QStringLiteral("https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/");
+        m.zypperSources << kept << homeAndManifest().zypperSources;
+        m.zypperSources[1].gpgkey = QStringLiteral("https://download.opensuse.org/repositories/home:/milnet/repodata/repomd.xml.key");
+        const gw::CarriedItems carried = gw::carriedItems(m, QStringLiteral("f.tar"), gw::catalogue());
+        QCOMPARE(carried.owned.size(), size_t(2));
+        const gw::CheckContext context{gw::FileReader(m_root)};
+        QCOMPARE(carried.owned[0]->check(context).state, gw::CheckState::Done);
+        QCOMPARE(carried.owned[1]->check(context).state, gw::CheckState::NotDone);
+
+        const QList<gw::Step> steps = carried.owned[1]->applySteps({}, context);
+        QCOMPARE(steps.size(), 4);
+        const QString staged = gw::kStagedReposDir + QStringLiteral("/home_milnet_kde-fixes.repo");
+        QCOMPARE(steps[1].argv, (QStringList{QStringLiteral("dd"), QStringLiteral("of=") + staged, QStringLiteral("status=none")}));
+        QCOMPARE(QString::fromUtf8(steps[1].input),
+                 QStringLiteral("[home_milnet_kde-fixes]\nname=KDE fixes\n"
+                                "baseurl=https://download.opensuse.org/repositories/home:/milnet:/kde-fixes/$releasever/\n"
+                                "priority=80\nenabled=1\nautorefresh=0\ngpgcheck=1\n"
+                                "gpgkey=https://download.opensuse.org/repositories/home:/milnet/repodata/repomd.xml.key\n"));
+        // Refreshed where it was staged, then moved into place.
+        QCOMPARE(steps[2].argv.mid(0, 4), (QStringList{QStringLiteral("zypper"), QStringLiteral("-n"),
+                                                       QStringLiteral("-D"), gw::kStagedReposDir}));
+        QCOMPARE(steps[2].argv.last(), QStringLiteral("home_milnet_kde-fixes"));
+        QCOMPARE(steps[3].argv.last(), QStringLiteral("/etc/zypp/repos.d/home_milnet_kde-fixes.repo"));
+        for (const gw::Step &step : steps)
+            QVERIFY(step.needsRoot);
+    }
+
+    // GRND-0079, INV-6: a file a setting replaces is kept, and a second
+    // restore keeps the first copy.
+    void aReplacedSettingIsKeptAsANumberedCopy()
+    {
+        const gw::Manifest m = homeAndManifest();
+        const QString file = save(m);
+        QVERIFY(!file.isEmpty());
+        const QByteArray homePath = qgetenv("HOME");
+        qputenv("HOME", m_home.toUtf8());
+        const gw::CarriedItems carried = gw::carriedItems(m, file, gw::catalogue());
+        qputenv("HOME", homePath);
+        const gw::Item &settings = *carried.owned.back();
+        QCOMPARE(settings.id(), gw::kCarriedSettingsId);
+        const gw::CheckContext context{gw::FileReader()};
+        QCOMPARE(settings.check(context).state, gw::CheckState::Done);
+
+        writeFile(home(QStringLiteral(".config/dolphinrc")), "new install's own\n");
+        QCOMPARE(settings.check(context).state, gw::CheckState::NotDone);
+        const QList<gw::Step> steps = settings.applySteps({}, context);
+        QCOMPARE(steps.size(), 1);
+        QVERIFY(!steps[0].needsRoot);
+        QCOMPARE(steps[0].argv.mid(0, 5), (QStringList{QStringLiteral("tar"), QStringLiteral("--extract"),
+                                                       QStringLiteral("--file"), file, QStringLiteral("-C")}));
+        QCOMPARE(steps[0].argv.value(5), m_home);
+        QCOMPARE(tar(steps[0].argv.mid(1), steps[0].input), 0);
+        QCOMPARE(settings.check(context).state, gw::CheckState::Done);
+        writeFile(home(QStringLiteral(".config/dolphinrc")), "changed again\n");
+        QCOMPARE(tar(steps[0].argv.mid(1), steps[0].input), 0);
+
+        QFile first(home(QStringLiteral(".config/dolphinrc.~1~")));
+        QVERIFY(first.open(QIODevice::ReadOnly));
+        QCOMPARE(first.readAll(), QByteArray("new install's own\n"));
+        QVERIFY(QFile::exists(home(QStringLiteral(".config/dolphinrc.~2~"))));
+    }
+
+    // GRND-0079, INV-5: an archive holding a link out of the home folder,
+    // then a file under it, writes nothing outside.
+    void aSettingCannotWriteThroughALinkOutOfTheHomeFolder()
+    {
+        const QString outside = m_dir->filePath(QStringLiteral("outside"));
+        const QString first = m_dir->filePath(QStringLiteral("first"));
+        const QString second = m_dir->filePath(QStringLiteral("second"));
+        QVERIFY(QDir().mkpath(outside) && QDir().mkpath(first + QStringLiteral("/.config"))
+                && QDir().mkpath(second + QStringLiteral("/.config/evil")));
+        QVERIFY(QFile::link(outside, first + QStringLiteral("/.config/evil")));
+        writeFile(second + QStringLiteral("/.config/evil/pwned"), "written outside\n");
+        const QString file = m_dir->filePath(QStringLiteral("evil.tar"));
+        QCOMPARE(tar({QStringLiteral("--create"), QStringLiteral("--file"), file, QStringLiteral("-C"), first,
+                      QStringLiteral(".config/evil")}),
+                 0);
+        QCOMPARE(tar({QStringLiteral("--append"), QStringLiteral("--file"), file, QStringLiteral("-C"), second,
+                      QStringLiteral(".config/evil/pwned")}),
+                 0);
+
+        gw::Manifest m;
+        m.settings = {{QStringLiteral("Evil"), {QStringLiteral(".config/evil")}, false, 1}};
+        const QByteArray homePath = qgetenv("HOME");
+        qputenv("HOME", m_home.toUtf8());
+        const gw::CarriedItems carried = gw::carriedItems(m, file, gw::catalogue());
+        qputenv("HOME", homePath);
+        const QList<gw::Step> steps = carried.owned.back()->applySteps({}, gw::CheckContext(gw::FileReader()));
+        QVERIFY(!steps[0].needsRoot);
+        QCOMPARE(tar(steps[0].argv.mid(1), steps[0].input), 2);
+        QVERIFY(!QFile::exists(outside + QStringLiteral("/pwned")));
+    }
+
+    // GRND-0079, INV-2's rule: an entry the file lacks is named.
+    void anEntryTheFileLacksIsNamed()
+    {
+        const gw::Manifest file = homeAndManifest();
+        gw::Manifest chosen = file;
+        chosen.settings.removeLast();
+        QVERIFY(gw::notInFile(chosen, file).isEmpty());
+        chosen.packages << QStringLiteral("evil");
+        QVERIFY(gw::notInFile(chosen, file).contains(QLatin1String("evil")));
     }
 };
 
