@@ -1408,7 +1408,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Lanes: carry, wizard.
   Blocked-by: GRND-0077.
 
-- 📋 [GRND-0079] **Start a new install from a saved setup.**
+- ✅ [GRND-0079] **Start a new install from a saved setup.**
   Serves S6 (design.md, Carrying a setup over). The setup job's first
   page offers a saved file; kept items start switched on; programs and
   sources become items, sources first; settings are copied as the user
@@ -1416,6 +1416,12 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   secrets, the last page warns again and offers to remove them or delete
   the file, only on the user's say-so. Built under the saved file's spec
   from the item that gathers a setup.
+  Built 2026-10-20 (36c3fcc), unreleased, under
+  docs/specs/GRND-0079-start-from-saved-setup.md. A failed software
+  source is never added; Flatpak sources other than Flathub are named
+  for the user to add, not restored (user, 2026-10-20). Still due before
+  0.5.0: the spec's manual check, a real file on a vfat stick restored
+  in a fresh Tumbleweed VM, and a look at the new page on screen.
   **Layman:** After reinstalling, Groundwork can read your saved file and switch on everything you kept.
   Kind: feature.
   Source: user-request-2026-10-15.
