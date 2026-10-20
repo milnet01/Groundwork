@@ -187,12 +187,15 @@ one file wherever they choose; a USB stick is the usual place. It holds
 settings and choices, never documents or photos.
 
 On the new install, the setup job's first page offers to start from a
-saved file. Each kept Groundwork item starts switched on. Programs and
-software sources become items of their own, each switched on, with the
-sources before the programs that need them. Settings are copied into the
-user's home as the user, never as root, after the programs; a file they
-would replace is kept beside it first. Anything the new system lacks is
-"not needed here". Groundwork's other items are offered as usual.
+saved file. Each kept Groundwork item starts switched on, except one
+that accepts a licence, which starts off. Each software source becomes an
+item of its own. Programs, Flatpak apps and settings are one item each,
+with a switch per entry; everything starts switched on. Sources come
+before programs. A program the new system cannot find is skipped and
+named at the end. Settings are copied into the user's home as the user,
+never as root, after the programs; a file they would replace is kept
+beside it as a numbered copy. Groundwork's other items are offered as
+usual (ruled by the user, 2026-10-20; spec GRND-0079).
 
 Where the saved file holds secrets, the last page of that run warns
 again, and offers to remove the secrets from the file or to delete the
