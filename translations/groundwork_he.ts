@@ -2180,6 +2180,10 @@
         <translation>כותב את קובץ התצורה</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>לא ניתן היה לקרוא חלק מהקבצים בהגדרות האלה, ולכן הם הושמטו: %1.</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>ההגדרות האלה השתנו בזמן שנשמרו, אולי כי האפליקציה הייתה פתוחה: %1. סגור אותה ושמור שוב כדי להיות בטוח.</translation>
     </message>

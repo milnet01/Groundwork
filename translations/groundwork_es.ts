@@ -2180,6 +2180,10 @@
         <translation>Escribiendo el archivo de configuración</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>No se pudieron leer algunos archivos de estos ajustes, así que se omitieron: %1.</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>Estos ajustes cambiaron mientras se guardaban, quizá porque la aplicación estaba abierta: %1. Ciérrala y vuelve a guardar para asegurarte.</translation>
     </message>

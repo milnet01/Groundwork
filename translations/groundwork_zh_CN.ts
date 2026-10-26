@@ -2176,6 +2176,10 @@
         <translation>正在写入配置文件</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>以下设置中的部分文件无法读取，因此未被保存：%1。</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>以下设置在保存期间发生了变化，可能是因为应用正开着：%1。请关闭它并重新保存，以确保无误。</translation>
     </message>

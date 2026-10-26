@@ -2180,6 +2180,10 @@
         <translation>Die Einrichtungsdatei wird geschrieben</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>Einige Dateien in diesen Einstellungen konnten nicht gelesen werden und wurden ausgelassen: %1.</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>Diese Einstellungen haben sich beim Speichern geändert, vielleicht weil die App geöffnet war: %1. Schließen Sie sie und speichern Sie erneut, um sicherzugehen.</translation>
     </message>

@@ -425,8 +425,11 @@ int Worker::saveSetup(const QString &choicesPath)
         || !list.commit())
         return end(false, tr("The setup list could not be written to %1.").arg(m_stateDir) + QLatin1Char(' ') + nothing);
 
-    // tar exits 1 when a file changed as it was read, a running browser say;
-    // its only output is such a warning, which names the file.
+    // tar exits 1 when a file changed as it was read, a running browser say,
+    // and leaves out a file it cannot read. Its only output is a warning
+    // naming the file, in the user's language, so which kind each is comes
+    // from reading the files here instead.
+    const QStringList unreadable = unreadableSettings(*manifest, home);
     partial = output + QStringLiteral(".partial");
     QString detail;
     QStringList warnings;
@@ -434,10 +437,15 @@ int Worker::saveSetup(const QString &choicesPath)
                       Step::Tool::Generic, tr("Writing the setup file"), {1}, createInput(*manifest)};
     if (!runStep(id, create, &detail, &warnings))
         return end(false, detail);
+    if (!unreadable.isEmpty())
+        say(formatMarker(QStringLiteral("HINT"),
+                         {id, tr("Some files in these settings could not be read, so they were left out: %1.")
+                                  .arg(unreadable.join(QStringLiteral(", ")))}));
+    // A setting with an unreadable file is named once, above.
     QStringList changed;
     for (const SettingsRow &row : std::as_const(manifest->settings)) {
         for (const QString &path : row.paths) {
-            if (!changed.contains(row.name)
+            if (!changed.contains(row.name) && !unreadable.contains(row.name)
                 && std::any_of(warnings.cbegin(), warnings.cend(), [&](const QString &w) { return w.contains(path); }))
                 changed << row.name;
         }

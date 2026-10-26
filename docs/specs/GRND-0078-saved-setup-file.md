@@ -178,10 +178,12 @@ markers (`docs/reference/worker-interface.md`, Markers). Every step is
 2. Write the manifest to the state folder as `groundwork-setup.json`.
 3. Write the archive to `<output>.partial`, the settings paths on
    standard input, NUL-separated:
-   `tar --create --format=posix --file <output>.partial -C <state>
-   groundwork-setup.json -C <home> --verbatim-files-from --null
-   --files-from=-`. Exit 1 ("a file changed as it was read", a running
-   browser say) is also ok (`Step::alsoOk`).
+   `tar --create --format=posix --ignore-failed-read --file
+   <output>.partial -C <state> groundwork-setup.json -C <home>
+   --verbatim-files-from --null --files-from=-`. Exit 1 ("a file
+   changed as it was read", a running browser say) is also ok
+   (`Step::alsoOk`). A file the user cannot read is left out, and a
+   HINT names its setting (GRND-0085, user decision 2026-10-26).
 4. `tar --list --file <output>.partial` and compare with the manifest
    (INV-5).
 5. `mv -f -- <output>.partial <output>`.
@@ -446,3 +448,4 @@ archive (INV-4).
 ## 12. Cold-eyes loop log
 
 Rows live in `../reviews/GRND-0078-saved-setup-file-loop-log.md`.
+- **impl (2026-10-26)** — GRND-0085: § 4.5 step 3 adds --ignore-failed-read; an unreadable file is left out and a HINT names its setting (user decision 2026-10-26). No reviewer dispatched; this project runs no reviews (CLAUDE.md, 2026-10-07).

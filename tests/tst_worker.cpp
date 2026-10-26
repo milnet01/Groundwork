@@ -12,6 +12,8 @@
 #include <QTemporaryDir>
 #include <QtTest>
 
+#include <unistd.h>
+
 namespace {
 
 const QByteArray kSudo = R"(#!/bin/sh
@@ -665,6 +667,33 @@ cat > "$FAKE_WRITTEN$out"
         QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("fail"));
         QCOMPARE(r.exitCode, 1);
         QVERIFY(!QFile::exists(output));
+    }
+
+    // GRND-0085: a file under a setting that cannot be read is left out;
+    // the save still ends ok, and one hint names the setting.
+    void anUnreadableFileIsLeftOut()
+    {
+        if (getuid() == 0)
+            QSKIP("root reads every file");
+        const QString output = m_dir->filePath(QStringLiteral("out.tar"));
+        const QString choices = saveSetup({".config/dolphinrc", ".ssh"}, output);
+        const QString locked = m_dir->filePath(QStringLiteral(".ssh/locked"));
+        writeFile(locked, "owned by root, say\n");
+        QVERIFY(QFile::setPermissions(locked, {}));
+        const Run r = save(choices);
+        QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(std::count_if(r.markers.cbegin(), r.markers.cend(),
+                               [](const gw::Marker &m) {
+                                   return m.name == QLatin1String("HINT") && m.fields.value(1).contains(QLatin1String("Mine"));
+                               }),
+                 1);
+        QProcess list;
+        list.start(QStringLiteral("/usr/bin/tar"), {QStringLiteral("--list"), QStringLiteral("--file"), output});
+        list.waitForFinished();
+        const QStringList members = QString::fromUtf8(list.readAllStandardOutput()).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
+        QVERIFY(members.contains(QStringLiteral(".ssh/id_ed25519")));
+        QVERIFY(!members.contains(QStringLiteral(".ssh/locked")));
     }
 
     void refusesAnUnknownItem()

@@ -1456,12 +1456,21 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: user-request-2026-10-16.
   Lanes: items.
 
-- 📋 [GRND-0085] **One unreadable file under a setting fails the whole save.**
+- ✅ [GRND-0085] **One unreadable file under a setting fails the whole save.**
   Found while building GRND-0078, not measured on a real home. The
   spec's tar --create (§ 4.5) exits 2 on a file it cannot read, so the
   run ends fail. Candidate: tar --ignore-failed-read, which turns it
   into a warning, plus a HINT naming the setting. That changes the
   spec's argument list, so it needs the user's say first.
+  User decision (2026-10-26): skip the unreadable file, finish the
+  save, and name the setting in a HINT. Build with
+  tar --ignore-failed-read.
+  Built 2026-10-26. tar runs with --ignore-failed-read; the Worker
+  finds unreadable files under each setting itself, since tar's
+  warnings come in the user's language, and one HINT names those
+  settings. A setting that is one unreadable file still fails, as
+  "The file is missing ...", since nothing of it can be saved.
+  Test: tst_worker anUnreadableFileIsLeftOut.
   **Layman:** If one settings file cannot be read, such as a file left owned by root, saving the setup fails instead of skipping that file.
   Kind: fix.
   Source: claude-2026-10-19.

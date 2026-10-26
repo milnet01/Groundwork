@@ -20,7 +20,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   that are done, the programs you asked for, the software sources you
   added, and your settings app by app. Settings that hold saved
   passwords or keys start switched off, and switching one on says the
-  file will then hold them. (GRND-0078)
+  file will then hold them. A file Groundwork cannot read, such as one
+  owned by root, is left out, and the save names its setting.
+  (GRND-0078, GRND-0085)
 - **Starting a new install from a saved setup: on the first page, switch
   on "Start from a saved setup" and choose the file.** What you kept
   starts switched on: Groundwork's items, your software sources, your

@@ -2176,6 +2176,10 @@
         <translation>セットアップファイルを書き込んでいます</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>次の設定の一部のファイルを読み取れなかったため、保存から除外しました：%1。</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>保存中に次の設定が変わりました。アプリが開いていたのかもしれません：%1。確実にするには、アプリを閉じてからもう一度保存してください。</translation>
     </message>

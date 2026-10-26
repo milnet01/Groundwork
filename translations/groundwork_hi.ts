@@ -2180,6 +2180,10 @@
         <translation>सेटअप फ़ाइल लिखी जा रही है</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>इन सेटिंग की कुछ फ़ाइलें पढ़ी नहीं जा सकीं, इसलिए उन्हें छोड़ दिया गया: %1।</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>ये सेटिंग सेव होते समय बदल गईं, शायद इसलिए कि ऐप खुला था: %1। पक्का करने के लिए उसे बंद करें और फिर से सेव करें।</translation>
     </message>

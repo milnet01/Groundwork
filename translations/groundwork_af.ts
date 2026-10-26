@@ -2180,6 +2180,10 @@
         <translation>Besig om die opstellingslêer te skryf</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>Sommige lêers in hierdie instellings kon nie gelees word nie, en is uitgelaat: %1.</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>Hierdie instellings het verander terwyl hulle gestoor is, dalk omdat die toep oop was: %1. Maak dit toe en stoor weer om seker te wees.</translation>
     </message>

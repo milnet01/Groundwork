@@ -2176,6 +2176,10 @@
         <translation>正在寫入組態檔案</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>以下設定中的部分檔案無法讀取，因此未被儲存：%1。</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>以下設定在儲存期間發生了變更，可能是因為應用程式正開著：%1。請關閉它並重新儲存，以確保無誤。</translation>
     </message>

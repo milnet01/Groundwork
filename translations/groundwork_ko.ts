@@ -2176,6 +2176,10 @@
         <translation>구성 파일을 기록하는 중</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>다음 설정의 일부 파일을 읽을 수 없어 저장에서 제외했습니다: %1.</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>저장하는 동안 다음 설정이 바뀌었습니다. 앱이 열려 있었을 수 있습니다: %1. 확실히 하려면 앱을 닫고 다시 저장하세요.</translation>
     </message>

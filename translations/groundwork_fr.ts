@@ -2180,6 +2180,10 @@
         <translation>Écriture du fichier de configuration</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>Certains fichiers de ces réglages n&apos;ont pas pu être lus et ont été laissés de côté&#xa0;: %1.</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>Ces réglages ont changé pendant leur enregistrement, peut-être parce que l&apos;application était ouverte&#xa0;: %1. Fermez-la et enregistrez à nouveau pour être sûr.</translation>
     </message>

@@ -2180,6 +2180,10 @@
         <translation>Kubhalwa ifayela lokusetha</translation>
     </message>
     <message>
+        <source>Some files in these settings could not be read, so they were left out: %1.</source>
+        <translation>Amanye amafayela kulezi zilungiselelo awakwazanga ukufundwa, ngakho ashiywe ngaphandle: %1.</translation>
+    </message>
+    <message>
         <source>These settings changed while they were saved, perhaps because the app was open: %1. Close it and save again to be sure.</source>
         <translation>Lezi zilungiselelo zishintshile ngenkathi zilondolozwa, mhlawumbe ngoba uhlelo lwaluvuliwe: %1. Luvale bese ulondoloza futhi ukuze uqiniseke.</translation>
     </message>

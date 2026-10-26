@@ -1,6 +1,8 @@
 #include "carry.h"
 
 #include <QCoreApplication>
+#include <QDirIterator>
+#include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QLocale>
@@ -527,9 +529,41 @@ QString membersProblem(const QStringList &members, const Manifest &manifest)
 
 QStringList createArguments(const QString &partial, const QString &stateDir, const QString &home)
 {
-    return {QStringLiteral("--create"), QStringLiteral("--format=posix"), QStringLiteral("--file"), partial,
-            QStringLiteral("-C"), stateDir, kManifestName, QStringLiteral("-C"), home,
+    // An unreadable file is left out with a warning, not a failure (GRND-0085).
+    return {QStringLiteral("--create"), QStringLiteral("--format=posix"), QStringLiteral("--ignore-failed-read"),
+            QStringLiteral("--file"), partial, QStringLiteral("-C"), stateDir, kManifestName, QStringLiteral("-C"), home,
             QStringLiteral("--verbatim-files-from"), QStringLiteral("--null"), QStringLiteral("--files-from=-")};
+}
+
+QStringList unreadableSettings(const Manifest &manifest, const QString &home)
+{
+    // As tar reads them: a link is stored, not followed, and a folder must
+    // be both read and entered.
+    auto unreadable = [](const QFileInfo &info) {
+        if (info.isSymLink())
+            return false;
+        return !info.isReadable() || (info.isDir() && !info.isExecutable());
+    };
+    auto anyUnreadable = [&](const QString &path) {
+        const QFileInfo top(home + QLatin1Char('/') + path);
+        if (unreadable(top))
+            return true;
+        if (!top.isDir() || top.isSymLink())
+            return false;
+        QDirIterator it(top.filePath(), QDir::AllEntries | QDir::Hidden | QDir::System | QDir::NoDotAndDotDot,
+                        QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            if (unreadable(it.nextFileInfo()))
+                return true;
+        }
+        return false;
+    };
+    QStringList names;
+    for (const SettingsRow &row : manifest.settings) {
+        if (std::any_of(row.paths.cbegin(), row.paths.cend(), anyUnreadable))
+            names << row.name;
+    }
+    return names;
 }
 
 QByteArray createInput(const Manifest &manifest)

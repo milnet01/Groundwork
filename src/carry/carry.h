@@ -150,6 +150,10 @@ QStringList createArguments(const QString &partial, const QString &stateDir, con
 QByteArray createInput(const Manifest &manifest);
 QStringList listArguments(const QString &file);
 
+// The names of the settings holding a file or folder under home that this
+// user cannot read, which tar leaves out (GRND-0085).
+QStringList unreadableSettings(const Manifest &manifest, const QString &home);
+
 // Reads a saved file with tar (spec 4.7).
 std::optional<Manifest> readSetupFile(const CheckContext &context, const QString &file, QString *why,
                                       QStringList *skipped);
