@@ -1466,6 +1466,14 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   imported from /etc/pki/rpm-gpg/claude-code.asc; the steps ran in
   Tumbleweed and Leap 16.0 containers that day. The row says "Ants
   Terminal offers this too." while Ants Terminal is switched on.
+  Ants Terminal confirmed (its session, 2026-10-26): ANTS-5744 (d79ed406)
+  offers Claude Code in its welcome dialog through Anthropic's native
+  installer, into ~/.local/bin, only when it finds none (claude on PATH,
+  ~/.local/bin/claude, or ~/.claude). Built, not released: its newest
+  tag, v0.7.114, lacks it. No double install: Groundwork's check also
+  looks in ~/.local/bin, and Ants Terminal sees /usr/bin/claude. The row
+  "Ants Terminal offers this too." is true only once that Ants Terminal
+  release ships.
   **Layman:** A switch among the developer tools that installs Claude Code, Anthropic's coding assistant, for people who do not get it through Ants Terminal.
   Kind: feature.
   Source: user-request-2026-10-16.
