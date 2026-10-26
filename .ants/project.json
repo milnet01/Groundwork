@@ -1,5 +1,6 @@
 {
     "changelog": "CHANGELOG.md",
+    "claude_chrome": true,
     "docs_dir": "docs",
     "id_format": {
         "prefix": "GRND"
