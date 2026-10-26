@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=85 -->
+<!-- ants-roadmap-id-high-water: GRND=86 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1402,6 +1402,12 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Built 2026-10-19 in bd12241: src/carry/, the wizard's carry pages, and
   the Worker's --save-setup. Gate 46 of 46. Not yet run on a real
   machine or a vfat stick (spec § 7's manual check, before release).
+  Manual check passed 2026-10-26. The user's real setup was saved
+  from this machine to a 16 GB FAT32 stick (a vfat image attached as a
+  loop device). The save page chose the stick by itself and read it as
+  a vfat drive. tar -tvf lists the file, manifest first, and no .partial
+  was left. Manifest: 27 items, 340 packages, 17 Flatpaks, 7 sources,
+  147 settings.
   **Layman:** Groundwork can list what is set up on this machine, let you keep or drop each part, and save it for your next install.
   Kind: feature.
   Source: user-request-2026-10-15.
@@ -1422,6 +1428,15 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   for the user to add, not restored (user, 2026-10-20). Still due before
   0.5.0: the spec's manual check, a real file on a vfat stick restored
   in a fresh Tumbleweed VM, and a look at the new page on screen.
+  Manual check 2026-10-26, partly passed. That file, on the stick as a
+  USB drive, restored in a fresh Tumbleweed VM (Minimal-VM image of
+  Snapshot20261024, plus the KDE pattern). The file dialog opened on the
+  stick, filtered to saved setups. The saved-setup page showed the file
+  and date, and marked the AMD item as not needed here. All 27 items,
+  the sources, the 17 Flatpaks and the settings came back. Programs
+  from your saved file failed: GRND-0086. Still to do: the saved-setup
+  page in Arabic and Hebrew (the VM needed noto-sans-arabic-fonts and
+  noto-sans-hebrew-fonts; installed, not yet looked at).
   **Layman:** After reinstalling, Groundwork can read your saved file and switch on everything you kept.
   Kind: feature.
   Source: user-request-2026-10-15.
@@ -1497,6 +1512,26 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   **Layman:** If one settings file cannot be read, such as a file left owned by root, saving the setup fails instead of skipping that file.
   Kind: fix.
   Source: claude-2026-10-19.
+  Lanes: carry, worker.
+
+- 📋 [GRND-0086] **One clashing package stops every carried program installing.**
+  Found in GRND-0079's manual check (2026-10-26). The carried-packages
+  step installs all saved packages in one zypper -n --ignore-unknown
+  install. The saved list held kernel-default; the VM image has
+  kernel-default-base, which conflicts. zypper -n answered its question
+  with cancel, exit 4, and none of the 340 packages were installed.
+  Unknown names (cursor, freedownloadmanager, ROCm libraries) were
+  skipped as designed. The log is in the VM at
+  ~/.local/state/groundwork/logs/run-20261026-062903.log, copied to
+  /mnt/Emulators/claude-scratch/grnd-live/run79/restore-run.log.
+  To settle with the user: (a) on a failed batch, install the rest and
+  name the ones that could not go in; (b) leave out packages the
+  installer chooses, such as kernels and boot loaders (kernel-default,
+  shim, grub2-*, sdbootutil); or both. A full Tumbleweed install has
+  kernel-default, so this exact clash is partly the VM's.
+  **Layman:** When one saved program cannot be installed on the new system, none of the others are installed either.
+  Kind: fix.
+  Source: grnd-0079-manual-check-2026-10-26.
   Lanes: carry, worker.
 
 ## 0.6.0 — Your own set-up
