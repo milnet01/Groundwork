@@ -35,6 +35,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   Flathub are named for you to add. Where the file holds saved
   passwords or keys, the last page offers to remove them from it or
   delete it. (GRND-0079)
+- **Claude Code, Anthropic's coding assistant, among the developer
+  tools.** It installs from Anthropic's signed repository, so system
+  updates keep it up to date. Using it needs a paid Claude plan. It
+  shows as done when `claude` is already installed. While Ants Terminal
+  is switched on, the row says Ants Terminal offers it too. (GRND-0082)
 
 ## [0.4.0] - 2026-10-16
 

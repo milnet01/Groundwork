@@ -69,6 +69,16 @@ public:
 const FakeItem parser(QStringLiteral("parser"), gw::Level::NiceToHave, false);
 const FakeIncluder terminal(QStringLiteral("terminal"), gw::Level::NiceToHave, false);
 const gw::Catalogue including({&parser, &terminal});
+// GRND-0082: an item another one offers too.
+class FakeOffered : public FakeItem
+{
+public:
+    using FakeItem::FakeItem;
+    QStringList alsoOfferedBy() const override { return {QStringLiteral("host")}; }
+};
+const FakeOffered assistant(QStringLiteral("assistant"), gw::Level::NiceToHave, false);
+const FakeItem host(QStringLiteral("host"), gw::Level::NiceToHave, false);
+const gw::Catalogue offering({&assistant, &host});
 // Starting from a saved setup (GRND-0079): a kept item that is not on by
 // default, and one that accepts a licence.
 class FakeLicenceItem : public FakeItem
@@ -410,6 +420,23 @@ private slots:
                  qPrintable(parserRow->reason()));
         w->row(QStringLiteral("terminal"))->toggle()->click();
         QVERIFY2(parserRow->reason().isEmpty(), qPrintable(parserRow->reason()));
+    }
+
+    // GRND-0082: while an item that offers another is switched on, the
+    // other's row says so, whether or not it is on itself.
+    void anItemOfferedByASwitchedOnOneSaysSo()
+    {
+        auto w = make(QStringLiteral("en"), &offering);
+        QTRY_VERIFY(w->checksDone());
+        auto *assistantRow = w->row(QStringLiteral("assistant"));
+        QVERIFY2(assistantRow->reason().isEmpty(), qPrintable(assistantRow->reason()));
+        w->row(QStringLiteral("host"))->toggle()->click();
+        QCOMPARE(assistantRow->reason(), QStringLiteral("Title of host offers this too."));
+        assistantRow->toggle()->click();
+        QVERIFY(assistantRow->isChecked());
+        QCOMPARE(assistantRow->reason(), QStringLiteral("Title of host offers this too."));
+        w->row(QStringLiteral("host"))->toggle()->click();
+        QVERIFY2(assistantRow->reason().isEmpty(), qPrintable(assistantRow->reason()));
     }
 
     void switchingOnAnInstallPullsTheUpdateAndSaysWhy()

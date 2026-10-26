@@ -671,6 +671,20 @@ void Wizard::refreshRows(const QStringList &pulled, const QStringList &included,
             row->setReason({});
         it = m_reasons.erase(it);
     }
+    // A switched-on item that offers this one too says so, unless the row
+    // already gives a reason above.
+    for (ItemRow *row : std::as_const(m_rows)) {
+        const Item *item = catalogue().find(row->id());
+        if (!item || item->alsoOfferedBy().isEmpty() || m_reasons.contains(row->id()))
+            continue;
+        QString offer;
+        for (const QString &by : item->alsoOfferedBy())
+            if (m_selection.contains(by) && m_rows.contains(by)) {
+                offer = tr("%1 offers this too.").arg(m_rows.value(by)->toggle()->text());
+                break;
+            }
+        row->setReason(offer);
+    }
 }
 
 QStringList Wizard::workerArguments() const

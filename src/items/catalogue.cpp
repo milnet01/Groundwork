@@ -1,6 +1,7 @@
 #include "catalogue.h"
 
 #include "antsterminalitem.h"
+#include "claudecodeitem.h"
 #include "oneupitem.h"
 #include "appitems.h"
 #include "bootmenuitem.h"
@@ -119,6 +120,7 @@ const Catalogue &catalogue()
         // Not built for Leap 16.0 (zypper search, 2026-10-16).
         {QStringLiteral("tree-sitter-glsl"), QStringLiteral("tree-sitter-make"), QStringLiteral("tree-sitter-meson"),
          QStringLiteral("tree-sitter-yaml"), QStringLiteral("tree-sitter-toml"), QStringLiteral("tree-sitter-php")});
+    static const ClaudeCodeItem claudeCode; // GRND-0082
     static const AntsTerminalItem antsTerminal; // GRND-0061
     static const OneUpItem oneUp; // GRND-0074
     // Backup of the user's own files (GRND-0028)
@@ -143,7 +145,7 @@ const Catalogue &catalogue()
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
                                 &hostname, &ssh, &clock, &numlock,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
-                                &buildTools, &codium, &claudeTools, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
+                                &buildTools, &codium, &claudeCode, &claudeTools, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;
 }
 

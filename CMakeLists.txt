@@ -81,16 +81,18 @@ add_library(groundwork_items STATIC
     src/items/swappinessitem.cpp
     src/items/numlockitem.cpp
     src/items/antsterminalitem.cpp
+    src/items/claudecodeitem.cpp
     src/items/gamingextrasitem.cpp
     src/items/virtualmachinesitem.cpp
     src/items/amdvideoitem.cpp
     src/items/oneupitem.cpp
     src/items/updateitem.cpp)
 target_link_libraries(groundwork_items PUBLIC groundwork_core)
-# The freeze recorder's script (GRND-0058) is built in at :/items, so the
-# item writes it from the program itself.
+# The freeze recorder's script (GRND-0058) and Anthropic's signing key
+# (GRND-0082) are built in at :/items, so the items write them from the
+# program itself.
 qt_add_resources(groundwork_items groundwork_scripts
-    PREFIX /items BASE src/items FILES src/items/freeze-recorder.sh)
+    PREFIX /items BASE src/items FILES src/items/freeze-recorder.sh src/items/claude-code.asc)
 
 # The Worker depends on Core and Items, never on the Wizard.
 add_library(groundwork_drives STATIC

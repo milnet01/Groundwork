@@ -532,6 +532,25 @@
     </message>
 </context>
 <context>
+    <name>gw::ClaudeCodeItem</name>
+    <message>
+        <source>Claude Code</source>
+        <translation>Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs Claude Code, Anthropic&apos;s coding assistant, from Anthropic&apos;s own repository, so system updates keep it up to date. Using it needs a paid Claude plan.</source>
+        <translation>Anthropic의 코딩 도우미인 Claude Code를 Anthropic의 자체 저장소에서 설치합니다. 시스템 업데이트로 최신 상태가 유지됩니다. 사용하려면 유료 Claude 요금제가 필요합니다.</translation>
+    </message>
+    <message>
+        <source>Claude Code is not installed.</source>
+        <translation>Claude Code가 설치되어 있지 않습니다.</translation>
+    </message>
+    <message>
+        <source>Installing Claude Code</source>
+        <translation>Claude Code 설치 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
@@ -2051,6 +2070,10 @@
     <message>
         <source>Switched off because %1 includes it.</source>
         <translation>%1에 포함되어 있으므로 꺼졌습니다.</translation>
+    </message>
+    <message>
+        <source>%1 offers this too.</source>
+        <translation>%1에서도 이것을 제공합니다.</translation>
     </message>
     <message>
         <source>Choose the saved setup file first.</source>

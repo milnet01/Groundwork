@@ -533,6 +533,25 @@
     </message>
 </context>
 <context>
+    <name>gw::ClaudeCodeItem</name>
+    <message>
+        <source>Claude Code</source>
+        <translation>Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs Claude Code, Anthropic&apos;s coding assistant, from Anthropic&apos;s own repository, so system updates keep it up to date. Using it needs a paid Claude plan.</source>
+        <translation>Ifaka i-Claude Code, umncedisi wokubhala ikhowudi we-Anthropic, isuka kwindawo yogcino ye-Anthropic ngokwayo, ukuze uhlaziyo lwesistim luyigcine ihlaziyiwe. Ukuyisebenzisa kufuna isicwangciso se-Claude esihlawulelwayo.</translation>
+    </message>
+    <message>
+        <source>Claude Code is not installed.</source>
+        <translation>I-Claude Code ayifakwanga.</translation>
+    </message>
+    <message>
+        <source>Installing Claude Code</source>
+        <translation>Kufakwa i-Claude Code</translation>
+    </message>
+</context>
+<context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
@@ -2055,6 +2074,10 @@
     <message>
         <source>Switched off because %1 includes it.</source>
         <translation>Kuvaliwe kuba i-%1 iyakuquka.</translation>
+    </message>
+    <message>
+        <source>%1 offers this too.</source>
+        <translation>I-%1 nayo iyakunika oku.</translation>
     </message>
     <message>
         <source>Choose the saved setup file first.</source>

@@ -533,6 +533,25 @@
     </message>
 </context>
 <context>
+    <name>gw::ClaudeCodeItem</name>
+    <message>
+        <source>Claude Code</source>
+        <translation>Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs Claude Code, Anthropic&apos;s coding assistant, from Anthropic&apos;s own repository, so system updates keep it up to date. Using it needs a paid Claude plan.</source>
+        <translation>מתקין את Claude Code, עוזר התכנות של Anthropic, מהמאגר של Anthropic עצמה, כך שעדכוני המערכת שומרים עליו מעודכן. השימוש בו דורש מנוי Claude בתשלום.</translation>
+    </message>
+    <message>
+        <source>Claude Code is not installed.</source>
+        <translation>התוכנה Claude Code אינה מותקנת.</translation>
+    </message>
+    <message>
+        <source>Installing Claude Code</source>
+        <translation>מתקין את Claude Code</translation>
+    </message>
+</context>
+<context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
@@ -2055,6 +2074,10 @@
     <message>
         <source>Switched off because %1 includes it.</source>
         <translation>כבוי כי %1 כולל אותו.</translation>
+    </message>
+    <message>
+        <source>%1 offers this too.</source>
+        <translation>גם %1 מציע את זה.</translation>
     </message>
     <message>
         <source>Choose the saved setup file first.</source>

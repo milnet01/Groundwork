@@ -108,6 +108,9 @@ public:
     // Items this one includes, so switching it on switches them off; the
     // user may switch them back on (docs/design.md, The levels).
     virtual QStringList includes() const { return {}; }
+    // Items that offer this one themselves, such as a program that installs
+    // it on first start; while one is switched on, this row says so.
+    virtual QStringList alsoOfferedBy() const { return {}; }
     // Non-empty for an item that takes a value from the user, such as the
     // computer's name: the field's label. Its steps carry kValuePlaceholder.
     virtual QString valuePrompt() const { return {}; }

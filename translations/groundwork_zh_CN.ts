@@ -532,6 +532,25 @@
     </message>
 </context>
 <context>
+    <name>gw::ClaudeCodeItem</name>
+    <message>
+        <source>Claude Code</source>
+        <translation>Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs Claude Code, Anthropic&apos;s coding assistant, from Anthropic&apos;s own repository, so system updates keep it up to date. Using it needs a paid Claude plan.</source>
+        <translation>从 Anthropic 自己的软件源安装 Anthropic 的编程助手 Claude Code，系统更新会让它保持最新。使用它需要付费的 Claude 套餐。</translation>
+    </message>
+    <message>
+        <source>Claude Code is not installed.</source>
+        <translation>未安装 Claude Code。</translation>
+    </message>
+    <message>
+        <source>Installing Claude Code</source>
+        <translation>正在安装 Claude Code</translation>
+    </message>
+</context>
+<context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
@@ -2051,6 +2070,10 @@
     <message>
         <source>Switched off because %1 includes it.</source>
         <translation>已关闭，因为 %1 已包含它。</translation>
+    </message>
+    <message>
+        <source>%1 offers this too.</source>
+        <translation>%1 也提供此项。</translation>
     </message>
     <message>
         <source>Choose the saved setup file first.</source>

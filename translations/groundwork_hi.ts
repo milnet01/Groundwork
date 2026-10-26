@@ -533,6 +533,25 @@
     </message>
 </context>
 <context>
+    <name>gw::ClaudeCodeItem</name>
+    <message>
+        <source>Claude Code</source>
+        <translation>Claude Code</translation>
+    </message>
+    <message>
+        <source>Installs Claude Code, Anthropic&apos;s coding assistant, from Anthropic&apos;s own repository, so system updates keep it up to date. Using it needs a paid Claude plan.</source>
+        <translation>Claude Code इंस्टॉल करता है, जो Anthropic का कोडिंग सहायक है, Anthropic के अपने रिपॉज़िटरी से, ताकि सिस्टम अपडेट इसे नया बनाए रखें। इसका उपयोग करने के लिए Claude का सशुल्क प्लान चाहिए।</translation>
+    </message>
+    <message>
+        <source>Claude Code is not installed.</source>
+        <translation>Claude Code इंस्टॉल नहीं है।</translation>
+    </message>
+    <message>
+        <source>Installing Claude Code</source>
+        <translation>Claude Code इंस्टॉल किया जा रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::ClockItem</name>
     <message>
         <source>Clock shared with Windows</source>
@@ -2055,6 +2074,10 @@
     <message>
         <source>Switched off because %1 includes it.</source>
         <translation>बंद किया गया क्योंकि %1 में यह शामिल है।</translation>
+    </message>
+    <message>
+        <source>%1 offers this too.</source>
+        <translation>%1 भी यह देता है।</translation>
     </message>
     <message>
         <source>Choose the saved setup file first.</source>
