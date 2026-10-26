@@ -1428,7 +1428,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Lanes: carry, wizard, worker.
   Blocked-by: GRND-0078.
 
-- 📋 [GRND-0082] **Item: Claude Code.**
+- ✅ [GRND-0082] **Item: Claude Code.**
   User request (2026-10-16): offer to install Claude Code. Ants Terminal
   will offer it in its own first-run wizard; Groundwork offers it too,
   for users who do not use Ants Terminal. Joins GRND-0027's developer
@@ -1462,6 +1462,10 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   --gpg-auto-import-keys needed. claude lands at /usr/bin/claude. The
   package requires only glibc >= 2.17. So no native-installer fallback is
   needed on any of the three.
+  Built 2026-10-26 (b86a46a), unreleased. The key is built in and
+  imported from /etc/pki/rpm-gpg/claude-code.asc; the steps ran in
+  Tumbleweed and Leap 16.0 containers that day. The row says "Ants
+  Terminal offers this too." while Ants Terminal is switched on.
   **Layman:** A switch among the developer tools that installs Claude Code, Anthropic's coding assistant, for people who do not get it through Ants Terminal.
   Kind: feature.
   Source: user-request-2026-10-16.
