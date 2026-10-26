@@ -1451,6 +1451,17 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Anthropic's signed RPM repository through zypper. First a VM check
   that it installs on Tumbleweed, Leap 16 and Slowroll; where it does
   not, fall back to the native installer there.
+  Install check (2026-10-26, podman containers in place of VMs, user
+  choice that day): claude-code 2.1.308 installs through zypper from the
+  stable repository on Tumbleweed, Leap 16.0 and Slowroll (a Tumbleweed
+  container switched to the Slowroll oss repository with zypper dup;
+  there is no Slowroll image). Steps that worked on all three: fetch
+  https://downloads.claude.ai/keys/claude-code.asc, check its fingerprint
+  is 31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE, rpm --import it, zypper
+  addrepo --refresh the stable URL, zypper -n install claude-code. No
+  --gpg-auto-import-keys needed. claude lands at /usr/bin/claude. The
+  package requires only glibc >= 2.17. So no native-installer fallback is
+  needed on any of the three.
   **Layman:** A switch among the developer tools that installs Claude Code, Anthropic's coding assistant, for people who do not get it through Ants Terminal.
   Kind: feature.
   Source: user-request-2026-10-16.
