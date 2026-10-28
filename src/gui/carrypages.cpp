@@ -19,6 +19,7 @@
 #include <QVBoxLayout>
 
 #include <algorithm>
+#include <memory>
 
 namespace gw {
 namespace {
@@ -90,10 +91,14 @@ void GatherPage::initializePage()
         return; // gathered once; the switches keep what the user chose
     m_started = true;
     // du over the home folder can take a while, so off the window's thread.
-    QThread *thread = QThread::create([this, gather = m_choice->gather] {
-        const Gathered found = gather ? gather() : Gathered{};
-        QMetaObject::invokeMethod(this, [this, found] { showFound(found); }, Qt::QueuedConnection);
+    // What is found reaches this page only while it exists: changing the
+    // language replaces the window while gathering may still run.
+    auto found = std::make_shared<Gathered>();
+    QThread *thread = QThread::create([gather = m_choice->gather, found] {
+        if (gather)
+            *found = gather();
     });
+    connect(thread, &QThread::finished, this, [this, found] { showFound(*found); });
     connect(thread, &QThread::finished, thread, &QObject::deleteLater);
     thread->start();
 }
