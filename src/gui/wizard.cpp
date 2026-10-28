@@ -494,10 +494,8 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         m_chosenJob = m_offeredJobs.first();
     addPage(new WelcomePage(this, m_setup.language));
     for (Level level : {Level::Essentials, Level::SystemSetup, Level::Configuration, Level::NiceToHave}) {
-        bool any = false;
-        for (const Item *item : m_setup.catalogue->items())
-            any = any || item->level() == level;
-        if (!any)
+        const QList<const Item *> &items = m_setup.catalogue->items();
+        if (std::none_of(items.cbegin(), items.cend(), [level](const Item *item) { return item->level() == level; }))
             continue; // a level with no items gets no page
         auto *page = new QWizardPage(this);
         page->setTitle(levelTitle(level));
@@ -606,13 +604,12 @@ void Wizard::fitRows()
     auto *shown = currentPage()->findChild<QScrollArea *>();
     if (!shown)
         return;
-    QList<QWidget *> fitted;
-    if (m_levelPages.values().contains(shown->widget()))
-        fitted = m_levelPages.values();
-    else if (shown->objectName() == QLatin1String("preparePage") || shown->objectName() == QLatin1String("carryPage"))
+    QList<QWidget *> fitted = m_levelPages.values();
+    if (!fitted.contains(shown->widget())) {
+        if (shown->objectName() != QLatin1String("preparePage") && shown->objectName() != QLatin1String("carryPage"))
+            return;
         fitted = {shown->widget()};
-    else
-        return;
+    }
     QCoreApplication::sendPostedEvents(nullptr, QEvent::LayoutRequest); // settle the shown page
     const int viewWidth = shown->viewport()->width();
     int extra = 0;
