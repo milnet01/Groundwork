@@ -36,6 +36,7 @@
 #include <QVBoxLayout>
 
 #include <algorithm>
+#include <memory>
 
 namespace gw {
 namespace {
@@ -564,10 +565,12 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     if (!m_offeredJobs.contains(Job::SetUp) && !m_offeredJobs.contains(Job::CarryOver))
         return; // nothing here is set up or carried, so nothing is checked
     // Checks run off the window's thread so the window stays responsive.
-    QThread *thread = QThread::create([this] {
-        const CheckResults results = m_setup.runChecks();
-        QMetaObject::invokeMethod(this, [this, results] { showResults(results); }, Qt::QueuedConnection);
-    });
+    // The thread holds its own copy of the checks, and its results reach
+    // this window only while it exists: changing the language replaces
+    // the window while the checks may still run.
+    auto results = std::make_shared<CheckResults>();
+    QThread *thread = QThread::create([runChecks = m_setup.runChecks, results] { *results = runChecks(); });
+    connect(thread, &QThread::finished, this, [this, results] { showResults(*results); });
     connect(thread, &QThread::finished, thread, &QObject::deleteLater);
     thread->start();
 }
