@@ -148,7 +148,9 @@ QList<Drive> parseDrives(const QByteArray &lsblkJson, const QByteArray &swaps)
                 continue;
             Partition p;
             p.path = child.value(QStringLiteral("path")).toString();
-            p.start = number(child.value(QStringLiteral("start"))) * drive.sectorSize;
+            // sysfs counts the start in 512-byte units, whatever the
+            // drive's logical sector size.
+            p.start = number(child.value(QStringLiteral("start"))) * 512;
             p.size = number(child.value(QStringLiteral("size")));
             p.fstype = child.value(QStringLiteral("fstype")).toString();
             p.label = child.value(QStringLiteral("label")).toString();

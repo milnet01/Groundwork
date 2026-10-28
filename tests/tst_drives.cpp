@@ -77,6 +77,17 @@ private slots:
         QVERIFY(d.inUse.isEmpty());
     }
 
+    // lsblk's START is sysfs's, in 512-byte units whatever the drive's
+    // logical sector size.
+    void aStartIsIn512ByteUnitsOnAnyDrive()
+    {
+        QJsonObject d = disk("/dev/sdc", 100 * gw::kGiB, {part("/dev/sdc1", 2048, 100 * gw::kMiB, "vfat")});
+        d.insert("log-sec", 4096);
+        const gw::Drive drive = one(d);
+        QCOMPARE(drive.sectorSize, qint64(4096));
+        QCOMPARE(drive.partitions.value(0).start, gw::kMiB);
+    }
+
     void skipsWhatIsNotADrive()
     {
         QJsonObject rom = disk("/dev/sr0", 1 * gw::kGiB);
