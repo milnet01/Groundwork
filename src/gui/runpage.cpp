@@ -46,17 +46,27 @@ RunPage::RunPage(QWidget *parent)
     connect(&m_process, &QProcess::readyReadStandardOutput, this, &RunPage::readOutput);
     connect(&m_process, &QProcess::readyReadStandardError, this,
             [this] { m_details->appendPlainText(QString::fromUtf8(m_process.readAllStandardError())); });
-    connect(&m_process, &QProcess::finished, this, [this] {
-        readOutput();
-        if (!m_pending.isEmpty())
-            handleLine(m_pending);
-        m_pending.clear();
-        if (m_summary->text().isEmpty())
-            m_summary->setText(tr("Groundwork stopped unexpectedly. The details below say why."));
-        m_oneUp->setVisible(m_offersOneUp && !QStandardPaths::findExecutable(QStringLiteral("oneup")).isEmpty());
-        emit completeChanged();
-        emit runFinished();
+    connect(&m_process, &QProcess::finished, this, &RunPage::finish);
+    // A Worker that never started sends no finished signal.
+    connect(&m_process, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
+        if (error != QProcess::FailedToStart)
+            return;
+        m_details->appendPlainText(m_process.errorString());
+        finish();
     });
+}
+
+void RunPage::finish()
+{
+    readOutput();
+    if (!m_pending.isEmpty())
+        handleLine(m_pending);
+    m_pending.clear();
+    if (m_summary->text().isEmpty())
+        m_summary->setText(tr("Groundwork stopped unexpectedly. The details below say why."));
+    m_oneUp->setVisible(m_offersOneUp && !QStandardPaths::findExecutable(QStringLiteral("oneup")).isEmpty());
+    emit completeChanged();
+    emit runFinished();
 }
 
 RunPage::~RunPage()
@@ -76,6 +86,8 @@ void RunPage::start(const QString &program, const QStringList &arguments,
         m_rows->addWidget(label);
         m_status.insert(id, label);
     }
+    // A later run on this page, such as removing secrets, says its own outcome.
+    m_summary->clear();
     m_started = true;
     m_process.start(program, arguments);
     emit completeChanged();

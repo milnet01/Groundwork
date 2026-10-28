@@ -40,6 +40,7 @@ signals:
 private:
     void readOutput();
     void handleLine(const QString &line);
+    void finish();
 
     QProcess m_process;
     QString m_pending;
