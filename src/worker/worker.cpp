@@ -116,7 +116,7 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
     int code = runCommand(argv, step.input, lines, echo);
     if (step.tool == Step::Tool::Zypper) {
         if (code == 103) // zypper updated itself; run once more to finish
-            code = runCommand(argv, step.input);
+            code = runCommand(argv, step.input, lines, echo);
         if (code == 106)
             say(formatMarker(QStringLiteral("HINT"),
                               {itemId, tr("A software source could not be read and was skipped.")}));
@@ -282,18 +282,14 @@ int Worker::prepareDrive(const QString &layoutPath)
     }
     const CheckContext context(m_files);
     const QString id = QStringLiteral("prepare-drive");
-    say(formatMarker(QStringLiteral("STEP_BEGIN"), {id, QStringLiteral("1"), QStringLiteral("1"), tr("Preparing a drive")}));
+    beginOne(id, tr("Preparing a drive"));
     auto end = [&](bool ok, const QString &detail) {
         m_privilege.stopKeepAlive();
         if (m_auth == Auth::Failed) {
             say(formatMarker(QStringLiteral("AUTH"), {QStringLiteral("failed")}));
             return int(AuthFailed);
         }
-        say(formatMarker(QStringLiteral("STEP_END"), {id, ok ? QStringLiteral("ok") : QStringLiteral("fail"), detail}));
-        say(formatMarker(QStringLiteral("DONE"),
-                         {ok ? QStringLiteral("1") : QStringLiteral("0"), ok ? QStringLiteral("0") : QStringLiteral("1"),
-                          QStringLiteral("0")}));
-        return int(ok ? Ok : Failed);
+        return endOne(id, ok, detail);
     };
     const QString nothing = tr("Nothing was written.");
     QString why = tr("The layout file could not be read.");
@@ -379,17 +375,13 @@ int Worker::saveSetup(const QString &choicesPath)
         return Unsupported;
     }
     const QString id = QStringLiteral("save-setup");
-    say(formatMarker(QStringLiteral("STEP_BEGIN"), {id, QStringLiteral("1"), QStringLiteral("1"), tr("Saving the setup")}));
+    beginOne(id, tr("Saving the setup"));
     QString partial;
     auto end = [&](bool ok, QString detail) {
         // The file at the output is whole or absent (INV-5).
         if (!ok && !partial.isEmpty() && !QFile::remove(partial) && QFile::exists(partial))
             detail += QLatin1Char(' ') + tr("A part-written file is left at %1; it can be deleted.").arg(partial);
-        say(formatMarker(QStringLiteral("STEP_END"), {id, ok ? QStringLiteral("ok") : QStringLiteral("fail"), detail}));
-        say(formatMarker(QStringLiteral("DONE"),
-                         {ok ? QStringLiteral("1") : QStringLiteral("0"), ok ? QStringLiteral("0") : QStringLiteral("1"),
-                          QStringLiteral("0")}));
-        return int(ok ? Ok : Failed);
+        return endOne(id, ok, detail);
     };
     const QString nothing = tr("Nothing was saved.");
 
