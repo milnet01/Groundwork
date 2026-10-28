@@ -15,11 +15,6 @@ namespace {
 
 constexpr int kLongTimeoutMs = 10 * 60 * 1000; // du over a home, tar over a large file
 
-bool matches(const char *pattern, const QString &text)
-{
-    return QRegularExpression(QString::fromLatin1(pattern)).match(text).hasMatch();
-}
-
 bool hasControl(const QString &text)
 {
     return std::any_of(text.cbegin(), text.cend(), [](QChar c) { return c.unicode() < 0x20 || c.unicode() == 0x7f; });
@@ -77,14 +72,23 @@ QStringList strings(const QJsonValue &value)
 
 } // namespace
 
-bool isPackageName(const QString &text) { return matches("^[A-Za-z0-9][A-Za-z0-9+._-]*$", text); }
+bool isPackageName(const QString &text)
+{
+    static const QRegularExpression name(QStringLiteral("^[A-Za-z0-9][A-Za-z0-9+._-]*$"));
+    return name.match(text).hasMatch();
+}
 
 bool isFlatpakAppId(const QString &text)
 {
-    return matches("^[A-Za-z_][A-Za-z0-9_-]*(?:\\.[A-Za-z_][A-Za-z0-9_-]*){2,}$", text);
+    static const QRegularExpression id(QStringLiteral("^[A-Za-z_][A-Za-z0-9_-]*(?:\\.[A-Za-z_][A-Za-z0-9_-]*){2,}$"));
+    return id.match(text).hasMatch();
 }
 
-bool isAlias(const QString &text) { return matches("^[A-Za-z0-9][A-Za-z0-9:._+-]*$", text); }
+bool isAlias(const QString &text)
+{
+    static const QRegularExpression alias(QStringLiteral("^[A-Za-z0-9][A-Za-z0-9:._+-]*$"));
+    return alias.match(text).hasMatch();
+}
 
 bool isSourceUrl(const QString &text)
 {
