@@ -933,6 +933,20 @@ private slots:
         QVERIFY(!steps[2].needsRoot);
     }
 
+    // GRND-0100: an app already installed for everyone, as a Groundwork
+    // item installs it, is not installed again just for the user.
+    void anAppInstalledForAnyoneIsNotInstalledAgain()
+    {
+        writeFile(m_bin + QStringLiteral("/flatpak"), "#!/bin/sh\nprintf 'com.discordapp.Discord\\tsystem\\n'\n", true);
+        gw::Manifest m;
+        m.flatpaks = {{QStringLiteral("com.discordapp.Discord"), QStringLiteral("flathub"), QStringLiteral("user")}};
+        const gw::CarriedItems carried = gw::carriedItems(m, QStringLiteral("f.tar"), gw::catalogue());
+        QCOMPARE(carried.owned.size(), size_t(1));
+        const gw::CheckContext context{gw::FileReader()};
+        QCOMPARE(carried.owned[0]->check(context).state, gw::CheckState::Done);
+        QVERIFY(carried.owned[0]->applySteps({}, context).isEmpty());
+    }
+
     // GRND-0088, INV-11: the choices may move a Flathub app from the user
     // to everyone, and change nothing else.
     void onlyAFlathubUserAppMayBeMovedToEveryone()

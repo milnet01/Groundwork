@@ -1946,13 +1946,18 @@ scheduled.
   Source: close-findings-2026-10-29.
   Lanes: worker.
 
-- 📋 [GRND-0100] **A Discord saved per user is installed twice on restore.**
+- ✅ [GRND-0100] **A Discord saved per user is installed twice on restore.**
   Found in GRND-0088's VM check (2026-10-29), run 1. The saved file kept
   the Discord item and com.discordapp.Discord with "installation":
   "user". On restore the Discord item installed it system-wide, then
   carried-flatpaks installed the user copy too: flatpak list showed it
   in both installations (about 600 MB more). Other catalogue Flatpak
   items saved per user would do the same.
+  Fixed 2026-10-29: carried-flatpaks counts an app as present in
+  either installation, as the catalogue's Flathub items already do, so a
+  Discord the Discord item installed for everyone is not installed again
+  just for the user. Test red first. Spec GRND-0079 § 4.1's table says
+  so. Not yet run in a VM.
   **Layman:** Restoring a saved setup can install the same Flatpak app twice, once for everyone and once just for you.
   Kind: fix.
   Source: grnd-0088-vm-check-2026-10-29.

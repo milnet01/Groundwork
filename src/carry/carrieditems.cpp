@@ -225,8 +225,10 @@ public:
     }
 
 private:
-    // The kept apps not installed; nothing when Flatpak could not list them.
-    // Flatpak not installed at all means none is.
+    // The kept apps not installed for anyone; nothing when Flatpak could not
+    // list them. Flatpak not installed at all means none is. An app a
+    // Groundwork item installed for everyone is not installed again just for
+    // the user (GRND-0100).
     std::optional<QList<FlatpakApp>> absentApps(const CheckContext &context, QStringList *names) const
     {
         const CommandResult r = context.run({QStringLiteral("flatpak"), QStringLiteral("list"), QStringLiteral("--app"),
@@ -236,7 +238,8 @@ private:
         const QStringList lines = QString::fromUtf8(r.out).split(QLatin1Char('\n'));
         QList<FlatpakApp> absent;
         for (const FlatpakApp &app : m_apps) {
-            if (!lines.contains(app.app + QLatin1Char('\t') + app.installation)) {
+            const QString listed = app.app + QLatin1Char('\t');
+            if (std::none_of(lines.cbegin(), lines.cend(), [&](const QString &line) { return line.startsWith(listed); })) {
                 absent << app;
                 *names << app.app;
             }
