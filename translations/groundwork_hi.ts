@@ -345,10 +345,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>इस सिस्टम पर नहीं मिला: %1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>सॉफ़्टवेयर स्रोत: %1</translation>
     </message>
@@ -369,8 +365,12 @@
         <translation>आपकी सेव की गई फ़ाइल से प्रोग्राम</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>आपके पास जो प्रोग्राम थे, उन्हें एक साथ इंस्टॉल करता है। जो इस सिस्टम पर नहीं मिलते, उन्हें छोड़ दिया जाता है और अंत में उनके नाम बताए जाते हैं।</translation>
+        <source>Not installed: %1</source>
+        <translation>इंस्टॉल नहीं हुआ: %1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>आपके पास जो प्रोग्राम थे, उन्हें इंस्टॉल करता है। जो इंस्टॉल नहीं हो पाते, उन्हें छोड़ दिया जाता है और अंत में उनके नाम बताए जाते हैं।</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

@@ -345,10 +345,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>Akutholakalanga kule sistimu: %1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>Umthombo wesofthiwe: %1</translation>
     </message>
@@ -369,8 +365,12 @@
         <translation>Izinhlelo ezivela efayeleni lakho elilondoloziwe</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>Ifaka izinhlelo obunazo, ngesikhathi esisodwa. Noma yiluphi le sistimu engalutholi luyeqiwa futhi lushiwo ekugcineni.</translation>
+        <source>Not installed: %1</source>
+        <translation>Akufakiwe: %1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>Ifaka izinhlelo obunazo. Noma yiluphi olungakwazi ukufakwa luyeqiwa futhi lushiwo ekugcineni.</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

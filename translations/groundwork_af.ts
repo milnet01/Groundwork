@@ -345,10 +345,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>Nie op hierdie stelsel gevind nie: %1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>Sagtewarebron: %1</translation>
     </message>
@@ -369,8 +365,12 @@
         <translation>Programme uit jou gestoorde lêer</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>Installeer die programme wat jy gehad het, in een slag. Enige wat hierdie stelsel nie kan vind nie, word oorgeslaan en aan die einde genoem.</translation>
+        <source>Not installed: %1</source>
+        <translation>Nie geïnstalleer nie: %1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>Installeer die programme wat jy gehad het. Enige wat nie geïnstalleer kan word nie, word oorgeslaan en aan die einde genoem.</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

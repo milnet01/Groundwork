@@ -344,10 +344,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>在這個系統上找不到：%1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>軟體來源：%1</translation>
     </message>
@@ -368,8 +364,12 @@
         <translation>儲存的檔案中的程式</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>一次安裝您以前的程式。這個系統找不到的程式會被略過，並在最後列出。</translation>
+        <source>Not installed: %1</source>
+        <translation>未安裝：%1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>安裝您以前的程式。無法安裝的程式會被略過，並在最後列出。</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

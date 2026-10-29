@@ -345,10 +345,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>לא נמצא במערכת הזו: %1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>מקור תוכנה: %1</translation>
     </message>
@@ -369,8 +365,12 @@
         <translation>תוכנות מהקובץ השמור שלך</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>מתקין את התוכנות שהיו לך, בבת אחת. כל מה שהמערכת הזו לא מוצאת מדולג ומצוין בסוף.</translation>
+        <source>Not installed: %1</source>
+        <translation>לא מותקן: %1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>מתקין את התוכנות שהיו לך. כל מה שלא ניתן להתקין מדולג ומצוין בסוף.</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

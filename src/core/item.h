@@ -48,6 +48,10 @@ struct Step
     QList<int> alsoOk = {};
     // Fed to the command's standard input; how a step writes a file.
     QByteArray input = {};
+    // A Zypper step's first package name in argv, or 0. When those names
+    // clash with the system, the Worker installs them in parts, so one
+    // name does not stop the rest (GRND-0086).
+    qsizetype namesFrom = 0;
 };
 
 // A root step that makes each directory, with its parents.

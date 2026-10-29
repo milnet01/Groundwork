@@ -191,8 +191,10 @@ saved file. Each kept Groundwork item starts switched on, except one
 that accepts a licence, which starts off. Each software source becomes an
 item of its own. Programs, Flatpak apps and settings are one item each,
 with a switch per entry; everything starts switched on. Sources come
-before programs. A program the new system cannot find is skipped and
-named at the end. Settings are copied into the user's home as the user,
+before programs. A program the new system cannot find, or cannot
+install beside the rest, is skipped and named at the end. The
+installer's own choices, its kernel, boot loader and security
+framework, are not carried (user, 2026-10-29; GRND-0086). Settings are copied into the user's home as the user,
 never as root, after the programs; a file they would replace is kept
 beside it as a numbered copy. Groundwork's other items are offered as
 usual (ruled by the user, 2026-10-20; spec GRND-0079). A Flatpak source

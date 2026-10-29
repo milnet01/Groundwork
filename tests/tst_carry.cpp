@@ -467,6 +467,38 @@ private slots:
         QVERIFY(skipped.join(QLatin1Char('\n')).contains(QLatin1String("--gpg-auto-import-keys")));
     }
 
+    // GRND-0086: what the installer chooses for this computer, a kernel,
+    // boot loader or security framework, is neither gathered nor read
+    // back, even from a file saved before; a kernel's companions are.
+    void whatTheInstallerChoosesIsLeftOut()
+    {
+        const QStringList chosen{QStringLiteral("kernel-default"), QStringLiteral("kernel-default-base"),
+                                 QStringLiteral("kernel-longterm"),
+                                 QStringLiteral("grub2-x86_64-efi-bls"),
+                                 QStringLiteral("grub2"),
+                                 QStringLiteral("shim"),
+                                 QStringLiteral("sdbootutil"),
+                                 QStringLiteral("systemd-boot"),
+                                 QStringLiteral("patterns-base-selinux"),
+                                 QStringLiteral("patterns-base-apparmor")};
+        const QStringList kept{QStringLiteral("act"), QStringLiteral("kernel-devel"),
+                               QStringLiteral("kernel-default-devel"), QStringLiteral("kernel-firmware-amdgpu"),
+                               QStringLiteral("mokutil")};
+        QByteArray table = "S  | Name | Summary | Type\n---+------+---------+--------\n";
+        for (const QString &name : chosen + kept)
+            table += "i+ | " + name.toUtf8() + " | x | package\n";
+        QCOMPARE(gw::askedForPackages(table), kept);
+
+        QJsonObject json = gw::manifestJson(homeAndManifest());
+        json.insert("packages", QJsonArray::fromStringList(chosen + kept));
+        QString why;
+        QStringList skipped;
+        const std::optional<gw::Manifest> m = gw::readManifest(json, &why, &skipped);
+        QVERIFY2(m, qPrintable(why));
+        QCOMPARE(m->packages, kept);
+        QVERIFY(skipped.isEmpty()); // left out by design, not unreadable
+    }
+
     // GRND-0079, INV-3: a carried id holds a colon or starts "carried-",
     // and none is a Groundwork id.
     void aCarriedIdIsNeverAGroundworkId()

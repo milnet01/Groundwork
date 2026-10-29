@@ -20,6 +20,18 @@ bool hasControl(const QString &text)
     return std::any_of(text.cbegin(), text.cend(), [](QChar c) { return c.unicode() < 0x20 || c.unicode() == 0x7f; });
 }
 
+// The installer chooses the kernel, boot loader and security framework for
+// the computer it installs, and a carried one can clash with its choice:
+// kernel-default stopped every program installing beside
+// kernel-default-base (GRND-0086).
+bool isInstallerChosen(const QString &name)
+{
+    static const QRegularExpression chosen(
+        QStringLiteral("^(kernel-(default|longterm|preempt|rt|vanilla|kvmsmall|64kb)(-base|-extra|-optional)?"
+                       "|grub2(-.+)?|shim|systemd-boot|sdbootutil(-.+)?|patterns-base-(selinux|apparmor))$"));
+    return chosen.match(name).hasMatch();
+}
+
 // The distribution's own trees, which a fresh install adds (spec 4.3).
 const QStringList kDistributionTrees{
     QStringLiteral("download.opensuse.org/tumbleweed/"),
@@ -125,8 +137,9 @@ QStringList askedForPackages(const QByteArray &zypperOut)
     QStringList names;
     for (const QString &line : QString::fromUtf8(zypperOut).split(QLatin1Char('\n'))) {
         const QStringList columns = line.split(QLatin1Char('|'));
-        if (columns.size() >= 2 && columns[0].trimmed() == QLatin1String("i+") && isPackageName(columns[1].trimmed()))
-            names << columns[1].trimmed();
+        const QString name = columns.value(1).trimmed();
+        if (columns[0].trimmed() == QLatin1String("i+") && isPackageName(name) && !isInstallerChosen(name))
+            names << name;
     }
     return names;
 }
@@ -429,6 +442,8 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
             *skipped << skippedName(id);
     }
     for (const QString &name : strings(json.value("packages"))) {
+        if (isInstallerChosen(name))
+            continue; // a file saved before GRND-0086 may hold one
         if (isPackageName(name))
             m.packages << name;
         else

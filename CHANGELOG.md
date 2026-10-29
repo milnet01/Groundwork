@@ -28,13 +28,15 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   starts switched on: Groundwork's items, your software sources, your
   programs, Flatpak apps and settings, each list with a switch per
   entry. One run puts them back, settings last and as you. A program
-  this system cannot find is skipped and named at the end, and a
+  this system cannot find or cannot install is skipped and named at the
+  end, without stopping the others. The kernel, boot loader and
+  security framework are left to the new install's own choice. A
   settings file that would be replaced is kept as a numbered copy. A
   software source that does not check signatures, or comes from another
   system, starts switched off, saying why. Flatpak sources other than
   Flathub are named for you to add. Where the file holds saved
   passwords or keys, the last page offers to remove them from it or
-  delete it. (GRND-0079)
+  delete it. (GRND-0079, GRND-0086)
 - **Claude Code, Anthropic's coding assistant, among the developer
   tools.** It installs from Anthropic's signed repository, so system
   updates keep it up to date. Using it needs a paid Claude plan. It

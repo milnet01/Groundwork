@@ -180,9 +180,20 @@ container: with `--ignore-unknown`, an unknown name and `hello` installs
 `hello` and exits 0; without it, an unknown name and `nano` installs
 nothing and exits 104.
 
+A name that clashes with the system still makes zypper install
+nothing: `-n` answers the conflict with cancel, exit 4 (GRND-0086,
+seen in the VM on 2026-10-26 with `kernel-default` beside
+`kernel-default-base`). Exit 8, rpm refusing the transaction, is
+treated the same. The Worker then installs the names in halves,
+splitting each half that fails the same way, until a name fails
+alone. Once more than eight names have failed alone, the step fails
+with zypper's exit code, and the rest are not tried. A file saved before GRND-0078
+§ 4.2 left out the installer's choices may still hold them; they are
+dropped as the file is read (GRND-0078 § 4.7).
+
 After a carried item ends `ok`, the Worker runs its check again. When
 the check is not Done, a `HINT` with the item's id carries the check's
-detail: "Not found on this system: …". So the run page names what was
+detail: "Not installed: …". So the run page names what was
 skipped.
 
 ### 4.5 Settings
@@ -355,6 +366,15 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
   *Breaks when:* the page removes them on leaving, or the removal's last
   step is missing.
 
+- **INV-10** — A program that clashes with the system does not stop
+  the others, and the run page names it (GRND-0086, 2026-10-29).
+  *Test:* `tests/tst_worker.cpp`, a fake `zypper` that exits 4 while a
+  clashing name is in the list; the rest are installed, the item ends
+  `ok`, and the `HINT` names the clashing one. A second fake fails
+  every install; the step fails within a few dozen `zypper` runs.
+  *Breaks when:* the Worker does not split a failed install, or splits
+  without a limit.
+
 ## 6. Failure modes
 
 - **The stick is pulled during the run:** the settings item's `tar`
@@ -380,7 +400,7 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
 
 - `tests/tst_carry.cpp`: INV-3, INV-5, INV-6, INV-7, with fixture
   `repos.d`, fake `rpm` and `flatpak`, and real `tar`.
-- `tests/tst_worker.cpp`: INV-2, INV-3, INV-4, INV-5, INV-9, driving the
+- `tests/tst_worker.cpp`: INV-2, INV-3, INV-4, INV-5, INV-9, INV-10, driving the
   built program with its fakes.
 - `tests/tst_wizard.cpp`: INV-1, INV-8, INV-9.
 - Manual, before release: a real file from this machine on a vfat
@@ -426,6 +446,7 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
 | INV-7 | `tests/tst_carry.cpp` |
 | INV-8 | `tests/tst_wizard.cpp` |
 | INV-9 | `tests/tst_wizard.cpp`, `tests/tst_worker.cpp` |
+| INV-10 | `tests/tst_worker.cpp` |
 | A carried source's packages are what the user expects | **nothing** — the source is restored as it was; what it serves now is its owner's |
 
 ## 11. Cross-doc impact

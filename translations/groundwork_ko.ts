@@ -344,10 +344,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>이 시스템에서 찾을 수 없음: %1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>소프트웨어 소스: %1</translation>
     </message>
@@ -368,8 +364,12 @@
         <translation>저장한 파일의 프로그램</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>이전에 쓰던 프로그램을 한 번에 설치합니다. 이 시스템에서 찾을 수 없는 것은 건너뛰고 마지막에 이름을 알려 줍니다.</translation>
+        <source>Not installed: %1</source>
+        <translation>설치되지 않음: %1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>이전에 쓰던 프로그램을 설치합니다. 설치할 수 없는 것은 건너뛰고 마지막에 이름을 알려 줍니다.</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

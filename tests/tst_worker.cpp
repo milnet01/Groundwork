@@ -91,6 +91,16 @@ esac
 exit 0
 )";
 
+// zypper -n installs nothing and exits 4 while any name clashes
+// (GRND-0079's VM run, 2026-10-26); otherwise as kZypperInstalls.
+const QByteArray kZypperClashes = R"(#!/bin/sh
+echo "zypper $*" >> "$FAKE_LOG"
+case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
+case " $* " in *" clash-"*) exit 4;; esac
+for name in "$@"; do case "$name" in -*|install|nosuch*) ;; *) echo "$name" >> "$FAKE_INSTALLED";; esac; done
+exit 0
+)";
+
 constexpr qint64 kMiB = qint64(1) << 20;
 constexpr qint64 kGiB = qint64(1) << 30;
 
@@ -249,13 +259,13 @@ class TstWorker : public QObject
 
     // A saved file (GRND-0078's format, written with the real tar) holding
     // Dolphin's settings and an SSH key, and keeping two programs.
-    QString savedFile()
+    QString savedFile(const QJsonObject &manifest = savedManifest())
     {
         writeFile(m_bin + QStringLiteral("/tar"), kTar, true);
         writeFile(m_dir->filePath(QStringLiteral(".config/dolphinrc")), "[General]\nShowFullPath=true\n");
         writeFile(m_dir->filePath(QStringLiteral(".ssh/id_ed25519")), "not a real key\n");
         const QString staged = m_dir->filePath(QStringLiteral("staged"));
-        writeFile(staged + QStringLiteral("/groundwork-setup.json"), QJsonDocument(savedManifest()).toJson());
+        writeFile(staged + QStringLiteral("/groundwork-setup.json"), QJsonDocument(manifest).toJson());
         const QString file = m_dir->filePath(QStringLiteral("groundwork-setup-pc-2026-10-20.tar"));
         QProcess tar;
         tar.start(QStringLiteral("/usr/bin/tar"), {QStringLiteral("--create"), QStringLiteral("--format=posix"),
@@ -747,6 +757,62 @@ cat > "$FAKE_WRITTEN$out"
         QCOMPARE(hints.size(), 1);
         QVERIFY(hints.first().contains(QLatin1String("nosuch-thing")));
         QVERIFY(!hints.first().contains(QLatin1String("act")));
+    }
+
+    // GRND-0086: a program that clashes with this system costs only itself.
+    // zypper -n installs nothing and exits 4 while one clashes, so the
+    // Worker installs the rest in parts, and the run names the clash.
+    void aClashingProgramCostsOnlyItself()
+    {
+        writeFile(m_bin + QStringLiteral("/rpm"), kRpm, true);
+        writeFile(m_bin + QStringLiteral("/zypper"), kZypperClashes, true);
+        m_env.insert(QStringLiteral("FAKE_INSTALLED"), m_dir->filePath(QStringLiteral("installed")));
+        QJsonObject chosen = savedManifest();
+        chosen.insert("packages", QJsonArray{"act", "clash-one", "hello", "nano", "vim", "nosuch-thing"});
+        const QString file = savedFile(chosen);
+        chosen.remove("settings");
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("system-update"), QStringLiteral("carried-packages")});
+        QVERIFY2(r.endsFor(QStringLiteral("carried-packages")).value(1) == QLatin1String("ok"),
+                 qPrintable(r.endsFor(QStringLiteral("carried-packages")).join(QLatin1Char('|'))));
+        QCOMPARE(r.exitCode, 0);
+        QFile list(m_dir->filePath(QStringLiteral("installed")));
+        QVERIFY(list.open(QIODevice::ReadOnly));
+        const QStringList installed = QString::fromUtf8(list.readAll()).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
+        for (const char *name : {"act", "hello", "nano", "vim"})
+            QVERIFY2(installed.contains(QLatin1String(name)), name);
+        QVERIFY(!installed.contains(QStringLiteral("clash-one")));
+        const QStringList hints = hintsFor(r, QStringLiteral("carried-packages"));
+        QCOMPARE(hints.size(), 1);
+        QVERIFY(hints.first().contains(QLatin1String("clash-one")));
+        QVERIFY(hints.first().contains(QLatin1String("nosuch-thing")));
+        QVERIFY(!hints.first().contains(QLatin1String("hello")));
+    }
+
+    // GRND-0086: a failure that is not a clash, such as every part failing
+    // the same way, stops after a few names fail alone rather than trying
+    // each of hundreds.
+    void aFailureThatIsNotAClashStopsSoon()
+    {
+        writeFile(m_bin + QStringLiteral("/rpm"), kRpm, true);
+        writeFile(m_bin + QStringLiteral("/zypper"), R"(#!/bin/sh
+echo "zypper $*" >> "$FAKE_LOG"
+case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
+case " $* " in *" install "*) exit 4;; esac
+exit 0
+)", true);
+        m_env.insert(QStringLiteral("FAKE_INSTALLED"), m_dir->filePath(QStringLiteral("installed")));
+        QStringList names;
+        for (int i = 0; i < 300; ++i)
+            names << QStringLiteral("pkg%1").arg(i);
+        QJsonObject chosen = savedManifest();
+        chosen.insert("packages", QJsonArray::fromStringList(names));
+        const QString file = savedFile(chosen);
+        chosen.remove("settings");
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("system-update"), QStringLiteral("carried-packages")});
+        QCOMPARE(r.endsFor(QStringLiteral("carried-packages")).value(1), QStringLiteral("fail"));
+        QVERIFY2(r.count(QStringLiteral("zypper")) < 40, qPrintable(QString::number(r.count(QStringLiteral("zypper")))));
     }
 
     // GRND-0079, INV-5: settings are copied as the user, into the home

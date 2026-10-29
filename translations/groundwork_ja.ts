@@ -344,10 +344,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>このシステムで見つかりません：%1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>ソフトウェアソース：%1</translation>
     </message>
@@ -368,8 +364,12 @@
         <translation>保存したファイルのプログラム</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>以前使っていたプログラムをまとめてインストールします。このシステムで見つからないものはスキップし、最後に名前を表示します。</translation>
+        <source>Not installed: %1</source>
+        <translation>インストールされていません：%1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>以前使っていたプログラムをインストールします。インストールできないものはスキップし、最後に名前を表示します。</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

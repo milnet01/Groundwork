@@ -73,6 +73,24 @@ A row whose first column is `i+` is gathered; its name is the second
 column, trimmed (measured 2026-10-15: `i+ | act | …`). Patterns are
 not gathered.
 
+Nor is what the installer chooses for the computer: a kernel, a boot
+loader, a security framework (user, 2026-10-29; GRND-0086). Each can
+clash with the new install's own choice. `kernel-default` beside
+`kernel-default-base` stopped every carried program installing. A name
+matching this is left out:
+
+```regex pcre2
+^(kernel-(default|longterm|preempt|rt|vanilla|kvmsmall|64kb)(-base|-extra|-optional)?|grub2(-.+)?|shim|systemd-boot|sdbootutil(-.+)?|patterns-base-(selinux|apparmor))$
+```
+
+| input | expected |
+|---|---|
+| `kernel-default` | `kernel-default` |
+| `grub2-x86_64-efi-bls` | `grub2-x86_64-efi-bls` |
+| `patterns-base-selinux` | `patterns-base-selinux` |
+| `kernel-devel` | no match |
+| `kernel-firmware-amdgpu` | no match |
+
 Flatpak apps:
 
 ```
@@ -248,6 +266,8 @@ it. It refuses the whole file, with a plain reason, when:
 
 It skips one entry, saying why, when a field fails its pattern below.
 Unknown keys are ignored, so a later format 1 writer may add fields.
+A package § 4.2 leaves out is dropped without a word, since a file
+saved before GRND-0086 may hold one.
 
 ```regex pcre2
 ^[A-Za-z0-9][A-Za-z0-9+._-]*$
@@ -372,6 +392,15 @@ archive (INV-4).
   *Breaks when:* a name starting with `-` is passed to `zypper` as an
   option.
 
+- **INV-11** — A package the installer chooses (§ 4.2) is neither
+  gathered nor read back from a file (GRND-0086, 2026-10-29).
+  *Test:* `tests/tst_carry.cpp`, a `zypper` table and a manifest each
+  holding kernels, boot loaders and security patterns beside
+  `kernel-devel` and `kernel-firmware-amdgpu`; only the latter come
+  back, and nothing is reported skipped.
+  *Breaks when:* `askedForPackages` or `readManifest` keeps
+  `kernel-default`.
+
 ## 6. Failure modes
 
 - **A command is missing** (no `flatpak`): that group is a row saying
@@ -391,7 +420,7 @@ archive (INV-4).
 ## 7. Tests
 
 - `tests/tst_carry.cpp` (new): INV-1, INV-2, INV-3, INV-4, INV-6,
-  INV-7, INV-8, INV-9, INV-10, with fixture homes, `repos.d` and fake
+  INV-7, INV-8, INV-9, INV-10, INV-11, with fixture homes, `repos.d` and fake
   `zypper` and `flatpak`; real `tar` for the round trip.
 - `tests/tst_worker.cpp`: INV-3, INV-5, driving the built program with a
   fake `tar`, as it does today with its other fakes.
@@ -437,6 +466,7 @@ archive (INV-4).
 | INV-8 | `tests/tst_carry.cpp` |
 | INV-9 | `tests/tst_carry.cpp` |
 | INV-10 | `tests/tst_carry.cpp`; `spec_conformance` for the patterns |
+| INV-11 | `tests/tst_carry.cpp`; `spec_conformance` for the pattern |
 | § 4.4's secrets table covers the apps users have | **nothing** — a new app that keeps passwords is unknown until someone adds it |
 
 ## 11. Cross-doc impact

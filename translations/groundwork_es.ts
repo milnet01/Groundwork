@@ -345,10 +345,6 @@
         </translation>
     </message>
     <message>
-        <source>Not found on this system: %1</source>
-        <translation>No encontrado en este sistema: %1</translation>
-    </message>
-    <message>
         <source>Software source: %1</source>
         <translation>Fuente de software: %1</translation>
     </message>
@@ -369,8 +365,12 @@
         <translation>Programas de tu archivo guardado</translation>
     </message>
     <message>
-        <source>Installs the programs you had, in one go. Any this system cannot find is skipped and named at the end.</source>
-        <translation>Instala los programas que tenías, de una vez. Los que este sistema no encuentre se omiten y se nombran al final.</translation>
+        <source>Not installed: %1</source>
+        <translation>No instalado: %1</translation>
+    </message>
+    <message>
+        <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
+        <translation>Instala los programas que tenías. Los que no se puedan instalar se omiten y se nombran al final.</translation>
     </message>
     <message>
         <source>The installed programs could not be listed.</source>

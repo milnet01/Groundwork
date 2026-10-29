@@ -32,7 +32,7 @@ QString namesText(const QStringList &all)
 
 CheckResult missing(const QStringList &absent)
 {
-    return {CheckState::NotDone, QCoreApplication::translate("gw::Carry", "Not found on this system: %1").arg(namesText(absent))};
+    return {CheckState::NotDone, QCoreApplication::translate("gw::Carry", "Not installed: %1").arg(namesText(absent))};
 }
 
 class SourceItem : public Item
@@ -98,8 +98,8 @@ public:
     QString title() const override { return QCoreApplication::translate("gw::Carry", "Programs from your saved file"); }
     QString applySentence() const override
     {
-        return QCoreApplication::translate("gw::Carry", "Installs the programs you had, in one go. Any this system "
-                                                        "cannot find is skipped and named at the end.");
+        return QCoreApplication::translate("gw::Carry", "Installs the programs you had. Any that cannot be installed "
+                                                        "is skipped and named at the end.");
     }
     bool installsPackages() const override { return true; }
     // rpm -q exits with the number not installed, and names each one.
@@ -122,13 +122,14 @@ public:
                     QCoreApplication::translate("gw::Carry", "The installed programs could not be listed.")};
         return missing(absent);
     }
-    // One unknown name would make zypper install nothing (spec 4.4).
+    // One unknown name would make zypper install nothing (spec 4.4); one
+    // that clashes still does, so the Worker then installs in parts.
     QList<Step> applySteps(const SystemIdentity &, const CheckContext &) const override
     {
-        return {{QStringList{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("--ignore-unknown"),
-                             QStringLiteral("install")}
-                     + m_packages,
-                 true, Step::Tool::Zypper, QCoreApplication::translate("gw::Carry", "Installing your programs")}};
+        const QStringList install{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("--ignore-unknown"),
+                                  QStringLiteral("install")};
+        return {{install + m_packages, true, Step::Tool::Zypper,
+                 QCoreApplication::translate("gw::Carry", "Installing your programs"), {}, {}, install.size()}};
     }
 
 private:

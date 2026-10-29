@@ -34,6 +34,14 @@ QString tr(const char *text) { return QCoreApplication::translate("gw::Worker", 
 // same way; man zypper, EXIT CODES).
 bool zypperSucceeded(int code) { return code == 0 || (code >= 100 && code <= 103) || code == 106; }
 
+// zypper -n answers a conflict by cancelling, exit 4; rpm refusing the
+// transaction is 8. Either may come from one name among many (GRND-0086).
+bool zypperClashed(int code) { return code == 4 || code == 8; }
+
+// Past this many names failing alone, the failure is taken to be the
+// system's, not theirs, and the rest are not tried one by one.
+constexpr int kMostLoneClashes = 8;
+
 } // namespace
 
 Worker::Worker(const Catalogue &catalogue, FileReader files, QString stateDir)
@@ -113,20 +121,46 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
 {
     say(formatMarker(QStringLiteral("ACTION"), {itemId, step.label}));
     const QStringList argv = step.needsRoot ? Privilege::asRoot(step.argv) : step.argv;
-    int code = runCommand(argv, step.input, lines, echo);
+    int code = 0;
     if (step.tool == Step::Tool::Zypper) {
-        if (code == 103) // zypper updated itself; run once more to finish
-            code = runCommand(argv, step.input, lines, echo);
+        code = runZypper(argv, step.input, lines, echo);
         if (code == 106)
             say(formatMarker(QStringLiteral("HINT"),
                               {itemId, tr("A software source could not be read and was skipped.")}));
-        if (zypperSucceeded(code))
+        int lonesLeft = kMostLoneClashes;
+        if (zypperSucceeded(code)
+            || (step.namesFrom > 0 && zypperClashed(code)
+                && installInParts(step, step.argv.mid(step.namesFrom), &code, &lonesLeft)))
             return true;
-    } else if (code == 0 || step.alsoOk.contains(code)) {
-        return true;
+    } else {
+        code = runCommand(argv, step.input, lines, echo);
+        if (code == 0 || step.alsoOk.contains(code))
+            return true;
     }
     *detail = tr("%1 failed (exit code %2).").arg(step.label).arg(code);
     return false;
+}
+
+bool Worker::installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft)
+{
+    if (names.size() == 1)
+        return --*lonesLeft >= 0; // the item's check, run after, names it
+    const qsizetype half = names.size() / 2;
+    for (const QStringList &part : {names.first(half), names.mid(half)}) {
+        const QStringList argv = step.argv.first(step.namesFrom) + part;
+        *code = runZypper(step.needsRoot ? Privilege::asRoot(argv) : argv, step.input);
+        if (!zypperSucceeded(*code) && !(zypperClashed(*code) && installInParts(step, part, code, lonesLeft)))
+            return false;
+    }
+    return true;
+}
+
+int Worker::runZypper(const QStringList &argv, const QByteArray &input, QStringList *lines, bool echo)
+{
+    const int code = runCommand(argv, input, lines, echo);
+    if (code == 103) // zypper updated itself; run once more to finish
+        return runCommand(argv, input, lines, echo);
+    return code;
 }
 
 void Worker::openLog()
