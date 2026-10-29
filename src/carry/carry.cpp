@@ -1,5 +1,7 @@
 #include "carry.h"
 
+#include "core/translations.h"
+
 #include <QCoreApplication>
 #include <QDirIterator>
 #include <QFileInfo>
@@ -108,6 +110,29 @@ bool isSourceUrl(const QString &text)
                         || text.startsWith(QLatin1String("ftp://"));
     return scheme && !text.contains(QLatin1Char(' ')) && !hasControl(text);
 }
+
+bool isKeyUrl(const QString &text) { return text.startsWith(QLatin1String("https://")) && isSourceUrl(text); }
+
+namespace {
+
+// Why § 4.7 refuses a source for its key or priority; empty when it does not.
+QString keyOrPriorityProblem(const ZypperSource &source)
+{
+    if (source.gpgkey.contains(QLatin1Char(' ')))
+        return QCoreApplication::translate("gw::Carry", "“%1” can't be carried: it names more than one signing key.")
+            .arg(isolated(source.name));
+    if (!source.gpgkey.isEmpty() && !isKeyUrl(source.gpgkey))
+        return QCoreApplication::translate("gw::Carry",
+                                           "“%1” can't be carried: its signing key is not fetched over https.")
+            .arg(isolated(source.name));
+    if (source.priority < 1 || source.priority > 200)
+        return QCoreApplication::translate("gw::Carry",
+                                           "“%1” can't be carried: its priority is not a number from 1 to 200.")
+            .arg(isolated(source.name));
+    return {};
+}
+
+} // namespace
 
 bool isSettingsPath(const QString &path)
 {
@@ -268,7 +293,12 @@ void gatherSources(const CheckContext &context, Gathered *into)
         }
         // A source a new install could not reach, such as a local folder, is not carried.
         for (const ZypperSource &source : *sources) {
-            if (!isDistributionSource(source.baseurl) && isSourceUrl(source.baseurl))
+            if (isDistributionSource(source.baseurl) || !isSourceUrl(source.baseurl))
+                continue;
+            // One the reader would refuse is named instead (spec 4.3).
+            if (const QString why = keyOrPriorityProblem(source); !why.isEmpty())
+                into->uncarriedSources << why;
+            else
                 into->zypperSources << source;
         }
     }
@@ -495,7 +525,7 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
             s.autorefresh = o.value("autorefresh").toBool(false);
             s.gpgcheck = o.value("gpgcheck").toBool(true);
             if (isAlias(s.alias) && !s.name.isEmpty() && !hasControl(s.name) && isSourceUrl(s.baseurl)
-                && (s.gpgkey.isEmpty() || isSourceUrl(s.gpgkey)) && s.priority >= 1 && s.priority <= 200)
+                && keyOrPriorityProblem(s).isEmpty())
                 m.zypperSources << s;
             else
                 *skipped << skippedName(s.alias);

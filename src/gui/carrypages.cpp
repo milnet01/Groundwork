@@ -166,7 +166,10 @@ void GatherPage::showFound(const Gathered &found)
         Switch *row = addRow(tr("Couldn't tell: %1 could not be read.").arg(isolated(file)), false, {});
         row->setEnabled(false);
     }
-    if (found.zypperSources.isEmpty() && found.flatpakRemotes.isEmpty() && found.unreadableRepos.isEmpty())
+    for (const QString &why : found.uncarriedSources)
+        addRow(why, false, {})->setEnabled(false);
+    if (found.zypperSources.isEmpty() && found.flatpakRemotes.isEmpty() && found.unreadableRepos.isEmpty()
+        && found.uncarriedSources.isEmpty())
         note(tr("None found."));
     for (const ZypperSource &s : found.zypperSources)
         addRow(QStringLiteral("%1 — %2").arg(isolated(s.name), isolated(s.baseurl)), true,

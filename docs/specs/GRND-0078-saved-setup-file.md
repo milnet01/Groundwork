@@ -127,7 +127,9 @@ A source a Groundwork item adds, such as Packman, is gathered like any
 other; the item finds it by URL on the new install, as OneUp's does
 (`OneUpItem::applySteps`, `src/items/packman.h::repositoryAlias`). A `.repo` file that cannot
 be read or parsed is a row saying "couldn't tell", switched off and
-unswitchable, naming the file.
+unswitchable, naming the file. A source § 4.7 would refuse for its
+`gpgkey` or `priority` is not gathered either: it is a row of the same
+kind, naming the source and saying why it cannot be carried.
 
 Flatpak remotes other than `flathub`:
 
@@ -317,6 +319,11 @@ name and a source's alias follow their own patterns:
 
 A URL must start `https://`, `http://` or `ftp://` and hold no space or
 control character.
+
+A source's `gpgkey`, when set, is one such URL starting `https://`. The
+key is imported as root, and one fetched over `http://` or `ftp://` can
+be swapped on the way (user decision 2026-10-29). Its `priority` is a
+whole number from 1 to 200.
 
 ### 4.8 Removing secrets
 

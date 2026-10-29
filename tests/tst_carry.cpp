@@ -264,6 +264,48 @@ private slots:
         QVERIFY(!gw::isDistributionSource(QStringLiteral("https://download.opensuse.org/repositories/games/")));
     }
 
+    // Spec 4.3, 4.7: a source the reader would refuse for its gpgkey or
+    // priority is not gathered, but named with why; a gpgkey is https only
+    // (user decision 2026-10-29).
+    void aSourceTheReaderWouldRefuseIsNotGathered()
+    {
+        const QString repos = m_root + QStringLiteral("/etc/zypp/repos.d/");
+        const QByteArray url = "baseurl=https://dl.example.org/repo/\n";
+        writeFile(repos + QStringLiteral("a.repo"), "[a-http-key]\n" + url + "gpgkey=http://dl.example.org/key\n");
+        writeFile(repos + QStringLiteral("b.repo"), "[b-file-key]\n" + url + "gpgkey=file:///etc/key\n");
+        writeFile(repos + QStringLiteral("c.repo"),
+                  "[c-two-keys]\n" + url + "gpgkey=https://dl.example.org/k1 https://dl.example.org/k2\n");
+        writeFile(repos + QStringLiteral("d.repo"), "[d-priority-0]\n" + url + "priority=0\n");
+        writeFile(repos + QStringLiteral("e.repo"), "[e-priority-word]\n" + url + "priority=high\n");
+        writeFile(repos + QStringLiteral("f.repo"), "[f-good]\n" + url + "gpgkey=https://dl.example.org/key\npriority=200\n");
+        gw::Gathered g;
+        gw::gatherSources(gw::CheckContext(gw::FileReader(m_root)), &g);
+        QCOMPARE(g.zypperSources.size(), 1);
+        QCOMPARE(g.zypperSources.first().alias, QStringLiteral("f-good"));
+        QCOMPARE(g.uncarriedSources.size(), 5);
+        const QString why = g.uncarriedSources.join(QLatin1Char('\n'));
+        for (const char *alias : {"a-http-key", "b-file-key", "c-two-keys", "d-priority-0", "e-priority-word"})
+            QVERIFY2(why.contains(QLatin1String(alias)), alias);
+        QVERIFY(gw::isKeyUrl(QStringLiteral("https://dl.example.org/key")));
+        QVERIFY(!gw::isKeyUrl(QStringLiteral("http://dl.example.org/key")));
+        QVERIFY(!gw::isKeyUrl(QStringLiteral("ftp://dl.example.org/key")));
+
+        // The reader refuses the same: a saved http key is skipped.
+        QJsonObject json = gw::manifestJson(homeAndManifest());
+        QJsonArray sources = json.value("sources").toArray();
+        QJsonObject plain = sources.first().toObject();
+        plain.insert("alias", "plain-key");
+        plain.insert("gpgkey", "http://dl.example.org/key");
+        sources.append(plain);
+        json.insert("sources", sources);
+        QString refused;
+        QStringList skipped;
+        const std::optional<gw::Manifest> m = gw::readManifest(json, &refused, &skipped);
+        QVERIFY2(m, qPrintable(refused));
+        QCOMPARE(m->zypperSources.size(), 1);
+        QVERIFY(skipped.join(QLatin1Char('\n')).contains(QLatin1String("plain-key")));
+    }
+
     // Spec 4.4: an app's entries are one row; an entry no group claims is
     // its own; data in .local/share and .cache is not offered.
     void settingsAreOfferedAppByApp()

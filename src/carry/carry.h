@@ -74,6 +74,8 @@ bool isPackageName(const QString &text);
 bool isFlatpakAppId(const QString &text);
 bool isAlias(const QString &text);
 bool isSourceUrl(const QString &text);
+// A source's gpgkey: one URL, https only (spec 4.7).
+bool isKeyUrl(const QString &text);
 
 // INV-3: relative, no "..", starts with ".", and not .cache, .local or
 // .var alone.
@@ -103,6 +105,7 @@ struct Gathered
     QString flatpaksProblem;
     QList<ZypperSource> zypperSources;
     QStringList unreadableRepos; // file names
+    QStringList uncarriedSources; // plain words, one per source the reader would refuse
     QList<FlatpakRemote> flatpakRemotes;
     QString remotesProblem;
     QList<SettingsRow> settings;
