@@ -127,10 +127,14 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
         if (code == 106)
             say(formatMarker(QStringLiteral("HINT"),
                               {itemId, tr("A software source could not be read and was skipped.")}));
+        // 4 and 8 are also the system's own failure, so a name that failed
+        // alone clashed only if another part installed (GRND-0079 § 4.4).
         int lonesLeft = kMostLoneClashes;
+        bool installed = false;
         if (zypperSucceeded(code)
             || (step.namesFrom > 0 && zypperClashed(code)
-                && installInParts(step, step.argv.mid(step.namesFrom), &code, &lonesLeft)))
+                && installInParts(step, step.argv.mid(step.namesFrom), &code, &lonesLeft, &installed)
+                && installed))
             return true;
     } else {
         code = runCommand(argv, step.input, lines, echo);
@@ -141,7 +145,7 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
     return false;
 }
 
-bool Worker::installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft)
+bool Worker::installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft, bool *installed)
 {
     if (names.size() == 1)
         return --*lonesLeft >= 0; // the item's check, run after, names it
@@ -149,7 +153,9 @@ bool Worker::installInParts(const Step &step, const QStringList &names, int *cod
     for (const QStringList &part : {names.first(half), names.mid(half)}) {
         const QStringList argv = step.argv.first(step.namesFrom) + part;
         *code = runZypper(step.needsRoot ? Privilege::asRoot(argv) : argv, step.input);
-        if (!zypperSucceeded(*code) && !(zypperClashed(*code) && installInParts(step, part, code, lonesLeft)))
+        if (zypperSucceeded(*code))
+            *installed = true;
+        else if (!(zypperClashed(*code) && installInParts(step, part, code, lonesLeft, installed)))
             return false;
     }
     return true;

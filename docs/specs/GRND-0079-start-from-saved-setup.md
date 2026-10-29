@@ -186,7 +186,11 @@ seen in the VM on 2026-10-26 with `kernel-default` beside
 `kernel-default-base`). Exit 8, rpm refusing the transaction, is
 treated the same. The Worker then installs the names in halves,
 splitting each half that fails the same way, until a name fails
-alone. Once more than eight names have failed alone, the step fails
+alone. Exit 4 and 8 also mean the system failed, such as a download
+that could not finish (`man zypper`, EXIT CODES). So a name that
+failed alone is taken to clash only when another part of the same
+step installed; when no part installs, the step fails with zypper's
+exit code. Once more than eight names have failed alone, the step fails
 with zypper's exit code, and the rest are not tried. A file saved before GRND-0078
 § 4.2 left out the installer's choices may still hold them; they are
 dropped as the file is read (GRND-0078 § 4.7).
@@ -376,9 +380,10 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
   *Test:* `tests/tst_worker.cpp`, a fake `zypper` that exits 4 while a
   clashing name is in the list; the rest are installed, the item ends
   `ok`, and the `HINT` names the clashing one. A second fake fails
-  every install; the step fails within a few dozen `zypper` runs.
-  *Breaks when:* the Worker does not split a failed install, or splits
-  without a limit.
+  every install; the step fails within a few dozen `zypper` runs. The
+  same fake over a few names; the step fails.
+  *Breaks when:* the Worker does not split a failed install, splits
+  without a limit, or ends a step `ok` when no part installed.
 
 ## 6. Failure modes
 

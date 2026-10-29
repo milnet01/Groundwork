@@ -60,8 +60,9 @@ private:
                  bool echo = true);
     // Runs a Zypper step again over each half of names, splitting a half
     // that clashes, until a name clashes alone. Returns false, with code,
-    // on another failure or once lonesLeft names have clashed alone.
-    bool installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft);
+    // on another failure or once lonesLeft names have clashed alone. Sets
+    // installed when any part installs.
+    bool installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft, bool *installed);
     int runZypper(const QStringList &argv, const QByteArray &input, QStringList *lines = nullptr, bool echo = true);
     // One item's STEP_BEGIN, then end(ok, detail) says its STEP_END and DONE.
     void beginOne(const QString &id, const QString &title);

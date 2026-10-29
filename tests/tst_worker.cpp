@@ -101,6 +101,15 @@ for name in "$@"; do case "$name" in -*|install|nosuch*) ;; *) echo "$name" >> "
 exit 0
 )";
 
+// Every install exits 4, as when the system itself fails: zypper(8) says
+// 4 is any error from the ZYPP library, not only a clash.
+const QByteArray kZypperInstallsNothing = R"(#!/bin/sh
+echo "zypper $*" >> "$FAKE_LOG"
+case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
+case " $* " in *" install "*) exit 4;; esac
+exit 0
+)";
+
 constexpr qint64 kMiB = qint64(1) << 20;
 constexpr qint64 kGiB = qint64(1) << 30;
 
@@ -824,12 +833,7 @@ cat > "$FAKE_WRITTEN$out"
     void aFailureThatIsNotAClashStopsSoon()
     {
         writeFile(m_bin + QStringLiteral("/rpm"), kRpm, true);
-        writeFile(m_bin + QStringLiteral("/zypper"), R"(#!/bin/sh
-echo "zypper $*" >> "$FAKE_LOG"
-case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
-case " $* " in *" install "*) exit 4;; esac
-exit 0
-)", true);
+        writeFile(m_bin + QStringLiteral("/zypper"), kZypperInstallsNothing, true);
         m_env.insert(QStringLiteral("FAKE_INSTALLED"), m_dir->filePath(QStringLiteral("installed")));
         QStringList names;
         for (int i = 0; i < 300; ++i)
@@ -842,6 +846,23 @@ exit 0
                               QStringLiteral("system-update"), QStringLiteral("carried-packages")});
         QCOMPARE(r.endsFor(QStringLiteral("carried-packages")).value(1), QStringLiteral("fail"));
         QVERIFY2(r.count(QStringLiteral("zypper")) < 40, qPrintable(QString::number(r.count(QStringLiteral("zypper")))));
+    }
+
+    // GRND-0086: exit 4 and 8 also mean the system failed. When no part of
+    // a short list installs, no name is taken to clash and the step fails,
+    // where splitting down to single names would have ended it ok.
+    void aShortListThatInstallsNothingFails()
+    {
+        writeFile(m_bin + QStringLiteral("/rpm"), kRpm, true);
+        writeFile(m_bin + QStringLiteral("/zypper"), kZypperInstallsNothing, true);
+        m_env.insert(QStringLiteral("FAKE_INSTALLED"), m_dir->filePath(QStringLiteral("installed")));
+        QJsonObject chosen = savedManifest();
+        chosen.insert("packages", QJsonArray{"act", "hello", "nano"});
+        const QString file = savedFile(chosen);
+        chosen.remove("settings");
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("system-update"), QStringLiteral("carried-packages")});
+        QCOMPARE(r.endsFor(QStringLiteral("carried-packages")).value(1), QStringLiteral("fail"));
     }
 
     // GRND-0079, INV-5: settings are copied as the user, into the home
