@@ -13,6 +13,7 @@
 #include <QDir>
 #include <QLabel>
 #include <QLocale>
+#include <QMessageBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
@@ -265,6 +266,7 @@ private slots:
         m_saved = {};
         m_carriedState = gw::CheckState::NotDone;
         qunsetenv("FAKE_WORKER_LOG");
+        qunsetenv("FAKE_STOP"); // a stop test that failed early leaves it set
     }
 
     // Qt has no words of its own for Afrikaans, so the Wizard labels its
@@ -1035,6 +1037,33 @@ private slots:
         QVERIFY(QFile::exists(stop));
         QVERIFY(!w->isVisible());
         QTRY_VERIFY(!w->runPage()->isRunning()); // the Worker finished its step and stopped
+        qunsetenv("FAKE_STOP");
+    }
+
+    // Audit 2026-10-29: where the stop request cannot be written, the
+    // Worker is never told, so the window stays and says the run goes on.
+    void aStopThatCannotBeAskedKeepsTheWindowSayingSo()
+    {
+        const QString state = m_dir.filePath(QStringLiteral("state"));
+        const QString release = m_dir.filePath(QStringLiteral("release-the-fake-worker"));
+        QFile::remove(QDir(state).filePath(QStringLiteral("stop.request")));
+        QFile::remove(release);
+        QVERIFY(QDir().mkpath(state));
+        qputenv("FAKE_STOP", release.toUtf8());
+        auto w = make();
+        QTRY_VERIFY(w->checksDone());
+        goToRunPage(*w);
+        QTRY_VERIFY(w->runPage()->isRunning());
+        QFile::setPermissions(state, QFile::ReadOwner | QFile::ExeOwner);
+        w->close();
+        QFile::setPermissions(state, QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
+        QVERIFY(!QFile::exists(QDir(state).filePath(QStringLiteral("stop.request"))));
+        QVERIFY(w->isVisible());
+        auto *told = w->findChild<QMessageBox *>();
+        QVERIFY(told && told->isVisible());
+        QFile done(release);
+        QVERIFY(done.open(QIODevice::WriteOnly));
+        QTRY_VERIFY(!w->runPage()->isRunning());
         qunsetenv("FAKE_STOP");
     }
 

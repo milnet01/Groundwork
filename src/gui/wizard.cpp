@@ -24,6 +24,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QLocale>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSaveFile>
@@ -924,7 +925,16 @@ bool Wizard::stopForClose()
     // Stopping).
     (void)QDir().mkpath(m_setup.stateDir);
     QFile stop(stopFilePath(m_setup.stateDir));
-    (void)stop.open(QIODevice::WriteOnly);
+    if (!stop.open(QIODevice::WriteOnly)) {
+        // The Worker is never told, so it runs on; the window stays and says so.
+        auto *box = new QMessageBox(
+            QMessageBox::Warning, windowTitle(),
+            tr("Groundwork could not ask the run to stop (%1), so it goes on to its end.").arg(stop.errorString()),
+            QMessageBox::Ok, this);
+        box->setAttribute(Qt::WA_DeleteOnClose);
+        box->open();
+        return true;
+    }
     hide();
     return true;
 }
