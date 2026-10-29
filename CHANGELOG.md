@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-29
+
+**Theme:** Ready for the next install.
+
 ### Added
 
 - **Carrying a setup over: Groundwork lists what is set up on this
