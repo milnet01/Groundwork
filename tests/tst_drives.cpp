@@ -236,6 +236,9 @@ private slots:
         QTest::newRow("small start-up") << QList<P>{{gw::Use::Efi, gw::kGiB}, sys} << false;
         QTest::newRow("too big") << QList<P>{efi, {gw::Use::System, 70 * gw::kGiB}} << false;
         QTest::newRow("not whole MiB") << QList<P>{efi, {gw::Use::System, 20 * gw::kGiB + 1}} << false;
+        // INV-4: two sizes that add up past qint64 must not wrap round to fit.
+        QTest::newRow("sizes past qint64") << QList<P>{efi, {gw::Use::System, qint64(1) << 62}, {gw::Use::Data, qint64(1) << 62}}
+                                          << false;
     }
 
     void customLayoutsAreChecked()
@@ -297,6 +300,36 @@ private slots:
         parts.append(QJsonObject{{"use", "boot; rm -rf /"}, {"size", 1}});
         f["partitions"] = parts;
         QVERIFY(!gw::readLayoutFile(QJsonDocument(f).toJson(), &why));
+    }
+
+    // INV-4: a hand-written size that is not a whole number of bytes, or
+    // does not fit the drive, is refused before any number is taken from it.
+    void layoutFileSizesMustBeWholeAndFit_data()
+    {
+        QTest::addColumn<QJsonValue>("driveSize");
+        QTest::addColumn<QJsonValue>("dataSize");
+        const QJsonValue drive(double(64 * gw::kGiB));
+        QTest::newRow("past qint64") << drive << QJsonValue(1e300);
+        QTest::newRow("not whole") << drive << QJsonValue(double(20 * gw::kGiB) + 0.5);
+        QTest::newRow("bigger than the drive") << drive << QJsonValue(double(65 * gw::kGiB));
+        QTest::newRow("drive past qint64") << QJsonValue(1e300) << QJsonValue(double(20 * gw::kGiB));
+    }
+
+    void layoutFileSizesMustBeWholeAndFit()
+    {
+        QFETCH(QJsonValue, driveSize);
+        QFETCH(QJsonValue, dataSize);
+        QJsonObject f = gw::layoutFile(gw::layoutFor(gw::Suggestion::Whole, gw::Firmware::Uefi, 0),
+                                       one(disk("/dev/sdb", 64 * gw::kGiB)));
+        QJsonObject drive = f["drive"].toObject();
+        drive["size"] = driveSize;
+        f["drive"] = drive;
+        QJsonArray parts = f["partitions"].toArray();
+        parts.append(QJsonObject{{"use", "data"}, {"size", dataSize}});
+        f["partitions"] = parts;
+        QString why;
+        QVERIFY(!gw::readLayoutFile(QJsonDocument(f).toJson(), &why));
+        QVERIFY(!why.isEmpty());
     }
 
     // GRND-0076's VM run, in Arabic: a path inside right-to-left text came

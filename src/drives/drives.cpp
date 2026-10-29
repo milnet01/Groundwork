@@ -9,6 +9,7 @@
 #include <QSet>
 
 #include <algorithm>
+#include <cmath>
 
 namespace gw {
 namespace {
@@ -29,7 +30,18 @@ const QString kBiosBootType = QStringLiteral("21686148-6449-6E6F-744E-6565644546
 qint64 alignUp(qint64 v) { return (v + kMiB - 1) / kMiB * kMiB; }
 qint64 alignDown(qint64 v) { return v / kMiB * kMiB; }
 
-qint64 number(const QJsonValue &v) { return v.toVariant().toLongLong(); }
+// A number with a fraction, or outside qint64, reads as 0: no size or
+// sector count has a fraction, and converting one out of range is undefined.
+qint64 number(const QJsonValue &v)
+{
+    const QVariant n = v.toVariant();
+    if (n.typeId() == QMetaType::Double) {
+        const double d = n.toDouble();
+        if (d != std::trunc(d) || !(std::abs(d) < 0x1p63))
+            return 0;
+    }
+    return n.toLongLong();
+}
 
 // GPT keeps its backup at the drive's end: 16 KiB of entries and a header
 // sector. The first 1 MiB is left for alignment, as sfdisk does.
@@ -313,19 +325,28 @@ QString validate(const Layout &layout, const Drive &drive)
         return QCoreApplication::translate("gw::Drives", "openSUSE can go beside Windows only on a GPT drive.");
     QHash<Use, int> count;
     int rests = 0;
+    // needed never passes space, so a hand-written size cannot wrap it (INV-4).
+    const qint64 space = usableSpace(drive, layout.kind);
     qint64 needed = 0;
+    bool fits = true;
+    auto add = [&](qint64 size) {
+        if (size > space - needed)
+            fits = false;
+        else
+            needed += size;
+    };
     for (const PlannedPartition &p : layout.partitions) {
         ++count[p.use];
         if (!p.size) {
             ++rests;
-            needed += minimumFor(p.use);
+            add(minimumFor(p.use));
             continue;
         }
         if (*p.size % kMiB != 0)
             return QCoreApplication::translate("gw::Drives", "Each size must be a whole number of MiB.");
         if (*p.size < minimumFor(p.use))
             return QCoreApplication::translate("gw::Drives", "The %1 partition is smaller than its minimum.").arg(useName(p.use));
-        needed += *p.size;
+        add(*p.size);
     }
     if (count.value(Use::System) != 1)
         return QCoreApplication::translate("gw::Drives", "A layout needs exactly one system partition.");
@@ -341,7 +362,7 @@ QString validate(const Layout &layout, const Drive &drive)
     }
     if (rests > 1)
         return QCoreApplication::translate("gw::Drives", "Only one partition may take the rest of the space.");
-    if (needed > usableSpace(drive, layout.kind))
+    if (!fits)
         return QCoreApplication::translate("gw::Drives", "The layout does not fit in the space on this drive.");
     return {};
 }
@@ -497,7 +518,8 @@ std::optional<LayoutFile> readLayoutFile(const QByteArray &json, QString *why)
         const QJsonObject p = v.toObject();
         const auto use = useFromName(p.value(QStringLiteral("use")).toString());
         const QJsonValue size = p.value(QStringLiteral("size"));
-        if (!use || !(size.isNull() || size.isDouble()) || (size.isDouble() && size.toDouble() <= 0))
+        if (!use || !(size.isNull() || size.isDouble())
+            || (size.isDouble() && (number(size) <= 0 || number(size) > file.drive.size)))
             return refuse(QCoreApplication::translate("gw::Drives", "The layout file is not one this Groundwork can read."));
         file.layout.partitions << PlannedPartition{*use, size.isNull() ? std::nullopt
                                                                         : std::optional<qint64>(number(size))};
