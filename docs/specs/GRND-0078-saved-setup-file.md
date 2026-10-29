@@ -168,10 +168,10 @@ The same table marks secrets. At least: `.ssh`, `.gnupg`, `.pki`,
 `.password-store`, `.netrc`, `.git-credentials`, `.docker`, `.aws`,
 `.kube`, `.mozilla`, `.thunderbird`; in `.config`: `google-chrome*`,
 `chromium`, `BraveSoftware`, `microsoft-edge*`, `vivaldi`, `opera`,
-`gh`, `gcloud`, `rclone`; and the `.var/app` folders of
+`gh`, `gcloud`, `rclone`, `discord`; and the `.var/app` folders of
 `org.mozilla.firefox`, `org.mozilla.Thunderbird`, `com.google.Chrome`,
-`com.brave.Browser`, `org.chromium.Chromium`, `com.microsoft.Edge` and
-`com.discordapp.Discord`.
+`com.brave.Browser`, `org.chromium.Chromium`, `com.microsoft.Edge`,
+`com.vivaldi.Vivaldi`, `com.opera.Opera` and `com.discordapp.Discord`.
 
 A row starts switched on unless it is secret or bigger than 100 MiB.
 Switching a secret row on shows, beside it: "The saved file will hold

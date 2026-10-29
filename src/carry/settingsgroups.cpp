@@ -48,6 +48,7 @@ const QStringList kSecrets{
     QStringLiteral(".config/gh"),
     QStringLiteral(".config/gcloud"),
     QStringLiteral(".config/rclone"),
+    QStringLiteral(".config/discord"),
     QStringLiteral(".var/app/org.mozilla.firefox/config"),
     QStringLiteral(".var/app/org.mozilla.Thunderbird/config"),
     QStringLiteral(".var/app/com.google.Chrome/config"),
@@ -55,6 +56,8 @@ const QStringList kSecrets{
     QStringLiteral(".var/app/org.chromium.Chromium/config"),
     QStringLiteral(".var/app/com.microsoft.Edge/config"),
     QStringLiteral(".var/app/com.discordapp.Discord/config"),
+    QStringLiteral(".var/app/com.vivaldi.Vivaldi/config"),
+    QStringLiteral(".var/app/com.opera.Opera/config"),
 };
 
 // Built on each call, so the names follow the language loaded.

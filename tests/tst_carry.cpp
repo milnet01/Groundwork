@@ -357,6 +357,12 @@ private slots:
             QCOMPARE(gw::startsOn(row), !secret);
             QVERIFY2(row.bytes > 0, qPrintable(row.name)); // du read it
         }
+        // Native Discord keeps its login token in .config/discord; the
+        // Flatpak browsers keep their profiles under config.
+        for (const char *path : {".config/discord", ".var/app/com.vivaldi.Vivaldi/config", ".var/app/com.opera.Opera/config"}) {
+            const QList<gw::SettingsRow> one = gw::groupSettings({QString::fromLatin1(path)});
+            QVERIFY2(one.size() == 1 && one.first().secret, path);
+        }
         QVERIFY(!gw::startsOn({QStringLiteral("Steam"), {QStringLiteral(".steam")}, false, gw::kLargeSettings + 1}));
         QVERIFY(gw::startsOn({QStringLiteral("Small"), {QStringLiteral(".small")}, false, gw::kLargeSettings}));
 
