@@ -76,8 +76,9 @@ CheckResult NvidiaItem::check(const CheckContext &context) const
 
 QList<Step> NvidiaItem::applySteps(const SystemIdentity &system, const CheckContext &context) const
 {
-    QList<Step> steps;
-    QString alias = repositoryAlias(context, QStringLiteral("download.nvidia.com"));
+    QString alias;
+    QList<Step> steps =
+        usableRepository(context, QStringLiteral("download.nvidia.com"), tr("Switching on NVIDIA's software source"), &alias);
     if (alias.isEmpty()) {
         alias = kRepoAlias;
         // Slowroll uses the Tumbleweed repository; Leap's path takes its

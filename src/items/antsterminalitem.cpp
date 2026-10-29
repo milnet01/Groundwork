@@ -78,8 +78,8 @@ CheckResult AntsTerminalItem::check(const CheckContext &context) const
 QList<Step> AntsTerminalItem::applySteps(const SystemIdentity &system, const CheckContext &context) const
 {
     const QString label = tr("Installing Ants Terminal");
-    QList<Step> steps;
-    QString alias = repositoryAlias(context, kRepoPath);
+    QString alias;
+    QList<Step> steps = usableRepository(context, kRepoPath, label, &alias);
     if (alias.isEmpty()) {
         alias = kPackage;
         steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("addrepo"), QStringLiteral("-f"),

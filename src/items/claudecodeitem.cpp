@@ -50,12 +50,18 @@ CheckResult ClaudeCodeItem::check(const CheckContext &context) const
 QList<Step> ClaudeCodeItem::applySteps(const SystemIdentity &, const CheckContext &context) const
 {
     const QString label = tr("Installing Claude Code");
+    const QByteArray builtInKey = key();
+    // Compiled in, so only a broken build lacks it; then say what failed.
+    if (builtInKey.isEmpty())
+        return {Step{{QStringLiteral("false")}, false, Step::Tool::Generic,
+                     tr("Reading Groundwork's built-in signing key for Claude Code")}};
     QList<Step> steps = {
         makeDirectoriesStep({QFileInfo(kKeyFile).path()}, label),
-        writeFileStep(kKeyFile, key(), label),
+        writeFileStep(kKeyFile, builtInKey, label),
         {{QStringLiteral("rpm"), QStringLiteral("--import"), kKeyFile}, true, Step::Tool::Generic, label},
     };
-    QString alias = repositoryAlias(context, kRepoPath);
+    QString alias;
+    steps << usableRepository(context, kRepoPath, label, &alias);
     if (alias.isEmpty()) {
         alias = kPackage;
         steps.append({{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("addrepo"), QStringLiteral("-f"),

@@ -590,6 +590,10 @@
         <source>Installing Claude Code</source>
         <translation>Claude Code word geïnstalleer</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
@@ -1068,6 +1072,10 @@
         <source>Setting up the freeze recorder</source>
         <translation>Die vriesopnemer word opgestel</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::GamingExtrasItem</name>
@@ -1236,6 +1244,10 @@
         <translation>Hou die stelsellog op hoogstens 1 GB en vee die oudste inskrywings eerste uit, sodat dit nooit die skyf kan volmaak nie.</translation>
     </message>
     <message>
+        <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
         <translation>Die stelsellog kan groter as 1 GB word.</translation>
     </message>
@@ -1341,6 +1353,10 @@
         <translation>Secure Boot is aan, so jy sal dalk gevra word om &apos;n sleutel by die volgende herbegin goed te keur.</translation>
     </message>
     <message>
+        <source>Switching on NVIDIA&apos;s software source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding NVIDIA&apos;s software source</source>
         <translation>Besig om NVIDIA se sagtewarebron by te voeg</translation>
     </message>
@@ -1382,6 +1398,10 @@
 </context>
 <context>
     <name>gw::Packman</name>
+    <message>
+        <source>Switching on the Packman software source</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Adding the Packman software source</source>
         <translation>Besig om die Packman-sagtewarebron by te voeg</translation>

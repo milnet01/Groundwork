@@ -87,6 +87,19 @@ private slots:
         QVERIFY(gw::packmanAlias(context()).isEmpty());
     }
 
+    // GRND-0093: a Packman the user switched off is switched on to
+    // install from, never added again under its alias.
+    void aDisabledPackmanIsSwitchedOn()
+    {
+        repo(QStringLiteral("packman.repo"),
+             "[packman]\nenabled=0\nbaseurl=https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/\n");
+        const auto steps = gw::CodecsItem().applySteps(gw::parseOsRelease("ID=opensuse-tumbleweed\n"), context());
+        QVERIFY(!steps.isEmpty());
+        QCOMPARE(steps[0].argv, QStringList({"zypper", "-n", "modifyrepo", "-e", "packman"}));
+        for (const auto &step : steps)
+            QVERIFY2(!step.argv.contains(QStringLiteral("addrepo")), qPrintable(step.argv.join(QLatin1Char(' '))));
+    }
+
     void findsPackmanInAMultiSectionFile()
     {
         repo(QStringLiteral("mixed.repo"),

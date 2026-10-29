@@ -117,7 +117,7 @@ QList<Step> BootMenuItem::applySteps(const SystemIdentity &, const CheckContext 
     const QStringList edit = grubTimeoutLine(context).isEmpty()
         ? QStringList{QStringLiteral("sed"), QStringLiteral("-i"), QStringLiteral("$a") + setting, kDefaultGrub}
         : QStringList{QStringLiteral("sed"), QStringLiteral("-i"), QStringLiteral("-E"),
-                      QStringLiteral("s/^GRUB_TIMEOUT=.*/") + setting + QLatin1Char('/'), kDefaultGrub};
+                      QStringLiteral("s/^[[:space:]]*GRUB_TIMEOUT=.*/") + setting + QLatin1Char('/'), kDefaultGrub};
     return {Step{edit, true, Step::Tool::Generic, label},
             Step{{QStringLiteral("grub2-mkconfig"), QStringLiteral("-o"), QStringLiteral("/boot/grub2/grub.cfg")},
                  true, Step::Tool::Generic, label}};

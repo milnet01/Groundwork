@@ -75,11 +75,17 @@ CheckResult FreezeRecorderItem::check(const CheckContext &context) const
 QList<Step> FreezeRecorderItem::applySteps(const SystemIdentity &, const CheckContext &) const
 {
     const QString label = tr("Setting up the freeze recorder");
+    const QByteArray recorder = script();
+    // Compiled in, so only a broken build lacks it; an empty script would
+    // be restarted by its service every few seconds.
+    if (recorder.isEmpty())
+        return {Step{{QStringLiteral("false")}, false, Step::Tool::Generic,
+                     tr("Reading Groundwork's built-in freeze recorder script")}};
     const auto systemctl = [&](const QStringList &args) {
         return Step{QStringList{QStringLiteral("systemctl")} + args, true, Step::Tool::Generic, label};
     };
     return {makeDirectoriesStep({kBinDir}, label),
-            writeFileStep(kScript, script(), label),
+            writeFileStep(kScript, recorder, label),
             Step{{QStringLiteral("chmod"), QStringLiteral("755"), kScript}, true, Step::Tool::Generic, label},
             writeFileStep(QStringLiteral("/etc/systemd/system/") + kService, kUnit, label),
             systemctl({QStringLiteral("daemon-reload")}),

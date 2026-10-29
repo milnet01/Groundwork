@@ -103,6 +103,18 @@ private slots:
         QVERIFY(s.contains(QStringLiteral("root: zypper -n refresh anthropic")));
     }
 
+    // GRND-0093: a repository the user switched off is switched on, never
+    // added again under the alias it already holds.
+    void applyingSwitchesOnARepositoryTurnedOff()
+    {
+        rooted(QStringLiteral("etc/zypp/repos.d/claude-code.repo"),
+               "[claude-code]\nenabled=0\nbaseurl=" + kRepo.toUtf8() + "\n");
+        const QStringList s = argvs(steps());
+        QVERIFY2(!s.join(QLatin1Char('\n')).contains(QLatin1String("addrepo")), qPrintable(s.join(QLatin1Char('\n'))));
+        QVERIFY(s.contains(QStringLiteral("root: zypper -n modifyrepo -e claude-code")));
+        QVERIFY(s.contains(QStringLiteral("root: zypper -n refresh claude-code")));
+    }
+
     // It joins the developer tools. No released Ants Terminal offers it
     // yet, so the row does not say so (GRND-0082, 2026-10-29).
     void inTheCatalogue()

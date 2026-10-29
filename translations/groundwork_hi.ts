@@ -590,6 +590,10 @@
         <source>Installing Claude Code</source>
         <translation>Claude Code इंस्टॉल किया जा रहा है</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
@@ -1068,6 +1072,10 @@
         <source>Setting up the freeze recorder</source>
         <translation>फ़्रीज़ रिकॉर्डर सेट किया जा रहा है</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::GamingExtrasItem</name>
@@ -1236,6 +1244,10 @@
         <translation>सिस्टम लॉग को अधिकतम 1 GB तक रखता है और सबसे पुरानी प्रविष्टियाँ पहले हटाता है, ताकि वह कभी ड्राइव को भर न सके।</translation>
     </message>
     <message>
+        <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
         <translation>सिस्टम लॉग 1 GB से बड़ा हो सकता है।</translation>
     </message>
@@ -1341,6 +1353,10 @@
         <translation>Secure Boot चालू है, इसलिए अगले रीस्टार्ट पर आपसे एक कुंजी स्वीकृत करने के लिए कहा जा सकता है।</translation>
     </message>
     <message>
+        <source>Switching on NVIDIA&apos;s software source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding NVIDIA&apos;s software source</source>
         <translation>NVIDIA का सॉफ़्टवेयर स्रोत जोड़ा जा रहा है</translation>
     </message>
@@ -1382,6 +1398,10 @@
 </context>
 <context>
     <name>gw::Packman</name>
+    <message>
+        <source>Switching on the Packman software source</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Adding the Packman software source</source>
         <translation>Packman सॉफ़्टवेयर स्रोत जोड़ा जा रहा है</translation>

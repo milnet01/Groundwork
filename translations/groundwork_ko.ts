@@ -589,6 +589,10 @@
         <source>Installing Claude Code</source>
         <translation>Claude Code 설치 중</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
@@ -1066,6 +1070,10 @@
         <source>Setting up the freeze recorder</source>
         <translation>멈춤 기록기를 설정하는 중</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::GamingExtrasItem</name>
@@ -1234,6 +1242,10 @@
         <translation>시스템 로그를 최대 1GB로 유지하고 가장 오래된 항목부터 삭제하여 드라이브가 가득 차지 않도록 합니다.</translation>
     </message>
     <message>
+        <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
         <translation>시스템 로그가 1GB보다 커질 수 있습니다.</translation>
     </message>
@@ -1339,6 +1351,10 @@
         <translation>Secure Boot가 켜져 있으므로 다음에 다시 시작할 때 키를 승인하라는 요청이 나타날 수 있습니다.</translation>
     </message>
     <message>
+        <source>Switching on NVIDIA&apos;s software source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding NVIDIA&apos;s software source</source>
         <translation>NVIDIA 소프트웨어 소스 추가 중</translation>
     </message>
@@ -1380,6 +1396,10 @@
 </context>
 <context>
     <name>gw::Packman</name>
+    <message>
+        <source>Switching on the Packman software source</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Adding the Packman software source</source>
         <translation>Packman 소프트웨어 소스 추가 중</translation>

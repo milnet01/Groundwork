@@ -76,7 +76,8 @@ Terminal includes tree-sitter, which it has built in.
    keyboard escape, which restarts a frozen computer cleanly. A smoother
    scheduler for spinning hard drives, where one is found. A calmer wake
    from hibernation, with missed maintenance jobs spread out. A 1 GB
-   limit on the system log, which deletes the oldest entries first. A
+   limit on the system log, which deletes the oldest entries first,
+   and any older than three months, and leaves 2 GB of the drive free. A
    3-second wait at the boot menu. The freeze recorder, which notes what
    was using memory before a freeze. Less eager swapping, so programs
    stay in memory longer.

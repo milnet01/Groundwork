@@ -1832,7 +1832,7 @@ scheduled.
   Source: review-code-2026-10-29.
   Lanes: worker.
 
-- 📋 [GRND-0093] **Items: four low-severity review findings.**
+- ✅ [GRND-0093] **Items: four low-severity review findings.**
   Queued, not fixed: user ruling 2026-10-29. Each is in
   docs/reviews/review-code-2026-10-29/lane-05-items.md § Low / Info:
   claudecodeitem.cpp:58-63 (disabled repository alias reused),
@@ -1840,6 +1840,15 @@ scheduled.
   read), logcapitem.cpp:88-89 (extra journald keys beyond the spec),
   bootmenuitem.cpp:67/120 (check and apply match GRUB_TIMEOUT
   differently).
+  Fixed 2026-10-29, all four. A disabled repository is switched on
+  (usableRepository, zypper modifyrepo -e) for Packman, NVIDIA, OneUp,
+  Ants Terminal and Claude Code, never added again (tests red first). The
+  GRUB edit matches an indented line (real sed, red first). An empty
+  built-in key or recorder script fails one step naming it; no red run,
+  as both are compiled in. The log limit's sentence and design.md now say
+  it also deletes entries older than three months and keeps 2 GB free:
+  the settings came from the user's notes (GRND-0056), so the code was
+  right.
   **Layman:** Small edge cases in a few items: a disabled repository, an empty key file, log limits, the boot menu timeout line.
   Kind: review-fix.
   Source: review-code-2026-10-29.

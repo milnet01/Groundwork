@@ -67,8 +67,11 @@ QString LogCapItem::title() const { return tr("A size limit on the system log");
 
 QString LogCapItem::applySentence() const
 {
+    // Two sentences, so the first keeps its translations.
     return tr("Keeps the system's log to at most 1 GB, deleting the oldest entries first, so it can never fill "
-              "the drive.");
+              "the drive.")
+        + QLatin1Char(' ')
+        + tr("It also deletes entries older than three months, and leaves at least 2 GB of the drive free.");
 }
 
 CheckResult LogCapItem::check(const CheckContext &context) const

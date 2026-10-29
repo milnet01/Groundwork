@@ -590,6 +590,10 @@
         <source>Installing Claude Code</source>
         <translation>Claude Code wird installiert</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
@@ -1068,6 +1072,10 @@
         <source>Setting up the freeze recorder</source>
         <translation>Der Einfrier-Rekorder wird eingerichtet</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::GamingExtrasItem</name>
@@ -1236,6 +1244,10 @@
         <translation>Begrenzt das Systemprotokoll auf höchstens 1 GB und löscht dabei die ältesten Einträge zuerst, damit es das Laufwerk nie füllen kann.</translation>
     </message>
     <message>
+        <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
         <translation>Das Systemprotokoll kann größer als 1 GB werden.</translation>
     </message>
@@ -1341,6 +1353,10 @@
         <translation>Secure Boot ist eingeschaltet, daher werden Sie beim nächsten Neustart vielleicht gebeten, einen Schlüssel zu bestätigen.</translation>
     </message>
     <message>
+        <source>Switching on NVIDIA&apos;s software source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding NVIDIA&apos;s software source</source>
         <translation>Die Softwarequelle von NVIDIA wird hinzugefügt</translation>
     </message>
@@ -1382,6 +1398,10 @@
 </context>
 <context>
     <name>gw::Packman</name>
+    <message>
+        <source>Switching on the Packman software source</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Adding the Packman software source</source>
         <translation>Die Softwarequelle Packman wird hinzugefügt</translation>

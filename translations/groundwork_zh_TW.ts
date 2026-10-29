@@ -589,6 +589,10 @@
         <source>Installing Claude Code</source>
         <translation>正在安裝 Claude Code</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::ClockItem</name>
@@ -1066,6 +1070,10 @@
         <source>Setting up the freeze recorder</source>
         <translation>正在設定當機記錄器</translation>
     </message>
+    <message>
+        <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::GamingExtrasItem</name>
@@ -1234,6 +1242,10 @@
         <translation>將系統日誌維持在 1 GB 以內，優先刪除最舊的項目，使其永遠不會佔滿磁碟。</translation>
     </message>
     <message>
+        <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
         <translation>系統日誌可能會超過 1 GB。</translation>
     </message>
@@ -1339,6 +1351,10 @@
         <translation>Secure Boot 已開啟，因此下次重新開機時可能會要求您核准一把金鑰。</translation>
     </message>
     <message>
+        <source>Switching on NVIDIA&apos;s software source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Adding NVIDIA&apos;s software source</source>
         <translation>正在新增 NVIDIA 的軟體來源</translation>
     </message>
@@ -1380,6 +1396,10 @@
 </context>
 <context>
     <name>gw::Packman</name>
+    <message>
+        <source>Switching on the Packman software source</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Adding the Packman software source</source>
         <translation>正在新增 Packman 軟體來源</translation>

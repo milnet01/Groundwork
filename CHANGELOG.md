@@ -70,6 +70,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - **When the drives cannot be listed, the drive page says so,** instead
   of asking you to plug one in. The note on room to hibernate goes once
   you switch it on, and an encrypted swap reads as swap.
+- **A software source you had switched off is switched back on,**
+  instead of being added again and failing, for Packman, NVIDIA, OneUp,
+  Ants Terminal and Claude Code. The shorter boot menu wait now also
+  changes an indented setting line.
 
 ## [0.4.0] - 2026-10-16
 

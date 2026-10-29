@@ -125,7 +125,7 @@ codecs.opensuse.org/
 
 A source a Groundwork item adds, such as Packman, is gathered like any
 other; the item finds it by URL on the new install, as OneUp's does
-(`OneUpItem::applySteps`, `src/items/packman.h::repositoryAlias`). A `.repo` file that cannot
+(`OneUpItem::applySteps`, `src/items/packman.h::usableRepository`). A `.repo` file that cannot
 be read or parsed is a row saying "couldn't tell", switched off and
 unswitchable, naming the file. A source § 4.7 would refuse for its
 `gpgkey` or `priority` is not gathered either: it is a row of the same

@@ -4,6 +4,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QProcess>
 #include <QTemporaryDir>
 #include <QtTest>
 
@@ -139,9 +140,9 @@ private slots:
         rooted(QStringLiteral("etc/default/grub"), "GRUB_TIMEOUT=8\n");
         QList<gw::Step> steps = gw::BootMenuItem().applySteps({}, context());
         QCOMPARE(steps.size(), 2);
-        QCOMPARE(steps[0].argv, (QStringList{QStringLiteral("sed"), QStringLiteral("-i"), QStringLiteral("-E"),
-                                             QStringLiteral("s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=3/"),
-                                             QStringLiteral("/etc/default/grub")}));
+        QCOMPARE(steps[0].argv.mid(0, 4), (QStringList{QStringLiteral("sed"), QStringLiteral("-i"), QStringLiteral("-E"),
+                                                       QStringLiteral("s/^[[:space:]]*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=3/")}));
+        QCOMPARE(steps[0].argv.last(), QStringLiteral("/etc/default/grub"));
         QCOMPARE(steps[1].argv, rebuild);
 
         rooted(QStringLiteral("etc/default/grub"), "GRUB_DISTRIBUTOR=x\n");
@@ -152,6 +153,23 @@ private slots:
         QCOMPARE(steps[1].argv, rebuild);
         for (const gw::Step &s : steps)
             QVERIFY(s.needsRoot);
+    }
+
+    // GRND-0093: the check reads an indented GRUB_TIMEOUT line, so the
+    // edit changes one too; real sed, on a copy of the file.
+    void anIndentedTimeoutIsChanged()
+    {
+        loader("grub2");
+        rooted(QStringLiteral("etc/default/grub"), "GRUB_DISTRIBUTOR=x\n  GRUB_TIMEOUT=8\n");
+        QStringList argv = gw::BootMenuItem().applySteps({}, context()).value(0).argv;
+        QVERIFY(!argv.isEmpty());
+        argv.last() = m_root->filePath(QStringLiteral("etc/default/grub"));
+        QCOMPARE(argv.first(), QStringLiteral("sed"));
+        QCOMPARE(QProcess::execute(QStringLiteral("/usr/bin/sed"), argv.mid(1)), 0); // PATH holds only fakes
+        QFile f(argv.last());
+        QVERIFY(f.open(QIODevice::ReadOnly));
+        const QByteArray text = f.readAll();
+        QVERIFY2(text.contains("GRUB_TIMEOUT=3") && !text.contains("GRUB_TIMEOUT=8"), text.constData());
     }
 };
 
