@@ -16,8 +16,6 @@ public:
     QString title() const override;
     QString applySentence() const override;
     bool installsPackages() const override { return true; }
-    // Ants Terminal offers Claude Code itself (GRND-0082).
-    QStringList alsoOfferedBy() const override { return {QStringLiteral("ants-terminal")}; }
     CheckResult check(const CheckContext &context) const override;
     QList<Step> applySteps(const SystemIdentity &system,
                            const CheckContext &context) const override;

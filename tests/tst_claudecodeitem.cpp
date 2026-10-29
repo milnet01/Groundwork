@@ -103,17 +103,16 @@ private slots:
         QVERIFY(s.contains(QStringLiteral("root: zypper -n refresh anthropic")));
     }
 
-    // It joins the developer tools, and Ants Terminal offers it too.
-    void inTheCatalogueOfferedByAntsTerminal()
+    // It joins the developer tools. No released Ants Terminal offers it
+    // yet, so the row does not say so (GRND-0082, 2026-10-29).
+    void inTheCatalogue()
     {
         const gw::Catalogue &all = gw::catalogue();
         const gw::Item *item = all.find(QStringLiteral("dev-claude-code"));
         QVERIFY(item);
         QVERIFY(item->installsPackages());
         QCOMPARE(item->level(), gw::Level::NiceToHave);
-        for (const QString &by : item->alsoOfferedBy())
-            QVERIFY2(all.find(by), qPrintable(by));
-        QCOMPARE(item->alsoOfferedBy(), QStringList{QStringLiteral("ants-terminal")});
+        QVERIFY(item->alsoOfferedBy().isEmpty());
     }
 };
 
