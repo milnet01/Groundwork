@@ -50,7 +50,9 @@ struct Step
     QByteArray input = {};
     // A Zypper step's first package name in argv, or 0. When those names
     // clash with the system, the Worker installs them in parts, so one
-    // name does not stop the rest (GRND-0086).
+    // name does not stop the rest (GRND-0086). The step can then end ok
+    // with names left out; only a carried item's check is run again after,
+    // to name them, so set this on a carried item's step alone.
     qsizetype namesFrom = 0;
 };
 

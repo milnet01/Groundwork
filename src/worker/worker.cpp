@@ -148,7 +148,7 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
 bool Worker::installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft, bool *installed)
 {
     if (names.size() == 1)
-        return --*lonesLeft >= 0; // the item's check, run after, names it
+        return --*lonesLeft >= 0; // the carried item's check, run after, names it
     const qsizetype half = names.size() / 2;
     for (const QStringList &part : {names.first(half), names.mid(half)}) {
         const QStringList argv = step.argv.first(step.namesFrom) + part;
