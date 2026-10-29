@@ -4,7 +4,7 @@
   "suppressions_doc": "tools/audit/suppressions.md",
   "tools": {
     "clang-tidy": {
-      "checks": "-*,bugprone-*,-bugprone-easily-swappable-parameters,clang-analyzer-*,performance-*,-performance-enum-size,modernize-use-nodiscard"
+      "checks": "-*,bugprone-*,-bugprone-easily-swappable-parameters,clang-analyzer-*,performance-*,-performance-enum-size"
     },
     "clazy-standalone": {
       "checks": "level1,missing-qobject-macro",

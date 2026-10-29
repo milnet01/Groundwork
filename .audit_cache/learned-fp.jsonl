@@ -12,3 +12,4 @@
 {"fingerprint":"55d29b2c308d02b1","reason":"constexpr qint64 GiB = 1024 * 1024 is the constant 1048576, which fits in int (close-findings 2026-10-29).","rule":"clang-tidy","timestamp":"2026-10-29T10:48:50Z"}
 {"fingerprint":"4e47fb3e31110520","reason":"anySets builds the pattern from its key and pattern arguments, once per call outside the loop; it cannot be static (close-findings 2026-10-29).","rule":"clazy","timestamp":"2026-10-29T10:48:52Z"}
 {"fingerprint":"0b860e1eb92fafaa","reason":"packagesFor() returns a fresh unshared list, so first() copies nothing, and it is never empty there (close-findings 2026-10-29).","rule":"clazy","timestamp":"2026-10-29T10:48:53Z"}
+{"fingerprint":"a6064129ca970e50","reason":"16 * 1024 is a small constant; it cannot overflow int (close-findings 2026-10-29).","rule":"clang-tidy","timestamp":"2026-10-29T10:53:39Z"}

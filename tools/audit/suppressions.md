@@ -17,4 +17,5 @@ suppressed here; they are queued as one roadmap item (GRND-0094).
 | cppcheck | `missingInclude` | The `*.moc` files CMake's AUTOMOC generates into `build/`. Spot-checked 2026-10-29. | suppress |
 | typos | path `translations/*.ts` | Translations are not English text. Spot-checked 2026-10-29. | suppress |
 | typos | `hda` / `HDA` | Intel HD Audio, the sound hardware the sound-firmware item names (`tests/tst_soundfirmwareitem.cpp`). | suppress |
-| typos | path `ROADMAP.md` | Generated from the roadmap store. Its hits are commit hashes (`f31ba33` read as `ba`) and German (`Sie`). Spot-checked 2026-10-29. | suppress |
+| typos | path `ROADMAP.md` | Generated from the roadmap store. Its hits are fragments of commit hashes and German words. Spot-checked 2026-10-29. | suppress |
+| clang-tidy | `bugprone-unchecked-optional-access`, path `tests/*` | A test reads the value after `QVERIFY` or `QVERIFY2` on it, which returns from the test when it is empty. The analyser does not see that return. Spot-checked 2026-10-29 in `tests/tst_carry.cpp`. | suppress |
