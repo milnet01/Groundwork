@@ -14,7 +14,17 @@ defending one requires. This file is only what an outside reader needs.
 > trusted: user input, files, the network, plugins, another process. One
 > line each — what crosses, and what is checked at the crossing.
 
-(Filled once design names them.)
+- **A layout file, read by the Worker before it partitions a drive as
+  root.** The Worker trusts none of it and validates it again itself.
+  Checks: `docs/specs/GRND-0076-prepare-a-drive.md` INV-3, INV-4, INV-8.
+- **A saved setup file, from a stick that may have been edited.** Its
+  sources reach `zypper` as root, and its settings are written into the
+  home folder. Checks: `docs/specs/GRND-0078-saved-setup-file.md` INV-3,
+  INV-10; `docs/specs/GRND-0079-start-from-saved-setup.md` INV-2, INV-5,
+  INV-8.
+- **The choices file the wizard writes for the Worker.** Its settings
+  paths are checked before any `tar` call:
+  `docs/specs/GRND-0078-saved-setup-file.md` INV-3.
 
 ## Supported versions
 

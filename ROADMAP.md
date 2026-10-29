@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=88 -->
+<!-- ants-roadmap-id-high-water: GRND=95 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1729,3 +1729,97 @@ scheduled.
   Kind: ux.
   Source: grnd-0086-vm-check-2026-10-29.
   Lanes: worker, carry.
+
+- 📋 [GRND-0089] **Carry: seven low-severity review findings.**
+  Queued, not fixed: user ruling 2026-10-29 (fix HIGH and MEDIUM now,
+  queue LOW). Each is in
+  docs/reviews/review-code-2026-10-29/lane-01-carry.md § Low / Info:
+  carrieditems.cpp:83-84 (mv overwrites an existing .repo),
+  carry.cpp:460-475 (repeated alias), carry.cpp:74/498/535 (raw
+  echo without isolated()), carry.cpp:619-627 (unbounded member read),
+  carry.cpp:364-365 (findmnt failure skips the FAT check),
+  carry.cpp:421-425 (format above INT_MAX), carrieditems.cpp:62-63
+  (unparseable .repo passed over).
+  **Layman:** Small edge cases in saving and reading a setup file: duplicate names, unusual values, very large files.
+  Kind: review-fix.
+  Source: review-code-2026-10-29.
+  Lanes: carry.
+
+- 📋 [GRND-0090] **Wizard: ten low-severity review findings.**
+  Queued, not fixed: user ruling 2026-10-29. Each is in
+  docs/reviews/review-code-2026-10-29/lane-02-wizard-gui.md § Low / Info:
+  savedsetuppage.cpp:56 (manual delete of a parented child),
+  wizard.cpp:76/263/316/394/413 (pages without Q_OBJECT),
+  wizard.cpp:877 and carrypages.cpp:278 (choices files not owner-only),
+  switch.cpp:85 (& in names becomes a mnemonic), carrypages.cpp:27 and
+  savedsetuppage.cpp:71 (QLocale default), wizard.cpp:653/660/683
+  (name without isolated()), savedsetuppage.cpp:67 (created with no
+  offset), main.cpp:110 and wizard.cpp:570 (checks thread outlives
+  main), wizard.cpp:863/899 (no single-instance guard),
+  carrypages.cpp:66 (USER unset).
+  **Layman:** Small edge cases in the wizard window: file permissions, shortcuts in names, dates, two copies running at once.
+  Kind: review-fix.
+  Source: review-code-2026-10-29.
+  Lanes: wizard.
+
+- 📋 [GRND-0091] **Drives: four low-severity review findings.**
+  Queued, not fixed: user ruling 2026-10-29. Each is in
+  docs/reviews/review-code-2026-10-29/lane-03-drives.md § Low / Info:
+  preparepages.cpp:426 (hibernate note shown whatever the switch says),
+  drives.cpp:171-172 (a failed lsblk reads as no drives),
+  drives.cpp:132 (size-0 drives left out, unstated in § 4.1),
+  drives.cpp:82 (dm swap named differently by /proc/swaps).
+  **Layman:** Small edge cases when preparing a drive: a note shown at the wrong time, empty card readers, a failed drive listing.
+  Kind: review-fix.
+  Source: review-code-2026-10-29.
+  Lanes: drives.
+
+- 📋 [GRND-0092] **Worker: four low-severity review findings.**
+  Queued, not fixed: user ruling 2026-10-29. Each is in
+  docs/reviews/review-code-2026-10-29/lane-04-worker-core.md § Low /
+  Info: worker.cpp:127-129 (exit 106 inside a part gives no HINT),
+  worker.cpp:146-150 (empty names list recursion), worker.cpp:72-77
+  and markers.cpp:21 (echoed output can read as a marker),
+  markers.h:24 and systemidentity.h:28/32 (parsers lack nodiscard).
+  **Layman:** Small edge cases in the part that installs things: an unreported restart hint, output that looks like a control line.
+  Kind: review-fix.
+  Source: review-code-2026-10-29.
+  Lanes: worker.
+
+- 📋 [GRND-0093] **Items: four low-severity review findings.**
+  Queued, not fixed: user ruling 2026-10-29. Each is in
+  docs/reviews/review-code-2026-10-29/lane-05-items.md § Low / Info:
+  claudecodeitem.cpp:58-63 (disabled repository alias reused),
+  claudecodeitem.cpp:27 and freezerecorderitem.cpp:53 (empty resource
+  read), logcapitem.cpp:88-89 (extra journald keys beyond the spec),
+  bootmenuitem.cpp:67/120 (check and apply match GRUB_TIMEOUT
+  differently).
+  **Layman:** Small edge cases in a few items: a disabled repository, an empty key file, log limits, the boot menu timeout line.
+  Kind: review-fix.
+  Source: review-code-2026-10-29.
+  Lanes: items.
+
+- 📋 [GRND-0094] **Code style classes the checking tools raise.**
+  Style-only classes from check-code --tree 2026-10-29, one item by
+  the audit's rule: useStlAlgorithm, range-loop-detach,
+  implicit-conversion-in-loop, shadowFunction, noExplicitConstructor,
+  functionStatic, constVariablePointer, returnByReference,
+  no-module-include, and the one-off performance hints
+  (translations.cpp:57, carrypages.cpp:196, main.cpp:214). Raw lists:
+  rerun check-code --tree.
+  **Layman:** Tidy-ups the checking tools suggest that change no behaviour.
+  Kind: refactor.
+  Source: check-code-2026-10-29.
+  Lanes: all.
+
+- 📋 [GRND-0095] **Review the changed tests for 0.5.0.**
+  review-code sends changed test files to review-tests:
+  tests/CMakeLists.txt, tst_carry.cpp, tst_claudecodeitem.cpp,
+  tst_drives.cpp, tst_wizard.cpp, tst_worker.cpp. Also from
+  verify-delivery 2026-10-29: no test covers changing the language
+  while checks or gathering run (fixes 36f819f, 6009c39), nor the
+  non-Flathub sources line on the saved-setup page.
+  **Layman:** Check that the tests added for 0.5.0 really test what they claim.
+  Kind: test.
+  Source: review-code-2026-10-29.
+  Lanes: tests.

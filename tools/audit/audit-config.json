@@ -1,0 +1,17 @@
+{
+  "project": "groundwork",
+  "scope_file": "tools/audit/scope.txt",
+  "suppressions_doc": "tools/audit/suppressions.md",
+  "tools": {
+    "clang-tidy": {
+      "checks": "-*,bugprone-*,-bugprone-easily-swappable-parameters,clang-analyzer-*,performance-*,-performance-enum-size,modernize-use-nodiscard"
+    },
+    "clazy-standalone": {
+      "checks": "level1,missing-qobject-macro",
+      "requires": "build/compile_commands.json"
+    }
+  },
+  "presets": {
+    "default": ["cppcheck", "clang-tidy", "clazy-standalone", "shellcheck", "actionlint", "zizmor", "semgrep", "gitleaks", "typos"]
+  }
+}

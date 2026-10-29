@@ -1,0 +1,13 @@
+logs/
+data/
+database/
+node_modules/
+dist/
+build/
+_build/
+__pycache__/
+.venv/
+venv/
+env/
+static/images/
+static/videos/
