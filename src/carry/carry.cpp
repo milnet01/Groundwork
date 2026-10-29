@@ -71,9 +71,23 @@ QString strippedMember(const QString &member)
     return path;
 }
 
+// A value that failed its check, as the page and the marker show it:
+// without control or direction characters an edited file could hold.
+QString shown(const QString &value)
+{
+    QString text = value;
+    text.removeIf([](QChar c) {
+        const char16_t u = c.unicode();
+        return u < 0x20 || u == 0x7f || u == 0x061c || u == 0x200e || u == 0x200f || (u >= 0x202a && u <= 0x202e)
+               || (u >= 0x2066 && u <= 0x2069);
+    });
+    return isolated(text);
+}
+
 QString skippedName(const QString &value)
 {
-    return QCoreApplication::translate("gw::Carry", "Skipped “%1”: it is not a name Groundwork can use.").arg(value);
+    return QCoreApplication::translate("gw::Carry", "Skipped “%1”: it is not a name Groundwork can use.")
+        .arg(shown(value));
 }
 
 QStringList strings(const QJsonValue &value)
@@ -389,6 +403,13 @@ QString saveProblem(qint64 bytes, qint64 freeBytes, const QString &fstype)
                                                         "Choose another folder.");
     // The settings' members, then the manifest and the archive's end.
     const qint64 file = bytes + kSetupFileExtra;
+    // findmnt failed, so the drive may be FAT.
+    if (fstype.isEmpty() && file > kVfatLimit)
+        return QCoreApplication::translate("gw::Carry", "Groundwork could not tell whether this drive uses FAT, "
+                                                        "which cannot hold a file bigger than 4 GiB, and the "
+                                                        "settings switched on need %1. Switch some off, or choose "
+                                                        "another folder.")
+            .arg(locale.formattedDataSize(file, 1, QLocale::DataSizeIecFormat));
     if (fstype == QLatin1String("vfat") && file > kVfatLimit)
         return QCoreApplication::translate("gw::Carry", "This drive uses FAT, which cannot hold a file bigger than "
                                                         "4 GiB, and the settings switched on need %1. Switch some "
@@ -472,13 +493,14 @@ QJsonObject manifestJson(const Manifest &manifest)
 std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStringList *skipped)
 {
     const QJsonValue format = json.value("format");
-    if (!format.isDouble() || format.toInt() < 1) {
-        *why = QCoreApplication::translate("gw::Carry", "This is not a Groundwork setup file.");
-        return std::nullopt;
-    }
-    if (format.toInt() > kSetupFormat) {
+    // Compared as a double first: toInt() gives 0 for a format past INT_MAX.
+    if (format.isDouble() && format.toDouble() > kSetupFormat) {
         *why = QCoreApplication::translate("gw::Carry", "This file was saved by a newer Groundwork. Update "
                                                         "Groundwork to read it.");
+        return std::nullopt;
+    }
+    if (!format.isDouble() || format.toInt() < 1) {
+        *why = QCoreApplication::translate("gw::Carry", "This is not a Groundwork setup file.");
         return std::nullopt;
     }
     Manifest m;
@@ -524,8 +546,15 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
             s.enabled = o.value("enabled").toBool(true);
             s.autorefresh = o.value("autorefresh").toBool(false);
             s.gpgcheck = o.value("gpgcheck").toBool(true);
-            if (isAlias(s.alias) && !s.name.isEmpty() && !hasControl(s.name) && isSourceUrl(s.baseurl)
-                && keyOrPriorityProblem(s).isEmpty())
+            const bool repeated = std::any_of(m.zypperSources.cbegin(), m.zypperSources.cend(),
+                                              [&](const ZypperSource &kept) { return kept.alias == s.alias; });
+            // A second source with one alias would be a second item with one id.
+            if (repeated)
+                *skipped << QCoreApplication::translate("gw::Carry", "Skipped a second software source named "
+                                                                     "“%1”: the file names it twice.")
+                                .arg(shown(s.alias));
+            else if (isAlias(s.alias) && !s.name.isEmpty() && !hasControl(s.name) && isSourceUrl(s.baseurl)
+                     && keyOrPriorityProblem(s).isEmpty())
                 m.zypperSources << s;
             else
                 *skipped << skippedName(s.alias);
@@ -549,7 +578,7 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
             if (!isSettingsPath(path)) {
                 *why = QCoreApplication::translate("gw::Carry", "The file names a setting outside the home "
                                                                 "folder: %1")
-                           .arg(path);
+                           .arg(shown(path));
                 return std::nullopt;
             }
         }
@@ -587,15 +616,15 @@ QString membersProblem(const QStringList &members, const Manifest &manifest)
         const QString path = strippedMember(member);
         if (!isSettingsPath(path))
             return QCoreApplication::translate("gw::Carry", "The file holds %1, which is outside the home folder.")
-                .arg(member);
+                .arg(shown(member));
         if (std::none_of(paths.cbegin(), paths.cend(), [&](const QString &p) { return isUnder(path, p); }))
             return QCoreApplication::translate("gw::Carry", "The file holds %1, which its setup list does not name.")
-                .arg(member);
+                .arg(shown(member));
     }
     for (const QString &p : std::as_const(paths)) {
         if (std::none_of(members.cbegin(), members.cend(),
                          [&](const QString &member) { return isUnder(strippedMember(member), p); }))
-            return QCoreApplication::translate("gw::Carry", "The file is missing %1.").arg(p);
+            return QCoreApplication::translate("gw::Carry", "The file is missing %1.").arg(shown(p));
     }
     return {};
 }
@@ -673,7 +702,8 @@ QStringList listArguments(const QString &file)
 std::optional<Manifest> readSetupFile(const CheckContext &context, const QString &file, QString *why,
                                       QStringList *skipped)
 {
-    const CommandResult list = context.run(QStringList{QStringLiteral("tar")} + listArguments(file), kLongTimeoutMs);
+    const CommandResult list =
+        context.run(QStringList{QStringLiteral("tar")} + listArguments(file), kLongTimeoutMs, kMemberListCap);
     if (!list.ok()) {
         *why = QCoreApplication::translate("gw::Carry", "The file could not be read as a Groundwork setup file.");
         return std::nullopt;
@@ -687,7 +717,7 @@ std::optional<Manifest> readSetupFile(const CheckContext &context, const QString
     const CommandResult text = context.run({QStringLiteral("tar"), QStringLiteral("--extract"),
                                             QStringLiteral("--to-stdout"), QStringLiteral("--file"), file,
                                             kManifestName},
-                                           kLongTimeoutMs);
+                                           kLongTimeoutMs, kManifestCap);
     if (!text.ok()) {
         *why = QCoreApplication::translate("gw::Carry", "The file could not be read as a Groundwork setup file.");
         return std::nullopt;

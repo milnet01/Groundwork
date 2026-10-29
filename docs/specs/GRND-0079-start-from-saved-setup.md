@@ -112,7 +112,7 @@ Carried items come after every Groundwork item, in this order:
 
 | Id | One per | Check | Apply |
 |---|---|---|---|
-| `carried-source:<alias>` | zypper source | Done when `/etc/zypp/repos.d` holds a source with this alias or this `baseurl` (`parseRepoFile`) | § 4.3 |
+| `carried-source:<alias>` | zypper source | Done when `/etc/zypp/repos.d` holds a source with this alias or this `baseurl` (`parseRepoFile`); otherwise couldn't tell when a `.repo` file there cannot be read, or `<alias>.repo` holds another source | § 4.3 |
 | `carried-packages` | file | Done when `rpm -q` finds every kept name; the detail names the rest | § 4.4 |
 | `carried-flatpaks` | file | Done when `flatpak list --app --columns=application,installation` lists every kept app | one `flatpak install -y --noninteractive --system` or `--user` `REMOTE APP` step per missing app, `alsoOk = {1}` |
 | `carried-settings` | file | `tar --diff` of the kept paths: 0 Done, 1 not done unless it reports only owners and modes, 2 couldn't tell | § 4.5 |

@@ -381,6 +381,14 @@
         <translation>Nie geïnstalleer nie: %1</translation>
     </message>
     <message>
+        <source>Groundwork could not read %1 in %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 already holds another software source.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
         <translation>Installeer die programme wat jy gehad het. Enige wat nie geïnstalleer kan word nie, word oorgeslaan en aan die einde genoem.</translation>
     </message>
@@ -471,6 +479,14 @@
     <message>
         <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
         <translation>Hierdie lêer is deur &apos;n nuwer Groundwork gestoor. Dateer Groundwork op om dit te lees.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skipped a second software source named “%1”: the file names it twice.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>

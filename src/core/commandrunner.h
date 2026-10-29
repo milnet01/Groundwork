@@ -12,11 +12,12 @@ struct CommandResult
 {
     bool started = false;  // false: the program was not found or could not run
     bool timedOut = false; // true: killed at the time limit
+    bool tooLong = false;  // true: killed when its output passed the cap
     int exitCode = -1;
     QByteArray out;
     QByteArray err;
 
-    bool ok() const { return started && !timedOut && exitCode == 0; }
+    bool ok() const { return started && !timedOut && !tooLong && exitCode == 0; }
 };
 
 class CommandRunner
@@ -24,7 +25,8 @@ class CommandRunner
 public:
     static constexpr int DefaultTimeoutMs = 20000;
 
-    CommandResult run(const QStringList &argv, int timeoutMs = DefaultTimeoutMs) const;
+    // maxOutBytes caps what is kept of standard output; -1 keeps it all.
+    CommandResult run(const QStringList &argv, int timeoutMs = DefaultTimeoutMs, qint64 maxOutBytes = -1) const;
 };
 
 } // namespace gw

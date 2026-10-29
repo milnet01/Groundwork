@@ -82,10 +82,10 @@ public:
     // Hidden entries, such as a home folder's dot-files, only when asked.
     QStringList entries(const QString &dir, bool hidden = false) const { return m_files.entries(dir, hidden); }
     QString linkTargetName(const QString &path) const { return m_files.linkTargetName(path); }
-    CommandResult run(const QStringList &argv,
-                      int timeoutMs = CommandRunner::DefaultTimeoutMs) const
+    CommandResult run(const QStringList &argv, int timeoutMs = CommandRunner::DefaultTimeoutMs,
+                      qint64 maxOutBytes = -1) const
     {
-        return m_commands.run(argv, timeoutMs);
+        return m_commands.run(argv, timeoutMs, maxOutBytes);
     }
 
 private:

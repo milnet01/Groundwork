@@ -380,6 +380,14 @@
         <translation>未安裝：%1</translation>
     </message>
     <message>
+        <source>Groundwork could not read %1 in %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 already holds another software source.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
         <translation>安裝您以前的程式。無法安裝的程式會被略過，並在最後列出。</translation>
     </message>
@@ -470,6 +478,14 @@
     <message>
         <source>This file was saved by a newer Groundwork. Update Groundwork to read it.</source>
         <translation>這個檔案是由較新版本的 Groundwork 儲存的。請先更新 Groundwork 再讀取它。</translation>
+    </message>
+    <message>
+        <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skipped a second software source named “%1”: the file names it twice.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>

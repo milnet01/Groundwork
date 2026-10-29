@@ -1,10 +1,11 @@
 #include "commandrunner.h"
 
+#include <QDeadlineTimer>
 #include <QProcess>
 
 namespace gw {
 
-CommandResult CommandRunner::run(const QStringList &argv, int timeoutMs) const
+CommandResult CommandRunner::run(const QStringList &argv, int timeoutMs, qint64 maxOutBytes) const
 {
     CommandResult result;
     if (argv.isEmpty())
@@ -20,14 +21,31 @@ CommandResult CommandRunner::run(const QStringList &argv, int timeoutMs) const
         return result;
     result.started = true;
 
-    if (!process.waitForFinished(timeoutMs)) {
-        result.timedOut = true;
+    if (maxOutBytes < 0) {
+        if (!process.waitForFinished(timeoutMs))
+            result.timedOut = true;
+    } else {
+        // Read as it comes, so a program printing without end is stopped at
+        // the cap instead of filling memory.
+        const QDeadlineTimer deadline(timeoutMs);
+        while (process.state() != QProcess::NotRunning && !deadline.hasExpired()) {
+            if (!process.waitForReadyRead(int(deadline.remainingTime())) && process.state() != QProcess::NotRunning)
+                process.waitForFinished(int(deadline.remainingTime()));
+            result.out += process.readAllStandardOutput();
+            if (result.out.size() > maxOutBytes) {
+                result.tooLong = true;
+                break;
+            }
+        }
+        result.timedOut = !result.tooLong && process.state() != QProcess::NotRunning;
+    }
+    if (result.timedOut || result.tooLong) {
         process.kill();
         process.waitForFinished();
     } else if (process.exitStatus() == QProcess::NormalExit) {
         result.exitCode = process.exitCode();
     }
-    result.out = process.readAllStandardOutput();
+    result.out += process.readAllStandardOutput();
     result.err = process.readAllStandardError();
     return result;
 }

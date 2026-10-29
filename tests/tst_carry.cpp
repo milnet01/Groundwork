@@ -431,6 +431,10 @@ private slots:
         QVERIFY(!gw::saveProblem(gw::kVfatLimit - gw::kSetupFileExtra + 1, 100 * GiB, QStringLiteral("vfat")).isEmpty());
         QVERIFY(!gw::saveProblem(GiB, GiB + gw::kSetupFileExtra - 1, QStringLiteral("ext4")).isEmpty());
         QVERIFY(!gw::saveProblem(GiB, -1, QStringLiteral("ext4")).isEmpty()); // free space unknown
+        // GRND-0089: findmnt failed, so the drive may be FAT; only a file
+        // FAT cannot hold is refused.
+        QVERIFY(!gw::saveProblem(5 * GiB, 100 * GiB, QString()).isEmpty());
+        QVERIFY(gw::saveProblem(GiB, 100 * GiB, QString()).isEmpty());
     }
 
     void theFileIsNamedForTheComputerAndTheDay()
@@ -465,6 +469,10 @@ private slots:
         QVERIFY(gw::readManifest(json, &why, &skipped));
         QVERIFY(skipped.isEmpty());
         json.insert("format", 2);
+        QVERIFY(!gw::readManifest(json, &why, &skipped));
+        QVERIFY2(why.contains(QLatin1String("newer Groundwork")), qPrintable(why));
+        // GRND-0089: a format too big for an int is newer too.
+        json.insert("format", 3e9);
         QVERIFY(!gw::readManifest(json, &why, &skipped));
         QVERIFY2(why.contains(QLatin1String("newer Groundwork")), qPrintable(why));
         QVERIFY(!gw::readManifest(QByteArray("not json"), &why, &skipped));
@@ -589,6 +597,91 @@ private slots:
         QVERIFY(skipped.join(QLatin1Char('\n')).contains(QLatin1String("--gpg-auto-import-keys")));
     }
 
+    // GRND-0089: a second source with the same alias would make a second
+    // item with the same id, so it is skipped, saying why.
+    void aRepeatedAliasIsSkipped()
+    {
+        QJsonObject json = gw::manifestJson(homeAndManifest());
+        QJsonArray sources = json.value("sources").toArray();
+        QJsonObject again = sources.first().toObject();
+        again.insert("baseurl", "https://example.org/other/");
+        sources.append(again);
+        json.insert("sources", sources);
+        QString why;
+        QStringList skipped;
+        const std::optional<gw::Manifest> m = gw::readManifest(json, &why, &skipped);
+        QVERIFY2(m, qPrintable(why));
+        QCOMPARE(m->zypperSources.size(), 1);
+        QCOMPARE(m->zypperSources.first().baseurl, homeAndManifest().zypperSources.first().baseurl);
+        QCOMPARE(skipped.size(), 1);
+        QVERIFY2(skipped.first().contains(QLatin1String("home_milnet_kde-fixes")), qPrintable(skipped.first()));
+    }
+
+    // GRND-0089: a refused value from an edited file is shown without its
+    // control and direction characters, and isolated from the sentence.
+    void aRefusedValueIsShownWithoutControlCharacters()
+    {
+        auto clean = [](const QString &text) {
+            return std::none_of(text.cbegin(), text.cend(), [](QChar c) {
+                const char16_t u = c.unicode();
+                return u < 0x20 || u == 0x7f || (u >= 0x202a && u <= 0x202e) || u == 0x200e || u == 0x200f;
+            });
+        };
+        const QString evil = QStringLiteral("app\x1b[31m\u202eevil");
+        QJsonObject json = gw::manifestJson(homeAndManifest());
+        json.insert("flatpaks", QJsonArray{QJsonObject{{"app", evil}, {"remote", "flathub"}, {"installation", "user"}}});
+        QString why;
+        QStringList skipped;
+        QVERIFY(gw::readManifest(json, &why, &skipped));
+        QCOMPARE(skipped.size(), 1);
+        QVERIFY2(clean(skipped.first()), qPrintable(skipped.first()));
+        QVERIFY(skipped.first().contains(QChar(0x2068) + QStringLiteral("app[31mevil") + QChar(0x2069)));
+
+        json = gw::manifestJson(homeAndManifest());
+        QJsonArray settings = json.value("settings").toArray();
+        QJsonObject row = settings.first().toObject();
+        row.insert("paths", QJsonArray{QStringLiteral("/etc/\u202epasswd")});
+        settings.replace(0, row);
+        json.insert("settings", settings);
+        QVERIFY(!gw::readManifest(json, &why, &skipped));
+        QVERIFY2(clean(why), qPrintable(why));
+
+        const QString problem = gw::membersProblem({gw::kManifestName, QStringLiteral(".config/dolphinrc"),
+                                                    QStringLiteral(".ssh/"), QStringLiteral(".x\x1b[2J")},
+                                                   homeAndManifest());
+        QVERIFY(!problem.isEmpty());
+        QVERIFY2(clean(problem), qPrintable(problem));
+    }
+
+    // GRND-0089: tar's member list and the setup list are read only up to
+    // a cap, so a crafted file cannot fill memory before it is checked.
+    void anOversizedListOrManifestIsRefused()
+    {
+        const gw::Manifest m = homeAndManifest();
+        const QByteArray manifest = QJsonDocument(gw::manifestJson(m)).toJson();
+        writeFile(m_dir->filePath(QStringLiteral("manifest.json")), manifest);
+        // A fake tar: --list prints the members, --extract the manifest,
+        // each padded past its cap when asked.
+        const QByteArray script = "#!/bin/sh\n"
+                                  "case \"$1\" in\n"
+                                  "--list) printf 'groundwork-setup.json\\n.config/dolphinrc\\n.ssh/\\n'\n"
+                                  "  [ \"$GW_PAD\" = list ] && head -c " + QByteArray::number(gw::kMemberListCap)
+                                  + " /dev/zero | tr '\\0' 'a' | sed 's|^|.ssh/|' ;;\n"
+                                  "--extract) cat '" + m_dir->filePath(QStringLiteral("manifest.json")).toUtf8() + "'\n"
+                                  "  [ \"$GW_PAD\" = manifest ] && head -c " + QByteArray::number(gw::kManifestCap)
+                                  + " /dev/zero | tr '\\0' ' ' ;;\n"
+                                  "esac\nexit 0\n";
+        writeFile(m_bin + QStringLiteral("/tar"), script, true);
+        QString why;
+        QVERIFY2(read(QStringLiteral("f.tar"), &why), qPrintable(why));
+        for (const char *pad : {"list", "manifest"}) {
+            qputenv("GW_PAD", pad);
+            QVERIFY2(!read(QStringLiteral("f.tar"), &why), pad);
+            QVERIFY(!why.isEmpty());
+        }
+        qunsetenv("GW_PAD");
+    }
+
     // GRND-0086: what the installer chooses for this computer, a kernel,
     // boot loader or security framework, is neither gathered nor read
     // back, even from a file saved before; a kernel's companions are.
@@ -674,6 +767,36 @@ private slots:
         QCOMPARE(steps[3].argv.last(), QStringLiteral("/etc/zypp/repos.d/home_milnet_kde-fixes.repo"));
         for (const gw::Step &step : steps)
             QVERIFY(step.needsRoot);
+    }
+
+    // GRND-0089: the step moves the source into <alias>.repo, so a file of
+    // that name holding another source, or a file that cannot be read,
+    // makes the check couldn't tell rather than not done.
+    void aTakenOrUnreadableRepoFileCouldNotTell()
+    {
+        gw::Manifest m;
+        m.zypperSources = homeAndManifest().zypperSources;
+        const gw::CarriedItems carried = gw::carriedItems(m, QStringLiteral("f.tar"), gw::catalogue());
+        QCOMPARE(carried.owned.size(), size_t(1));
+        const gw::Item &item = *carried.owned[0];
+        const QString repos = m_root + QStringLiteral("/etc/zypp/repos.d/");
+        const gw::CheckContext context{gw::FileReader(m_root)};
+        writeFile(repos + QStringLiteral("other.repo"), "[other]\nbaseurl=https://example.org/other/\n");
+        QCOMPARE(item.check(context).state, gw::CheckState::NotDone);
+
+        writeFile(repos + QStringLiteral("home_milnet_kde-fixes.repo"), "[mine]\nbaseurl=https://example.org/mine/\n");
+        gw::CheckResult r = item.check(context);
+        QCOMPARE(r.state, gw::CheckState::CouldNotTell);
+        QVERIFY(!r.detail.isEmpty());
+        QVERIFY(QFile::remove(repos + QStringLiteral("home_milnet_kde-fixes.repo")));
+
+        writeFile(repos + QStringLiteral("broken.repo"), "baseurl=no section\n");
+        r = item.check(context);
+        QCOMPARE(r.state, gw::CheckState::CouldNotTell);
+        QVERIFY2(r.detail.contains(QLatin1String("broken.repo")), qPrintable(r.detail));
+        // A file that holds it still reads done.
+        writeFile(repos + QStringLiteral("kde.repo"), "[kde]\nbaseurl=" + m.zypperSources.first().baseurl.toUtf8() + "\n");
+        QCOMPARE(item.check(context).state, gw::CheckState::Done);
     }
 
     // GRND-0079 § 4.5: settings saved by another account, whose uid,

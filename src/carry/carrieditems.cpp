@@ -67,19 +67,36 @@ public:
             .arg(isolated(m_source.baseurl));
     }
     // Done by alias or by baseurl, so a source Groundwork's own item added
-    // under another alias is not added twice (INV-7).
+    // under another alias is not added twice (INV-7). Couldn't tell when a
+    // file there cannot be read, since it may hold this source, or when
+    // the step's <alias>.repo already holds another, which the move would
+    // replace (GRND-0089).
     CheckResult check(const CheckContext &context) const override
     {
+        const QString fileName = m_source.alias + QStringLiteral(".repo");
+        QStringList unreadable;
+        bool taken = false;
         for (const QString &name : context.entries(kReposDir)) {
             if (!name.endsWith(QLatin1String(".repo")))
                 continue;
             const std::optional<QByteArray> text = context.readFile(kReposDir + QLatin1Char('/') + name);
             const std::optional<QList<ZypperSource>> sources = text ? parseRepoFile(*text) : std::nullopt;
+            if (!sources)
+                unreadable << name;
+            taken = taken || name == fileName;
             for (const ZypperSource &s : sources.value_or(QList<ZypperSource>())) {
                 if (s.alias == m_source.alias || s.baseurl == m_source.baseurl)
                     return {CheckState::Done, {}};
             }
         }
+        if (!unreadable.isEmpty())
+            return {CheckState::CouldNotTell,
+                    QCoreApplication::translate("gw::Carry", "Groundwork could not read %1 in %2.")
+                        .arg(namesText(unreadable), isolated(kReposDir))};
+        if (taken)
+            return {CheckState::CouldNotTell,
+                    QCoreApplication::translate("gw::Carry", "%1 already holds another software source.")
+                        .arg(isolated(kReposDir + QLatin1Char('/') + fileName))};
         return {CheckState::NotDone, {}};
     }
     // Refreshed from a folder of its own first, and moved into place only

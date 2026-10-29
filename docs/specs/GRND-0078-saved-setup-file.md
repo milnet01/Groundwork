@@ -185,8 +185,8 @@ settings, and the folder's free space
 (`df --output=avail -B1 -- DIR`) and filesystem
 (`findmnt -no FSTYPE --target DIR`). Save is unavailable when the total,
 plus 1 MiB for the manifest and the archive's end, exceeds the free space, or exceeds 4 GiB − 1 byte on `vfat`, which
-cannot hold a larger file; the page says which, and which rows are
-largest.
+cannot hold a larger file, or on a folder whose filesystem `findmnt`
+could not tell; the page says which, and which rows are largest.
 
 The file is named `groundwork-setup-<hostname>-<YYYY-MM-DD>.tar`.
 
@@ -275,9 +275,14 @@ it. It refuses the whole file, with a plain reason, when:
 
 - the manifest is missing, appears twice, or is not JSON;
 - `format` is above 1: "This file was saved by a newer Groundwork";
-- any member breaks INV-3.
+- any member breaks INV-3;
+- the member list passes `kMemberListCap` or the manifest `kManifestCap`
+  (`carry.h`), so a crafted file cannot fill memory first.
 
-It skips one entry, saying why, when a field fails its pattern below.
+It skips one entry, saying why, when a field fails its pattern below,
+and a zypper source whose alias an earlier one already used. A value it
+refuses or skips is shown isolated and without control or direction
+characters.
 Unknown keys are ignored, so a later format 1 writer may add fields.
 A package § 4.2 leaves out is dropped without a word, since a file
 saved before GRND-0086 may hold one.

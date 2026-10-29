@@ -31,6 +31,7 @@ private slots:
         fake(QStringLiteral("gw-echo"), "printf '%s|%s' \"$1\" \"$LC_ALL\"; echo oops >&2");
         fake(QStringLiteral("gw-exit"), "exit \"$1\"");
         fake(QStringLiteral("gw-sleep"), "exec sleep 5");
+        fake(QStringLiteral("gw-flood"), "head -c 50000000 /dev/zero; exec sleep 5");
     }
     void cleanupTestCase() { qputenv("PATH", m_oldPath); }
 
@@ -72,6 +73,37 @@ private slots:
         QVERIFY(r.timedOut);
         QVERIFY(!r.ok());
         QVERIFY(t.elapsed() < 4000);
+    }
+
+    // A program that prints past the cap is killed there, long before
+    // its time limit, and is never ok.
+    void stopsAtOutputCap()
+    {
+        QElapsedTimer t;
+        t.start();
+        const auto r = gw::CommandRunner().run({QStringLiteral("gw-flood")}, 4000, 1 << 20);
+        QVERIFY(r.tooLong);
+        QVERIFY(!r.timedOut);
+        QVERIFY(!r.ok());
+        QVERIFY(t.elapsed() < 3000);
+    }
+
+    void outputUnderTheCapIsKept()
+    {
+        const auto r = gw::CommandRunner().run({QStringLiteral("gw-echo"), QStringLiteral("hi")},
+                                               gw::CommandRunner::DefaultTimeoutMs, 100);
+        QVERIFY(r.ok());
+        QVERIFY(!r.tooLong);
+        QCOMPARE(r.out, QByteArray("hi|C"));
+        QCOMPARE(r.err, QByteArray("oops\n"));
+    }
+
+    void cappedRunStillTimesOut()
+    {
+        const auto r = gw::CommandRunner().run({QStringLiteral("gw-sleep")}, 300, 100);
+        QVERIFY(r.timedOut);
+        QVERIFY(!r.tooLong);
+        QVERIFY(!r.ok());
     }
 };
 

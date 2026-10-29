@@ -1749,7 +1749,7 @@ scheduled.
   Source: grnd-0086-vm-check-2026-10-29.
   Lanes: worker, carry.
 
-- 📋 [GRND-0089] **Carry: seven low-severity review findings.**
+- ✅ [GRND-0089] **Carry: seven low-severity review findings.**
   Queued, not fixed: user ruling 2026-10-29 (fix HIGH and MEDIUM now,
   queue LOW). Each is in
   docs/reviews/review-code-2026-10-29/lane-01-carry.md § Low / Info:
@@ -1759,6 +1759,14 @@ scheduled.
   carry.cpp:364-365 (findmnt failure skips the FAT check),
   carry.cpp:421-425 (format above INT_MAX), carrieditems.cpp:62-63
   (unparseable .repo passed over).
+  Fixed 2026-10-29, all seven, each with a test proven red first.
+  The .repo name clash and an unreadable .repo now read couldn't tell,
+  so the Worker never overwrites or doubles a source. A repeated alias
+  is skipped, saying why. A refused value is shown isolated, without
+  control or direction characters. The member list and manifest are
+  read up to kMemberListCap and kManifestCap (a new cap in
+  CommandRunner). An unknown filesystem refuses a file over 4 GiB. A
+  format past INT_MAX reads "newer Groundwork".
   **Layman:** Small edge cases in saving and reading a setup file: duplicate names, unusual values, very large files.
   Kind: review-fix.
   Source: review-code-2026-10-29.

@@ -26,6 +26,10 @@ constexpr qint64 kLargeSettings = qint64(100) << 20;
 constexpr qint64 kVfatLimit = (qint64(4) << 30) - 1;
 // Room the save check adds for the manifest and the archive's end (spec 4.5).
 constexpr qint64 kSetupFileExtra = qint64(1) << 20;
+// How much of tar's member list and of the manifest readSetupFile reads,
+// so a crafted file cannot fill memory before it is checked (GRND-0089).
+constexpr qint64 kMemberListCap = qint64(64) << 20;
+constexpr qint64 kManifestCap = qint64(16) << 20;
 
 struct FlatpakApp
 {
