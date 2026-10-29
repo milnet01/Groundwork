@@ -282,6 +282,8 @@ items.
 - **Step results** are ok, skipped or failed, with a detail line. An
   item whose dependency failed, or was skipped for any reason but
   "already done" or "not needed here", is skipped too, saying why; all others still run.
+  A dependency left out of the run blocks the same way unless its
+  check reads "already done" or "not needed here".
   Each item states what it depends on.
 - **The Worker re-checks before it applies.** It runs an item's check
   immediately before the item's steps, and applies only on "not done".

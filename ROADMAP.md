@@ -1928,12 +1928,19 @@ scheduled.
   Source: close-findings-2026-10-29.
   Lanes: wizard.
 
-- 📋 [GRND-0099] **Worker: an unselected dependency that cannot tell does not block.**
+- ✅ [GRND-0099] **Worker: an unselected dependency that cannot tell does not block.**
   Open questions in
   docs/reviews/review-code-2026-10-29/lane-04-worker-core.md: an
   unselected dependency whose check reads "couldn't tell" does not
   block its dependant, and the find(dep) lookup has no null check.
   Verify each before fixing.
+  Fixed 2026-10-29. Both open questions verified real. A dependency
+  left out of the run now blocks unless its check reads already done or
+  not needed here, so "couldn't tell" blocks (test red first: flathub
+  ran with system-update unsure). A dependency missing from the
+  catalogue blocks by its id instead of dereferencing null; no catalogue
+  holds one today (orderProblems guards it), so no red run. design.md,
+  Step results, says so.
   **Layman:** A step can run even though something it needs could not be checked.
   Kind: review-fix.
   Source: close-findings-2026-10-29.

@@ -74,6 +74,8 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   instead of being added again and failing, for Packman, NVIDIA, OneUp,
   Ants Terminal and Claude Code. The shorter boot menu wait now also
   changes an indented setting line.
+- **An item is skipped, saying why, when something it needs was left
+  out of the run and could not be checked,** instead of running anyway.
 
 ## [0.4.0] - 2026-10-16
 

@@ -251,13 +251,19 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         // skips this item (design, Step results).
         QString blockedBy;
         for (const QStringList deps = m_catalogue->dependencies(*item); const QString &dep : deps) {
+            const Item *needed = m_catalogue->find(dep);
+            if (!needed) { // not in this catalogue, so it cannot have completed
+                blockedBy = dep;
+                continue;
+            }
             const auto o = outcomes.constFind(dep);
             if (o != outcomes.constEnd()) {
                 if (*o == Outcome::Failed || *o == Outcome::SkippedOther)
-                    blockedBy = m_catalogue->find(dep)->title();
-            } else if (!selection.contains(dep)
-                       && m_catalogue->find(dep)->check(context).state == CheckState::NotDone) {
-                blockedBy = m_catalogue->find(dep)->title();
+                    blockedBy = needed->title();
+            } else if (!selection.contains(dep)) {
+                const CheckState state = needed->check(context).state;
+                if (state != CheckState::Done && state != CheckState::NotNeeded)
+                    blockedBy = needed->title();
             }
         }
         if (!blockedBy.isEmpty()) {

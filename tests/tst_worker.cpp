@@ -28,7 +28,7 @@ exec "$@"
 
 const QByteArray kZypper = R"(#!/bin/sh
 echo "zypper $*" >> "$FAKE_LOG"
-case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
+case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit "${FAKE_LIST_CODE:-0}";; esac
 case " $* " in *" needs-rebooting "*) exit "${FAKE_REBOOT:-0}";; esac
 if [ -n "$FAKE_ECHO" ]; then echo "$FAKE_ECHO"; fi
 if [ -n "$FAKE_STOP_FILE" ]; then touch "$FAKE_STOP_FILE"; fi
@@ -472,6 +472,16 @@ private slots:
         const Run r = run({QStringLiteral("system-update"), QStringLiteral("flathub")});
         QCOMPARE(r.exitCode, 1);
         QCOMPARE(r.endsFor(QStringLiteral("system-update")).value(1), QStringLiteral("fail"));
+        QCOMPARE(r.endsFor(QStringLiteral("flathub")).value(1), QStringLiteral("skip"));
+        QCOMPARE(r.count(QStringLiteral("flatpak remote-add")), 0);
+    }
+
+    // GRND-0099: a dependency left out of the run blocks unless its check
+    // reads already done or not needed here; "couldn't tell" blocks too.
+    void aDependencyLeftOutThatCannotTellBlocks()
+    {
+        m_env.insert(QStringLiteral("FAKE_LIST_CODE"), QStringLiteral("1"));
+        const Run r = run({QStringLiteral("flathub")});
         QCOMPARE(r.endsFor(QStringLiteral("flathub")).value(1), QStringLiteral("skip"));
         QCOMPARE(r.count(QStringLiteral("flatpak remote-add")), 0);
     }
