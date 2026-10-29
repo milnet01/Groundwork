@@ -294,8 +294,9 @@ items.
   running zypper. Closing the window during a run asks the Worker to
   stop and hides the window; the Wizard's process stays until the
   Worker has finished the current item and exited, so neither Qt nor
-  the AppImage's mount ends the Worker early. The Worker also survives
-  its output being closed.
+  the AppImage's mount ends the Worker early. Where the stop file
+  cannot be written, the window stays and says the run goes on to its
+  end. The Worker also survives its output being closed.
 - **Root** is asked for once per run. Every `sudo` is started directly
   by the Worker process, never by a helper or a shell: with no
   terminal, `sudo` keys its remembered password to the process that
