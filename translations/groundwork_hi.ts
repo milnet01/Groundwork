@@ -322,6 +322,18 @@
         <translation>“%1” छोड़ दिया गया: यह ऐसा नाम नहीं है जिसे Groundwork इस्तेमाल कर सके।</translation>
     </message>
     <message>
+        <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>zypper could not be run.</source>
         <translation>zypper चलाया नहीं जा सका।</translation>
     </message>
@@ -433,6 +445,10 @@
         <translation>Flatpak अपने स्रोतों की सूची नहीं दे सका।</translation>
     </message>
     <message>
+        <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
         <translation>Groundwork पता नहीं लगा सका कि इस फ़ोल्डर में कितनी जगह है। कोई दूसरा फ़ोल्डर चुनें।</translation>
     </message>
@@ -507,6 +523,10 @@
     <message>
         <source>GnuPG keys</source>
         <translation>GnuPG कुंजियाँ</translation>
+    </message>
+    <message>
+        <source>size unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1486,6 +1506,10 @@
         <translation>चालू की गई सेटिंग %1 लेती हैं।</translation>
     </message>
     <message>
+        <source>The size of some settings switched on is unknown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This folder has %1 free, on a %2 drive.</source>
         <translation>इस फ़ोल्डर में %1 खाली है, एक %2 ड्राइव पर।</translation>
     </message>
@@ -2086,6 +2110,10 @@
     <message>
         <source>You had this before.</source>
         <translation>यह आपके पास पहले था।</translation>
+    </message>
+    <message>
+        <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

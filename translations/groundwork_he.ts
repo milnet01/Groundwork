@@ -322,6 +322,18 @@
         <translation>דולג על &quot;%1&quot;: זה לא שם ש־Groundwork יכול להשתמש בו.</translation>
     </message>
     <message>
+        <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>zypper could not be run.</source>
         <translation>לא ניתן היה להפעיל את zypper.</translation>
     </message>
@@ -433,6 +445,10 @@
         <translation>‏Flatpak לא הצליח להציג את רשימת המקורות שלו.</translation>
     </message>
     <message>
+        <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
         <translation>‏Groundwork לא הצליח לקבוע כמה מקום יש בתיקייה הזו. בחר תיקייה אחרת.</translation>
     </message>
@@ -507,6 +523,10 @@
     <message>
         <source>GnuPG keys</source>
         <translation>מפתחות GnuPG</translation>
+    </message>
+    <message>
+        <source>size unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1486,6 +1506,10 @@
         <translation>ההגדרות המופעלות תופסות %1.</translation>
     </message>
     <message>
+        <source>The size of some settings switched on is unknown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This folder has %1 free, on a %2 drive.</source>
         <translation>בתיקייה הזו יש %1 פנויים, בכונן %2.</translation>
     </message>
@@ -2086,6 +2110,10 @@
     <message>
         <source>You had this before.</source>
         <translation>זה היה לך בעבר.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

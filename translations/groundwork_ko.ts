@@ -322,6 +322,18 @@
         <translation>“%1” 건너뜀: Groundwork가 사용할 수 있는 이름이 아닙니다.</translation>
     </message>
     <message>
+        <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>zypper could not be run.</source>
         <translation>zypper를 실행할 수 없습니다.</translation>
     </message>
@@ -432,6 +444,10 @@
         <translation>Flatpak이 소스 목록을 가져올 수 없습니다.</translation>
     </message>
     <message>
+        <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
         <translation>Groundwork가 이 폴더의 남은 공간을 판단할 수 없습니다. 다른 폴더를 선택하세요.</translation>
     </message>
@@ -506,6 +522,10 @@
     <message>
         <source>GnuPG keys</source>
         <translation>GnuPG 키</translation>
+    </message>
+    <message>
+        <source>size unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1483,6 +1503,10 @@
         <translation>켜 둔 설정의 크기는 %1입니다.</translation>
     </message>
     <message>
+        <source>The size of some settings switched on is unknown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This folder has %1 free, on a %2 drive.</source>
         <translation>이 폴더는 %2 드라이브에 있으며, 남은 공간은 %1입니다.</translation>
     </message>
@@ -2082,6 +2106,10 @@
     <message>
         <source>You had this before.</source>
         <translation>이전에 있던 항목입니다.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

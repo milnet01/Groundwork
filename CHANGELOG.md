@@ -21,7 +21,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   added, and your settings app by app. Settings that hold saved
   passwords or keys start switched off, and switching one on says the
   file will then hold them. A file Groundwork cannot read, such as one
-  owned by root, is left out, and the save names its setting.
+  owned by root, is left out, and the save names its setting. A
+  software source whose signing key is not fetched over https cannot
+  be carried, and its row says why.
   (GRND-0078, GRND-0085)
 - **Starting a new install from a saved setup: on the first page, switch
   on "Start from a saved setup" and choose the file.** What you kept
@@ -40,8 +42,7 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - **Claude Code, Anthropic's coding assistant, among the developer
   tools.** It installs from Anthropic's signed repository, so system
   updates keep it up to date. Using it needs a paid Claude plan. It
-  shows as done when `claude` is already installed. While Ants Terminal
-  is switched on, the row says Ants Terminal offers it too. (GRND-0082)
+  shows as done when `claude` is already installed. (GRND-0082)
 
 ### Fixed
 
@@ -53,6 +54,13 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - **When the Worker cannot start, the run page now ends and says so,
   instead of waiting forever.** A second run on the same page, such as
   removing saved passwords, reports its own outcome.
+- **Firewall, Firmware updates, RAM protection, System snapshots and
+  Remote login (SSH) now update the system before they install anything,**
+  as every other item that installs packages does.
+- **An app installed the ordinary way is no longer offered a second
+  time from Flathub when Flatpak is missing.**
+- **A layout file with impossible partition sizes is refused before a
+  drive is touched.**
 
 ## [0.4.0] - 2026-10-16
 

@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=95 -->
+<!-- ants-roadmap-id-high-water: GRND=99 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1501,6 +1501,11 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   looks in ~/.local/bin, and Ants Terminal sees /usr/bin/claude. The row
   "Ants Terminal offers this too." is true only once that Ants Terminal
   release ships.
+  2026-10-29 audit: the row no longer says "Ants Terminal offers this
+  too" (3d2d019). Per the Ants Terminal session, no released Ants
+  Terminal offers Claude Code yet: newest tag v0.7.114 (2026-10-12);
+  ANTS-5744 lands in its next release, planned 0.8.0. Re-adding it is
+  GRND-0096.
   **Layman:** A switch among the developer tools that installs Claude Code, Anthropic's coding assistant, for people who do not get it through Ants Terminal.
   Kind: feature.
   Source: user-request-2026-10-16.
@@ -1823,3 +1828,46 @@ scheduled.
   Kind: test.
   Source: review-code-2026-10-29.
   Lanes: tests.
+
+- 📋 [GRND-0096] **Claude Code row: say Ants Terminal offers it, once a release does.**
+  Blocked until an Ants Terminal release carrying ANTS-5744 is tagged
+  (planned 0.8.0, no date; Ants Terminal session, 2026-10-29). Put back
+  alsoOfferedBy() returning ants-terminal in
+  src/items/claudecodeitem.h, restore the tst_claudecodeitem check
+  (removed in 3d2d019), and re-add the CHANGELOG sentence. Consider
+  tying the row to the installed Ants Terminal version rather than its
+  switch.
+  **Layman:** When Ants Terminal can install Claude Code itself, say so on the Claude Code row again.
+  Kind: enhancement.
+  Source: close-findings-2026-10-29.
+  Lanes: items.
+
+- 📋 [GRND-0097] **Carry: a source name with a control character is gathered, then refused.**
+  Found next door by the carry fix (08d344a), same class as that
+  finding: gathering does not apply the reader's name check, so such a
+  source is saved and then refused on the new install. Fix: check the
+  name when gathering, as 08d344a does for keys and priority.
+  **Layman:** A software source with an odd character in its name is saved but cannot be put back.
+  Kind: review-fix.
+  Source: close-findings-2026-10-29.
+  Lanes: carry.
+
+- 📋 [GRND-0098] **Clearing a saved setup does not restore what a kept item switched off.**
+  Found by the wizard fix (bb1c77b): an item a kept item's includes()
+  switched off stays off after the saved setup is cleared. Live case:
+  ants-terminal switches dev-tree-sitter off.
+  **Layman:** Switching off a saved setup can leave an item off that the saved setup turned off.
+  Kind: review-fix.
+  Source: close-findings-2026-10-29.
+  Lanes: wizard.
+
+- 📋 [GRND-0099] **Worker: an unselected dependency that cannot tell does not block.**
+  Open questions in
+  docs/reviews/review-code-2026-10-29/lane-04-worker-core.md: an
+  unselected dependency whose check reads "couldn't tell" does not
+  block its dependant, and the find(dep) lookup has no null check.
+  Verify each before fixing.
+  **Layman:** A step can run even though something it needs could not be checked.
+  Kind: review-fix.
+  Source: close-findings-2026-10-29.
+  Lanes: worker.

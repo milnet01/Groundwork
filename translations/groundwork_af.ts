@@ -322,6 +322,18 @@
         <translation>Oorgeslaan: “%1” is nie &apos;n naam wat Groundwork kan gebruik nie.</translation>
     </message>
     <message>
+        <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>zypper could not be run.</source>
         <translation>zypper kon nie uitgevoer word nie.</translation>
     </message>
@@ -433,6 +445,10 @@
         <translation>Flatpak kon nie sy bronne lys nie.</translation>
     </message>
     <message>
+        <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
         <translation>Groundwork kon nie vasstel hoeveel plek hierdie vouer het nie. Kies &apos;n ander vouer.</translation>
     </message>
@@ -507,6 +523,10 @@
     <message>
         <source>GnuPG keys</source>
         <translation>GnuPG-sleutels</translation>
+    </message>
+    <message>
+        <source>size unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1486,6 +1506,10 @@
         <translation>Die instellings wat aangeskakel is, neem %1 op.</translation>
     </message>
     <message>
+        <source>The size of some settings switched on is unknown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This folder has %1 free, on a %2 drive.</source>
         <translation>Hierdie vouer het %1 vry, op &apos;n %2-skyf.</translation>
     </message>
@@ -2086,6 +2110,10 @@
     <message>
         <source>You had this before.</source>
         <translation>Jy het dit voorheen gehad.</translation>
+    </message>
+    <message>
+        <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -322,6 +322,18 @@
         <translation>已略過「%1」：這不是 Groundwork 能使用的名稱。</translation>
     </message>
     <message>
+        <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>zypper could not be run.</source>
         <translation>無法執行 zypper。</translation>
     </message>
@@ -432,6 +444,10 @@
         <translation>Flatpak 無法列出它的軟體來源。</translation>
     </message>
     <message>
+        <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
         <translation>Groundwork 無法判斷這個資料夾還有多少空間。請選擇另一個資料夾。</translation>
     </message>
@@ -506,6 +522,10 @@
     <message>
         <source>GnuPG keys</source>
         <translation>GnuPG 金鑰</translation>
+    </message>
+    <message>
+        <source>size unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1483,6 +1503,10 @@
         <translation>已開啟的設定共佔 %1。</translation>
     </message>
     <message>
+        <source>The size of some settings switched on is unknown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This folder has %1 free, on a %2 drive.</source>
         <translation>這個資料夾有 %1 可用空間，位於 %2 磁碟機上。</translation>
     </message>
@@ -2082,6 +2106,10 @@
     <message>
         <source>You had this before.</source>
         <translation>您以前用過這個。</translation>
+    </message>
+    <message>
+        <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
