@@ -116,7 +116,7 @@ QList<SettingsRow> groupSettings(const QStringList &entries)
 {
     QList<SettingsRow> rows;
     QStringList claimed;
-    for (const Group &group : groups()) {
+    for (const QList<Group> allGroups = groups(); const Group &group : allGroups) {
         SettingsRow row{group.name, {}, false, 0};
         for (const QString &entry : entries) {
             if (!claimed.contains(entry) && anyMatches(entry, group.entries))

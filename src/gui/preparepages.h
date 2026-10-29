@@ -34,7 +34,7 @@ class DrivePage : public QWizardPage
 {
     Q_OBJECT
 public:
-    DrivePage(PrepareChoice *choice, QWidget *parent = nullptr);
+    explicit DrivePage(PrepareChoice *choice, QWidget *parent = nullptr);
     void initializePage() override;
     bool isComplete() const override;
 
@@ -50,7 +50,7 @@ class WindowsPage : public QWizardPage
 {
     Q_OBJECT
 public:
-    WindowsPage(PrepareChoice *choice, QWidget *parent = nullptr);
+    explicit WindowsPage(PrepareChoice *choice, QWidget *parent = nullptr);
     void initializePage() override;
 
 private:
@@ -65,7 +65,7 @@ class CustomLayoutEditor : public QWidget
     Q_OBJECT
 public:
     explicit CustomLayoutEditor(QWidget *parent = nullptr);
-    void setPartitions(const QList<PlannedPartition> &partitions);
+    void setPartitions(const QList<PlannedPartition> &planned);
     QList<PlannedPartition> partitions() const;
     void addPartition(const PlannedPartition &partition);
     int count() const { return int(m_rows.size()); }
@@ -90,7 +90,7 @@ class LayoutPage : public QWizardPage
 {
     Q_OBJECT
 public:
-    LayoutPage(PrepareChoice *choice, QWidget *parent = nullptr);
+    explicit LayoutPage(PrepareChoice *choice, QWidget *parent = nullptr);
     void initializePage() override;
     bool isComplete() const override;
 
@@ -120,7 +120,7 @@ class ConfirmPage : public QWizardPage
 {
     Q_OBJECT
 public:
-    ConfirmPage(PrepareChoice *choice, QWidget *parent = nullptr);
+    explicit ConfirmPage(PrepareChoice *choice, QWidget *parent = nullptr);
     void initializePage() override;
     bool isComplete() const override;
     bool validatePage() override; // writes the layout file

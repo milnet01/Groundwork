@@ -34,7 +34,7 @@ QString NvidiaItem::applySentence() const
 NvidiaItem::Driver NvidiaItem::driverFor(const CheckContext &context)
 {
     Driver best = Driver::None;
-    for (const PciDevice &d : pciDevices(context)) {
+    for (const QList<PciDevice> devices = pciDevices(context); const PciDevice &d : devices) {
         if (d.vendor != QLatin1String("0x10de")
             || !(d.cls.startsWith(QLatin1String("0x0300")) || d.cls.startsWith(QLatin1String("0x0302"))))
             continue;

@@ -250,7 +250,7 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         // done" or "not needed here", or is neither done nor in the list,
         // skips this item (design, Step results).
         QString blockedBy;
-        for (const QString &dep : m_catalogue->dependencies(*item)) {
+        for (const QStringList deps = m_catalogue->dependencies(*item); const QString &dep : deps) {
             const auto o = outcomes.constFind(dep);
             if (o != outcomes.constEnd()) {
                 if (*o == Outcome::Failed || *o == Outcome::SkippedOther)
@@ -351,8 +351,8 @@ int Worker::prepareDrive(const QString &layoutPath)
         return end(false, why + QLatin1Char(' ') + nothing);
     const Layout &layout = planned->layout;
     auto driveNow = [&]() -> std::optional<Drive> {
-        for (const Drive &d : readDrives(context)) {
-            if (d.path == planned->drive.path)
+        for (const QList<Drive> drives = readDrives(context); const Drive &d : drives) {
+            if (d.path == planned->drive.path) // cppcheck-suppress useStlAlgorithm
                 return d;
         }
         return std::nullopt;
@@ -610,7 +610,7 @@ int Worker::removeSecrets(const QString &file)
           m_stateDir, kManifestName},
          false, Step::Tool::Generic, label}};
     for (const Step &step : steps) {
-        if (!runStep(id, step, &detail))
+        if (!runStep(id, step, &detail)) // cppcheck-suppress useStlAlgorithm
             return endOne(id, false, detail + QLatin1Char(' ') + partDone);
     }
 

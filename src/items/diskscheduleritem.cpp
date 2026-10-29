@@ -33,7 +33,7 @@ CheckResult DiskSchedulerItem::check(const CheckContext &context) const
     static const QRegularExpression active(QStringLiteral("\\[(\\S+)\\]"));
     bool found = false;
     bool allBfq = true;
-    for (const QString &name : context.entries(kBlock)) {
+    for (const QStringList names = context.entries(kBlock); const QString &name : names) {
         if (!name.startsWith(QLatin1String("sd")))
             continue;
         const QString queue = kBlock + QLatin1Char('/') + name + QStringLiteral("/queue/");

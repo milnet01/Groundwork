@@ -5,6 +5,8 @@
 
 #include <QCoreApplication>
 
+#include <algorithm>
+
 namespace gw {
 namespace {
 
@@ -14,11 +16,10 @@ QString tr(const char *text) { return QCoreApplication::translate("gw::AmdVideoI
 // controller (0x0302) or another display controller (0x0380).
 bool hasAmdGraphics(const CheckContext &context)
 {
-    for (const PciDevice &d : pciDevices(context)) {
-        if (d.vendor == QLatin1String("0x1002") && d.cls.startsWith(QLatin1String("0x03")))
-            return true;
-    }
-    return false;
+    const QList<PciDevice> devices = pciDevices(context);
+    return std::any_of(devices.cbegin(), devices.cend(), [](const PciDevice &d) {
+        return d.vendor == QLatin1String("0x1002") && d.cls.startsWith(QLatin1String("0x03"));
+    });
 }
 
 } // namespace

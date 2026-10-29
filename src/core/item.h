@@ -74,7 +74,7 @@ inline Step writeFileStep(const QString &path, const QByteArray &text, const QSt
 class CheckContext
 {
 public:
-    CheckContext(FileReader files, CommandRunner commands = {})
+    explicit CheckContext(FileReader files, CommandRunner commands = {})
         : m_files(std::move(files)), m_commands(commands) {}
 
     std::optional<QByteArray> readFile(const QString &path) const { return m_files.read(path); }

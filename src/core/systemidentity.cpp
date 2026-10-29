@@ -28,7 +28,7 @@ QString unquote(QString value)
 SystemIdentity parseOsRelease(const QByteArray &text)
 {
     QHash<QString, QString> fields;
-    for (const QByteArray &rawLine : text.split('\n')) {
+    for (const QList<QByteArray> rawLines = text.split('\n'); const QByteArray &rawLine : rawLines) {
         const QString line = QString::fromUtf8(rawLine).trimmed();
         if (line.isEmpty() || line.startsWith(QLatin1Char('#')))
             continue;

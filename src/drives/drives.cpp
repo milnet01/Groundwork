@@ -89,7 +89,7 @@ QString partitionName(Use use)
 // Where a device is in use, at any depth below a drive (INV-1).
 QString inUseBelow(const QJsonObject &device, const QSet<QString> &swaps)
 {
-    for (const QJsonValue &mount : device.value(QStringLiteral("mountpoints")).toArray()) {
+    for (const QJsonArray mounts = device.value(QStringLiteral("mountpoints")).toArray(); const QJsonValue mount : mounts) {
         // An encrypted swap is /dev/dm-N in /proc/swaps, so its mount point
         // is what names it.
         if (mount.toString() == QLatin1String("[SWAP]"))
@@ -102,7 +102,7 @@ QString inUseBelow(const QJsonObject &device, const QSet<QString> &swaps)
     if (swaps.contains(device.value(QStringLiteral("path")).toString()))
         return QCoreApplication::translate("gw::Drives", "In use: %1 is swap.")
             .arg(isolated(device.value(QStringLiteral("path")).toString()));
-    for (const QJsonValue &child : device.value(QStringLiteral("children")).toArray()) {
+    for (const QJsonArray children = device.value(QStringLiteral("children")).toArray(); const QJsonValue child : children) {
         if (const QString why = inUseBelow(child.toObject(), swaps); !why.isEmpty())
             return why;
     }
@@ -113,7 +113,7 @@ qint64 restSize(const Layout &layout, qint64 space)
 {
     qint64 fixed = 0;
     for (const PlannedPartition &p : layout.partitions)
-        fixed += p.size.value_or(0);
+        fixed += p.size.value_or(0); // cppcheck-suppress useStlAlgorithm
     return alignDown(space - fixed);
 }
 
@@ -136,14 +136,14 @@ QStringList lsblkArguments()
 QList<Drive> parseDrives(const QByteArray &lsblkJson, const QByteArray &swaps)
 {
     QSet<QString> swapPaths;
-    for (const QByteArray &line : swaps.split('\n').mid(1)) {
+    for (const QList<QByteArray> lines = swaps.split('\n').mid(1); const QByteArray &line : lines) {
         const QByteArray path = line.simplified().split(' ').value(0);
         if (!path.isEmpty())
             swapPaths.insert(QString::fromUtf8(path));
     }
     QList<Drive> drives;
     const QJsonArray devices = QJsonDocument::fromJson(lsblkJson).object().value(QStringLiteral("blockdevices")).toArray();
-    for (const QJsonValue &value : devices) {
+    for (const QJsonValue value : devices) {
         const QJsonObject device = value.toObject();
         if (device.value(QStringLiteral("type")).toString() != QLatin1String("disk")
             || device.value(QStringLiteral("ro")).toBool() || number(device.value(QStringLiteral("size"))) <= 0)
@@ -159,7 +159,7 @@ QList<Drive> parseDrives(const QByteArray &lsblkJson, const QByteArray &swaps)
         drive.sectorSize = qMax<qint64>(512, number(device.value(QStringLiteral("log-sec"))));
         drive.rotational = device.value(QStringLiteral("rota")).toBool();
         drive.inUse = inUseBelow(device, swapPaths);
-        for (const QJsonValue &c : device.value(QStringLiteral("children")).toArray()) {
+        for (const QJsonArray children = device.value(QStringLiteral("children")).toArray(); const QJsonValue c : children) {
             const QJsonObject child = c.toObject();
             if (child.value(QStringLiteral("type")).toString() != QLatin1String("part"))
                 continue;
@@ -240,8 +240,8 @@ QString useName(Use use)
 
 std::optional<Use> useFromName(const QString &name)
 {
-    for (Use use : allUses()) {
-        if (useName(use) == name)
+    for (const QList<Use> uses = allUses(); Use use : uses) {
+        if (useName(use) == name) // cppcheck-suppress useStlAlgorithm
             return use;
     }
     return std::nullopt;
@@ -269,7 +269,7 @@ FreeSpace largestFreeSpace(const Drive &drive)
 
 qint64 memorySwapSize(const QByteArray &meminfo)
 {
-    for (const QByteArray &line : meminfo.split('\n')) {
+    for (const QList<QByteArray> lines = meminfo.split('\n'); const QByteArray &line : lines) {
         if (!line.startsWith("MemTotal:"))
             continue;
         const qint64 bytes = line.simplified().split(' ').value(1).toLongLong() * 1024;
@@ -528,7 +528,7 @@ std::optional<LayoutFile> readLayoutFile(const QByteArray &json, QString *why)
         return refuse(QCoreApplication::translate("gw::Drives", "The layout file is not one this Groundwork can read."));
     file.layout.firmware = firmware == QLatin1String("uefi") ? Firmware::Uefi : Firmware::Bios;
     file.layout.kind = kind == QLatin1String("beside") ? LayoutKind::Beside : LayoutKind::Whole;
-    for (const QJsonValue &v : root.value(QStringLiteral("partitions")).toArray()) {
+    for (const QJsonArray values = root.value(QStringLiteral("partitions")).toArray(); const QJsonValue v : values) {
         const QJsonObject p = v.toObject();
         const auto use = useFromName(p.value(QStringLiteral("use")).toString());
         const QJsonValue size = p.value(QStringLiteral("size"));

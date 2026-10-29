@@ -1,13 +1,13 @@
 #include "selection.h"
 
+#include <algorithm>
+
 namespace gw {
 
 const Item *Catalogue::find(const QString &id) const
 {
-    for (const Item *item : m_items)
-        if (item->id() == id)
-            return item;
-    return nullptr;
+    const auto it = std::find_if(m_items.cbegin(), m_items.cend(), [&](const Item *item) { return item->id() == id; });
+    return it == m_items.cend() ? nullptr : *it;
 }
 
 QStringList Catalogue::dependencies(const Item &item) const
@@ -56,7 +56,7 @@ QStringList Catalogue::switchOn(Selection &selection, const QString &id,
         pending.append(dependencies(*item));
     }
     for (const QString &current : std::as_const(on)) {
-        for (const QString &included : find(current)->includes()) {
+        for (const QStringList includedIds = find(current)->includes(); const QString &included : includedIds) {
             if (!selection.contains(included))
                 continue;
             switchOff(selection, included);
@@ -100,7 +100,7 @@ QStringList Catalogue::orderProblems() const
     QStringList problems;
     QSet<QString> seen;
     for (const Item *item : m_items) {
-        for (const QString &dep : dependencies(*item)) {
+        for (const QStringList deps = dependencies(*item); const QString &dep : deps) {
             const Item *target = find(dep);
             if (!target)
                 problems.append(item->id() + QStringLiteral(" depends on unknown ") + dep);
@@ -109,7 +109,7 @@ QStringList Catalogue::orderProblems() const
             else if (!seen.contains(dep))
                 problems.append(item->id() + QStringLiteral(" is listed before ") + dep);
         }
-        for (const QString &included : item->includes())
+        for (const QStringList includedIds = item->includes(); const QString &included : includedIds)
             if (!find(included))
                 problems.append(item->id() + QStringLiteral(" includes unknown ") + included);
         seen.insert(item->id());

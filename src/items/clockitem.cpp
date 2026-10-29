@@ -38,7 +38,7 @@ QString ClockItem::applySentence() const
 bool ClockItem::windowsFound(const CheckContext &context)
 {
     if (context.fileExists(kEfiVars)) {
-        for (const QString &entry : context.entries(kEfiVars)) {
+        for (const QStringList entryNames = context.entries(kEfiVars); const QString &entry : entryNames) { // cppcheck-suppress useStlAlgorithm
             if (!entry.startsWith(QLatin1String("Boot")) || !entry.endsWith(kGlobalGuid) || entry.size() != 8 + kGlobalGuid.size())
                 continue;
             const auto data = context.readFile(kEfiVars + QLatin1Char('/') + entry);

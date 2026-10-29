@@ -27,7 +27,7 @@ bool anySets(const CheckContext &context, const QString &dir, const QString &key
 {
     const QRegularExpression line(QStringLiteral("^\\s*%1\\s*=\\s*%2\\s*$").arg(key, pattern),
                                   QRegularExpression::MultilineOption);
-    for (const QString &name : context.entries(dir)) {
+    for (const QStringList names = context.entries(dir); const QString &name : names) { // cppcheck-suppress useStlAlgorithm
         if (!name.endsWith(QLatin1String(".conf")))
             continue;
         if (const auto text = context.readFile(dir + QLatin1Char('/') + name);

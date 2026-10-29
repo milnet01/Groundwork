@@ -2,6 +2,8 @@
 
 #include <QCoreApplication>
 
+#include <algorithm>
+
 namespace gw {
 
 // The catalogue marks each title and sentence with QT_TRANSLATE_NOOP in the
@@ -16,9 +18,10 @@ CheckResult FlathubAppItem::check(const CheckContext &context) const
     if (r.ok())
         return {CheckState::Done, {}};
     // Asked even without Flatpak, so an app installed the ordinary way is not offered twice.
-    for (const QString &package : m_native)
-        if (context.run({QStringLiteral("rpm"), QStringLiteral("-q"), package}).ok())
-            return {CheckState::Done, QCoreApplication::translate("gw::Apps", "Installed from the system's software sources.")};
+    if (std::any_of(m_native.cbegin(), m_native.cend(), [&](const QString &package) {
+            return context.run({QStringLiteral("rpm"), QStringLiteral("-q"), package}).ok();
+        }))
+        return {CheckState::Done, QCoreApplication::translate("gw::Apps", "Installed from the system's software sources.")};
     if (!r.started)
         return {CheckState::NotDone, QCoreApplication::translate("gw::Apps", "Flatpak is not installed.")};
     if (r.timedOut)
@@ -46,7 +49,7 @@ CheckResult PackageItem::check(const CheckContext &context) const
     auto release = context.readFile(QStringLiteral("/etc/os-release"));
     if (!release)
         release = context.readFile(QStringLiteral("/usr/lib/os-release"));
-    for (const QString &package : packages(parseOsRelease(release.value_or(QByteArray())))) {
+    for (const QStringList packageNames = packages(parseOsRelease(release.value_or(QByteArray()))); const QString &package : packageNames) {
         const CommandResult r = context.run({QStringLiteral("rpm"), QStringLiteral("-q"), package});
         if (!r.started || r.timedOut)
             return {CheckState::CouldNotTell, QCoreApplication::translate("gw::Apps", "The installed packages could not be listed.")};

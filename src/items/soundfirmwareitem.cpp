@@ -19,7 +19,7 @@ QString SoundFirmwareItem::applySentence() const
 
 bool SoundFirmwareItem::needsSof(const CheckContext &context)
 {
-    for (const PciDevice &d : pciDevices(context)) {
+    for (const QList<PciDevice> devices = pciDevices(context); const PciDevice &d : devices) {
         if (!d.cls.startsWith(QLatin1String("0x04")))
             continue; // not multimedia
         if (d.driver.contains(QLatin1String("sof"), Qt::CaseInsensitive))

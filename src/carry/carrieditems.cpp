@@ -36,7 +36,7 @@ bool onlyOwnerOrModeDiffers(const CommandResult &diff)
 QString namesText(const QStringList &all)
 {
     QStringList shown;
-    for (const QString &name : all.mid(0, kNamesShown))
+    for (const QStringList first = all.mid(0, kNamesShown); const QString &name : first)
         shown << isolated(name);
     QString text = shown.join(QStringLiteral(", "));
     if (all.size() > kNamesShown)
@@ -76,7 +76,7 @@ public:
         const QString fileName = m_source.alias + QStringLiteral(".repo");
         QStringList unreadable;
         bool taken = false;
-        for (const QString &name : context.entries(kReposDir)) {
+        for (const QStringList names = context.entries(kReposDir); const QString &name : names) {
             if (!name.endsWith(QLatin1String(".repo")))
                 continue;
             const std::optional<QByteArray> text = context.readFile(kReposDir + QLatin1Char('/') + name);
@@ -84,10 +84,11 @@ public:
             if (!sources)
                 unreadable << name;
             taken = taken || name == fileName;
-            for (const ZypperSource &s : sources.value_or(QList<ZypperSource>())) {
-                if (s.alias == m_source.alias || s.baseurl == m_source.baseurl)
-                    return {CheckState::Done, {}};
-            }
+            const QList<ZypperSource> found = sources.value_or(QList<ZypperSource>());
+            if (std::any_of(found.cbegin(), found.cend(), [&](const ZypperSource &s) {
+                    return s.alias == m_source.alias || s.baseurl == m_source.baseurl;
+                }))
+                return {CheckState::Done, {}};
         }
         if (!unreadable.isEmpty())
             return {CheckState::CouldNotTell,
@@ -368,10 +369,10 @@ QString notInFile(const Manifest &chosen, const Manifest &file)
         return QCoreApplication::translate("gw::Carry", "The saved file does not hold %1.").arg(isolated(name));
     };
     for (const QString &id : chosen.items)
-        if (!file.items.contains(id))
+        if (!file.items.contains(id)) // cppcheck-suppress useStlAlgorithm
             return lacks(id);
     for (const QString &name : chosen.packages)
-        if (!file.packages.contains(name))
+        if (!file.packages.contains(name)) // cppcheck-suppress useStlAlgorithm
             return lacks(name);
     for (const FlatpakApp &app : chosen.flatpaks) {
         // The one change a choice may make: a Flathub app saved for the
@@ -383,13 +384,13 @@ QString notInFile(const Manifest &chosen, const Manifest &file)
             return lacks(app.app);
     }
     for (const ZypperSource &source : chosen.zypperSources)
-        if (!file.zypperSources.contains(source))
+        if (!file.zypperSources.contains(source)) // cppcheck-suppress useStlAlgorithm
             return lacks(source.alias);
     for (const FlatpakRemote &remote : chosen.flatpakRemotes)
-        if (!file.flatpakRemotes.contains(remote))
+        if (!file.flatpakRemotes.contains(remote)) // cppcheck-suppress useStlAlgorithm
             return lacks(remote.name);
     for (const SettingsRow &row : chosen.settings)
-        if (!file.settings.contains(row))
+        if (!file.settings.contains(row)) // cppcheck-suppress useStlAlgorithm
             return lacks(row.name);
     return {};
 }

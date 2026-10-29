@@ -5,6 +5,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+#include <algorithm>
+
 namespace gw {
 namespace {
 
@@ -33,10 +35,9 @@ CheckResult FirmwareItem::check(const CheckContext &context) const
     if (!r.ok())
         return {CheckState::CouldNotTell, tr("The firmware updater could not check for updates.")};
     const QJsonArray devices = QJsonDocument::fromJson(r.out).object().value(QStringLiteral("Devices")).toArray();
-    int waiting = 0;
-    for (const QJsonValue &device : devices)
-        if (!device.toObject().value(QStringLiteral("Releases")).toArray().isEmpty())
-            ++waiting;
+    const int waiting = int(std::count_if(devices.begin(), devices.end(), [](const QJsonValue &device) {
+        return !device.toObject().value(QStringLiteral("Releases")).toArray().isEmpty();
+    }));
     if (waiting == 0)
         return {CheckState::Done, {}};
     // Named at the call, so lupdate sees the count and gives it plural forms.

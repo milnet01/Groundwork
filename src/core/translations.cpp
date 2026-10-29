@@ -52,7 +52,7 @@ QStringList availableLanguages()
 QString systemLanguage()
 {
     const QStringList have = availableLanguages();
-    const QString name = QLocale::system().name(); // e.g. af_ZA
+    QString name = QLocale::system().name(); // e.g. af_ZA
     if (have.contains(name))
         return name;
     const QString language = name.section(QLatin1Char('_'), 0, 0);

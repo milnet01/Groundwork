@@ -42,7 +42,7 @@ QByteArray kdeTerminal(const CheckContext &context)
         dir = QDir::homePath() + QStringLiteral("/.config");
     QByteArray service;
     bool general = false;
-    for (const QByteArray &line : context.readFile(dir + QStringLiteral("/kdeglobals")).value_or(QByteArray()).split('\n')) {
+    for (const QList<QByteArray> lines = context.readFile(dir + QStringLiteral("/kdeglobals")).value_or(QByteArray()).split('\n'); const QByteArray &line : lines) {
         const QByteArray trimmed = line.trimmed();
         if (trimmed.startsWith('['))
             general = trimmed == "[General]";

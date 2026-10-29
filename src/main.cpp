@@ -223,7 +223,7 @@ int main(int argc, char *argv[])
                 continue;
             }
             if (args[i] == QLatin1String("--set") && i + 1 < args.size()) {
-                const QString pair = args[++i]; // ID=VALUE
+                const QString &pair = args[++i]; // ID=VALUE
                 values.insert(pair.section(QLatin1Char('='), 0, 0), pair.section(QLatin1Char('='), 1));
                 continue;
             }

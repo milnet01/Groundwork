@@ -31,7 +31,7 @@ CheckResult CodecsItem::check(const CheckContext &context) const
     // libavcodec<version>, from Packman: the library browsers and players use.
     static const QRegularExpression library(QStringLiteral("^libavcodec\\d+$"));
     bool fromPackman = false;
-    for (const QByteArray &line : r.out.split('\n')) {
+    for (const QList<QByteArray> lines = r.out.split('\n'); const QByteArray &line : lines) {
         const QList<QByteArray> fields = line.split('\t');
         if (fields.size() == 2 && library.match(QString::fromUtf8(fields[0])).hasMatch()
             && fields[1].toLower().contains("packman"))

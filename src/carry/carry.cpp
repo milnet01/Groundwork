@@ -93,7 +93,7 @@ QString skippedName(const QString &value)
 QStringList strings(const QJsonValue &value)
 {
     QStringList out;
-    for (const QJsonValue &v : value.toArray())
+    for (const QJsonArray values = value.toArray(); const QJsonValue v : values)
         out << v.toString();
     return out;
 }
@@ -153,10 +153,10 @@ bool isSettingsPath(const QString &path)
     if (!path.startsWith(QLatin1Char('.')) || hasControl(path))
         return false;
     const QStringList parts = path.split(QLatin1Char('/'));
-    for (const QString &part : parts) {
-        if (part.isEmpty() || part == QLatin1String(".") || part == QLatin1String(".."))
-            return false;
-    }
+    if (std::any_of(parts.cbegin(), parts.cend(), [](const QString &part) {
+            return part.isEmpty() || part == QLatin1String(".") || part == QLatin1String("..");
+        }))
+        return false;
     return !(parts.size() == 1
              && (path == QLatin1String(".cache") || path == QLatin1String(".local") || path == QLatin1String(".var")));
 }
@@ -174,7 +174,7 @@ QStringList gatherItems(const Catalogue &catalogue, const CheckResults &results)
 QStringList askedForPackages(const QByteArray &zypperOut)
 {
     QStringList names;
-    for (const QString &line : QString::fromUtf8(zypperOut).split(QLatin1Char('\n'))) {
+    for (const QStringList lines = QString::fromUtf8(zypperOut).split(QLatin1Char('\n')); const QString &line : lines) {
         const QStringList columns = line.split(QLatin1Char('|'));
         const QString name = columns.value(1).trimmed();
         if (columns[0].trimmed() == QLatin1String("i+") && isPackageName(name) && !isInstallerChosen(name))
@@ -186,7 +186,7 @@ QStringList askedForPackages(const QByteArray &zypperOut)
 QList<FlatpakApp> parseFlatpakApps(const QByteArray &flatpakOut)
 {
     QList<FlatpakApp> apps;
-    for (const QString &line : QString::fromUtf8(flatpakOut).split(QLatin1Char('\n'))) {
+    for (const QStringList lines = QString::fromUtf8(flatpakOut).split(QLatin1Char('\n')); const QString &line : lines) {
         const QStringList columns = line.split(QLatin1Char('\t'));
         if (columns.size() >= 3 && isFlatpakAppId(columns[0]) && isAlias(columns[1]) && isInstallation(columns[2]))
             apps << FlatpakApp{columns[0], columns[1], columns[2]};
@@ -197,7 +197,7 @@ QList<FlatpakApp> parseFlatpakApps(const QByteArray &flatpakOut)
 QList<FlatpakRemote> parseFlatpakRemotes(const QByteArray &flatpakOut)
 {
     QList<FlatpakRemote> remotes;
-    for (const QString &line : QString::fromUtf8(flatpakOut).split(QLatin1Char('\n'))) {
+    for (const QStringList lines = QString::fromUtf8(flatpakOut).split(QLatin1Char('\n')); const QString &line : lines) {
         const QStringList columns = line.split(QLatin1Char('\t'));
         if (columns.size() < 3 || columns[0] == QLatin1String("flathub"))
             continue;
@@ -212,7 +212,7 @@ QList<FlatpakRemote> parseFlatpakRemotes(const QByteArray &flatpakOut)
 std::optional<QList<ZypperSource>> parseRepoFile(const QByteArray &text)
 {
     QList<ZypperSource> sources;
-    for (const QString &raw : QString::fromUtf8(text).split(QLatin1Char('\n'))) {
+    for (const QStringList rawLines = QString::fromUtf8(text).split(QLatin1Char('\n')); const QString &raw : rawLines) {
         // A line starting with a space continues a value; only the first is kept.
         if (raw.startsWith(QLatin1Char(' ')) || raw.startsWith(QLatin1Char('\t')))
             continue;
@@ -296,7 +296,7 @@ void gatherPrograms(const CheckContext &context, Gathered *into)
 void gatherSources(const CheckContext &context, Gathered *into)
 {
     const QString dir = QStringLiteral("/etc/zypp/repos.d/");
-    for (const QString &name : context.entries(dir)) {
+    for (const QStringList names = context.entries(dir); const QString &name : names) {
         if (!name.endsWith(QLatin1String(".repo")))
             continue;
         const std::optional<QByteArray> text = context.readFile(dir + name);
@@ -330,14 +330,14 @@ void gatherSources(const CheckContext &context, Gathered *into)
 QList<SettingsRow> gatherSettings(const CheckContext &context, const QString &home)
 {
     QStringList entries;
-    for (const QString &name : context.entries(home + QStringLiteral("/.config"), true))
+    for (const QStringList names = context.entries(home + QStringLiteral("/.config"), true); const QString &name : names)
         entries << QStringLiteral(".config/") + name;
-    for (const QString &name : context.entries(home, true)) {
+    for (const QStringList names = context.entries(home, true); const QString &name : names) {
         if (name.startsWith(QLatin1Char('.')) && name != QLatin1String(".cache") && name != QLatin1String(".config")
             && name != QLatin1String(".local") && name != QLatin1String(".var"))
             entries << name;
     }
-    for (const QString &id : context.entries(home + QStringLiteral("/.var/app"))) {
+    for (const QStringList ids = context.entries(home + QStringLiteral("/.var/app")); const QString &id : ids) {
         const QString config = QStringLiteral(".var/app/") + id + QStringLiteral("/config");
         if (context.fileExists(home + QLatin1Char('/') + config))
             entries << config;
@@ -363,7 +363,7 @@ QList<SettingsRow> gatherSettings(const CheckContext &context, const QString &ho
         // Any other end, du missing or killed say, gives no count at all.
         if (!r.started || r.timedOut || (r.exitCode != 0 && r.exitCode != 1))
             return counts;
-        for (const QString &line : QString::fromUtf8(r.out).split(QLatin1Char('\n'))) {
+        for (const QStringList lines = QString::fromUtf8(r.out).split(QLatin1Char('\n')); const QString &line : lines) {
             const qsizetype tab = line.indexOf(QLatin1Char('\t'));
             bool ok = false;
             const qint64 count = tab > 0 ? line.left(tab).toLongLong(&ok) : 0;
@@ -511,13 +511,13 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
     m.systemVersion = json.value("system").toObject().value("version_id").toString();
 
     // Unknown keys are ignored, so a later format-1 writer may add fields.
-    for (const QString &id : strings(json.value("items"))) {
+    for (const QStringList ids = strings(json.value("items")); const QString &id : ids) {
         if (isPackageName(id))
             m.items << id;
         else
             *skipped << skippedName(id);
     }
-    for (const QString &name : strings(json.value("packages"))) {
+    for (const QStringList names = strings(json.value("packages")); const QString &name : names) {
         if (isInstallerChosen(name))
             continue; // a file saved before GRND-0086 may hold one
         if (isPackageName(name))
@@ -525,7 +525,7 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
         else
             *skipped << skippedName(name);
     }
-    for (const QJsonValue &v : json.value("flatpaks").toArray()) {
+    for (const QJsonArray values = json.value("flatpaks").toArray(); const QJsonValue v : values) {
         const QJsonObject o = v.toObject();
         const FlatpakApp app{o.value("app").toString(), o.value("remote").toString(), o.value("installation").toString()};
         if (isFlatpakAppId(app.app) && isAlias(app.remote) && isInstallation(app.installation))
@@ -533,7 +533,7 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
         else
             *skipped << skippedName(app.app);
     }
-    for (const QJsonValue &v : json.value("sources").toArray()) {
+    for (const QJsonArray values = json.value("sources").toArray(); const QJsonValue v : values) {
         const QJsonObject o = v.toObject();
         const QString kind = o.value("kind").toString();
         if (kind == QLatin1String("zypper")) {
@@ -569,13 +569,13 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
             *skipped << skippedName(kind);
         }
     }
-    for (const QJsonValue &v : json.value("settings").toArray()) {
+    for (const QJsonArray values = json.value("settings").toArray(); const QJsonValue v : values) {
         const QJsonObject o = v.toObject();
         SettingsRow row{o.value("name").toString(), strings(o.value("paths")), o.value("secret").toBool(),
                         qint64(o.value("bytes").toDouble())};
         // A path outside the home folder refuses the whole file (INV-3).
         for (const QString &path : std::as_const(row.paths)) {
-            if (!isSettingsPath(path)) {
+            if (!isSettingsPath(path)) { // cppcheck-suppress useStlAlgorithm
                 *why = QCoreApplication::translate("gw::Carry", "The file names a setting outside the home "
                                                                 "folder: %1")
                            .arg(shown(path));
@@ -623,7 +623,7 @@ QString membersProblem(const QStringList &members, const Manifest &manifest)
     }
     for (const QString &p : std::as_const(paths)) {
         if (std::none_of(members.cbegin(), members.cend(),
-                         [&](const QString &member) { return isUnder(strippedMember(member), p); }))
+                         [&](const QString &member) { return isUnder(strippedMember(member), p); })) // cppcheck-suppress useStlAlgorithm
             return QCoreApplication::translate("gw::Carry", "The file is missing %1.").arg(shown(p));
     }
     return {};
@@ -687,7 +687,7 @@ QByteArray createInput(const Manifest &manifest)
     QByteArray input;
     for (const SettingsRow &row : manifest.settings) {
         for (const QString &path : row.paths)
-            input += path.toUtf8() + '\0';
+            input += path.toUtf8() + '\0'; // cppcheck-suppress useStlAlgorithm
     }
     return input;
 }

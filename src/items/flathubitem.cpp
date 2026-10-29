@@ -2,6 +2,8 @@
 
 #include <QCoreApplication>
 
+#include <algorithm>
+
 namespace gw {
 namespace {
 QString tr(const char *text) { return QCoreApplication::translate("gw::FlathubItem", text); }
@@ -25,10 +27,10 @@ CheckResult FlathubItem::check(const CheckContext &context) const
         return {CheckState::CouldNotTell, tr("Flatpak did not list its app sources.")};
     // One remote per line: name, a tab, then its options. A Flathub remote
     // for the whole system or for this user both count.
-    for (const QByteArray &line : r.out.split('\n')) {
-        if (line.split('\t').value(0).trimmed() == "flathub")
-            return {CheckState::Done, {}};
-    }
+    const QList<QByteArray> lines = r.out.split('\n');
+    if (std::any_of(lines.cbegin(), lines.cend(),
+                    [](const QByteArray &line) { return line.split('\t').value(0).trimmed() == "flathub"; }))
+        return {CheckState::Done, {}};
     return {CheckState::NotDone, tr("Flathub is not added yet.")};
 }
 

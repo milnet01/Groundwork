@@ -81,11 +81,11 @@ void Switch::paintEvent(QPaintEvent *)
     }
 
     painter.setOpacity(1.0);
-    QRect label = rect();
-    label.setLeft(trackRect().right() + 1 + track.height() / 2);
-    label = QStyle::visualRect(layoutDirection(), rect(), label);
+    QRect textRect = rect();
+    textRect.setLeft(trackRect().right() + 1 + track.height() / 2);
+    textRect = QStyle::visualRect(layoutDirection(), rect(), textRect);
     const Qt::Alignment align = QStyle::visualAlignment(layoutDirection(), Qt::AlignLeft | Qt::AlignVCenter);
-    style()->drawItemText(&painter, label, align | Qt::TextShowMnemonic, pal, isEnabled(), text(),
+    style()->drawItemText(&painter, textRect, align | Qt::TextShowMnemonic, pal, isEnabled(), text(),
                           QPalette::WindowText);
 }
 

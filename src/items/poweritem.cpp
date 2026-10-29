@@ -18,7 +18,7 @@ QString PowerItem::applySentence() const
 
 bool PowerItem::hasSystemBattery(const CheckContext &context)
 {
-    for (const QString &supply : context.entries(kSupplies)) {
+    for (const QStringList supplies = context.entries(kSupplies); const QString &supply : supplies) { // cppcheck-suppress useStlAlgorithm
         const QString dir = kSupplies + QLatin1Char('/') + supply + QLatin1Char('/');
         const QByteArray type = context.readFile(dir + QStringLiteral("type")).value_or(QByteArray()).trimmed();
         const QByteArray scope = context.readFile(dir + QStringLiteral("scope")).value_or(QByteArray()).trimmed();

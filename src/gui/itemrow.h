@@ -24,7 +24,7 @@ public:
     // Sets the toggle without reporting it as the user's choice.
     void setChecked(bool on);
     // Shown under the row; empty hides it.
-    void setReason(const QString &reason);
+    void setReason(const QString &text);
     QString reason() const;
     QCheckBox *toggle() const { return m_toggle; }
     // The item's title, as its switch shows it.

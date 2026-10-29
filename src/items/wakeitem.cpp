@@ -38,14 +38,14 @@ bool hasDelay(const CheckContext &context, const QString &unit, const QString &t
     QMap<QString, QString> dropIns;
     const QString dir = timer + QStringLiteral(".timer.d/");
     for (const QString &base : {kVendor, kAdmin})
-        for (const QString &name : context.entries(base + dir))
+        for (const QStringList names = context.entries(base + dir); const QString &name : names)
             if (name.endsWith(QLatin1String(".conf")))
                 dropIns.insert(name, base + dir + name);
     files += dropIns.values();
 
     QByteArray delay;
-    for (const QString &file : files)
-        for (const QByteArray &line : context.readFile(file).value_or(QByteArray()).split('\n')) {
+    for (const QString &file : std::as_const(files))
+        for (const QList<QByteArray> lines = context.readFile(file).value_or(QByteArray()).split('\n'); const QByteArray &line : lines) {
             const QByteArray trimmed = line.trimmed();
             if (trimmed.startsWith("RandomizedDelaySec="))
                 delay = trimmed.mid(int(qstrlen("RandomizedDelaySec="))).trimmed();
@@ -96,7 +96,7 @@ QList<Step> WakeItem::applySteps(const SystemIdentity &, const CheckContext &con
     for (const QString &timer : missing)
         dirs << kAdmin + timer + QStringLiteral(".timer.d");
     QList<Step> steps = {makeDirectoriesStep(dirs, label)};
-    for (const QString &dir : dirs)
+    for (const QString &dir : std::as_const(dirs))
         steps << writeFileStep(dir + QLatin1Char('/') + kDropIn,
                                "# Written by Groundwork: a calmer wake from hibernation. Remove this file to undo.\n"
                                "[Timer]\nRandomizedDelaySec=30min\n",

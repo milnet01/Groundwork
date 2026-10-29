@@ -71,10 +71,10 @@ void ItemRow::setChecked(bool on)
     m_toggle->setChecked(on);
 }
 
-void ItemRow::setReason(const QString &reason)
+void ItemRow::setReason(const QString &text)
 {
-    m_reason->setText(reason);
-    m_reason->setVisible(!reason.isEmpty());
+    m_reason->setText(text);
+    m_reason->setVisible(!text.isEmpty());
 }
 
 QString ItemRow::reason() const { return m_reason->text(); }

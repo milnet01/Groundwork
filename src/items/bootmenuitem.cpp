@@ -18,8 +18,9 @@ enum class Loader { None, Sdbootutil, Grub };
 // openSUSE's installer records the boot loader here.
 Loader loader(const CheckContext &context)
 {
-    for (const QByteArray &line : context.readFile(QStringLiteral("/etc/sysconfig/bootloader"))
-                                      .value_or(QByteArray()).split('\n')) {
+    const QList<QByteArray> lines =
+        context.readFile(QStringLiteral("/etc/sysconfig/bootloader")).value_or(QByteArray()).split('\n');
+    for (const QByteArray &line : lines) {
         const QByteArray trimmed = line.trimmed();
         if (!trimmed.startsWith("LOADER_TYPE="))
             continue;
@@ -63,7 +64,7 @@ std::optional<int> seconds(QString value)
 QByteArray grubTimeoutLine(const CheckContext &context)
 {
     QByteArray found;
-    for (const QByteArray &line : context.readFile(kDefaultGrub).value_or(QByteArray()).split('\n'))
+    for (const QList<QByteArray> lines = context.readFile(kDefaultGrub).value_or(QByteArray()).split('\n'); const QByteArray &line : lines)
         if (line.trimmed().startsWith("GRUB_TIMEOUT="))
             found = line.trimmed();
     return found;

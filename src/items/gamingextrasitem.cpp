@@ -25,7 +25,7 @@ QString GamingExtrasItem::applySentence() const
 
 CheckResult GamingExtrasItem::check(const CheckContext &context) const
 {
-    for (const QString &package : packages(context)) {
+    for (const QStringList packageNames = packages(context); const QString &package : packageNames) {
         const CommandResult r = context.run({QStringLiteral("rpm"), QStringLiteral("-q"), package});
         if (!r.started || r.timedOut)
             return {CheckState::CouldNotTell, tr("The installed packages could not be listed.")};

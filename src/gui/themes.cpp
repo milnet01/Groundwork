@@ -52,7 +52,7 @@ QString &current()
 
 std::optional<Theme> find(const QString &id)
 {
-    for (const Theme &theme : themes())
+    for (const QList<Theme> allThemes = themes(); const Theme &theme : allThemes)
         if (theme.id == id)
             return theme;
     return std::nullopt;

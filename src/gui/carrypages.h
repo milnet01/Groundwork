@@ -42,7 +42,7 @@ class GatherPage : public QWizardPage
 {
     Q_OBJECT
 public:
-    GatherPage(CarryChoice *choice, QWidget *parent = nullptr);
+    explicit GatherPage(CarryChoice *choice, QWidget *parent = nullptr);
     void initializePage() override;
     bool isComplete() const override;
     bool validatePage() override; // records what is kept
@@ -63,7 +63,7 @@ class SavePage : public QWizardPage
 {
     Q_OBJECT
 public:
-    SavePage(CarryChoice *choice, QWidget *parent = nullptr);
+    explicit SavePage(CarryChoice *choice, QWidget *parent = nullptr);
     void initializePage() override;
     bool isComplete() const override;
     bool validatePage() override; // writes the choices file

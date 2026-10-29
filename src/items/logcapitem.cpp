@@ -33,14 +33,14 @@ QByteArray systemMaxUse(const CheckContext &context)
         }
     QMap<QString, QString> dropIns;
     for (const QString &dir : kDirs)
-        for (const QString &name : context.entries(dir + QStringLiteral("journald.conf.d/")))
+        for (const QStringList names = context.entries(dir + QStringLiteral("journald.conf.d/")); const QString &name : names)
             if (name.endsWith(QLatin1String(".conf")))
                 dropIns.insert(name, dir + QStringLiteral("journald.conf.d/") + name);
     files += dropIns.values();
 
     QByteArray value;
-    for (const QString &file : files)
-        for (const QByteArray &line : context.readFile(file).value_or(QByteArray()).split('\n')) {
+    for (const QString &file : std::as_const(files))
+        for (const QList<QByteArray> lines = context.readFile(file).value_or(QByteArray()).split('\n'); const QByteArray &line : lines) {
             const QByteArray trimmed = line.trimmed();
             if (trimmed.startsWith("SystemMaxUse="))
                 value = trimmed.mid(int(qstrlen("SystemMaxUse="))).trimmed();

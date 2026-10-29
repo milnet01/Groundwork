@@ -23,15 +23,15 @@ QByteArray numlock(const CheckContext &context)
 {
     QStringList files;
     for (const QString &dir : {QStringLiteral("/usr/lib/sddm/sddm.conf.d"), kLocalDir})
-        for (const QString &name : context.entries(dir))
+        for (const QStringList names = context.entries(dir); const QString &name : names)
             if (name.endsWith(QLatin1String(".conf")))
                 files << dir + QLatin1Char('/') + name;
     files << QStringLiteral("/etc/sddm.conf");
 
     QByteArray value = "none"; // SDDM's default: NumLock is left as it is
-    for (const QString &file : files) {
+    for (const QString &file : std::as_const(files)) {
         bool general = false;
-        for (const QByteArray &line : context.readFile(file).value_or(QByteArray()).split('\n')) {
+        for (const QList<QByteArray> lines = context.readFile(file).value_or(QByteArray()).split('\n'); const QByteArray &line : lines) {
             const QByteArray trimmed = line.trimmed();
             if (trimmed.startsWith('['))
                 general = trimmed == "[General]";

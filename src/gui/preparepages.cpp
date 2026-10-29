@@ -111,9 +111,9 @@ QVBoxLayout *scrolled(QWizardPage *page)
 // this, so each leaves the page now and is deleted later.
 void clear(QWidget *box, QButtonGroup *group)
 {
-    for (QAbstractButton *button : group->buttons())
+    for (const QList<QAbstractButton *> buttons = group->buttons(); QAbstractButton *button : buttons)
         group->removeButton(button);
-    for (QWidget *child : box->findChildren<QWidget *>(Qt::FindDirectChildrenOnly)) {
+    for (const QList<QWidget *> directChildren = box->findChildren<QWidget *>(Qt::FindDirectChildrenOnly); QWidget *child : directChildren) {
         child->hide();
         child->setParent(nullptr);
         child->deleteLater();
@@ -223,11 +223,11 @@ CustomLayoutEditor::CustomLayoutEditor(QWidget *parent) : QWidget(parent), m_row
     layout->addWidget(add, 0, Qt::AlignLeading);
 }
 
-void CustomLayoutEditor::setPartitions(const QList<PlannedPartition> &partitions)
+void CustomLayoutEditor::setPartitions(const QList<PlannedPartition> &planned)
 {
     while (!m_rows.isEmpty())
         removePartition(0);
-    for (const PlannedPartition &p : partitions)
+    for (const PlannedPartition &p : planned)
         addPartition(p);
 }
 
@@ -236,7 +236,7 @@ void CustomLayoutEditor::addPartition(const PlannedPartition &partition)
     Row row;
     row.widget = new QWidget(this);
     row.use = new QComboBox(row.widget);
-    for (Use use : allUses())
+    for (const QList<Use> uses = allUses(); Use use : uses)
         row.use->addItem(useTitle(use), int(use));
     row.use->setCurrentIndex(row.use->findData(int(partition.use)));
     row.use->setAccessibleName(tr("Use"));

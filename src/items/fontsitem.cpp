@@ -2,6 +2,8 @@
 
 #include <QCoreApplication>
 
+#include <algorithm>
+
 namespace gw {
 namespace {
 QString tr(const char *text) { return QCoreApplication::translate("gw::FontsItem", text); }
@@ -18,9 +20,10 @@ QString FontsItem::applySentence() const
 CheckResult FontsItem::check(const CheckContext &context) const
 {
     const CommandResult fonts = context.run({QStringLiteral("fc-list"), QStringLiteral(":"), QStringLiteral("family")});
-    for (const QByteArray &line : fonts.out.split('\n'))
-        if (line == "Arial" || line.startsWith("Arial,"))
-            return {CheckState::Done, {}};
+    const QList<QByteArray> families = fonts.out.split('\n');
+    if (std::any_of(families.cbegin(), families.cend(),
+                    [](const QByteArray &line) { return line == "Arial" || line.startsWith("Arial,"); }))
+        return {CheckState::Done, {}};
 
     const CommandResult info = context.run({QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("--no-refresh"),
                                             QStringLiteral("info"), QStringLiteral("fetchmsttfonts")});

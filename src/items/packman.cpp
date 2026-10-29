@@ -16,7 +16,7 @@ template<typename Matches>
 QString aliasWhere(const CheckContext &context, Matches baseurlMatches, bool *disabled = nullptr)
 {
     QString firstDisabled;
-    for (const QString &name : context.entries(kReposDir)) {
+    for (const QStringList names = context.entries(kReposDir); const QString &name : names) {
         if (!name.endsWith(QLatin1String(".repo")))
             continue;
         const auto text = context.readFile(kReposDir + QLatin1Char('/') + name);
@@ -31,7 +31,7 @@ QString aliasWhere(const CheckContext &context, Matches baseurlMatches, bool *di
                 firstDisabled = alias;
             return matches && enabled ? alias : QString();
         };
-        for (const QByteArray &raw : text->split('\n')) {
+        for (const QList<QByteArray> rawLines = text->split('\n'); const QByteArray &raw : rawLines) {
             const QString line = QString::fromUtf8(raw).trimmed();
             if (line.startsWith(QLatin1Char('[')) && line.endsWith(QLatin1Char(']'))) {
                 if (!finish().isEmpty())

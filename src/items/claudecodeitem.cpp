@@ -7,6 +7,8 @@
 #include <QFile>
 #include <QFileInfo>
 
+#include <algorithm>
+
 namespace gw {
 namespace {
 QString tr(const char *text) { return QCoreApplication::translate("gw::ClaudeCodeItem", text); }
@@ -41,9 +43,9 @@ CheckResult ClaudeCodeItem::check(const CheckContext &context) const
     // On PATH, or in ~/.local/bin, where Anthropic's own installer puts it.
     QStringList dirs = qEnvironmentVariable("PATH").split(QLatin1Char(':'), Qt::SkipEmptyParts);
     dirs.append(QDir::homePath() + QStringLiteral("/.local/bin"));
-    for (const QString &dir : std::as_const(dirs))
-        if (context.fileExists(dir + QStringLiteral("/claude")))
-            return {CheckState::Done, {}};
+    if (std::any_of(dirs.cbegin(), dirs.cend(),
+                    [&](const QString &dir) { return context.fileExists(dir + QStringLiteral("/claude")); }))
+        return {CheckState::Done, {}};
     return {CheckState::NotDone, tr("Claude Code is not installed.")};
 }
 

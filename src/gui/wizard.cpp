@@ -96,7 +96,7 @@ public:
         auto *languageLabel = new QLabel(Wizard::tr("Language:"), this);
         auto *languages = new QComboBox(this);
         languageLabel->setBuddy(languages);
-        for (const QString &code : availableLanguages()) {
+        for (const QStringList codes = availableLanguages(); const QString &code : codes) {
             QString name = code == QLatin1String("en") ? QStringLiteral("English")
                                                        : QLocale(code).nativeLanguageName();
             const bool shows = fontShowsLanguage(code);
@@ -132,7 +132,7 @@ public:
         auto *themeChoice = new QComboBox(this);
         themeChoice->setObjectName(QStringLiteral("themes"));
         themeLabel->setBuddy(themeChoice);
-        for (const Theme &theme : themes())
+        for (const QList<Theme> allThemes = themes(); const Theme &theme : allThemes)
             themeChoice->addItem(theme.name, theme.id);
         themeChoice->setCurrentIndex(qMax(0, themeChoice->findData(currentTheme())));
         connect(themeChoice, &QComboBox::currentIndexChanged, this, [themeChoice] {
@@ -348,7 +348,7 @@ public:
     void initializePage() override
     {
         QList<QPair<QString, QString>> titles;
-        for (const QString &id : m_wizard->runOrder())
+        for (const QStringList ids = m_wizard->runOrder(); const QString &id : ids)
             titles.append({id, m_wizard->row(id) ? rowTitle(id) : id});
         start(m_program, m_wizard->workerArguments(), titles);
     }
@@ -618,7 +618,7 @@ void Wizard::showResults(const CheckResults &results)
         static_cast<QVBoxLayout *>(inner->layout())->addStretch();
     m_selection = m_setup.catalogue->defaultSelection(results);
     refreshRows({}, {}, {}, true);
-    for (const QString &id : gatherItems(*m_setup.catalogue, results))
+    for (const QStringList ids = gatherItems(*m_setup.catalogue, results); const QString &id : ids)
         m_carry.items.append({id, m_setup.catalogue->find(id)->title()});
     m_checksDone = true;
     emit checksFinished();
@@ -713,7 +713,7 @@ void Wizard::refreshRows(const QStringList &pulled, const QStringList &included,
         if (!item || item->alsoOfferedBy().isEmpty() || m_reasons.contains(row->id()))
             continue;
         QString offer;
-        for (const QString &by : item->alsoOfferedBy())
+        for (const QStringList offeringIds = item->alsoOfferedBy(); const QString &by : offeringIds)
             if (m_selection.contains(by) && m_rows.contains(by)) {
                 offer = tr("%1 offers this too.").arg(isolated(m_rows.value(by)->title()));
                 break;
@@ -775,7 +775,7 @@ int Wizard::nextId() const
 
 bool Wizard::valuesValid() const
 {
-    for (const QString &id : runOrder()) {
+    for (const QStringList ids = runOrder(); const QString &id : ids) {
         const ItemRow *row = m_rows.value(id);
         if (row && row->valueField() && !catalogue().find(id)->isValidValue(row->value()))
             return false;
@@ -876,7 +876,7 @@ void Wizard::clearSavedSetup()
             const Item *item = m_setup.catalogue->find(id);
             if (!item || drop.contains(id))
                 continue;
-            for (const QString &dependency : m_setup.catalogue->dependencies(*item))
+            for (const QStringList deps = m_setup.catalogue->dependencies(*item); const QString &dependency : deps)
                 needed = drop.remove(dependency) || needed;
         }
     }

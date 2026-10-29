@@ -2,6 +2,8 @@
 
 #include <QCoreApplication>
 
+#include <algorithm>
+
 namespace gw {
 namespace {
 QString tr(const char *text) { return QCoreApplication::translate("gw::SnapshotsItem", text); }
@@ -31,9 +33,10 @@ CheckResult SnapshotsItem::check(const CheckContext &context) const
         return {CheckState::NotDone, tr("The snapshot tool is not installed.")};
     if (!configs.ok())
         return {CheckState::CouldNotTell, tr("The snapshot settings could not be read.")};
-    for (const QByteArray &line : configs.out.split('\n'))
-        if (line.split(',').value(1).trimmed() == "/")
-            return {CheckState::Done, {}};
+    const QList<QByteArray> lines = configs.out.split('\n');
+    if (std::any_of(lines.cbegin(), lines.cend(),
+                    [](const QByteArray &line) { return line.split(',').value(1).trimmed() == "/"; }))
+        return {CheckState::Done, {}};
     return {CheckState::NotDone, tr("Snapshots are not set up for the system.")};
 }
 

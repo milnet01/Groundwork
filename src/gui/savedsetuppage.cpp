@@ -44,7 +44,7 @@ SavedSetupPage::SavedSetupPage(Wizard *wizard) : QWizardPage(wizard), m_wizard(w
 
 void SavedSetupPage::initializePage()
 {
-    SavedSetup *saved = m_wizard->savedSetup();
+    const SavedSetup *saved = m_wizard->savedSetup();
     if (saved && !saved->rowsMade)
         makeRows();
 }

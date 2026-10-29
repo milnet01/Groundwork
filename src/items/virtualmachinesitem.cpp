@@ -9,7 +9,7 @@ QString tr(const char *text) { return QCoreApplication::translate("gw::VirtualMa
 // True when a flags line lists vmx or svm as a whole word.
 bool canVirtualise(const QByteArray &cpuinfo)
 {
-    for (const QByteArray &line : cpuinfo.split('\n')) {
+    for (const QList<QByteArray> lines = cpuinfo.split('\n'); const QByteArray &line : lines) { // cppcheck-suppress useStlAlgorithm
         const qsizetype colon = line.indexOf(':');
         if (colon < 0 || line.left(colon).trimmed() != "flags")
             continue;

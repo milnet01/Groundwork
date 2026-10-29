@@ -1854,7 +1854,7 @@ scheduled.
   Source: review-code-2026-10-29.
   Lanes: items.
 
-- 📋 [GRND-0094] **Code style classes the checking tools raise.**
+- ✅ [GRND-0094] **Code style classes the checking tools raise.**
   Style-only classes from check-code --tree 2026-10-29, one item by
   the audit's rule: useStlAlgorithm, range-loop-detach,
   implicit-conversion-in-loop, shadowFunction, noExplicitConstructor,
@@ -1862,6 +1862,14 @@ scheduled.
   no-module-include, and the one-off performance hints
   (translations.cpp:57, carrypages.cpp:196, main.cpp:214). Raw lists:
   rerun check-code --tree.
+  Fixed 2026-10-29: explicit constructors, renamed shadowing names,
+  a const pointer, std::as_const or a const local on every
+  range-loop-detach site, QJsonValue loops by value, and the three
+  one-off hints. 11 loops became std algorithms; 16 with side effects
+  or several exits carry a cppcheck-suppress. Left on purpose:
+  functionStatic on CommandRunner::run, which tests substitute through
+  CheckContext. cppcheck, clazy and clang-tidy rerun clean on the named
+  classes; a -Wshadow build found no new hiding names; full gate passed.
   **Layman:** Tidy-ups the checking tools suggest that change no behaviour.
   Kind: refactor.
   Source: check-code-2026-10-29.

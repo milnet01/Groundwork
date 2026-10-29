@@ -215,7 +215,7 @@ bool GatherPage::validatePage()
         if (row->isChecked())
             keep(kept);
     }
-    m_choice->kept = kept;
+    m_choice->kept = std::move(kept);
     return true;
 }
 
@@ -280,7 +280,7 @@ void SavePage::refresh()
         QList<SettingsRow> largest = m_choice->kept.settings;
         std::sort(largest.begin(), largest.end(), [](const SettingsRow &a, const SettingsRow &b) { return a.bytes > b.bytes; });
         QStringList names;
-        for (const SettingsRow &row : largest.mid(0, 3))
+        for (const QList<SettingsRow> topRows = largest.mid(0, 3); const SettingsRow &row : topRows)
             names << QStringLiteral("%1 (%2)").arg(isolated(row.name), bytesText(row.bytes));
         problem += QLatin1Char('\n') + tr("The largest: %1.").arg(names.join(QStringLiteral(", ")));
     }

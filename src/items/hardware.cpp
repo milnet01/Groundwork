@@ -8,7 +8,7 @@ const QString kDevices = QStringLiteral("/sys/bus/pci/devices");
 QList<PciDevice> pciDevices(const CheckContext &context)
 {
     QList<PciDevice> devices;
-    for (const QString &slot : context.entries(kDevices)) {
+    for (const QStringList slotNames = context.entries(kDevices); const QString &slot : slotNames) {
         const QString dir = kDevices + QLatin1Char('/') + slot + QLatin1Char('/');
         auto read = [&](const char *name) {
             return QString::fromLatin1(context.readFile(dir + QLatin1String(name)).value_or(QByteArray())).trimmed();

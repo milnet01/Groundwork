@@ -5,6 +5,8 @@
 
 #include <QCoreApplication>
 
+#include <algorithm>
+
 namespace gw {
 namespace {
 QString tr(const char *text) { return QCoreApplication::translate("gw::BroadcomItem", text); }
@@ -22,11 +24,11 @@ bool BroadcomItem::needsWl(const CheckContext &context)
 {
     static const QStringList ids{QStringLiteral("0x4358"), QStringLiteral("0x4359"), QStringLiteral("0x4365"),
                                  QStringLiteral("0x43b1"), QStringLiteral("0x43a0"), QStringLiteral("0x4360")};
-    for (const PciDevice &d : pciDevices(context))
-        if (d.vendor == QLatin1String("0x14e4") && d.cls.startsWith(QLatin1String("0x0280"))
-            && ids.contains(d.device.toLower()))
-            return true;
-    return false;
+    const QList<PciDevice> devices = pciDevices(context);
+    return std::any_of(devices.cbegin(), devices.cend(), [](const PciDevice &d) {
+        return d.vendor == QLatin1String("0x14e4") && d.cls.startsWith(QLatin1String("0x0280"))
+               && ids.contains(d.device.toLower());
+    });
 }
 
 CheckResult BroadcomItem::check(const CheckContext &context) const
