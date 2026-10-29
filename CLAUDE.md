@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 4 — Between items.
-**In flight:** nothing; 0.4.0 released 2026-10-16 (GitHub and OBS); all of 0.5.0 (GRND-0078, GRND-0079, GRND-0082, GRND-0085) built 2026-10-19 to 2026-10-26, unreleased, its manual checks outstanding. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
+**In flight:** nothing; 0.4.0 released 2026-10-16 (GitHub and OBS); 0.5.0 built and VM-checked 2026-10-29 bar GRND-0088 (fix not chosen yet), unreleased. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where

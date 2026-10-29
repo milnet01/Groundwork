@@ -1444,6 +1444,11 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   GRND-0086's fix: all four items ended ok; 331 of the 340 saved
   programs are installed, the rest unknown to this system's sources or
   left to the installer.
+  Arabic and Hebrew look, 2026-10-29: the saved-setup page lays out right
+  to left; file name, source addresses, package names and settings paths
+  keep their direction. One fault, the date ("Oct 2026 05:46:39 26"),
+  fixed in 55f2010; not yet seen in a VM build. Qt's own file dialog
+  keeps English buttons there.
   **Layman:** After reinstalling, Groundwork can read your saved file and switch on everything you kept.
   Kind: feature.
   Source: user-request-2026-10-15.
