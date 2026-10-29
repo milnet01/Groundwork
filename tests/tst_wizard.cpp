@@ -157,6 +157,7 @@ class TstWizard : public QObject
     QTemporaryDir m_dir;
     qint64 m_free = 100 * kGiB; // the save folder's free space
     gw::Manifest m_saved;       // what the saved file holds
+    gw::CheckState m_carriedState = gw::CheckState::NotDone; // what its items' checks say
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
                                      const gw::Catalogue *items = &catalogue,
@@ -183,10 +184,10 @@ class TstWizard : public QObject
             return r;
         };
         setup.readSetup = [this](const QString &, QString *, QStringList *) { return std::optional(m_saved); };
-        setup.checkItems = [](const QList<const gw::Item *> &items) {
+        setup.checkItems = [this](const QList<const gw::Item *> &items) {
             gw::CheckResults r;
             for (const gw::Item *item : items)
-                r.insert(item->id(), {gw::CheckState::NotDone, {}});
+                r.insert(item->id(), {m_carriedState, {}});
             return r;
         };
         setup.system.id = QStringLiteral("opensuse-tumbleweed");
@@ -262,6 +263,7 @@ private slots:
         gw::loadLanguage(QStringLiteral("en"));
         m_free = 100 * kGiB;
         m_saved = {};
+        m_carriedState = gw::CheckState::NotDone;
         qunsetenv("FAKE_WORKER_LOG");
     }
 
@@ -1054,6 +1056,71 @@ private slots:
         QVERIFY(w->selection().contains(QStringLiteral("firewall")));
         QVERIFY(!w->selection().contains(QStringLiteral("nvidia")));
         QCOMPARE(w->row(QStringLiteral("nvidia"))->reason(), QStringLiteral("You had this before."));
+    }
+
+    // Audit 2026-10-29: a saved setup switched off after its page is
+    // forgotten whole: the kept items it switched on, what its programs
+    // pulled in, and its notes. What the user switched on stays.
+    void aSavedSetupSwitchedOffLeavesNoneOfItsChoices()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.items = {QStringLiteral("firewall"), QStringLiteral("nvidia")};
+        m_saved.packages = {QStringLiteral("act")};
+        auto w = fromSaved();
+        QVERIFY(w);
+        w->next();
+        QVERIFY(w->selection().contains(QStringLiteral("firewall")));
+        QVERIFY(w->selection().contains(QStringLiteral("update")));
+        w->userToggled(QStringLiteral("nvidia"), true); // the user's own say, needing update
+        w->back();
+        w->back();
+        QCOMPARE(w->currentId(), 0);
+        w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"))->click();
+        w->next();
+        QVERIFY(!w->savedSetup());
+        QVERIFY(!w->selection().contains(QStringLiteral("firewall")));
+        QVERIFY(!w->selection().contains(QStringLiteral("carried-packages")));
+        QVERIFY(w->selection().contains(QStringLiteral("nvidia")));
+        QVERIFY(w->selection().contains(QStringLiteral("update"))); // nvidia still needs it
+    }
+
+    // The same, with nothing of the user's own: what the programs pulled in
+    // goes too, and so does the note on the item awaiting the user's say.
+    void aSavedSetupSwitchedOffTakesWhatItPulledIn()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.items = {QStringLiteral("nvidia")};
+        m_saved.packages = {QStringLiteral("act")};
+        auto w = fromSaved();
+        QVERIFY(w);
+        w->next();
+        QVERIFY(w->selection().contains(QStringLiteral("update")));
+        QCOMPARE(w->row(QStringLiteral("nvidia"))->reason(), QStringLiteral("You had this before."));
+        w->back();
+        w->back();
+        w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"))->click();
+        w->next();
+        QVERIFY(!w->savedSetup());
+        QVERIFY(!w->selection().contains(QStringLiteral("update")));
+        QVERIFY(w->row(QStringLiteral("nvidia"))->reason().isEmpty());
+    }
+
+    // And what a carried row the user switched on pulled in goes with it.
+    void aSavedSetupSwitchedOffTakesWhatItsRowsPulledIn()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.packages = {QStringLiteral("act")};
+        m_carriedState = gw::CheckState::Done; // so its row starts off
+        auto w = fromSaved();
+        QVERIFY(w);
+        QVERIFY(!w->selection().contains(QStringLiteral("update")));
+        w->userToggled(QStringLiteral("carried-packages"), true);
+        QVERIFY(w->selection().contains(QStringLiteral("update")));
+        w->back();
+        w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"))->click();
+        w->next();
+        QVERIFY(!w->savedSetup());
+        QVERIFY(!w->selection().contains(QStringLiteral("update")));
     }
 
     // GRND-0079's VM run, in Arabic and Hebrew: "26 Oct 2026 05:46:39"

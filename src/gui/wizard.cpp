@@ -637,6 +637,10 @@ void Wizard::fitRows()
 
 void Wizard::userToggled(const QString &id, bool on)
 {
+    if (on && m_saved && isCarriedId(id)) {
+        switchOnSaved(id);
+        return;
+    }
     QStringList included;
     const QStringList pulled = on ? catalogue().switchOn(m_selection, id, m_results, &included)
                                   : catalogue().switchOff(m_selection, id);
@@ -808,6 +812,24 @@ void Wizard::clearSavedSetup()
         m_rows.remove(item->id());
         m_results.remove(item->id());
     }
+    // What it switched on goes too, unless a choice that stays needs it.
+    Selection drop = m_saved->switchedOn & m_selection;
+    for (bool needed = true; needed;) {
+        needed = false;
+        for (const QString &id : std::as_const(m_selection)) {
+            const Item *item = m_setup.catalogue->find(id);
+            if (!item || drop.contains(id))
+                continue;
+            for (const QString &dependency : m_setup.catalogue->dependencies(*item))
+                needed = drop.remove(dependency) || needed;
+        }
+    }
+    m_selection.subtract(drop);
+    for (const QString &id : std::as_const(m_saved->carried.keptItems)) {
+        ItemRow *row = m_rows.value(id);
+        if (row && row->reason() == tr("You had this before."))
+            row->setReason({});
+    }
     m_saved.reset();
     refreshRows({}, {}, {}, true);
 }
@@ -834,9 +856,7 @@ void Wizard::startCarried()
         const CheckState state = m_results.value(id).state;
         if (state != CheckState::NotDone && state != CheckState::CouldNotTell)
             continue;
-        QStringList included;
-        const QStringList pulled = catalogue().switchOn(m_selection, id, m_results, &included);
-        refreshRows(pulled, included, id, true);
+        switchOnSaved(id);
     }
 }
 
@@ -854,10 +874,17 @@ void Wizard::switchOnKept()
                 row->setReason(tr("You had this before."));
             continue;
         }
-        QStringList included;
-        const QStringList pulled = catalogue().switchOn(m_selection, id, m_results, &included);
-        refreshRows(pulled, included, id, true);
+        switchOnSaved(id);
     }
+}
+
+void Wizard::switchOnSaved(const QString &id)
+{
+    const Selection before = m_selection;
+    QStringList included;
+    const QStringList pulled = catalogue().switchOn(m_selection, id, m_results, &included);
+    m_saved->switchedOn.unite(m_selection - before);
+    refreshRows(pulled, included, id, true);
 }
 
 QString Wizard::restoreChoicesPath() const { return m_setup.stateDir + QStringLiteral("/restore-choices.json"); }

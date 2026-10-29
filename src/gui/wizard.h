@@ -84,6 +84,7 @@ struct SavedSetup
     QList<Entry> entries;
     bool rowsMade = false;    // the page has made its rows
     bool keptSwitched = false; // the kept items were switched on, once (INV-1)
+    Selection switchedOn;      // what this setup switched on, so clearing switches it off
     bool holdsSecrets() const;
 };
 
@@ -156,6 +157,7 @@ protected:
 private:
     void showResults(const CheckResults &results);
     void refreshRows(const QStringList &pulled, const QStringList &included, const QString &cause, bool on);
+    void switchOnSaved(const QString &id);
     void fitRows();
     bool stopForClose();
 
