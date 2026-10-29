@@ -278,12 +278,15 @@ private slots:
         writeFile(repos + QStringLiteral("d.repo"), "[d-priority-0]\n" + url + "priority=0\n");
         writeFile(repos + QStringLiteral("e.repo"), "[e-priority-word]\n" + url + "priority=high\n");
         writeFile(repos + QStringLiteral("f.repo"), "[f-good]\n" + url + "gpgkey=https://dl.example.org/key\npriority=200\n");
+        // GRND-0097: the reader's name check too.
+        writeFile(repos + QStringLiteral("g.repo"), "[g-control-name]\nname=Bad\x1b[2JName\n" + url);
         gw::Gathered g;
         gw::gatherSources(gw::CheckContext(gw::FileReader(m_root)), &g);
         QCOMPARE(g.zypperSources.size(), 1);
         QCOMPARE(g.zypperSources.first().alias, QStringLiteral("f-good"));
-        QCOMPARE(g.uncarriedSources.size(), 5);
+        QCOMPARE(g.uncarriedSources.size(), 6);
         const QString why = g.uncarriedSources.join(QLatin1Char('\n'));
+        QVERIFY2(why.contains(QLatin1String("Bad[2JName")), qPrintable(why));
         for (const char *alias : {"a-http-key", "b-file-key", "c-two-keys", "d-priority-0", "e-priority-word"})
             QVERIFY2(why.contains(QLatin1String(alias)), alias);
         QVERIFY(gw::isKeyUrl(QStringLiteral("https://dl.example.org/key")));

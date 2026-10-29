@@ -310,7 +310,12 @@ void gatherSources(const CheckContext &context, Gathered *into)
             if (isDistributionSource(source.baseurl) || !isSourceUrl(source.baseurl))
                 continue;
             // One the reader would refuse is named instead (spec 4.3).
-            if (const QString why = keyOrPriorityProblem(source); !why.isEmpty())
+            if (hasControl(source.name))
+                into->uncarriedSources << QCoreApplication::translate("gw::Carry", "“%1” can't be carried: its name "
+                                                                                   "holds a character Groundwork "
+                                                                                   "cannot use.")
+                                              .arg(shown(source.name));
+            else if (const QString why = keyOrPriorityProblem(source); !why.isEmpty())
                 into->uncarriedSources << why;
             else
                 into->zypperSources << source;

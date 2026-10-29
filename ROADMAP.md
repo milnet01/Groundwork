@@ -1900,11 +1900,16 @@ scheduled.
   Source: close-findings-2026-10-29.
   Lanes: items.
 
-- 📋 [GRND-0097] **Carry: a source name with a control character is gathered, then refused.**
+- ✅ [GRND-0097] **Carry: a source name with a control character is gathered, then refused.**
   Found next door by the carry fix (08d344a), same class as that
   finding: gathering does not apply the reader's name check, so such a
   source is saved and then refused on the new install. Fix: check the
   name when gathering, as 08d344a does for keys and priority.
+  Fixed 2026-10-29: gathering refuses a source whose name holds a
+  control character, as the reader does, with a row naming it (test red
+  first). The alias pattern and an empty name were already handled by
+  parseRepoFile, which refuses the first and names the second by its
+  alias; spec § 4.3 now lists the name rule.
   **Layman:** A software source with an odd character in its name is saved but cannot be put back.
   Kind: review-fix.
   Source: close-findings-2026-10-29.

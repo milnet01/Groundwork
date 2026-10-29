@@ -481,6 +481,10 @@
         <translation>यह फ़ाइल Groundwork के नए संस्करण से सेव की गई थी। इसे पढ़ने के लिए Groundwork अपडेट करें।</translation>
     </message>
     <message>
+        <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
         <translation type="unfinished"></translation>
     </message>

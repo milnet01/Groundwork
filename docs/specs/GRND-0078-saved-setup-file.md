@@ -128,7 +128,8 @@ other; the item finds it by URL on the new install, as OneUp's does
 (`OneUpItem::applySteps`, `src/items/packman.h::usableRepository`). A `.repo` file that cannot
 be read or parsed is a row saying "couldn't tell", switched off and
 unswitchable, naming the file. A source § 4.7 would refuse for its
-`gpgkey` or `priority` is not gathered either: it is a row of the same
+`gpgkey`, `priority` or a control character in its `name` is not
+gathered either: it is a row of the same
 kind, naming the source and saying why it cannot be carried.
 
 Flatpak remotes other than `flathub`:
