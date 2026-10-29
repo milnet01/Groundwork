@@ -21,6 +21,6 @@ struct Marker
 QString formatMarker(const QString &name, const QStringList &fields = {});
 
 // Nothing for a line that is not a marker; such lines are log text.
-std::optional<Marker> parseMarker(const QString &line);
+[[nodiscard]] std::optional<Marker> parseMarker(const QString &line);
 
 } // namespace gw

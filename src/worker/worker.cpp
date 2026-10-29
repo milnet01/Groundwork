@@ -72,8 +72,9 @@ int Worker::runCommand(const QStringList &argv, const QByteArray &input, QString
     auto take = [&](const QString &line) {
         if (lines)
             *lines << line;
+        // A command's line that looks like a marker is passed on as text.
         if (echo)
-            say(line);
+            say(line.startsWith(QLatin1String("@@")) ? QLatin1Char(' ') + line : line);
     };
     auto drain = [&] {
         pending += QString::fromUtf8(process.readAll());
@@ -124,17 +125,13 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
     int code = 0;
     if (step.tool == Step::Tool::Zypper) {
         code = runZypper(argv, step.input, lines, echo);
-        if (code == 106)
-            say(formatMarker(QStringLiteral("HINT"),
-                              {itemId, tr("A software source could not be read and was skipped.")}));
+        Parts parts{itemId, kMostLoneClashes};
+        sayIfSourceSkipped(itemId, code, &parts.sourceSkipped);
         // 4 and 8 are also the system's own failure, so a name that failed
         // alone clashed only if another part installed (GRND-0079 § 4.4).
-        int lonesLeft = kMostLoneClashes;
-        bool installed = false;
         if (zypperSucceeded(code)
             || (step.namesFrom > 0 && zypperClashed(code)
-                && installInParts(step, step.argv.mid(step.namesFrom), &code, &lonesLeft, &installed)
-                && installed))
+                && installInParts(step, step.argv.mid(step.namesFrom), &code, &parts) && parts.installed))
             return true;
     } else {
         code = runCommand(argv, step.input, lines, echo);
@@ -145,20 +142,33 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
     return false;
 }
 
-bool Worker::installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft, bool *installed)
+bool Worker::installInParts(const Step &step, const QStringList &names, int *code, Parts *parts)
 {
+    // No names, or fewer arguments than namesFrom: nothing to split, and
+    // halving nothing would never end.
+    if (names.isEmpty() || step.namesFrom > step.argv.size())
+        return false;
     if (names.size() == 1)
-        return --*lonesLeft >= 0; // the carried item's check, run after, names it
+        return --parts->lonesLeft >= 0; // the carried item's check, run after, names it
     const qsizetype half = names.size() / 2;
     for (const QStringList &part : {names.first(half), names.mid(half)}) {
         const QStringList argv = step.argv.first(step.namesFrom) + part;
         *code = runZypper(step.needsRoot ? Privilege::asRoot(argv) : argv, step.input);
+        sayIfSourceSkipped(parts->itemId, *code, &parts->sourceSkipped);
         if (zypperSucceeded(*code))
-            *installed = true;
-        else if (!(zypperClashed(*code) && installInParts(step, part, code, lonesLeft, installed)))
+            parts->installed = true;
+        else if (!(zypperClashed(*code) && installInParts(step, part, code, parts)))
             return false;
     }
     return true;
+}
+
+void Worker::sayIfSourceSkipped(const QString &itemId, int code, bool *said)
+{
+    if (code != 106 || *said)
+        return;
+    *said = true;
+    say(formatMarker(QStringLiteral("HINT"), {itemId, tr("A software source could not be read and was skipped.")}));
 }
 
 int Worker::runZypper(const QStringList &argv, const QByteArray &input, QStringList *lines, bool echo)

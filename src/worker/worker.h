@@ -61,8 +61,18 @@ private:
     // Runs a Zypper step again over each half of names, splitting a half
     // that clashes, until a name clashes alone. Returns false, with code,
     // on another failure or once lonesLeft names have clashed alone. Sets
-    // installed when any part installs.
-    bool installInParts(const Step &step, const QStringList &names, int *code, int *lonesLeft, bool *installed);
+    // installed when any part installs; a part that skipped a source says
+    // so, once a step.
+    struct Parts
+    {
+        QString itemId;
+        int lonesLeft;
+        bool installed = false;
+        bool sourceSkipped = false;
+    };
+    bool installInParts(const Step &step, const QStringList &names, int *code, Parts *parts);
+    // A HINT that a software source was skipped, once per step (exit 106).
+    void sayIfSourceSkipped(const QString &itemId, int code, bool *said);
     int runZypper(const QStringList &argv, const QByteArray &input, QStringList *lines = nullptr, bool echo = true);
     // One item's STEP_BEGIN, then end(ok, detail) says its STEP_END and DONE.
     void beginOne(const QString &id, const QString &title);

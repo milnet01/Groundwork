@@ -1814,13 +1814,19 @@ scheduled.
   Source: review-code-2026-10-29.
   Lanes: drives.
 
-- 📋 [GRND-0092] **Worker: four low-severity review findings.**
+- ✅ [GRND-0092] **Worker: four low-severity review findings.**
   Queued, not fixed: user ruling 2026-10-29. Each is in
   docs/reviews/review-code-2026-10-29/lane-04-worker-core.md § Low /
   Info: worker.cpp:127-129 (exit 106 inside a part gives no HINT),
   worker.cpp:146-150 (empty names list recursion), worker.cpp:72-77
   and markers.cpp:21 (echoed output can read as a marker),
   markers.h:24 and systemidentity.h:28/32 (parsers lack nodiscard).
+  Fixed 2026-10-29, all four. A part of a split install that exits
+  106 gives the skipped-source HINT, once a step (test red first). A
+  command's line starting @@ is passed on with a leading space, so it
+  never reads as a marker (test red first). installInParts refuses an
+  empty name list; no item reaches it, so no red run. The three parsers
+  are [[nodiscard]].
   **Layman:** Small edge cases in the part that installs things: an unreported restart hint, output that looks like a control line.
   Kind: review-fix.
   Source: review-code-2026-10-29.

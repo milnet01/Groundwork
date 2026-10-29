@@ -109,7 +109,9 @@ groundwork --worker [--lang LANG] --delete-setup-file FILE
 
 One per line on standard output: `@@NAME@@|field|field`. A field never
 holds `|` or a line break (`src/core/markers.cpp`). Every other line is
-the output of a command the Worker ran.
+the output of a command the Worker ran. A command's line that starts
+with `@@` is passed on with a leading space, so it never reads as a
+marker.
 
 | Marker | Fields | Sent |
 |---|---|---|

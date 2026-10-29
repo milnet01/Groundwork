@@ -25,11 +25,11 @@ struct SystemIdentity
 
 // Parses os-release text (man os-release: KEY=VALUE lines, values optionally
 // in single or double quotes, '#' comments).
-SystemIdentity parseOsRelease(const QByteArray &text);
+[[nodiscard]] SystemIdentity parseOsRelease(const QByteArray &text);
 
 // Reads /etc/os-release, or /usr/lib/os-release only if the first is
 // missing; the two are never combined (man os-release).
-SystemIdentity readSystemIdentity(const FileReader &files);
+[[nodiscard]] SystemIdentity readSystemIdentity(const FileReader &files);
 
 // True on a live system, started from a USB stick or disc, which keeps
 // nothing after a restart. dracut's live boot puts rd.live.image on the

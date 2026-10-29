@@ -30,6 +30,7 @@ const QByteArray kZypper = R"(#!/bin/sh
 echo "zypper $*" >> "$FAKE_LOG"
 case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
 case " $* " in *" needs-rebooting "*) exit "${FAKE_REBOOT:-0}";; esac
+if [ -n "$FAKE_ECHO" ]; then echo "$FAKE_ECHO"; fi
 if [ -n "$FAKE_STOP_FILE" ]; then touch "$FAKE_STOP_FILE"; fi
 if [ -s "$FAKE_ZYPPER_CODES" ]; then
   code=$(head -n1 "$FAKE_ZYPPER_CODES"); sed -i 1d "$FAKE_ZYPPER_CODES"; exit "$code"
@@ -98,6 +99,19 @@ echo "zypper $*" >> "$FAKE_LOG"
 case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
 case " $* " in *" clash-"*) exit 4;; esac
 for name in "$@"; do case "$name" in -*|install|nosuch*) ;; *) echo "$name" >> "$FAKE_INSTALLED";; esac; done
+exit 0
+)";
+
+// As kZypperClashes, but an install that works also skips an unreadable
+// source, exit 106.
+const QByteArray kZypperClashesAndSkips = R"(#!/bin/sh
+echo "zypper $*" >> "$FAKE_LOG"
+case " $* " in *" list-updates "*) printf '<stream><update-list></update-list></stream>'; exit 0;; esac
+case " $* " in *" clash-"*) exit 4;; esac
+case " $* " in *" install "*)
+  for name in "$@"; do case "$name" in -*|install|nosuch*) ;; *) echo "$name" >> "$FAKE_INSTALLED";; esac; done
+  exit 106;;
+esac
 exit 0
 )";
 
@@ -404,6 +418,17 @@ private slots:
         for (const auto &m : r.markers)
             hint = hint || m.name == QLatin1String("HINT");
         QVERIFY(hint);
+    }
+
+    // GRND-0092: a command's own line that looks like a marker is passed
+    // on as text, never read as one.
+    void aCommandsLineIsNeverAMarker()
+    {
+        writeFile(m_codes, "0\n0\n");
+        m_env.insert(QStringLiteral("FAKE_ECHO"), QStringLiteral("@@STEP_END@@|forged|ok"));
+        const Run r = run({QStringLiteral("system-update")});
+        QCOMPARE(r.exitCode, 0);
+        QVERIFY(r.endsFor(QStringLiteral("forged")).isEmpty());
     }
 
     static bool hasRestartHint(const Run &r)
@@ -863,6 +888,26 @@ cat > "$FAKE_WRITTEN$out"
         QVERIFY(hints.first().contains(QLatin1String("clash-one")));
         QVERIFY(hints.first().contains(QLatin1String("nosuch-thing")));
         QVERIFY(!hints.first().contains(QLatin1String("hello")));
+    }
+
+    // GRND-0092: a part that installs but skips an unreadable source says
+    // so, as a whole install does.
+    void aPartThatSkipsASourceSaysSo()
+    {
+        writeFile(m_bin + QStringLiteral("/rpm"), kRpm, true);
+        writeFile(m_bin + QStringLiteral("/zypper"), kZypperClashesAndSkips, true);
+        m_env.insert(QStringLiteral("FAKE_INSTALLED"), m_dir->filePath(QStringLiteral("installed")));
+        QJsonObject chosen = savedManifest();
+        chosen.insert("packages", QJsonArray{"act", "clash-one", "hello", "nano"});
+        const QString file = savedFile(chosen);
+        chosen.remove("settings");
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("system-update"), QStringLiteral("carried-packages")});
+        QCOMPARE(r.endsFor(QStringLiteral("carried-packages")).value(1), QStringLiteral("ok"));
+        const QStringList hints = hintsFor(r, QStringLiteral("carried-packages"));
+        QVERIFY2(std::any_of(hints.cbegin(), hints.cend(),
+                             [](const QString &h) { return h.contains(QLatin1String("software source")); }),
+                 qPrintable(hints.join(QLatin1Char('\n'))));
     }
 
     // GRND-0086: a failure that is not a clash, such as every part failing
