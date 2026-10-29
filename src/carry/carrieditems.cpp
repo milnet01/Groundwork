@@ -16,6 +16,18 @@ constexpr int kLongTimeoutMs = 10 * 60 * 1000; // rpm over hundreds of names, ta
 const QString kReposDir = QStringLiteral("/etc/zypp/repos.d");
 constexpr qsizetype kNamesShown = 10;
 
+// True when every line tar --diff printed is an owner or a mode, in the
+// C locale the runner sets.
+bool onlyOwnerOrModeDiffers(const QByteArray &out)
+{
+    static const QStringList kinds{QStringLiteral(": Uid differs"), QStringLiteral(": Gid differs"),
+                                   QStringLiteral(": Mode differs")};
+    const QStringList lines = QString::fromUtf8(out).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
+    return !lines.isEmpty() && std::all_of(lines.cbegin(), lines.cend(), [](const QString &line) {
+        return std::any_of(kinds.cbegin(), kinds.cend(), [&](const QString &kind) { return line.endsWith(kind); });
+    });
+}
+
 // Up to ten names, then how many more, so a row on a fresh install does
 // not list every program.
 QString namesText(const QStringList &all)
@@ -209,7 +221,10 @@ public:
                                                         "file it replaces is kept beside it as a numbered copy.");
     }
     // tar --diff exits 0 when every path matches, 1 when one differs or is
-    // missing, 2 when it cannot compare (measured 2026-10-20).
+    // missing, 2 when it cannot compare (measured 2026-10-20). It counts an
+    // owner or mode as a difference too, and a restore as this user, under
+    // the user's umask, leaves both its own (measured 2026-10-29): those
+    // alone are done.
     CheckResult check(const CheckContext &context) const override
     {
         if (geteuid() == 0)
@@ -223,7 +238,7 @@ public:
         if (r.ok())
             return {CheckState::Done, {}};
         if (r.started && !r.timedOut && r.exitCode == 1)
-            return {CheckState::NotDone, {}};
+            return {onlyOwnerOrModeDiffers(r.out) ? CheckState::Done : CheckState::NotDone, {}};
         return {CheckState::CouldNotTell,
                 QCoreApplication::translate("gw::Carry", "The saved file could not be compared with your home folder.")};
     }

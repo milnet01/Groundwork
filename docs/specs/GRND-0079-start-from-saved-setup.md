@@ -121,7 +121,7 @@ exits 1, "public key not found", and the manifest holds no key (measured
 2026-10-20 in a Tumbleweed container with Flathub's beta repository).
 The page names each one for the user to add (user, 2026-10-20). An app
 from it fails its step and is named by the `HINT`.
-| `carried-settings` | file | `tar --diff` of the kept paths: 0 Done, 1 not done, 2 couldn't tell | § 4.5 |
+| `carried-settings` | file | `tar --diff` of the kept paths: 0 Done, 1 not done unless it reports only owners and modes, 2 couldn't tell | § 4.5 |
 
 The colon in a carried id cannot clash with a Groundwork id: none has one,
 and § 4.7 of the saved file's spec admits none in a package name or item
@@ -226,6 +226,10 @@ Measured 2026-10-20 with GNU tar 1.35, in a scratch tree:
   and exits 2.
 - `tar --diff`: 0 after an extract, 1 when a file is missing or its time
   or size differs, 2 when a path is not in the archive.
+- `tar --diff` also exits 1 on "Uid differs", "Gid differs" and "Mode
+  differs" (measured 2026-10-29, an archive written with
+  `--owner=12345 --mode=…`). A restore as the user leaves the user's
+  own owner and umask, so a diff reporting only those is Done.
 
 A link member is extracted as a link. It is made as the user, so it
 points only where the user can already write.

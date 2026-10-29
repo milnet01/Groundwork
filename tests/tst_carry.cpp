@@ -676,6 +676,34 @@ private slots:
             QVERIFY(step.needsRoot);
     }
 
+    // GRND-0079 § 4.5: settings saved by another account, whose uid,
+    // group and modes differ from what the restore left, are done once
+    // their contents match. tar --diff reports owner and mode too.
+    void settingsFromAnotherAccountAreDone()
+    {
+        const gw::Manifest m = homeAndManifest();
+        writeFile(m_state + QLatin1Char('/') + gw::kManifestName, QJsonDocument(gw::manifestJson(m)).toJson());
+        const QString file = m_dir->filePath(QStringLiteral("other.tar"));
+        QCOMPARE(tar(QStringList{QStringLiteral("--owner=12345"), QStringLiteral("--group=12345"),
+                                 QStringLiteral("--mode=a+rw")}
+                         + gw::createArguments(file, m_state, m_home),
+                     gw::createInput(m)),
+                 0);
+        const QByteArray homePath = qgetenv("HOME");
+        qputenv("HOME", m_home.toUtf8());
+        const gw::CarriedItems carried = gw::carriedItems(m, file, gw::catalogue());
+        qputenv("HOME", homePath);
+        const gw::Item &settings = *carried.owned.back();
+        QCOMPARE(settings.id(), gw::kCarriedSettingsId);
+        const gw::CheckContext context{gw::FileReader()};
+        QCOMPARE(settings.check(context).state, gw::CheckState::Done);
+        writeFile(home(QStringLiteral(".config/dolphinrc")), "[General]\nShowFullPath=false\n");
+        QCOMPARE(settings.check(context).state, gw::CheckState::NotDone);
+        QFile::remove(home(QStringLiteral(".ssh/id_ed25519")));
+        writeFile(home(QStringLiteral(".config/dolphinrc")), "[General]\nShowFullPath=true\n");
+        QCOMPARE(settings.check(context).state, gw::CheckState::NotDone);
+    }
+
     // GRND-0079, INV-6: a file a setting replaces is kept, and a second
     // restore keeps the first copy.
     void aReplacedSettingIsKeptAsANumberedCopy()
