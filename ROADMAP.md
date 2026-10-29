@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=107 -->
+<!-- ants-roadmap-id-high-water: GRND=108 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2063,3 +2063,13 @@ scheduled.
   **Layman:** A maintenance job that is switched off never runs, so it no longer makes 'Calmer wake' read as not done.
   Kind: fix.
   Source: user-report-2026-10-29.
+
+- 📋 [GRND-0108] **The run page asks for the password in a field of its own, not a box.**
+  GRND-0102 made the askpass box the window's own dialog. The user
+  asked on 2026-10-29 for a field built into the run page instead.
+  PasswordChannel already brings the request to the window; the page
+  shows a field and OK and Cancel in place of the dialog. Askpass mode
+  outside the window keeps its own box.
+  **Layman:** When Groundwork needs your password, the 'Setting up' page shows a password field in place, so nothing pops up.
+  Kind: ux.
+  Source: user-request-2026-10-29.
