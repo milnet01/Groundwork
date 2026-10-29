@@ -50,7 +50,7 @@ struct SettingsRow
     QString name;
     QStringList paths; // relative to the home folder
     bool secret = false;
-    qint64 bytes = 0;
+    qint64 bytes = 0; // -1: unknown, du gave no size (spec 4.4)
     bool operator==(const SettingsRow &) const = default;
 };
 
@@ -117,11 +117,12 @@ void gatherSources(const CheckContext &context, Gathered *into);
 // The settings rows for the home folder, an absolute path read through
 // context, sized with du (spec 4.4).
 QList<SettingsRow> gatherSettings(const CheckContext &context, const QString &home);
-// Whether a row starts switched on (spec 4.4, INV-2).
+// Whether a row starts switched on (spec 4.4, INV-2): not when its size
+// is unknown.
 bool startsOn(const SettingsRow &row);
 
 // Why Save is unavailable for this many bytes in this folder; empty when
-// it is available (spec 4.5, INV-9).
+// it is available (spec 4.5, INV-9). Negative bytes: a size is unknown.
 QString saveProblem(qint64 bytes, qint64 freeBytes, const QString &fstype);
 struct FolderSpace
 {

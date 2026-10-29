@@ -4,6 +4,7 @@
 
 #include "core/translations.h"
 
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDir>
 #include <QFileDialog>
@@ -24,7 +25,12 @@
 namespace gw {
 namespace {
 
-QString bytesText(qint64 bytes) { return QLocale().formattedDataSize(bytes, 1, QLocale::DataSizeIecFormat); }
+QString bytesText(qint64 bytes)
+{
+    if (bytes < 0)
+        return QCoreApplication::translate("gw::Carry", "size unknown");
+    return QLocale().formattedDataSize(bytes, 1, QLocale::DataSizeIecFormat);
+}
 
 QLabel *wrapped(QWidget *parent, const QString &text = {})
 {
@@ -53,9 +59,13 @@ QVBoxLayout *scrolled(QWizardPage *page)
 
 qint64 settingsBytes(const Manifest &manifest)
 {
+    // -1 when a size is unknown (spec 4.4).
     qint64 total = 0;
-    for (const SettingsRow &row : manifest.settings)
+    for (const SettingsRow &row : manifest.settings) {
+        if (row.bytes < 0)
+            return -1;
         total += row.bytes;
+    }
     return total;
 }
 
@@ -244,6 +254,8 @@ void SavePage::refresh()
     const FolderSpace space = m_choice->space ? m_choice->space(m_choice->folder) : FolderSpace{};
     const qint64 total = settingsBytes(m_choice->kept);
     QString sizes = tr("The settings switched on take %1.").arg(bytesText(total));
+    if (total < 0)
+        sizes = tr("The size of some settings switched on is unknown.");
     if (space.freeBytes >= 0)
         sizes += QLatin1Char(' ') + tr("This folder has %1 free, on a %2 drive.").arg(bytesText(space.freeBytes),
                                                                                       isolated(space.fstype));

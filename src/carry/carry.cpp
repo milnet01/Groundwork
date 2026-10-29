@@ -315,23 +315,37 @@ QList<SettingsRow> gatherSettings(const CheckContext &context, const QString &ho
         argv << home + QLatin1Char('/') + entry;
     const CommandResult du = context.run(argv, kLongTimeoutMs);
     QHash<QString, qint64> sizes;
-    for (const QString &line : QString::fromUtf8(du.out).split(QLatin1Char('\n'))) {
-        const qsizetype tab = line.indexOf(QLatin1Char('\t'));
-        if (tab > 0)
-            sizes.insert(line.mid(tab + 1), line.left(tab).toLongLong());
+    // Any other end, du missing or killed say, gives no size at all.
+    if (du.started && !du.timedOut && (du.exitCode == 0 || du.exitCode == 1)) {
+        for (const QString &line : QString::fromUtf8(du.out).split(QLatin1Char('\n'))) {
+            const qsizetype tab = line.indexOf(QLatin1Char('\t'));
+            bool ok = false;
+            const qint64 size = tab > 0 ? line.left(tab).toLongLong(&ok) : 0;
+            if (ok)
+                sizes.insert(line.mid(tab + 1), size);
+        }
     }
     for (SettingsRow &row : rows) {
-        for (const QString &path : std::as_const(row.paths))
-            row.bytes += sizes.value(home + QLatin1Char('/') + path);
+        for (const QString &path : std::as_const(row.paths)) {
+            const auto size = sizes.constFind(home + QLatin1Char('/') + path);
+            if (size == sizes.cend()) {
+                row.bytes = -1;
+                break;
+            }
+            row.bytes += *size;
+        }
     }
     return rows;
 }
 
-bool startsOn(const SettingsRow &row) { return !row.secret && row.bytes <= kLargeSettings; }
+bool startsOn(const SettingsRow &row) { return !row.secret && row.bytes >= 0 && row.bytes <= kLargeSettings; }
 
 QString saveProblem(qint64 bytes, qint64 freeBytes, const QString &fstype)
 {
     const QLocale locale;
+    if (bytes < 0)
+        return QCoreApplication::translate("gw::Carry", "Groundwork could not tell the size of some settings "
+                                                        "switched on. Switch them off to save.");
     if (freeBytes < 0)
         return QCoreApplication::translate("gw::Carry", "Groundwork could not tell how much room this folder has. "
                                                         "Choose another folder.");

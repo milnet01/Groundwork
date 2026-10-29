@@ -327,6 +327,30 @@ private slots:
         QCOMPARE(kept.value("secret"), QJsonValue(true));
     }
 
+    // Spec 4.4: a size du did not give is unknown, not 0. The row starts
+    // off, and Save waits while it is on.
+    void aSizeDuDidNotGiveIsUnknown()
+    {
+        writeFile(home(QStringLiteral(".config/dolphinrc")), "[General]\n");
+        writeFile(home(QStringLiteral(".bashrc")), "x");
+        // du that printed sizes, then failed: none of them is trusted.
+        writeFile(m_bin + QStringLiteral("/du"), "#!/bin/sh\nshift 3\nfor p; do printf '1\\t%s\\n' \"$p\"; done\nexit 2\n",
+                  true);
+        QList<gw::SettingsRow> rows = gw::gatherSettings(gw::CheckContext(gw::FileReader()), m_home);
+        QCOMPARE(rows.size(), 2);
+        for (const gw::SettingsRow &row : rows) {
+            QVERIFY2(row.bytes < 0, qPrintable(row.name));
+            QVERIFY(!gw::startsOn(row));
+        }
+        // du ran but named one path only: the other is unknown.
+        writeFile(m_bin + QStringLiteral("/du"),
+                  "#!/bin/sh\nfor p; do case \"$p\" in *bashrc) printf '1\\t%s\\n' \"$p\";; esac; done\n", true);
+        rows = gw::gatherSettings(gw::CheckContext(gw::FileReader()), m_home);
+        for (const gw::SettingsRow &row : rows)
+            QCOMPARE(row.bytes < 0, row.paths.contains(QStringLiteral(".config/dolphinrc")));
+        QVERIFY(!gw::saveProblem(-1, qint64(100) << 30, QStringLiteral("ext4")).isEmpty());
+    }
+
     // INV-9: Save waits for room, and for a file vfat can hold.
     void saveNeedsRoomAndAFileTheFolderCanHold()
     {

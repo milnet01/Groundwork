@@ -153,6 +153,9 @@ A table in Carry (`carry/settingsgroups.cpp`) groups entries into named
 apps — "KDE Plasma desktop" takes `kdeglobals`, `kwinrc`, `plasma*` and
 the other Plasma files — and an entry no group claims is a row of its
 own, named by the entry. A row's size is `du -s -b -- <paths>`.
+When du does not finish, or prints no size for one of a row's paths,
+the row's size is unknown: it reads "size unknown", starts switched
+off, and Save is unavailable while it is on.
 
 The same table marks secrets. At least: `.ssh`, `.gnupg`, `.pki`,
 `.password-store`, `.netrc`, `.git-credentials`, `.docker`, `.aws`,
