@@ -24,6 +24,8 @@ constexpr int kSetupFormat = 1;
 constexpr qint64 kLargeSettings = qint64(100) << 20;
 // The largest file vfat holds (spec 4.5, INV-9).
 constexpr qint64 kVfatLimit = (qint64(4) << 30) - 1;
+// Room the save check adds for the manifest and the archive's end (spec 4.5).
+constexpr qint64 kSetupFileExtra = qint64(1) << 20;
 
 struct FlatpakApp
 {

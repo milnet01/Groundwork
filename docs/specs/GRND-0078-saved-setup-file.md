@@ -152,7 +152,12 @@ Offered, each a candidate entry, paths relative to the home folder:
 A table in Carry (`carry/settingsgroups.cpp`) groups entries into named
 apps — "KDE Plasma desktop" takes `kdeglobals`, `kwinrc`, `plasma*` and
 the other Plasma files — and an entry no group claims is a row of its
-own, named by the entry. A row's size is `du -s -b -- <paths>`.
+own, named by the entry. A row's size is what the archive holds for it:
+`du -s -b -- <paths>`, plus 2 KiB for each entry
+`du -s --inodes -- <paths>` counts. That covers a member's header, its
+pax header and its padding (GNU tar 1.35, `--format=posix`: 1,003 small
+files took 2,052 bytes each, measured 2026-10-29); a path longer than
+about 400 bytes takes more.
 When du does not finish, or prints no size for one of a row's paths,
 the row's size is unknown: it reads "size unknown", starts switched
 off, and Save is unavailable while it is on.
@@ -176,8 +181,8 @@ The save page shows the file name, the folder (a folder dialog; a
 mounted USB stick is offered first), the total size of the switched-on
 settings, and the folder's free space
 (`df --output=avail -B1 -- DIR`) and filesystem
-(`findmnt -no FSTYPE --target DIR`). Save is unavailable when the total
-exceeds the free space, or exceeds 4 GiB − 1 byte on `vfat`, which
+(`findmnt -no FSTYPE --target DIR`). Save is unavailable when the total,
+plus 1 MiB for the manifest and the archive's end, exceeds the free space, or exceeds 4 GiB − 1 byte on `vfat`, which
 cannot hold a larger file; the page says which, and which rows are
 largest.
 
@@ -383,10 +388,12 @@ archive (INV-4).
   one other item done.
   *Breaks when:* `system-update` is recorded.
 
-- **INV-9** — Save is unavailable when the switched-on size exceeds the
-  folder's free space, or 4 GiB − 1 byte on `vfat`.
+- **INV-9** — Save is unavailable when the switched-on size, as § 4.4
+  and § 4.5 count it, exceeds the folder's free space, or 4 GiB − 1 byte
+  on `vfat`.
   *Test:* `tests/tst_carry.cpp`, the rule with 5 GiB on `vfat` (no),
-  5 GiB on `ext4` with room (yes), and 1 GiB with 0.5 GiB free (no).
+  5 GiB on `ext4` with room (yes), and 1 GiB with 0.5 GiB free (no);
+  a folder of small files counted at no less than tar writes for it.
   *Breaks when:* the filesystem check is missed, and the stick fills
   with a file that cannot be finished.
 

@@ -348,7 +348,28 @@ private slots:
         rows = gw::gatherSettings(gw::CheckContext(gw::FileReader()), m_home);
         for (const gw::SettingsRow &row : rows)
             QCOMPARE(row.bytes < 0, row.paths.contains(QStringLiteral(".config/dolphinrc")));
+        // Sizes, but no count of entries: unknown too.
+        writeFile(m_bin + QStringLiteral("/du"),
+                  "#!/bin/sh\n[ \"$2\" = -b ] || exit 2\nshift 3\nfor p; do printf '1\\t%s\\n' \"$p\"; done\n", true);
+        for (const gw::SettingsRow &row : gw::gatherSettings(gw::CheckContext(gw::FileReader()), m_home))
+            QVERIFY2(row.bytes < 0, qPrintable(row.name));
         QVERIFY(!gw::saveProblem(-1, qint64(100) << 30, QStringLiteral("ext4")).isEmpty());
+    }
+
+    // INV-9, spec 4.4: a row's size is what tar writes for it, headers
+    // and padding too, not the sum of its files.
+    void aRowIsSizedAsTheArchiveHoldsIt()
+    {
+        for (int i = 0; i < 300; ++i)
+            writeFile(home(QStringLiteral(".config/many/f%1").arg(i)), "x");
+        gw::Manifest m;
+        m.settings = gw::gatherSettings(gw::CheckContext(gw::FileReader()), m_home);
+        QCOMPARE(m.settings.size(), 1);
+        const QString file = save(m);
+        QVERIFY(!file.isEmpty());
+        const qint64 members = QFileInfo(file).size() - 16 * 1024; // less the manifest and the end
+        QVERIFY2(m.settings.first().bytes >= members,
+                 qPrintable(QStringLiteral("%1 < %2").arg(m.settings.first().bytes).arg(members)));
     }
 
     // INV-9: Save waits for room, and for a file vfat can hold.
@@ -358,7 +379,9 @@ private slots:
         QVERIFY(!gw::saveProblem(5 * GiB, 100 * GiB, QStringLiteral("vfat")).isEmpty());
         QVERIFY(gw::saveProblem(5 * GiB, 100 * GiB, QStringLiteral("ext4")).isEmpty());
         QVERIFY(!gw::saveProblem(GiB, GiB / 2, QStringLiteral("ext4")).isEmpty());
-        QVERIFY(gw::saveProblem(gw::kVfatLimit, 100 * GiB, QStringLiteral("vfat")).isEmpty());
+        QVERIFY(gw::saveProblem(gw::kVfatLimit - gw::kSetupFileExtra, 100 * GiB, QStringLiteral("vfat")).isEmpty());
+        QVERIFY(!gw::saveProblem(gw::kVfatLimit - gw::kSetupFileExtra + 1, 100 * GiB, QStringLiteral("vfat")).isEmpty());
+        QVERIFY(!gw::saveProblem(GiB, GiB + gw::kSetupFileExtra - 1, QStringLiteral("ext4")).isEmpty());
         QVERIFY(!gw::saveProblem(GiB, -1, QStringLiteral("ext4")).isEmpty()); // free space unknown
     }
 

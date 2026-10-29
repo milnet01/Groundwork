@@ -308,31 +308,39 @@ QList<SettingsRow> gatherSettings(const CheckContext &context, const QString &ho
     QList<SettingsRow> rows = groupSettings(entries);
     if (rows.isEmpty())
         return rows;
-    // One du for every path. It exits 1 when part of a folder is
-    // unreadable, and still prints the rest.
-    QStringList argv{QStringLiteral("du"), QStringLiteral("-s"), QStringLiteral("-b"), QStringLiteral("--")};
-    for (const QString &entry : std::as_const(entries))
-        argv << home + QLatin1Char('/') + entry;
-    const CommandResult du = context.run(argv, kLongTimeoutMs);
-    QHash<QString, qint64> sizes;
-    // Any other end, du missing or killed say, gives no size at all.
-    if (du.started && !du.timedOut && (du.exitCode == 0 || du.exitCode == 1)) {
-        for (const QString &line : QString::fromUtf8(du.out).split(QLatin1Char('\n'))) {
+    // One du for every path, for bytes and then for entries. It exits 1
+    // when part of a folder is unreadable, and still prints the rest.
+    auto du = [&](const QString &what) {
+        QStringList argv{QStringLiteral("du"), QStringLiteral("-s"), what, QStringLiteral("--")};
+        for (const QString &entry : std::as_const(entries))
+            argv << home + QLatin1Char('/') + entry;
+        const CommandResult r = context.run(argv, kLongTimeoutMs);
+        QHash<QString, qint64> counts;
+        // Any other end, du missing or killed say, gives no count at all.
+        if (!r.started || r.timedOut || (r.exitCode != 0 && r.exitCode != 1))
+            return counts;
+        for (const QString &line : QString::fromUtf8(r.out).split(QLatin1Char('\n'))) {
             const qsizetype tab = line.indexOf(QLatin1Char('\t'));
             bool ok = false;
-            const qint64 size = tab > 0 ? line.left(tab).toLongLong(&ok) : 0;
+            const qint64 count = tab > 0 ? line.left(tab).toLongLong(&ok) : 0;
             if (ok)
-                sizes.insert(line.mid(tab + 1), size);
+                counts.insert(line.mid(tab + 1), count);
         }
-    }
+        return counts;
+    };
+    const QHash<QString, qint64> sizes = du(QStringLiteral("-b"));
+    const QHash<QString, qint64> inodes = du(QStringLiteral("--inodes"));
+    // Each entry's header, pax header and padding, as tar writes them
+    // (spec 4.4, measured 2026-10-29).
+    constexpr qint64 kEntryBytes = 2048;
     for (SettingsRow &row : rows) {
         for (const QString &path : std::as_const(row.paths)) {
-            const auto size = sizes.constFind(home + QLatin1Char('/') + path);
-            if (size == sizes.cend()) {
+            const QString key = home + QLatin1Char('/') + path;
+            if (!sizes.contains(key) || !inodes.contains(key)) {
                 row.bytes = -1;
                 break;
             }
-            row.bytes += *size;
+            row.bytes += sizes.value(key) + inodes.value(key) * kEntryBytes;
         }
     }
     return rows;
@@ -349,16 +357,18 @@ QString saveProblem(qint64 bytes, qint64 freeBytes, const QString &fstype)
     if (freeBytes < 0)
         return QCoreApplication::translate("gw::Carry", "Groundwork could not tell how much room this folder has. "
                                                         "Choose another folder.");
-    if (fstype == QLatin1String("vfat") && bytes > kVfatLimit)
+    // The settings' members, then the manifest and the archive's end.
+    const qint64 file = bytes + kSetupFileExtra;
+    if (fstype == QLatin1String("vfat") && file > kVfatLimit)
         return QCoreApplication::translate("gw::Carry", "This drive uses FAT, which cannot hold a file bigger than "
                                                         "4 GiB, and the settings switched on need %1. Switch some "
                                                         "off, or choose a folder on another drive.")
-            .arg(locale.formattedDataSize(bytes, 1, QLocale::DataSizeIecFormat));
-    if (bytes > freeBytes)
+            .arg(locale.formattedDataSize(file, 1, QLocale::DataSizeIecFormat));
+    if (file > freeBytes)
         return QCoreApplication::translate("gw::Carry", "There is not enough room here: the settings switched on "
                                                         "need %1, and %2 is free. Switch some off, or choose "
                                                         "another folder.")
-            .arg(locale.formattedDataSize(bytes, 1, QLocale::DataSizeIecFormat),
+            .arg(locale.formattedDataSize(file, 1, QLocale::DataSizeIecFormat),
                  locale.formattedDataSize(freeBytes, 1, QLocale::DataSizeIecFormat));
     return {};
 }
