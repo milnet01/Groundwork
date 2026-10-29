@@ -106,6 +106,12 @@ private slots:
         QCOMPARE(all.find(QStringLiteral("ants-terminal"))->includes(), QStringList{"dev-tree-sitter"});
         for (const char *id : {"dev-claude-tools", "dev-tree-sitter"})
             QVERIFY2(all.find(QLatin1String(id)) && all.find(QLatin1String(id))->installsPackages(), id);
+        // These install a package when it is missing, so they wait for the
+        // system update like every other installing item (design, The levels).
+        for (const char *id : {"firewall", "firmware-updates", "memory-protection", "snapshots", "ssh"})
+            QVERIFY2(all.find(QLatin1String(id))
+                         && all.dependencies(*all.find(QLatin1String(id))).contains(QStringLiteral("system-update")),
+                     id);
         // Ids are unique.
         QSet<QString> ids;
         for (const gw::Item *item : all.items())

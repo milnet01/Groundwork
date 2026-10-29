@@ -17,6 +17,7 @@ public:
     CheckResult check(const CheckContext &context) const override;
     QList<Step> applySteps(const SystemIdentity &system,
                            const CheckContext &context) const override;
+    bool installsPackages() const override { return true; }
 };
 
 } // namespace gw

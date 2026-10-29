@@ -495,7 +495,9 @@ case "$1" in
   update) exit 2;;
 esac
 )", true);
-        const Run r = run({QStringLiteral("firmware-updates")});
+        // The update comes too, as the Wizard sends it: the item installs fwupd
+        // when it is missing (design, The levels).
+        const Run r = run({QStringLiteral("system-update"), QStringLiteral("firmware-updates")});
         QCOMPARE(r.exitCode, 0);
         QCOMPARE(r.endsFor(QStringLiteral("firmware-updates")).value(1), QStringLiteral("ok"));
         QCOMPARE(r.count(QStringLiteral("fwupdmgr update")), 1);
@@ -540,7 +542,8 @@ echo "dd $*" >> "$FAKE_LOG"
 out=$(printf '%s' "$1" | sed 's|^of=||; s|/|_|g')
 cat > "$FAKE_WRITTEN$out"
 )", true);
-        const Run r = run({QStringLiteral("memory-protection")});
+        // With the update, as the Wizard sends it (design, The levels).
+        const Run r = run({QStringLiteral("system-update"), QStringLiteral("memory-protection")});
         QCOMPARE(r.exitCode, 0);
         QCOMPARE(r.endsFor(QStringLiteral("memory-protection")).value(1), QStringLiteral("ok"));
         QVERIFY(r.calls.contains(QStringLiteral(

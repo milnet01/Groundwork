@@ -21,6 +21,7 @@ public:
     CheckResult check(const CheckContext &context) const override;
     QList<Step> applySteps(const SystemIdentity &system,
                            const CheckContext &context) const override;
+    bool installsPackages() const override { return true; }
 
     // The desktop's memory floor for a machine with this much memory, in
     // systemd's units: 2G from 8 GiB, 1G from 4 GiB, else 512M.
