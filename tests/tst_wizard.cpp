@@ -909,6 +909,39 @@ private slots:
         QCOMPARE(page.summary(), gw::RunPage::tr("Groundwork stopped unexpectedly. The details below say why."));
     }
 
+    // Audit 2026-10-29: a carried source's name comes from a saved file,
+    // and Qt reads text with a tag in it as markup unless told otherwise.
+    // No run page or row label reads its text as markup.
+    void textFromASavedFileIsNeverMarkup()
+    {
+        // The labels holding a tag that show it as plain text.
+        const auto plain = [](QWidget &widget) {
+            int count = 0;
+            for (QLabel *label : widget.findChildren<QLabel *>())
+                count += label->text().contains(QLatin1String("<b>")) && label->textFormat() == Qt::PlainText;
+            return count;
+        };
+        gw::RunPage page;
+        QSignalSpy finished(&page, &gw::RunPage::runFinished);
+        page.start(QStringLiteral("sh"),
+                   {QStringLiteral("-c"),
+                    QStringLiteral("echo '@@HINT@@|a|<b>h</b>'; echo '@@UNSUPPORTED@@|<b>u</b>'")},
+                   {{QStringLiteral("a"), QStringLiteral("<b>a</b>")}});
+        QTRY_COMPARE(finished.size(), 1);
+        QCOMPARE(plain(page), 3); // the row, the hint and the summary
+
+        class Marked : public FakeItem
+        {
+        public:
+            using FakeItem::FakeItem;
+            QString applySentence() const override { return QStringLiteral("<b>Does</b> it."); }
+        };
+        const Marked item(QStringLiteral("carried-source:x"), gw::Level::Configuration, false);
+        gw::ItemRow row(item, {gw::CheckState::NotDone, QStringLiteral("<b>2</b>")});
+        row.setReason(QStringLiteral("<b>why</b>"));
+        QCOMPARE(plain(row), 3); // the state, the sentence and the reason
+    }
+
     // GRND-0076's VM run, in Arabic: the drive's partition lines put their
     // bullets on the wrong side and showed "/dev/vda3" as "dev/vda3/". Each
     // line runs the window's way, and its path, filesystem and label keep

@@ -19,8 +19,11 @@ RunPage::RunPage(QWidget *parent)
 {
     setTitle(tr("Setting up"));
     setSubTitle(tr("You can close this window; Groundwork then stops after the current step."));
-    m_hintLabel->setWordWrap(true);
-    m_summary->setWordWrap(true);
+    // The Worker's text, which may quote a saved file, is never markup.
+    for (QLabel *label : {m_hintLabel, m_summary}) {
+        label->setTextFormat(Qt::PlainText);
+        label->setWordWrap(true);
+    }
     m_details->setReadOnly(true);
     m_details->hide();
     // OneUp keeps a machine up to date after setup (design, The levels).
@@ -81,6 +84,7 @@ void RunPage::start(const QString &program, const QStringList &arguments,
 {
     for (const auto &[id, title] : titles) {
         auto *label = new QLabel(tr("%1: waiting").arg(title), this);
+        label->setTextFormat(Qt::PlainText); // a carried title is the saved file's text
         label->setWordWrap(true);
         label->setProperty("title", title);
         m_rows->addWidget(label);

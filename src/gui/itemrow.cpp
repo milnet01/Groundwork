@@ -18,8 +18,11 @@ ItemRow::ItemRow(const Item &item, const CheckResult &result, QWidget *parent)
 {
     auto *stateLabel = new QLabel(stateLine(item, result), this);
     auto *sentence = new QLabel(item.applySentence(), this);
-    for (QLabel *label : {stateLabel, sentence, m_reason})
+    // A carried item's text is the saved file's, so never markup.
+    for (QLabel *label : {stateLabel, sentence, m_reason}) {
+        label->setTextFormat(Qt::PlainText);
         label->setWordWrap(true);
+    }
     m_reason->hide();
 
     // Nothing to apply where the item does not apply to this system.
