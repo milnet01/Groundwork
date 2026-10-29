@@ -229,7 +229,8 @@ Measured 2026-10-20 with GNU tar 1.35, in a scratch tree:
 - `tar --diff` also exits 1 on "Uid differs", "Gid differs" and "Mode
   differs" (measured 2026-10-29, an archive written with
   `--owner=12345 --mode=…`). A restore as the user leaves the user's
-  own owner and umask, so a diff reporting only those is Done.
+  own owner and umask, so a diff reporting only those is Done. A
+  missing file is named on stderr alone, so any stderr is not done.
 
 A link member is extracted as a link. It is made as the user, so it
 points only where the user can already write.

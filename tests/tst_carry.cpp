@@ -697,10 +697,11 @@ private slots:
         QCOMPARE(settings.id(), gw::kCarriedSettingsId);
         const gw::CheckContext context{gw::FileReader()};
         QCOMPARE(settings.check(context).state, gw::CheckState::Done);
-        writeFile(home(QStringLiteral(".config/dolphinrc")), "[General]\nShowFullPath=false\n");
+        // A missing file is named on stderr only, beside the owner lines.
+        QVERIFY(QFile::remove(home(QStringLiteral(".ssh/id_ed25519"))));
         QCOMPARE(settings.check(context).state, gw::CheckState::NotDone);
-        QFile::remove(home(QStringLiteral(".ssh/id_ed25519")));
-        writeFile(home(QStringLiteral(".config/dolphinrc")), "[General]\nShowFullPath=true\n");
+        writeFile(home(QStringLiteral(".ssh/id_ed25519")), "not a real key\n");
+        writeFile(home(QStringLiteral(".config/dolphinrc")), "[General]\nShowFullPath=false\n");
         QCOMPARE(settings.check(context).state, gw::CheckState::NotDone);
     }
 

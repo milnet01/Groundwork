@@ -17,12 +17,14 @@ const QString kReposDir = QStringLiteral("/etc/zypp/repos.d");
 constexpr qsizetype kNamesShown = 10;
 
 // True when every line tar --diff printed is an owner or a mode, in the
-// C locale the runner sets.
-bool onlyOwnerOrModeDiffers(const QByteArray &out)
+// C locale the runner sets. A missing file is named on stderr alone.
+bool onlyOwnerOrModeDiffers(const CommandResult &diff)
 {
+    if (!diff.err.trimmed().isEmpty())
+        return false;
     static const QStringList kinds{QStringLiteral(": Uid differs"), QStringLiteral(": Gid differs"),
                                    QStringLiteral(": Mode differs")};
-    const QStringList lines = QString::fromUtf8(out).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
+    const QStringList lines = QString::fromUtf8(diff.out).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
     return !lines.isEmpty() && std::all_of(lines.cbegin(), lines.cend(), [](const QString &line) {
         return std::any_of(kinds.cbegin(), kinds.cend(), [&](const QString &kind) { return line.endsWith(kind); });
     });
@@ -238,7 +240,7 @@ public:
         if (r.ok())
             return {CheckState::Done, {}};
         if (r.started && !r.timedOut && r.exitCode == 1)
-            return {onlyOwnerOrModeDiffers(r.out) ? CheckState::Done : CheckState::NotDone, {}};
+            return {onlyOwnerOrModeDiffers(r) ? CheckState::Done : CheckState::NotDone, {}};
         return {CheckState::CouldNotTell,
                 QCoreApplication::translate("gw::Carry", "The saved file could not be compared with your home folder.")};
     }
