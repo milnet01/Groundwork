@@ -1023,6 +1023,26 @@ private slots:
         QCOMPARE(w->row(QStringLiteral("nvidia"))->reason(), QStringLiteral("You had this before."));
     }
 
+    // GRND-0079's VM run, in Arabic and Hebrew: "26 Oct 2026 05:46:39"
+    // showed as "Oct 2026 05:46:39 26", its day apart from the rest. The
+    // date keeps its own direction, as the file's name does.
+    void theSavedDateKeepsItsOwnDirection()
+    {
+        m_saved.created = QStringLiteral("2026-10-26T05:46:39Z");
+        auto w = fromSaved();
+        QVERIFY(w);
+        const QString date =
+            QLocale().toString(QDateTime::fromString(m_saved.created, Qt::ISODate).toLocalTime(), QLocale::ShortFormat);
+        bool seen = false;
+        for (auto *label : w->currentPage()->findChildren<QLabel *>()) {
+            if (!label->text().startsWith(QLatin1String("File: ")))
+                continue;
+            seen = true;
+            QVERIFY2(label->text().endsWith(QChar(0x2068) + date + QChar(0x2069)), qPrintable(label->text()));
+        }
+        QVERIFY(seen);
+    }
+
     // GRND-0079, INV-8: a source with signatures unchecked, or from a file
     // saved on another system, starts switched off, saying why; programs
     // start on, with the update they need.

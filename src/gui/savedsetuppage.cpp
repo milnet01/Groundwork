@@ -68,7 +68,7 @@ void SavedSetupPage::makeRows()
     rows->addWidget(wrapped(m_inner, created.isValid()
                                          ? tr("File: %1, saved %2")
                                                .arg(isolated(QFileInfo(saved.file).fileName()),
-                                                    QLocale().toString(created.toLocalTime(), QLocale::ShortFormat))
+                                                    isolated(QLocale().toString(created.toLocalTime(), QLocale::ShortFormat)))
                                          : tr("File: %1").arg(isolated(QFileInfo(saved.file).fileName()))));
     if (m.systemId != m_wizard->systemId())
         rows->addWidget(wrapped(m_inner, tr("Saved on a different system: %1").arg(isolated(m.systemId))));
