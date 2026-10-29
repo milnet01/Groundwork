@@ -445,6 +445,11 @@ int Worker::saveSetup(const QString &choicesPath)
         }
     }
 
+    // tar writes no member for a path it cannot read at all, so the
+    // manifest does not list one; the hint below still names its setting.
+    const QStringList unreadable = unreadableSettings(*manifest, home);
+    *manifest = withoutUnreadablePaths(*manifest, home);
+
     // The manifest, as it will be read back, goes first in the archive.
     QSaveFile list(m_stateDir + QLatin1Char('/') + kManifestName);
     if (!list.open(QIODevice::WriteOnly) || list.write(QJsonDocument(manifestJson(*manifest)).toJson()) < 0
@@ -455,7 +460,6 @@ int Worker::saveSetup(const QString &choicesPath)
     // and leaves out a file it cannot read. Its only output is a warning
     // naming the file, in the user's language, so which kind each is comes
     // from reading the files here instead.
-    const QStringList unreadable = unreadableSettings(*manifest, home);
     partial = output + QStringLiteral(".partial");
     QString detail;
     QStringList warnings;

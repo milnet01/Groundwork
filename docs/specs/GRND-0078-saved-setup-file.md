@@ -193,7 +193,10 @@ markers (`docs/reference/worker-interface.md`, Markers). Every step is
 
 1. Validate the manifest by § 4.7 and every settings path by INV-3, and
    that each exists. Refuse before any step otherwise.
-2. Write the manifest to the state folder as `groundwork-setup.json`.
+2. Write the manifest to the state folder as `groundwork-setup.json`,
+   less every settings path the user cannot read itself: tar writes no
+   member for it (GNU tar 1.35, a mode-000 file and folder, measured
+   2026-10-29). A row left with no path is dropped.
 3. Write the archive to `<output>.partial`, the settings paths on
    standard input, NUL-separated:
    `tar --create --format=posix --ignore-failed-read --file

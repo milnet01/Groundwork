@@ -14,6 +14,8 @@
 #include <QTemporaryDir>
 #include <QtTest>
 
+#include <unistd.h>
+
 namespace {
 
 class FakeItem : public gw::Item
@@ -417,6 +419,31 @@ private slots:
                                     QStringLiteral(".ssh/id_ed25519")},
                                    m)
                     .isEmpty());
+    }
+
+    // GRND-0085, spec 4.5 step 2: a path tar cannot read at all is left out
+    // of the manifest, and so is a row left with no path. A folder that can
+    // be read but not entered keeps its path: tar writes its member.
+    void aPathTarCannotReadIsLeftOutOfTheManifest()
+    {
+        if (getuid() == 0)
+            QSKIP("root reads every file");
+        gw::Manifest m = homeAndManifest();
+        writeFile(home(QStringLiteral(".viminfo")), "x");
+        writeFile(home(QStringLiteral(".config/locked/a")), "x");
+        m.settings << gw::SettingsRow{QStringLiteral("Vim"), {QStringLiteral(".viminfo")}, false, 1}
+                   << gw::SettingsRow{QStringLiteral("Locked"), {QStringLiteral(".config/locked")}, false, 1};
+        m.settings[0].paths << QStringLiteral(".viminfo");
+        QVERIFY(QFile::setPermissions(home(QStringLiteral(".viminfo")), {}));
+        QVERIFY(QFile::setPermissions(home(QStringLiteral(".config/locked")), QFile::ReadOwner));
+        const gw::Manifest kept = gw::withoutUnreadablePaths(m, m_home);
+        QFile::setPermissions(home(QStringLiteral(".viminfo")), QFile::ReadOwner | QFile::WriteOwner);
+        QFile::setPermissions(home(QStringLiteral(".config/locked")),
+                              QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
+        QCOMPARE(kept.settings.size(), 3);
+        QCOMPARE(kept.settings[0].paths, QStringList{QStringLiteral(".config/dolphinrc")});
+        QCOMPARE(kept.settings[1].name, QStringLiteral("SSH keys"));
+        QCOMPARE(kept.settings[2].paths, QStringList{QStringLiteral(".config/locked")});
     }
 
     // INV-4: § 4.8's steps remove the secrets from the file alone and keep

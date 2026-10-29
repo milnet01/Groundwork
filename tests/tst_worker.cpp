@@ -706,6 +706,35 @@ cat > "$FAKE_WRITTEN$out"
         QVERIFY(!members.contains(QStringLiteral(".ssh/locked")));
     }
 
+    // GRND-0085: a settings path that is itself unreadable, a root-owned
+    // ~/.viminfo say, gets no member from tar. It is left out of the saved
+    // manifest too, so the save ends ok and the file reads back.
+    void anUnreadableSettingsPathIsLeftOut()
+    {
+        if (getuid() == 0)
+            QSKIP("root reads every file");
+        const QString output = m_dir->filePath(QStringLiteral("out.tar"));
+        const QString choices = saveSetup({".config/dolphinrc", ".viminfo"}, output);
+        const QString locked = m_dir->filePath(QStringLiteral(".viminfo"));
+        writeFile(locked, "owned by root, say\n");
+        QVERIFY(QFile::setPermissions(locked, {}));
+        const Run r = save(choices);
+        QFile::setPermissions(locked, QFile::ReadOwner | QFile::WriteOwner);
+        QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("ok"));
+        QCOMPARE(std::count_if(r.markers.cbegin(), r.markers.cend(),
+                               [](const gw::Marker &m) {
+                                   return m.name == QLatin1String("HINT") && m.fields.value(1).contains(QLatin1String("Mine"));
+                               }),
+                 1);
+        QProcess extract;
+        extract.start(QStringLiteral("/usr/bin/tar"), {QStringLiteral("--extract"), QStringLiteral("--to-stdout"),
+                                                       QStringLiteral("--file"), output, QStringLiteral("groundwork-setup.json")});
+        extract.waitForFinished();
+        const QJsonArray settings = QJsonDocument::fromJson(extract.readAllStandardOutput()).object().value("settings").toArray();
+        QCOMPARE(settings.size(), 1);
+        QCOMPARE(settings.first().toObject().value("paths").toArray(), QJsonArray{".config/dolphinrc"});
+    }
+
     void refusesAnUnknownItem()
     {
         QCOMPARE(run({QStringLiteral("no-such-item")}).exitCode, 2);

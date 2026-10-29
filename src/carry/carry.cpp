@@ -585,6 +585,20 @@ QStringList unreadableSettings(const Manifest &manifest, const QString &home)
     return names;
 }
 
+Manifest withoutUnreadablePaths(const Manifest &manifest, const QString &home)
+{
+    // A folder that can be read but not entered still gets its own member.
+    auto unreadable = [&](const QString &path) {
+        const QFileInfo info(home + QLatin1Char('/') + path);
+        return !info.isSymLink() && !info.isReadable();
+    };
+    Manifest kept = manifest;
+    for (SettingsRow &row : kept.settings)
+        row.paths.removeIf(unreadable);
+    kept.settings.removeIf([](const SettingsRow &row) { return row.paths.isEmpty(); });
+    return kept;
+}
+
 QByteArray createInput(const Manifest &manifest)
 {
     QByteArray input;
