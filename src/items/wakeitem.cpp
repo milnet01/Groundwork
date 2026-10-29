@@ -53,6 +53,13 @@ bool hasDelay(const CheckContext &context, const QString &unit, const QString &t
     return !delay.isEmpty() && delay != "0";
 }
 
+// systemctl enable links the timer into timers.target's wants folder.
+bool switchedOn(const CheckContext &context, const QString &timer)
+{
+    const QString link = QStringLiteral("timers.target.wants/") + timer + QStringLiteral(".timer");
+    return context.fileExists(kAdmin + link) || context.fileExists(kVendor + link);
+}
+
 QStringList timersWithoutDelay(const CheckContext &context, bool *anyFound)
 {
     QStringList missing;
@@ -61,7 +68,8 @@ QStringList timersWithoutDelay(const CheckContext &context, bool *anyFound)
         if (unit.isEmpty())
             continue;
         *anyFound = true;
-        if (!hasDelay(context, unit, timer))
+        // A switched-off timer never runs, so it cannot pile up after a wake.
+        if (switchedOn(context, timer) && !hasDelay(context, unit, timer))
             missing << timer;
     }
     return missing;

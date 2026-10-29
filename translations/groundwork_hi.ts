@@ -1275,6 +1275,10 @@
         <translation>सेवा प्रबंधक ने जवाब नहीं दिया।</translation>
     </message>
     <message>
+        <source>The memory watchdog earlyoom is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
         <translation>मेमोरी निगरानी, systemd-oomd, इंस्टॉल नहीं है।</translation>
     </message>

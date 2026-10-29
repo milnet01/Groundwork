@@ -1275,6 +1275,10 @@
         <translation>מנהל השירותים לא הגיב.</translation>
     </message>
     <message>
+        <source>The memory watchdog earlyoom is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
         <translation>שומר הזיכרון, ‎systemd-oomd‏, לא מותקן.</translation>
     </message>

@@ -1273,6 +1273,10 @@
         <translation>服务管理器没有响应。</translation>
     </message>
     <message>
+        <source>The memory watchdog earlyoom is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
         <translation>内存监视程序 systemd-oomd 未安装。</translation>
     </message>

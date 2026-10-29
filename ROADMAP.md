@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=105 -->
+<!-- ants-roadmap-id-high-water: GRND=107 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2048,4 +2048,18 @@ scheduled.
   level page.
   **Layman:** Once a run finishes, a 'Back to my choices' button re-checks the system and returns to the item lists, so you can pick more without restarting.
   Kind: ux.
+  Source: user-report-2026-10-29.
+
+- ✅ [GRND-0106] **RAM protection counts a running earlyoom as done.**
+  The check knew only systemd-oomd, so a machine guarded by earlyoom
+  read "not done", and applying would have added a second watchdog.
+  **Layman:** If earlyoom already guards your memory, Groundwork says RAM protection is done instead of offering a second, competing watchdog.
+  Kind: fix.
+  Source: user-report-2026-10-29.
+
+- ✅ [GRND-0107] **Calmer wake ignores maintenance jobs that are switched off.**
+  A disabled packagekit-background timer, with no delay, kept the
+  item "not done" on a machine where every running timer had one.
+  **Layman:** A maintenance job that is switched off never runs, so it no longer makes 'Calmer wake' read as not done.
+  Kind: fix.
   Source: user-report-2026-10-29.

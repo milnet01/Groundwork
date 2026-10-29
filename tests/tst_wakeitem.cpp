@@ -21,10 +21,13 @@ class TstWakeItem : public QObject
         QVERIFY(f.open(QIODevice::WriteOnly | QIODevice::Truncate));
         f.write(text);
     }
-    void timer(const QString &name, const QByteArray &timerSection)
+    // A timer is switched on unless on is false, as systemctl enable does.
+    void timer(const QString &name, const QByteArray &timerSection, bool on = true)
     {
         write(QStringLiteral("usr/lib/systemd/system/%1.timer").arg(name),
               "[Unit]\nDescription=x\n\n[Timer]\n" + timerSection + "\n[Install]\nWantedBy=timers.target\n");
+        if (on)
+            write(QStringLiteral("etc/systemd/system/timers.target.wants/%1.timer").arg(name), {});
     }
     gw::CheckContext context() const { return gw::CheckContext(gw::FileReader(m_root->path())); }
     gw::CheckState state() const { return gw::WakeItem().check(context()).state; }
@@ -49,6 +52,15 @@ private slots:
         QCOMPARE(state(), gw::CheckState::Done);
         write(QStringLiteral("etc/systemd/system/backup-rpmdb.timer.d/90-off.conf"), "[Timer]\nRandomizedDelaySec=0\n");
         QCOMPARE(state(), gw::CheckState::NotDone);
+    }
+
+    // A switched-off timer never runs, so it cannot pile up after a wake
+    // (user's machine, packagekit-background, 2026-10-29).
+    void aSwitchedOffTimerIsNotCounted()
+    {
+        timer(QStringLiteral("backup-rpmdb"), "OnCalendar=daily\nRandomizedDelaySec=2h\n");
+        timer(QStringLiteral("packagekit-background"), "OnCalendar=daily\n", false);
+        QCOMPARE(state(), gw::CheckState::Done);
     }
 
     // Only the timers without a delay get one, so a longer delay the

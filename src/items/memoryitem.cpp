@@ -71,6 +71,9 @@ CheckResult MemoryItem::check(const CheckContext &context) const
     const ServiceState s = readService(context, kUnit);
     if (!s.known)
         return {CheckState::CouldNotTell, tr("The service manager did not answer.")};
+    // earlyoom is another memory watchdog, and a second would fight it.
+    if (const ServiceState other = readService(context, QStringLiteral("earlyoom")); other.enabled && other.active)
+        return {CheckState::Done, tr("The memory watchdog earlyoom is running.")};
     const bool watching = s.found && s.enabled && s.active;
     const bool shared = anySets(context, kUserService, QStringLiteral("Delegate"), QStringLiteral(".*\\bmemory\\b.*"));
     const bool appsKillable = anySets(context, kApps, QStringLiteral("ManagedOOMMemoryPressure"), QStringLiteral("kill"));

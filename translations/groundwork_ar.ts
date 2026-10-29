@@ -1283,6 +1283,10 @@
         <translation>لم يستجب مدير الخدمات.</translation>
     </message>
     <message>
+        <source>The memory watchdog earlyoom is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
         <translation>مراقب الذاكرة، ‎systemd-oomd‏، غير مثبّت.</translation>
     </message>

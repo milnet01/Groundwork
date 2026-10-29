@@ -25,6 +25,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   leaves it in front.
 - **The window opens wide.** It opened narrow, so its rows wrapped
   until the window took the screen's whole height.
+- **RAM protection counts earlyoom.** A computer already guarded by the
+  earlyoom memory watchdog read "not done", and applying would have
+  added a second watchdog.
+- **Calmer wake ignores switched-off jobs.** A maintenance job that
+  never runs kept the item "not done".
 
 ## [0.5.1] - 2026-10-29
 

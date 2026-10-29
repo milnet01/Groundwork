@@ -99,6 +99,17 @@ private slots:
         QCOMPARE(gw::MemoryItem().check(context()).state, gw::CheckState::NotDone);
     }
 
+    // earlyoom is another memory watchdog; a second would fight it
+    // (user's machine, 2026-10-29).
+    void earlyoomRunningIsDone()
+    {
+        write(m_units->filePath(QStringLiteral("earlyoom.enabled")), "enabled");
+        write(m_units->filePath(QStringLiteral("earlyoom.active")), "active");
+        const gw::CheckResult r = gw::MemoryItem().check(context());
+        QCOMPARE(r.state, gw::CheckState::Done);
+        QVERIFY(r.detail.contains(QStringLiteral("earlyoom")));
+    }
+
     void aMissingWatchdogIsInstalledFirst()
     {
         const gw::CheckResult r = gw::MemoryItem().check(context());

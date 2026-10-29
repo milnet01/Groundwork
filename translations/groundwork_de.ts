@@ -1275,6 +1275,10 @@
         <translation>Die Dienstverwaltung hat nicht geantwortet.</translation>
     </message>
     <message>
+        <source>The memory watchdog earlyoom is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
         <translation>Der Speicherwächter systemd-oomd ist nicht installiert.</translation>
     </message>

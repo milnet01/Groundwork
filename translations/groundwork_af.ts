@@ -1275,6 +1275,10 @@
         <translation>Die diensbestuurder het nie geantwoord nie.</translation>
     </message>
     <message>
+        <source>The memory watchdog earlyoom is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
         <translation>Die geheuewaghond, systemd-oomd, is nie geïnstalleer nie.</translation>
     </message>

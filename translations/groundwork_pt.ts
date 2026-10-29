@@ -1275,6 +1275,10 @@
         <translation>O gerenciador de serviços não respondeu.</translation>
     </message>
     <message>
+        <source>The memory watchdog earlyoom is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
         <translation>O vigia de memória, systemd-oomd, não está instalado.</translation>
     </message>
