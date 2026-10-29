@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=86 -->
+<!-- ants-roadmap-id-high-water: GRND=88 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1437,6 +1437,13 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   from your saved file failed: GRND-0086. Still to do: the saved-setup
   page in Arabic and Hebrew (the VM needed noto-sans-arabic-fonts and
   noto-sans-hebrew-fonts; installed, not yet looked at).
+  Correction (2026-10-29): the 2026-10-26 note that the 17 Flatpaks came
+  back is wrong. That run's log names nine as "Not found on this
+  system": the four from the user's own sources, by design, and five
+  Flathub apps installed per user (GRND-0088). Re-run 2026-10-29 with
+  GRND-0086's fix: all four items ended ok; 331 of the 340 saved
+  programs are installed, the rest unknown to this system's sources or
+  left to the installer.
   **Layman:** After reinstalling, Groundwork can read your saved file and switch on everything you kept.
   Kind: feature.
   Source: user-request-2026-10-15.
@@ -1514,7 +1521,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: claude-2026-10-19.
   Lanes: carry, worker.
 
-- 📋 [GRND-0086] **One clashing package stops every carried program installing.**
+- ✅ [GRND-0086] **One clashing package stops every carried program installing.**
   Found in GRND-0079's manual check (2026-10-26). The carried-packages
   step installs all saved packages in one zypper -n --ignore-unknown
   install. The saved list held kernel-default; the VM image has
@@ -1529,9 +1536,35 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   installer chooses, such as kernels and boot loaders (kernel-default,
   shim, grub2-*, sdbootutil); or both. A full Tumbleweed install has
   kernel-default, so this exact clash is partly the VM's.
+  User chose both (2026-10-29). Built 2026-10-29 in f31ba33: the
+  installer's own choices (kernel flavours, boot loaders, the security
+  framework pattern) are neither gathered nor read back; a failed batch
+  (exit 4 or 8) is installed in halves until a name fails alone, which
+  the run names. Specs GRND-0078 INV-11 and GRND-0079 INV-10. Gate 47 of
+  47. Still due: re-run the restore in the VM.
+  VM re-run 2026-10-29 (fresh AppImage of f31ba33, the 2026-10-26 file
+  on the stick): the five installer-chosen names were left out and
+  zypper took the rest in one go, where it had refused all before.
+  The VM's 24 GB root then filled (GRND-0087); with the root grown to
+  60 GB a second run ended all four items ok, 331 of 340 programs in.
   **Layman:** When one saved program cannot be installed on the new system, none of the others are installed either.
   Kind: fix.
   Source: grnd-0079-manual-check-2026-10-26.
+  Lanes: carry, worker.
+
+- 📋 [GRND-0088] **Flathub apps installed per user are not restored.**
+  Found in GRND-0086's VM check (2026-10-29); the 2026-10-26 run's log
+  shows the same, though GRND-0079's note recorded all 17 as back.
+  Five saved apps from Flathub had "installation": "user". Each step
+  ran flatpak install --user flathub APP and failed with "No remote refs
+  found for 'flathub'": the flathub item adds Flathub system-wide only.
+  The run named them "Not installed". Fix to settle with the user: add
+  Flathub to the user's own installation before a user app, or install
+  those apps system-wide. Apps from sources other than Flathub stay
+  named for the user to add (GRND-0079 spec, user 2026-10-20).
+  **Layman:** Flatpak apps you had installed just for yourself, rather than for the whole computer, do not come back from a saved file.
+  Kind: fix.
+  Source: grnd-0086-vm-check-2026-10-29.
   Lanes: carry, worker.
 
 ## 0.6.0 — Your own set-up
@@ -1670,3 +1703,16 @@ scheduled.
   Kind: feature.
   Source: user-request-2026-10-16.
   Lanes: items.
+
+- 📋 [GRND-0087] **A full disk reads only as an exit code.**
+  Found in GRND-0086's VM check (2026-10-29). Restoring the user's
+  saved setup filled the VM's 24 GB root. The run page said "Installing
+  your programs failed (exit code 8)" and "Copying your settings failed
+  (exit code 2)"; only KDE's own notice said the disk was full. zypper's
+  log says "needs 468MB more space on the /opt filesystem". Options:
+  read that line and say it, or check free space before a carried
+  install.
+  **Layman:** When the disk fills up during a run, Groundwork should say the disk is full, not show a number.
+  Kind: ux.
+  Source: grnd-0086-vm-check-2026-10-29.
+  Lanes: worker, carry.
