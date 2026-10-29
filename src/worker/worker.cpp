@@ -267,7 +267,7 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
 
         QString detail;
         bool success = true;
-        for (Step step : item->applySteps(system, context)) {
+        for (Step &step : item->applySteps(system, context)) {
             step.argv.replaceInStrings(kValuePlaceholder, value);
             if (step.needsRoot && !ensureRoot())
                 break;
