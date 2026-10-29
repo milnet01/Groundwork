@@ -409,6 +409,10 @@
         <translation>מתקין את %1</translation>
     </message>
     <message>
+        <source>Adding Flathub for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings from your saved file</source>
         <translation>הגדרות מהקובץ השמור שלך</translation>
     </message>
@@ -1555,6 +1559,10 @@
     <message>
         <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
         <translation>‏Groundwork לא יכול להוסיף את מקורות ה־Flatpak האלה בלי המפתחות שלהם. הוסף אותם בעצמך אם אתה צריך אותם: %1</translation>
+    </message>
+    <message>
+        <source>For everyone on this computer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>

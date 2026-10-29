@@ -111,8 +111,21 @@ void SavedSetupPage::makeRows()
             for (const QString &name : m.packages)
                 entry(isolated(name), [name](Manifest &k) { k.packages << name; });
         } else if (id == kCarriedFlatpaksId) {
-            for (const FlatpakApp &app : m.flatpaks)
+            for (const FlatpakApp &app : m.flatpaks) {
                 entry(isolated(app.app), [app](Manifest &k) { k.flatpaks << app; });
+                if (app.installation != QLatin1String("user") || app.remote != QLatin1String("flathub"))
+                    continue;
+                // Off keeps it just for this user, as saved (GRND-0088).
+                auto *everyone = new Switch(tr("For everyone on this computer"), m_inner);
+                everyone->setObjectName(QStringLiteral("everyone:") + app.app);
+                rows->addWidget(everyone);
+                saved.entries.last().keep = [app, everyone](Manifest &k) {
+                    FlatpakApp chosen = app;
+                    if (everyone->isChecked())
+                        chosen.installation = QStringLiteral("system");
+                    k.flatpaks << chosen;
+                };
+            }
         } else if (id == kCarriedSettingsId) {
             for (const SettingsRow &setting : m.settings) {
                 entry(isolated(setting.name), [setting](Manifest &k) { k.settings << setting; });

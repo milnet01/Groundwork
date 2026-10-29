@@ -409,6 +409,10 @@
         <translation>Kufakwa i-%1</translation>
     </message>
     <message>
+        <source>Adding Flathub for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings from your saved file</source>
         <translation>Izilungiselelo ezivela efayeleni lakho elilondoloziwe</translation>
     </message>
@@ -1555,6 +1559,10 @@
     <message>
         <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
         <translation>I-Groundwork ayikwazi ukwengeza le mithombo ye-Flatpak ngaphandle kokhiye bayo. Yengeze wena uma uyidinga: %1</translation>
+    </message>
+    <message>
+        <source>For everyone on this computer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>

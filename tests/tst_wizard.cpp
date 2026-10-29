@@ -1260,6 +1260,38 @@ private slots:
         QVERIFY(act && act->isChecked());
     }
 
+    // GRND-0088, INV-11: a Flathub app saved just for the user offers
+    // "For everyone on this computer", off; switched on, the choices hold
+    // it system-wide. No other app offers it.
+    void aFlathubUserAppOffersEveryone()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.flatpaks = {{QStringLiteral("org.kde.kate"), QStringLiteral("flathub"), QStringLiteral("user")},
+                            {QStringLiteral("org.kde.krita"), QStringLiteral("kdeapps"), QStringLiteral("user")},
+                            {QStringLiteral("com.spotify.Client"), QStringLiteral("flathub"), QStringLiteral("system")}};
+        auto w = fromSaved();
+        QVERIFY(w);
+        auto everyone = [&](const char *app) {
+            return w->currentPage()->findChild<QCheckBox *>(QStringLiteral("everyone:") + QLatin1String(app));
+        };
+        QVERIFY(everyone("org.kde.kate") && !everyone("org.kde.kate")->isChecked());
+        QVERIFY(everyone("org.kde.kate")->text().contains(QLatin1String("For everyone on this computer")));
+        QVERIFY(!everyone("org.kde.krita"));
+        QVERIFY(!everyone("com.spotify.Client"));
+        everyone("org.kde.kate")->click();
+        goToRunPage(*w);
+        QFile choices(w->restoreChoicesPath());
+        QVERIFY(choices.open(QIODevice::ReadOnly));
+        const QJsonArray kept =
+            QJsonDocument::fromJson(choices.readAll()).object().value("manifest").toObject().value("flatpaks").toArray();
+        QCOMPARE(kept.size(), 3);
+        for (const QJsonValue &app : kept) {
+            const QString id = app.toObject().value("app").toString();
+            QCOMPARE(app.toObject().value("installation").toString(),
+                     id == QLatin1String("org.kde.krita") ? QStringLiteral("user") : QStringLiteral("system"));
+        }
+    }
+
     // GRND-0079, INV-9: after a run from a file holding secrets, nothing is
     // removed or deleted until a button is pressed.
     void secretsAreRemovedOrTheFileDeletedOnlyWhenPressed()

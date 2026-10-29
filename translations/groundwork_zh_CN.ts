@@ -408,6 +408,10 @@
         <translation>正在安装 %1</translation>
     </message>
     <message>
+        <source>Adding Flathub for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings from your saved file</source>
         <translation>保存的文件中的设置</translation>
     </message>
@@ -1552,6 +1556,10 @@
     <message>
         <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
         <translation>没有密钥，Groundwork 无法添加这些 Flatpak 源。如有需要，请自行添加：%1</translation>
+    </message>
+    <message>
+        <source>For everyone on this computer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>

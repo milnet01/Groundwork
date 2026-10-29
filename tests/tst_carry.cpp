@@ -781,6 +781,50 @@ private slots:
         chosen.packages << QStringLiteral("evil");
         QVERIFY(gw::notInFile(chosen, file).contains(QLatin1String("evil")));
     }
+
+    // GRND-0088, INV-11: an app saved just for the user is installed for
+    // the user, after Flathub is added to the user's own installation; the
+    // apps for everyone come first, so that step failing cannot stop them.
+    void aUserAppGetsFlathubForTheUserFirst()
+    {
+        writeFile(m_bin + QStringLiteral("/flatpak"), "#!/bin/sh\nexit 0\n", true); // nothing installed
+        gw::Manifest m;
+        m.flatpaks = {{QStringLiteral("org.kde.kate"), QStringLiteral("flathub"), QStringLiteral("user")},
+                      {QStringLiteral("com.spotify.Client"), QStringLiteral("flathub"), QStringLiteral("system")}};
+        const gw::CarriedItems carried = gw::carriedItems(m, QStringLiteral("f.tar"), gw::catalogue());
+        QCOMPARE(carried.owned.size(), size_t(1));
+        const QList<gw::Step> steps = carried.owned[0]->applySteps({}, gw::CheckContext{gw::FileReader()});
+        QCOMPARE(steps.size(), 3);
+        QCOMPARE(steps[0].argv.last(), QStringLiteral("com.spotify.Client"));
+        QVERIFY(steps[0].needsRoot);
+        QCOMPARE(steps[1].argv, (QStringList{QStringLiteral("flatpak"), QStringLiteral("remote-add"),
+                                             QStringLiteral("--user"), QStringLiteral("--if-not-exists"),
+                                             QStringLiteral("flathub"),
+                                             QStringLiteral("https://dl.flathub.org/repo/flathub.flatpakrepo")}));
+        QVERIFY(!steps[1].needsRoot);
+        QCOMPARE(steps[2].argv.mid(4), (QStringList{QStringLiteral("--user"), QStringLiteral("flathub"),
+                                                    QStringLiteral("org.kde.kate")}));
+        QVERIFY(!steps[2].needsRoot);
+    }
+
+    // GRND-0088, INV-11: the choices may move a Flathub app from the user
+    // to everyone, and change nothing else.
+    void onlyAFlathubUserAppMayBeMovedToEveryone()
+    {
+        gw::Manifest file;
+        file.flatpaks = {{QStringLiteral("org.kde.kate"), QStringLiteral("flathub"), QStringLiteral("user")},
+                         {QStringLiteral("org.kde.krita"), QStringLiteral("kdeapps"), QStringLiteral("user")},
+                         {QStringLiteral("com.spotify.Client"), QStringLiteral("flathub"), QStringLiteral("system")}};
+        gw::Manifest chosen = file;
+        chosen.flatpaks[0].installation = QStringLiteral("system");
+        QVERIFY(gw::notInFile(chosen, file).isEmpty());
+        gw::Manifest other = file;
+        other.flatpaks[1].installation = QStringLiteral("system");
+        QVERIFY(gw::notInFile(other, file).contains(QLatin1String("org.kde.krita")));
+        gw::Manifest down = file;
+        down.flatpaks[2].installation = QStringLiteral("user");
+        QVERIFY(gw::notInFile(down, file).contains(QLatin1String("com.spotify.Client")));
+    }
 };
 
 QTEST_GUILESS_MAIN(TstCarry)

@@ -409,6 +409,10 @@
         <translation>%1 wird installiert</translation>
     </message>
     <message>
+        <source>Adding Flathub for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings from your saved file</source>
         <translation>Einstellungen aus Ihrer gespeicherten Datei</translation>
     </message>
@@ -1555,6 +1559,10 @@
     <message>
         <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
         <translation>Groundwork kann diese Flatpak-Quellen ohne ihre Schlüssel nicht hinzufügen. Fügen Sie sie selbst hinzu, wenn Sie sie brauchen: %1</translation>
+    </message>
+    <message>
+        <source>For everyone on this computer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>

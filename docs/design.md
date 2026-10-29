@@ -200,7 +200,9 @@ beside it as a numbered copy. Groundwork's other items are offered as
 usual (ruled by the user, 2026-10-20; spec GRND-0079). A Flatpak source
 other than Flathub is named for the user to add, not added: `flatpak
 remote-add` of its address alone fails for want of its key (ruled by
-the user, 2026-10-20).
+the user, 2026-10-20). A Flathub app saved just for the user comes back
+just for them, or for everyone on the computer; the person restoring
+chooses per app (ruled by the user, 2026-10-29; GRND-0088).
 
 Where the saved file holds secrets, the last page of that run warns
 again, and offers to remove the secrets from the file or to delete the

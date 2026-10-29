@@ -36,9 +36,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   settings file that would be replaced is kept as a numbered copy. A
   software source that does not check signatures, or comes from another
   system, starts switched off, saying why. Flatpak sources other than
-  Flathub are named for you to add. Where the file holds saved
+  Flathub are named for you to add. A Flathub app you had just for
+  yourself comes back just for you, with no password, or for everyone
+  on this computer if you switch that on. Where the file holds saved
   passwords or keys, the last page offers to remove them from it or
-  delete it. (GRND-0079, GRND-0086)
+  delete it. (GRND-0079, GRND-0086, GRND-0088)
 - **Claude Code, Anthropic's coding assistant, among the developer
   tools.** It installs from Anthropic's signed repository, so system
   updates keep it up to date. Using it needs a paid Claude plan. It

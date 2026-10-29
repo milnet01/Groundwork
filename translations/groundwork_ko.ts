@@ -408,6 +408,10 @@
         <translation>%1 설치 중</translation>
     </message>
     <message>
+        <source>Adding Flathub for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings from your saved file</source>
         <translation>저장한 파일의 설정</translation>
     </message>
@@ -1552,6 +1556,10 @@
     <message>
         <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
         <translation>Groundwork는 키가 없어서 이 Flatpak 소스를 추가할 수 없습니다. 필요하면 직접 추가하세요: %1</translation>
+    </message>
+    <message>
+        <source>For everyone on this computer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>

@@ -413,6 +413,10 @@
         <translation>جارٍ تثبيت %1</translation>
     </message>
     <message>
+        <source>Adding Flathub for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings from your saved file</source>
         <translation>الإعدادات من ملفك المحفوظ</translation>
     </message>
@@ -1567,6 +1571,10 @@
     <message>
         <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
         <translation>لا يستطيع Groundwork إضافة مصادر Flatpak هذه بدون مفاتيحها. أضفها بنفسك إن كنت تحتاج إليها: %1</translation>
+    </message>
+    <message>
+        <source>For everyone on this computer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>

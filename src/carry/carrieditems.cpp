@@ -6,6 +6,7 @@
 #include <QDir>
 
 #include <algorithm>
+#include <utility>
 
 #include <unistd.h>
 
@@ -175,13 +176,33 @@ public:
     {
         QStringList absent;
         QList<Step> steps;
-        // flatpak exits 1 for an app it cannot install; the others still go
-        // on, and the check run after names it (spec 4.4).
-        for (const FlatpakApp &app : absentApps(context, &absent).value_or(m_apps))
+        auto install = [&](const FlatpakApp &app) {
             steps.append({{QStringLiteral("flatpak"), QStringLiteral("install"), QStringLiteral("-y"),
                            QStringLiteral("--noninteractive"), QStringLiteral("--") + app.installation, app.remote, app.app},
                           app.installation == QLatin1String("system"), Step::Tool::Generic,
                           QCoreApplication::translate("gw::Carry", "Installing %1").arg(isolated(app.app)), {1}});
+        };
+        // flatpak exits 1 for an app it cannot install; the others still go
+        // on, and the check run after names it (spec 4.4).
+        const QList<FlatpakApp> apps = absentApps(context, &absent).value_or(m_apps);
+        for (const FlatpakApp &app : apps)
+            if (app.installation == QLatin1String("system"))
+                install(app);
+        // The flathub item adds Flathub system-wide only, so an app just for
+        // the user needs it in the user's own installation (spec 4.2). It
+        // comes after the apps for everyone, so its failing cannot stop them.
+        bool flathubForUser = false;
+        for (const FlatpakApp &app : apps) {
+            if (app.installation == QLatin1String("system"))
+                continue;
+            if (app.remote == QLatin1String("flathub") && !std::exchange(flathubForUser, true))
+                steps.append({{QStringLiteral("flatpak"), QStringLiteral("remote-add"), QStringLiteral("--user"),
+                               QStringLiteral("--if-not-exists"), QStringLiteral("flathub"),
+                               QStringLiteral("https://dl.flathub.org/repo/flathub.flatpakrepo")},
+                              false, Step::Tool::Generic,
+                              QCoreApplication::translate("gw::Carry", "Adding Flathub for you")});
+            install(app);
+        }
         return steps;
     }
 
@@ -335,9 +356,15 @@ QString notInFile(const Manifest &chosen, const Manifest &file)
     for (const QString &name : chosen.packages)
         if (!file.packages.contains(name))
             return lacks(name);
-    for (const FlatpakApp &app : chosen.flatpaks)
-        if (!file.flatpaks.contains(app))
+    for (const FlatpakApp &app : chosen.flatpaks) {
+        // The one change a choice may make: a Flathub app saved for the
+        // user restored for everyone (INV-11).
+        const FlatpakApp asSaved{app.app, app.remote, QStringLiteral("user")};
+        const bool movedToEveryone = app.remote == QLatin1String("flathub")
+                                     && app.installation == QLatin1String("system") && file.flatpaks.contains(asSaved);
+        if (!file.flatpaks.contains(app) && !movedToEveryone)
             return lacks(app.app);
+    }
     for (const ZypperSource &source : chosen.zypperSources)
         if (!file.zypperSources.contains(source))
             return lacks(source.alias);

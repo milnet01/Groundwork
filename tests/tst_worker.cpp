@@ -769,6 +769,41 @@ cat > "$FAKE_WRITTEN$out"
         QCOMPARE(r.count(QStringLiteral("sudo")), 0);
     }
 
+    // GRND-0088, INV-11: a Flathub app saved for the user may be restored
+    // for everyone; the same change to an app from another remote refuses.
+    void aFlathubUserAppMayBeRestoredForEveryone()
+    {
+        QJsonObject saved = savedManifest();
+        saved.insert("flatpaks", QJsonArray{QJsonObject{{"app", "org.kde.kate"}, {"remote", "flathub"},
+                                                        {"installation", "user"}},
+                                            QJsonObject{{"app", "org.kde.krita"}, {"remote", "kdeapps"},
+                                                        {"installation", "user"}}});
+        const QString file = savedFile(saved);
+        QVERIFY(!file.isEmpty());
+        QJsonObject chosen = saved;
+        chosen.remove("packages");
+        chosen.remove("settings");
+        chosen.insert("flatpaks", QJsonArray{QJsonObject{{"app", "org.kde.kate"}, {"remote", "flathub"},
+                                                         {"installation", "system"}}});
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                              QStringLiteral("system-update"), QStringLiteral("flathub"),
+                              QStringLiteral("carried-flatpaks")});
+        QVERIFY2(r.markers.value(0).name != QLatin1String("SETUP_REFUSED"), qPrintable(r.markers.value(0).fields.join('|')));
+        QVERIFY2(r.calls.contains(
+                     QStringLiteral("sudo -n -- flatpak install -y --noninteractive --system flathub org.kde.kate")),
+                 qPrintable(r.calls.join(QLatin1Char('\n'))));
+        QCOMPARE(r.count(QStringLiteral("flatpak remote-add --user")), 0);
+
+        chosen.insert("flatpaks", QJsonArray{QJsonObject{{"app", "org.kde.krita"}, {"remote", "kdeapps"},
+                                                         {"installation", "system"}}});
+        QFile::remove(m_log); // the first run's calls
+        const Run refused = worker({QStringLiteral("--setup-choices"), restoreChoices(file, chosen),
+                                    QStringLiteral("carried-flatpaks")});
+        QCOMPARE(refused.exitCode, 2);
+        QCOMPARE(refused.markers.value(0).name, QStringLiteral("SETUP_REFUSED"));
+        QCOMPARE(refused.count(QStringLiteral("flatpak install")), 0);
+    }
+
     // GRND-0079, INV-3: a carried id is accepted only from a saved file.
     void aCarriedIdNeedsASavedFile()
     {

@@ -409,6 +409,10 @@
         <translation>Besig om %1 te installeer</translation>
     </message>
     <message>
+        <source>Adding Flathub for you</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings from your saved file</source>
         <translation>Instellings uit jou gestoorde lêer</translation>
     </message>
@@ -1555,6 +1559,10 @@
     <message>
         <source>Groundwork cannot add these Flatpak sources without their keys. Add them yourself if you need them: %1</source>
         <translation>Groundwork kan nie hierdie Flatpak-bronne sonder hulle sleutels byvoeg nie. Voeg hulle self by as jy hulle nodig het: %1</translation>
+    </message>
+    <message>
+        <source>For everyone on this computer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
