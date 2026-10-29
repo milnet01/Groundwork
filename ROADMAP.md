@@ -1567,6 +1567,14 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Flathub to the user's own installation before a user app, or install
   those apps system-wide. Apps from sources other than Flathub stay
   named for the user to add (GRND-0079 spec, user 2026-10-20).
+  User decision (2026-10-29): the person restoring chooses, per app.
+  Each Flathub app saved with "installation": "user" gets its own choice
+  on the saved-setup page: just for you (as saved) or for everyone on
+  this computer. Just for you adds Flathub to the user's own
+  installation first (flatpak remote-add --user --if-not-exists), no
+  password. Needs GRND-0079 spec § 4.4 and § 4.6 (the choices file)
+  amended before building. A first test written for a system-wide-only
+  fix was set aside: /mnt/Emulators/claude-scratch/gw88-systemwide-test.patch.
   **Layman:** Flatpak apps you had installed just for yourself, rather than for the whole computer, do not come back from a saved file.
   Kind: fix.
   Source: grnd-0086-vm-check-2026-10-29.
