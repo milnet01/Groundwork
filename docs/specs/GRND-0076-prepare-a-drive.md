@@ -66,7 +66,11 @@ lsblk --json --bytes --output NAME,PATH,TYPE,SIZE,START,PTTYPE,PTUUID,PARTTYPE,F
 ```
 
 Measured 2026-10-15 on util-linux 2.42.4: every column is readable
-without root, and `START` is in logical sectors. Through
+without root. `START` is in 512-byte units whatever `LOG-SEC` says:
+lsblk reports sysfs's `start`, which the kernel counts in 512-byte
+sectors. Not yet measured on a drive with 4096-byte sectors;
+`tests/tst_drives.cpp` `aStartIsIn512ByteUnitsOnAnyDrive` locks the
+reading. Through
 `CheckContext::run`, with `LC_ALL=C` like every check.
 
 A drive is a `TYPE` `disk` that is not read-only. It **cannot be
