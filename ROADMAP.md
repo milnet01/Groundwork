@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=99 -->
+<!-- ants-roadmap-id-high-water: GRND=102 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1562,7 +1562,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: grnd-0079-manual-check-2026-10-26.
   Lanes: carry, worker.
 
-- 🚧 [GRND-0088] **Flathub apps installed per user are not restored.**
+- ✅ [GRND-0088] **Flathub apps installed per user are not restored.**
   Found in GRND-0086's VM check (2026-10-29); the 2026-10-26 run's log
   shows the same, though GRND-0079's note recorded all 17 as back.
   Five saved apps from Flathub had "installation": "user". Each step
@@ -1586,6 +1586,14 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   --if-not-exists flathub as exit 0, twice, with no password.
   Built 2026-10-29 (585c875), tests green with fakes. Still owed: the VM
   check, a real per-user Flathub app restored both ways.
+  VM check passed 2026-10-29, AppImage from 786ce65, fresh Tumbleweed
+  (Minimal-VM 20261024 + Plasma), saved on the host. Run 1, all as
+  saved: PeaZip, VICE, Discord and steam-rom-manager came back in the
+  user's installation; flathub was added there (flatpak remotes: flathub
+  system, flathub user). Run 2, a fresh copy, PeaZip and VICE switched
+  to "For everyone": both installed system-wide, nothing per user, no
+  user remote added. The switch showed only under the five Flathub apps
+  saved per user, off. Findings filed as GRND-0100 to GRND-0102.
   **Layman:** Flatpak apps you had installed just for yourself, rather than for the whole computer, do not come back from a saved file.
   Kind: fix.
   Source: grnd-0086-vm-check-2026-10-29.
@@ -1877,3 +1885,39 @@ scheduled.
   Kind: review-fix.
   Source: close-findings-2026-10-29.
   Lanes: worker.
+
+- 📋 [GRND-0100] **A Discord saved per user is installed twice on restore.**
+  Found in GRND-0088's VM check (2026-10-29), run 1. The saved file kept
+  the Discord item and com.discordapp.Discord with "installation":
+  "user". On restore the Discord item installed it system-wide, then
+  carried-flatpaks installed the user copy too: flatpak list showed it
+  in both installations (about 600 MB more). Other catalogue Flatpak
+  items saved per user would do the same.
+  **Layman:** Restoring a saved setup can install the same Flatpak app twice, once for everyone and once just for you.
+  Kind: fix.
+  Source: grnd-0088-vm-check-2026-10-29.
+  Lanes: carry, catalogue.
+
+- 📋 [GRND-0101] **A Flatpak base app is saved as an app and fails on restore.**
+  Found in GRND-0088's VM check (2026-10-29), run 1. The save listed
+  io.qt.PySide.BaseApp as an app. Restoring it failed: "Multiple refs
+  match 'io.qt.PySide.BaseApp', unable to proceed in non-interactive
+  mode". A base app is something other apps build on, not one a person
+  runs; the save could leave it out, or the install could name a branch.
+  **Layman:** Your saved file lists a Flatpak building block as if it were an app, and it fails to come back.
+  Kind: fix.
+  Source: grnd-0088-vm-check-2026-10-29.
+  Lanes: carry.
+
+- 📋 [GRND-0102] **The password box can be lost behind the main window.**
+  Seen in GRND-0088's VM check (2026-10-29), run 1, on KDE Plasma
+  Wayland with the window maximised. A click on the main window after
+  Apply raised it over the password box. The box has no taskbar entry,
+  so the run showed "working…" with nothing to say it waited for a
+  password; minimising the main window found it. In run 2, untouched,
+  the box stayed on top. Likely cause: the box is a separate process
+  with no parent window. Not yet confirmed outside a VM.
+  **Layman:** If you click the main window while Groundwork asks for your password, the password box can hide behind it with no way to find it.
+  Kind: ux.
+  Source: grnd-0088-vm-check-2026-10-29.
+  Lanes: gui.

@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 4 — Between items.
-**In flight:** nothing; 0.4.0 released 2026-10-16 (GitHub and OBS); 0.5.0 built 2026-10-29, unreleased; one VM pass owed over the save/restore paths changed since the VM check (audit fixes, GRND-0088 built 585c875). Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
+**In flight:** nothing; 0.4.0 released 2026-10-16 (GitHub and OBS); 0.5.0 built 2026-10-29, unreleased; VM pass over save/restore passed 2026-10-29 (GRND-0088 closed; findings GRND-0100 to 0102 in the Backlog). Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where
