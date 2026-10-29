@@ -894,6 +894,21 @@ private slots:
         delete page;
     }
 
+    // A Worker that cannot start ends the run, saying so; the page does not
+    // wait for it. A second run says its own outcome, not the first one's.
+    void aWorkerThatCannotStartEndsTheRun()
+    {
+        gw::RunPage page;
+        QSignalSpy finished(&page, &gw::RunPage::runFinished);
+        page.start(QStringLiteral("sh"), {QStringLiteral("-c"), QStringLiteral("echo '@@DONE@@|1|0|0'")}, {});
+        QTRY_COMPARE(finished.size(), 1);
+        QCOMPARE(page.summary(), gw::RunPage::tr("All done."));
+        page.start(QStringLiteral("/nonexistent/groundwork-worker"), {}, {});
+        QTRY_COMPARE(finished.size(), 2);
+        QVERIFY(page.isComplete());
+        QCOMPARE(page.summary(), gw::RunPage::tr("Groundwork stopped unexpectedly. The details below say why."));
+    }
+
     // GRND-0076's VM run, in Arabic: the drive's partition lines put their
     // bullets on the wrong side and showed "/dev/vda3" as "dev/vda3/". Each
     // line runs the window's way, and its path, filesystem and label keep
