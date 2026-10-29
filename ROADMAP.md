@@ -1736,7 +1736,7 @@ scheduled.
   Source: user-request-2026-10-16.
   Lanes: items.
 
-- 📋 [GRND-0087] **A full disk reads only as an exit code.**
+- ✅ [GRND-0087] **A full disk reads only as an exit code.**
   Found in GRND-0086's VM check (2026-10-29). Restoring the user's
   saved setup filled the VM's 24 GB root. The run page said "Installing
   your programs failed (exit code 8)" and "Copying your settings failed
@@ -1744,6 +1744,12 @@ scheduled.
   log says "needs 468MB more space on the /opt filesystem". Options:
   read that line and say it, or check free space before a carried
   install.
+  Done (2026-10-29): after a failed step the Worker asks df for the
+  free space on /, /opt, /usr, /var and the home folder. Under 1 GiB,
+  the message adds "The disk holding / is full: 300 MiB free." beside
+  the exit code. Asked after the failure so it holds in every language.
+  tst_worker aFullDiskIsSaid locks it. Not done: a free-space check
+  before a carried install starts.
   **Layman:** When the disk fills up during a run, Groundwork should say the disk is full, not show a number.
   Kind: ux.
   Source: grnd-0086-vm-check-2026-10-29.

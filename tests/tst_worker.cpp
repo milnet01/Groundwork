@@ -476,6 +476,32 @@ private slots:
         QCOMPARE(r.count(QStringLiteral("flatpak remote-add")), 0);
     }
 
+    // GRND-0087: a step that fails on a nearly full disk says the disk is
+    // full, not only an exit code; with room to spare it says nothing more.
+    void aFullDiskIsSaid_data()
+    {
+        QTest::addColumn<QByteArray>("avail");
+        QTest::addColumn<bool>("full");
+        QTest::newRow("300 MiB free") << QByteArray("314572800") << true;
+        QTest::newRow("20 GiB free") << QByteArray("21474836480") << false;
+    }
+
+    void aFullDiskIsSaid()
+    {
+        QFETCH(QByteArray, avail);
+        QFETCH(bool, full);
+        writeFile(m_bin + QStringLiteral("/df"),
+                  "#!/bin/sh\necho \"df $*\" >> \"$FAKE_LOG\"\necho '     Avail Mounted on'\necho '" + avail
+                      + " /'\necho '21474836480 /home'\n",
+                  true);
+        writeFile(m_codes, "0\n8\n"); // refresh ok, dup fails
+        const Run r = run({QStringLiteral("system-update")});
+        const QStringList end = r.endsFor(QStringLiteral("system-update"));
+        QCOMPARE(end.value(1), QStringLiteral("fail"));
+        QVERIFY2(end.value(2).contains(QStringLiteral("disk")) == full, qPrintable(end.value(2)));
+        QCOMPARE(r.count(QStringLiteral("df ")), 1);
+    }
+
     // GRND-0099: a dependency left out of the run blocks unless its check
     // reads already done or not needed here; "couldn't tell" blocks too.
     void aDependencyLeftOutThatCannotTellBlocks()

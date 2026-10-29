@@ -2179,6 +2179,10 @@
         <translation>%1 실패(종료 코드 %2).</translation>
     </message>
     <message>
+        <source>The disk holding %1 is full: %2 free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Already done.</source>
         <translation>이미 완료되었습니다.</translation>
     </message>

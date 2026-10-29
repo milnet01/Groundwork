@@ -74,6 +74,9 @@ private:
     // A HINT that a software source was skipped, once per step (exit 106).
     void sayIfSourceSkipped(const QString &itemId, int code, bool *said);
     int runZypper(const QStringList &argv, const QByteArray &input, QStringList *lines = nullptr, bool echo = true);
+    // A sentence naming a nearly full disk a step may have written to, or
+    // empty when each has room (GRND-0087).
+    QString fullDisk();
     // One item's STEP_BEGIN, then end(ok, detail) says its STEP_END and DONE.
     void beginOne(const QString &id, const QString &title);
     int endOne(const QString &id, bool ok, const QString &detail);

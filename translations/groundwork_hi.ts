@@ -2183,6 +2183,10 @@
         <translation>%1 विफल रहा (एग्ज़िट कोड %2)।</translation>
     </message>
     <message>
+        <source>The disk holding %1 is full: %2 free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Already done.</source>
         <translation>पहले ही हो चुका है।</translation>
     </message>

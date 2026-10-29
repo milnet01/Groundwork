@@ -12,6 +12,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Changed
+
+- **A step that fails on a nearly full disk now says so.** Its
+  message names the full disk and how much space is left, where it
+  showed only an exit code.
+
 ## [0.5.1] - 2026-10-29
 
 **Theme:** Ready for the next install.

@@ -2183,6 +2183,10 @@
         <translation>I-%1 yehlulekile (ikhodi yokuphuma %2).</translation>
     </message>
     <message>
+        <source>The disk holding %1 is full: %2 free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Already done.</source>
         <translation>Sekwenziwe.</translation>
     </message>

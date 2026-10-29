@@ -2179,6 +2179,10 @@
         <translation>%1 が失敗しました（終了コード %2）。</translation>
     </message>
     <message>
+        <source>The disk holding %1 is full: %2 free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Already done.</source>
         <translation>完了済みです。</translation>
     </message>

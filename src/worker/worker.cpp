@@ -6,6 +6,7 @@
 #include "core/markers.h"
 #include "core/statepaths.h"
 #include "core/systemidentity.h"
+#include "core/translations.h"
 #include "drives/drives.h"
 #include "privilege.h"
 
@@ -17,6 +18,7 @@
 #include <QHash>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QLocale>
 #include <QProcess>
 #include <QSaveFile>
 #include <QTextStream>
@@ -41,6 +43,11 @@ bool zypperClashed(int code) { return code == 4 || code == 8; }
 // Past this many names failing alone, the failure is taken to be the
 // system's, not theirs, and the rest are not tried one by one.
 constexpr int kMostLoneClashes = 8;
+
+// Below this much free space a failed step is taken to have filled the
+// disk, or found it too full to start: one carried program can need
+// hundreds of megabytes (GRND-0087's VM run needed 468 MB more).
+constexpr qint64 kNearlyFull = qint64(1) << 30;
 
 } // namespace
 
@@ -139,7 +146,38 @@ bool Worker::runStep(const QString &itemId, const Step &step, QString *detail, Q
             return true;
     }
     *detail = tr("%1 failed (exit code %2).").arg(step.label).arg(code);
+    if (const QString full = fullDisk(); !full.isEmpty())
+        *detail += QLatin1Char(' ') + full;
     return false;
+}
+
+QString Worker::fullDisk()
+{
+    // Asked after the failure, so it holds in every language: zypper's and
+    // tar's own words for a full disk are translated (GRND-0087).
+    QStringList lines;
+    const int code = runCommand({QStringLiteral("df"), QStringLiteral("--output=avail,target"),
+                                 QStringLiteral("--block-size=1"), QStringLiteral("/"), QStringLiteral("/opt"),
+                                 QStringLiteral("/usr"), QStringLiteral("/var"), QDir::homePath()},
+                                {}, &lines, false);
+    if (code < 0)
+        return {};
+    qint64 least = kNearlyFull;
+    QString where;
+    for (const QString &line : std::as_const(lines)) {
+        const QString trimmed = line.trimmed();
+        const qsizetype gap = trimmed.indexOf(QLatin1Char(' '));
+        bool number = false;
+        const qint64 avail = trimmed.left(gap).toLongLong(&number);
+        if (number && gap > 0 && avail < least) {
+            least = avail;
+            where = trimmed.mid(gap + 1).trimmed();
+        }
+    }
+    if (where.isEmpty())
+        return {};
+    return tr("The disk holding %1 is full: %2 free.")
+        .arg(isolated(where), QLocale().formattedDataSize(least, 1, QLocale::DataSizeIecFormat));
 }
 
 bool Worker::installInParts(const Step &step, const QStringList &names, int *code, Parts *parts)
