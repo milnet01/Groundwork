@@ -775,6 +775,10 @@
         <translation>使用中：%1 正作為交換空間使用。</translation>
     </message>
     <message>
+        <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Start-up</source>
         <translation>開機</translation>
     </message>

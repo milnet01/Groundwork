@@ -780,6 +780,10 @@
         <translation>قيد الاستخدام: %1 مستخدم كذاكرة تبديل (swap).</translation>
     </message>
     <message>
+        <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Start-up</source>
         <translation>الإقلاع</translation>
     </message>

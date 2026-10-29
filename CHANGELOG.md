@@ -67,6 +67,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   page,** not only your system's.
 - **Opening Groundwork a second time says it is already open,** instead
   of starting a second window that could stop the first one's run.
+- **When the drives cannot be listed, the drive page says so,** instead
+  of asking you to plug one in. The note on room to hibernate goes once
+  you switch it on, and an encrypted swap reads as swap.
 
 ## [0.4.0] - 2026-10-16
 

@@ -776,6 +776,10 @@
         <translation>उपयोग में: %1 स्वैप के रूप में चालू है।</translation>
     </message>
     <message>
+        <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Start-up</source>
         <translation>स्टार्ट-अप</translation>
     </message>

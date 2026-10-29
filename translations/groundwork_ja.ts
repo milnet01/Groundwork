@@ -775,6 +775,10 @@
         <translation>使用中：%1 はスワップとして使われています。</translation>
     </message>
     <message>
+        <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Start-up</source>
         <translation>スタートアップ</translation>
     </message>

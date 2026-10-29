@@ -90,6 +90,11 @@ QString partitionName(Use use)
 QString inUseBelow(const QJsonObject &device, const QSet<QString> &swaps)
 {
     for (const QJsonValue &mount : device.value(QStringLiteral("mountpoints")).toArray()) {
+        // An encrypted swap is /dev/dm-N in /proc/swaps, so its mount point
+        // is what names it.
+        if (mount.toString() == QLatin1String("[SWAP]"))
+            return QCoreApplication::translate("gw::Drives", "In use: %1 is swap.")
+                .arg(isolated(device.value(QStringLiteral("path")).toString()));
         if (!mount.toString().isEmpty())
             return QCoreApplication::translate("gw::Drives", "In use: %1 is mounted at %2.")
                 .arg(isolated(device.value(QStringLiteral("path")).toString()), isolated(mount.toString()));
@@ -177,11 +182,17 @@ QList<Drive> parseDrives(const QByteArray &lsblkJson, const QByteArray &swaps)
     return drives;
 }
 
-QList<Drive> readDrives(const CheckContext &context)
+QList<Drive> readDrives(const CheckContext &context, QString *why)
 {
     const CommandResult r = context.run(lsblkArguments());
-    if (!r.ok())
+    const bool listed =
+        r.ok() && QJsonDocument::fromJson(r.out).object().value(QStringLiteral("blockdevices")).isArray();
+    if (!listed) {
+        if (why)
+            *why = QCoreApplication::translate("gw::Drives", "Groundwork could not list the drives: lsblk did not "
+                                                             "work. Press Look again.");
         return {};
+    }
     return parseDrives(r.out, context.readFile(QStringLiteral("/proc/swaps")).value_or(QByteArray()));
 }
 
@@ -192,8 +203,11 @@ Firmware readFirmware(const CheckContext &context)
 
 DriveSurvey surveyDrives(const CheckContext &context)
 {
-    return {readDrives(context), readFirmware(context),
-            memorySwapSize(context.readFile(QStringLiteral("/proc/meminfo")).value_or(QByteArray()))};
+    DriveSurvey survey;
+    survey.drives = readDrives(context, &survey.problem);
+    survey.firmware = readFirmware(context);
+    survey.memorySwap = memorySwapSize(context.readFile(QStringLiteral("/proc/meminfo")).value_or(QByteArray()));
+    return survey;
 }
 
 QList<Use> allUses() { return {Use::Efi, Use::BiosBoot, Use::Swap, Use::System, Use::Home, Use::Data}; }

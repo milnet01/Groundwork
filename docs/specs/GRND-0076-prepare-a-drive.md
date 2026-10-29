@@ -73,10 +73,13 @@ sectors. Not yet measured on a drive with 4096-byte sectors;
 reading. Through
 `CheckContext::run`, with `LC_ALL=C` like every check.
 
-A drive is a `TYPE` `disk` that is not read-only. It **cannot be
+A drive is a `TYPE` `disk` that is not read-only and whose size is
+above 0, which leaves out an empty card reader. It **cannot be
 picked** when any device under it, at any depth (partitions, and the
 `crypt` or `lvm` devices on them), has a mount point or is active swap
-(`/proc/swaps`). That covers the running system, and the stick a live
+(`/proc/swaps`, or lsblk's `[SWAP]` mount point for an encrypted one).
+When lsblk fails or prints no list, the page says so instead of asking
+for a drive. That covers the running system, and the stick a live
 system started from, which is mounted. The picker shows such a drive
 greyed, saying why.
 
@@ -123,7 +126,7 @@ layout. On, swap is the size of memory (`MemTotal` in `/proc/meminfo`,
 rounded up to a whole GiB) instead of 2 GiB, and each minimum above
 grows by the difference. It starts on when that swap is at most 5 % of
 the space the layout uses, and off otherwise; when off for that reason,
-the switch says how many GB it would take and what share of the drive.
+the switch says how many GiB it would take and what share of the drive.
 The page also says that memory is this computer's, so a drive prepared
 for another computer should be sized for that one.
 

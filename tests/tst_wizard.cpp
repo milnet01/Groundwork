@@ -153,7 +153,7 @@ gw::DriveSurvey fakeSurvey()
     tight.size = 229 * kGiB; // about 29 GiB free: 24 needed, 30 to hibernate
     for (gw::Partition &p : tight.partitions)
         p.path.replace(QLatin1String("sdc"), QLatin1String("sdd"));
-    return {{stick, system, windows, tight}, gw::Firmware::Uefi, 8 * kGiB};
+    return {{stick, system, windows, tight}, gw::Firmware::Uefi, 8 * kGiB, {}};
 }
 
 } // namespace
@@ -170,6 +170,7 @@ class TstWizard : public QObject
     QString m_refused; // why the reader refuses the file, when it does
     std::atomic_bool m_holdRead = false; // the reader waits while set
     std::atomic_bool m_holdChecks = false, m_checksEnded = false; // the checks wait while set
+    QString m_surveyProblem; // why the drives could not be listed, when set
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
                                      const gw::Catalogue *items = &catalogue,
@@ -221,7 +222,14 @@ class TstWizard : public QObject
         setup.stateDir = m_dir.filePath(QStringLiteral("state"));
         setup.jobs = jobs;
         setup.liveSystem = live;
-        setup.surveyDrives = fakeSurvey;
+        setup.surveyDrives = [this] {
+            gw::DriveSurvey survey = fakeSurvey();
+            if (!m_surveyProblem.isEmpty()) {
+                survey.drives.clear();
+                survey.problem = m_surveyProblem;
+            }
+            return survey;
+        };
         setup.gatherSetup = [] {
             gw::Gathered found;
             found.packages = {QStringLiteral("act")};
@@ -855,6 +863,24 @@ private slots:
         QVERIFY(!page->isComplete()); // still the user's pick
     }
 
+    // GRND-0091: a list that failed says so, rather than asking for a drive
+    // to be plugged in.
+    void aFailedDriveListSaysSo()
+    {
+        m_surveyProblem = QStringLiteral("lsblk broke.");
+        const auto reset = qScopeGuard([this] { m_surveyProblem.clear(); });
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp, gw::Job::PrepareDrive});
+        w->chooseJob(gw::Job::PrepareDrive);
+        w->next();
+        bool said = false, plugIn = false;
+        for (auto *label : w->currentPage()->findChildren<QLabel *>()) {
+            said = said || label->text().contains(m_surveyProblem);
+            plugIn = plugIn || label->text().contains(QLatin1String("Plug one in"));
+        }
+        QVERIFY(said);
+        QVERIFY(!plugIn);
+    }
+
     // GRND-0076, INV-9 on the page: 8 GiB of swap is more than 5 % of a
     // 100 GiB stick, so the switch starts off and says its share; on a
     // 500 GiB disk it starts on.
@@ -868,6 +894,11 @@ private slots:
         QVERIFY(note);
         QVERIFY2(note->text().contains(QLatin1String("GiB")) && note->text().contains(QLatin1String("%")),
                  qPrintable(note->text()));
+        // GRND-0091: the note is for the switch while off for that reason.
+        hibernate->click();
+        QVERIFY(!shownLabel(w->currentPage(), QStringLiteral("hibernateNote")));
+        hibernate->click();
+        QVERIFY(shownLabel(w->currentPage(), QStringLiteral("hibernateNote")));
 
         auto big = pickDrive(QStringLiteral("/dev/sdc"));
         big->next(); // past Windows' checklist

@@ -775,6 +775,10 @@
         <translation>正在使用：%1 正用作交换空间。</translation>
     </message>
     <message>
+        <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Start-up</source>
         <translation>启动</translation>
     </message>

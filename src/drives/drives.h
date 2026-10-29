@@ -45,8 +45,8 @@ QStringList lsblkArguments();
 // Every drive lsblk lists that is a disk, not read-only and not empty.
 // Swap is the text of /proc/swaps.
 QList<Drive> parseDrives(const QByteArray &lsblkJson, const QByteArray &swaps);
-// Empty when lsblk could not run.
-QList<Drive> readDrives(const CheckContext &context);
+// Empty, with why set, when lsblk failed or printed no list.
+QList<Drive> readDrives(const CheckContext &context, QString *why = nullptr);
 
 enum class Firmware { Uefi, Bios };
 Firmware readFirmware(const CheckContext &context);
@@ -61,6 +61,7 @@ struct DriveSurvey
     QList<Drive> drives;
     Firmware firmware = Firmware::Uefi;
     qint64 memorySwap = 0;
+    QString problem; // why the drives could not be listed; empty when they were
 };
 DriveSurvey surveyDrives(const CheckContext &context);
 

@@ -148,7 +148,9 @@ void DrivePage::lookAgain()
     m_choice->drive.reset();
     clear(m_list, m_group);
     auto *rows = static_cast<QVBoxLayout *>(m_list->layout());
-    if (m_choice->found.drives.isEmpty())
+    if (!m_choice->found.problem.isEmpty())
+        rows->addWidget(wrapped(m_list, m_choice->found.problem));
+    else if (m_choice->found.drives.isEmpty())
         rows->addWidget(wrapped(m_list, tr("No drive was found. Plug one in, then press Look again.")));
     for (const Drive &drive : std::as_const(m_choice->found.drives)) {
         auto *pick = new QRadioButton(driveTitle(drive), m_list);
@@ -423,7 +425,7 @@ void LayoutPage::refresh()
     }
     const qint64 space = usableSpace(drive, chosenKind());
     const qint64 swap = m_choice->found.memorySwap;
-    m_hibernateNote->setVisible(!custom && swap > 0 && !hibernateStartsOn(swap, space));
+    m_hibernateNote->setVisible(!custom && swap > 0 && !hibernateStartsOn(swap, space) && !m_hibernate->isChecked());
     m_hibernateNote->setText(tr("Room to hibernate takes %1, %2 % of the space this layout uses.")
                                  .arg(gib(swap))
                                  .arg(space > 0 ? qRound(100.0 * double(swap) / double(space)) : 100));

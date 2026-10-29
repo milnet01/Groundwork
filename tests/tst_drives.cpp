@@ -4,9 +4,11 @@
 // util-linux 2.42.4 prints with --bytes.
 #include "drives/drives.h"
 
+#include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QTemporaryDir>
 #include <QtTest>
 
 namespace {
@@ -116,6 +118,46 @@ private slots:
         const gw::Drive d = one(disk("/dev/sdb", 100 * gw::kGiB, {part("/dev/sdb1", 2048, 2 * gw::kGiB, "swap")}),
                                 "Filename Type Size Used Priority\n/dev/sdb1 partition 2097148 0 -2\n");
         QVERIFY(d.inUse.contains(QStringLiteral("swap")));
+    }
+
+    // GRND-0091: an encrypted swap shows in /proc/swaps as /dev/dm-N, not
+    // by lsblk's path; its [SWAP] mount point still reads as swap.
+    void aSwapMountPointReadsAsSwap()
+    {
+        QJsonObject swap{{"name", "cr_swap"}, {"path", "/dev/mapper/cr_swap"}, {"type", "crypt"},
+                         {"size", double(2 * gw::kGiB)}, {"mountpoints", QJsonArray{"[SWAP]"}}};
+        const gw::Drive d = one(disk("/dev/sdb", 100 * gw::kGiB,
+                                     {part("/dev/sdb1", 2048, 2 * gw::kGiB, "crypto_LUKS", {QJsonValue()}, {swap})}),
+                                "Filename Type Size Used Priority\n/dev/dm-0 partition 2097148 0 -2\n");
+        QVERIFY2(d.inUse.contains(QLatin1String("is swap")) && !d.inUse.contains(QLatin1String("[SWAP]")),
+                 qPrintable(d.inUse));
+    }
+
+    // GRND-0091: lsblk failing, or printing no list, is a problem the
+    // page names, not a computer with no drives.
+    void aFailedListIsAProblem()
+    {
+        QTemporaryDir bin;
+        QVERIFY(bin.isValid());
+        const QByteArray path = qgetenv("PATH");
+        qputenv("PATH", bin.path().toUtf8() + ":/usr/bin:/bin");
+        auto fake = [&](const QByteArray &body) {
+            QFile f(bin.filePath(QStringLiteral("lsblk")));
+            QVERIFY(f.open(QIODevice::WriteOnly | QIODevice::Truncate));
+            f.write("#!/bin/sh\n" + body + "\n");
+            f.close();
+            QVERIFY(f.setPermissions(f.permissions() | QFile::ExeOwner));
+        };
+        const gw::CheckContext context{gw::FileReader()};
+        for (const QByteArray &body : {QByteArray("exit 1"), QByteArray("echo not json")}) {
+            fake(body);
+            const gw::DriveSurvey s = gw::surveyDrives(context);
+            QVERIFY2(!s.problem.isEmpty(), body.constData());
+            QVERIFY(s.drives.isEmpty());
+        }
+        fake("echo '{\"blockdevices\": []}'");
+        QVERIFY(gw::surveyDrives(context).problem.isEmpty());
+        qputenv("PATH", path);
     }
 
     // INV-7: a suggestion is offered only where it fits.

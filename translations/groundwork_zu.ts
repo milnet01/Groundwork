@@ -776,6 +776,10 @@
         <translation>Iyasetshenziswa: i-%1 isetshenziswa njenge-swap.</translation>
     </message>
     <message>
+        <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Start-up</source>
         <translation>Ukuqalisa</translation>
     </message>

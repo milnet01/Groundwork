@@ -1797,13 +1797,18 @@ scheduled.
   Source: review-code-2026-10-29.
   Lanes: wizard.
 
-- 📋 [GRND-0091] **Drives: four low-severity review findings.**
+- ✅ [GRND-0091] **Drives: four low-severity review findings.**
   Queued, not fixed: user ruling 2026-10-29. Each is in
   docs/reviews/review-code-2026-10-29/lane-03-drives.md § Low / Info:
   preparepages.cpp:426 (hibernate note shown whatever the switch says),
   drives.cpp:171-172 (a failed lsblk reads as no drives),
   drives.cpp:132 (size-0 drives left out, unstated in § 4.1),
   drives.cpp:82 (dm swap named differently by /proc/swaps).
+  Fixed 2026-10-29, all four, each with a test that failed first.
+  The hibernate note shows only while the switch is off, and the spec
+  says GiB. A failed or garbled lsblk is a problem the drive page names
+  (DriveSurvey::problem). A [SWAP] mount point reads as swap. The spec
+  now states that a drive of size 0 is not offered.
   **Layman:** Small edge cases when preparing a drive: a note shown at the wrong time, empty card readers, a failed drive listing.
   Kind: review-fix.
   Source: review-code-2026-10-29.

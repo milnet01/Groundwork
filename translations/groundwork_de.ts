@@ -776,6 +776,10 @@
         <translation>In Gebrauch: %1 ist als Swap aktiv.</translation>
     </message>
     <message>
+        <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Start-up</source>
         <translation>Start</translation>
     </message>
