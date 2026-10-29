@@ -85,6 +85,7 @@ struct SavedSetup
     bool rowsMade = false;    // the page has made its rows
     bool keptSwitched = false; // the kept items were switched on, once (INV-1)
     Selection switchedOn;      // what this setup switched on, so clearing switches it off
+    Selection switchedOff;     // what its items switched off by including it, so clearing switches it on
     bool holdsSecrets() const;
 };
 

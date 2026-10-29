@@ -1915,10 +1915,14 @@ scheduled.
   Source: close-findings-2026-10-29.
   Lanes: carry.
 
-- 📋 [GRND-0098] **Clearing a saved setup does not restore what a kept item switched off.**
+- ✅ [GRND-0098] **Clearing a saved setup does not restore what a kept item switched off.**
   Found by the wizard fix (bb1c77b): an item a kept item's includes()
   switched off stays off after the saved setup is cleared. Live case:
   ants-terminal switches dev-tree-sitter off.
+  Fixed 2026-10-29: the saved setup records what its items switched
+  off by including it (SavedSetup::switchedOff), and clearing it switches
+  those back on unless a choice that stays includes them. Test red
+  first, with a kept terminal including a parser the user had on.
   **Layman:** Switching off a saved setup can leave an item off that the saved setup turned off.
   Kind: review-fix.
   Source: close-findings-2026-10-29.

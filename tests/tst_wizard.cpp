@@ -98,6 +98,8 @@ public:
 const FakeItem firewall(QStringLiteral("firewall"), gw::Level::SystemSetup, false);
 const FakeLicenceItem nvidia(QStringLiteral("nvidia"), gw::Level::Essentials, true);
 const gw::Catalogue restoring({&update, &nvidia, &firewall});
+// A kept item that switches another off by including it (GRND-0098).
+const gw::Catalogue restoringIncluding({&update, &parser, &terminal});
 
 const QByteArray kFakeWorker = R"(#!/bin/sh
 if [ -n "$FAKE_WORKER_LOG" ]; then echo "$*" >> "$FAKE_WORKER_LOG"; fi
@@ -171,6 +173,7 @@ class TstWizard : public QObject
     std::atomic_bool m_holdRead = false; // the reader waits while set
     std::atomic_bool m_holdChecks = false, m_checksEnded = false; // the checks wait while set
     QString m_surveyProblem; // why the drives could not be listed, when set
+    gw::CheckResults m_moreResults; // further check results the startup checks give
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
                                      const gw::Catalogue *items = &catalogue,
@@ -197,6 +200,7 @@ class TstWizard : public QObject
             r.insert(QStringLiteral("fonts"), {gw::CheckState::NotDone, {}});
             r.insert(QStringLiteral("firewall"), {gw::CheckState::NotDone, {}});
             r.insert(QStringLiteral("nvidia"), {gw::CheckState::NotDone, {}});
+            r.insert(m_moreResults);
             return r;
         };
         setup.readSetup = [this](const QString &, QString *why, QStringList *) {
@@ -261,9 +265,9 @@ class TstWizard : public QObject
         return label && !label->isHidden() ? label : nullptr;
     }
     // The setup job started from m_saved, on the saved setup page.
-    std::unique_ptr<gw::Wizard> fromSaved()
+    std::unique_ptr<gw::Wizard> fromSaved(const gw::Catalogue *items = &restoring)
     {
-        auto w = make(QStringLiteral("en"), &restoring);
+        auto w = make(QStringLiteral("en"), items);
         if (!QTest::qWaitFor([&] { return w->checksDone(); }))
             return nullptr;
         auto *on = w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"));
@@ -1191,6 +1195,33 @@ private slots:
         QVERIFY(!w->savedSetup());
         QVERIFY(!w->selection().contains(QStringLiteral("update")));
         QVERIFY(w->row(QStringLiteral("nvidia"))->reason().isEmpty());
+    }
+
+    // GRND-0098: what a kept item switched off, by including it, comes
+    // back on when the saved setup is switched off.
+    void aSavedSetupSwitchedOffRestoresWhatItsItemsIncluded()
+    {
+        m_moreResults = {{QStringLiteral("parser"), {gw::CheckState::NotDone, {}}},
+                         {QStringLiteral("terminal"), {gw::CheckState::NotDone, {}}}};
+        const auto reset = qScopeGuard([this] { m_moreResults.clear(); });
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.items = {QStringLiteral("terminal")};
+        auto w = fromSaved(&restoringIncluding);
+        QVERIFY(w);
+        if (!w->selection().contains(QStringLiteral("parser")))
+            w->row(QStringLiteral("parser"))->toggle()->click();
+        QVERIFY(w->selection().contains(QStringLiteral("parser")));
+        w->next();
+        QVERIFY(w->selection().contains(QStringLiteral("terminal")));
+        QVERIFY(!w->selection().contains(QStringLiteral("parser")));
+        w->back();
+        w->back();
+        w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"))->click();
+        w->next();
+        QVERIFY(!w->savedSetup());
+        QVERIFY(!w->selection().contains(QStringLiteral("terminal")));
+        QVERIFY(w->selection().contains(QStringLiteral("parser")));
+        QVERIFY2(w->row(QStringLiteral("parser"))->reason().isEmpty(), qPrintable(w->row(QStringLiteral("parser"))->reason()));
     }
 
     // And what a carried row the user switched on pulled in goes with it.

@@ -881,6 +881,16 @@ void Wizard::clearSavedSetup()
         }
     }
     m_selection.subtract(drop);
+    // What its items switched off comes back, unless a choice that stays
+    // includes it.
+    for (const QString &id : std::as_const(m_saved->switchedOff)) {
+        const bool stillIncluded = std::any_of(m_selection.cbegin(), m_selection.cend(), [&](const QString &on) {
+            const Item *item = m_setup.catalogue->find(on);
+            return item && item->includes().contains(id);
+        });
+        if (m_rows.contains(id) && !stillIncluded)
+            m_selection.insert(id);
+    }
     for (const QString &id : std::as_const(m_saved->carried.keptItems)) {
         ItemRow *row = m_rows.value(id);
         if (row && row->reason() == tr("You had this before."))
@@ -940,6 +950,7 @@ void Wizard::switchOnSaved(const QString &id)
     QStringList included;
     const QStringList pulled = catalogue().switchOn(m_selection, id, m_results, &included);
     m_saved->switchedOn.unite(m_selection - before);
+    m_saved->switchedOff.unite(before - m_selection);
     refreshRows(pulled, included, id, true);
 }
 
