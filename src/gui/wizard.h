@@ -124,9 +124,11 @@ public:
     const Catalogue &catalogue() const;
     const CheckResults &results() const { return m_results; }
 
-    // Reads a saved file and builds its items (spec 4.1); on refusal, why
-    // says so and nothing changes. clearSavedSetup forgets it.
-    bool loadSavedSetup(const QString &file, QString *why);
+    // Reads a saved file and builds its items (spec 4.1), off the window's
+    // thread; done then says whether it was read, and why not. On refusal
+    // nothing changes. clearSavedSetup forgets it.
+    void loadSavedSetup(const QString &file, std::function<void(bool read, const QString &why)> done);
+    bool hasSavedSetup(const QString &file) const { return m_saved && m_saved->file == file; }
     void clearSavedSetup();
     SavedSetup *savedSetup() const { return m_saved.get(); }
     // A carried row the saved setup page made; then the carried items'

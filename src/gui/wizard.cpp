@@ -200,9 +200,10 @@ public:
     // checks too. Preparing a drive needs none.
     bool isComplete() const override
     {
-        return ((m_wizard->chosenJob() == Job::SetUp || m_wizard->chosenJob() == Job::CarryOver)
-                && m_wizard->checksDone())
-               || m_wizard->chosenJob() == Job::PrepareDrive;
+        return !m_reading
+               && (((m_wizard->chosenJob() == Job::SetUp || m_wizard->chosenJob() == Job::CarryOver)
+                    && m_wizard->checksDone())
+                   || m_wizard->chosenJob() == Job::PrepareDrive);
     }
     // A saved file is read on Next; one refused keeps the page, saying why.
     bool validatePage() override
@@ -211,11 +212,25 @@ public:
             m_wizard->clearSavedSetup();
             return true;
         }
-        QString why;
-        const bool read = m_wizard->loadSavedSetup(m_savedFile->text().trimmed(), &why);
-        m_savedProblem->setText(why);
-        m_savedProblem->setVisible(!read);
-        return read;
+        const QString file = m_savedFile->text().trimmed();
+        if (m_wizard->hasSavedSetup(file))
+            return true; // read already; the switches keep what the user chose
+        if (m_reading)
+            return false;
+        // Read off the window's thread; Next waits, then moves on.
+        m_reading = true;
+        m_savedProblem->hide();
+        emit completeChanged();
+        m_wizard->loadSavedSetup(file, [this, file](bool read, const QString &why) {
+            m_reading = false;
+            emit completeChanged();
+            m_savedProblem->setText(why);
+            m_savedProblem->setVisible(!read);
+            if (read && m_wizard->currentPage() == this && m_fromSaved->isChecked()
+                && m_savedFile->text().trimmed() == file)
+                m_wizard->next();
+        });
+        return false;
     }
 
 private:
@@ -259,6 +274,7 @@ private:
     QCheckBox *m_fromSaved = nullptr;
     QLineEdit *m_savedFile = nullptr;
     QLabel *m_savedProblem = nullptr;
+    bool m_reading = false; // a saved file is being read
 };
 
 class ReviewPage : public QWizardPage
@@ -774,33 +790,57 @@ QStringList Wizard::runOrder() const
     return order;
 }
 
-bool Wizard::loadSavedSetup(const QString &file, QString *why)
+void Wizard::loadSavedSetup(const QString &file, std::function<void(bool read, const QString &why)> done)
 {
-    if (m_saved && m_saved->file == file)
-        return true; // read already; the switches keep what the user chose
     if (file.isEmpty()) {
-        *why = tr("Choose the saved setup file first.");
-        return false;
+        done(false, tr("Choose the saved setup file first."));
+        return;
     }
-    QStringList skipped;
-    const std::optional<Manifest> manifest = m_setup.readSetup(file, why, &skipped);
-    if (!manifest)
-        return false;
-    clearSavedSetup();
-    auto saved = std::make_unique<SavedSetup>();
-    saved->file = file;
-    saved->manifest = *manifest;
-    saved->skipped = skipped;
-    saved->carried = carriedItems(*manifest, file, *m_setup.catalogue);
-    saved->all.emplace(withCarried(*m_setup.catalogue, saved->carried));
-    QList<const Item *> items;
-    for (const std::unique_ptr<Item> &item : saved->carried.owned)
-        items << item.get();
-    const CheckResults found = m_setup.checkItems ? m_setup.checkItems(items) : CheckResults();
-    for (auto it = found.cbegin(); it != found.cend(); ++it)
-        m_results.insert(it.key(), it.value());
-    m_saved = std::move(saved);
-    return true;
+    // Reading runs tar over the file and the checks compare its archive,
+    // which on a stick can take minutes, so both run off the window's
+    // thread as the startup checks do. The thread holds its own copies of
+    // the reader and the checks, and reads the catalogue, which outlives
+    // every window; its result reaches this window only while it exists.
+    struct Read
+    {
+        std::optional<Manifest> manifest;
+        QString why;
+        QStringList skipped;
+        CarriedItems carried;
+        CheckResults found;
+    };
+    auto read = std::make_shared<Read>();
+    QThread *thread = QThread::create(
+        [read, file, readSetup = m_setup.readSetup, checkItems = m_setup.checkItems, catalogue = m_setup.catalogue] {
+            read->manifest = readSetup(file, &read->why, &read->skipped);
+            if (!read->manifest)
+                return;
+            read->carried = carriedItems(*read->manifest, file, *catalogue);
+            QList<const Item *> items;
+            for (const std::unique_ptr<Item> &item : read->carried.owned)
+                items << item.get();
+            if (checkItems)
+                read->found = checkItems(items);
+        });
+    connect(thread, &QThread::finished, this, [this, read, file, done = std::move(done)] {
+        if (!read->manifest) {
+            done(false, read->why);
+            return;
+        }
+        clearSavedSetup();
+        auto saved = std::make_unique<SavedSetup>();
+        saved->file = file;
+        saved->manifest = *read->manifest;
+        saved->skipped = read->skipped;
+        saved->carried = std::move(read->carried);
+        saved->all.emplace(withCarried(*m_setup.catalogue, saved->carried));
+        for (auto it = read->found.cbegin(); it != read->found.cend(); ++it)
+            m_results.insert(it.key(), it.value());
+        m_saved = std::move(saved);
+        done(true, {});
+    });
+    connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+    thread->start();
 }
 
 void Wizard::clearSavedSetup()

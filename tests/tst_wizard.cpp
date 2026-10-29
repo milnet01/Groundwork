@@ -27,6 +27,8 @@
 #include <QTemporaryDir>
 #include <QtTest>
 
+#include <atomic>
+
 namespace {
 
 class FakeItem : public gw::Item
@@ -159,6 +161,9 @@ class TstWizard : public QObject
     qint64 m_free = 100 * kGiB; // the save folder's free space
     gw::Manifest m_saved;       // what the saved file holds
     gw::CheckState m_carriedState = gw::CheckState::NotDone; // what its items' checks say
+    std::atomic<QThread *> m_readOn = nullptr, m_checkedOn = nullptr; // where the file was read and checked
+    QString m_refused; // why the reader refuses the file, when it does
+    std::atomic_bool m_holdRead = false; // the reader waits while set
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
                                      const gw::Catalogue *items = &catalogue,
@@ -184,8 +189,18 @@ class TstWizard : public QObject
             r.insert(QStringLiteral("nvidia"), {gw::CheckState::NotDone, {}});
             return r;
         };
-        setup.readSetup = [this](const QString &, QString *, QStringList *) { return std::optional(m_saved); };
+        setup.readSetup = [this](const QString &, QString *why, QStringList *) {
+            m_readOn = QThread::currentThread();
+            while (m_holdRead)
+                QThread::msleep(5);
+            if (!m_refused.isEmpty()) {
+                *why = m_refused;
+                return std::optional<gw::Manifest>();
+            }
+            return std::optional(m_saved);
+        };
         setup.checkItems = [this](const QList<const gw::Item *> &items) {
+            m_checkedOn = QThread::currentThread();
             gw::CheckResults r;
             for (const gw::Item *item : items)
                 r.insert(item->id(), {m_carriedState, {}});
@@ -241,7 +256,10 @@ class TstWizard : public QObject
         on->click();
         file->setText(m_dir.filePath(QStringLiteral("groundwork-setup-pc-2026-10-20.tar")));
         w->next();
-        return w->currentPage()->title() == QLatin1String("Your saved setup") ? std::move(w) : nullptr;
+        // The file is read off the window's thread; the page moves on once it is.
+        return QTest::qWaitFor([&] { return w->currentPage()->title() == QLatin1String("Your saved setup"); })
+                   ? std::move(w)
+                   : nullptr;
     }
     static gw::ZypperSource source(const QString &alias, bool gpgcheck)
     {
@@ -265,6 +283,7 @@ private slots:
         m_free = 100 * kGiB;
         m_saved = {};
         m_carriedState = gw::CheckState::NotDone;
+        m_refused.clear();
         qunsetenv("FAKE_WORKER_LOG");
         qunsetenv("FAKE_STOP"); // a stop test that failed early leaves it set
     }
@@ -1150,6 +1169,55 @@ private slots:
         w->next();
         QVERIFY(!w->savedSetup());
         QVERIFY(!w->selection().contains(QStringLiteral("update")));
+    }
+
+    // Audit 2026-10-29: reading a saved file runs tar over it, and its
+    // checks compare an archive that may be gigabytes on a stick. Both run
+    // off the window's thread, as the startup checks do, so the window
+    // keeps answering; the page moves on once they are done.
+    void aSavedFileIsReadOffTheWindowsThread()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.packages = {QStringLiteral("act")};
+        m_readOn = nullptr;
+        m_checkedOn = nullptr;
+        auto w = fromSaved();
+        QVERIFY(w);
+        QVERIFY(m_readOn.load() && m_readOn.load() != QThread::currentThread());
+        QVERIFY(m_checkedOn.load() && m_checkedOn.load() != QThread::currentThread());
+    }
+
+    // While the file is read, the page stays and its Next waits.
+    void nextWaitsWhileTheFileIsRead()
+    {
+        m_holdRead = true;
+        const auto release = qScopeGuard([this] { m_holdRead = false; });
+        auto w = make(QStringLiteral("en"), &restoring);
+        QTRY_VERIFY(w->checksDone());
+        w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"))->click();
+        w->currentPage()->findChild<QLineEdit *>(QStringLiteral("savedFile"))->setText(QStringLiteral("x.tar"));
+        w->next();
+        QCOMPARE(w->currentId(), 0);
+        QVERIFY(!w->currentPage()->isComplete());
+        m_holdRead = false;
+        QTRY_COMPARE(w->currentPage()->title(), QStringLiteral("Your saved setup"));
+    }
+
+    // GRND-0079 spec 4.1: a refused file keeps the page, saying why, once
+    // the read off the window's thread ends.
+    void aRefusedFileKeepsThePageSayingWhy()
+    {
+        m_refused = QStringLiteral("Not a saved setup.");
+        auto w = make(QStringLiteral("en"), &restoring);
+        QTRY_VERIFY(w->checksDone());
+        w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"))->click();
+        w->currentPage()->findChild<QLineEdit *>(QStringLiteral("savedFile"))->setText(QStringLiteral("x.tar"));
+        w->next();
+        QTRY_VERIFY(shownLabel(w->currentPage(), QStringLiteral("savedProblem")));
+        QCOMPARE(shownLabel(w->currentPage(), QStringLiteral("savedProblem"))->text(), m_refused);
+        QCOMPARE(w->currentId(), 0);
+        QVERIFY(!w->savedSetup());
+        QVERIFY(w->currentPage()->isComplete());
     }
 
     // GRND-0079's VM run, in Arabic and Hebrew: "26 Oct 2026 05:46:39"
