@@ -41,6 +41,17 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   shows as done when `claude` is already installed. While Ants Terminal
   is switched on, the row says Ants Terminal offers it too. (GRND-0082)
 
+### Fixed
+
+- **Preparing a drive with 4096-byte sectors now finds its free space
+  and checks the new partitions correctly.** Each partition's start was
+  read eight times too far along the drive. (GRND-0076)
+- **Changing the language while Groundwork is still checking or
+  gathering no longer risks a crash.**
+- **When the Worker cannot start, the run page now ends and says so,
+  instead of waiting forever.** A second run on the same page, such as
+  removing saved passwords, reports its own outcome.
+
 ## [0.4.0] - 2026-10-16
 
 **Theme:** A drive ready for openSUSE.
