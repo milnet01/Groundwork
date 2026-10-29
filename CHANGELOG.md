@@ -63,6 +63,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   time from Flathub when Flatpak is missing.**
 - **A layout file with impossible partition sizes is refused before a
   drive is touched.**
+- **Sizes and dates now follow the language you choose on the first
+  page,** not only your system's.
+- **Opening Groundwork a second time says it is already open,** instead
+  of starting a second window that could stop the first one's run.
 
 ## [0.4.0] - 2026-10-16
 

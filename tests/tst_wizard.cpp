@@ -1,9 +1,12 @@
 // The Wizard on Qt's offscreen display, with fake items and a fake Worker
 // script: default toggles, dependency toggling with reasons, Apply's
 // availability, the run page reading markers, and closing mid-run.
+#include "core/statepaths.h"
 #include "core/translations.h"
+#include "gui/carrypages.h"
 #include "gui/itemrow.h"
 #include "gui/runpage.h"
+#include "gui/switch.h"
 #include "gui/themes.h"
 #include "gui/wizard.h"
 
@@ -24,10 +27,12 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QLockFile>
 #include <QTemporaryDir>
 #include <QtTest>
 
 #include <atomic>
+#include <thread>
 
 namespace {
 
@@ -164,6 +169,7 @@ class TstWizard : public QObject
     std::atomic<QThread *> m_readOn = nullptr, m_checkedOn = nullptr; // where the file was read and checked
     QString m_refused; // why the reader refuses the file, when it does
     std::atomic_bool m_holdRead = false; // the reader waits while set
+    std::atomic_bool m_holdChecks = false, m_checksEnded = false; // the checks wait while set
 
     std::unique_ptr<gw::Wizard> make(const QString &language = QStringLiteral("en"),
                                      const gw::Catalogue *items = &catalogue,
@@ -179,7 +185,10 @@ class TstWizard : public QObject
         }
         gw::WizardSetup setup;
         setup.catalogue = items;
-        setup.runChecks = [] {
+        setup.runChecks = [this] {
+            while (m_holdChecks)
+                QThread::msleep(5);
+            m_checksEnded = true;
             gw::CheckResults r;
             r.insert(QStringLiteral("update"), {gw::CheckState::NotDone, QStringLiteral("2 waiting")});
             r.insert(QStringLiteral("codecs"), {gw::CheckState::NotDone, {}});
@@ -439,7 +448,7 @@ private slots:
         QVERIFY(parserRow->isChecked());
         w->row(QStringLiteral("terminal"))->toggle()->click();
         QVERIFY(!parserRow->isChecked());
-        QVERIFY2(parserRow->reason().contains(QLatin1String("Title of terminal includes it")),
+        QVERIFY2(parserRow->reason().contains(QString(QChar(0x2068) + QStringLiteral("Title of terminal") + QChar(0x2069) + QStringLiteral(" includes it"))),
                  qPrintable(parserRow->reason()));
         w->row(QStringLiteral("terminal"))->toggle()->click();
         QVERIFY2(parserRow->reason().isEmpty(), qPrintable(parserRow->reason()));
@@ -454,10 +463,10 @@ private slots:
         auto *assistantRow = w->row(QStringLiteral("assistant"));
         QVERIFY2(assistantRow->reason().isEmpty(), qPrintable(assistantRow->reason()));
         w->row(QStringLiteral("host"))->toggle()->click();
-        QCOMPARE(assistantRow->reason(), QStringLiteral("Title of host offers this too."));
+        QCOMPARE(assistantRow->reason(), QChar(0x2068) + QStringLiteral("Title of host") + QChar(0x2069) + QStringLiteral(" offers this too."));
         assistantRow->toggle()->click();
         QVERIFY(assistantRow->isChecked());
-        QCOMPARE(assistantRow->reason(), QStringLiteral("Title of host offers this too."));
+        QCOMPARE(assistantRow->reason(), QChar(0x2068) + QStringLiteral("Title of host") + QChar(0x2069) + QStringLiteral(" offers this too."));
         w->row(QStringLiteral("host"))->toggle()->click();
         QVERIFY2(assistantRow->reason().isEmpty(), qPrintable(assistantRow->reason()));
     }
@@ -1223,6 +1232,90 @@ private slots:
     // GRND-0079's VM run, in Arabic and Hebrew: "26 Oct 2026 05:46:39"
     // showed as "Oct 2026 05:46:39 26", its day apart from the rest. The
     // date keeps its own direction, as the file's name does.
+    // GRND-0090: a created time with no offset, from a hand-made file, is
+    // read as UTC, as this program's own writer means it. Red only where
+    // local time is not UTC.
+    void aSavedTimeWithNoOffsetIsUtc()
+    {
+        m_saved.created = QStringLiteral("2026-10-26T05:46:39");
+        auto w = fromSaved();
+        QVERIFY(w);
+        const QString date = QLocale().toString(
+            QDateTime::fromString(m_saved.created + QLatin1Char('Z'), Qt::ISODate).toLocalTime(), QLocale::ShortFormat);
+        bool seen = false;
+        for (auto *label : w->currentPage()->findChildren<QLabel *>()) {
+            if (!label->text().startsWith(QLatin1String("File: ")))
+                continue;
+            seen = true;
+            QVERIFY2(label->text().endsWith(QChar(0x2068) + date + QChar(0x2069)), qPrintable(label->text()));
+        }
+        QVERIFY(seen);
+    }
+
+    // GRND-0090: the program's end waits for the checks, which read the
+    // static catalogue, so its destructors never run under them.
+    void theChecksAreWaitedForAtTheEnd()
+    {
+        m_holdChecks = true;
+        m_checksEnded = false;
+        auto w = make();
+        std::thread release([this] {
+            QThread::msleep(200);
+            m_holdChecks = false;
+        });
+        QVERIFY(QMetaObject::invokeMethod(QCoreApplication::instance(), "aboutToQuit", Qt::DirectConnection));
+        const bool ended = m_checksEnded;
+        release.join();
+        QVERIFY(ended);
+    }
+
+    // GRND-0090: the state folder, which holds the user's choices and
+    // logs, is the user's alone.
+    void theStateFolderIsTheUsersAlone()
+    {
+        const QString dir = m_dir.filePath(QStringLiteral("state-alone"));
+        QVERIFY(gw::makeStateDir(dir));
+        QCOMPARE(QFileInfo(dir).permissions() & ~(QFile::ReadUser | QFile::WriteUser | QFile::ExeUser),
+                 QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
+        QVERIFY(QFile::setPermissions(dir, QFileInfo(dir).permissions() | QFile::ReadOther));
+        QVERIFY(gw::makeStateDir(dir)); // a folder made before is narrowed too
+        QVERIFY(!(QFileInfo(dir).permissions() & (QFile::ReadGroup | QFile::ReadOther | QFile::ExeOther)));
+    }
+
+    // GRND-0090: a second copy of the window is told one is open, so two
+    // never share the choices and stop files.
+    void aSecondCopyFindsTheFirst()
+    {
+        const QString dir = m_dir.filePath(QStringLiteral("state-lock"));
+        QVERIFY(gw::makeStateDir(dir));
+        QLockFile first(gw::wizardLockPath(dir));
+        QLockFile second(gw::wizardLockPath(dir));
+        QVERIFY(!gw::anotherCopyHolds(first));
+        QVERIFY(gw::anotherCopyHolds(second));
+        first.unlock();
+        QVERIFY(!gw::anotherCopyHolds(second));
+    }
+
+    // GRND-0090: a name with an ampersand shows it, and makes no shortcut.
+    void aSwitchShowsAnAmpersandAsWritten()
+    {
+        gw::Switch on(QStringLiteral("Bits &Pieces"));
+        QCOMPARE(on.label(), QStringLiteral("Bits &Pieces"));
+        QVERIFY(QKeySequence::mnemonic(on.text()).isEmpty());
+    }
+
+    // GRND-0090: with USER unset, the usual folder is never /run/media
+    // itself or another account's media folder.
+    void theUsualFolderIgnoresAMissingUser()
+    {
+        const QByteArray user = qgetenv("USER");
+        qunsetenv("USER");
+        const QString folder = gw::usualSetupFolder();
+        qputenv("USER", user);
+        QVERIFY2(folder == QDir::homePath() || folder.startsWith(QStringLiteral("/run/media/") + user + QLatin1Char('/')),
+                 qPrintable(folder));
+    }
+
     void theSavedDateKeepsItsOwnDirection()
     {
         m_saved.created = QStringLiteral("2026-10-26T05:46:39Z");

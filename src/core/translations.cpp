@@ -64,6 +64,13 @@ bool loadLanguage(const QString &code)
     for (auto &t : installed())
         QCoreApplication::removeTranslator(t.get());
     installed().clear();
+    // Sizes and dates in the language shown; the system's own locale
+    // where it is that language, so its region's formats stay.
+    auto useLocaleOf = [](const QString &shown) {
+        const QLocale chosen(shown);
+        QLocale::setDefault(QLocale::system().language() == chosen.language() ? QLocale::system() : chosen);
+    };
+    useLocaleOf(code == kPseudoLanguage ? QLocale::system().name() : code);
 
     if (code == kPseudoLanguage) {
         installed().push_back(std::make_unique<PseudoTranslator>());
@@ -74,8 +81,10 @@ bool loadLanguage(const QString &code)
         return true;
 
     auto own = std::make_unique<QTranslator>();
-    if (!own->load(QStringLiteral("groundwork_") + code, kResourceDir))
+    if (!own->load(QStringLiteral("groundwork_") + code, kResourceDir)) {
+        useLocaleOf(QStringLiteral("en")); // its text stays English
         return false;
+    }
     QCoreApplication::installTranslator(own.get());
     installed().push_back(std::move(own));
     // Qt's own words, such as standard button labels.

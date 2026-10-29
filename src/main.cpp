@@ -14,6 +14,7 @@
 #include <QApplication>
 #include <QCoreApplication>
 #include <QDir>
+#include <QLockFile>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QTextStream>
@@ -96,6 +97,17 @@ int wizardMode(int argc, char *argv[])
         return 3;
     }
 
+    // One window at a time: two would share the choices and stop files.
+    const QString stateDir = gw::defaultStateDir();
+    (void)gw::makeStateDir(stateDir);
+    QLockFile lock(gw::wizardLockPath(stateDir));
+    if (gw::anotherCopyHolds(lock)) {
+        tell(QMessageBox::Information,
+             QCoreApplication::translate("gw::Entry", "Groundwork is already open. Use the window that is open, "
+                                                      "or close it and start Groundwork again."));
+        return 1;
+    }
+
     std::unique_ptr<gw::Wizard> wizard;
     std::function<void(const QString &)> build = [&](const QString &code) {
         language = code;
@@ -110,7 +122,7 @@ int wizardMode(int argc, char *argv[])
         setup.runChecks = [files] { return gw::runChecks(gw::catalogue().items(), gw::CheckContext(files)); };
         setup.language = language;
         setup.workerProgram = QApplication::applicationFilePath();
-        setup.stateDir = gw::defaultStateDir();
+        setup.stateDir = stateDir;
         setup.liveSystem = gw::isLiveSystem(files);
         setup.jobs = {gw::Job::SetUp, gw::Job::CarryOver, gw::Job::PrepareDrive};
         setup.surveyDrives = [files] { return gw::surveyDrives(gw::CheckContext(files)); };

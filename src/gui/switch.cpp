@@ -6,7 +6,8 @@
 
 namespace gw {
 
-Switch::Switch(const QString &text, QWidget *parent) : QCheckBox(text, parent)
+// Each & doubled, so a name holding one shows it and makes no shortcut.
+Switch::Switch(const QString &text, QWidget *parent) : QCheckBox(QString(text).replace(u'&', QStringLiteral("&&")), parent)
 {
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 }
@@ -19,11 +20,13 @@ QRect Switch::trackRect() const
     return {margin(), (height() - side) / 2, 2 * side, side};
 }
 
+QString Switch::label() const { return text().replace(QStringLiteral("&&"), QStringLiteral("&")); }
+
 QSize Switch::sizeHint() const
 {
     const QFontMetrics metrics = fontMetrics();
     const int side = metrics.height();
-    return {2 * margin() + 2 * side + side / 2 + metrics.horizontalAdvance(text()), side + 2 * margin()};
+    return {2 * margin() + 2 * side + side / 2 + metrics.horizontalAdvance(label()), side + 2 * margin()};
 }
 
 bool Switch::hitButton(const QPoint &pos) const { return rect().contains(pos); }

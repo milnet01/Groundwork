@@ -27,6 +27,8 @@ public:
     void setReason(const QString &reason);
     QString reason() const;
     QCheckBox *toggle() const { return m_toggle; }
+    // The item's title, as its switch shows it.
+    QString title() const { return m_title; }
     // For an item that takes a value; null otherwise.
     QLineEdit *valueField() const { return m_value; }
     QString value() const;
@@ -43,6 +45,7 @@ private:
     void applyFontScale();
 
     QString m_id;
+    QString m_title;
     QCheckBox *m_toggle;
     QLabel *m_reason;
     QLineEdit *m_value = nullptr;

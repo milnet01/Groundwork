@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QLocale>
 #include <QScrollArea>
+#include <QTimeZone>
 #include <QVBoxLayout>
 
 namespace gw {
@@ -53,7 +54,11 @@ void SavedSetupPage::makeRows()
     SavedSetup &saved = *m_wizard->savedSetup();
     saved.rowsMade = true;
     // Another file read since: its rows go, and the page is made afresh.
-    delete findChild<QScrollArea *>();
+    // Taken off the page now, so the window's fitting finds the new one.
+    if (auto *old = findChild<QScrollArea *>()) {
+        old->setParent(nullptr);
+        old->deleteLater();
+    }
     m_inner = new QWidget;
     auto *rows = new QVBoxLayout(m_inner);
     auto *scroll = new QScrollArea(this);
@@ -64,7 +69,10 @@ void SavedSetupPage::makeRows()
     m_outer->addWidget(scroll);
 
     const Manifest &m = saved.manifest;
-    const QDateTime created = QDateTime::fromString(m.created, Qt::ISODate);
+    QDateTime created = QDateTime::fromString(m.created, Qt::ISODate);
+    // A time with no offset is UTC, as the writer means it.
+    if (created.timeSpec() == Qt::LocalTime)
+        created = QDateTime(created.date(), created.time(), QTimeZone::UTC);
     rows->addWidget(wrapped(m_inner, created.isValid()
                                          ? tr("File: %1, saved %2")
                                                .arg(isolated(QFileInfo(saved.file).fileName()),

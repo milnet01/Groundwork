@@ -42,6 +42,14 @@
 namespace gw {
 namespace {
 
+// The checks and a saved file's read use the static catalogue, so the
+// program's end waits for their thread rather than run its destructors
+// under it.
+void waitAtTheEnd(QThread *thread)
+{
+    QObject::connect(qApp, &QCoreApplication::aboutToQuit, thread, [thread] { thread->wait(); });
+}
+
 QString levelTitle(Level level)
 {
     switch (level) {
@@ -76,6 +84,7 @@ QString jobTitle(Job job)
 
 class WelcomePage : public QWizardPage
 {
+    Q_OBJECT
 public:
     WelcomePage(Wizard *wizard, const QString &language) : QWizardPage(wizard), m_wizard(wizard)
     {
@@ -279,6 +288,7 @@ private:
 
 class ReviewPage : public QWizardPage
 {
+    Q_OBJECT
 public:
     explicit ReviewPage(Wizard *wizard) : QWizardPage(wizard), m_wizard(wizard), m_list(new QLabel(this)), m_error(new QLabel(this))
     {
@@ -332,6 +342,7 @@ private:
 
 class RunWizardPage : public RunPage
 {
+    Q_OBJECT
 public:
     explicit RunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard) { makeSecretsOffer(); }
     void initializePage() override
@@ -344,7 +355,7 @@ public:
     void configure(const QString &program) { m_program = program; }
 
 private:
-    QString rowTitle(const QString &id) const { return m_wizard->row(id)->toggle()->text(); }
+    QString rowTitle(const QString &id) const { return m_wizard->row(id)->title(); }
     // A saved file holding secrets: after the run, the user may remove them
     // from it or delete it. Neither runs unless pressed (spec 4.8, INV-9).
     void makeSecretsOffer()
@@ -410,6 +421,7 @@ private:
 
 class PrepareRunWizardPage : public RunPage
 {
+    Q_OBJECT
 public:
     explicit PrepareRunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard)
     {
@@ -429,6 +441,7 @@ private:
 
 class CarryRunWizardPage : public RunPage
 {
+    Q_OBJECT
 public:
     explicit CarryRunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard)
     {
@@ -587,6 +600,7 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     QThread *thread = QThread::create([runChecks = m_setup.runChecks, results] { *results = runChecks(); });
     connect(thread, &QThread::finished, this, [this, results] { showResults(*results); });
     connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+    waitAtTheEnd(thread);
     thread->start();
 }
 
@@ -668,7 +682,7 @@ void Wizard::refreshRows(const QStringList &pulled, const QStringList &included,
 {
     for (ItemRow *row : std::as_const(m_rows))
         row->setChecked(m_selection.contains(row->id()));
-    const QString causeTitle = cause.isEmpty() ? QString() : m_rows.value(cause)->toggle()->text();
+    const QString causeTitle = cause.isEmpty() ? QString() : isolated(m_rows.value(cause)->title());
     for (const QString &id : pulled) {
         if (ItemRow *row = m_rows.value(id)) {
             row->setReason(on ? tr("Switched on because %1 needs it.").arg(causeTitle)
@@ -701,7 +715,7 @@ void Wizard::refreshRows(const QStringList &pulled, const QStringList &included,
         QString offer;
         for (const QString &by : item->alsoOfferedBy())
             if (m_selection.contains(by) && m_rows.contains(by)) {
-                offer = tr("%1 offers this too.").arg(m_rows.value(by)->toggle()->text());
+                offer = tr("%1 offers this too.").arg(isolated(m_rows.value(by)->title()));
                 break;
             }
         row->setReason(offer);
@@ -840,6 +854,7 @@ void Wizard::loadSavedSetup(const QString &file, std::function<void(bool read, c
         done(true, {});
     });
     connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+    waitAtTheEnd(thread);
     thread->start();
 }
 
@@ -941,7 +956,7 @@ bool Wizard::writeRestoreChoices() const
         if (m_selection.contains(entry.id) && (!entry.on || entry.on->isChecked()))
             entry.keep(kept);
     }
-    (void)QDir().mkpath(m_setup.stateDir);
+    (void)makeStateDir(m_setup.stateDir);
     QSaveFile file(restoreChoicesPath());
     const QJsonObject choices{{"file", m_saved->file}, {"manifest", manifestJson(kept)}};
     return file.open(QIODevice::WriteOnly) && file.write(QJsonDocument(choices).toJson()) >= 0 && file.commit();
@@ -963,7 +978,7 @@ bool Wizard::stopForClose()
     // Ask the Worker to stop between items, and keep this process until it
     // has, so neither Qt nor the AppImage's mount ends it early (design,
     // Stopping).
-    (void)QDir().mkpath(m_setup.stateDir);
+    (void)makeStateDir(m_setup.stateDir);
     QFile stop(stopFilePath(m_setup.stateDir));
     if (!stop.open(QIODevice::WriteOnly)) {
         // The Worker is never told, so it runs on; the window stays and says so.
@@ -994,3 +1009,5 @@ void Wizard::reject()
 }
 
 } // namespace gw
+
+#include "wizard.moc"

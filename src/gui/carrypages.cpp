@@ -2,6 +2,7 @@
 
 #include "switch.h"
 
+#include "core/statepaths.h"
 #include "core/translations.h"
 
 #include <QCoreApplication>
@@ -21,6 +22,9 @@
 
 #include <algorithm>
 #include <memory>
+
+#include <pwd.h>
+#include <unistd.h>
 
 namespace gw {
 namespace {
@@ -73,7 +77,12 @@ qint64 settingsBytes(const Manifest &manifest)
 
 QString usualSetupFolder()
 {
-    const QDir media(QStringLiteral("/run/media/") + qEnvironmentVariable("USER"));
+    // The account's own name, since USER may be unset and /run/media/ alone
+    // lists every account's folder.
+    const passwd *account = getpwuid(geteuid());
+    if (!account || !account->pw_name || !*account->pw_name)
+        return QDir::homePath();
+    const QDir media(QStringLiteral("/run/media/") + QString::fromLocal8Bit(account->pw_name));
     const QStringList sticks = media.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
     return sticks.isEmpty() ? QDir::homePath() : media.filePath(sticks.first());
 }
@@ -289,7 +298,7 @@ bool SavePage::validatePage()
     manifest.groundwork = m_choice->version;
     manifest.systemId = m_choice->system.id;
     manifest.systemVersion = m_choice->system.versionId;
-    (void)QDir().mkpath(QFileInfo(m_choice->choicesPath).path());
+    (void)makeStateDir(QFileInfo(m_choice->choicesPath).path());
     QSaveFile file(m_choice->choicesPath);
     const QJsonObject choices{{"output", m_choice->output()}, {"manifest", manifestJson(manifest)}};
     const bool saved = file.open(QIODevice::WriteOnly) && file.write(QJsonDocument(choices).toJson()) >= 0

@@ -72,6 +72,16 @@ class TstTranslations : public QObject
 private slots:
     void cleanup() { gw::loadLanguage(QStringLiteral("en")); }
 
+    // GRND-0090: sizes and dates follow the language chosen, not only the
+    // system's.
+    void theChosenLanguageSetsTheLocale()
+    {
+        QVERIFY(gw::loadLanguage(QStringLiteral("de")));
+        QCOMPARE(QLocale().language(), QLocale::German);
+        QVERIFY(gw::loadLanguage(QStringLiteral("en")));
+        QCOMPARE(QLocale().language(), QLocale::English);
+    }
+
     void englishIsAlwaysAvailable() { QVERIFY(gw::availableLanguages().contains(QStringLiteral("en"))); }
 
     void unknownLanguageKeepsTheSourceText()

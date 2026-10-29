@@ -171,6 +171,7 @@ int Worker::runZypper(const QStringList &argv, const QByteArray &input, QStringL
 
 void Worker::openLog()
 {
+    (void)makeStateDir(m_stateDir);
     (void)QDir().mkpath(m_stateDir + QStringLiteral("/logs"));
     // A stop file left by an earlier run must not stop this one.
     QFile::remove(stopFilePath(m_stateDir));

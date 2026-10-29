@@ -303,6 +303,11 @@ items.
   the AppImage's mount ends the Worker early. Where the stop file
   cannot be written, the window stays and says the run goes on to its
   end. The Worker also survives its output being closed.
+- **One window at a time.** A second window says one is open and
+  closes, since two would share the choices and stop files
+  (`anotherCopyHolds`). Groundwork takes away other users' access to
+  the state folder, `$XDG_STATE_HOME/groundwork` (`makeStateDir`),
+  since it holds the user's choices and logs.
 - **Root** is asked for once per run. Every `sudo` is started directly
   by the Worker process, never by a helper or a shell: with no
   terminal, `sudo` keys its remembered password to the process that

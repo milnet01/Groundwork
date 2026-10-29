@@ -906,6 +906,10 @@
         <translation>請以您自己的身分啟動 Groundwork，而不是以 root 身分。它會在需要時詢問密碼。</translation>
     </message>
     <message>
+        <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
         <translation>用法：groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
     </message>

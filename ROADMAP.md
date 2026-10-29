@@ -1772,7 +1772,7 @@ scheduled.
   Source: review-code-2026-10-29.
   Lanes: carry.
 
-- 📋 [GRND-0090] **Wizard: ten low-severity review findings.**
+- ✅ [GRND-0090] **Wizard: ten low-severity review findings.**
   Queued, not fixed: user ruling 2026-10-29. Each is in
   docs/reviews/review-code-2026-10-29/lane-02-wizard-gui.md § Low / Info:
   savedsetuppage.cpp:56 (manual delete of a parented child),
@@ -1784,6 +1784,14 @@ scheduled.
   offset), main.cpp:110 and wizard.cpp:570 (checks thread outlives
   main), wizard.cpp:863/899 (no single-instance guard),
   carrypages.cpp:66 (USER unset).
+  Fixed 2026-10-29, all ten. A second window says one is open and
+  closes. The state folder loses other users' access. Sizes and dates
+  follow the chosen language. Item names in reasons are isolated. A
+  created time with no offset reads as UTC. A Switch shows & as written,
+  with no shortcut. The usual folder uses the account's name, not USER.
+  The program's end waits for the checks and saved-file threads. The
+  pages have Q_OBJECT, and the old scroll area goes by deleteLater. Each
+  observable fix has a test that failed first.
   **Layman:** Small edge cases in the wizard window: file permissions, shortcuts in names, dates, two copies running at once.
   Kind: review-fix.
   Source: review-code-2026-10-29.

@@ -15,6 +15,8 @@ class Switch : public QCheckBox
 public:
     explicit Switch(const QString &text, QWidget *parent = nullptr);
 
+    // The text as given, which text() holds with each & doubled.
+    QString label() const;
     QSize sizeHint() const override;
 
 protected:
