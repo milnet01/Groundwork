@@ -72,7 +72,7 @@ void SavedSetupPage::makeRows()
     QDateTime created = QDateTime::fromString(m.created, Qt::ISODate);
     // A time with no offset is UTC, as the writer means it.
     if (created.timeSpec() == Qt::LocalTime)
-        created = QDateTime(created.date(), created.time(), QTimeZone::UTC);
+        created = QDateTime(created.date(), created.time(), QTimeZone::utc());
     rows->addWidget(wrapped(m_inner, created.isValid()
                                          ? tr("File: %1, saved %2")
                                                .arg(isolated(QFileInfo(saved.file).fileName()),
