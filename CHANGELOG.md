@@ -12,6 +12,16 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-10-29
+
+**Theme:** Ready for the next install.
+
+### Fixed
+
+- **Groundwork builds again with Qt versions older than 6.5.**
+  0.5.0 was tagged but never published, since its check on GitHub
+  failed for this; 0.5.1 carries all of 0.5.0's changes.
+
 ## [0.5.0] - 2026-10-29
 
 **Theme:** Ready for the next install.

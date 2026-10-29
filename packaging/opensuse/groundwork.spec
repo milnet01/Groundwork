@@ -25,7 +25,7 @@
 # expands macros inside comments, and a single one can turn into shell.
 
 Name:           groundwork
-Version:        0.5.0
+Version:        0.5.1
 Release:        0
 Summary:        First-run setup wizard for openSUSE
 License:        MIT
