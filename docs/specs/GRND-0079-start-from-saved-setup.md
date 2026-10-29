@@ -115,13 +115,37 @@ Carried items come after every Groundwork item, in this order:
 | `carried-source:<alias>` | zypper source | Done when `/etc/zypp/repos.d` holds a source with this alias or this `baseurl` (`parseRepoFile`) | § 4.3 |
 | `carried-packages` | file | Done when `rpm -q` finds every kept name; the detail names the rest | § 4.4 |
 | `carried-flatpaks` | file | Done when `flatpak list --app --columns=application,installation` lists every kept app | one `flatpak install -y --noninteractive --system` or `--user` `REMOTE APP` step per missing app, `alsoOk = {1}` |
+| `carried-settings` | file | `tar --diff` of the kept paths: 0 Done, 1 not done unless it reports only owners and modes, 2 couldn't tell | § 4.5 |
 
 A Flatpak remote becomes no item. `flatpak remote-add` of its URL alone
 exits 1, "public key not found", and the manifest holds no key (measured
 2026-10-20 in a Tumbleweed container with Flathub's beta repository).
 The page names each one for the user to add (user, 2026-10-20). An app
 from it fails its step and is named by the `HINT`.
-| `carried-settings` | file | `tar --diff` of the kept paths: 0 Done, 1 not done unless it reports only owners and modes, 2 couldn't tell | § 4.5 |
+
+A Flathub app saved with `"installation": "user"` is restored the way
+the person restoring chooses (GRND-0088, user 2026-10-29). Its row on
+the page has a second switch, "For everyone on this computer", off. Off
+keeps it just for this user. On writes `"installation": "system"` for it
+in the choices (§ 4.6); that is the one change a choice may make to an
+entry. No other app gets the switch: a remote other than Flathub is the
+user's to add (§ 4.7).
+
+An app just for this user needs Flathub in the user's own installation.
+The `flathub` item adds it system-wide only, so the Worker's `flatpak
+install --user flathub APP` failed with "No remote refs found for
+'flathub'" (GRND-0086's VM check, 2026-10-29). So before the first such
+app, `carried-flatpaks` runs one step as the user:
+
+```
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+It needs no password. The apps for everyone come first, so a failed
+step cannot stop them. Measured 2026-10-29 in a
+`registry.opensuse.org/opensuse/tumbleweed` container, as a normal user:
+the command exits 0, and 0 again when Flathub is already there; then
+`flatpak remote-ls --user --app flathub` lists apps.
 
 The colon in a carried id cannot clash with a Groundwork id: none has one,
 and § 4.7 of the saved file's spec admits none in a package name or item
@@ -252,14 +276,17 @@ The wizard writes `$XDG_STATE_HOME/groundwork/restore-choices.json`:
 ```
 
 `manifest` lists only what stayed switched on, in the format of § 4.6 of
-the saved file's spec. The run starts as:
+the saved file's spec. A Flathub app switched to everyone on this
+computer carries `"installation": "system"` (§ 4.2). The run starts as:
 
 ```
 groundwork --worker --setup-choices CHOICES_FILE [--lang LANG] [--set ID=VALUE]... ID...
 ```
 
 The Worker reads the file again with `readSetupFile`. Every entry of the
-choices' manifest must be in the file's manifest. Otherwise it says
+choices' manifest must be in the file's manifest. A Flathub app counts
+as there when only its installation differs, `"user"` in the file and
+`"system"` in the choices. Otherwise it says
 `SETUP_REFUSED|<reason>` and exits 2, before any step. It then builds
 the carried items from the choices' manifest, and runs the ids as
 `Worker::run` does today.
@@ -314,7 +341,8 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
 
 - **INV-2** — No entry reaches a command unless the Worker read it from
   the file itself: an entry in the choices that the file lacks refuses
-  the run with `SETUP_REFUSED`, before any step.
+  the run with `SETUP_REFUSED`, before any step. INV-11 names the one
+  change a choice may make.
   *Test:* `tests/tst_worker.cpp`, choices naming package `evil` that the
   file lacks; exit 2, no `zypper` call recorded.
   *Breaks when:* the Worker builds items from the choices file alone.
@@ -385,6 +413,23 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
   *Breaks when:* the Worker does not split a failed install, splits
   without a limit, or ends a step `ok` when no part installed.
 
+- **INV-11** — A Flathub app saved just for one user is restored just
+  for that user, with no password, unless the person restoring switches
+  it to everyone on this computer. Only such an app may change, and only
+  from user to system (GRND-0088, 2026-10-29).
+  *Test:* `tests/tst_carry.cpp`, a user app and a system app from
+  `flathub`; the steps are the system app's install, then the `--user
+  --if-not-exists` remote-add, then the user app's install, the last
+  two with `needsRoot` false. `tests/tst_worker.cpp`, choices with a
+  file's user Flathub app as `system`; the run goes ahead. The same
+  change to an app from another remote; `SETUP_REFUSED`, exit 2.
+  `tests/tst_wizard.cpp`, the page shows "For everyone on this
+  computer" for the user Flathub app only, off; switched on, the
+  choices hold `"system"` for it.
+  *Breaks when:* the remote-add is missing, runs through `sudo`, or
+  comes before a system app's install; or the Worker accepts any other
+  change.
+
 ## 6. Failure modes
 
 - **The stick is pulled during the run:** the settings item's `tar`
@@ -396,6 +441,9 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
 - **The file changed between the page and the run:** INV-2 refuses the
   run if an entry is gone; the run page shows the reason.
 - **A Flatpak remote:** named on the page, never added (§ 4.2).
+- **Flathub cannot be added for the user:** the step fails, and so does
+  `carried-flatpaks`. The apps for everyone are installed by then
+  (§ 4.2).
 - **A setting cannot be written** (a link out of the home folder, a full
   disk): `tar` exits 2; the files before it are written, with their
   copies; the item fails, naming the path.
@@ -408,11 +456,11 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
 
 ## 7. Tests
 
-- `tests/tst_carry.cpp`: INV-3, INV-5, INV-6, INV-7, with fixture
+- `tests/tst_carry.cpp`: INV-3, INV-5, INV-6, INV-7, INV-11, with fixture
   `repos.d`, fake `rpm` and `flatpak`, and real `tar`.
-- `tests/tst_worker.cpp`: INV-2, INV-3, INV-4, INV-5, INV-9, INV-10, driving the
+- `tests/tst_worker.cpp`: INV-2, INV-3, INV-4, INV-5, INV-9, INV-10, INV-11, driving the
   built program with its fakes.
-- `tests/tst_wizard.cpp`: INV-1, INV-8, INV-9.
+- `tests/tst_wizard.cpp`: INV-1, INV-8, INV-9, INV-11.
 - Manual, before release: a real file from this machine on a vfat
   stick, restored in a fresh Tumbleweed VM.
 - Each test is seen to fail before its code exists.
@@ -457,6 +505,7 @@ Neither runs unless pressed. Leaving the page keeps the file as it is.
 | INV-8 | `tests/tst_wizard.cpp` |
 | INV-9 | `tests/tst_wizard.cpp`, `tests/tst_worker.cpp` |
 | INV-10 | `tests/tst_worker.cpp` |
+| INV-11 | `tests/tst_carry.cpp`, `tests/tst_worker.cpp`, `tests/tst_wizard.cpp` |
 | A carried source's packages are what the user expects | **nothing** — the source is restored as it was; what it serves now is its owner's |
 
 ## 11. Cross-doc impact

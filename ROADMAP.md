@@ -1580,6 +1580,10 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   password. Needs GRND-0079 spec § 4.4 and § 4.6 (the choices file)
   amended before building. A first test written for a system-wide-only
   fix was set aside: /mnt/Emulators/claude-scratch/gw88-systemwide-test.patch.
+  Spec amended 2026-10-29:
+  docs/specs/GRND-0079-start-from-saved-setup.md § 4.2, § 4.6, INV-11. A
+  container run the same day measured flatpak remote-add --user
+  --if-not-exists flathub as exit 0, twice, with no password.
   **Layman:** Flatpak apps you had installed just for yourself, rather than for the whole computer, do not come back from a saved file.
   Kind: fix.
   Source: grnd-0086-vm-check-2026-10-29.
