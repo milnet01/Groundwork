@@ -2002,7 +2002,7 @@ scheduled.
   Source: grnd-0088-vm-check-2026-10-29.
   Lanes: gui.
 
-- 📋 [GRND-0103] **The release recipe does not name the AppImage it attaches.**
+- ✅ [GRND-0103] **The release recipe does not name the AppImage it attaches.**
   Found cutting 0.5.1 (2026-10-29). .claude/bump.json has no
   artifacts field, so cut-release would attach nothing, while 0.4.0 and
   0.5.1 each attached build/appimage/Groundwork-x86_64.AppImage, built by
@@ -2010,6 +2010,11 @@ scheduled.
   Fix: add an artifacts entry and a recipe todo that builds the AppImage,
   so a release cannot ship without it or with one built from another
   commit.
+  Fixed 2026-10-29: .claude/bump.json now names
+  build/appimage/Groundwork-x86_64.AppImage in artifacts, and a todo
+  deletes any earlier AppImage, then builds it from the bumped tree.
+  Not yet exercised by a real release; the next cut-release run is the
+  first.
   **Layman:** The release steps forget to say that the download file must be built and attached.
   Kind: chore.
   Source: cut-release-2026-10-29.
