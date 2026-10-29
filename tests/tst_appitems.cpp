@@ -48,6 +48,13 @@ private slots:
         QCOMPARE(native.check(context()).state, gw::CheckState::Done);
         fake(QStringLiteral("rpm"), "exit 1");
         QCOMPARE(native.check(context()).state, gw::CheckState::NotDone);
+        // Without Flatpak, an app installed the ordinary way is still done,
+        // so it is not offered twice.
+        QVERIFY(QFile::remove(m_bin.filePath(QStringLiteral("flatpak"))));
+        fake(QStringLiteral("rpm"), "[ \"$2\" = y-native ] && exit 0; exit 1");
+        QCOMPARE(native.check(context()).state, gw::CheckState::Done);
+        fake(QStringLiteral("rpm"), "exit 1");
+        QCOMPARE(native.check(context()).state, gw::CheckState::NotDone);
         const auto steps = app.applySteps(tumbleweed(), context());
         QCOMPARE(steps[0].argv, QStringList({"flatpak", "install", "-y", "--noninteractive", "--system", "flathub", "org.example.X"}));
     }

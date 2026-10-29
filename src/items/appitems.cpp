@@ -13,15 +13,16 @@ QString FlathubAppItem::applySentence() const { return QCoreApplication::transla
 CheckResult FlathubAppItem::check(const CheckContext &context) const
 {
     const CommandResult r = context.run({QStringLiteral("flatpak"), QStringLiteral("info"), m_appId});
+    if (r.ok())
+        return {CheckState::Done, {}};
+    // Asked even without Flatpak, so an app installed the ordinary way is not offered twice.
+    for (const QString &package : m_native)
+        if (context.run({QStringLiteral("rpm"), QStringLiteral("-q"), package}).ok())
+            return {CheckState::Done, QCoreApplication::translate("gw::Apps", "Installed from the system's software sources.")};
     if (!r.started)
         return {CheckState::NotDone, QCoreApplication::translate("gw::Apps", "Flatpak is not installed.")};
     if (r.timedOut)
         return {CheckState::CouldNotTell, QCoreApplication::translate("gw::Apps", "Flatpak did not answer.")};
-    if (r.exitCode == 0)
-        return {CheckState::Done, {}};
-    for (const QString &package : m_native)
-        if (context.run({QStringLiteral("rpm"), QStringLiteral("-q"), package}).ok())
-            return {CheckState::Done, QCoreApplication::translate("gw::Apps", "Installed from the system's software sources.")};
     return {CheckState::NotDone, {}};
 }
 
