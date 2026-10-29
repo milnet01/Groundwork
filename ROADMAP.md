@@ -1875,13 +1875,16 @@ scheduled.
   Source: check-code-2026-10-29.
   Lanes: all.
 
-- 📋 [GRND-0095] **Review the changed tests for 0.5.0.**
+- 🚫 [GRND-0095] **Review the changed tests for 0.5.0.**
   review-code sends changed test files to review-tests:
   tests/CMakeLists.txt, tst_carry.cpp, tst_claudecodeitem.cpp,
   tst_drives.cpp, tst_wizard.cpp, tst_worker.cpp. Also from
   verify-delivery 2026-10-29: no test covers changing the language
   while checks or gathering run (fixes 36f819f, 6009c39), nor the
   non-Flathub sources line on the saved-setup page.
+  Dropped 2026-10-29: the user confirmed the 2026-10-07 ruling that
+  this project runs no reviews. Each fix made for 0.5.0 on 2026-10-29
+  has a test run red first.
   **Layman:** Check that the tests added for 0.5.0 really test what they claim.
   Kind: test.
   Source: review-code-2026-10-29.
@@ -1958,6 +1961,11 @@ scheduled.
   Discord the Discord item installed for everyone is not installed again
   just for the user. Test red first. Spec GRND-0079 § 4.1's table says
   so. Not yet run in a VM.
+  VM-checked 2026-10-29 on a fresh Tumbleweed VM, the AppImage built
+  from b339eb0: a file keeping app-discord and com.discordapp.Discord
+  for the user ran system-update, flathub, app-discord, then
+  carried-flatpaks read "Already done."; flatpak list showed Discord
+  once, system.
   **Layman:** Restoring a saved setup can install the same Flatpak app twice, once for everyone and once just for you.
   Kind: fix.
   Source: grnd-0088-vm-check-2026-10-29.
@@ -1973,6 +1981,9 @@ scheduled.
   saving (parseFlatpakApps) and dropped without a word when reading a
   file saved before. Test red first. Spec GRND-0078 § 4.2 says so. Not
   yet run in a VM.
+  VM-checked 2026-10-29 in the same run: the file also kept
+  io.qt.PySide.BaseApp; it was dropped on reading, the run ended with no
+  failure, and no BaseApp was installed.
   **Layman:** Your saved file lists a Flatpak building block as if it were an app, and it fails to come back.
   Kind: fix.
   Source: grnd-0088-vm-check-2026-10-29.
