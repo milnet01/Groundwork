@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=102 -->
+<!-- ants-roadmap-id-high-water: GRND=103 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2001,3 +2001,16 @@ scheduled.
   Kind: ux.
   Source: grnd-0088-vm-check-2026-10-29.
   Lanes: gui.
+
+- 📋 [GRND-0103] **The release recipe does not name the AppImage it attaches.**
+  Found cutting 0.5.1 (2026-10-29). .claude/bump.json has no
+  artifacts field, so cut-release would attach nothing, while 0.4.0 and
+  0.5.1 each attached build/appimage/Groundwork-x86_64.AppImage, built by
+  hand with packaging/appimage/build-appimage.sh from the tagged tree.
+  Fix: add an artifacts entry and a recipe todo that builds the AppImage,
+  so a release cannot ship without it or with one built from another
+  commit.
+  **Layman:** The release steps forget to say that the download file must be built and attached.
+  Kind: chore.
+  Source: cut-release-2026-10-29.
+  Lanes: packaging.

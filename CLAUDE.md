@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 4 — Between items.
-**In flight:** nothing; 0.4.0 released 2026-10-16 (GitHub and OBS); 0.5.0 built 2026-10-29, unreleased; VM pass over save/restore passed 2026-10-29 (GRND-0088 closed); every fix-kind Backlog item fixed 2026-10-29, GRND-0100 and 0101 not yet VM-checked. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
+**In flight:** nothing; 0.5.1 released 2026-10-29 (GitHub and OBS); the v0.5.0 tag exists but was never published (its GitHub check failed). Every fix-kind Backlog item fixed 2026-10-29. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where
@@ -64,6 +64,12 @@ git config ants.gate.docsGlob "$(./scripts/local-ci.sh --docs-glob)"
 
 Linter versions are pinned in `scripts/ci-tools.env`. The workflow
 installs those versions, and the gate warns locally when yours differ.
+
+Qt is not pinned. GitHub's `ubuntu-latest` has an older Qt 6 than
+Tumbleweed, so a Qt API newer than the runner's passes the local gate
+and fails on GitHub: `QTimeZone::UTC` (Qt 6.5) left CI red for twelve
+pushes on 2026-10-29 and cost the v0.5.0 tag, which was never
+published. After a push, read `gh run list --commit <full SHA>`.
 
 ### Translations
 
