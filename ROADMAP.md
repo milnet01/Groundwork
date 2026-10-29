@@ -1562,7 +1562,7 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   Source: grnd-0079-manual-check-2026-10-26.
   Lanes: carry, worker.
 
-- 📋 [GRND-0088] **Flathub apps installed per user are not restored.**
+- 🚧 [GRND-0088] **Flathub apps installed per user are not restored.**
   Found in GRND-0086's VM check (2026-10-29); the 2026-10-26 run's log
   shows the same, though GRND-0079's note recorded all 17 as back.
   Five saved apps from Flathub had "installation": "user". Each step
@@ -1584,6 +1584,8 @@ Preparing a drive and Carrying a setup over). Split from GRND-0076 on
   docs/specs/GRND-0079-start-from-saved-setup.md § 4.2, § 4.6, INV-11. A
   container run the same day measured flatpak remote-add --user
   --if-not-exists flathub as exit 0, twice, with no password.
+  Built 2026-10-29 (585c875), tests green with fakes. Still owed: the VM
+  check, a real per-user Flathub app restored both ways.
   **Layman:** Flatpak apps you had installed just for yourself, rather than for the whole computer, do not come back from a saved file.
   Kind: fix.
   Source: grnd-0086-vm-check-2026-10-29.
