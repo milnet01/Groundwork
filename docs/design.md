@@ -287,7 +287,11 @@ items.
 - **zypper's exit codes in an apply step** are read with OneUp's rule:
   0, 100–103 and 106 are success. 106 also means a repository was
   skipped, and the user is told which. 103 means zypper updated itself,
-  so the step is run once more to finish (`man zypper`, EXIT CODES). In
+  so the step is run once more to finish (`man zypper`, EXIT CODES).
+  One step departs from it: when installing the carried programs exits
+  4 or 8, the Worker installs them in parts. That step ends ok with the
+  names that failed alone left out, within the limits in spec
+  GRND-0079 § 4.4. In
   a check, 106 gives "couldn't tell", except in the update item's
   check (Check results, above).
 - **Stopping** is cooperative, between items. The Worker never signals a

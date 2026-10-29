@@ -76,6 +76,10 @@ groundwork --worker [--lang LANG] --setup-choices CHOICES_FILE [--set ITEM=VALUE
 - After a carried item ends `ok`, its check runs again. A `HINT` with
   its id names what it could not put back, such as a program this
   system lacks.
+- `carried-packages` installs in parts when zypper exits 4 or 8. It
+  ends `ok` with the names that failed alone left out, and the `HINT`
+  names them. It ends `fail` when no part installed, or more than eight
+  names failed alone (spec § 4.4).
 
 Two more forms act on a saved file, each as one item asking for no
 password (GRND-0079 spec § 4.8):
