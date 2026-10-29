@@ -13,6 +13,8 @@ class QVBoxLayout;
 
 namespace gw {
 
+class PasswordChannel;
+
 class RunPage : public QWizardPage
 {
     Q_OBJECT
@@ -43,6 +45,7 @@ private:
     void finish();
 
     QProcess m_process;
+    PasswordChannel *m_passwords;
     QString m_pending;
     bool m_started = false;
     QHash<QString, QLabel *> m_status;

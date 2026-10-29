@@ -1,6 +1,7 @@
 #include "runpage.h"
 
 #include "core/markers.h"
+#include "passwordchannel.h"
 
 #include <QLabel>
 #include <QPlainTextEdit>
@@ -13,7 +14,7 @@
 namespace gw {
 
 RunPage::RunPage(QWidget *parent)
-    : QWizardPage(parent), m_rows(new QVBoxLayout), m_hintLabel(new QLabel(this)),
+    : QWizardPage(parent), m_passwords(new PasswordChannel(this)), m_rows(new QVBoxLayout), m_hintLabel(new QLabel(this)),
       m_summary(new QLabel(this)), m_details(new QPlainTextEdit(this)),
       m_oneUp(new QPushButton(tr("Open OneUp to keep this computer up to date"), this))
 {
@@ -65,6 +66,7 @@ void RunPage::finish()
     if (!m_pending.isEmpty())
         handleLine(m_pending);
     m_pending.clear();
+    m_passwords->close();
     if (m_summary->text().isEmpty())
         m_summary->setText(tr("Groundwork stopped unexpectedly. The details below say why."));
     m_oneUp->setVisible(m_offersOneUp && !QStandardPaths::findExecutable(QStringLiteral("oneup")).isEmpty());
@@ -93,6 +95,12 @@ void RunPage::start(const QString &program, const QStringList &arguments,
     // A later run on this page, such as removing secrets, says its own outcome.
     m_summary->clear();
     m_started = true;
+    // The Worker's sudo passes this on to askpass mode, so the box opens
+    // as this window's own (GRND-0102).
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    if (m_passwords->listen())
+        env.insert(QString::fromLatin1(kAskpassSocketVar), m_passwords->path());
+    m_process.setProcessEnvironment(env);
     m_process.start(program, arguments);
     emit completeChanged();
 }

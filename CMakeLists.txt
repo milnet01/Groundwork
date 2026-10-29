@@ -116,6 +116,7 @@ add_library(groundwork_gui STATIC
     src/gui/askpassdialog.cpp
     src/gui/carrypages.cpp
     src/gui/itemrow.cpp
+    src/gui/passwordchannel.cpp
     src/gui/preparepages.cpp
     src/gui/runpage.cpp
     src/gui/savedsetuppage.cpp

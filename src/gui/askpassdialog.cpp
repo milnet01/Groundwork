@@ -1,5 +1,7 @@
 #include "askpassdialog.h"
 
+#include "passwordchannel.h"
+
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QLineEdit>
@@ -51,6 +53,20 @@ QString AskpassDialog::password() const { return m_field->text(); }
 
 int runAskpass(const QString &sudoPrompt)
 {
+    // Started from the window, the window shows the box (GRND-0102).
+    if (const QString channel = qEnvironmentVariable(kAskpassSocketVar); !channel.isEmpty()) {
+        QByteArray reply;
+        switch (askWindow(channel, sudoPrompt, &reply)) {
+        case Asked::Answered:
+            std::fwrite(reply.constData(), 1, size_t(reply.size()), stdout);
+            std::fflush(stdout);
+            return 0;
+        case Asked::Cancelled:
+            return 1;
+        case Asked::NoChannel:
+            break;
+        }
+    }
     AskpassDialog dialog(sudoPrompt);
     if (dialog.exec() != QDialog::Accepted)
         return 1;

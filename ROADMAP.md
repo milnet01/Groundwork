@@ -1995,7 +1995,7 @@ scheduled.
   Source: grnd-0088-vm-check-2026-10-29.
   Lanes: carry.
 
-- 📋 [GRND-0102] **The password box can be lost behind the main window.**
+- ✅ [GRND-0102] **The password box can be lost behind the main window.**
   Seen in GRND-0088's VM check (2026-10-29), run 1, on KDE Plasma
   Wayland with the window maximised. A click on the main window after
   Apply raised it over the password box. The box has no taskbar entry,
@@ -2003,6 +2003,13 @@ scheduled.
   password; minimising the main window found it. In run 2, untouched,
   the box stayed on top. Likely cause: the box is a separate process
   with no parent window. Not yet confirmed outside a VM.
+  Fixed 2026-10-29: the run page listens on a socket in a folder only
+  the user can open (PasswordChannel), and askpass mode asks it, so the
+  box opens as the window's own modal child. With no window listening,
+  askpass mode shows its own box. Tests: tst_askpass
+  theWindowShowsTheBoxAsItsOwn, cancelInTheWindowReadsAsCancel,
+  noWindowLeavesTheBoxToAskpass. Not yet tried on a real Plasma Wayland
+  desktop.
   **Layman:** If you click the main window while Groundwork asks for your password, the password box can hide behind it with no way to find it.
   Kind: ux.
   Source: grnd-0088-vm-check-2026-10-29.

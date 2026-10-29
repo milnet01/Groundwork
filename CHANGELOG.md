@@ -18,6 +18,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   message names the full disk and how much space is left, where it
   showed only an exit code.
 
+### Fixed
+
+- **The password box can no longer hide behind the main window.** It
+  now opens as part of Groundwork's window, so a click on the window
+  leaves it in front.
+
 ## [0.5.1] - 2026-10-29
 
 **Theme:** Ready for the next install.

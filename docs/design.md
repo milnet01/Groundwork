@@ -322,7 +322,12 @@ items.
   (`Defaults targetpw` in `/usr/etc/sudoers`, read 2026-10-02), and the
   user's own on Leap 16 (GRND-0013). The Worker passes `sudo -p %p`,
   so the box receives only that name. With a display, `sudo -A` shows the app's own password
-  box; without one, `sudo` asks on the terminal.
+  box; without one, `sudo` asks on the terminal. Started from the
+  window, the box is the window's own (GRND-0102). Askpass mode is a
+  process of its own, so a click on the window could hide its box. So
+  the run page listens on a socket in a folder only the user can open
+  (`PasswordChannel`), and askpass mode asks it for the password. With
+  no window listening, askpass mode shows its own box.
 - **Logging** goes to one file per run under the user's state directory,
   and the Worker's output is mirrored there.
 - **Persistence:** none, beyond the logs, the window's own settings, and

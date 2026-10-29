@@ -3,12 +3,16 @@
 // on OK.
 #include "core/translations.h"
 #include "gui/askpassdialog.h"
+#include "gui/passwordchannel.h"
 
 #include <QDialogButtonBox>
+#include <QFileInfo>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QtTest>
+
+#include <thread>
 
 class TstAskpass : public QObject
 {
@@ -76,6 +80,60 @@ private slots:
         const QString cancel = d.findChild<QDialogButtonBox *>()->button(QDialogButtonBox::Cancel)->text();
         gw::loadLanguage(QStringLiteral("en"));
         QVERIFY2(cancel != QLatin1String("Cancel") && cancel != QLatin1String("&Cancel"), qPrintable(cancel));
+    }
+
+    // Askpass mode asks the window, whose own box is its child, so a click
+    // on the window cannot hide it (GRND-0102).
+    void theWindowShowsTheBoxAsItsOwn()
+    {
+        QWidget window;
+        window.show();
+        gw::PasswordChannel channel(&window);
+        QVERIFY(channel.listen());
+        // The socket's folder is the user's alone.
+        QCOMPARE(QFileInfo(QFileInfo(channel.path()).path()).permissions() & 0x0077, QFileDevice::Permissions());
+
+        QByteArray reply;
+        gw::Asked asked = gw::Asked::NoChannel;
+        std::thread askpass([&] { asked = gw::askWindow(channel.path(), QStringLiteral("root"), &reply); });
+        gw::AskpassDialog *box = nullptr;
+        QTRY_VERIFY((box = window.findChild<gw::AskpassDialog *>()));
+        QCOMPARE(box->parentWidget(), &window);
+        QVERIFY(box->isModal());
+        QVERIFY2(allText(*box).contains(QLatin1String("administrator password")), qPrintable(allText(*box)));
+        QTest::keyClicks(box->passwordField(), QStringLiteral("s3cret"));
+        box->findChild<QDialogButtonBox *>()->button(QDialogButtonBox::Ok)->click();
+        askpass.join();
+        QCOMPARE(asked, gw::Asked::Answered);
+        QCOMPARE(reply, QByteArray("s3cret\n"));
+    }
+
+    void cancelInTheWindowReadsAsCancel()
+    {
+        QWidget window;
+        gw::PasswordChannel channel(&window);
+        QVERIFY(channel.listen());
+        QByteArray reply;
+        gw::Asked asked = gw::Asked::NoChannel;
+        std::thread askpass([&] { asked = gw::askWindow(channel.path(), QStringLiteral("root"), &reply); });
+        gw::AskpassDialog *box = nullptr;
+        QTRY_VERIFY((box = window.findChild<gw::AskpassDialog *>()));
+        box->findChild<QDialogButtonBox *>()->button(QDialogButtonBox::Cancel)->click();
+        askpass.join();
+        QCOMPARE(asked, gw::Asked::Cancelled);
+    }
+
+    // With no window listening, askpass mode shows its own box, as before.
+    void noWindowLeavesTheBoxToAskpass()
+    {
+        QWidget window;
+        gw::PasswordChannel channel(&window);
+        QVERIFY(channel.listen());
+        const QString path = channel.path();
+        channel.close();
+        QVERIFY(!QFileInfo::exists(QFileInfo(path).path()));
+        QByteArray reply;
+        QCOMPARE(gw::askWindow(path, QStringLiteral("root"), &reply), gw::Asked::NoChannel);
     }
 };
 
