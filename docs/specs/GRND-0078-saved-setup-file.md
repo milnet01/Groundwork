@@ -98,7 +98,10 @@ flatpak list --app --columns=application,origin,installation
 ```
 
 Tab-separated (measured 2026-10-15). Each line gives app id, remote and
-`system` or `user`.
+`system` or `user`. An id ending `.BaseApp` is left out, here and when
+a file is read: it is what other apps build on, not an app a person
+runs, and installing it by name failed on its several branches
+(GRND-0101).
 
 ### 4.3 Software sources
 

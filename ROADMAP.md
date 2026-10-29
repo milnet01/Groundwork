@@ -1963,12 +1963,16 @@ scheduled.
   Source: grnd-0088-vm-check-2026-10-29.
   Lanes: carry, catalogue.
 
-- 📋 [GRND-0101] **A Flatpak base app is saved as an app and fails on restore.**
+- ✅ [GRND-0101] **A Flatpak base app is saved as an app and fails on restore.**
   Found in GRND-0088's VM check (2026-10-29), run 1. The save listed
   io.qt.PySide.BaseApp as an app. Restoring it failed: "Multiple refs
   match 'io.qt.PySide.BaseApp', unable to proceed in non-interactive
   mode". A base app is something other apps build on, not one a person
   runs; the save could leave it out, or the install could name a branch.
+  Fixed 2026-10-29: a Flatpak id ending .BaseApp is left out when
+  saving (parseFlatpakApps) and dropped without a word when reading a
+  file saved before. Test red first. Spec GRND-0078 § 4.2 says so. Not
+  yet run in a VM.
   **Layman:** Your saved file lists a Flatpak building block as if it were an app, and it fails to come back.
   Kind: fix.
   Source: grnd-0088-vm-check-2026-10-29.

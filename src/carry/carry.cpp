@@ -183,12 +183,22 @@ QStringList askedForPackages(const QByteArray &zypperOut)
     return names;
 }
 
+namespace {
+
+// A base app, such as io.qt.PySide.BaseApp, is what other apps build on,
+// not one a person runs; flatpak lists it among the apps, and installing it
+// by name alone fails on its several branches (GRND-0101).
+bool isBaseApp(const QString &app) { return app.endsWith(QLatin1String(".BaseApp")); }
+
+} // namespace
+
 QList<FlatpakApp> parseFlatpakApps(const QByteArray &flatpakOut)
 {
     QList<FlatpakApp> apps;
     for (const QStringList lines = QString::fromUtf8(flatpakOut).split(QLatin1Char('\n')); const QString &line : lines) {
         const QStringList columns = line.split(QLatin1Char('\t'));
-        if (columns.size() >= 3 && isFlatpakAppId(columns[0]) && isAlias(columns[1]) && isInstallation(columns[2]))
+        if (columns.size() >= 3 && isFlatpakAppId(columns[0]) && !isBaseApp(columns[0]) && isAlias(columns[1])
+            && isInstallation(columns[2]))
             apps << FlatpakApp{columns[0], columns[1], columns[2]};
     }
     return apps;
@@ -533,6 +543,8 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
     for (const QJsonArray values = json.value("flatpaks").toArray(); const QJsonValue v : values) {
         const QJsonObject o = v.toObject();
         const FlatpakApp app{o.value("app").toString(), o.value("remote").toString(), o.value("installation").toString()};
+        if (isBaseApp(app.app))
+            continue; // a file saved before GRND-0101 may hold one
         if (isFlatpakAppId(app.app) && isAlias(app.remote) && isInstallation(app.installation))
             m.flatpaks << app;
         else

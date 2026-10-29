@@ -717,6 +717,26 @@ private slots:
         QVERIFY(skipped.isEmpty()); // left out by design, not unreadable
     }
 
+    // GRND-0101: a Flatpak base app is something apps build on, not one a
+    // person runs, so it is neither saved nor read back.
+    void aFlatpakBaseAppIsLeftOut()
+    {
+        const QList<gw::FlatpakApp> apps = gw::parseFlatpakApps(
+            "io.qt.PySide.BaseApp\tflathub\tuser\ncom.spotify.Client\tflathub\tsystem\n");
+        QCOMPARE(apps.size(), 1);
+        QCOMPARE(apps.first().app, QStringLiteral("com.spotify.Client"));
+
+        QJsonObject json = gw::manifestJson(homeAndManifest());
+        json.insert("flatpaks", QJsonArray{QJsonObject{{"app", "io.qt.PySide.BaseApp"}, {"remote", "flathub"},
+                                                       {"installation", "user"}}});
+        QString why;
+        QStringList skipped;
+        const std::optional<gw::Manifest> m = gw::readManifest(json, &why, &skipped);
+        QVERIFY2(m, qPrintable(why));
+        QVERIFY(m->flatpaks.isEmpty());
+        QVERIFY(skipped.isEmpty()); // left out by design, not unreadable
+    }
+
     // GRND-0079, INV-3: a carried id holds a colon or starts "carried-",
     // and none is a Groundwork id.
     void aCarriedIdIsNeverAGroundworkId()
