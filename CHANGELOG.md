@@ -23,6 +23,8 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - **The password box can no longer hide behind the main window.** It
   now opens as part of Groundwork's window, so a click on the window
   leaves it in front.
+- **The window opens wide.** It opened narrow, so its rows wrapped
+  until the window took the screen's whole height.
 
 ## [0.5.1] - 2026-10-29
 

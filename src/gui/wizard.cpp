@@ -589,6 +589,11 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
                 qApp->quit();
         });
     }
+    // Opened at the welcome page's own width, the window was narrow, and its
+    // rows wrapped until fitting them took the screen's whole height (user,
+    // 2026-10-29). Open a hundred characters wide, within a small screen.
+    const int wide = qMin(screen()->availableGeometry().width() * 2 / 3, fontMetrics().averageCharWidth() * 100);
+    resize(qMax(sizeHint().width(), wide), sizeHint().height());
 
     if (!m_offeredJobs.contains(Job::SetUp) && !m_offeredJobs.contains(Job::CarryOver))
         return; // nothing here is set up or carried, so nothing is checked

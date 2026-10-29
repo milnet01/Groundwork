@@ -20,6 +20,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QScreen>
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QStandardItemModel>
@@ -638,6 +639,19 @@ private slots:
         auto *scroll = w->currentPage()->findChild<QScrollArea *>();
         QVERIFY(scroll);
         QTRY_COMPARE(scroll->verticalScrollBar()->maximum(), 0);
+    }
+
+    // Opened at the welcome page's own width, the window was narrow, and
+    // its rows wrapped until fitting them took the screen's whole height
+    // (user, 2026-10-29). It opens wide: a hundred characters, or two
+    // thirds of a smaller screen.
+    void theWindowOpensWide()
+    {
+        auto w = make();
+        const QRect screen = w->screen()->availableGeometry();
+        const int wide = qMin(screen.width() * 2 / 3, w->fontMetrics().averageCharWidth() * 100);
+        QVERIFY2(w->width() >= wide, qPrintable(QStringLiteral("%1 < %2").arg(w->width()).arg(wide)));
+        QVERIFY(w->width() <= screen.width());
     }
 
     // The first page offers colours, following the desktop until one is

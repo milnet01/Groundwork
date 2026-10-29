@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=103 -->
+<!-- ants-roadmap-id-high-water: GRND=105 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2032,3 +2032,20 @@ scheduled.
   Kind: chore.
   Source: cut-release-2026-10-29.
   Lanes: packaging.
+
+- ✅ [GRND-0104] **The window opens wide, not narrow and the screen's full height.**
+  Opened at the welcome page's own width, rows wrapped until fitting
+  them took the screen's height. It opens a hundred characters wide,
+  or two thirds of a smaller screen.
+  **Layman:** Groundwork opens wide enough that its rows don't wrap so much, so it no longer stretches to the full height of the screen.
+  Kind: fix.
+  Source: user-report-2026-10-29.
+
+- 📋 [GRND-0105] **After a run, a button goes back to the choices.**
+  The run page is the last page and offers only Finish, so a run that
+  skipped everything (an item already installed) leaves no way to
+  pick again. The button re-runs the checks and returns to the first
+  level page.
+  **Layman:** Once a run finishes, a 'Back to my choices' button re-checks the system and returns to the item lists, so you can pick more without restarting.
+  Kind: ux.
+  Source: user-report-2026-10-29.
