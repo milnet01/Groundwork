@@ -2099,9 +2099,10 @@ scheduled.
   seen to close and reopen. Wizard::fitRows grew it on each step change
   and, on Wayland, hid and showed it to be placed afresh (GRND-0075).
   Open it at its full height, within the screen, and never resize it.
-  Shipped 2026-10-30: the window opens as tall as the screen allows and
-  fitRows is gone, so no step resizes or re-shows it. Not yet seen on
-  the user's Plasma Wayland desktop.
+  Shipped 2026-10-30: fitRows is gone, so no step resizes or re-shows the
+  window. The user saw it hold on Plasma Wayland the same day, and asked
+  for it shorter than the screen's full height: it now opens forty-four
+  lines tall, the least that shows six rows, within a smaller screen.
   **Layman:** The window no longer changes size or vanishes and reappears when you move to the next step.
   Kind: ux.
   Source: user-request-2026-10-30.

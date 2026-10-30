@@ -614,14 +614,16 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     // 2026-10-29). Open a hundred characters wide, within a small screen.
     // Grown to fit each step, the window changed size at every step, and on
     // Wayland was seen to close and reopen to be placed afresh (user,
-    // 2026-10-30; GRND-0109). So it opens as tall as the screen allows, the
-    // fullest level's rows showing (GRND-0049), and keeps that size; a
-    // longer page scrolls. Wayland draws the title bar outside Qt's sight,
-    // so leave room for one.
+    // 2026-10-30; GRND-0109). So it opens at one size and keeps it; a longer
+    // page scrolls. As tall as the screen allowed, it was far taller than
+    // wide on a large screen (user, 2026-10-30), so it opens forty-four lines
+    // tall, the least that still shows six rows (GRND-0049). Wayland draws
+    // the title bar outside Qt's sight, so leave room for one.
     const QRect screen = this->screen()->availableGeometry();
     const int wide = qMin(screen.width() * 2 / 3, fontMetrics().averageCharWidth() * 100);
     const int frame = style()->pixelMetric(QStyle::PM_TitleBarHeight, nullptr, this);
-    resize(qMax(sizeHint().width(), wide), qMax(sizeHint().height(), screen.height() - frame));
+    const int tall = qMin(screen.height() - frame, fontMetrics().lineSpacing() * 44);
+    resize(qMax(sizeHint().width(), wide), qMax(sizeHint().height(), tall));
 
     if (!m_offeredJobs.contains(Job::SetUp) && !m_offeredJobs.contains(Job::CarryOver))
         return; // nothing here is set up or carried, so nothing is checked

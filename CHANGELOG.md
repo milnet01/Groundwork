@@ -39,8 +39,8 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - **The window opens wide.** It opened narrow, so its rows wrapped
   until the window took the screen's whole height.
 - **The window keeps one size from step to step.** It changed size at
-  every step, and could be seen to close and reopen. It now opens as
-  tall as the screen allows, and a longer page scrolls.
+  every step, and could be seen to close and reopen. It now opens at
+  one size, and a longer page scrolls.
 - **RAM protection counts earlyoom.** A computer already guarded by the
   earlyoom memory watchdog read "not done", and applying would have
   added a second watchdog.

@@ -712,6 +712,16 @@ private slots:
         QVERIFY(w->width() <= screen.width());
     }
 
+    // Opened as tall as the screen allowed, the window was far taller than
+    // wide on a large screen (user, 2026-10-30). It opens forty-four lines
+    // tall, or as tall as a smaller screen allows.
+    void theWindowOpensNoTallerThanItNeeds()
+    {
+        auto w = make();
+        const int lines = w->fontMetrics().lineSpacing() * 44;
+        QVERIFY2(w->height() <= lines, qPrintable(QStringLiteral("%1 > %2").arg(w->height()).arg(lines)));
+    }
+
     // The first page offers colours, following the desktop until one is
     // chosen; a choice paints the window, outlives a change of language
     // (GRND-0050), and is kept for the next run (GRND-0072).
