@@ -2101,8 +2101,9 @@ scheduled.
   Open it at its full height, within the screen, and never resize it.
   Shipped 2026-10-30: fitRows is gone, so no step resizes or re-shows the
   window. The user saw it hold on Plasma Wayland the same day, and asked
-  for it shorter than the screen's full height: it now opens forty-four
-  lines tall, the least that shows six rows, within a smaller screen.
+  for it shorter than the screen's full height: it now opens forty-eight
+  lines tall, within a smaller screen. Forty-four showed six rows on this
+  machine and not on GitHub's runner, whose font differs.
   **Layman:** The window no longer changes size or vanishes and reappears when you move to the next step.
   Kind: ux.
   Source: user-request-2026-10-30.

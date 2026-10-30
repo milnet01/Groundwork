@@ -713,12 +713,12 @@ private slots:
     }
 
     // Opened as tall as the screen allowed, the window was far taller than
-    // wide on a large screen (user, 2026-10-30). It opens forty-four lines
+    // wide on a large screen (user, 2026-10-30). It opens forty-eight lines
     // tall, or as tall as a smaller screen allows.
     void theWindowOpensNoTallerThanItNeeds()
     {
         auto w = make();
-        const int lines = w->fontMetrics().lineSpacing() * 44;
+        const int lines = w->fontMetrics().lineSpacing() * 48;
         QVERIFY2(w->height() <= lines, qPrintable(QStringLiteral("%1 > %2").arg(w->height()).arg(lines)));
     }
 
