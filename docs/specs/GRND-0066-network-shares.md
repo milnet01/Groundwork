@@ -229,6 +229,9 @@ With a second machine or the host on the same network, and `/srv/look` and `/srv
 5. Remove `/srv/add` in Groundwork and apply. Step 2 lists only `look`, and `smb.conf` still has its other sections.
 6. Repeat step 3's `get` with the firewall on and with `samba` removed from the zone, to see that the firewall is what lets it through.
 7. From a Windows machine, if one is at hand, see whether the computer appears under Network and whether it opens. Record the result in the release notes for GRND-0066.
+8. `smbclient -N` into each stock share a fresh `smb.conf` brings, `users` and `profiles` among them: each is refused, though `map to guest` is now on.
+
+Run 2026-10-30 in a Tumbleweed VM with SELinux enforcing and firewalld on: steps 1 to 6 and 8 behaved as written, and the shares survived a restart. Step 7 has not run: no Windows machine was used.
 
 ## 8. Alternatives considered (and rejected)
 

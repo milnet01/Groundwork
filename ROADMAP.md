@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=110 -->
+<!-- ants-roadmap-id-high-water: GRND=111 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1618,7 +1618,7 @@ built as 0.4.0 instead.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
 
-- 🚧 [GRND-0066] **Item: share folders on the network.**
+- ✅ [GRND-0066] **Item: share folders on the network.**
   From the owner's machine: Samba (smb and nmb) with wsdd so Windows
   finds it, and the firewall opened for it. Needs a design first: which
   folders, who may open them, and a Samba password.
@@ -1636,6 +1636,12 @@ built as 0.4.0 instead.
   obeys the file, and it stays owed until run. Leap 16.0 offers wsdd 0.8
   with its firewalld service, read from that release's repo/oss
   metadata. Translations are unfinished in every .ts file.
+  Shipped 2026-10-30. The spec's recipe ran in a Tumbleweed VM with
+  SELinux enforcing and firewalld on: a guest reads a look-only share
+  and cannot write to it, adds a file to the other and it belongs to the
+  user, cannot follow a link to /etc/passwd, and is refused by Samba's
+  stock shares. Nothing yet shows whether Windows finds or opens the
+  shares: no Windows machine was used.
   **Layman:** Lets other computers at home open folders you choose on this one.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -1656,6 +1662,10 @@ built as 0.4.0 instead.
   its fstab line takes effect at the next start. No spec:
   spec-format.md section 1, one subsystem, choices settled here.
   Shipped 2026-10-30 in 9d14e4d.
+  VM try, 2026-10-30, Tumbleweed: a blank ext4 drive labelled Extra was
+  added to fstab and mounted at /mnt/Extra, the user could write to it,
+  and it stayed mounted after a restart. With the drive removed, the
+  computer still started.
   **Layman:** Second hard drives show up and are ready every time the computer starts.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -2136,3 +2146,16 @@ scheduled.
   Kind: ux.
   Source: user-request-2026-10-30.
   Lanes: gui.
+
+- 📋 [GRND-0111] **Changing the shared folders should not need a system update.**
+  Seen in GRND-0066's VM run, 2026-10-30. The item says it installs
+  packages, so it depends on the system update, and UpdateItem::check
+  never reads done. Applying the same list or a changed one therefore runs
+  the update first, though Samba and wsdd are already there. Any item with
+  installsPackages behaves this way once its packages are installed; this
+  one is the first a user would apply repeatedly. Needs a design choice:
+  let an item say at apply time that it installs nothing.
+  **Layman:** Adding a shared folder later also installs every waiting update, which can take a long time.
+  Kind: ux.
+  Source: grnd-0066-vm-run-2026-10-30.
+  Lanes: items, core.
