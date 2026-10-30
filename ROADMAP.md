@@ -1607,13 +1607,16 @@ has a written design before it is built.
 Numbered 0.4.0 until 2026-10-16, when the user chose to ship what was
 built as 0.4.0 instead.
 
-- 📋 [GRND-0065] **Item: your GitHub projects, copied into a folder you choose.**
+- 📋 [GRND-0065] **Your GitHub projects, copied into a folder you choose.**
   The user liked this over a personal list (2026-10-10): sign in
   once, list the user's repositories, tick which to copy, choose the
   folder. Private ones work once signed in. Copying runs as the user,
   not root. Needs a design first: signing in from a window, a list of
   choices rather than one switch, and nothing personal in the source.
   Next, with GRND-0073, after the user's reinstall (user, 2026-10-30).
+  Spec: docs/specs/GRND-0065-copy-github-projects.md, accepted
+  2026-10-30. A job of its own rather than a row, with forks starting
+  off (user, 2026-10-30).
   **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -1705,6 +1708,10 @@ built as 0.4.0 instead.
   system-wide settings outside the home folder, such as the firewall,
   printers and drive mounts. Item checks never run as root, so the design
   must say how root-only settings are read. Built after the user's reinstall.
+  Spec: docs/specs/GRND-0073-system-settings.md, accepted 2026-10-30.
+  Firewall, printers, drive mounts and network shares; Save asks for the
+  password once, only for the firewall or printers (user, 2026-10-30).
+  It amends GRND-0078 and GRND-0079.
   **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
   Kind: feature.
   Source: user-request-2026-10-12.

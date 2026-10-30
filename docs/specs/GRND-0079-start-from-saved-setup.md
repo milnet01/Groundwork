@@ -110,6 +110,9 @@ The catalogue keeps its non-owning pointers. Whoever holds the
 
 Carried items come after every Groundwork item, in this order:
 
+`GRND-0073-system-settings.md` § 4.6 adds `carried-firewall`,
+`carried-printers` and `carried-mounts`, after these.
+
 | Id | One per | Check | Apply |
 |---|---|---|---|
 | `carried-source:<alias>` | zypper source | Done when `/etc/zypp/repos.d` holds a source with this alias or this `baseurl` (`parseRepoFile`); otherwise couldn't tell when a `.repo` file there cannot be read, or `<alias>.repo` holds another source | § 4.3 |

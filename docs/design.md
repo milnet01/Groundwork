@@ -10,7 +10,8 @@ agreed — `~/.claude/workflow.md` § 4 says when it passes.
 Claude, which gave it after the independent review reached its cap.
 Amended 2026-10-15 for preparing a drive and carrying a setup over
 (GRND-0076 to GRND-0079), and agreed by the user the same day from a
-summary.
+summary. Amended 2026-10-30 for copying GitHub projects and carrying
+system settings (GRND-0065, GRND-0073), from the user's answers that day.
 
 What it serves: `docs/discovery.md`, signs S1–S6.
 
@@ -27,11 +28,11 @@ the terminal. A **check** mode prints every item's state in a terminal
 and changes nothing. An **askpass** mode is the password box `sudo`
 calls, so the app needs no desktop's own password helper.
 
-The wizard's first page offers three jobs: **set up this machine**,
-**carry this setup over** to a new install, and **prepare a drive**. On a
-live system only preparing a drive is offered, since nothing there
-lasts. Each job is its own run of pages, and all root work goes through
-the worker.
+The wizard's first page offers four jobs: **set up this machine**,
+**carry this setup over** to a new install, **prepare a drive**, and
+**copy your GitHub projects**. On a live system only preparing a drive is
+offered, since nothing there lasts. Each job is its own run of pages, and
+all root work goes through the worker.
 
 ## The levels
 
@@ -173,8 +174,9 @@ exact commands.
 
 ## Carrying a setup over
 
-On an installed machine, the carry job gathers four kinds of setup, all
-without root:
+On an installed machine, the carry job gathers five kinds of setup. The
+page reads them all without root; pressing Save asks for the password
+once, and only when the firewall or printers are switched on:
 
 - **Groundwork's own items** whose check says done.
 - **Programs the user asked for**: packages zypper marks as asked for
@@ -189,6 +191,10 @@ without root:
   SSH keys, browser profiles) are marked as such and start switched
   off. Switching one on warns that the saved file will then hold
   secrets; the user decides (ruled by the user, 2026-10-15).
+- **System settings**: the firewall, printers, drive mounts and network
+  shares (user, 2026-10-30). Printers count as secret. The installer's
+  own mounts are never carried, and a restored system file keeps what it
+  replaces as a numbered copy. Spec GRND-0073 holds the rules.
 
 The user keeps or drops each part with a switch, and saves the result to
 one file wherever they choose; a USB stick is the usual place. It holds
@@ -220,6 +226,15 @@ file as it is keeps it (ruled by the user, 2026-10-15).
 The saved file's format is a contract between two jobs and two
 installs; its spec (S6) holds it.
 
+## Copying GitHub projects
+
+The GitHub job installs `git` and `gh` when they are missing, signs the
+user in, lists the repositories the account owns with a switch each, and
+copies the chosen ones into a folder, as the user. Forks start switched
+off. A folder already at the destination is left alone. The last page of
+a set-up run offers this job too (user, 2026-10-30). `gh` holds the sign-in;
+Groundwork never reads the token. Spec GRND-0065 holds the detail.
+
 ## The parts
 
 Source files are under `src/`; tests and packaging are at the top level.
@@ -232,6 +247,7 @@ Source files are under `src/`; tests and packaging are at the top level.
 | **Wizard** | The pages, the rows, reading markers from the worker, the askpass box | `gui/` |
 | **Drives** | Reading the drives; the suggested layouts; the steps that write a layout | `drives/` |
 | **Carry** | Gathering a setup; reading and writing the saved file; turning a saved file into a selection | `carry/` |
+| **GitHub** | Reading the list of repositories; the steps that copy them | `github/` |
 | **Entry** | Choosing the mode: from the command line, or, for askpass, from an environment variable the Worker sets, because `SUDO_ASKPASS` names a program path and carries no option (`man sudo`, `-A`); check mode, which prints Core's results for the catalogue's checks | `main.cpp` |
 | **Tests** | Unit tests and the fake-command scenarios | `tests/` |
 | **Packaging** | The AppImage build; the RPM spec, and the scripts that build it on OBS | `packaging/appimage/`, `packaging/opensuse/`, `packaging/obs/` |
@@ -261,10 +277,11 @@ items.
   a file itself. Its check names the read-only commands and system
   files it needs, and how to read them; Core runs and reads them. Its
   apply returns a list of steps, which the Worker runs.
-- **Drives and Carry depend on Core and Items only**, as Items do on
-  Core: they name commands and return steps, and run nothing themselves.
-- **Worker and Wizard depend on Core, Items, Drives and Carry, never on
-  each other.**
+- **Drives, Carry and GitHub depend on Core and Items only**, as Items do
+  on Core: they name commands and return steps, and run nothing
+  themselves.
+- **Worker and Wizard depend on Core, Items, Drives, Carry and GitHub,
+  never on each other.**
   They meet only through a child process: the Wizard starts the Worker,
   reads its markers, and asks it to stop by writing a file. No shared
   memory, no signals.
@@ -277,6 +294,9 @@ items.
   out of the log.
 - **Entry may depend on every part**; no part depends on Entry.
 - **The Wizard refuses to start as root.**
+- **The Wizard starts one command that changes anything itself:** `gh
+  auth login`, as the user, because a sign-in must be cancellable while
+  it waits and the Worker stops only between items.
 
 ## What every part does the same way
 

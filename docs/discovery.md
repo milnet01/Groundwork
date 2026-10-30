@@ -82,8 +82,9 @@ labels.
   the drive, the user is first told to back up, turn off Fast Startup,
   check for BitLocker and shrink Windows from Windows itself.
 - **S6** — On an installed machine, Groundwork lists its own items that
-  are on, programs the user added, extra software sources, and desktop
-  and app settings. The user keeps or drops each. After a fresh install,
+  are on, programs the user added, extra software sources, desktop and
+  app settings, and system settings: the firewall, printers, drive mounts
+  and network shares. The user keeps or drops each. After a fresh install,
   every kept part is switched on, and Groundwork's other items are
   offered as usual.
 

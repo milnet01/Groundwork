@@ -203,7 +203,8 @@ groundwork --worker --save-setup CHOICES_FILE [--lang LANG]
 
 The Worker runs it as one item, id `save-setup`, with the existing
 markers (`docs/reference/worker-interface.md`, Markers). Every step is
-`needsRoot = false`:
+`needsRoot = false`, except the firewall and printer reads that
+`GRND-0073-system-settings.md` § 4.5 adds:
 
 1. Validate the manifest by § 4.7 and every settings path by INV-3, and
    that each exists. Refuse before any step otherwise.
@@ -266,7 +267,9 @@ The manifest:
 }
 ```
 
-Only what the user kept is listed; a dropped part is absent. `system`
+`GRND-0073-system-settings.md` § 4.1 adds `mounts`, `shares` and two
+reserved `settings` paths, in format 1. Only what the user kept is
+listed; a dropped part is absent. `system`
 is `ID` and `VERSION_ID` from `/etc/os-release`, so GRND-0079 can tell a
 Tumbleweed file from a Leap one.
 

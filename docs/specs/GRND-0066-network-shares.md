@@ -252,7 +252,7 @@ Run 2026-10-30 in a Tumbleweed VM with SELinux enforcing and firewalld on: steps
 - A password or per-person access — the user's choice, 2026-10-30.
 - Editing or removing the user's own shares in `smb.conf`, including the owner's `OS_ISOs` and `InsightVM`, which point at the retired `/mnt/Storage` — deferred; not yet queued.
 - Stopping Samba and closing the firewall when the last share is removed. The user's own shares may still need it — deferred; not yet queued.
-- Carrying the share list in a saved setup (GRND-0078) — deferred; not yet queued.
+- Carrying the share list in a saved setup — tracked by GRND-0073.
 - A way to tell Windows to accept guests — deferred; not yet queued.
 
 ## 10. What checks this
