@@ -18,6 +18,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include <QGridLayout>
 #include <QHBoxLayout>
 #include <QHash>
 #include <QJsonDocument>
@@ -556,7 +557,7 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         page->setTitle(levelTitle(level));
         page->setSubTitle(levelSubTitle(level));
         auto *inner = new QWidget;
-        new QVBoxLayout(inner);
+        new QGridLayout(inner);
         auto *scroll = new QScrollArea(page);
         scroll->setWidgetResizable(true);
         scroll->setWidget(inner);
@@ -611,8 +612,9 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     }
     // Opened at the welcome page's own width, the window was narrow, and its
     // rows wrapped until fitting them took the screen's whole height (user,
-    // 2026-10-29). Open a hundred characters wide, within a small screen.
-    // Grown to fit each step, the window changed size at every step, and on
+    // 2026-10-29). Open a hundred and fifty characters wide, within a small
+    // screen, which gives the rows two columns (arrangeRows). Grown to fit
+    // each step, the window changed size at every step, and on
     // Wayland was seen to close and reopen to be placed afresh (user,
     // 2026-10-30; GRND-0109). So it opens at one size and keeps it; a longer
     // page scrolls. As tall as the screen allowed, it was far taller than
@@ -621,7 +623,7 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     // did here and not on GitHub's runner, so leave some spare. Wayland draws
     // the title bar outside Qt's sight, so leave room for one.
     const QRect screen = this->screen()->availableGeometry();
-    const int wide = qMin(screen.width() * 2 / 3, fontMetrics().averageCharWidth() * 100);
+    const int wide = qMin(screen.width() * 2 / 3, fontMetrics().averageCharWidth() * 150);
     const int frame = style()->pixelMetric(QStyle::PM_TitleBarHeight, nullptr, this);
     const int tall = qMin(screen.height() - frame, fontMetrics().lineSpacing() * 48);
     resize(qMax(sizeHint().width(), wide), qMax(sizeHint().height(), tall));
@@ -674,18 +676,53 @@ void Wizard::showResults(const CheckResults &results)
     for (const Item *item : m_setup.catalogue->items()) {
         QWidget *inner = m_levelPages.value(int(item->level()));
         auto *row = new ItemRow(*item, results.value(item->id()), inner);
-        inner->layout()->addWidget(row);
         m_rows.insert(item->id(), row);
         connect(row, &ItemRow::toggledByUser, this, &Wizard::userToggled);
     }
-    for (QWidget *inner : std::as_const(m_levelPages))
-        static_cast<QVBoxLayout *>(inner->layout())->addStretch();
+    m_rowColumns = 0;
+    arrangeRows();
     m_selection = m_setup.catalogue->defaultSelection(results);
     refreshRows({}, {}, {}, true);
     for (const QStringList ids = gatherItems(*m_setup.catalogue, results); const QString &id : ids)
         m_carry.items.append({id, m_setup.catalogue->find(id)->title()});
     m_checksDone = true;
     emit checksFinished();
+}
+
+void Wizard::resizeEvent(QResizeEvent *event)
+{
+    QWizard::resizeEvent(event);
+    arrangeRows();
+}
+
+void Wizard::arrangeRows()
+{
+    // Two columns need about sixty characters each, or a row wraps until it
+    // is taller than the column saves (user, 2026-10-30).
+    const int columns = width() >= fontMetrics().averageCharWidth() * 120 ? 2 : 1;
+    if (columns == m_rowColumns)
+        return;
+    m_rowColumns = columns;
+    QHash<QWidget *, int> placed;
+    for (const Item *item : m_setup.catalogue->items()) {
+        ItemRow *row = m_rows.value(item->id());
+        if (!row)
+            continue;
+        QWidget *inner = m_levelPages.value(int(item->level()));
+        auto *grid = static_cast<QGridLayout *>(inner->layout());
+        const int index = placed[inner]++;
+        grid->removeWidget(row);
+        grid->addWidget(row, index / columns, index % columns);
+    }
+    // The space left over goes below the rows, and each column gets its share.
+    for (QWidget *inner : std::as_const(m_levelPages)) {
+        auto *grid = static_cast<QGridLayout *>(inner->layout());
+        for (int r = 0; r < grid->rowCount(); ++r)
+            grid->setRowStretch(r, 0);
+        grid->setRowStretch((placed.value(inner) + columns - 1) / columns, 1);
+        grid->setColumnStretch(0, 1);
+        grid->setColumnStretch(1, columns == 2 ? 1 : 0);
+    }
 }
 
 void Wizard::userToggled(const QString &id, bool on)

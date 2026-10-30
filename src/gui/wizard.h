@@ -160,8 +160,11 @@ signals:
 protected:
     void closeEvent(QCloseEvent *event) override;
     void reject() override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
+    // Puts each level page's rows in one column or two, as the width allows.
+    void arrangeRows();
     // Runs the checks off the window's thread, then shows them and calls then.
     void startChecks(std::function<void()> then = {});
     void showResults(const CheckResults &results);
@@ -187,6 +190,7 @@ private:
     };
     QHash<QString, Reason> m_reasons;
     QHash<int, QWidget *> m_levelPages; // each level page's row area, keyed by Level
+    int m_rowColumns = 0; // how many columns the rows are in; 0 until placed
     RunPage *m_runPage;
     PrepareChoice m_prepare;
     int m_drivePageId = -1, m_layoutPageId = -1, m_windowsPageId = -1;

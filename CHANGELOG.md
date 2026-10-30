@@ -27,6 +27,8 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Changed
 
+- **The window opens wider, with its items in two columns.** You scroll
+  less. A narrower window, or a large font, goes back to one column.
 - **A step that fails on a nearly full disk now says so.** Its
   message names the full disk and how much space is left, where it
   showed only an exit code.

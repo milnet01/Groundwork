@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=109 -->
+<!-- ants-roadmap-id-high-water: GRND=110 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2114,6 +2114,20 @@ scheduled.
   lines tall, within a smaller screen. Forty-four showed six rows on this
   machine and not on GitHub's runner, whose font differs.
   **Layman:** The window no longer changes size or vanishes and reappears when you move to the next step.
+  Kind: ux.
+  Source: user-request-2026-10-30.
+  Lanes: gui.
+
+- ✅ [GRND-0110] **A wider window shows the rows in two columns.**
+  The user, 2026-10-30, on the forty-eight-line height (GRND-0109): the
+  width can be expanded and columns added to organise the layout better.
+  The level pages lay rows out in two columns when the window has room
+  for them, and in one when it does not, such as at a large font.
+  Shipped 2026-10-30: the window opens a hundred and fifty characters
+  wide, within two thirds of a smaller screen, and the level pages show
+  two columns from a hundred and twenty characters. The saved-setup page
+  keeps one column.
+  **Layman:** The window opens wider and puts the choices side by side, so you scroll less.
   Kind: ux.
   Source: user-request-2026-10-30.
   Lanes: gui.

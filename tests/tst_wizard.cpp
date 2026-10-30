@@ -701,15 +701,46 @@ private slots:
 
     // Opened at the welcome page's own width, the window was narrow, and
     // its rows wrapped until fitting them took the screen's whole height
-    // (user, 2026-10-29). It opens wide: a hundred characters, or two
-    // thirds of a smaller screen.
+    // (user, 2026-10-29). It opens wide: a hundred and fifty characters, or
+    // two thirds of a smaller screen.
     void theWindowOpensWide()
     {
         auto w = make();
         const QRect screen = w->screen()->availableGeometry();
-        const int wide = qMin(screen.width() * 2 / 3, w->fontMetrics().averageCharWidth() * 100);
+        const int wide = qMin(screen.width() * 2 / 3, w->fontMetrics().averageCharWidth() * 150);
         QVERIFY2(w->width() >= wide, qPrintable(QStringLiteral("%1 < %2").arg(w->width()).arg(wide)));
         QVERIFY(w->width() <= screen.width());
+    }
+
+    // With room to spare beside them, the rows ran down one long column
+    // (user, 2026-10-30). A wide window shows them in two, in reading
+    // order; a narrower one, as at a large font, goes back to one.
+    void aWideWindowShowsRowsInTwoColumns()
+    {
+        QList<FakeItem> three;
+        for (int i = 0; i < 3; ++i)
+            three.append(FakeItem(QStringLiteral("item%1").arg(i), gw::Level::Essentials, false));
+        QList<const gw::Item *> items;
+        for (const FakeItem &item : three)
+            items.append(&item);
+        const gw::Catalogue threeRows(items);
+        auto w = make(QStringLiteral("en"), &threeRows);
+        QTRY_VERIFY(w->checksDone());
+        w->next();
+        const gw::ItemRow *first = w->row(QStringLiteral("item0"));
+        const gw::ItemRow *second = w->row(QStringLiteral("item1"));
+        const gw::ItemRow *third = w->row(QStringLiteral("item2"));
+
+        w->resize(w->fontMetrics().averageCharWidth() * 150, w->height());
+        QTRY_VERIFY(second->x() > first->x());
+        QCOMPARE(second->y(), first->y());
+        QCOMPARE(third->x(), first->x());
+        QVERIFY(third->y() > first->y());
+
+        w->resize(w->fontMetrics().averageCharWidth() * 100, w->height());
+        QTRY_COMPARE(second->x(), first->x());
+        QVERIFY(second->y() > first->y());
+        QVERIFY(third->y() > second->y());
     }
 
     // Opened as tall as the screen allowed, the window was far taller than
