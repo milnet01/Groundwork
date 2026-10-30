@@ -1627,7 +1627,7 @@ built as 0.4.0 instead.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
 
-- 🚧 [GRND-0067] **Item: mount extra drives at start-up.**
+- ✅ [GRND-0067] **Item: mount extra drives at start-up.**
   From the owner's machine: fstab entries by UUID with nofail,
   noatime, nosuid, nodev and x-gvfs-show, so a missing drive never
   stops the boot. Needs a design first: which drives, where they
@@ -1641,6 +1641,7 @@ built as 0.4.0 instead.
   keeps its owner. A drive already open somewhere is not unmounted;
   its fstab line takes effect at the next start. No spec:
   spec-format.md section 1, one subsystem, choices settled here.
+  Shipped 2026-10-30 in 9d14e4d.
   **Layman:** Second hard drives show up and are ready every time the computer starts.
   Kind: feature.
   Source: user-request-2026-10-10.
