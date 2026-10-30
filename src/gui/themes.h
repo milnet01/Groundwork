@@ -43,4 +43,13 @@ void applyTheme(const QString &id);
 // The id last applied, "desktop" before any.
 QString currentTheme();
 
+// The user's choice: applies theme id, hands it to the password box
+// through GROUNDWORK_THEME, and saves it for the next run in
+// groundwork/settings.conf under the user's config folder.
+void chooseTheme(const QString &id);
+
+// At start: applies the theme saved by chooseTheme, or follows the
+// desktop when none is saved, and hands it on as chooseTheme does.
+void restoreTheme();
+
 } // namespace gw

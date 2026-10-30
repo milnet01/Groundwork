@@ -81,7 +81,7 @@ int wizardMode(int argc, char *argv[])
     if (!gw::fontShowsLanguage(language))
         language = QStringLiteral("en"); // rather than a window of empty boxes
     gw::loadLanguage(language);
-    gw::applyTheme(QString::fromLatin1(gw::kFollowDesktop));
+    gw::restoreTheme(); // the last run's choice (GRND-0072)
 
     if (geteuid() == 0) {
         tell(QMessageBox::Critical,

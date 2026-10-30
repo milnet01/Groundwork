@@ -135,12 +135,8 @@ public:
         for (const QList<Theme> allThemes = themes(); const Theme &theme : allThemes)
             themeChoice->addItem(theme.name, theme.id);
         themeChoice->setCurrentIndex(qMax(0, themeChoice->findData(currentTheme())));
-        connect(themeChoice, &QComboBox::currentIndexChanged, this, [themeChoice] {
-            const QString id = themeChoice->currentData().toString();
-            applyTheme(id);
-            // The password box is another process; it reads this.
-            qputenv("GROUNDWORK_THEME", id.toUtf8());
-        });
+        connect(themeChoice, &QComboBox::currentIndexChanged, this,
+                [themeChoice] { chooseTheme(themeChoice->currentData().toString()); });
         // More than one job: the user picks one (GRND-0077).
         QLabel *jobsLabel = nullptr;
         QWidget *jobs = nullptr;

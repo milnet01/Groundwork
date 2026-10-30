@@ -2,6 +2,8 @@
 
 #include <QApplication>
 #include <QCoreApplication>
+#include <QDir>
+#include <QSettings>
 #include <QStyleHints>
 
 #include <algorithm>
@@ -48,6 +50,15 @@ QString &current()
 {
     static QString id = QString::fromLatin1(kFollowDesktop);
     return id;
+}
+
+// The window's own settings, in the user's config folder (GRND-0072).
+QSettings settings()
+{
+    QString dir = qEnvironmentVariable("XDG_CONFIG_HOME");
+    if (dir.isEmpty())
+        dir = QDir::homePath() + QStringLiteral("/.config");
+    return QSettings(dir + QStringLiteral("/groundwork/settings.conf"), QSettings::IniFormat);
 }
 
 std::optional<Theme> find(const QString &id)
@@ -166,6 +177,21 @@ void applyTheme(const QString &id)
 QString currentTheme()
 {
     return current();
+}
+
+void chooseTheme(const QString &id)
+{
+    applyTheme(id);
+    // The password box is another process; it reads this.
+    qputenv("GROUNDWORK_THEME", id.toUtf8());
+    settings().setValue(QStringLiteral("theme"), id);
+}
+
+void restoreTheme()
+{
+    // An id no longer offered follows the desktop, as applyTheme says.
+    applyTheme(settings().value(QStringLiteral("theme"), QString::fromLatin1(kFollowDesktop)).toString());
+    qputenv("GROUNDWORK_THEME", currentTheme().toUtf8());
 }
 
 } // namespace gw

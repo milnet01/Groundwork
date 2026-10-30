@@ -12,6 +12,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Added
+
+- **Groundwork remembers your colour theme.** The theme you pick on
+  the first page is the one the window opens in next time.
+
 ### Changed
 
 - **A step that fails on a nearly full disk now says so.** Its

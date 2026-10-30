@@ -330,7 +330,9 @@ items.
   no window listening, askpass mode shows its own box.
 - **Logging** goes to one file per run under the user's state directory,
   and the Worker's output is mirrored there.
-- **Persistence:** none, beyond the logs, the window's own settings, and
+- **Persistence:** none, beyond the logs, the window's own settings
+  (its colour theme, in `groundwork/settings.conf` under the user's
+  config folder), and
   a saved setup file written where the user chooses. Every run starts
   from fresh checks, a run started from a saved file included.
 - **Text** is plain words, written for someone new to openSUSE, and

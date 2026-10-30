@@ -90,6 +90,44 @@ private slots:
         gw::applyTheme(QStringLiteral("no-such-theme"));
         QCOMPARE(gw::currentTheme(), QString::fromLatin1(gw::kFollowDesktop));
     }
+
+    // GRND-0072: a theme chosen in one run is the theme the next run
+    // starts in, and the password box is told it too.
+    void aChosenThemeIsKeptForTheNextRun()
+    {
+        QTemporaryDir config;
+        qputenv("XDG_CONFIG_HOME", config.path().toUtf8());
+        gw::chooseTheme(QStringLiteral("nord"));
+        QVERIFY(QFile::exists(config.filePath(QStringLiteral("groundwork/settings.conf"))));
+
+        // The next run starts from nothing applied and nothing handed on.
+        gw::applyTheme(QString::fromLatin1(gw::kFollowDesktop));
+        qunsetenv("GROUNDWORK_THEME");
+        gw::restoreTheme();
+        QCOMPARE(gw::currentTheme(), QStringLiteral("nord"));
+        QCOMPARE(qgetenv("GROUNDWORK_THEME"), QByteArray("nord"));
+
+        // Choosing the desktop again is kept too.
+        gw::chooseTheme(QString::fromLatin1(gw::kFollowDesktop));
+        gw::applyTheme(QStringLiteral("dark"));
+        gw::restoreTheme();
+        QCOMPARE(gw::currentTheme(), QString::fromLatin1(gw::kFollowDesktop));
+        qunsetenv("XDG_CONFIG_HOME");
+        qunsetenv("GROUNDWORK_THEME");
+    }
+
+    // With nothing saved, the first run follows the desktop.
+    void nothingSavedFollowsTheDesktop()
+    {
+        QTemporaryDir config;
+        qputenv("XDG_CONFIG_HOME", config.path().toUtf8());
+        gw::applyTheme(QStringLiteral("dark"));
+        gw::restoreTheme();
+        QCOMPARE(gw::currentTheme(), QString::fromLatin1(gw::kFollowDesktop));
+        QCOMPARE(qgetenv("GROUNDWORK_THEME"), QByteArray(gw::kFollowDesktop));
+        qunsetenv("XDG_CONFIG_HOME");
+        qunsetenv("GROUNDWORK_THEME");
+    }
 };
 
 QTEST_MAIN(TestThemes)

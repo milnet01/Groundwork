@@ -299,6 +299,9 @@ class TstWizard : public QObject
     }
 
 private slots:
+    // A theme chosen here is saved; keep it out of the real config folder.
+    void initTestCase() { qputenv("XDG_CONFIG_HOME", m_dir.filePath(QStringLiteral("config")).toUtf8()); }
+
     void cleanup()
     {
         gw::loadLanguage(QStringLiteral("en"));
@@ -655,8 +658,8 @@ private slots:
     }
 
     // The first page offers colours, following the desktop until one is
-    // chosen; a choice paints the window and outlives a change of language
-    // (GRND-0050).
+    // chosen; a choice paints the window, outlives a change of language
+    // (GRND-0050), and is kept for the next run (GRND-0072).
     void theFirstPageOffersColoursThatOutliveALanguageChange()
     {
         auto w = make();
@@ -672,6 +675,11 @@ private slots:
         QCOMPARE(again->currentData().toString(), QStringLiteral("high-contrast-dark"));
 
         gw::applyTheme(QString::fromLatin1(gw::kFollowDesktop));
+        qunsetenv("GROUNDWORK_THEME");
+        gw::restoreTheme();
+        QCOMPARE(gw::currentTheme(), QStringLiteral("high-contrast-dark"));
+
+        gw::chooseTheme(QString::fromLatin1(gw::kFollowDesktop));
         qunsetenv("GROUNDWORK_THEME");
     }
 
