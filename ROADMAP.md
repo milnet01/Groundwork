@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=108 -->
+<!-- ants-roadmap-id-high-water: GRND=109 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2076,3 +2076,16 @@ scheduled.
   **Layman:** When Groundwork needs your password, the 'Setting up' page shows a password field in place, so nothing pops up.
   Kind: ux.
   Source: user-request-2026-10-29.
+
+- ✅ [GRND-0109] **The window keeps one size from step to step.**
+  The user, 2026-10-30: the window changes size at every step and is
+  seen to close and reopen. Wizard::fitRows grew it on each step change
+  and, on Wayland, hid and showed it to be placed afresh (GRND-0075).
+  Open it at its full height, within the screen, and never resize it.
+  Shipped 2026-10-30: the window opens as tall as the screen allows and
+  fitRows is gone, so no step resizes or re-shows it. Not yet seen on
+  the user's Plasma Wayland desktop.
+  **Layman:** The window no longer changes size or vanishes and reappears when you move to the next step.
+  Kind: ux.
+  Source: user-request-2026-10-30.
+  Lanes: gui.

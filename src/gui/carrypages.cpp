@@ -44,8 +44,7 @@ QLabel *wrapped(QWidget *parent, const QString &text = {})
     return label;
 }
 
-// The page's content scrolls; the wizard grows the window to show it where
-// the screen allows (Wizard::fitRows).
+// The page's content scrolls; the window keeps one size (GRND-0109).
 QVBoxLayout *scrolled(QWizardPage *page)
 {
     auto *inner = new QWidget;

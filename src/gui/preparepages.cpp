@@ -90,8 +90,7 @@ QLabel *wrapped(QWidget *parent, const QString &text = {})
 }
 
 // A page's content scrolls rather than squeezing its wrapped text; the
-// wizard grows the window to show it whole where the screen allows
-// (Wizard::fitRows).
+// window keeps one size (GRND-0109).
 QVBoxLayout *scrolled(QWizardPage *page)
 {
     auto *inner = new QWidget;

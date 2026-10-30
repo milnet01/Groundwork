@@ -161,7 +161,6 @@ private:
     void showResults(const CheckResults &results);
     void refreshRows(const QStringList &pulled, const QStringList &included, const QString &cause, bool on);
     void switchOnSaved(const QString &id);
-    void fitRows();
     bool stopForClose();
 
     WizardSetup m_setup;

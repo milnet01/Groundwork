@@ -550,8 +550,6 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         m_windowsPageId = addPage(new WindowsPage(&m_prepare, this));
         auto *layoutPage = new LayoutPage(&m_prepare, this);
         m_layoutPageId = addPage(layoutPage);
-        // Its list of partitions changes with the choice.
-        connect(layoutPage, &QWizardPage::completeChanged, this, &Wizard::fitRows);
         addPage(new ConfirmPage(&m_prepare, this));
         auto *prepareRun = new PrepareRunWizardPage(this);
         prepareRun->configure(m_setup.workerProgram);
@@ -566,8 +564,6 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         m_carry.system = m_setup.system;
         auto *gather = new GatherPage(&m_carry, this);
         m_gatherPageId = addPage(gather);
-        // Its rows arrive once gathered.
-        connect(gather, &QWizardPage::completeChanged, this, &Wizard::fitRows);
         addPage(new SavePage(&m_carry, this));
         auto *carryRun = new CarryRunWizardPage(this);
         carryRun->configure(m_setup.workerProgram);
@@ -576,7 +572,6 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     }
     if (m_offeredJobs.contains(Job::SetUp) && offersSavedSetup())
         m_savedPageId = addPage(new SavedSetupPage(this));
-    connect(this, &QWizard::currentIdChanged, this, &Wizard::fitRows);
     for (RunPage *page : {m_runPage, m_prepareRunPage, m_carryRunPage}) {
         if (!page)
             continue;
@@ -588,8 +583,16 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
     // Opened at the welcome page's own width, the window was narrow, and its
     // rows wrapped until fitting them took the screen's whole height (user,
     // 2026-10-29). Open a hundred characters wide, within a small screen.
-    const int wide = qMin(screen()->availableGeometry().width() * 2 / 3, fontMetrics().averageCharWidth() * 100);
-    resize(qMax(sizeHint().width(), wide), sizeHint().height());
+    // Grown to fit each step, the window changed size at every step, and on
+    // Wayland was seen to close and reopen to be placed afresh (user,
+    // 2026-10-30; GRND-0109). So it opens as tall as the screen allows, the
+    // fullest level's rows showing (GRND-0049), and keeps that size; a
+    // longer page scrolls. Wayland draws the title bar outside Qt's sight,
+    // so leave room for one.
+    const QRect screen = this->screen()->availableGeometry();
+    const int wide = qMin(screen.width() * 2 / 3, fontMetrics().averageCharWidth() * 100);
+    const int frame = style()->pixelMetric(QStyle::PM_TitleBarHeight, nullptr, this);
+    resize(qMax(sizeHint().width(), wide), qMax(sizeHint().height(), screen.height() - frame));
 
     if (!m_offeredJobs.contains(Job::SetUp) && !m_offeredJobs.contains(Job::CarryOver))
         return; // nothing here is set up or carried, so nothing is checked
@@ -623,48 +626,6 @@ void Wizard::showResults(const CheckResults &results)
         m_carry.items.append({id, m_setup.catalogue->find(id)->title()});
     m_checksDone = true;
     emit checksFinished();
-}
-
-void Wizard::fitRows()
-{
-    // The window opens at the welcome page's size, which shows a level's
-    // rows only after scrolling (GRND-0049). On a level page, where the
-    // header is its own height, grow it to the fullest level, within the
-    // screen. A page of preparing a drive grows to show itself whole.
-    if (!currentPage())
-        return;
-    auto *shown = currentPage()->findChild<QScrollArea *>();
-    if (!shown)
-        return;
-    QList<QWidget *> fitted = m_levelPages.values();
-    if (!fitted.contains(shown->widget())) {
-        if (shown->objectName() != QLatin1String("preparePage") && shown->objectName() != QLatin1String("carryPage"))
-            return;
-        fitted = {shown->widget()};
-    }
-    QCoreApplication::sendPostedEvents(nullptr, QEvent::LayoutRequest); // settle the shown page
-    const int viewWidth = shown->viewport()->width();
-    int extra = 0;
-    for (QWidget *inner : std::as_const(fitted)) {
-        const int need = inner->hasHeightForWidth() ? inner->heightForWidth(viewWidth) : inner->sizeHint().height();
-        extra = qMax(extra, need - shown->viewport()->height());
-    }
-    if (extra <= 0)
-        return;
-    const QRect screen = this->screen()->availableGeometry();
-    // Wayland draws the title bar outside Qt's sight, so leave room for one.
-    const int frame = qMax(frameGeometry().height() - height(),
-                           style()->pixelMetric(QStyle::PM_TitleBarHeight, nullptr, this));
-    resize(width(), qMin(height() + extra, screen.height() - frame));
-    if (QGuiApplication::platformName().startsWith(QLatin1String("wayland"))) {
-        // Wayland lets no window move itself, so the grown window kept its top
-        // edge and ran off the screen, buttons and all (GRND-0075). Shown
-        // again, it is placed afresh by the desktop at its new size.
-        hide();
-        show();
-    } else if (frameGeometry().bottom() > screen.bottom()) {
-        move(x(), screen.top());
-    }
 }
 
 void Wizard::userToggled(const QString &id, bool on)

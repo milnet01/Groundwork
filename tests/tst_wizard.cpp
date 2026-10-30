@@ -644,6 +644,27 @@ private slots:
         QTRY_COMPARE(scroll->verticalScrollBar()->maximum(), 0);
     }
 
+    // The window changed size at every step and, on Wayland, was seen to
+    // close and reopen (user, 2026-10-30; GRND-0109). It keeps one size.
+    void aStepKeepsTheWindowsSize()
+    {
+        QList<FakeItem> six;
+        for (int i = 0; i < 6; ++i)
+            six.append(FakeItem(QStringLiteral("item%1").arg(i), gw::Level::Essentials, false));
+        QList<const gw::Item *> items;
+        for (const FakeItem &item : six)
+            items.append(&item);
+        const gw::Catalogue sixRows(items);
+        auto w = make(QStringLiteral("en"), &sixRows);
+        QTRY_VERIFY(w->checksDone());
+        const QSize opened = w->size();
+        for (int step = 0; step < 3; ++step) {
+            w->next();
+            QCoreApplication::processEvents();
+            QCOMPARE(w->size(), opened);
+        }
+    }
+
     // Opened at the welcome page's own width, the window was narrow, and
     // its rows wrapped until fitting them took the screen's whole height
     // (user, 2026-10-29). It opens wide: a hundred characters, or two
