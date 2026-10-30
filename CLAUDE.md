@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 4 — Between items.
-**In flight:** nothing; 0.5.1 released 2026-10-29 (GitHub and OBS); the v0.5.0 tag exists but was never published (its GitHub check failed). Every fix-kind Backlog item fixed 2026-10-29. Queue the user set 2026-10-29: GRND-0072, then GRND-0108, then GRND-0105. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
+**In flight:** nothing; 0.5.1 released 2026-10-29 (GitHub and OBS); the v0.5.0 tag exists but was never published (its GitHub check failed). Every fix-kind Backlog item fixed 2026-10-29. Queue the user set 2026-10-29: GRND-0108, then GRND-0105 (GRND-0072 shipped 2026-10-30). Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where

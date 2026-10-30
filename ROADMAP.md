@@ -1648,10 +1648,13 @@ built as 0.4.0 instead.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
 
-- 📋 [GRND-0072] **Remember the chosen colour theme between runs.**
+- ✅ [GRND-0072] **Remember the chosen colour theme between runs.**
   The user ruled on 2026-10-12: yes. Their reason: Groundwork will hold
   more of the user's own settings over time. Design with write-spec
   first, beside the scan-and-restore item.
+  Shipped 2026-10-30: saved in groundwork/settings.conf under the user's
+  config folder; no spec, as design.md's Persistence line already
+  allowed it.
   **Layman:** The wizard opens in the colour theme you picked last time.
   Kind: feature.
   Source: user-request-2026-10-12.
