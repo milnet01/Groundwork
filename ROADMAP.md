@@ -1622,6 +1622,15 @@ built as 0.4.0 instead.
   From the owner's machine: Samba (smb and nmb) with wsdd so Windows
   finds it, and the firewall opened for it. Needs a design first: which
   folders, who may open them, and a Samba password.
+  The user's design choices, 2026-10-30. Who opens: anyone at home, no
+  password (Claude recommended a password; the user chose otherwise).
+  Changes: set per share, some look-only and others letting people add
+  files. Folders: picked in Groundwork, with an add-folder list. A spec
+  is owed under spec-format.md section 1: this is a security boundary
+  with real design choices. Not started.
+  Seen on the owner's machine the same day: wsdd is installed but off,
+  so the item must decide whether to switch it on. `--set id=value`
+  (Wizard::workerArguments) is the existing path for a typed value.
   **Layman:** Lets other computers at home open folders you choose on this one.
   Kind: feature.
   Source: user-request-2026-10-10.
