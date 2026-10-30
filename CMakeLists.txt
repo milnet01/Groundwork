@@ -106,7 +106,8 @@ target_link_libraries(groundwork_drives PUBLIC groundwork_core)
 add_library(groundwork_carry STATIC
     src/carry/carry.cpp
     src/carry/carrieditems.cpp
-    src/carry/settingsgroups.cpp)
+    src/carry/settingsgroups.cpp
+    src/carry/systemparts.cpp)
 target_link_libraries(groundwork_carry PUBLIC groundwork_items groundwork_core)
 
 # GitHub names commands and reads their output, as Items do (GRND-0065).

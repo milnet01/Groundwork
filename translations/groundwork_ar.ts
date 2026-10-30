@@ -445,6 +445,62 @@
         <translation>جارٍ نسخ إعداداتك</translation>
     </message>
     <message>
+        <source>The service manager did not answer.</source>
+        <translation type="unfinished">لم يستجب مدير الخدمات.</translation>
+    </message>
+    <message>
+        <source>Firewall rules from your saved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Putting your firewall rules back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printers from your saved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Putting your printers back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installing CUPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drives from your saved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of drives that connect at start-up could not be read.</source>
+        <translation type="unfinished">تعذّرت قراءة قائمة الأقراص التي تتصل عند بدء التشغيل.</translation>
+    </message>
+    <message>
+        <source>Not connected to this computer, so not added: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Already in the list of drives, so not added: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting your drives at start-up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
         <translation>غير مفعّل: هذا المصدر لا يتحقق من تواقيع برامجه.</translation>
     </message>
@@ -501,6 +557,10 @@
         <translation>يذكر الملف إعدادًا خارج مجلد المنزل: %1</translation>
     </message>
     <message>
+        <source>The file names a setting Groundwork cannot use: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The setup list in the file is damaged.</source>
         <translation>قائمة الإعداد في الملف تالفة.</translation>
     </message>
@@ -555,6 +615,22 @@
     <message>
         <source>size unknown</source>
         <translation>الحجم غير معروف</translation>
+    </message>
+    <message>
+        <source>The saved file could not be read.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is not carried: it asks for a password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is not carried: %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1235,6 +1311,34 @@
     <message>
         <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
         <translation>سيحتوي الملف المحفوظ على كلمات المرور أو المفاتيح المحفوظة لهذا التطبيق. يستطيع أي شخص لديه الملف قراءتها.</translation>
+    </message>
+    <message>
+        <source>System settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firewall rules. Save will ask for your password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printers: %1. Save will ask for your password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drive at %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shared folder %1: others may add files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shared folder %1: others may only look</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1982,6 +2086,18 @@
         <source>Holds saved passwords or keys.</source>
         <translation>يحتوي على كلمات مرور أو مفاتيح محفوظة.</translation>
     </message>
+    <message>
+        <source>Shared folders. Anyone on the network can open these with no password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: others may add files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: others may only look</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::SnapshotsItem</name>
@@ -2669,12 +2785,24 @@
         <translation>لم يعد %1 في مجلد المنزل.</translation>
     </message>
     <message>
+        <source>Reading %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The setup list could not be written to %1.</source>
         <translation>تعذّرت كتابة قائمة الإعداد في %1.</translation>
     </message>
     <message>
         <source>Writing the setup file</source>
         <translation>جارٍ كتابة ملف الإعداد</translation>
+    </message>
+    <message>
+        <source>Saving %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>

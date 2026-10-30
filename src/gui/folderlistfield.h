@@ -27,7 +27,7 @@ public:
     // remove the last one.
     QString value() const;
     // Adds a folder, or says why not beneath the list.
-    void addFolder(const QString &path);
+    void addFolder(const QString &path, bool write = false);
     // Why the last folder was refused; empty if it was not.
     QString refusal() const;
 

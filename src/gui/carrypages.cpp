@@ -10,6 +10,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QLabel>
 #include <QLocale>
@@ -203,13 +204,58 @@ void GatherPage::showFound(const Gathered &found)
         m_rows->insertWidget(m_rows->count() - 1, warning);
         connect(row, &QCheckBox::toggled, warning, &QWidget::setVisible);
     }
+    showSystem(found);
     m_choice->gathered = true;
     emit completeChanged();
+}
+
+void GatherPage::showSystem(const Gathered &found)
+{
+    if (!found.firewallFound && found.printers.isEmpty() && found.mounts.isEmpty() && found.shares.isEmpty()
+        && found.sharesNotCarried.isEmpty())
+        return;
+    QWidget *area = m_status->parentWidget();
+    heading(tr("System settings"));
+    CarryChoice *choice = m_choice;
+    if (found.firewallFound) {
+        Switch *row = addRow(tr("Firewall rules. Save will ask for your password."), true,
+                             [choice](Manifest &) { choice->systemKinds << QStringLiteral("firewall"); });
+        row->setObjectName(QStringLiteral("system:firewall"));
+    }
+    if (!found.printers.isEmpty()) {
+        QStringList names;
+        for (const QString &name : found.printers)
+            names << isolated(name);
+        // A printer's address can hold a print server's password (GRND-0073
+        // spec 3), so it starts off and warns, as other secrets do.
+        Switch *row = addRow(tr("Printers: %1. Save will ask for your password.").arg(names.join(QStringLiteral(", "))), false,
+                             [choice](Manifest &) { choice->systemKinds << QStringLiteral("printers"); });
+        row->setObjectName(QStringLiteral("system:printers"));
+        QLabel *warning = wrapped(area, tr("The saved file will hold your printers' settings, and a printer's address "
+                                           "can hold a password. Anyone with the file can read them."));
+        warning->setObjectName(QStringLiteral("secretWarning:system:printers"));
+        warning->hide();
+        m_rows->insertWidget(m_rows->count() - 1, warning);
+        connect(row, &QCheckBox::toggled, warning, &QWidget::setVisible);
+    }
+    for (const CarriedMount &mount : found.mounts) {
+        Switch *row = addRow(tr("Drive at %1").arg(isolated(mount.point)), true, [mount](Manifest &m) { m.mounts << mount; });
+        row->setObjectName(QStringLiteral("mount:") + mount.point);
+    }
+    for (const CarriedShare &share : found.shares) {
+        Switch *row = addRow(share.write ? tr("Shared folder %1: others may add files").arg(isolated(share.path))
+                                         : tr("Shared folder %1: others may only look").arg(isolated(share.path)),
+                             true, [share](Manifest &m) { m.shares << share; });
+        row->setObjectName(QStringLiteral("share:") + share.path);
+    }
+    for (const QString &why : found.sharesNotCarried)
+        m_rows->insertWidget(m_rows->count() - 1, wrapped(area, why));
 }
 
 bool GatherPage::validatePage()
 {
     Manifest kept;
+    m_choice->systemKinds.clear();
     for (const auto &[row, keep] : std::as_const(m_keeps)) {
         if (row->isChecked())
             keep(kept);
@@ -263,7 +309,10 @@ void SavePage::refresh()
     m_file->setText(tr("File: %1").arg(isolated(QFileInfo(m_choice->output()).fileName())));
     m_folder->setText(tr("Folder: %1").arg(isolated(m_choice->folder)));
     const FolderSpace space = m_choice->space ? m_choice->space(m_choice->folder) : FolderSpace{};
-    const qint64 total = settingsBytes(m_choice->kept);
+    // A part read as root cannot be sized before the password (GRND-0073 spec 4.2).
+    qint64 total = settingsBytes(m_choice->kept);
+    if (total >= 0)
+        total += kSystemPartAllowance * m_choice->systemKinds.size();
     QString sizes = tr("The settings switched on take %1.").arg(bytesText(total));
     if (total < 0)
         sizes = tr("The size of some settings switched on is unknown.");
@@ -299,7 +348,9 @@ bool SavePage::validatePage()
     manifest.systemVersion = m_choice->system.versionId;
     (void)makeStateDir(QFileInfo(m_choice->choicesPath).path());
     QSaveFile file(m_choice->choicesPath);
-    const QJsonObject choices{{"output", m_choice->output()}, {"manifest", manifestJson(manifest)}};
+    const QJsonObject choices{{"output", m_choice->output()},
+                              {"manifest", manifestJson(manifest)},
+                              {"systemKinds", QJsonArray::fromStringList(m_choice->systemKinds)}};
     const bool saved = file.open(QIODevice::WriteOnly) && file.write(QJsonDocument(choices).toJson()) >= 0
                        && file.commit();
     if (!saved) {

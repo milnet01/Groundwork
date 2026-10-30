@@ -1,6 +1,8 @@
 #include "carry.h"
 
+#include "core/folderlist.h"
 #include "core/translations.h"
+#include "items/networksharesitem.h"
 
 #include <QCoreApplication>
 #include <QDirIterator>
@@ -71,23 +73,10 @@ QString strippedMember(const QString &member)
     return path;
 }
 
-// A value that failed its check, as the page and the marker show it:
-// without control or direction characters an edited file could hold.
-QString shown(const QString &value)
-{
-    QString text = value;
-    text.removeIf([](QChar c) {
-        const char16_t u = c.unicode();
-        return u < 0x20 || u == 0x7f || u == 0x061c || u == 0x200e || u == 0x200f || (u >= 0x202a && u <= 0x202e)
-               || (u >= 0x2066 && u <= 0x2069);
-    });
-    return isolated(text);
-}
-
 QString skippedName(const QString &value)
 {
     return QCoreApplication::translate("gw::Carry", "Skipped “%1”: it is not a name Groundwork can use.")
-        .arg(shown(value));
+        .arg(shownFromFile(value));
 }
 
 QStringList strings(const QJsonValue &value)
@@ -99,6 +88,17 @@ QStringList strings(const QJsonValue &value)
 }
 
 } // namespace
+
+QString shownFromFile(const QString &value)
+{
+    QString text = value;
+    text.removeIf([](QChar c) {
+        const char16_t u = c.unicode();
+        return u < 0x20 || u == 0x7f || u == 0x061c || u == 0x200e || u == 0x200f || (u >= 0x202a && u <= 0x202e)
+               || (u >= 0x2066 && u <= 0x2069);
+    });
+    return isolated(text);
+}
 
 bool isPackageName(const QString &text)
 {
@@ -324,7 +324,7 @@ void gatherSources(const CheckContext &context, Gathered *into)
                 into->uncarriedSources << QCoreApplication::translate("gw::Carry", "“%1” can't be carried: its name "
                                                                                    "holds a character Groundwork "
                                                                                    "cannot use.")
-                                              .arg(shown(source.name));
+                                              .arg(shownFromFile(source.name));
             else if (const QString why = keyOrPriorityProblem(source); !why.isEmpty())
                 into->uncarriedSources << why;
             else
@@ -349,7 +349,7 @@ QList<SettingsRow> gatherSettings(const CheckContext &context, const QString &ho
         entries << QStringLiteral(".config/") + name;
     for (const QStringList names = context.entries(home, true); const QString &name : names) {
         if (name.startsWith(QLatin1Char('.')) && name != QLatin1String(".cache") && name != QLatin1String(".config")
-            && name != QLatin1String(".local") && name != QLatin1String(".var"))
+            && name != QLatin1String(".local") && name != QLatin1String(".var") && name != kSystemPartsFolder)
             entries << name;
     }
     for (const QStringList ids = context.entries(home + QStringLiteral("/.var/app")); const QString &id : ids) {
@@ -489,11 +489,17 @@ QJsonObject manifestJson(const Manifest &manifest)
     for (const FlatpakRemote &r : manifest.flatpakRemotes)
         sources.append(QJsonObject{{"kind", "flatpak"}, {"name", r.name}, {"url", r.url}, {"installation", r.installation}});
     QJsonArray settings;
-    for (const SettingsRow &row : manifest.settings)
+    for (const QList<SettingsRow> rows = manifest.settings + manifest.systemParts; const SettingsRow &row : rows)
         settings.append(QJsonObject{{"name", row.name},
                                     {"paths", QJsonArray::fromStringList(row.paths)},
                                     {"secret", row.secret},
                                     {"bytes", double(row.bytes)}});
+    QJsonArray mounts;
+    for (const CarriedMount &m : manifest.mounts)
+        mounts.append(QJsonObject{{"source", m.source}, {"point", m.point}, {"fstype", m.fstype}, {"options", m.options}});
+    QJsonArray shares;
+    for (const CarriedShare &share : manifest.shares)
+        shares.append(QJsonObject{{"path", share.path}, {"write", share.write}});
     return {{"format", manifest.format},
             {"created", manifest.created},
             {"groundwork", manifest.groundwork},
@@ -502,7 +508,9 @@ QJsonObject manifestJson(const Manifest &manifest)
             {"packages", QJsonArray::fromStringList(manifest.packages)},
             {"flatpaks", flatpaks},
             {"sources", sources},
-            {"settings", settings}};
+            {"settings", settings},
+            {"mounts", mounts},
+            {"shares", shares}};
 }
 
 std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStringList *skipped)
@@ -569,7 +577,7 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
             if (repeated)
                 *skipped << QCoreApplication::translate("gw::Carry", "Skipped a second software source named "
                                                                      "“%1”: the file names it twice.")
-                                .arg(shown(s.alias));
+                                .arg(shownFromFile(s.alias));
             else if (isAlias(s.alias) && !s.name.isEmpty() && !hasControl(s.name) && isSourceUrl(s.baseurl)
                      && keyOrPriorityProblem(s).isEmpty())
                 m.zypperSources << s;
@@ -595,14 +603,52 @@ std::optional<Manifest> readManifest(const QJsonObject &json, QString *why, QStr
             if (!isSettingsPath(path)) { // cppcheck-suppress useStlAlgorithm
                 *why = QCoreApplication::translate("gw::Carry", "The file names a setting outside the home "
                                                                 "folder: %1")
-                           .arg(shown(path));
+                           .arg(shownFromFile(path));
                 return std::nullopt;
             }
         }
-        if (row.name.isEmpty() || row.paths.isEmpty())
+        if (row.name.isEmpty() || row.paths.isEmpty()) {
             *skipped << skippedName(row.name);
+            continue;
+        }
+        // The firewall and printers are read apart, and printers are secret
+        // whatever the file says (GRND-0073 spec 4.1, INV-8).
+        if (row.paths == QStringList{kFirewallPart} || row.paths == QStringList{kPrintersPart}) {
+            row.secret = row.secret || row.paths.first() == kPrintersPart;
+            if (std::none_of(m.systemParts.cbegin(), m.systemParts.cend(),
+                             [&](const SettingsRow &part) { return part.paths == row.paths; }))
+                m.systemParts << row;
+            continue;
+        }
+        for (const QString &path : std::as_const(row.paths)) {
+            if (isUnder(path, kSystemPartsFolder)) { // cppcheck-suppress useStlAlgorithm
+                *why = QCoreApplication::translate("gw::Carry", "The file names a setting Groundwork cannot use: %1")
+                           .arg(shownFromFile(path));
+                return std::nullopt;
+            }
+        }
+        m.settings << row;
+    }
+    for (const QJsonArray values = json.value("mounts").toArray(); const QJsonValue v : values) {
+        const QJsonObject o = v.toObject();
+        const CarriedMount mount{o.value("source").toString(), o.value("point").toString(), o.value("fstype").toString(),
+                                 o.value("options").toString()};
+        if (isCarriedMount(mount))
+            m.mounts << mount;
         else
-            m.settings << row;
+            *skipped << skippedName(mount.point);
+    }
+    const NetworkSharesItem shareRules;
+    for (const QJsonArray values = json.value("shares").toArray(); const QJsonValue v : values) {
+        const QJsonObject o = v.toObject();
+        const CarriedShare share{o.value("path").toString(), o.value("write").toBool()};
+        const bool repeated = std::any_of(m.shares.cbegin(), m.shares.cend(),
+                                          [&](const CarriedShare &kept) { return kept.path == share.path; });
+        if (!share.path.isEmpty() && shareRules.whyRefused(share.path).isEmpty() && !repeated
+            && m.shares.size() < kMaxListedFolders)
+            m.shares << share;
+        else
+            *skipped << skippedName(share.path);
     }
     return m;
 }
@@ -625,7 +671,7 @@ QString membersProblem(const QStringList &members, const Manifest &manifest)
     if (lists > 1)
         return QCoreApplication::translate("gw::Carry", "The file holds more than one setup list.");
     QStringList paths;
-    for (const SettingsRow &row : manifest.settings)
+    for (const QList<SettingsRow> rows = manifest.settings + manifest.systemParts; const SettingsRow &row : rows)
         paths << row.paths;
     for (const QString &member : members) {
         if (member == kManifestName)
@@ -633,15 +679,15 @@ QString membersProblem(const QStringList &members, const Manifest &manifest)
         const QString path = strippedMember(member);
         if (!isSettingsPath(path))
             return QCoreApplication::translate("gw::Carry", "The file holds %1, which is outside the home folder.")
-                .arg(shown(member));
+                .arg(shownFromFile(member));
         if (std::none_of(paths.cbegin(), paths.cend(), [&](const QString &p) { return isUnder(path, p); }))
             return QCoreApplication::translate("gw::Carry", "The file holds %1, which its setup list does not name.")
-                .arg(shown(member));
+                .arg(shownFromFile(member));
     }
     for (const QString &p : std::as_const(paths)) {
         if (std::none_of(members.cbegin(), members.cend(),
                          [&](const QString &member) { return isUnder(strippedMember(member), p); })) // cppcheck-suppress useStlAlgorithm
-            return QCoreApplication::translate("gw::Carry", "The file is missing %1.").arg(shown(p));
+            return QCoreApplication::translate("gw::Carry", "The file is missing %1.").arg(shownFromFile(p));
     }
     return {};
 }
@@ -752,8 +798,9 @@ std::optional<Manifest> readSetupFile(const CheckContext &context, const QString
 QStringList secretMembers(const QStringList &members, const Manifest &manifest)
 {
     QStringList secret;
+    const QList<SettingsRow> rows = manifest.settings + manifest.systemParts;
     for (const QString &member : members) {
-        for (const SettingsRow &row : manifest.settings) {
+        for (const SettingsRow &row : rows) {
             // As tar --delete names it: a folder without its trailing slash,
             // and nothing inside one already named, which it deletes too.
             const QString path = strippedMember(member);
@@ -773,6 +820,7 @@ Manifest withoutSecrets(const Manifest &manifest)
 {
     Manifest kept = manifest;
     kept.settings.removeIf([](const SettingsRow &row) { return row.secret; });
+    kept.systemParts.removeIf([](const SettingsRow &row) { return row.secret; });
     return kept;
 }
 

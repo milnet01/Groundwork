@@ -9,6 +9,7 @@
 #include "gui/runpage.h"
 #include "gui/switch.h"
 #include "gui/themes.h"
+#include "core/folderlist.h"
 #include "gui/wizard.h"
 
 #include <QAccessible>
@@ -79,6 +80,7 @@ public:
         return path == QLatin1String("/etc") ? QStringLiteral("Not that one.") : QString();
     }
 };
+const FakeFolderListItem shares(QStringLiteral("network-shares"), gw::Level::Configuration, false);
 const FakeItem fonts(QStringLiteral("fonts"), gw::Level::NiceToHave, true);
 const gw::Catalogue catalogue({&update, &codecs, &hostname, &fonts});
 class FakeIncluder : public FakeItem
@@ -109,6 +111,7 @@ public:
     bool acceptsLicence() const override { return true; }
 };
 const FakeItem firewall(QStringLiteral("firewall"), gw::Level::SystemSetup, false);
+const gw::Catalogue withShares({&update, &firewall, &shares});
 const FakeLicenceItem nvidia(QStringLiteral("nvidia"), gw::Level::Essentials, true);
 const gw::Catalogue restoring({&update, &nvidia, &firewall});
 // A kept item that switches another off by including it (GRND-0098).
@@ -180,6 +183,7 @@ class TstWizard : public QObject
     QTemporaryDir m_dir;
     qint64 m_free = 100 * kGiB; // the save folder's free space
     gw::GithubSurvey m_github;  // what the GitHub job's pages read
+    gw::Gathered m_systemFound; // the system settings gathering finds (GRND-0073)
     gw::Manifest m_saved;       // what the saved file holds
     gw::CheckState m_carriedState = gw::CheckState::NotDone; // what its items' checks say
     std::atomic<QThread *> m_readOn = nullptr, m_checkedOn = nullptr; // where the file was read and checked
@@ -248,8 +252,8 @@ class TstWizard : public QObject
             }
             return survey;
         };
-        setup.gatherSetup = [] {
-            gw::Gathered found;
+        setup.gatherSetup = [this] {
+            gw::Gathered found = m_systemFound;
             found.packages = {QStringLiteral("act")};
             found.settings = {{QStringLiteral("Dolphin"), {QStringLiteral(".config/dolphinrc")}, false, 300},
                               {QStringLiteral("SSH keys"), {QStringLiteral(".ssh")}, true, 20}};
@@ -321,6 +325,7 @@ private slots:
         gw::loadLanguage(QStringLiteral("en"));
         m_free = 100 * kGiB;
         m_github = {};
+        m_systemFound = {};
         m_saved = {};
         m_carriedState = gw::CheckState::NotDone;
         m_refused.clear();
@@ -960,6 +965,107 @@ private slots:
         const QJsonArray settings = manifest.value("settings").toArray();
         QCOMPARE(settings.size(), 1); // the secret stayed off
         QCOMPARE(settings.first().toObject().value("name").toString(), QStringLiteral("Dolphin"));
+    }
+
+    // GRND-0073 spec 4.2: the rows, with a printer starting off and warning.
+    void theSystemRowsStartAsTheSpecSays()
+    {
+        m_systemFound.firewallFound = true;
+        m_systemFound.printers = {QStringLiteral("Office")};
+        m_systemFound.mounts = {{QStringLiteral("UUID=1"), QStringLiteral("/mnt/Games"), QStringLiteral("ext4"), QStringLiteral("nofail")}};
+        m_systemFound.shares = {{QStringLiteral("/mnt/Games/PC Games"), false}, {QStringLiteral("/mnt/Games/Music"), true}};
+        m_systemFound.sharesNotCarried = {QStringLiteral("Private is not carried: it asks for a password.")};
+        auto w = gathered();
+        QVERIFY(w);
+        QWizardPage *page = w->currentPage();
+        auto *firewall = page->findChild<QCheckBox *>(QStringLiteral("system:firewall"));
+        auto *printers = page->findChild<QCheckBox *>(QStringLiteral("system:printers"));
+        auto *warning = page->findChild<QLabel *>(QStringLiteral("secretWarning:system:printers"));
+        auto *mount = page->findChild<QCheckBox *>(QStringLiteral("mount:/mnt/Games"));
+        auto *share = page->findChild<QCheckBox *>(QStringLiteral("share:/mnt/Games/Music"));
+        QVERIFY(firewall && printers && warning && mount && share);
+        QVERIFY(firewall->isChecked());
+        QVERIFY(firewall->text().contains(QLatin1String("password")));
+        QVERIFY(!printers->isChecked());
+        QVERIFY(printers->text().contains(QLatin1String("Office")));
+        QVERIFY(warning->isHidden());
+        printers->click();
+        QVERIFY(!warning->isHidden());
+        QVERIFY(mount->isChecked());
+        QVERIFY(mount->text().contains(QLatin1String("/mnt/Games")));
+        QVERIFY(share->isChecked());
+        bool named = false;
+        for (const QCheckBox *row : page->findChildren<QCheckBox *>())
+            named = named || (row->text().contains(QLatin1String("Private")) && !row->isEnabled());
+        for (const QLabel *label : page->findChildren<QLabel *>())
+            named = named || label->text().contains(QLatin1String("Private"));
+        QVERIFY(named);
+    }
+
+    // GRND-0073 spec 4.5: what Save writes, and the room each root kind adds.
+    void saveRecordsTheSystemKinds()
+    {
+        m_systemFound.firewallFound = true;
+        m_systemFound.printers = {QStringLiteral("Office")};
+        m_systemFound.mounts = {{QStringLiteral("UUID=1"), QStringLiteral("/mnt/Games"), QStringLiteral("ext4"), QStringLiteral("nofail")}};
+        m_systemFound.shares = {{QStringLiteral("/mnt/Games/Music"), true}};
+        auto w = gathered();
+        QVERIFY(w);
+        w->next(); // the save page
+        QCOMPARE(w->carryChoice().systemKinds, QStringList{"firewall"}); // printers start off
+        m_free = gw::kSystemPartAllowance / 2;
+        w->back();
+        w->next();
+        QVERIFY(!w->currentPage()->isComplete()); // the allowance does not fit
+        m_free = 100 * kGiB;
+        w->back();
+        w->next();
+        w->next(); // Save
+        QFile file(w->carryChoice().choicesPath);
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        const QJsonObject choices = QJsonDocument::fromJson(file.readAll()).object();
+        QCOMPARE(choices.value("systemKinds").toArray(), QJsonArray{"firewall"});
+        const QJsonObject manifest = choices.value("manifest").toObject();
+        QCOMPARE(manifest.value("mounts").toArray().size(), 1);
+        QCOMPARE(manifest.value("shares").toArray().first().toObject().value("path").toString(), QStringLiteral("/mnt/Games/Music"));
+        QCOMPARE(manifest.value("shares").toArray().first().toObject().value("write").toBool(), true);
+    }
+
+    // GRND-0073 spec 4.6: rows for each kind, printers marked, and the shares
+    // going to network-shares' own list, joined with what it holds.
+    void aSavedSetupsSystemPartsBecomeRows()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.systemParts = {{QStringLiteral("Firewall"), {gw::kFirewallPart}, false, 10},
+                               {QStringLiteral("Printers"), {gw::kPrintersPart}, true, 10}};
+        m_saved.mounts = {{QStringLiteral("UUID=1"), QStringLiteral("/mnt/Games"), QStringLiteral("ext4"), QStringLiteral("nofail")},
+                          {QStringLiteral("UUID=2"), QStringLiteral("/mnt/Other"), QStringLiteral("ext4"), QStringLiteral("nofail")}};
+        m_saved.shares = {{QStringLiteral("/mnt/Games/Music"), true}, {QStringLiteral("/mnt/Games/Dropped"), false}};
+        auto w = fromSaved(&withShares);
+        QVERIFY(w);
+        for (const QString &id : {gw::kCarriedFirewallId, gw::kCarriedPrintersId, gw::kCarriedMountsId}) {
+            QVERIFY2(w->row(id), qPrintable(id));
+            QVERIFY2(w->selection().contains(id), qPrintable(id)); // kept, so on
+        }
+        QVERIFY(w->selection().contains(QStringLiteral("firewall"))); // what the firewall part needs
+        QWizardPage *page = w->currentPage();
+        QVERIFY(page->findChild<QLabel *>(QStringLiteral("secretMark:Printers")));
+        QVERIFY(w->savedSetup()->holdsSecrets());
+        page->findChild<QCheckBox *>(gw::kCarriedMountsId + QStringLiteral("//mnt/Other"))->click();
+        page->findChild<QCheckBox *>(QStringLiteral("network-shares//mnt/Games/Dropped"))->click();
+        w->next();
+        QVERIFY(w->selection().contains(QStringLiteral("network-shares")));
+        const QString value = w->row(QStringLiteral("network-shares"))->value();
+        QCOMPARE(gw::parseFolderList(value)->size(), 1);
+        QCOMPARE(gw::parseFolderList(value)->first().path, QStringLiteral("/mnt/Games/Music"));
+        QVERIFY(gw::parseFolderList(value)->first().write);
+        goToRunPage(*w);
+        QFile file(w->restoreChoicesPath());
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        const QJsonObject manifest = QJsonDocument::fromJson(file.readAll()).object().value("manifest").toObject();
+        QCOMPARE(manifest.value("mounts").toArray().size(), 1);
+        QCOMPARE(manifest.value("shares").toArray().size(), 1);
+        QCOMPARE(manifest.value("settings").toArray().size(), 2); // the two parts' rows
     }
 
     // GRND-0065: the job, from the first page to its Start page, read.

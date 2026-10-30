@@ -139,6 +139,32 @@ esac
 exit 0
 )";
 
+// System settings (GRND-0073): the real command, with /etc moved into the
+// fixture, as root would have it.
+const QByteArray kUnderRoot = R"(#!/bin/sh
+echo "${0##*/} $*" >> "$FAKE_LOG"
+tool="${0##*/}"
+n=$#
+while [ "$n" -gt 0 ]; do
+  a="$1"; shift
+  case "$a" in
+    /etc/*) a="$GROUNDWORK_ROOT$a";;
+  esac
+  set -- "$@" "$a"
+  n=$((n-1))
+done
+exec "/usr/bin/$tool" "$@"
+)";
+
+// Everything is found and running.
+const QByteArray kSystemctlRunning = R"(#!/bin/sh
+echo "systemctl $*" >> "$FAKE_LOG"
+case "$1" in
+  is-enabled) echo enabled;;
+  is-active) echo active;;
+esac
+)";
+
 constexpr qint64 kMiB = qint64(1) << 20;
 constexpr qint64 kGiB = qint64(1) << 30;
 
@@ -337,6 +363,45 @@ class TstWorker : public QObject
         p.start(QStringLiteral(GROUNDWORK_BIN), QStringList{QStringLiteral("--worker")} + args);
         return finish(p);
     }
+    // GRND-0073: a firewall and a printer in the fixture's /etc, each beside
+    // the copies their programs keep; and the commands that read and write them.
+    void setUpSystemFolders()
+    {
+        for (const char *tool : {"tar", "find", "mkdir", "chmod"})
+            writeFile(m_bin + QLatin1Char('/') + QLatin1String(tool), kUnderRoot, true);
+        writeFile(m_bin + QStringLiteral("/systemctl"), kSystemctlRunning, true);
+        for (const char *tool : {"firewall-cmd", "restorecon", "chown"}) // chown root:lp needs root
+            writeFile(m_bin + QLatin1Char('/') + QLatin1String(tool), kRecord, true);
+        const QString etc = m_root + QStringLiteral("/etc/");
+        writeFile(etc + QStringLiteral("firewalld/firewalld.conf"), "DefaultZone=home\n");
+        writeFile(etc + QStringLiteral("firewalld/zones/home.xml"), "<zone>new</zone>\n");
+        writeFile(etc + QStringLiteral("firewalld/zones/home.xml.old"), "<zone>old</zone>\n");
+        writeFile(etc + QStringLiteral("cups/printers.conf"), "<Printer Office>\n");
+        writeFile(etc + QStringLiteral("cups/printers.conf.O"), "<Printer Old>\n");
+        writeFile(etc + QStringLiteral("cups/cupsd.conf"), "Listen 631\n");
+        writeFile(etc + QStringLiteral("cups/ppd/Office.ppd"), "*PPD\n");
+        writeFile(etc + QStringLiteral("cups/ppd/Office.ppd.O"), "*PPD old\n");
+    }
+    QString saveChoices(const QString &output, const QStringList &kinds)
+    {
+        writeFile(m_dir->filePath(QStringLiteral(".myapprc")), "x\n");
+        const QJsonObject manifest{
+            {"format", 1},
+            {"packages", QJsonArray{"act"}},
+            {"settings", QJsonArray{QJsonObject{{"name", "Mine"}, {"paths", QJsonArray{".myapprc"}}, {"secret", false}, {"bytes", 2}}}}};
+        const QString choices = m_dir->filePath(QStringLiteral("setup-choices.json"));
+        writeFile(choices, QJsonDocument(QJsonObject{{"output", output}, {"manifest", manifest},
+                                                     {"systemKinds", QJsonArray::fromStringList(kinds)}}).toJson());
+        return choices;
+    }
+    static QStringList tarMembers(const QString &file)
+    {
+        QProcess list;
+        list.start(QStringLiteral("/usr/bin/tar"), {QStringLiteral("--list"), QStringLiteral("--file"), file});
+        list.waitForFinished();
+        return QString::fromUtf8(list.readAllStandardOutput()).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
+    }
+
     // GRND-0065: a fake gh, then the Worker copying repos into folder.
     Run copyGithub(const QString &folder, const QStringList &repos)
     {
@@ -1143,6 +1208,115 @@ cat > "$FAKE_WRITTEN$out"
         const Run deleted = worker({QStringLiteral("--delete-setup-file"), file});
         QCOMPARE(deleted.endsFor(QStringLiteral("delete-setup-file")).value(1), QStringLiteral("ok"));
         QVERIFY(!QFile::exists(file));
+    }
+
+    // GRND-0073, INV-2: root is asked for once, and only for what needs it.
+    void saveAsksForRootOnlyWhenNeeded_data()
+    {
+        QTest::addColumn<QStringList>("kinds");
+        QTest::addColumn<int>("asks");
+        QTest::newRow("neither") << QStringList{} << 0;
+        QTest::newRow("firewall") << QStringList{"firewall"} << 1;
+        QTest::newRow("printers") << QStringList{"printers"} << 1;
+        QTest::newRow("both") << QStringList{"firewall", "printers"} << 1;
+    }
+    void saveAsksForRootOnlyWhenNeeded()
+    {
+        QFETCH(QStringList, kinds);
+        QFETCH(int, asks);
+        setUpSystemFolders();
+        const QString output = m_dir->filePath(QStringLiteral("saved.tar"));
+        const Run r = save(saveChoices(output, kinds));
+        QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.count(QStringLiteral("sudo -v")) + r.count(QStringLiteral("sudo -A")), asks);
+        const QStringList members = tarMembers(output);
+        QCOMPARE(members.value(0), QStringLiteral("groundwork-setup.json"));
+        QVERIFY(members.contains(QStringLiteral(".myapprc")));
+        QCOMPARE(members.contains(QStringLiteral(".groundwork-system/firewall/zones/home.xml")), kinds.contains(QStringLiteral("firewall")));
+        QCOMPARE(members.contains(QStringLiteral(".groundwork-system/printers/printers.conf")), kinds.contains(QStringLiteral("printers")));
+        // What restoring would refuse never enters the file (spec 4.5).
+        for (const QString &member : members) {
+            QVERIFY2(!member.endsWith(QLatin1String(".old")), qPrintable(member));
+            QVERIFY2(!member.endsWith(QLatin1String(".O")), qPrintable(member));
+            QVERIFY2(!member.contains(QLatin1String("cupsd.conf")), qPrintable(member));
+        }
+        QVERIFY(!QFile::exists(m_state + QStringLiteral("/groundwork/system.tar")));
+    }
+
+    void aRefusedPasswordSavesNothing()
+    {
+        setUpSystemFolders();
+        m_env.insert(QStringLiteral("FAKE_SUDO_FAIL"), QStringLiteral("1"));
+        const QString output = m_dir->filePath(QStringLiteral("saved.tar"));
+        const Run r = save(saveChoices(output, {"firewall"}));
+        QCOMPARE(r.exitCode, 4);
+        QVERIFY(r.endsFor(QStringLiteral("save-setup")).value(2).contains(QLatin1String("Nothing was saved")));
+        QVERIFY(!QFile::exists(output));
+        QVERIFY(!QFile::exists(output + QStringLiteral(".partial")));
+        QCOMPARE(r.count(QStringLiteral("find")), 0);
+    }
+
+    void anUnknownKindSavesNothing()
+    {
+        const QString output = m_dir->filePath(QStringLiteral("saved.tar"));
+        const Run r = save(saveChoices(output, {"sudoers"}));
+        QCOMPARE(r.exitCode, 1);
+        QCOMPARE(r.count(QStringLiteral("sudo")), 0);
+        QVERIFY(!QFile::exists(output));
+    }
+
+    // A firewall with nothing of its own is no failure: there is no row.
+    void aPartWithNothingToSaveIsNamed()
+    {
+        setUpSystemFolders();
+        QVERIFY(QDir(m_root + QStringLiteral("/etc/firewalld")).removeRecursively());
+        QVERIFY(QDir().mkpath(m_root + QStringLiteral("/etc/firewalld")));
+        const QString output = m_dir->filePath(QStringLiteral("saved.tar"));
+        const Run r = save(saveChoices(output, {"firewall"}));
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(hintsFor(r, QStringLiteral("save-setup")).filter(QStringLiteral("Firewall")).size(), 1);
+        QVERIFY(!tarMembers(output).join(QLatin1Char(' ')).contains(QLatin1String(".groundwork-system/firewall")));
+    }
+
+    // Spec 4.5 and 4.6 end to end: saved here, restored into another root.
+    // The replaced zone stays as a numbered copy, firewalld.conf is not
+    // written, and the printer file comes back with cups stopped.
+    void aSavedFirewallAndPrinterComeBack()
+    {
+        setUpSystemFolders();
+        const QString output = m_dir->filePath(QStringLiteral("saved.tar"));
+        QCOMPARE(save(saveChoices(output, {"firewall", "printers"})).exitCode, 0);
+
+        const QString etc = m_root + QStringLiteral("/etc/");
+        QVERIFY(QDir(etc + QStringLiteral("firewalld")).removeRecursively());
+        QVERIFY(QDir(etc + QStringLiteral("cups")).removeRecursively());
+        writeFile(etc + QStringLiteral("firewalld/firewalld.conf"), "DefaultZone=public\n");
+        writeFile(etc + QStringLiteral("firewalld/zones/home.xml"), "<zone>fresh</zone>\n");
+        QFile::remove(m_log);
+
+        const QJsonObject manifest{
+            {"format", 1},
+            {"settings", QJsonArray{QJsonObject{{"name", "Firewall"}, {"paths", QJsonArray{".groundwork-system/firewall"}}, {"secret", false}, {"bytes", 16777216}},
+                                    QJsonObject{{"name", "Printers"}, {"paths", QJsonArray{".groundwork-system/printers"}}, {"secret", true}, {"bytes", 16777216}}}}};
+        const Run r = worker({QStringLiteral("--setup-choices"), restoreChoices(output, manifest),
+                              QStringLiteral("carried-firewall"), QStringLiteral("carried-printers")});
+        QVERIFY2(r.endsFor(QStringLiteral("carried-firewall")).value(1) == QLatin1String("ok"),
+                 qPrintable(r.endsFor(QStringLiteral("carried-firewall")).join(QLatin1Char('|')) + r.calls.join(QLatin1Char('\n'))));
+        QCOMPARE(r.endsFor(QStringLiteral("carried-printers")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.exitCode, 0);
+        auto text = [](const QString &path) {
+            QFile f(path);
+            return f.open(QIODevice::ReadOnly) ? f.readAll() : QByteArray();
+        };
+        QCOMPARE(text(etc + QStringLiteral("firewalld/zones/home.xml")), QByteArray("<zone>new</zone>\n"));
+        QCOMPARE(text(etc + QStringLiteral("firewalld/zones/home.xml.~1~")), QByteArray("<zone>fresh</zone>\n"));
+        QCOMPARE(text(etc + QStringLiteral("firewalld/firewalld.conf")), QByteArray("DefaultZone=public\n"));
+        QCOMPARE(text(etc + QStringLiteral("cups/printers.conf")), QByteArray("<Printer Office>\n"));
+        QVERIFY(QFile::exists(etc + QStringLiteral("cups/ppd/Office.ppd")));
+        QVERIFY(!QFile::exists(etc + QStringLiteral("cups/cupsd.conf")));
+        QCOMPARE(r.count(QStringLiteral("firewall-cmd --reload")), 1);
+        QCOMPARE(r.count(QStringLiteral("firewall-cmd --set-default-zone=home")), 1);
     }
 
     // GRND-0065, INV-4: whatever is at the destination stays as it is: a

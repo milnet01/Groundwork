@@ -1,8 +1,9 @@
 // The items a saved file's kept parts become (GRND-0079;
 // docs/specs/GRND-0079-start-from-saved-setup.md § 4.2): a software source
 // each, then the programs, the Flatpak apps and the settings, one item
-// each. They come after every Groundwork item, and the Wizard or the
-// Worker that builds them keeps them alive.
+// each, then the firewall, printers and drive mounts (GRND-0073 § 4.6). They
+// come after every Groundwork item, and the Wizard or the Worker that builds
+// them keeps them alive.
 #pragma once
 
 #include "carry.h"
@@ -15,6 +16,11 @@ namespace gw {
 inline const QString kCarriedPackagesId = QStringLiteral("carried-packages");
 inline const QString kCarriedFlatpaksId = QStringLiteral("carried-flatpaks");
 inline const QString kCarriedSettingsId = QStringLiteral("carried-settings");
+inline const QString kCarriedFirewallId = QStringLiteral("carried-firewall");
+inline const QString kCarriedPrintersId = QStringLiteral("carried-printers");
+inline const QString kCarriedMountsId = QStringLiteral("carried-mounts");
+// The Groundwork item a saved file's shares go to (GRND-0073 spec 4.6).
+inline const QString kNetworkSharesId = QStringLiteral("network-shares");
 // A source's item id: this, then its alias.
 inline const QString kCarriedSourcePrefix = QStringLiteral("carried-source:");
 // Where a source is refreshed before it is moved into /etc/zypp/repos.d,

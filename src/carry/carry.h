@@ -17,6 +17,10 @@
 
 namespace gw {
 
+// A value that failed a check, as a page or a marker may show it: without
+// control or direction characters an edited file could hold.
+QString shownFromFile(const QString &value);
+
 // The manifest's own name, in the state folder and in the archive (spec 4.6).
 inline const QString kManifestName = QStringLiteral("groundwork-setup.json");
 constexpr int kSetupFormat = 1;
@@ -30,6 +34,12 @@ constexpr qint64 kSetupFileExtra = qint64(1) << 20;
 // so a crafted file cannot fill memory before it is checked (GRND-0089).
 constexpr qint64 kMemberListCap = qint64(64) << 20;
 constexpr qint64 kManifestCap = qint64(16) << 20;
+// Under these only the system parts live in the file (GRND-0073 spec 4.1).
+inline const QString kSystemPartsFolder = QStringLiteral(".groundwork-system");
+inline const QString kFirewallPart = QStringLiteral(".groundwork-system/firewall");
+inline const QString kPrintersPart = QStringLiteral(".groundwork-system/printers");
+// What the save check adds for a part it cannot size before the password.
+constexpr qint64 kSystemPartAllowance = qint64(16) << 20;
 
 struct FlatpakApp
 {
@@ -60,6 +70,21 @@ struct SettingsRow
     bool operator==(const SettingsRow &) const = default;
 };
 
+// A drive's line of /etc/fstab, kept for a new install (GRND-0073 spec 4.3).
+struct CarriedMount
+{
+    QString source, point, fstype, options;
+    bool operator==(const CarriedMount &) const = default;
+};
+
+// A shared folder, and whether others may add files (GRND-0073 spec 4.4).
+struct CarriedShare
+{
+    QString path;
+    bool write = false;
+    bool operator==(const CarriedShare &) const = default;
+};
+
 struct Manifest
 {
     int format = kSetupFormat;
@@ -69,6 +94,11 @@ struct Manifest
     QList<ZypperSource> zypperSources;
     QList<FlatpakRemote> flatpakRemotes;
     QList<SettingsRow> settings;
+    // The firewall and printers: settings rows in the file, under paths only
+    // these use, so an older Groundwork still reads it (GRND-0073 spec 4.1).
+    QList<SettingsRow> systemParts;
+    QList<CarriedMount> mounts;
+    QList<CarriedShare> shares;
     bool operator==(const Manifest &) const = default;
 };
 
@@ -113,6 +143,12 @@ struct Gathered
     QList<FlatpakRemote> flatpakRemotes;
     QString remotesProblem;
     QList<SettingsRow> settings;
+    // System-wide settings (GRND-0073 spec 4.2).
+    bool firewallFound = false;
+    QStringList printers;
+    QList<CarriedMount> mounts;
+    QList<CarriedShare> shares;
+    QStringList sharesNotCarried; // plain words, one per share left behind
 };
 
 // The candidate entries (spec 4.4), relative to the home folder, as named
@@ -126,6 +162,8 @@ void gatherSources(const CheckContext &context, Gathered *into);
 // The settings rows for the home folder, an absolute path read through
 // context, sized with du (spec 4.4).
 QList<SettingsRow> gatherSettings(const CheckContext &context, const QString &home);
+// The system-wide settings, with no password (GRND-0073 spec 4.2, INV-1).
+void gatherSystem(const CheckContext &context, Gathered *into);
 // Whether a row starts switched on (spec 4.4, INV-2): not when its size
 // is unknown.
 bool startsOn(const SettingsRow &row);
@@ -170,6 +208,48 @@ Manifest withoutUnreadablePaths(const Manifest &manifest, const QString &home);
 // Reads a saved file with tar (spec 4.7).
 std::optional<Manifest> readSetupFile(const CheckContext &context, const QString &file, QString *why,
                                       QStringList *skipped);
+
+// The two parts read as root at Save (GRND-0073 spec 4.5): their kind in the
+// choices file, their row's path and name, and the folder they come from.
+struct SystemPart
+{
+    QString kind, path, name, source;
+    bool secret = false;
+};
+std::optional<SystemPart> systemPartNamed(const QString &kind);
+// Whether a member of the saved file is one this part restores (spec 4.6).
+bool isSystemMember(const QString &name, const QString &partPath);
+// The root find that lists a part's files, one to a line and relative to its
+// source; and of those, the ones restoring would accept. firewalld and CUPS
+// keep .old and .O copies beside what they write, and one of those in the
+// file would refuse the whole item.
+QStringList findSystemFilesArguments(const SystemPart &part);
+QStringList saveableSystemFiles(const SystemPart &part, const QStringList &found);
+// tar's arguments to write a part to its own archive, its files on standard
+// input, NUL-separated.
+QStringList createSystemArguments(const SystemPart &part, const QString &archive);
+// The file's members under a part, read as the user: every one a folder of
+// that part or a regular file with an allowed name, or a problem naming the
+// first that is not (INV-4).
+struct SystemMembers
+{
+    QStringList files;
+    QString problem;
+};
+SystemMembers systemMembers(const CheckContext &context, const QString &file, const QString &partPath);
+
+// The rules on a kept drive (GRND-0073 spec 4.3, INV-5), for what gathering
+// offers and what a file says alike.
+bool isCarriedMount(const CarriedMount &mount);
+QList<CarriedMount> carriedMounts(const QByteArray &fstabText);
+// The shares to keep: the folders network-shares holds, and other sections
+// open to guests, as a path and a flag alone (GRND-0073 spec 4.4, INV-7).
+struct FoundShares
+{
+    QList<CarriedShare> shares;
+    QStringList notCarried; // plain words, one per section left behind
+};
+FoundShares carriedShares(const QByteArray &smbConf, const QString &currentValue);
 
 // For removing secrets (spec 4.8): the members under a secret setting, as
 // tar --delete takes them, and the manifest without those settings.

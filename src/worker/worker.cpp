@@ -17,6 +17,7 @@
 #include <QEventLoop>
 #include <QFileInfo>
 #include <QHash>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLocale>
@@ -28,10 +29,20 @@
 #include <utility>
 #include <cstdio>
 
+#include <unistd.h>
+
 namespace gw {
 namespace {
 
 QString tr(const char *text) { return QCoreApplication::translate("gw::Worker", text); }
+
+QStringList strings(const QJsonValue &value)
+{
+    QStringList out;
+    for (const QJsonArray values = value.toArray(); const QJsonValue v : values)
+        out << v.toString();
+    return out;
+}
 
 // zypper's exit codes in an apply step (design, What every part does the
 // same way; man zypper, EXIT CODES).
@@ -282,9 +293,12 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
             const Outcome o = recheck.state == CheckState::Done ? Outcome::SkippedDone
                 : recheck.state == CheckState::NotNeeded       ? Outcome::SkippedNotNeeded
                                                                : Outcome::SkippedOther;
-            const QString why = o == Outcome::SkippedDone ? tr("Already done.")
-                : o == Outcome::SkippedNotNeeded            ? tr("Not needed here.")
-                                                            : recheck.detail;
+            // A carried item done may still name what it left out, such as a
+            // drive that is absent (GRND-0073 spec 4.9).
+            const QString why = o == Outcome::SkippedDone
+                ? (isCarriedId(id) && !recheck.detail.isEmpty() ? recheck.detail : tr("Already done."))
+                : o == Outcome::SkippedNotNeeded ? tr("Not needed here.")
+                                                 : recheck.detail;
             outcomes.insert(id, o);
             say(formatMarker(QStringLiteral("STEP_END"), {id, QStringLiteral("skip"), why}));
             continue;
@@ -349,7 +363,7 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         // system lacks, is named (GRND-0079 spec 4.4, INV-4).
         if (success && isCarriedId(id)) {
             const CheckResult after = item->check(context);
-            if (after.state != CheckState::Done && !after.detail.isEmpty())
+            if (!after.detail.isEmpty())
                 say(formatMarker(QStringLiteral("HINT"), {id, after.detail}));
             if (id == kCarriedSettingsId)
                 say(formatMarker(QStringLiteral("HINT"),
@@ -477,7 +491,11 @@ int Worker::saveSetup(const QString &choicesPath)
     const QString id = QStringLiteral("save-setup");
     beginOne(id, tr("Saving the setup"));
     QString partial;
+    // Where root writes a system part, before the user's own file takes it.
+    const QString systemArchive = m_stateDir + QStringLiteral("/system.tar");
     auto end = [&](bool ok, QString detail) {
+        m_privilege.stopKeepAlive();
+        (void)QFile::remove(systemArchive);
         // The file at the output is whole or absent (INV-5).
         if (!ok && !partial.isEmpty() && !QFile::remove(partial) && QFile::exists(partial))
             detail += QLatin1Char(' ') + tr("A part-written file is left at %1; it can be deleted.").arg(partial);
@@ -511,6 +529,43 @@ int Worker::saveSetup(const QString &choicesPath)
         }
     }
 
+    // The firewall and printers, read as root: asked for once, and only when
+    // switched on (GRND-0073 spec 4.5, INV-2). Listed first, since the
+    // manifest names only a part with files to save.
+    manifest->systemParts.clear();
+    QList<SystemPart> parts;
+    for (const QStringList kinds = strings(choices.value("systemKinds")); const QString &kind : kinds) {
+        const std::optional<SystemPart> part = systemPartNamed(kind);
+        if (!part)
+            return end(false, tr("The list of what to save could not be read.") + QLatin1Char(' ') + nothing);
+        parts << *part;
+    }
+    if (!parts.isEmpty() && !ensureRoot()) {
+        (void)end(false, nothing);
+        say(formatMarker(QStringLiteral("AUTH"), {QStringLiteral("failed")}));
+        return AuthFailed;
+    }
+    QList<QPair<SystemPart, QByteArray>> toSave; // each part and its files, for tar's input
+    QString systemDetail;
+    for (const SystemPart &part : std::as_const(parts)) {
+        QStringList found;
+        const Step find{findSystemFilesArguments(part), true, Step::Tool::Generic,
+                        tr("Reading %1").arg(isolated(part.name))};
+        if (!runStep(id, find, &systemDetail, &found, false))
+            return end(false, systemDetail + QLatin1Char(' ') + nothing);
+        const QStringList files = saveableSystemFiles(part, found);
+        if (files.isEmpty()) {
+            say(formatMarker(QStringLiteral("HINT"), {id, tr("%1 has no settings of its own on this computer, so "
+                                                             "there was nothing to save.").arg(isolated(part.name))}));
+            continue;
+        }
+        QByteArray input;
+        for (const QString &file : files)
+            input += file.toUtf8() + '\0'; // cppcheck-suppress useStlAlgorithm
+        toSave.append({part, input});
+        manifest->systemParts << SettingsRow{part.name, {part.path}, part.secret, kSystemPartAllowance};
+    }
+
     // tar writes no member for a path it cannot read at all, so the
     // manifest does not list one; the hint below still names its setting.
     const QStringList unreadable = unreadableSettings(*manifest, home);
@@ -533,6 +588,22 @@ int Worker::saveSetup(const QString &choicesPath)
                       Step::Tool::Generic, tr("Writing the setup file"), {1}, createInput(*manifest)};
     if (!runStep(id, create, &detail, &warnings))
         return end(false, detail);
+    // Each system part goes to an archive of its own as root, becomes the
+    // user's, and joins the file (GRND-0073 spec 4.5).
+    for (const auto &[part, input] : std::as_const(toSave)) {
+        const QString label = tr("Saving %1").arg(isolated(part.name));
+        const QList<Step> steps{
+            {createSystemArguments(part, systemArchive), true, Step::Tool::Generic, label, {1}, input},
+            {{QStringLiteral("chown"), QStringLiteral("%1:%2").arg(::getuid()).arg(::getgid()), systemArchive}, true,
+             Step::Tool::Generic, label},
+            {{QStringLiteral("tar"), QStringLiteral("--concatenate"), QStringLiteral("--file"), partial, systemArchive}, false,
+             Step::Tool::Generic, label},
+            {{QStringLiteral("rm"), QStringLiteral("-f"), QStringLiteral("--"), systemArchive}, false, Step::Tool::Generic, label}};
+        for (const Step &step : steps) {
+            if (!runStep(id, step, &detail)) // cppcheck-suppress useStlAlgorithm
+                return end(false, detail + QLatin1Char(' ') + nothing);
+        }
+    }
     if (!unreadable.isEmpty())
         say(formatMarker(QStringLiteral("HINT"),
                          {id, tr("Some files in these settings could not be read, so they were left out: %1.")

@@ -59,7 +59,9 @@ An older reader ignores `mounts` and `shares` (GRND-0078 §4.7, unknown keys), a
 
 This version's reader treats those two paths apart: `readManifest` moves them out of `Manifest::settings` into `Manifest::systemParts`, and forces Printers' `secret` true whatever the file says. `gatherSettings` never offers `.groundwork-system`.
 
-Member names measured 2026-10-30 with GNU tar 1.35 in a scratch tree, including the `--transform` and `--concatenate` below: `tar --list --verbose` gives each member's type as the first character, and a restore by name with `--strip-components=2` kept `home.xml.~1~` beside the new file.
+Member names measured 2026-10-30 with GNU tar 1.35 in a scratch tree, including the `--transform` and `--concatenate` below: `tar --list --verbose` gives each member's type as the first character, and a restore by name with `--strip-components=2` kept `home.xml.~1~` beside the new file. `tests/tst_worker.cpp::aSavedFirewallAndPrinterComeBack` now does this end to end.
+
+A row is read as a system part only when its paths are exactly one of the two. Any other path under `.groundwork-system` refuses the file.
 
 ### 4.2 Gathering, with no password
 
@@ -78,8 +80,8 @@ The Save page's size check adds `kSystemPartAllowance`, 16 MiB, per root-read ki
 
 `carriedMounts(fstabText)`, a pure function over `/etc/fstab`, which any user can read. A line is kept only when all of these hold:
 
-- Its source is `UUID=`, `LABEL=`, `/dev/disk/by-uuid/` or `/dev/disk/by-label/`, with no space or control character.
-- Its mount point is absolute, equal to its own `QDir::cleanPath`, and not `/` or under `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib64`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/srv`, `/sys`, `/tmp`, `/usr` or `/var`.
+- Its source is `UUID=`, `LABEL=`, `/dev/disk/by-uuid/` or `/dev/disk/by-label/`, then one name with no space, control character, slash or backslash, since the name is also looked for under `/dev/disk`.
+- Its mount point is absolute, holds no space, control character or backslash, since it becomes one field of a line, equals its own `QDir::cleanPath`, and is not `/` or under `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib64`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/srv`, `/sys`, `/tmp`, `/usr` or `/var`.
 - Its filesystem is not `btrfs`-with-`subvol=`, `swap`, `vfat` at `/boot/efi`, or a network type (`nfs`, `nfs4`, `cifs`, `smb3`, `sshfs`, `fuse.sshfs`).
 - Its options match the pattern below, and hold no `password`, `credentials` or `user=`.
 
@@ -104,29 +106,23 @@ The Save page's size check adds `kSystemPartAllowance`, 16 MiB, per root-read ki
 
 `CarryChoice` records `systemKinds`. `Worker::saveSetup` gains these steps, after the archive is written (GRND-0078 §4.5 step 3) and before it is listed. Root is asked for once, by `ensureRoot`, and only when a kind needs it. Refusing it fails the run: "Nothing was saved."
 
-Firewall:
+Only files §4.6 would restore are saved, since one other member would refuse the whole item there. firewalld writes `zones/home.xml.old` beside a saved zone (its `io/zone.py`), and a whole-folder archive would hold that. So the Worker lists first, before writing the manifest, and keeps the names §4.6 allows:
 
 ```
-tar --create --format=posix --file <state>/system.tar -C /etc/firewalld \
-    --transform 's,^\./\?,.groundwork-system/firewall/,' .
+find <source> -type f -printf '%P\n'     (root; <source> is /etc/firewalld or /etc/cups)
 ```
 
-Printers:
+A part with no such file is named in a `HINT` and gets no row. For each other part, after the archive is written, with the kept names on standard input:
 
 ```
-tar --create --format=posix --ignore-failed-read --file <state>/system.tar -C /etc/cups \
-    --transform 's,^,.groundwork-system/printers/,' printers.conf classes.conf ppd
-```
-
-`--ignore-failed-read` because `classes.conf` may not exist; without it, a missing name exits 2 (measured 2026-10-30). Each is `needsRoot = true`, followed by these:
-
-```
+tar --create --format=posix --ignore-failed-read --file <state>/system.tar -C <source> \
+    --transform=s,^,.groundwork-system/<kind>/, --verbatim-files-from --null --files-from=-   (root)
 chown <uid>:<gid> <state>/system.tar      (root)
 tar --concatenate --file <output>.partial <state>/system.tar
 rm -f -- <state>/system.tar
 ```
 
-`cupsd.conf`, `ssl/` and `subscriptions.conf` are never read. The Worker adds the row to the manifest before writing it. The manifest and the archive agree, or `membersProblem` fails the run (GRND-0078 INV-5).
+`--ignore-failed-read` so a file deleted since the listing is not a failure. `cupsd.conf`, `ssl/` and `subscriptions.conf` never match. The Worker adds the row to the manifest before writing it. The manifest and the archive agree, or `membersProblem` fails the run (GRND-0078 INV-5).
 
 ### 4.6 Restoring
 
@@ -142,7 +138,7 @@ rm -f -- <state>/system.tar
 
 Each carried kind's row says it changes system settings. The firewall and printers always read `NotDone`, so applying them twice is possible. That is safe, because each apply keeps numbered copies. These items exist only on a run from a saved file, so S1 is untouched.
 
-Before any root step, `systemMembers(file, kind)` reads `tar --list` and `tar --list --verbose` through `CheckContext::run`, same order line by line. Every member under `.groundwork-system/<kind>/` must be a folder or a regular file, and its name must match. Any other member refuses that whole item before a step runs, naming the member through `isolated()`.
+Before any root step, and in each item's check so the item reads "couldn't tell" and the Worker skips it, `systemMembers(file, kind)` reads `tar --list` and `tar --list --verbose` through `CheckContext::run`, same order line by line. Every member under `.groundwork-system/<kind>/` must be a folder or a regular file, and its name must match. Any other member refuses that whole item before a step runs, naming the member through `isolated()`.
 
 ```regex pcre2
 ^\.groundwork-system/firewall/(?:firewalld\.conf|(?:zones|services|policies|ipsets)/[A-Za-z0-9_.+-]+\.xml)$
@@ -163,7 +159,7 @@ Before any root step, `systemMembers(file, kind)` reads `tar --list` and `tar --
 | `.groundwork-system/printers/ppd/Office.ppd` | `.groundwork-system/printers/ppd/Office.ppd` |
 | `.groundwork-system/printers/cupsd.conf` | no match |
 
-A folder member is not extracted; only named files are, and the folders they sit in are made by `mkdir -p` from a fixed list. Files other than those matching are simply refused rather than skipped, so a tampered file changes nothing.
+A folder member is accepted only when it is the part's own folder or one of those named above. It is not extracted; only named files are, and the folders they sit in are made by `mkdir -p` from a fixed list. Files other than those matching are refused rather than skipped, so a tampered file changes nothing.
 
 ### 4.7 The firewall
 
@@ -197,7 +193,7 @@ Printer drivers come from the carried programs, which run first.
 
 ### 4.9 Mounts
 
-`missingMounts` compares the kept mounts with `/etc/fstab` and with `/dev/disk/by-uuid` and `/dev/disk/by-label`. A kept mount is left out, and named in a `HINT`, when its drive is not present, or `/etc/fstab` already has its mount point or its source. The rest go exactly as `ExtraDrivesItem::applySteps` does: `makeDirectoriesStep`, an append by `dd oflag=append conv=notrunc`, `systemctl daemon-reload`, then `mount` for each. `nofail` is added to any line without it, so a drive removed later cannot stop a start-up. Unlike that item, it never changes a drive's owner: these drives hold files.
+`missingMounts` compares the kept mounts with `/etc/fstab` and with `/dev/disk/by-uuid` and `/dev/disk/by-label`. A kept mount is left out, and named in a `HINT`, when its drive is not present, or `/etc/fstab` already has its mount point or its source. A line already there as it was kept is simply done. The rest go exactly as `ExtraDrivesItem::applySteps` does: `makeDirectoriesStep`, an append by `dd oflag=append conv=notrunc`, `systemctl daemon-reload`, then `mount` for each. `nofail` is added to any line without it, so a drive removed later cannot stop a start-up. Unlike that item, it never changes a drive's owner: these drives hold files.
 
 ## 5. Invariants
 
@@ -207,7 +203,7 @@ Printer drivers come from the carried programs, which run first.
 
 - **INV-3** — A file holding the firewall or printers still reads in a Groundwork of this format without error, and its parts are named by its manifest. *Test:* `tests/tst_carrysystem.cpp::aFileWithSystemPartsReadsBack`, through `readSetupFile` and `membersProblem`. *Breaks when:* the row and the member names disagree, or the format number moves.
 
-- **INV-4** — Only §4.6's names reach a root `tar`: a link, a device, a `..`, or a name outside the pattern refuses the item before any step. *Test:* `tests/tst_carrysystem.cpp::aTamperedMemberRefusesTheItem`, a data table of archives with a link at `zones/home.xml`, `zones/../../sudoers`, `cupsd.conf` and a device. *Breaks when:* one of them produces a step, or a root `tar` runs without `--files-from`.
+- **INV-4** — Only §4.6's names reach a root `tar`: a link, a device, a `..`, or a name outside the pattern refuses the item before any step. *Test:* `tests/tst_carrysystem.cpp::aTamperedMemberRefusesTheItem`, a data table of archives with a link at `zones/home.xml`, `zones/../../sudoers`, `cupsd.conf` and a device. *Breaks when:* one of them produces a step, or a root `tar` runs without `--files-from`. `tests/tst_carrysystem.cpp::onlyWhatRestoringAcceptsIsSaved` holds the other side: what Save writes, restoring accepts.
 
 - **INV-5** — `/etc/fstab`'s system lines are never carried: `/`, any subvolume, swap, EFI, anything under a §4.3 folder, and any line with a secret option. *Test:* `tests/tst_carrysystem.cpp::systemMountsAreNotCarried`, on a fixture copying a default Tumbleweed `fstab`, and through `readManifest` for a file naming `/`. *Breaks when:* a `/home` line is kept, or `readManifest` trusts the file's list.
 

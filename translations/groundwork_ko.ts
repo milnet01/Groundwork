@@ -440,6 +440,62 @@
         <translation>설정 복사 중</translation>
     </message>
     <message>
+        <source>The service manager did not answer.</source>
+        <translation type="unfinished">서비스 관리자가 응답하지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>Firewall rules from your saved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Putting your firewall rules back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printers from your saved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Putting your printers back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installing CUPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drives from your saved file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of drives that connect at start-up could not be read.</source>
+        <translation type="unfinished">시작할 때 연결되는 드라이브 목록을 읽지 못했습니다.</translation>
+    </message>
+    <message>
+        <source>Not connected to this computer, so not added: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Already in the list of drives, so not added: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting your drives at start-up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
         <translation>꺼짐: 이 소스는 프로그램의 서명을 확인하지 않습니다.</translation>
     </message>
@@ -496,6 +552,10 @@
         <translation>파일에 홈 폴더 밖의 설정이 들어 있습니다: %1</translation>
     </message>
     <message>
+        <source>The file names a setting Groundwork cannot use: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The setup list in the file is damaged.</source>
         <translation>파일의 구성 목록이 손상되었습니다.</translation>
     </message>
@@ -550,6 +610,22 @@
     <message>
         <source>size unknown</source>
         <translation>크기 알 수 없음</translation>
+    </message>
+    <message>
+        <source>The saved file could not be read.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is not carried: it asks for a password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is not carried: %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1225,6 +1301,34 @@
     <message>
         <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
         <translation>저장되는 파일에 이 앱에 저장된 비밀번호나 키가 들어갑니다. 파일을 가진 사람은 누구나 읽을 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>System settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firewall rules. Save will ask for your password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printers: %1. Save will ask for your password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drive at %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shared folder %1: others may add files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shared folder %1: others may only look</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1967,6 +2071,18 @@
         <source>Holds saved passwords or keys.</source>
         <translation>저장된 비밀번호나 키가 들어 있습니다.</translation>
     </message>
+    <message>
+        <source>Shared folders. Anyone on the network can open these with no password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: others may add files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: others may only look</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>gw::SnapshotsItem</name>
@@ -2649,12 +2765,24 @@
         <translation>%1은(는) 더 이상 홈 폴더 안에 없습니다.</translation>
     </message>
     <message>
+        <source>Reading %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>The setup list could not be written to %1.</source>
         <translation>구성 목록을 %1에 기록할 수 없습니다.</translation>
     </message>
     <message>
         <source>Writing the setup file</source>
         <translation>구성 파일을 기록하는 중</translation>
+    </message>
+    <message>
+        <source>Saving %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>

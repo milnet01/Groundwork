@@ -11,8 +11,11 @@ and Leap 16 or later.
 
 It can also save this computer's setup to one file: the programs you
 asked for, the software sources you added, and your settings app by
-app. Settings that hold saved passwords or keys start switched off.
-On a new install, it can start from that file and put it all back.
+app. It can also save your firewall rules, printers, extra drives and
+shared folders, and asks for your password if the firewall or printers
+are switched on. Settings that hold saved passwords or keys start
+switched off. On a new install, it can start from that file and put it
+all back.
 
 It can copy your GitHub projects too. Sign in to GitHub once, choose
 which projects to keep, and choose a folder. It never sees your password

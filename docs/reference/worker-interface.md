@@ -46,10 +46,12 @@ groundwork --worker [--lang LANG] --save-setup CHOICES_FILE
 ```
 
 - **`CHOICES_FILE`** — what the Wizard wrote: `{"output": PATH,
-  "manifest": {…}}`. The manifest's format is in
-  `docs/specs/GRND-0078-saved-setup-file.md` § 4.6.
-- It runs as one item, id `save-setup`, with the same markers, and asks
-  for no password.
+  "manifest": {…}, "systemKinds": ["firewall", "printers"]}`. The
+  manifest's format is in `docs/specs/GRND-0078-saved-setup-file.md`
+  § 4.6, with GRND-0073's additions.
+- It runs as one item, id `save-setup`, with the same markers. It asks
+  for the password once, and only when `systemKinds` names a part. A
+  refused password saves nothing, and exits 4.
 - It trusts nothing in the file. It ends `fail` before writing anything
   when the manifest breaks the spec's rules, a settings path leaves the
   home folder or is gone, or the output's folder is missing.
@@ -71,8 +73,12 @@ groundwork --worker [--lang LANG] --setup-choices CHOICES_FILE [--set ITEM=VALUE
   manifest that the saved file lacks refuses the run with
   `SETUP_REFUSED`, before any step, and exit 2.
 - The manifest's parts become items with ids `carried-source:ALIAS`,
-  `carried-packages`, `carried-flatpaks` and `carried-settings`. They are
+  `carried-packages`, `carried-flatpaks`, `carried-settings`,
+  `carried-firewall`, `carried-printers` and `carried-mounts`. They are
   accepted only in this form.
+- `carried-firewall` and `carried-printers` end `skip` when the saved
+  file holds a member other than the names GRND-0073 § 4.6 allows. Their
+  steps run as root, and a replaced file stays as a numbered copy.
 - After a carried item ends `ok`, its check runs again. A `HINT` with
   its id names what it could not put back, such as a program this
   system lacks.

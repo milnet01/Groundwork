@@ -2,6 +2,7 @@
 
 #include "core/statepaths.h"
 #include "core/translations.h"
+#include "folderlistfield.h"
 #include "itemrow.h"
 #include "runpage.h"
 #include "savedsetuppage.h"
@@ -907,8 +908,8 @@ bool Wizard::valuesValid() const
 
 bool SavedSetup::holdsSecrets() const
 {
-    return std::any_of(manifest.settings.cbegin(), manifest.settings.cend(),
-                       [](const SettingsRow &row) { return row.secret; });
+    const QList<SettingsRow> rows = manifest.settings + manifest.systemParts;
+    return std::any_of(rows.cbegin(), rows.cend(), [](const SettingsRow &row) { return row.secret; });
 }
 
 const Catalogue &Wizard::catalogue() const { return m_saved ? *m_saved->all : *m_setup.catalogue; }
@@ -1064,6 +1065,18 @@ void Wizard::switchOnKept()
             continue;
         }
         switchOnSaved(id);
+    }
+    // The shares still on join the folders network-shares already holds.
+    if (ItemRow *row = m_rows.value(kNetworkSharesId); row && row->folderList()) {
+        Manifest kept;
+        for (const SavedSetup::Entry &entry : std::as_const(m_saved->entries)) {
+            if (entry.id == kNetworkSharesId && entry.on && entry.on->isChecked())
+                entry.keep(kept);
+        }
+        for (const CarriedShare &share : std::as_const(kept.shares))
+            row->folderList()->addFolder(share.path, share.write);
+        if (!kept.shares.isEmpty())
+            switchOnSaved(kNetworkSharesId);
     }
 }
 

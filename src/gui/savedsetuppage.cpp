@@ -143,11 +143,41 @@ void SavedSetupPage::makeRows()
                 mark->setObjectName(QStringLiteral("secretMark:") + setting.name);
                 rows->addWidget(mark);
             }
+        } else if (id == kCarriedFirewallId || id == kCarriedPrintersId) {
+            // The row's own switch keeps it; printers say what they may hold.
+            for (const SettingsRow &part : m.systemParts) {
+                if ((part.paths.first() == kFirewallPart) != (id == kCarriedFirewallId))
+                    continue;
+                saved.entries.append({id, nullptr, [part](Manifest &k) { k.systemParts << part; }});
+                if (!part.secret)
+                    continue;
+                QLabel *mark = wrapped(m_inner, tr("Holds saved passwords or keys."));
+                mark->setObjectName(QStringLiteral("secretMark:") + part.name);
+                rows->addWidget(mark);
+            }
+        } else if (id == kCarriedMountsId) {
+            for (const CarriedMount &mount : m.mounts)
+                entry(isolated(mount.point), [mount](Manifest &k) { k.mounts << mount; })
+                    ->setObjectName(id + QLatin1Char('/') + mount.point);
         } else {
             for (const ZypperSource &source : m.zypperSources) {
                 if (kCarriedSourcePrefix + source.alias == id)
                     saved.entries.append({id, nullptr, [source](Manifest &k) { k.zypperSources << source; }});
             }
+        }
+    }
+    // Shares build no item: what stays on goes to network-shares' own list
+    // on leaving this page, where its warning applies (GRND-0073 spec 4.6).
+    if (!m.shares.isEmpty() && m_wizard->row(kNetworkSharesId)) {
+        rows->addWidget(wrapped(m_inner, tr("Shared folders. Anyone on the network can open these with no password.")));
+        for (const CarriedShare &share : m.shares) {
+            auto *on = new Switch(share.write ? tr("%1: others may add files").arg(isolated(share.path))
+                                              : tr("%1: others may only look").arg(isolated(share.path)),
+                                  m_inner);
+            on->setChecked(true);
+            on->setObjectName(kNetworkSharesId + QLatin1Char('/') + share.path);
+            rows->addWidget(on);
+            saved.entries.append({kNetworkSharesId, on, [share](Manifest &k) { k.shares << share; }});
         }
     }
     rows->addStretch();

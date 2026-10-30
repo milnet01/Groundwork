@@ -47,7 +47,7 @@ QString FolderListField::value() const
     return folderListValue(folders);
 }
 
-void FolderListField::addFolder(const QString &path)
+void FolderListField::addFolder(const QString &path, bool write)
 {
     QString why = m_item.whyRefused(path);
     if (why.isEmpty() && m_held.contains(path))
@@ -58,7 +58,7 @@ void FolderListField::addFolder(const QString &path)
     m_refusal->setText(why);
     m_refusal->setVisible(!why.isEmpty());
     if (why.isEmpty() && m_lines.size() < kMaxListedFolders) {
-        addLine({path, false});
+        addLine({path, write});
         updateAddButton();
     }
 }

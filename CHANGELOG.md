@@ -20,6 +20,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   your own projects with a switch each (forks start off), and copies the
   ones you keep into a folder you choose. A folder already there is left
   as it is. (GRND-0065)
+- A saved setup can carry system-wide settings: firewall rules, printers,
+  extra drives and shared folders. Saving asks for your password once,
+  only when the firewall or printers are switched on. Printers start off
+  and warn, since a printer's address can hold a password. On the new
+  install each kept kind has a switch, and a file it replaces is kept
+  beside it as a numbered copy. (GRND-0073)
 
 ## [0.5.2] - 2026-10-30
 

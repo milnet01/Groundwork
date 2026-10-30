@@ -26,6 +26,7 @@ struct CarryChoice
     Gathered found;
     bool gathered = false;
     Manifest kept;      // what the switches keep
+    QStringList systemKinds; // of the two parts read as root (GRND-0073 spec 4.5)
     QString folder;     // where to save
     QString choicesPath; // what the save page writes (spec 4.5)
     QString version;    // this Groundwork's
@@ -49,6 +50,7 @@ public:
 
 private:
     void showFound(const Gathered &found);
+    void showSystem(const Gathered &found); // the firewall, printers, drives and shares
     QLabel *heading(const QString &text);
     Switch *addRow(const QString &text, bool on, std::function<void(Manifest &)> keep);
 

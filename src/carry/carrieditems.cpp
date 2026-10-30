@@ -1,9 +1,11 @@
 #include "carrieditems.h"
 
 #include "core/translations.h"
+#include "items/service.h"
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QRegularExpression>
 
 #include <algorithm>
 #include <utility>
@@ -16,6 +18,7 @@ namespace {
 constexpr int kLongTimeoutMs = 10 * 60 * 1000; // rpm over hundreds of names, tar over a large file
 const QString kReposDir = QStringLiteral("/etc/zypp/repos.d");
 constexpr qsizetype kNamesShown = 10;
+const QString kFstabPath = QStringLiteral("/etc/fstab");
 
 // True when every line tar --diff printed is an owner or a mode, in the
 // C locale the runner sets. A missing file is named on stderr alone.
@@ -301,6 +304,257 @@ private:
     QString m_file, m_home;
 };
 
+// The firewall or printers, restored as root. Item checks never run as root,
+// so what the file holds cannot be compared with what is on the system: the
+// check reads not done, and restoring again keeps numbered copies (GRND-0073
+// spec 4.6). It reads couldn't tell for a file holding anything but the names
+// allowed, so no step runs (INV-4).
+class SystemPartItem : public Item
+{
+public:
+    SystemPartItem(SettingsRow part, QString file, QString unit) : m_part(std::move(part)), m_file(std::move(file)), m_unit(std::move(unit)) {}
+    Level level() const override { return Level::NiceToHave; }
+    CheckResult check(const CheckContext &context) const override
+    {
+        const ServiceState service = readService(context, m_unit);
+        if (!service.known)
+            return {CheckState::CouldNotTell, QCoreApplication::translate("gw::Carry", "The service manager did not answer.")};
+        const SystemMembers members = systemMembers(context, m_file, m_part.paths.first());
+        if (!members.problem.isEmpty())
+            return {CheckState::CouldNotTell, members.problem};
+        CheckResult result{CheckState::NotDone, {}};
+        result.nothingToInstall = service.found;
+        return result;
+    }
+
+protected:
+    // tar's step that restores files, named on its standard input, into dir.
+    // A replaced file is kept beside it as a numbered copy (INV-9).
+    Step extractStep(const QStringList &files, const QString &dir, const QString &label) const
+    {
+        QByteArray input;
+        for (const QString &file : files)
+            input += file.toUtf8() + '\0'; // cppcheck-suppress useStlAlgorithm
+        return {{QStringLiteral("tar"), QStringLiteral("--extract"), QStringLiteral("--file"), m_file, QStringLiteral("-C"), dir,
+                 QStringLiteral("--strip-components=2"), QStringLiteral("--backup=numbered"), QStringLiteral("--no-same-owner"),
+                 QStringLiteral("--no-overwrite-dir"), QStringLiteral("--verbatim-files-from"), QStringLiteral("--null"),
+                 QStringLiteral("--files-from=-")},
+                true, Step::Tool::Generic, label, {}, input};
+    }
+    // A file's own type comes from its folder, where SELinux is on (spec 15).
+    static void relabel(const CheckContext &context, const QString &dir, const QString &label, QList<Step> *steps)
+    {
+        if (context.fileExists(QStringLiteral("/sys/fs/selinux/enforce")))
+            *steps << Step{{QStringLiteral("restorecon"), QStringLiteral("-R"), dir}, true, Step::Tool::Generic, label};
+    }
+
+    SettingsRow m_part;
+    QString m_file;
+    QString m_unit;
+};
+
+class FirewallPartItem : public SystemPartItem
+{
+public:
+    FirewallPartItem(const SettingsRow &part, const QString &file, bool hasFirewallItem)
+        : SystemPartItem(part, file, QStringLiteral("firewalld")), m_hasFirewallItem(hasFirewallItem) {}
+    QString id() const override { return kCarriedFirewallId; }
+    QString title() const override { return QCoreApplication::translate("gw::Carry", "Firewall rules from your saved file"); }
+    QString applySentence() const override
+    {
+        return QCoreApplication::translate("gw::Carry", "Changes system settings: puts back your firewall's zones and "
+                                                        "services, and its default zone. A file it replaces is kept "
+                                                        "beside it as a numbered copy.");
+    }
+    QStringList dependsOn() const override { return m_hasFirewallItem ? QStringList{QStringLiteral("firewall")} : QStringList(); }
+    QList<Step> applySteps(const SystemIdentity &, const CheckContext &context) const override
+    {
+        const SystemMembers members = systemMembers(context, m_file, m_part.paths.first());
+        if (!members.problem.isEmpty())
+            return {};
+        const QString label = QCoreApplication::translate("gw::Carry", "Putting your firewall rules back");
+        const QString dir = QStringLiteral("/etc/firewalld");
+        const QString conf = m_part.paths.first() + QStringLiteral("/firewalld.conf");
+        // firewalld.conf holds settings a later version may read differently,
+        // so only its default zone is the user's (spec 4.7, INV-9).
+        QStringList files = members.files;
+        files.removeAll(conf);
+        QList<Step> steps{{{QStringLiteral("mkdir"), QStringLiteral("-p"), QStringLiteral("--"), dir + QStringLiteral("/zones"),
+                            dir + QStringLiteral("/services"), dir + QStringLiteral("/policies"), dir + QStringLiteral("/ipsets")},
+                           true, Step::Tool::Generic, label}};
+        if (!files.isEmpty())
+            steps << extractStep(files, dir, label);
+        relabel(context, dir, label, &steps);
+        steps << Step{{QStringLiteral("firewall-cmd"), QStringLiteral("--reload")}, true, Step::Tool::Generic, label};
+        if (const QString zone = defaultZone(context, members.files.contains(conf) ? conf : QString()); !zone.isEmpty())
+            steps << Step{{QStringLiteral("firewall-cmd"), QStringLiteral("--set-default-zone=") + zone}, true, Step::Tool::Generic, label};
+        return steps;
+    }
+
+private:
+    QString defaultZone(const CheckContext &context, const QString &member) const
+    {
+        if (member.isEmpty())
+            return {};
+        const CommandResult text = context.run({QStringLiteral("tar"), QStringLiteral("--extract"), QStringLiteral("--to-stdout"),
+                                                QStringLiteral("--file"), m_file, member},
+                                               kLongTimeoutMs, kManifestCap);
+        if (!text.ok())
+            return {};
+        static const QRegularExpression zone(QStringLiteral(R"(\A[A-Za-z0-9_-]+\z)"));
+        for (const QString &line : QString::fromUtf8(text.out).split(QLatin1Char('\n'))) {
+            if (line.startsWith(QLatin1String("DefaultZone="))) {
+                const QString value = line.section(QLatin1Char('='), 1).trimmed();
+                return zone.match(value).hasMatch() ? value : QString();
+            }
+        }
+        return {};
+    }
+
+    bool m_hasFirewallItem;
+};
+
+class PrintersPartItem : public SystemPartItem
+{
+public:
+    PrintersPartItem(const SettingsRow &part, const QString &file) : SystemPartItem(part, file, QStringLiteral("cups")) {}
+    QString id() const override { return kCarriedPrintersId; }
+    QString title() const override { return QCoreApplication::translate("gw::Carry", "Printers from your saved file"); }
+    QString applySentence() const override
+    {
+        return QCoreApplication::translate("gw::Carry", "Changes system settings: puts back your printers, installing "
+                                                        "CUPS if it is missing. A file it replaces is kept beside it as "
+                                                        "a numbered copy.");
+    }
+    bool installsPackages() const override { return true; }
+    QList<Step> applySteps(const SystemIdentity &, const CheckContext &context) const override
+    {
+        const SystemMembers members = systemMembers(context, m_file, m_part.paths.first());
+        if (!members.problem.isEmpty())
+            return {};
+        const QString label = QCoreApplication::translate("gw::Carry", "Putting your printers back");
+        const QString dir = QStringLiteral("/etc/cups");
+        QList<Step> steps;
+        if (!readService(context, m_unit).found)
+            steps << Step{{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("install"), m_unit}, true,
+                          Step::Tool::Zypper, QCoreApplication::translate("gw::Carry", "Installing CUPS")};
+        // cupsd writes printers.conf when it stops, so it must not be running
+        // while the file is replaced (spec 4.8, INV-10).
+        steps << Step{{QStringLiteral("systemctl"), QStringLiteral("stop"), m_unit}, true, Step::Tool::Generic, label};
+        steps << Step{{QStringLiteral("mkdir"), QStringLiteral("-p"), QStringLiteral("--"), dir + QStringLiteral("/ppd")}, true,
+                      Step::Tool::Generic, label};
+        if (!members.files.isEmpty())
+            steps << extractStep(members.files, dir, label);
+        for (const char *name : {"printers.conf", "classes.conf"}) {
+            if (!members.files.contains(m_part.paths.first() + QLatin1Char('/') + QLatin1String(name)))
+                continue;
+            const QString path = dir + QLatin1Char('/') + QLatin1String(name);
+            steps << Step{{QStringLiteral("chown"), QStringLiteral("root:lp"), path}, true, Step::Tool::Generic, label};
+            steps << Step{{QStringLiteral("chmod"), QStringLiteral("600"), path}, true, Step::Tool::Generic, label};
+        }
+        relabel(context, dir, label, &steps);
+        steps << Step{{QStringLiteral("systemctl"), QStringLiteral("enable"), QStringLiteral("--now"), m_unit}, true,
+                      Step::Tool::Generic, label};
+        return steps;
+    }
+};
+
+// Kept drives, added to /etc/fstab as ExtraDrivesItem adds them, but never
+// changing a drive's owner: these drives hold files (GRND-0073 spec 4.9).
+class MountsItem : public Item
+{
+public:
+    explicit MountsItem(QList<CarriedMount> mounts) : m_mounts(std::move(mounts)) {}
+    QString id() const override { return kCarriedMountsId; }
+    Level level() const override { return Level::NiceToHave; }
+    QString title() const override { return QCoreApplication::translate("gw::Carry", "Drives from your saved file"); }
+    QString applySentence() const override
+    {
+        return QCoreApplication::translate("gw::Carry", "Changes system settings: connects your drives at start-up, as "
+                                                        "they were. A missing drive never stops the computer starting.");
+    }
+    CheckResult check(const CheckContext &context) const override
+    {
+        const std::optional<QByteArray> fstab = context.readFile(kFstabPath);
+        if (!fstab)
+            return {CheckState::CouldNotTell,
+                    QCoreApplication::translate("gw::Carry", "The list of drives that connect at start-up could not be read.")};
+        const Missing missing = missingMounts(context, *fstab);
+        QStringList words;
+        if (!missing.absent.isEmpty())
+            words << QCoreApplication::translate("gw::Carry", "Not connected to this computer, so not added: %1.")
+                         .arg(namesText(missing.absent));
+        if (!missing.taken.isEmpty())
+            words << QCoreApplication::translate("gw::Carry", "Already in the list of drives, so not added: %1.")
+                         .arg(namesText(missing.taken));
+        return {missing.add.isEmpty() ? CheckState::Done : CheckState::NotDone, words.join(QLatin1Char(' '))};
+    }
+    QList<Step> applySteps(const SystemIdentity &, const CheckContext &context) const override
+    {
+        const Missing missing = missingMounts(context, context.readFile(kFstabPath).value_or(QByteArray()));
+        if (missing.add.isEmpty())
+            return {};
+        const QString label = QCoreApplication::translate("gw::Carry", "Connecting your drives at start-up");
+        QStringList points;
+        QByteArray lines = "\n# Written by Groundwork: drives from a saved setup.\n";
+        for (const CarriedMount &mount : missing.add) {
+            points << mount.point;
+            // So a drive removed later cannot stop a start-up.
+            QString options = mount.options;
+            if (!options.split(QLatin1Char(',')).contains(QLatin1String("nofail")))
+                options = options.isEmpty() ? QStringLiteral("nofail") : options + QStringLiteral(",nofail");
+            lines += QStringLiteral("%1 %2 %3 %4 0 0\n").arg(mount.source, mount.point, mount.fstype, options).toUtf8();
+        }
+        QList<Step> steps{makeDirectoriesStep(points, label),
+                          {{QStringLiteral("dd"), QStringLiteral("of=") + kFstabPath, QStringLiteral("oflag=append"),
+                            QStringLiteral("conv=notrunc"), QStringLiteral("status=none")},
+                           true, Step::Tool::Generic, label, {}, lines},
+                          {{QStringLiteral("systemctl"), QStringLiteral("daemon-reload")}, true, Step::Tool::Generic, label}};
+        for (const QString &point : std::as_const(points))
+            steps << Step{{QStringLiteral("mount"), point}, true, Step::Tool::Generic, label};
+        return steps;
+    }
+
+private:
+    struct Missing
+    {
+        QList<CarriedMount> add;
+        QStringList absent, taken;
+    };
+    // What to add now: a drive that is here, whose source and mount point
+    // /etc/fstab does not have (INV-6).
+    Missing missingMounts(const CheckContext &context, const QByteArray &fstab) const
+    {
+        QStringList sources, points;
+        for (const QString &line : QString::fromUtf8(fstab).split(QLatin1Char('\n'))) {
+            const QStringList fields = line.simplified().split(QLatin1Char(' '), Qt::SkipEmptyParts);
+            if (fields.size() < 2 || fields[0].startsWith(QLatin1Char('#')))
+                continue;
+            sources << fields[0];
+            points << fields[1];
+        }
+        Missing missing;
+        for (const CarriedMount &mount : m_mounts) {
+            QString device = mount.source;
+            if (device.startsWith(QLatin1String("UUID=")))
+                device = QStringLiteral("/dev/disk/by-uuid/") + device.mid(5);
+            else if (device.startsWith(QLatin1String("LABEL=")))
+                device = QStringLiteral("/dev/disk/by-label/") + device.mid(6);
+            if (sources.contains(mount.source, Qt::CaseInsensitive) && points.contains(mount.point))
+                continue; // this line, already there
+            if (!context.fileExists(device))
+                missing.absent << mount.point;
+            else if (sources.contains(mount.source, Qt::CaseInsensitive) || points.contains(mount.point))
+                missing.taken << mount.point;
+            else
+                missing.add << mount;
+        }
+        return missing;
+    }
+
+    QList<CarriedMount> m_mounts;
+};
+
 } // namespace
 
 bool isCarriedId(const QString &id) { return id.startsWith(QLatin1String("carried-")); }
@@ -322,6 +576,14 @@ CarriedItems carriedItems(const Manifest &kept, const QString &file, const Catal
     }
     if (!kept.settings.isEmpty())
         carried.owned.push_back(std::make_unique<SettingsItem>(kept.settings, file, QDir::homePath()));
+    for (const SettingsRow &part : kept.systemParts) {
+        if (part.paths == QStringList{kFirewallPart})
+            carried.owned.push_back(std::make_unique<FirewallPartItem>(part, file, bool(catalogue.find(QStringLiteral("firewall")))));
+        else if (part.paths == QStringList{kPrintersPart})
+            carried.owned.push_back(std::make_unique<PrintersPartItem>(part, file));
+    }
+    if (!kept.mounts.isEmpty())
+        carried.owned.push_back(std::make_unique<MountsItem>(kept.mounts));
     return carried;
 }
 
@@ -395,6 +657,15 @@ QString notInFile(const Manifest &chosen, const Manifest &file)
     for (const SettingsRow &row : chosen.settings)
         if (!file.settings.contains(row)) // cppcheck-suppress useStlAlgorithm
             return lacks(row.name);
+    for (const SettingsRow &row : chosen.systemParts)
+        if (!file.systemParts.contains(row)) // cppcheck-suppress useStlAlgorithm
+            return lacks(row.name);
+    for (const CarriedMount &mount : chosen.mounts)
+        if (!file.mounts.contains(mount)) // cppcheck-suppress useStlAlgorithm
+            return lacks(mount.point);
+    for (const CarriedShare &share : chosen.shares)
+        if (!file.shares.contains(share)) // cppcheck-suppress useStlAlgorithm
+            return lacks(share.path);
     return {};
 }
 

@@ -134,6 +134,7 @@ int wizardMode(int argc, char *argv[])
             gw::Gathered found;
             gw::gatherPrograms(gw::CheckContext(files), &found);
             gw::gatherSources(gw::CheckContext(files), &found);
+            gw::gatherSystem(gw::CheckContext(files), &found);
             found.settings = gw::gatherSettings(gw::CheckContext(gw::FileReader()), QDir::homePath());
             return found;
         };
