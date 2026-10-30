@@ -14,6 +14,10 @@ asked for, the software sources you added, and your settings app by
 app. Settings that hold saved passwords or keys start switched off.
 On a new install, it can start from that file and put it all back.
 
+It can copy your GitHub projects too. Sign in to GitHub once, choose
+which projects to keep, and choose a folder. It never sees your password
+or your sign-in token.
+
 ## Status
 
 Released. What each version added is in [CHANGELOG.md](CHANGELOG.md).

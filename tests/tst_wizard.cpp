@@ -179,6 +179,7 @@ class TstWizard : public QObject
 
     QTemporaryDir m_dir;
     qint64 m_free = 100 * kGiB; // the save folder's free space
+    gw::GithubSurvey m_github;  // what the GitHub job's pages read
     gw::Manifest m_saved;       // what the saved file holds
     gw::CheckState m_carriedState = gw::CheckState::NotDone; // what its items' checks say
     std::atomic<QThread *> m_readOn = nullptr, m_checkedOn = nullptr; // where the file was read and checked
@@ -255,6 +256,7 @@ class TstWizard : public QObject
             return found;
         };
         setup.folderSpace = [this](const QString &) { return gw::FolderSpace{m_free, QStringLiteral("ext4")}; };
+        setup.surveyGithub = [this] { return m_github; };
         auto w = std::make_unique<gw::Wizard>(setup);
         w->show();
         return w;
@@ -318,6 +320,7 @@ private slots:
     {
         gw::loadLanguage(QStringLiteral("en"));
         m_free = 100 * kGiB;
+        m_github = {};
         m_saved = {};
         m_carriedState = gw::CheckState::NotDone;
         m_refused.clear();
@@ -957,6 +960,221 @@ private slots:
         const QJsonArray settings = manifest.value("settings").toArray();
         QCOMPARE(settings.size(), 1); // the secret stayed off
         QCOMPARE(settings.first().toObject().value("name").toString(), QStringLiteral("Dolphin"));
+    }
+
+    // GRND-0065: the job, from the first page to its Start page, read.
+    std::unique_ptr<gw::Wizard> githubJob()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp, gw::Job::GitHubProjects});
+        w->chooseJob(gw::Job::GitHubProjects);
+        w->next();
+        if (!QTest::qWaitFor([&] { return w->currentPage()->isComplete(); }))
+            return nullptr;
+        return w;
+    }
+    static gw::GithubSurvey signedInSurvey()
+    {
+        gw::GithubSurvey survey;
+        survey.signedIn = true;
+        survey.account = QStringLiteral("someone");
+        survey.repositories = {{QStringLiteral("someone/mine"), false, false, 1024},
+                               {QStringLiteral("someone/secret"), true, false, 2048},
+                               {QStringLiteral("someone/theirs"), false, true, 4096}};
+        return survey;
+    }
+    static QString pageText(QWizardPage *page)
+    {
+        QStringList words;
+        for (const QLabel *label : page->findChildren<QLabel *>())
+            if (!label->isHidden())
+                words << label->text();
+        return words.join(QLatin1Char('\n'));
+    }
+
+    void aLiveSystemIsNotOfferedTheGithubJob()
+    {
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::GitHubProjects, gw::Job::PrepareDrive}, true);
+        QCOMPARE(w->offeredJobs(), QList<gw::Job>{gw::Job::PrepareDrive});
+    }
+
+    // Spec 4.2: missing programs are named, and Next installs them.
+    void aMissingProgramIsInstalledFirst()
+    {
+        m_github.missing = {QStringLiteral("gh")};
+        auto w = githubJob();
+        QVERIFY(w);
+        QVERIFY2(pageText(w->currentPage()).contains(QLatin1String("gh")), qPrintable(pageText(w->currentPage())));
+        m_github = signedInSurvey(); // once installed
+        w->next();
+        QCOMPARE(w->currentPage(), w->githubInstallPage());
+        QCOMPARE(w->githubChoice().toolsArguments(), QStringList({"--worker", "--github-tools", "--lang", "en"}));
+        // The fake Worker ends ok, so the sign-in is read again and it leads on.
+        QTRY_VERIFY(w->currentPage()->isComplete());
+        w->next();
+        QVERIFY(pageText(w->currentPage()).contains(QLatin1String("someone")));
+    }
+
+    // Spec 4.2: nothing leads on from an install that failed.
+    void aFailedInstallLeadsNowhere()
+    {
+        m_github.missing = {QStringLiteral("gh")};
+        auto w = githubJob();
+        QVERIFY(w);
+        w->githubChoice().prefix = {QStringLiteral("--no-such-prefix")};
+        w->githubChoice().program = QStringLiteral("/nonexistent/groundwork-worker");
+        w->next();
+        QTRY_VERIFY(!w->githubInstallPage()->isRunning());
+        QTest::qWait(100);
+        QVERIFY(!w->currentPage()->isComplete());
+    }
+
+    // Spec 4.2: not signed in, the Sign in page comes next; signed in, it is
+    // skipped.
+    void onlyASignedOutComputerSignsIn()
+    {
+        auto w = githubJob();
+        QVERIFY(w);
+        w->next();
+        QVERIFY(w->currentPage()->findChild<QPushButton *>(QStringLiteral("signIn")));
+
+        m_github = signedInSurvey();
+        auto signedIn = githubJob();
+        QVERIFY(signedIn);
+        signedIn->next();
+        QVERIFY(!signedIn->currentPage()->findChild<QPushButton *>(QStringLiteral("signIn")));
+        QVERIFY(pageText(signedIn->currentPage()).contains(QLatin1String("someone")));
+    }
+
+    // INV-2 on the page; the switch-all buttons; Next needs one on.
+    void theProjectsPageStartsForksOff()
+    {
+        m_github = signedInSurvey();
+        auto w = githubJob();
+        QVERIFY(w);
+        w->next();
+        QWizardPage *page = w->currentPage();
+        auto *mine = page->findChild<QCheckBox *>(QStringLiteral("repo:someone/mine"));
+        auto *secret = page->findChild<QCheckBox *>(QStringLiteral("repo:someone/secret"));
+        auto *theirs = page->findChild<QCheckBox *>(QStringLiteral("repo:someone/theirs"));
+        QVERIFY(mine && secret && theirs);
+        QVERIFY(mine->isChecked());
+        QVERIFY(secret->isChecked());
+        QVERIFY(!theirs->isChecked());
+        QVERIFY(secret->text().contains(QLatin1String("Private")));
+        QVERIFY(!mine->text().contains(QLatin1String("Private")));
+        QVERIFY(page->isComplete());
+        page->findChild<QPushButton *>(QStringLiteral("allOff"))->click();
+        QVERIFY(!mine->isChecked() && !secret->isChecked());
+        QVERIFY(!page->isComplete());
+        page->findChild<QPushButton *>(QStringLiteral("allOn"))->click();
+        QVERIFY(mine->isChecked() && secret->isChecked() && theirs->isChecked());
+        QVERIFY(page->isComplete());
+    }
+
+    // Spec 6: a damaged list touches nothing; a full one says it may be cut.
+    void theProjectsPageSaysWhatItCouldNotRead()
+    {
+        m_github = signedInSurvey();
+        m_github.repositories.clear();
+        m_github.listDamaged = true;
+        auto damaged = githubJob();
+        QVERIFY(damaged);
+        damaged->next();
+        QVERIFY(!damaged->currentPage()->isComplete());
+        QVERIFY(pageText(damaged->currentPage()).contains(QLatin1String("read the list")));
+
+        m_github.listDamaged = false;
+        for (int i = 0; i < gw::kGithubListLimit; ++i)
+            m_github.repositories.append({QStringLiteral("someone/p%1").arg(i), false, false, 1});
+        auto full = githubJob();
+        QVERIFY(full);
+        full->next();
+        QVERIFY(pageText(full->currentPage()).contains(QLatin1String("first 1000")));
+    }
+
+    // Spec 4.5: the folder page writes what is kept, and the copy starts.
+    void theFolderPageWritesTheChoicesAndTheCopyStarts()
+    {
+        m_github = signedInSurvey();
+        auto w = githubJob();
+        QVERIFY(w);
+        w->next();
+        w->githubChoice().folder = m_dir.filePath(QStringLiteral("Projects"));
+        w->next();
+        QVERIFY(w->currentPage()->isComplete());
+        QVERIFY2(pageText(w->currentPage()).contains(QLatin1String("about")), qPrintable(pageText(w->currentPage())));
+        w->next();
+        QCOMPARE(w->currentPage(), w->githubCopyPage());
+        QCOMPARE(w->githubChoice().copyArguments(),
+                 QStringList({"--worker", "--copy-github", w->githubChoice().choicesPath, "--lang", "en"}));
+        QFile file(w->githubChoice().choicesPath);
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        QString why;
+        const auto read = gw::readGithubChoices(file.readAll(), &why);
+        QVERIFY2(read, qPrintable(why));
+        QCOMPARE(read->folder, m_dir.filePath(QStringLiteral("Projects")));
+        QCOMPARE(read->repos, QStringList({"someone/mine", "someone/secret"})); // the fork stayed off
+    }
+
+    // Spec 4.6: too little room warns and does not stop; an unusable folder stops.
+    void theFolderPageWarnsOfRoomAndRefusesABadFolder()
+    {
+        m_github = signedInSurvey();
+        m_free = 100;
+        auto w = githubJob();
+        QVERIFY(w);
+        w->next();
+        w->githubChoice().folder = m_dir.filePath(QStringLiteral("Projects"));
+        w->next();
+        QVERIFY(w->currentPage()->isComplete());
+        QVERIFY(shownLabel(w->currentPage(), QStringLiteral("githubRoom")));
+        w->back();
+        w->githubChoice().folder = QStringLiteral("/usr/projects");
+        w->next();
+        QVERIFY(!w->currentPage()->isComplete());
+        QVERIFY(shownLabel(w->currentPage(), QStringLiteral("githubFolderProblem")));
+    }
+
+    // Spec 4.2: the last page of a set-up run offers the job.
+    void theLastPageOfARunOffersTheJob()
+    {
+        m_github = signedInSurvey();
+        auto w = make(QStringLiteral("en"), &catalogue, {gw::Job::SetUp, gw::Job::GitHubProjects});
+        QTRY_VERIFY(w->checksDone());
+        while (w->currentPage() != w->runPage())
+            w->next();
+        auto *offer = w->runPage()->findChild<QPushButton *>(QStringLiteral("copyGithub"));
+        QVERIFY(offer);
+        QVERIFY(!offer->isVisible());
+        QTRY_VERIFY(offer->isVisible());
+        offer->click();
+        QTRY_COMPARE(w->chosenJob(), gw::Job::GitHubProjects);
+        QTRY_VERIFY(w->currentId() > 0 && w->currentPage()->isComplete());
+        QCOMPARE(w->nextId() > 0, true);
+        w->next();
+        QVERIFY(pageText(w->currentPage()).contains(QLatin1String("someone")));
+    }
+
+    // Closing the window during a copy stops it between projects (INV-8's
+    // other half), as on any run.
+    void closingDuringACopyAsksItToStop()
+    {
+        m_github = signedInSurvey();
+        auto w = githubJob();
+        QVERIFY(w);
+        const QString stop = gw::stopFilePath(m_dir.filePath(QStringLiteral("state")));
+        QFile::remove(stop);
+        qputenv("FAKE_STOP", stop.toUtf8());
+        w->next();
+        w->githubChoice().folder = m_dir.filePath(QStringLiteral("Projects"));
+        w->next();
+        w->next();
+        QTRY_VERIFY(w->githubCopyPage()->isRunning());
+        w->close();
+        QVERIFY(QFile::exists(stop));
+        QVERIFY(!w->isVisible());
+        QTRY_VERIFY(!w->githubCopyPage()->isRunning());
+        qunsetenv("FAKE_STOP");
     }
 
     // GRND-0078, INV-9 shown: Save waits for room, and says why.

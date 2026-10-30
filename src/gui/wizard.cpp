@@ -79,6 +79,7 @@ QString jobTitle(Job job)
     case Job::SetUp: return Wizard::tr("Set up this computer");
     case Job::CarryOver: return Wizard::tr("Carry this setup over to a new install");
     case Job::PrepareDrive: return Wizard::tr("Prepare a drive for installing openSUSE");
+    case Job::GitHubProjects: return Wizard::tr("Copy your GitHub projects to this computer");
     }
     return {};
 }
@@ -151,6 +152,7 @@ public:
             for (Job job : wizard->offeredJobs()) {
                 auto *choice = new QRadioButton(jobTitle(job), jobs);
                 choice->setChecked(wizard->chosenJob() == job);
+                m_jobChoices.append({job, choice});
                 group->addButton(choice);
                 jobsLayout->addWidget(choice);
                 connect(choice, &QRadioButton::toggled, this, [this, job](bool on) {
@@ -202,14 +204,20 @@ public:
         disclaimer->setWordWrap(true);
         layout->addWidget(disclaimer);
     }
+    // A run page can choose another job, so the choice shown follows it.
+    void initializePage() override
+    {
+        for (const auto &[job, choice] : std::as_const(m_jobChoices))
+            choice->setChecked(m_wizard->chosenJob() == job);
+    }
     // Carrying a setup over records the items done, so it waits for the
-    // checks too. Preparing a drive needs none.
+    // checks too. Preparing a drive and copying projects need none.
     bool isComplete() const override
     {
         return !m_reading
                && (((m_wizard->chosenJob() == Job::SetUp || m_wizard->chosenJob() == Job::CarryOver)
                     && m_wizard->checksDone())
-                   || m_wizard->chosenJob() == Job::PrepareDrive);
+                   || m_wizard->chosenJob() == Job::PrepareDrive || m_wizard->chosenJob() == Job::GitHubProjects);
     }
     // A saved file is read on Next; one refused keeps the page, saying why.
     bool validatePage() override
@@ -280,6 +288,7 @@ private:
     QCheckBox *m_fromSaved = nullptr;
     QLineEdit *m_savedFile = nullptr;
     QLabel *m_savedProblem = nullptr;
+    QList<QPair<Job, QRadioButton *>> m_jobChoices;
     bool m_reading = false; // a saved file is being read
 };
 
@@ -351,6 +360,7 @@ public:
     {
         makeSecretsOffer();
         makeBackButton();
+        makeGithubOffer();
     }
     void initializePage() override
     {
@@ -368,9 +378,23 @@ public:
         m_back->hide();
         m_back->setEnabled(true);
         m_back->setText(Wizard::tr("Back to my choices"));
+        if (m_github)
+            m_github->hide();
     }
 
 private:
+    // The GitHub job, offered once a set-up run is over (GRND-0065 spec 4.2).
+    void makeGithubOffer()
+    {
+        if (!m_wizard->offeredJobs().contains(Job::GitHubProjects))
+            return;
+        m_github = new QPushButton(Wizard::tr("Copy your GitHub projects…"), this);
+        m_github->setObjectName(QStringLiteral("copyGithub"));
+        m_github->hide();
+        static_cast<QVBoxLayout *>(layout())->addWidget(m_github, 0, Qt::AlignLeading);
+        connect(this, &RunPage::runFinished, m_github, &QWidget::show);
+        connect(m_github, &QPushButton::clicked, m_wizard, &Wizard::startGithubJob, Qt::QueuedConnection);
+    }
     // A run that skipped everything left no way to pick again but a
     // restart (user, 2026-10-29; GRND-0105).
     void makeBackButton()
@@ -449,6 +473,7 @@ private:
     QString m_program;
     bool m_offered = false;
     QPushButton *m_back = nullptr;
+    QPushButton *m_github = nullptr;
 };
 
 class PrepareRunWizardPage : public RunPage
@@ -606,11 +631,25 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
         m_carryRunPage = carryRun;
         addPage(carryRun);
     }
+    if (m_offeredJobs.contains(Job::GitHubProjects)) {
+        m_github.survey = m_setup.surveyGithub;
+        m_github.space = m_setup.folderSpace;
+        m_github.choicesPath = m_setup.stateDir + QStringLiteral("/github-choices.json");
+        m_github.program = m_setup.workerProgram;
+        m_github.prefix = m_setup.workerPrefix;
+        m_github.language = m_setup.language;
+        m_githubStartId = addPage(new GithubStartPage(&m_github, this));
+        m_githubInstallPage = new GithubInstallPage(&m_github, this);
+        m_githubInstallId = addPage(m_githubInstallPage);
+        m_githubSignInId = addPage(new GithubSignInPage(&m_github, this));
+        m_githubProjectsId = addPage(new GithubProjectsPage(&m_github, this));
+        addPage(new GithubFolderPage(&m_github, this));
+        m_githubCopyPage = new GithubCopyPage(&m_github, this);
+        addPage(m_githubCopyPage);
+    }
     if (m_offeredJobs.contains(Job::SetUp) && offersSavedSetup())
         m_savedPageId = addPage(new SavedSetupPage(this));
-    for (RunPage *page : {m_runPage, m_prepareRunPage, m_carryRunPage}) {
-        if (!page)
-            continue;
+    for (RunPage *page : runPages()) {
         connect(page, &RunPage::runFinished, this, [this] {
             if (!isVisible()) // closed during the run: quit once the Worker is done
                 qApp->quit();
@@ -664,6 +703,15 @@ void Wizard::backToChoices()
         while (currentId() != m_firstLevelId && visitedIds().size() > 1)
             back();
     });
+}
+
+void Wizard::startGithubJob()
+{
+    clearSavedSetup();
+    chooseJob(Job::GitHubProjects);
+    startChecks(); // going back to the set-up job finds the rows fresh
+    restart();
+    next();
 }
 
 void Wizard::showResults(const CheckResults &results)
@@ -821,17 +869,26 @@ int Wizard::nextId() const
     // Set up: the welcome page, the levels, review, run. Prepare: the
     // welcome page, the drive, Windows' checklist where Windows is on it,
     // the layout, confirm, run (docs/design.md, Preparing a drive). Carry:
-    // the welcome page, what to carry, where to save it, run.
+    // the welcome page, what to carry, where to save it, run. GitHub: the
+    // welcome page, the programs, installing them if missing, signing in if
+    // needed, the projects, the folder, run.
     const int id = currentId();
     if (id == 0 && m_chosenJob == Job::PrepareDrive)
         return m_drivePageId;
     if (id == 0 && m_chosenJob == Job::CarryOver)
         return m_gatherPageId;
+    if (id == 0 && m_chosenJob == Job::GitHubProjects)
+        return m_githubStartId;
+    if (id >= 0 && id == m_githubStartId && !m_github.found.missing.isEmpty())
+        return m_githubInstallId;
+    if (id >= 0 && (id == m_githubStartId || id == m_githubInstallId))
+        return m_github.found.signedIn ? m_githubProjectsId : m_githubSignInId;
     if (id == 0 && m_chosenJob == Job::SetUp && m_saved)
         return m_savedPageId;
     if (id >= 0 && id == m_savedPageId)
         return m_firstLevelId;
-    if (currentPage() == m_runPage || currentPage() == m_prepareRunPage || currentPage() == m_carryRunPage)
+    if (currentPage() == m_runPage || currentPage() == m_prepareRunPage || currentPage() == m_carryRunPage
+        || currentPage() == m_githubCopyPage)
         return -1;
     if (id >= 0 && id == m_drivePageId)
         return m_prepare.drive && m_prepare.drive->hasWindows() ? m_windowsPageId : m_layoutPageId;
@@ -1047,10 +1104,20 @@ QStringList Wizard::secretsArguments(bool remove) const
                          m_saved->file, QStringLiteral("--lang"), m_setup.language};
 }
 
+QList<RunPage *> Wizard::runPages() const
+{
+    QList<RunPage *> pages;
+    for (RunPage *page : {m_runPage, m_prepareRunPage, m_carryRunPage, m_githubInstallPage, m_githubCopyPage}) {
+        if (page)
+            pages << page;
+    }
+    return pages;
+}
+
 bool Wizard::stopForClose()
 {
-    if (!m_runPage->isRunning() && !(m_prepareRunPage && m_prepareRunPage->isRunning())
-        && !(m_carryRunPage && m_carryRunPage->isRunning()))
+    const QList<RunPage *> pages = runPages();
+    if (std::none_of(pages.cbegin(), pages.cend(), [](const RunPage *page) { return page->isRunning(); }))
         return false;
     // Ask the Worker to stop between items, and keep this process until it
     // has, so neither Qt nor the AppImage's mount ends it early (design,

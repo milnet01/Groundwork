@@ -1607,7 +1607,7 @@ has a written design before it is built.
 Numbered 0.4.0 until 2026-10-16, when the user chose to ship what was
 built as 0.4.0 instead.
 
-- 📋 [GRND-0065] **Your GitHub projects, copied into a folder you choose.**
+- 🚧 [GRND-0065] **Your GitHub projects, copied into a folder you choose.**
   The user liked this over a personal list (2026-10-10): sign in
   once, list the user's repositories, tick which to copy, choose the
   folder. Private ones work once signed in. Copying runs as the user,
@@ -1617,6 +1617,10 @@ built as 0.4.0 instead.
   Spec: docs/specs/GRND-0065-copy-github-projects.md, accepted
   2026-10-30. A job of its own rather than a row, with forks starting
   off (user, 2026-10-30).
+  Built 2026-10-30 against spec; serves S7. Tests use a fake gh. Still
+  to run: the spec's section 7 VM recipe, which needs the user's GitHub
+  sign-in in a browser on the VM (INV-10), and Leap's step 7. Leap 16.0
+  metadata lists gh and git (read 2026-10-30).
   **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
   Kind: feature.
   Source: user-request-2026-10-10.

@@ -109,16 +109,22 @@ add_library(groundwork_carry STATIC
     src/carry/settingsgroups.cpp)
 target_link_libraries(groundwork_carry PUBLIC groundwork_items groundwork_core)
 
+# GitHub names commands and reads their output, as Items do (GRND-0065).
+add_library(groundwork_github STATIC
+    src/github/github.cpp)
+target_link_libraries(groundwork_github PUBLIC groundwork_core)
+
 add_library(groundwork_worker STATIC
     src/worker/privilege.cpp
     src/worker/worker.cpp)
-target_link_libraries(groundwork_worker PUBLIC groundwork_carry groundwork_drives groundwork_items groundwork_core)
+target_link_libraries(groundwork_worker PUBLIC groundwork_carry groundwork_drives groundwork_github groundwork_items groundwork_core)
 
 # The Wizard's widgets; never depended on by the Worker.
 add_library(groundwork_gui STATIC
     src/gui/askpassdialog.cpp
     src/gui/carrypages.cpp
     src/gui/folderlistfield.cpp
+    src/gui/githubpages.cpp
     src/gui/itemrow.cpp
     src/gui/passwordchannel.cpp
     src/gui/preparepages.cpp
@@ -127,7 +133,7 @@ add_library(groundwork_gui STATIC
     src/gui/switch.cpp
     src/gui/themes.cpp
     src/gui/wizard.cpp)
-target_link_libraries(groundwork_gui PUBLIC groundwork_carry groundwork_drives groundwork_core Qt6::Widgets)
+target_link_libraries(groundwork_gui PUBLIC groundwork_carry groundwork_drives groundwork_github groundwork_core Qt6::Widgets)
 
 add_executable(groundwork src/main.cpp)
 target_link_libraries(groundwork PRIVATE groundwork_gui groundwork_worker groundwork_items groundwork_core Qt6::Core Qt6::Widgets)

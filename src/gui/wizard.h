@@ -9,6 +9,7 @@
 #include "carrypages.h"
 #include "core/checkrunner.h"
 #include "core/selection.h"
+#include "githubpages.h"
 #include "preparepages.h"
 
 #include <QFont>
@@ -42,7 +43,7 @@ QFont fontFor(const QString &code, const QFont &base);
 
 // The jobs the first page offers (docs/design.md, The shape in one
 // paragraph). Each joins WizardSetup::jobs once it is built.
-enum class Job { SetUp, CarryOver, PrepareDrive };
+enum class Job { SetUp, CarryOver, PrepareDrive, GitHubProjects };
 
 struct WizardSetup
 {
@@ -62,6 +63,7 @@ struct WizardSetup
     // checking the items it becomes.
     std::function<std::optional<Manifest>(const QString &file, QString *why, QStringList *skipped)> readSetup;
     std::function<CheckResults(const QList<const Item *> &)> checkItems;
+    std::function<GithubSurvey()> surveyGithub; // when the GitHub job's first page opens
 };
 
 // A saved file the setup job starts from (GRND-0079 spec 4.1): what it
@@ -109,6 +111,8 @@ public:
     RunPage *runPage() const { return m_runPage; }
     RunPage *prepareRunPage() const { return m_prepareRunPage; }
     RunPage *carryRunPage() const { return m_carryRunPage; }
+    RunPage *githubInstallPage() const { return m_githubInstallPage; }
+    RunPage *githubCopyPage() const { return m_githubCopyPage; }
     QStringList workerArguments() const;
     // The Worker's arguments for preparing the drive (spec 4.4).
     QStringList prepareArguments() const;
@@ -116,6 +120,7 @@ public:
     QStringList carryArguments() const;
     const CarryChoice &carryChoice() const { return m_carry; }
     const PrepareChoice &prepareChoice() const { return m_prepare; }
+    GithubChoice &githubChoice() { return m_github; }
     // Routes each job through its own pages.
     int nextId() const override;
     // The selected ids in run order; a carried row with every switch inside
@@ -149,6 +154,8 @@ public:
     // After a run: checks the system again, forgets a saved setup, and
     // goes back to the first level page with fresh rows (GRND-0105).
     void backToChoices();
+    // After a run: on to the GitHub job, from its first page (GRND-0065 spec 4.2).
+    void startGithubJob();
 
     // The user switched an item on or off in a row.
     void userToggled(const QString &id, bool on);
@@ -171,6 +178,7 @@ private:
     void refreshRows(const QStringList &pulled, const QStringList &included, const QString &cause, bool on);
     void switchOnSaved(const QString &id);
     bool stopForClose();
+    QList<RunPage *> runPages() const;
 
     WizardSetup m_setup;
     QList<Job> m_offeredJobs;
@@ -200,6 +208,10 @@ private:
     std::unique_ptr<SavedSetup> m_saved;
     int m_savedPageId = -1, m_firstLevelId = -1;
     RunPage *m_carryRunPage = nullptr;
+    GithubChoice m_github;
+    int m_githubStartId = -1, m_githubInstallId = -1, m_githubSignInId = -1, m_githubProjectsId = -1;
+    RunPage *m_githubInstallPage = nullptr;
+    RunPage *m_githubCopyPage = nullptr;
 };
 
 } // namespace gw

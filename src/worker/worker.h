@@ -45,6 +45,13 @@ public:
     // Deletes a saved file, as one item, delete-setup-file, as the user.
     int deleteSetupFile(const QString &file);
 
+    // Installs git and gh, as one item, github-tools (GRND-0065 spec 4.7).
+    int installGithubTools();
+    // Copies the projects in the choices file, one item each, as the user
+    // (GRND-0065 spec 4.5). It trusts nothing in the file: a bad folder or
+    // name refuses the run before any step.
+    int copyGithub(const QString &choicesPath);
+
 private:
     enum class Outcome { Ok, SkippedDone, SkippedNotNeeded, SkippedOther, Failed };
 

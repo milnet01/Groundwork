@@ -135,6 +135,12 @@ if need actionlint; then
     printf 'actionlint clean\n' >&2
 fi
 
+step 'no real account names (GRND-0065, INV-9)'
+if git grep -n milnet -- src/github src/gui/githubpages.cpp tests/tst_github.cpp >&2; then
+    fail "the GitHub job's code and tests must not name a real account"
+fi
+printf 'none found\n' >&2
+
 report() {
     if (( ${#PROBLEMS[@]} )); then
         printf '\nlocal-ci: %s passed, but NOT everything GitHub checks ran as GitHub runs it:\n' "$1" >&2

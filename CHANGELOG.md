@@ -12,6 +12,15 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Added
+
+- A new job on the first page, also offered at the end of a set-up run:
+  copy your GitHub projects to this computer. It installs `git` and `gh`
+  if they are missing, signs you in with a code in your browser, lists
+  your own projects with a switch each (forks start off), and copies the
+  ones you keep into a folder you choose. A folder already there is left
+  as it is. (GRND-0065)
+
 ## [0.5.2] - 2026-10-30
 
 **Theme:** Ready for the next install.

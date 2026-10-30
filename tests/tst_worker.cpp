@@ -124,6 +124,21 @@ case " $* " in *" install "*) exit 4;; esac
 exit 0
 )";
 
+// Copying projects (GRND-0065): a clone makes the folder it is given, unless
+// told to fail; or, told to, something else appears at the destination.
+const QByteArray kGh = R"(#!/bin/sh
+echo "gh $*" >> "$FAKE_LOG"
+case "$1 $2" in
+  "auth setup-git") exit "${FAKE_SETUP_GIT:-0}";;
+  "repo clone")
+    if [ "$3" = "$FAKE_GH_FAIL" ]; then echo "fatal: could not read"; exit 1; fi
+    mkdir "$4" && echo copied > "$4/README" || exit 1
+    if [ -n "$FAKE_GH_APPEARS" ]; then mkdir "$FAKE_GH_APPEARS"; fi
+    if [ -n "$FAKE_STOP_FILE" ]; then touch "$FAKE_STOP_FILE"; fi;;
+esac
+exit 0
+)";
+
 constexpr qint64 kMiB = qint64(1) << 20;
 constexpr qint64 kGiB = qint64(1) << 30;
 
@@ -321,6 +336,14 @@ class TstWorker : public QObject
         p.setProcessEnvironment(m_env);
         p.start(QStringLiteral(GROUNDWORK_BIN), QStringList{QStringLiteral("--worker")} + args);
         return finish(p);
+    }
+    // GRND-0065: a fake gh, then the Worker copying repos into folder.
+    Run copyGithub(const QString &folder, const QStringList &repos)
+    {
+        writeFile(m_bin + QStringLiteral("/gh"), kGh, true);
+        const QString choices = m_dir->filePath(QStringLiteral("github-choices.json"));
+        writeFile(choices, QJsonDocument(QJsonObject{{"folder", folder}, {"repos", QJsonArray::fromStringList(repos)}}).toJson());
+        return worker({QStringLiteral("--copy-github"), choices});
     }
     QStringList hintsFor(const Run &r, const QString &id) const
     {
@@ -1120,6 +1143,122 @@ cat > "$FAKE_WRITTEN$out"
         const Run deleted = worker({QStringLiteral("--delete-setup-file"), file});
         QCOMPARE(deleted.endsFor(QStringLiteral("delete-setup-file")).value(1), QStringLiteral("ok"));
         QVERIFY(!QFile::exists(file));
+    }
+
+    // GRND-0065, INV-4: whatever is at the destination stays as it is: a
+    // folder, an empty folder, a link that leads nowhere. The next is copied.
+    void anExistingFolderIsSkipped()
+    {
+        const QString folder = m_dir->filePath(QStringLiteral("Projects"));
+        writeFile(folder + QStringLiteral("/full/mine.txt"), "my own work\n");
+        QVERIFY(QDir().mkpath(folder + QStringLiteral("/empty")));
+        QVERIFY(QFile::link(QStringLiteral("/no/such/place"), folder + QStringLiteral("/link")));
+        const Run r = copyGithub(folder, {"someone/full", "someone/empty", "someone/link", "someone/new"});
+        QCOMPARE(r.exitCode, 0);
+        for (const char *name : {"full", "empty", "link"}) {
+            const QString id = QStringLiteral("github:someone/") + QLatin1String(name);
+            QCOMPARE(r.endsFor(id).value(1), QStringLiteral("skip"));
+            QVERIFY(!r.endsFor(id).value(2).isEmpty());
+        }
+        QCOMPARE(r.count(QStringLiteral("gh repo clone")), 1);
+        QFile mine(folder + QStringLiteral("/full/mine.txt"));
+        QVERIFY(mine.open(QIODevice::ReadOnly));
+        QCOMPARE(mine.readAll(), QByteArray("my own work\n"));
+        QVERIFY(QDir(folder + QStringLiteral("/empty")).isEmpty());
+        QCOMPARE(QFileInfo(folder + QStringLiteral("/link")).symLinkTarget(), QStringLiteral("/no/such/place"));
+        QVERIFY(QFile::exists(folder + QStringLiteral("/new/README")));
+        QVERIFY(!QFile::exists(folder + QStringLiteral("/.new.partial")));
+    }
+
+    // GRND-0065, INV-4: a folder that appears during the clone is not moved
+    // into, and not replaced; the copy stays beside it, named.
+    void aFolderThatAppearsDuringTheCopyIsLeftAlone()
+    {
+        const QString folder = m_dir->filePath(QStringLiteral("Projects"));
+        m_env.insert(QStringLiteral("FAKE_GH_APPEARS"), folder + QStringLiteral("/late"));
+        const Run r = copyGithub(folder, {"someone/late"});
+        QCOMPARE(r.exitCode, 1);
+        QCOMPARE(r.endsFor(QStringLiteral("github:someone/late")).value(1), QStringLiteral("fail"));
+        QVERIFY(QDir(folder + QStringLiteral("/late")).isEmpty());
+        QVERIFY(QFile::exists(folder + QStringLiteral("/.late.partial/README")));
+        QVERIFY(r.endsFor(QStringLiteral("github:someone/late")).value(2).contains(QLatin1String(".late.partial")));
+    }
+
+    // GRND-0065, INV-5: a failed clone puts nothing at the destination, and
+    // the other projects still run.
+    void aFailedCopyLeavesNoProject()
+    {
+        const QString folder = m_dir->filePath(QStringLiteral("Projects"));
+        m_env.insert(QStringLiteral("FAKE_GH_FAIL"), QStringLiteral("someone/first"));
+        const Run r = copyGithub(folder, {"someone/first", "someone/second", "someone/third"});
+        QCOMPARE(r.exitCode, 1);
+        QCOMPARE(r.endsFor(QStringLiteral("github:someone/first")).value(1), QStringLiteral("fail"));
+        QVERIFY(!QFile::exists(folder + QStringLiteral("/first")));
+        QCOMPARE(r.endsFor(QStringLiteral("github:someone/second")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.endsFor(QStringLiteral("github:someone/third")).value(1), QStringLiteral("ok"));
+        QVERIFY(QFile::exists(folder + QStringLiteral("/third/README")));
+        QCOMPARE(r.markers.last().fields, QStringList({"2", "1", "0"}));
+    }
+
+    // GRND-0065, spec 4.5: a part-copied folder from a power cut is named
+    // for the user to delete, and never deleted for them.
+    void aLeftoverFromAPowerCutIsNamed()
+    {
+        const QString folder = m_dir->filePath(QStringLiteral("Projects"));
+        writeFile(folder + QStringLiteral("/.old.partial/half"), "half\n");
+        const Run r = copyGithub(folder, {"someone/old"});
+        QCOMPARE(r.exitCode, 1);
+        const QStringList end = r.endsFor(QStringLiteral("github:someone/old"));
+        QCOMPARE(end.value(1), QStringLiteral("fail"));
+        QVERIFY2(end.value(2).contains(QLatin1String(".old.partial")), qPrintable(end.value(2)));
+        QVERIFY(QFile::exists(folder + QStringLiteral("/.old.partial/half")));
+        QVERIFY(!QFile::exists(folder + QStringLiteral("/old")));
+    }
+
+    // GRND-0065, INV-8: a stop written during one project leaves it complete
+    // and starts no other.
+    void aStopEndsTheCopyBetweenProjects()
+    {
+        const QString folder = m_dir->filePath(QStringLiteral("Projects"));
+        m_env.insert(QStringLiteral("FAKE_STOP_FILE"), m_state + QStringLiteral("/groundwork/stop.request"));
+        const Run r = copyGithub(folder, {"someone/first", "someone/second"});
+        QCOMPARE(r.exitCode, 5);
+        QCOMPARE(r.endsFor(QStringLiteral("github:someone/first")).value(1), QStringLiteral("ok"));
+        QVERIFY(QFile::exists(folder + QStringLiteral("/first/README")));
+        QVERIFY(r.endsFor(QStringLiteral("github:someone/second")).isEmpty());
+        QCOMPARE(r.count(QStringLiteral("gh repo clone")), 1);
+        QCOMPARE(r.markers.last().fields.value(2), QStringLiteral("1"));
+    }
+
+    // GRND-0065, spec 4.5: gh auth setup-git runs first and asks no password,
+    // and its failure is a note, since the copies do not need it.
+    void aFailedGitSetupIsOnlyANote()
+    {
+        const QString folder = m_dir->filePath(QStringLiteral("Projects"));
+        m_env.insert(QStringLiteral("FAKE_SETUP_GIT"), QStringLiteral("1"));
+        const Run r = copyGithub(folder, {"someone/first"});
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.count(QStringLiteral("gh auth setup-git")), 1);
+        QCOMPARE(r.count(QStringLiteral("sudo")), 0);
+        QCOMPARE(hintsFor(r, QStringLiteral("github-setup")).size(), 1);
+        QCOMPARE(r.endsFor(QStringLiteral("github:someone/first")).value(1), QStringLiteral("ok"));
+    }
+
+    // GRND-0065, spec 4.7: one root step, as one item, in no catalogue.
+    void theToolsInstallAsOneItem()
+    {
+        const Run r = worker({QStringLiteral("--github-tools")});
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.endsFor(QStringLiteral("github-tools")).value(1), QStringLiteral("ok"));
+        QCOMPARE(r.count(QStringLiteral("zypper -n install git gh")), 1);
+        QCOMPARE(r.count(QStringLiteral("zypper -n dup")), 0);
+    }
+    void aRefusedPasswordInstallsNoTools()
+    {
+        m_env.insert(QStringLiteral("FAKE_SUDO_FAIL"), QStringLiteral("1"));
+        const Run r = worker({QStringLiteral("--github-tools")});
+        QCOMPARE(r.exitCode, 4);
+        QCOMPARE(r.count(QStringLiteral("zypper")), 0);
     }
 };
 

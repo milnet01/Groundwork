@@ -8,6 +8,7 @@
 #include "core/systemidentity.h"
 #include "core/translations.h"
 #include "drives/drives.h"
+#include "github/github.h"
 #include "privilege.h"
 
 #include <QCoreApplication>
@@ -686,6 +687,104 @@ int Worker::deleteSetupFile(const QString &file)
         return endOne(id, false, detail);
     say(formatMarker(QStringLiteral("HINT"), {id, tr("Deleted %1.").arg(file)}));
     return endOne(id, true, {});
+}
+
+int Worker::installGithubTools()
+{
+    openLog();
+    const SystemIdentity system = readSystemIdentity(m_files);
+    if (!system.supported()) {
+        say(formatMarker(QStringLiteral("UNSUPPORTED"), {system.reason}));
+        return Unsupported;
+    }
+    const QString id = QStringLiteral("github-tools");
+    const Step install = githubToolsStep();
+    beginOne(id, install.label);
+    if (!ensureRoot()) {
+        say(formatMarker(QStringLiteral("AUTH"), {QStringLiteral("failed")}));
+        return AuthFailed;
+    }
+    QString detail;
+    const bool ok = runStep(id, install, &detail);
+    m_privilege.stopKeepAlive();
+    return endOne(id, ok, detail);
+}
+
+int Worker::copyGithub(const QString &choicesPath)
+{
+    openLog();
+    const SystemIdentity system = readSystemIdentity(m_files);
+    if (!system.supported()) {
+        say(formatMarker(QStringLiteral("UNSUPPORTED"), {system.reason}));
+        return Unsupported;
+    }
+    // Every check before any step (INV-3).
+    QString why = tr("The list of projects to copy could not be read.");
+    std::optional<GithubChoices> choices;
+    if (QFile file(choicesPath); file.open(QIODevice::ReadOnly))
+        choices = readGithubChoices(file.readAll(), &why);
+    if (!choices) {
+        say(formatMarker(QStringLiteral("SETUP_REFUSED"), {why}));
+        return Usage;
+    }
+    const QString &folder = choices->folder;
+    const auto present = [](const QString &path) {
+        const QFileInfo info(path);
+        return info.exists() || info.isSymLink(); // a link that leads nowhere is still there
+    };
+    QString detail;
+    const QString setup = QStringLiteral("github-setup");
+    if (!runStep(setup, makeGithubFolderStep(folder), &detail)) {
+        say(formatMarker(QStringLiteral("SETUP_REFUSED"), {detail}));
+        return Failed;
+    }
+    // So a later git push in a copied project works; the copies do not need it.
+    if (!runStep(setup, setupGitStep(), &detail))
+        say(formatMarker(QStringLiteral("HINT"), {setup, tr("git could not be set up to use your sign-in, so git push "
+                                                            "may ask for it. Copying goes on.")}));
+
+    int ok = 0;
+    int failed = 0;
+    bool stopped = false;
+    const QStringList &repos = choices->repos;
+    for (qsizetype i = 0; i < repos.size(); ++i) {
+        if (stopRequested()) {
+            stopped = true;
+            break;
+        }
+        const QString &repo = repos[i];
+        const QString id = QStringLiteral("github:") + repo;
+        const QString name = repo.section(QLatin1Char('/'), 1);
+        say(formatMarker(QStringLiteral("STEP_BEGIN"),
+                         {id, QString::number(i + 1), QString::number(repos.size()), name}));
+        if (present(githubDestination(folder, repo))) {
+            say(formatMarker(QStringLiteral("STEP_END"),
+                             {id, QStringLiteral("skip"), tr("Already there, so it was left as it is.")}));
+            continue;
+        }
+        const QString partial = githubPartial(folder, repo);
+        const QString leftover = tr("A part-copied folder is at %1. Delete it, then copy again.").arg(partial);
+        detail.clear();
+        bool success = false;
+        if (present(partial)) {
+            detail = leftover; // never deleted for the user
+        } else {
+            const QList<Step> steps = githubCopySteps(folder, repo);
+            success = std::all_of(steps.cbegin(), steps.cend(), [&](const Step &step) { return runStep(id, step, &detail); });
+            // mv -n moves nothing onto a folder that appeared meanwhile.
+            if (present(partial)) {
+                success = false;
+                detail = detail.isEmpty() ? leftover : detail + QLatin1Char(' ') + leftover;
+            }
+        }
+        success ? ++ok : ++failed;
+        say(formatMarker(QStringLiteral("STEP_END"), {id, success ? QStringLiteral("ok") : QStringLiteral("fail"), detail}));
+    }
+    say(formatMarker(QStringLiteral("DONE"),
+                     {QString::number(ok), QString::number(failed), stopped ? QStringLiteral("1") : QStringLiteral("0")}));
+    if (stopped)
+        return Stopped;
+    return failed > 0 ? Failed : Ok;
 }
 
 } // namespace gw

@@ -11,7 +11,8 @@ levels and configuration, and agreed again. S1, S2 and the supported
 systems narrowed the same day to match the design; S3 widened to the
 user's language at the user's request. Widened on 2026-10-15 to two
 more jobs, preparing a drive and carrying a setup over (GRND-0076),
-and agreed by the user the same day from a summary. It is expected to change as the
+and agreed by the user the same day from a summary. S7 added 2026-10-30
+for the GitHub job, as its accepted spec says (GRND-0065). It is expected to change as the
 work goes on. A change is made here, with the user's agreement
 (`~/.claude/workflow.md` §§ 4 and 7).
 
@@ -43,6 +44,10 @@ installed, it gathers that machine's setup, asks which parts to keep,
 and saves them to a file. After the new install, setup starts from that
 file, and Groundwork's usual items are offered on top. Preparing is
 optional: the openSUSE installer can still do all of it.
+
+**Copy your GitHub projects:** signed in once from the window, it lists
+the user's own projects and copies the ones they keep into a folder they
+choose.
 
 ## Who it is for
 
@@ -87,6 +92,10 @@ labels.
   and network shares. The user keeps or drops each. After a fresh install,
   every kept part is switched on, and Groundwork's other items are
   offered as usual.
+- **S7** — Signed in once from the window, the user copies the projects
+  they choose from their own GitHub account, private ones included, into
+  a folder they choose. A folder already there is unchanged, and
+  Groundwork never reads the sign-in token.
 
 ## What it deliberately does not do
 

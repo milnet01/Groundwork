@@ -911,8 +911,8 @@
         <translation>‏Groundwork כבר פתוח. השתמש בחלון הפתוח, או סגור אותו והפעל את Groundwork מחדש.</translation>
     </message>
     <message>
-        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
-        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</translation>
+        <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --worker --github-tools | --worker --copy-github CHOICES_FILE | --version</source>
+        <translation>שימוש: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --worker --github-tools | --worker --copy-github CHOICES_FILE | --version</translation>
     </message>
     <message>
         <source>Groundwork</source>
@@ -1227,6 +1227,223 @@
     <message>
         <source>The saved file will hold this app&apos;s saved passwords or keys. Anyone with the file can read them.</source>
         <translation>הקובץ השמור יכיל את הסיסמאות או המפתחות השמורים של האפליקציה הזו. כל מי שיש לו את הקובץ יכול לקרוא אותם.</translation>
+    </message>
+</context>
+<context>
+    <name>gw::GitHub</name>
+    <message>
+        <source>This folder&apos;s path could not be used.</source>
+        <translation type="unfinished">לא ניתן היה להשתמש בנתיב של התיקייה הזו.</translation>
+    </message>
+    <message>
+        <source>This folder holds system files. Choose another.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden folders in your home folder hold settings. Choose another.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is a file, not a folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot write to %1. Choose another folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of projects holds a name that cannot be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two projects would go to the same folder: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of projects to copy is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installing git and gh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Making the folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letting git use your sign-in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copying the project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Putting the project in place</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>gw::GithubCopyPage</name>
+    <message>
+        <source>Copying your projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>gw::GithubFolderPage</name>
+    <message>
+        <source>Where to copy them</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a folder…</source>
+        <translation type="unfinished">בחירת תיקייה…</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation type="unfinished">בחירת תיקייה</translation>
+    </message>
+    <message>
+        <source>Folder: %1</source>
+        <translation type="unfinished">תיקייה: %1</translation>
+    </message>
+    <message>
+        <source>The projects switched on take about %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This drive has %1 free.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>That may not be enough room. The copy can still be tried.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>What to copy could not be written to %1, so nothing was copied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>gw::GithubInstallPage</name>
+    <message>
+        <source>Installing git and gh</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>gw::GithubProjectsPage</name>
+    <message>
+        <source>Switch all on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch all off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Which projects to copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forks start switched off.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signed in.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signed in as %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This account owns no projects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only the first 1000 are shown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 — Private — %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>gw::GithubSignInPage</name>
+    <message>
+        <source>Sign in to GitHub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waiting for GitHub…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signing in did not finish. Press the button to try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signed in. Reading your projects…</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>gw::GithubStartPage</name>
+    <message>
+        <source>Copy your GitHub projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Looking for git and gh…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>git and gh are on this computer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2137,6 +2354,10 @@
         <translation>הכנת כונן להתקנת openSUSE</translation>
     </message>
     <message>
+        <source>Copy your GitHub projects to this computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Welcome to Groundwork</source>
         <translation>ברוכים הבאים ל־Groundwork</translation>
     </message>
@@ -2231,6 +2452,10 @@
     <message>
         <source>Back to my choices</source>
         <translation>חזרה לבחירות שלי</translation>
+    </message>
+    <message>
+        <source>Copy your GitHub projects…</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2490,6 +2715,22 @@
     <message>
         <source>Deleted %1.</source>
         <translation>‏%1 נמחק.</translation>
+    </message>
+    <message>
+        <source>The list of projects to copy could not be read.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Already there, so it was left as it is.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A part-copied folder is at %1. Delete it, then copy again.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

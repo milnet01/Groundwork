@@ -29,6 +29,8 @@ public:
                const QList<QPair<QString, QString>> &titles);
     bool isRunning() const { return m_process.state() != QProcess::NotRunning; }
     bool isComplete() const override;
+    // The Worker has finished, and exited 0.
+    bool endedOk() const;
     // Going back past the page empties it for the next run (GRND-0105).
     void cleanupPage() override;
 

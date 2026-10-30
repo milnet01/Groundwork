@@ -44,7 +44,7 @@ A new part, **GitHub**, in `src/github/`, depending on Core only, as Items do. I
 
 | Page | Shows | Leaves when |
 |---|---|---|
-| Start | Whether `git` and `gh` are found (`rpm -q git gh`). When missing: a sentence naming them | Next: to the install run page if missing, else onward |
+| Start | Whether `git` and `gh` are found (`rpm -q --qf '%{NAME}\n' git gh`, since `rpm`'s words for a missing package are translated). When missing: a sentence naming them | Next: to the install run page if missing, else onward |
 | Install | `RunPage`, running `groundwork --worker --github-tools [--lang LANG]` | The run ends ok |
 | Sign in | Skipped when signed in. A "Sign in to GitHub" button, then the one-time code in large text, a Copy button and an Open browser button | `gh` exits 0 |
 | Projects | "Signed in as NAME." One row per repository, with a `Switch`, its name, "Private" when it is, and its size. "Switch all on" and "Switch all off" | At least one switch is on |
@@ -90,7 +90,7 @@ gh repo list --limit 1000 --json nameWithOwner,isPrivate,isFork,diskUsage
 Through `CheckContext::run`, with a 60-second limit. On 2026-10-30 this read the owner's account and returned valid JSON. `parseRepositories` keeps an entry only when its name matches:
 
 ```regex pcre2
-^[A-Za-z0-9_.-]+/(?!\.{1,2}$)[A-Za-z0-9_.][A-Za-z0-9_.-]*$
+^[A-Za-z0-9_][A-Za-z0-9_.-]*/(?!\.{1,2}$)[A-Za-z0-9_.][A-Za-z0-9_.-]*$
 ```
 
 | input | expected |
@@ -99,6 +99,9 @@ Through `CheckContext::run`, with a 60-second limit. On 2026-10-30 this read the
 | `someone/-oUpload` | no match |
 | `someone/..` | no match |
 | `someone/a b` | no match |
+| `-oUpload/project` | no match |
+
+The name comes first on `gh`'s line, so an owner starting with `-` would read as an option.
 
 A row starts on unless `isFork`. A list holding exactly 1000 says "Only the first 1000 are shown." `diskUsage` is GitHub's figure in KiB, and a checkout can differ from it, so the Folder page calls its total "about".
 
@@ -119,14 +122,14 @@ Then one item per repository, id `github:<owner>/<name>`, title the name, in the
 
 ```
 env GIT_TERMINAL_PROMPT=0 GIT_ASKPASS= SSH_ASKPASS= gh repo clone OWNER/NAME <folder>/.NAME.partial
-mv -n -- <folder>/.NAME.partial <folder>/NAME
+mv -n -T -- <folder>/.NAME.partial <folder>/NAME
 ```
 
-The `env` is why a revoked sign-in fails instead of waiting for a password. KDE sets `SSH_ASKPASS`, and git would otherwise open its box for each project. A leftover `.NAME.partial` from a power cut makes `gh` fail, and the detail names it for the user to delete; it is never deleted for them. One project failing does not stop the rest.
+The `env` is why a revoked sign-in fails instead of waiting for a password. KDE sets `SSH_ASKPASS`, and git would otherwise open its box for each project. `-T` is why a folder appearing at `DEST` during the clone is not moved into; the copy then stays at `.NAME.partial` and the item fails, naming it. A leftover `.NAME.partial` from a power cut fails the item before `gh` runs, and the detail names it for the user to delete; it is never deleted for them. One project failing does not stop the rest.
 
 ### 4.6 Which folder
 
-`GithubFolderProblem`, called by the page and the Worker, returns a sentence or nothing. The folder must be absolute and equal to its own `QDir::cleanPath`. It or its nearest existing parent must be writable by the user. It must not be `/` or under the system folders GRND-0066 §4.3 lists, and it must not be below a dot-folder in the home folder. A folder that does not exist yet is made when the copy starts (§4.5). The page starts at `~/Projects`.
+`githubFolderProblem`, called by the page and the Worker, returns a sentence or nothing. The folder must be absolute and equal to its own `QDir::cleanPath`. It or its nearest existing parent must be writable by the user. It must not be `/` or under the system folders GRND-0066 §4.3 lists, and it must not be below a dot-folder in the home folder. A folder that does not exist yet is made when the copy starts (§4.5). The page starts at `~/Projects`.
 
 Less free space than the total shows a warning and does not stop Next, since the total is only an estimate (§4.4).
 
@@ -142,7 +145,7 @@ Less free space than the total shows a warning and does not stop Next, since the
 
 - **INV-3** — A name from `gh` or the choices file reaches a command only if it matches §4.4's pattern; the Worker refuses the whole run otherwise, before any step. *Test:* `tests/tst_github.cpp::aBadNameRefusesTheRun`, one bad name in each position, with a fake `gh` recording that it never ran. *Breaks when:* `someone/-oUpload` or `someone/..` reaches `gh repo clone`.
 
-- **INV-4** — An existing destination is never changed, whatever it holds. *Test:* `tests/tst_worker.cpp::anExistingFolderIsSkipped`, with a folder, an empty folder and a link at `DEST`, each left byte-identical. *Breaks when:* `mv` loses `-n`, or the existence test misses a dangling link.
+- **INV-4** — An existing destination is never changed, whatever it holds. *Test:* `tests/tst_worker.cpp::anExistingFolderIsSkipped`, with a folder, an empty folder and a link at `DEST`, each left byte-identical. *Breaks when:* `mv` loses `-n` or `-T`, or the existence test misses a dangling link.
 
 - **INV-5** — After a failed clone, nothing appears at `DEST`, and the other projects still run. *Test:* `tests/tst_worker.cpp::aFailedCopyLeavesNoProject`, a fake `gh` failing the first of three. *Breaks when:* the clone goes directly to `DEST`, or a failure ends the run.
 
@@ -166,7 +169,6 @@ Less free space than the total shows a warning and does not stop Next, since the
 - **A project is very large.** Stop waits for it to finish (`docs/design.md`, Stopping). No progress bar beyond `git`'s own lines.
 - **A project needs Git LFS or submodules.** It copies without them, with git's warning in the log (§9).
 - **The wrong account is active.** The page names it. Fixing it is in a terminal, for now (§9).
-- **Package names differ on Leap 16.** See §15.
 
 ## 7. Tests
 
@@ -248,4 +250,4 @@ None. No saved file, setting or existing page changes shape. A machine already s
 
 ## 15. Open questions
 
-- **Does Leap 16 ship `gh`?** Unverified. `dev-claude-tools` names it, and that row has not been read on Leap for this. Settle by the §7 recipe's step 7, or Leap's package metadata as GRND-0066 §15 did. If it does not, the job reads "not needed here" on Leap: the Start page says so and stops.
+- **Does Leap 16 ship `gh`?** Settled 2026-10-30: yes. Leap 16.0's `repo/oss` metadata lists both `gh` and `git`, so the job has no Leap-only path.

@@ -94,6 +94,27 @@ groundwork --worker [--lang LANG] --delete-setup-file FILE
   them. It ends `ok` only when no such member is left.
 - `--delete-setup-file`, id `delete-setup-file`, deletes the file.
 
+Two more serve the GitHub job (GRND-0065):
+
+```
+groundwork --worker [--lang LANG] --github-tools
+groundwork --worker [--lang LANG] --copy-github CHOICES_FILE
+```
+
+- `--github-tools`, id `github-tools`, installs `git` and `gh` with one
+  root step. It runs no system update first.
+- **`CHOICES_FILE`** — what the Wizard wrote: `{"folder": PATH, "repos":
+  ["OWNER/NAME", …]}`. Its rules are in
+  `docs/specs/GRND-0065-copy-github-projects.md` §§ 4.4 and 4.6.
+- It trusts nothing in the file. A bad folder, a bad name, or two names
+  with one last part refuses the run with `SETUP_REFUSED`, before any
+  step, and exit 2.
+- It asks for no password. It makes the folder, runs `gh auth setup-git`
+  (a failure is a `HINT` with id `github-setup`), then copies one item
+  per project, id `github:OWNER/NAME`, in the order given.
+- A project whose folder already exists ends `skip`, and that folder is
+  not changed. One that fails does not stop the rest.
+
 ## Exit codes
 
 | Code | Meaning |
@@ -117,7 +138,7 @@ marker.
 |---|---|---|
 | `UNSUPPORTED` | reason | The system is not supported; the Worker exits 3 |
 | `UNKNOWN_ITEM` | id | An id is not in the catalogue; the Worker exits 2 |
-| `SETUP_REFUSED` | reason | The choices name what the saved file lacks, or either cannot be read; the Worker exits 2 |
+| `SETUP_REFUSED` | reason | The choices name what the saved file lacks, either cannot be read, or the GitHub job's choices break its rules; the Worker exits 2. Also sent, with exit 1, when the GitHub job's folder cannot be made |
 | `STEP_BEGIN` | id, position, total, title | An item starts |
 | `AUTH` | `ok` or `failed` | Once, before the first step that needs root |
 | `ACTION` | id, label | A step of the item starts |
@@ -141,4 +162,4 @@ Each run writes everything it prints to
 
 `GROUNDWORK_ROOT` points the Worker, and check mode, at a fixture tree
 instead of `/`. `tests/tst_worker.cpp` drives the built program this
-way, with fake `sudo`, `zypper` and `flatpak` first on `PATH`.
+way, with fake `sudo`, `zypper`, `flatpak` and `gh` first on `PATH`.

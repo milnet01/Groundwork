@@ -5,6 +5,7 @@
 #include "core/statepaths.h"
 #include "core/systemidentity.h"
 #include "core/translations.h"
+#include "github/github.h"
 #include "gui/askpassdialog.h"
 #include "gui/themes.h"
 #include "gui/wizard.h"
@@ -124,7 +125,9 @@ int wizardMode(int argc, char *argv[])
         setup.workerProgram = QApplication::applicationFilePath();
         setup.stateDir = stateDir;
         setup.liveSystem = gw::isLiveSystem(files);
-        setup.jobs = {gw::Job::SetUp, gw::Job::CarryOver, gw::Job::PrepareDrive};
+        setup.jobs = {gw::Job::SetUp, gw::Job::CarryOver, gw::Job::PrepareDrive, gw::Job::GitHubProjects};
+        // The user's own account, read as the user (GRND-0065).
+        setup.surveyGithub = [] { return gw::surveyGithub(gw::CheckContext(gw::FileReader())); };
         setup.surveyDrives = [files] { return gw::surveyDrives(gw::CheckContext(files)); };
         // Settings are the user's own, read from the real home folder.
         setup.gatherSetup = [files] {
@@ -210,6 +213,10 @@ int main(int argc, char *argv[])
             return worker.removeSecrets(args[at + 1]);
         if (const qsizetype at = args.indexOf(QStringLiteral("--delete-setup-file")); at > 0 && at + 1 < args.size())
             return worker.deleteSetupFile(args[at + 1]);
+        if (args.contains(QStringLiteral("--github-tools")))
+            return worker.installGithubTools();
+        if (const qsizetype at = args.indexOf(QStringLiteral("--copy-github")); at > 0 && at + 1 < args.size())
+            return worker.copyGithub(args[at + 1]);
         QString setupChoices;
         QStringList ids;
         QHash<QString, QString> values;
@@ -231,7 +238,7 @@ int main(int argc, char *argv[])
         }
         return setupChoices.isEmpty() ? worker.run(ids, values) : worker.runFromSetup(setupChoices, ids, values);
     }
-    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version")
+    QTextStream(stderr) << QCoreApplication::translate("gw::Entry", "Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --worker --github-tools | --worker --copy-github CHOICES_FILE | --version")
                         << '\n';
     return 2;
 }

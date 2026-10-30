@@ -132,6 +132,12 @@ void RunPage::start(const QString &program, const QStringList &arguments,
 
 bool RunPage::isComplete() const { return m_started && !isRunning(); }
 
+bool RunPage::endedOk() const
+{
+    return m_started && !isRunning() && m_process.error() != QProcess::FailedToStart
+           && m_process.exitStatus() == QProcess::NormalExit && m_process.exitCode() == 0;
+}
+
 void RunPage::cleanupPage()
 {
     qDeleteAll(m_status);
