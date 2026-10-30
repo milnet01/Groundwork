@@ -19,6 +19,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - **A "Back to my choices" button after a run.** It checks the computer
   again and returns to the lists of items, so you can pick more without
   restarting Groundwork.
+- **Extra drives connect at start-up** (GRND-0067). Your other
+  internal drives appear in `/mnt`, named after their labels, every
+  time the computer starts. A missing drive never stops it starting.
+  An empty drive becomes yours to save to. USB and Windows drives
+  are left out.
 
 ### Changed
 

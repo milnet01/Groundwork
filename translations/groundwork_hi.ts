@@ -928,6 +928,37 @@
     </message>
 </context>
 <context>
+    <name>gw::ExtraDrivesItem</name>
+    <message>
+        <source>Extra drives connect at start-up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The drives could not be listed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The list of drives that connect at start-up could not be read.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No extra internal drives were found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not yet connected at start-up: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting extra drives at start-up</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>gw::FirewallItem</name>
     <message>
         <source>Firewall</source>

@@ -74,6 +74,7 @@ add_library(groundwork_items STATIC
     src/items/sshitem.cpp
     src/items/sysrqitem.cpp
     src/items/diskscheduleritem.cpp
+    src/items/extradrivesitem.cpp
     src/items/wakeitem.cpp
     src/items/logcapitem.cpp
     src/items/bootmenuitem.cpp

@@ -8,6 +8,7 @@
 #include "broadcomitem.h"
 #include "clockitem.h"
 #include "codecsitem.h"
+#include "extradrivesitem.h"
 #include "diskscheduleritem.h"
 #include "firewallitem.h"
 #include "firmwareitem.h"
@@ -61,6 +62,7 @@ const Catalogue &catalogue()
     static const SshItem ssh;
     static const ClockItem clock;
     static const NumlockItem numlock;
+    static const ExtraDrivesItem extraDrives; // GRND-0067
     // Nice to have: everyday apps (GRND-0025)
     static const FlathubAppItem chrome(QStringLiteral("app-chrome"), QT_TRANSLATE_NOOP("gw::Apps", "Google Chrome"),
         QT_TRANSLATE_NOOP("gw::Apps", "Installs Google's web browser from Flathub."), QStringLiteral("com.google.Chrome"),
@@ -143,7 +145,7 @@ const Catalogue &catalogue()
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &amdVideo, &soundFirmware, &broadcom,
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
-                                &hostname, &ssh, &clock, &numlock,
+                                &hostname, &ssh, &clock, &numlock, &extraDrives,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
                                 &buildTools, &codium, &claudeCode, &claudeTools, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;

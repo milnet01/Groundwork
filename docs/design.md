@@ -84,7 +84,8 @@ Terminal includes tree-sitter, which it has built in.
 3. **Configuration** — choices a new install asks of its owner. The
    computer's name; remote login over SSH; the clock setting, where
    Windows is also installed; NumLock on at the login screen, where
-   that screen is SDDM.
+   that screen is SDDM; extra internal drives with a Linux filesystem
+   connected at start-up under `/mnt`.
 4. **Nice to have** — extras, each its own toggle. Everyday apps,
    gaming with game controllers and GameMode, virtual machines where the
    processor supports them, developer tools, Ants Terminal, the OneUp update app
