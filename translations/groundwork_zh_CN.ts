@@ -2088,6 +2088,10 @@
         <translation>无法把要恢复的内容写入 %1，因此没有做任何更改。</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>这个保存的文件包含保存的密码或密钥。任何拿到这个文件的人都能读取它们。</translation>
     </message>

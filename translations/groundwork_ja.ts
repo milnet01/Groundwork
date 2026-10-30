@@ -2088,6 +2088,10 @@
         <translation>復元する内容を %1 に書き込めなかったため、何も変更されていません。</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>この保存したファイルには、保存されたパスワードや鍵が含まれています。ファイルを持っている人は誰でも読めます。</translation>
     </message>

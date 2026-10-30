@@ -2092,6 +2092,10 @@
         <translation>क्या बहाल करना है, यह %1 में लिखा नहीं जा सका, इसलिए कुछ भी नहीं बदला गया।</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>इस सेव की गई फ़ाइल में सेव किए गए पासवर्ड या कुंजियाँ हैं। जिसके पास भी यह फ़ाइल हो, वह उन्हें पढ़ सकता है।</translation>
     </message>

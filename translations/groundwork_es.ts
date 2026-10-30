@@ -2092,6 +2092,10 @@
         <translation>No se ha podido escribir en %1 qué restaurar, así que no se ha cambiado nada.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>Este archivo guardado contiene contraseñas o claves guardadas. Cualquiera que tenga el archivo podrá leerlas.</translation>
     </message>

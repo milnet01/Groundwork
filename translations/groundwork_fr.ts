@@ -2092,6 +2092,10 @@
         <translation>La liste de ce qu&apos;il faut restaurer n&apos;a pas pu être écrite dans %1, donc rien n&apos;a été modifié.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>Ce fichier enregistré contient des mots de passe ou des clés enregistrés. Toute personne qui a le fichier peut les lire.</translation>
     </message>

@@ -2088,6 +2088,10 @@
         <translation>無法將要還原的內容寫入 %1，因此沒有進行任何變更。</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>這個儲存的檔案包含儲存的密碼或金鑰。任何拿到這個檔案的人都能讀取它們。</translation>
     </message>

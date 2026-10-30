@@ -2092,6 +2092,10 @@
         <translation>Wat herstel moet word, kon nie na %1 geskryf word nie, so niks is verander nie.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>Hierdie gestoorde lêer bevat gestoorde wagwoorde of sleutels. Enigiemand met die lêer kan hulle lees.</translation>
     </message>

@@ -2088,6 +2088,10 @@
         <translation>복원할 항목을 %1에 기록할 수 없어, 아무것도 바꾸지 않았습니다.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>이 저장한 파일에는 저장된 비밀번호나 키가 들어 있습니다. 파일을 가진 사람은 누구나 읽을 수 있습니다.</translation>
     </message>

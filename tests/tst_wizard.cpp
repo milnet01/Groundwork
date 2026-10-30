@@ -520,6 +520,40 @@ private slots:
         QCOMPARE(w->runPage()->summary(), QStringLiteral("All done."));
     }
 
+    // After a run, a button re-checks the system and goes back to the
+    // first level page, so more can be picked without a restart (GRND-0105).
+    void backToMyChoicesChecksAgainAndReturnsToTheLevels()
+    {
+        auto w = make();
+        QTRY_VERIFY(w->checksDone());
+        goToRunPage(*w);
+        QTRY_VERIFY(w->runPage()->isComplete());
+        auto *back = w->runPage()->findChild<QPushButton *>(QStringLiteral("backToChoices"));
+        QVERIFY(back && !back->isHidden());
+        const QString firstLevel = w->page(w->pageIds().at(1))->title();
+
+        // The run set codecs up, so the second check finds it done.
+        m_moreResults = {{QStringLiteral("codecs"), {gw::CheckState::Done, {}}}};
+        const auto reset = qScopeGuard([this] { m_moreResults.clear(); });
+        back->click();
+        QTRY_COMPARE(w->currentPage()->title(), firstLevel);
+        QCOMPARE(w->results().value(QStringLiteral("codecs")).state, gw::CheckState::Done);
+        QVERIFY(!w->selection().contains(QStringLiteral("codecs")));
+        QCOMPARE(w->runPage()->summary(), QString());
+        QCOMPARE(w->runPage()->statusOf(QStringLiteral("codecs")), QString());
+
+        // A row switched on now runs, and the page shows only this run.
+        w->row(QStringLiteral("hostname"))->toggle()->click();
+        goToRunPage(*w);
+        QTRY_VERIFY(w->runPage()->isComplete());
+        QVERIFY(w->runPage()->statusOf(QStringLiteral("hostname")).contains(QLatin1String("done")));
+        QCOMPARE(w->runPage()->statusOf(QStringLiteral("codecs")), QString());
+        const QList<QLabel *> labels = w->runPage()->findChildren<QLabel *>();
+        QCOMPARE(std::count_if(labels.cbegin(), labels.cend(),
+                               [](const QLabel *l) { return l->property("title").isValid(); }),
+                 w->runOrder().size()); // this run's rows alone
+    }
+
     void offersOneUpOnlyWhenItIsInstalled()
     {
         // A fake oneup on PATH that leaves a mark when started.

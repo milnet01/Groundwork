@@ -16,6 +16,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 - **Groundwork remembers your colour theme.** The theme you pick on
   the first page is the one the window opens in next time.
+- **A "Back to my choices" button after a run.** It checks the computer
+  again and returns to the lists of items, so you can pick more without
+  restarting Groundwork.
 
 ### Changed
 

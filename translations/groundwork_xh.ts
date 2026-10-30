@@ -2092,6 +2092,10 @@
         <translation>Uluhlu lwento ekufuneka ibuyiselwe alukwazanga ukubhalwa ku-%1, ngoko akukho nto itshintshiweyo.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>Le fayile egciniweyo ineephaswedi ezigciniweyo okanye izitshixo. Nabani na onefayile angazifunda.</translation>
     </message>

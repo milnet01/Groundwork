@@ -99,6 +99,9 @@ cover it. A user's own desktop settings can still be carried over from
 an old install (§ Carrying a setup over).
 
 After a run, if OneUp is installed, the last page offers to open it.
+After a setup run, a button goes back to the choices: it checks the
+system again, forgets a saved setup, and opens the first level page
+with fresh rows (GRND-0105).
 
 The list of items is one catalogue file in Items, not code spread
 across the wizard. Adding an item means adding one item file and one

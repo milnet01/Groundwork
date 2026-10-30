@@ -2108,6 +2108,10 @@
         <translation>تعذّرت كتابة ما يجب استعادته في %1، لذا لم يتغير أي شيء.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>يحتوي هذا الملف المحفوظ على كلمات مرور أو مفاتيح محفوظة. يستطيع أي شخص لديه الملف قراءتها.</translation>
     </message>

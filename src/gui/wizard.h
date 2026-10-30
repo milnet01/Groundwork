@@ -146,6 +146,10 @@ public:
     // Every switched-on item that takes a value has a valid one.
     bool valuesValid() const;
 
+    // After a run: checks the system again, forgets a saved setup, and
+    // goes back to the first level page with fresh rows (GRND-0105).
+    void backToChoices();
+
     // The user switched an item on or off in a row.
     void userToggled(const QString &id, bool on);
 
@@ -158,6 +162,8 @@ protected:
     void reject() override;
 
 private:
+    // Runs the checks off the window's thread, then shows them and calls then.
+    void startChecks(std::function<void()> then = {});
     void showResults(const CheckResults &results);
     void refreshRows(const QStringList &pulled, const QStringList &included, const QString &cause, bool on);
     void switchOnSaved(const QString &id);

@@ -2044,11 +2044,15 @@ scheduled.
   Kind: fix.
   Source: user-report-2026-10-29.
 
-- 📋 [GRND-0105] **After a run, a button goes back to the choices.**
+- ✅ [GRND-0105] **After a run, a button goes back to the choices.**
   The run page is the last page and offers only Finish, so a run that
   skipped everything (an item already installed) leaves no way to
   pick again. The button re-runs the checks and returns to the first
   level page.
+  Shipped 2026-10-30: "Back to my choices" on the setup run page
+  (Wizard::backToChoices) checks again, forgets a saved setup, rebuilds
+  the rows and goes back to the first level page; RunPage::cleanupPage
+  empties the page.
   **Layman:** Once a run finishes, a 'Back to my choices' button re-checks the system and returns to the item lists, so you can pick more without restarting.
   Kind: ux.
   Source: user-report-2026-10-29.

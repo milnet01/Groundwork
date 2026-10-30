@@ -132,6 +132,18 @@ void RunPage::start(const QString &program, const QStringList &arguments,
 
 bool RunPage::isComplete() const { return m_started && !isRunning(); }
 
+void RunPage::cleanupPage()
+{
+    qDeleteAll(m_status);
+    m_status.clear();
+    m_hints.clear();
+    m_hintLabel->clear();
+    m_summary->clear();
+    m_details->clear();
+    m_oneUp->hide();
+    m_started = false;
+}
+
 QString RunPage::statusOf(const QString &id) const
 {
     const QLabel *label = m_status.value(id);

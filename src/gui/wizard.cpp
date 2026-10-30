@@ -340,7 +340,11 @@ class RunWizardPage : public RunPage
 {
     Q_OBJECT
 public:
-    explicit RunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard) { makeSecretsOffer(); }
+    explicit RunWizardPage(Wizard *wizard) : RunPage(wizard), m_wizard(wizard)
+    {
+        makeSecretsOffer();
+        makeBackButton();
+    }
     void initializePage() override
     {
         QList<QPair<QString, QString>> titles;
@@ -349,8 +353,32 @@ public:
         start(m_program, m_wizard->workerArguments(), titles);
     }
     void configure(const QString &program) { m_program = program; }
+    void cleanupPage() override
+    {
+        RunPage::cleanupPage();
+        findChild<QWidget *>(QStringLiteral("secretsOffer"))->hide();
+        m_offered = false;
+        m_back->hide();
+        m_back->setEnabled(true);
+        m_back->setText(Wizard::tr("Back to my choices"));
+    }
 
 private:
+    // A run that skipped everything left no way to pick again but a
+    // restart (user, 2026-10-29; GRND-0105).
+    void makeBackButton()
+    {
+        m_back = new QPushButton(Wizard::tr("Back to my choices"), this);
+        m_back->setObjectName(QStringLiteral("backToChoices"));
+        m_back->hide();
+        static_cast<QVBoxLayout *>(layout())->addWidget(m_back, 0, Qt::AlignLeading);
+        connect(this, &RunPage::runFinished, m_back, &QWidget::show);
+        connect(m_back, &QPushButton::clicked, this, [this] {
+            m_back->setEnabled(false);
+            m_back->setText(Wizard::tr("Checking this computer…"));
+            m_wizard->backToChoices();
+        });
+    }
     QString rowTitle(const QString &id) const { return m_wizard->row(id)->title(); }
     // A saved file holding secrets: after the run, the user may remove them
     // from it or delete it. Neither runs unless pressed (spec 4.8, INV-9).
@@ -413,6 +441,7 @@ private:
     Wizard *m_wizard;
     QString m_program;
     bool m_offered = false;
+    QPushButton *m_back = nullptr;
 };
 
 class PrepareRunWizardPage : public RunPage
@@ -596,20 +625,48 @@ Wizard::Wizard(WizardSetup setup, QWidget *parent) : QWizard(parent), m_setup(st
 
     if (!m_offeredJobs.contains(Job::SetUp) && !m_offeredJobs.contains(Job::CarryOver))
         return; // nothing here is set up or carried, so nothing is checked
+    startChecks();
+}
+
+void Wizard::startChecks(std::function<void()> then)
+{
     // Checks run off the window's thread so the window stays responsive.
     // The thread holds its own copy of the checks, and its results reach
     // this window only while it exists: changing the language replaces
     // the window while the checks may still run.
     auto results = std::make_shared<CheckResults>();
     QThread *thread = QThread::create([runChecks = m_setup.runChecks, results] { *results = runChecks(); });
-    connect(thread, &QThread::finished, this, [this, results] { showResults(*results); });
+    connect(thread, &QThread::finished, this, [this, results, then = std::move(then)] {
+        showResults(*results);
+        if (then)
+            then();
+    });
     connect(thread, &QThread::finished, thread, &QObject::deleteLater);
     waitAtTheEnd(thread);
     thread->start();
 }
 
+void Wizard::backToChoices()
+{
+    clearSavedSetup();
+    startChecks([this] {
+        while (currentId() != m_firstLevelId && visitedIds().size() > 1)
+            back();
+    });
+}
+
 void Wizard::showResults(const CheckResults &results)
 {
+    // Checked again after a run, the rows start afresh (GRND-0105).
+    for (QWidget *inner : std::as_const(m_levelPages)) {
+        while (QLayoutItem *item = inner->layout()->takeAt(0)) {
+            delete item->widget();
+            delete item;
+        }
+    }
+    m_rows.clear();
+    m_reasons.clear();
+    m_carry.items.clear();
     m_results = results;
     for (const Item *item : m_setup.catalogue->items()) {
         QWidget *inner = m_levelPages.value(int(item->level()));

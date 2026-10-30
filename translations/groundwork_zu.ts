@@ -2092,6 +2092,10 @@
         <translation>Okufanele kubuyiselwe akukwazanga ukubhalwa ku-%1, ngakho akukho okushintshiwe.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>Leli fayela elilondoloziwe liqukethe amaphasiwedi agciniwe noma okhiye. Noma ubani onefayela angakufunda.</translation>
     </message>

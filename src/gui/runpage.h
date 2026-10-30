@@ -29,6 +29,8 @@ public:
                const QList<QPair<QString, QString>> &titles);
     bool isRunning() const { return m_process.state() != QProcess::NotRunning; }
     bool isComplete() const override;
+    // Going back past the page empties it for the next run (GRND-0105).
+    void cleanupPage() override;
 
     QString statusOf(const QString &id) const;
     QString summary() const;

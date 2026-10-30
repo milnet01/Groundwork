@@ -2092,6 +2092,10 @@
         <translation>Was wiederhergestellt werden soll, konnte nicht in %1 geschrieben werden, daher wurde nichts geändert.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>Diese gespeicherte Datei enthält gespeicherte Passwörter oder Schlüssel. Wer die Datei hat, kann sie lesen.</translation>
     </message>

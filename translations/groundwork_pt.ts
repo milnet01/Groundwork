@@ -2092,6 +2092,10 @@
         <translation>Não foi possível gravar o que restaurar em %1, então nada foi alterado.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>Este arquivo salvo guarda senhas ou chaves salvas. Qualquer pessoa com o arquivo pode lê-las.</translation>
     </message>

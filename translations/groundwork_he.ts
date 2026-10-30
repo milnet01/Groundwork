@@ -2092,6 +2092,10 @@
         <translation>לא ניתן היה לכתוב ל־%1 את מה שיש לשחזר, ולכן שום דבר לא השתנה.</translation>
     </message>
     <message>
+        <source>Back to my choices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
         <translation>הקובץ השמור הזה מכיל סיסמאות או מפתחות שמורים. כל מי שיש לו את הקובץ יכול לקרוא אותם.</translation>
     </message>
