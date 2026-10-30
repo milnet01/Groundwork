@@ -214,9 +214,7 @@ FoundShares carriedShares(const QByteArray &smbConf, const QString &currentValue
             add(folder.path, folder.write);
     }
     for (const QList<ShareSection> sections = readShareSections(smbConf); const ShareSection &section : sections) {
-        const QString lower = section.name.toLower();
-        if (lower == QLatin1String("global") || lower == QLatin1String("homes") || lower == QLatin1String("printers")
-            || lower == QLatin1String("print$") || section.path.isEmpty())
+        if (NetworkSharesItem::isReservedName(section.name) || section.path.isEmpty())
             continue;
         if (!section.guestOk) {
             found.notCarried << QCoreApplication::translate("gw::Carry", "%1 is not carried: it asks for a password.")

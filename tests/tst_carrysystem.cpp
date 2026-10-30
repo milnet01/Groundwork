@@ -510,6 +510,7 @@ private slots:
     {
         const QByteArray conf = "[global]\n   workgroup = HOME\n"
                                 "[homes]\n   guest ok = yes\n   path = /home\n"
+                                "[profiles]\n   path = /var/lib/samba/profiles\n"
                                 "[Music]\n   path = /mnt/Games/Music\n   guest ok = yes\n   root preexec = /bin/evil\n"
                                 "   read only = no\n"
                                 "[Films]\n   path = /mnt/Games/Films\n   guest ok = Yes\n   writable = yes\n"
@@ -525,6 +526,7 @@ private slots:
         QVERIFY2(left.contains(QLatin1String("Private")), qPrintable(left));
         QVERIFY2(left.contains(QLatin1String("System")), qPrintable(left));
         QVERIFY2(!left.contains(QLatin1String("homes")), qPrintable(left));
+        QVERIFY2(!left.contains(QLatin1String("profiles")), qPrintable(left)); // a stock smb.conf's own
 
         gw::Manifest manifest;
         manifest.shares = found.shares;

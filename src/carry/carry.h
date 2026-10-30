@@ -220,9 +220,9 @@ std::optional<SystemPart> systemPartNamed(const QString &kind);
 // Whether a member of the saved file is one this part restores (spec 4.6).
 bool isSystemMember(const QString &name, const QString &partPath);
 // The root find that lists a part's files, one to a line and relative to its
-// source; and of those, the ones restoring would accept. firewalld and CUPS
-// keep .old and .O copies beside what they write, and one of those in the
-// file would refuse the whole item.
+// source; and of those, the ones restoring would accept. firewalld keeps a
+// .old copy beside a zone it writes, and one of those in the file would
+// refuse the whole item.
 QStringList findSystemFilesArguments(const SystemPart &part);
 QStringList saveableSystemFiles(const SystemPart &part, const QStringList &found);
 // tar's arguments to write a part to its own archive, its files on standard

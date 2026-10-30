@@ -61,11 +61,6 @@ QList<Section> readSections(const QByteArray &text)
     return sections;
 }
 
-bool isReserved(const QString &name)
-{
-    return kReservedNames.contains(name, Qt::CaseInsensitive);
-}
-
 bool holdsIncludeLine(const QByteArray &conf)
 {
     for (const QByteArray &line : conf.split('\n'))
@@ -116,6 +111,11 @@ QByteArray sharesFileText(const QList<ListedFolder> &folders, const QStringList 
     return text;
 }
 } // namespace
+
+bool NetworkSharesItem::isReservedName(const QString &name)
+{
+    return kReservedNames.contains(name, Qt::CaseInsensitive);
+}
 
 QString NetworkSharesItem::whyPathRefused(const QString &path)
 {
@@ -241,7 +241,7 @@ CheckResult NetworkSharesItem::check(const CheckContext &context) const
     if (conf) {
         QStringList others;
         for (const Section &section : readSections(*conf)) {
-            if (isReserved(section.name))
+            if (isReservedName(section.name))
                 continue;
             others << isolated(section.name);
             if (!section.path.isEmpty())

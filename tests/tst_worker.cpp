@@ -1210,6 +1210,21 @@ cat > "$FAKE_WRITTEN$out"
         QVERIFY(!QFile::exists(file));
     }
 
+    // Found by GRND-0073's VM run: with no settings kept, tar's list of names
+    // is empty, and tar waited for it on an input never closed.
+    void aSaveWithNoSettingsFinishes()
+    {
+        writeFile(m_bin + QStringLiteral("/tar"), kTar, true);
+        const QString output = m_dir->filePath(QStringLiteral("saved.tar"));
+        const QJsonObject manifest{{"format", 1}, {"packages", QJsonArray{"act"}}, {"settings", QJsonArray{}}};
+        const QString choices = m_dir->filePath(QStringLiteral("setup-choices.json"));
+        writeFile(choices, QJsonDocument(QJsonObject{{"output", output}, {"manifest", manifest}}).toJson());
+        const Run r = save(choices);
+        QCOMPARE(r.exitCode, 0);
+        QCOMPARE(r.endsFor(QStringLiteral("save-setup")).value(1), QStringLiteral("ok"));
+        QVERIFY(QFile::exists(output));
+    }
+
     // GRND-0073, INV-2: root is asked for once, and only for what needs it.
     void saveAsksForRootOnlyWhenNeeded_data()
     {

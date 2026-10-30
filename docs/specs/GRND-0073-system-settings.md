@@ -122,6 +122,8 @@ tar --concatenate --file <output>.partial <state>/system.tar
 rm -f -- <state>/system.tar
 ```
 
+Measured 2026-10-30 in a Tumbleweed VM, SELinux enabled: `/etc/firewalld/zones` held `home.xml` and `home.xml.old`, and the saved file held only the first (`tar --list --verbose`).
+
 `--ignore-failed-read` so a file deleted since the listing is not a failure. `cupsd.conf`, `ssl/` and `subscriptions.conf` never match. The Worker adds the row to the manifest before writing it. The manifest and the archive agree, or `membersProblem` fails the run (GRND-0078 INV-5).
 
 ### 4.6 Restoring

@@ -28,6 +28,8 @@ public:
     // A share name for each path, none equal, ignoring case, to a name in
     // taken, a name Samba reserves, or an earlier one (spec 4.4).
     static QStringList shareNames(const QStringList &paths, const QStringList &taken);
+    // Samba's own sections, and those a package's smb.conf brings.
+    static bool isReservedName(const QString &name);
 
 private:
     // The rules on a path as written (spec 4.3).

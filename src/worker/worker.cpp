@@ -111,8 +111,11 @@ int Worker::runCommand(const QStringList &argv, const QByteArray &input, QString
             loop.quit();
     });
     process.start(argv.first(), argv.mid(1));
-    if (!input.isEmpty() && process.waitForStarted()) {
-        process.write(input);
+    // Closed with nothing to send too: tar reading an empty list of names
+    // would otherwise wait for ever.
+    if (process.waitForStarted()) {
+        if (!input.isEmpty())
+            process.write(input);
         process.closeWriteChannel();
     }
     if (process.state() != QProcess::NotRunning || process.error() != QProcess::FailedToStart)

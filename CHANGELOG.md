@@ -27,6 +27,11 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   install each kept kind has a switch, and a file it replaces is kept
   beside it as a numbered copy. (GRND-0073)
 
+### Fixed
+
+- Saving a setup with no app settings switched on never finished. It now
+  saves. (Found while building GRND-0073.)
+
 ## [0.5.2] - 2026-10-30
 
 **Theme:** Ready for the next install.

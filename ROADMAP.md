@@ -1621,6 +1621,9 @@ built as 0.4.0 instead.
   to run: the spec's section 7 VM recipe, which needs the user's GitHub
   sign-in in a browser on the VM (INV-10), and Leap's step 7. Leap 16.0
   metadata lists gh and git (read 2026-10-30).
+  New text still to translate, in one pass with GRND-0073's. The VM
+  recipe needs the user to sign in to GitHub in the VM's browser, so it
+  waits for them; a session cannot do it alone.
   **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -1719,6 +1722,13 @@ built as 0.4.0 instead.
   Built 2026-10-30 against spec, amended: Save keeps only the file names
   restore accepts, since firewalld writes .old copies beside its zones.
   Still to run: the spec's section 7 VM recipe (INV-11).
+  VM recipe, 2026-10-30, Worker only over ssh: step 1 and the file half of
+  step 2 done on one VM; the saved file held no .old file or cupsd.conf. The
+  VM had password-free sudo and no window, so the password box half of step 2
+  was not seen. Not yet run: steps 3 to 9, so spec section 15's questions are
+  still open. Kit:
+  /mnt/Emulators/claude-scratch/grnd-live/run73 (boot73.sh, vs,
+  saved.tar, choices.json, vm/data.qcow2). New text still to translate.
   **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
   Kind: feature.
   Source: user-request-2026-10-12.
