@@ -74,6 +74,17 @@ bool holdsIncludeLine(const QByteArray &conf)
     return false;
 }
 
+// The packages this system lacks.
+QStringList packagesToInstall(const CheckContext &context)
+{
+    QStringList install;
+    if (!readService(context, QStringLiteral("smb")).found)
+        install << QStringLiteral("samba");
+    if (!readService(context, QStringLiteral("wsdd")).found)
+        install << QStringLiteral("wsdd");
+    return install;
+}
+
 // The folders the shares file holds now, as a value.
 QString appliedValue(const QByteArray &sharesFile)
 {
@@ -224,6 +235,7 @@ CheckResult NetworkSharesItem::check(const CheckContext &context) const
     const auto shares = context.readFile(kShares);
 
     CheckResult result{running && conf && shares && holdsIncludeLine(*conf) ? CheckState::Done : CheckState::NotDone, {}};
+    result.nothingToInstall = packagesToInstall(context).isEmpty();
     if (shares)
         result.currentValue = appliedValue(*shares);
     if (conf) {
@@ -260,12 +272,7 @@ QList<Step> NetworkSharesItem::applyStepsFor(const SystemIdentity &, const Check
         taken << section.name;
 
     QList<Step> steps;
-    QStringList install;
-    if (!readService(context, QStringLiteral("smb")).found)
-        install << QStringLiteral("samba");
-    if (!readService(context, QStringLiteral("wsdd")).found)
-        install << QStringLiteral("wsdd");
-    if (!install.isEmpty())
+    if (const QStringList install = packagesToInstall(context); !install.isEmpty())
         steps.append({QStringList{QStringLiteral("zypper"), QStringLiteral("-n"), QStringLiteral("install")} + install,
                       true, Step::Tool::Zypper, tr("Installing file sharing")});
 

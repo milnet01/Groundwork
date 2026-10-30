@@ -739,7 +739,7 @@ void Wizard::userToggled(const QString &id, bool on)
     }
     QStringList included;
     const QStringList pulled = on ? catalogue().switchOn(m_selection, id, m_results, &included)
-                                  : catalogue().switchOff(m_selection, id);
+                                  : catalogue().switchOff(m_selection, id, m_results);
     refreshRows(pulled, included, id, on);
 }
 
@@ -941,7 +941,8 @@ void Wizard::clearSavedSetup()
             const Item *item = m_setup.catalogue->find(id);
             if (!item || drop.contains(id))
                 continue;
-            for (const QStringList deps = m_setup.catalogue->dependencies(*item); const QString &dependency : deps)
+            for (const QStringList deps = m_setup.catalogue->dependencies(*item, m_results.value(id));
+                 const QString &dependency : deps)
                 needed = drop.remove(dependency) || needed;
         }
     }

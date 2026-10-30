@@ -320,6 +320,28 @@ private slots:
         QCOMPARE(m_item.check(context()).state, gw::CheckState::CouldNotTell);
     }
 
+    // GRND-0111: the check and the steps agree on whether anything installs.
+    void theCheckSaysWhenNothingIsLeftToInstall_data()
+    {
+        QTest::addColumn<QByteArray>("found");
+        QTest::addColumn<bool>("nothing");
+        QTest::newRow("both here") << QByteArray("smb nmb wsdd") << true;
+        QTest::newRow("no Samba") << QByteArray("wsdd") << false;
+        QTest::newRow("no wsdd") << QByteArray("smb nmb") << false;
+    }
+    void theCheckSaysWhenNothingIsLeftToInstall()
+    {
+        QFETCH(QByteArray, found);
+        QFETCH(bool, nothing);
+        services("", found);
+        QCOMPARE(m_item.check(context()).nothingToInstall, nothing);
+        const QList<gw::Step> applied = steps(value({QStringLiteral("/mnt/a")}));
+        const bool installs = std::any_of(applied.cbegin(), applied.cend(), [](const gw::Step &step) {
+            return step.argv.first() == QLatin1String("zypper");
+        });
+        QCOMPARE(installs, !nothing);
+    }
+
     // The owner's other shares are named and offered to the list as taken;
     // Samba's own sections are not named.
     void theCheckNamesOtherShares()

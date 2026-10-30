@@ -293,7 +293,7 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         // done" or "not needed here", or is neither done nor in the list,
         // skips this item (design, Step results).
         QString blockedBy;
-        for (const QStringList deps = m_catalogue->dependencies(*item); const QString &dep : deps) {
+        for (const QStringList deps = m_catalogue->dependencies(*item, recheck); const QString &dep : deps) {
             const Item *needed = m_catalogue->find(dep);
             if (!needed) { // not in this catalogue, so it cannot have completed
                 blockedBy = dep;

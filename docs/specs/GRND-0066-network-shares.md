@@ -160,7 +160,7 @@ No step runs `testparm` as a gate. A file holding an unknown parameter still exi
 
 `Worker::run` gains one case: an item whose re-check is `Done` still runs when its `currentValue` is not empty and a value was given that differs from it. Both are compact JSON from one writer, so a plain comparison serves. An item that leaves `currentValue` empty, as `HostnameItem` does, behaves as now.
 
-The item installs packages, so it depends on bringing the system up to date (`docs/design.md`, The levels). Changing the list later still switches that on when updates are waiting.
+The item installs packages, so it depends on bringing the system up to date (`docs/design.md`, The levels). Once `readService` finds both `smb` and `wsdd`, its check sets `nothingToInstall` and that dependency falls away, so changing the list later brings no update (GRND-0111).
 
 An empty list leaves Apply greyed out, so the review page says a value is still needed.
 

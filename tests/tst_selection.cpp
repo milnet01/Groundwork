@@ -118,8 +118,33 @@ private slots:
     void switchingOffADependencySwitchesOffWhatNeedsIt()
     {
         gw::Selection s{QStringLiteral("update"), QStringLiteral("codecs"), QStringLiteral("hostname")};
-        QCOMPARE(catalogue().switchOff(s, QStringLiteral("update")), QStringList{"codecs"});
+        QCOMPARE(catalogue().switchOff(s, QStringLiteral("update"), {}), QStringList{"codecs"});
         QCOMPARE(sorted(s), QStringList{"hostname"});
+    }
+
+    // GRND-0111: with its packages already here, an item neither pulls the
+    // update nor goes off with it.
+    void anItemWithNothingToInstallNeedsNoPreparation()
+    {
+        auto r = results({{"update", S::NotDone}, {"fonts", S::NotDone}});
+        r[QStringLiteral("fonts")].nothingToInstall = true;
+        gw::Selection s;
+        QVERIFY(catalogue().switchOn(s, QStringLiteral("fonts"), r).isEmpty());
+        QCOMPARE(sorted(s), QStringList{"fonts"});
+
+        s.insert(QStringLiteral("update"));
+        QVERIFY(catalogue().switchOff(s, QStringLiteral("update"), r).isEmpty());
+        QCOMPARE(sorted(s), QStringList{"fonts"});
+    }
+
+    // What an item declares it depends on stays: only the preparation goes.
+    void nothingToInstallKeepsDeclaredDependencies()
+    {
+        const FakeItem needsParser(QStringLiteral("needs-parser"), gw::Level::NiceToHave, true, false,
+                                   {QStringLiteral("parser")});
+        gw::CheckResult nothing;
+        nothing.nothingToInstall = true;
+        QCOMPARE(catalogue().dependencies(needsParser, nothing), QStringList{"parser"});
     }
 
     void runOrderIsCatalogueOrder()

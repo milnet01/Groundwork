@@ -12,8 +12,13 @@ const Item *Catalogue::find(const QString &id) const
 
 QStringList Catalogue::dependencies(const Item &item) const
 {
+    return dependencies(item, {});
+}
+
+QStringList Catalogue::dependencies(const Item &item, const CheckResult &result) const
+{
     QStringList deps = item.dependsOn();
-    if (item.installsPackages()) {
+    if (item.installsPackages() && !result.nothingToInstall) {
         for (const Item *other : m_items)
             if (other->isPreparation() && other != &item && !deps.contains(other->id()))
                 deps.append(other->id());
@@ -53,13 +58,13 @@ QStringList Catalogue::switchOn(Selection &selection, const QString &id,
         first = false;
         selection.insert(current);
         on.append(current);
-        pending.append(dependencies(*item));
+        pending.append(dependencies(*item, results.value(current)));
     }
     for (const QString &current : std::as_const(on)) {
         for (const QStringList includedIds = find(current)->includes(); const QString &included : includedIds) {
             if (!selection.contains(included))
                 continue;
-            switchOff(selection, included);
+            switchOff(selection, included, results);
             if (switchedOff)
                 switchedOff->append(included);
         }
@@ -67,7 +72,7 @@ QStringList Catalogue::switchOn(Selection &selection, const QString &id,
     return pulled;
 }
 
-QStringList Catalogue::switchOff(Selection &selection, const QString &id) const
+QStringList Catalogue::switchOff(Selection &selection, const QString &id, const CheckResults &results) const
 {
     QStringList pulled;
     QStringList pending{id};
@@ -80,7 +85,7 @@ QStringList Catalogue::switchOff(Selection &selection, const QString &id) const
             pulled.append(current);
         first = false;
         for (const Item *other : m_items)
-            if (dependencies(*other).contains(current))
+            if (dependencies(*other, results.value(other->id())).contains(current))
                 pending.append(other->id());
     }
     return pulled;

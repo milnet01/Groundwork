@@ -26,6 +26,9 @@ public:
     // What an item depends on: what it declares, plus every preparation
     // when it installs packages.
     QStringList dependencies(const Item &item) const;
+    // The same on this system: no preparation when its check says it has
+    // nothing to install.
+    QStringList dependencies(const Item &item, const CheckResult &result) const;
 
     // Essentials whose check says "not done", other than preparations and
     // items that accept a licence, plus what they depend on.
@@ -40,7 +43,7 @@ public:
 
     // Switch an item off, with everything that depends on it. Returns the
     // ids switched off because they needed it.
-    QStringList switchOff(Selection &selection, const QString &id) const;
+    QStringList switchOff(Selection &selection, const QString &id, const CheckResults &results) const;
 
     // The selected ids in catalogue order, which is the Worker's run order.
     QStringList runOrder(const Selection &selection) const;

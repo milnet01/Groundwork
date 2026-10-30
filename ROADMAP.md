@@ -2147,7 +2147,7 @@ scheduled.
   Source: user-request-2026-10-30.
   Lanes: gui.
 
-- 📋 [GRND-0111] **Changing the shared folders should not need a system update.**
+- ✅ [GRND-0111] **Changing the shared folders should not need a system update.**
   Seen in GRND-0066's VM run, 2026-10-30. The item says it installs
   packages, so it depends on the system update, and UpdateItem::check
   never reads done. Applying the same list or a changed one therefore runs
@@ -2155,6 +2155,11 @@ scheduled.
   installsPackages behaves this way once its packages are installed; this
   one is the first a user would apply repeatedly. Needs a design choice:
   let an item say at apply time that it installs nothing.
+  Shipped 2026-10-30. An item's check can now set nothingToInstall; the
+  wizard and the Worker then drop the preparation for it, and its
+  declared dependencies stay. Only the network-shares item sets it so
+  far. Tested with fakes; not yet tried in a VM.
+  Amends docs/specs/GRND-0066-network-shares.md § 4.7.
   **Layman:** Adding a shared folder later also installs every waiting update, which can take a long time.
   Kind: ux.
   Source: grnd-0066-vm-run-2026-10-30.

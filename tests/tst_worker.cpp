@@ -634,7 +634,7 @@ cat > "$FAKE_WRITTEN$out"
         QCOMPARE(r.count(QStringLiteral("sudo -n -- dd")), 0);
 
         const QString changed = QStringLiteral(R"(network-shares=[{"path":"/mnt/new","write":true}])");
-        // With the update, as the Wizard sends it (design, The levels).
+        // With the update, as the Wizard sends it when Samba is not yet here.
         r = run({QStringLiteral("--set"), changed, QStringLiteral("system-update"), QStringLiteral("network-shares")});
         QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("ok"));
         QVERIFY(writtenShares().contains("path = /mnt/new\n"));
@@ -645,6 +645,27 @@ cat > "$FAKE_WRITTEN$out"
         r = run({QStringLiteral("--set"), QStringLiteral("computer-name=other-pc"), QStringLiteral("computer-name")});
         QCOMPARE(r.endsFor(QStringLiteral("computer-name")).value(1), QStringLiteral("skip"));
         QCOMPARE(r.count(QStringLiteral("sudo -n -- hostnamectl hostname other-pc")), 0);
+    }
+
+    // GRND-0111: with Samba and wsdd here, a changed list runs with the update
+    // left out; with one missing, the update is still needed.
+    void aChangedListNeedsNoUpdateOnceThePackagesAreHere()
+    {
+        shareFixture();
+        const QString changed = QStringLiteral(R"(network-shares=[{"path":"/mnt/new","write":true}])");
+        Run r = run({QStringLiteral("--set"), changed, QStringLiteral("network-shares")});
+        QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("ok"));
+        QVERIFY(writtenShares().contains("path = /mnt/new\n"));
+        QCOMPARE(r.count(QStringLiteral("sudo -n -- zypper")), 0);
+
+        writeFile(m_bin + QStringLiteral("/systemctl"), R"(#!/bin/sh
+case "$2" in wsdd) echo not-found; exit 4;; esac
+case "$1" in is-enabled) echo enabled;; is-active) echo active;; esac
+exit 0
+)", true);
+        r = run({QStringLiteral("--set"), changed, QStringLiteral("network-shares")});
+        QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("skip"));
+        QCOMPARE(r.count(QStringLiteral("sudo -n -- zypper")), 0);
     }
 
     // INV-9: spaces, an equals sign and a letter beyond ASCII survive the

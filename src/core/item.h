@@ -35,6 +35,9 @@ struct CheckResult
     // A folder-list item: folders something else already has, with the name
     // to give for each.
     QMap<QString, QString> heldFolders = {};
+    // An item that installs packages: its apply would install none now, so it
+    // needs no preparation (GRND-0111).
+    bool nothingToInstall = false;
 };
 
 // In a step's argv, replaced by the value the user gave the item.
@@ -109,8 +112,9 @@ public:
     virtual QString applySentence() const = 0; // S3: what applying would do
     virtual QStringList dependsOn() const { return {}; }
     virtual bool installsPackages() const { return false; }
-    // A preparation never starts switched on by itself; every item that
-    // installs packages depends on it (docs/design.md, The levels).
+    // A preparation never starts switched on by itself; an item that installs
+    // packages depends on it, unless its check says it has nothing to install
+    // (docs/design.md, The levels).
     virtual bool isPreparation() const { return false; }
     // True when the apply accepts a licence for the user. Such an item never
     // starts switched on, and no item may depend on one (docs/design.md, The

@@ -48,7 +48,9 @@ each row already says "already done", "not done", "not needed here" or
 
 **Bringing the system up to date is a preparation, not a goal.** Every
 item that installs packages depends on it, so the installs meet a
-current system. It never starts switched on by itself: switching on an
+current system. An item whose check says it has nothing left to install
+does not, so changing its value later brings no update. The preparation
+never starts switched on by itself: switching on an
 item that installs packages switches it on, and the user may also
 switch it on alone. Its row says whether updates are waiting, and S1 does not count it. Keeping a
 machine up to date afterwards is OneUp's job.
