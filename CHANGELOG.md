@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-10-30
+
+**Theme:** Ready for the next install.
+
 ### Added
 
 - **Groundwork remembers your colour theme.** The theme you pick on
@@ -33,9 +37,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Changed
 
-- **Changing your shared folders no longer runs a system update** (GRND-0111)
-  Once the sharing programs are installed, Groundwork leaves the update off, and the folder list changes straight away.
-
+- **Changing your shared folders no longer runs a system update**
+  (GRND-0111). Once the sharing programs are installed, Groundwork
+  leaves the update off, and the folder list changes straight away.
 - **The window opens wider, with its items in two columns.** You scroll
   less. A narrower window, or a large font, goes back to one column.
 - **A step that fails on a nearly full disk now says so.** Its
