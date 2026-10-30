@@ -1702,7 +1702,7 @@ built as 0.4.0 instead.
   Source: user-request-2026-10-12.
   Lanes: gui.
 
-- 📋 [GRND-0073] **Scan a system's settings, and put them back after a reinstall.**
+- 🚧 [GRND-0073] **Scan a system's settings, and put them back after a reinstall.**
   From the user, 2026-10-12: Groundwork should scan the system for its
   configurations, so that after a reinstall it can reinstate them.
   Needs a write-spec design first: what is recorded, where the record
@@ -1716,6 +1716,9 @@ built as 0.4.0 instead.
   Firewall, printers, drive mounts and network shares; Save asks for the
   password once, only for the firewall or printers (user, 2026-10-30).
   It amends GRND-0078 and GRND-0079.
+  Built 2026-10-30 against spec, amended: Save keeps only the file names
+  restore accepts, since firewalld writes .old copies beside its zones.
+  Still to run: the spec's section 7 VM recipe (INV-11).
   **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
   Kind: feature.
   Source: user-request-2026-10-12.
