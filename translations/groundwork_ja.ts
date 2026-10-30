@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>「%1」は引き継げません。複数の署名鍵が指定されています。</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>「%1」は引き継げません。署名鍵が https で取得されません。</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>「%1」は引き継げません。優先度が 1 から 200 までの数値ではありません。</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -381,11 +381,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork は %2 の %1 を読み取れませんでした。</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 には既に別のソフトウェアソースがあります。</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -417,7 +417,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Flathub を追加しています</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -457,7 +457,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork はオンにした設定の一部のサイズを判別できませんでした。保存するには、それらをオフにしてください。</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -481,15 +481,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>「%1」は引き継げません。名前に Groundwork で使えない文字が含まれています。</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork は、このドライブが 4 GiB を超えるファイルを保存できない FAT を使っているかどうかを判別できませんでした。オンにした設定には %1 が必要です。一部をオフにするか、別のフォルダーを選んでください。</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>「%1」という名前の 2 つ目のソフトウェアソースをスキップしました。ファイルに 2 回書かれています。</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -549,7 +549,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>サイズ不明</translation>
     </message>
 </context>
 <context>
@@ -595,7 +595,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork に内蔵された Claude Code 用の署名鍵を読み取っています</translation>
     </message>
 </context>
 <context>
@@ -784,7 +784,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork はドライブの一覧を取得できませんでした。lsblk が動作しませんでした。「もう一度探す」を押してください。</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -907,7 +907,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork は既に開いています。開いているウィンドウを使うか、閉じてから Groundwork をもう一度起動してください。</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -930,31 +930,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>追加のドライブを起動時に接続する</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>コンピューターを起動するたびに、他の内蔵ドライブが /mnt で使えるようになります。ドライブがなくても起動が止まることはありません。</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>ドライブの一覧を取得できませんでした。</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>起動時に接続するドライブの一覧を読み取れませんでした。</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>追加の内蔵ドライブは見つかりませんでした。</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>まだ起動時に接続されていません: %1。</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>追加のドライブを起動時に接続しています</translation>
     </message>
 </context>
 <context>
@@ -1060,31 +1060,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダーを追加…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>このフォルダーは既に %1 として共有されています。</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>このフォルダーは既に一覧にあります。</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルの追加、変更、削除を許可する</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">削除</translation>
+        <translation>削除</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 を削除</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>共有するフォルダーを選ぶ</translation>
     </message>
 </context>
 <context>
@@ -1138,7 +1138,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork に内蔵されたフリーズ記録スクリプトを読み取っています</translation>
     </message>
 </context>
 <context>
@@ -1309,7 +1309,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>3 か月より古い記録も削除し、ドライブに少なくとも 2 GB の空きを残します。</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1336,7 +1336,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>メモリー監視機能 earlyoom は動作しています。</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1367,71 +1367,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>このフォルダーのパスは使用できませんでした。</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>パスに制御文字、%、二重引用符、バックスラッシュを含むフォルダーは共有できません。</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>パスの先頭や末尾に空白があるフォルダー、または空白が 2 つ続くフォルダーは共有できません。</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>このフォルダーのパスは長すぎて共有できません。</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>コンピューター全体は共有できません。</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>このフォルダーにはシステムファイルがあるため、共有できません。</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>ホームフォルダーには鍵とパスワードがあるため、全体は共有できません。その中のフォルダーを選んでください。</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>ホームフォルダー内の隠しフォルダーには設定と鍵があるため、共有できません。</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>ネットワークでフォルダーを共有する</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>ここに挙げたフォルダーを他のコンピューターから開けるようにします。このコンピューターが接続するどのネットワークでも、ネットワーク上の誰もがパスワードなしでアクセスできます。Windows 11 では、そのコンピューターの設定を変更するまで、パスワードのないフォルダーが拒否されることがあります。</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>共有するフォルダー:</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">サービスマネージャーから応答がありませんでした。</translation>
+        <translation>サービスマネージャーから応答がありませんでした。</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>他の共有はそのままです: %1。</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル共有をインストールしています</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダーを共有しています</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル共有がファイアウォールを通過できるようにしています</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">ファイアウォールを再読み込みしています</translation>
+        <translation>ファイアウォールを再読み込みしています</translation>
     </message>
 </context>
 <context>
@@ -1493,7 +1493,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>NVIDIA のソフトウェアソースをオンにしています</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1539,7 +1539,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Packman ソフトウェアソースをオンにしています</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1693,7 +1693,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>オンにした設定の一部はサイズが不明です。</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1744,7 +1744,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>このコンピューターの全員に</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2218,7 +2218,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>オンにしたものに、まだ値が必要です (共有するフォルダーなど)。戻って入力してください。</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2226,7 +2226,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>選択に戻る</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2310,7 +2310,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork は実行の停止を要求できませんでした (%1)。そのため最後まで続行します。</translation>
     </message>
 </context>
 <context>
@@ -2325,7 +2325,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 のあるディスクがいっぱいです: 空き %2。</translation>
     </message>
     <message>
         <source>Already done.</source>

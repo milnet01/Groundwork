@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏“%1” لا يمكن نقله: فهو يذكر أكثر من مفتاح توقيع واحد.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏“%1” لا يمكن نقله: مفتاح توقيعه لا يُجلب عبر https.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏“%1” لا يمكن نقله: أولويته ليست رقمًا من 1 إلى 200.</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -386,11 +386,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على Groundwork قراءة %1 في %2.</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 يحتوي بالفعل على مصدر برامج آخر.</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -422,7 +422,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إضافة Flathub من أجلك</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -462,7 +462,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على Groundwork معرفة حجم بعض الإعدادات المفعّلة. عطّلها لتتمكن من الحفظ.</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -486,15 +486,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏“%1” لا يمكن نقله: اسمه يحتوي على حرف لا يستطيع Groundwork استخدامه.</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على Groundwork معرفة ما إذا كان هذا القرص يستخدم FAT، الذي لا يتسع لملف أكبر من 4 GiB، والإعدادات المفعّلة تحتاج إلى %1. عطّل بعضها، أو اختر مجلدًا آخر.</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>جرى تخطي مصدر برامج ثانٍ باسم “%1”: الملف يذكره مرتين.</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>الحجم غير معروف</translation>
     </message>
 </context>
 <context>
@@ -600,7 +600,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ قراءة مفتاح التوقيع المدمج في Groundwork لبرنامج Claude Code</translation>
     </message>
 </context>
 <context>
@@ -789,7 +789,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على Groundwork عرض الأقراص: لم يعمل lsblk. اضغط «ابحث مجددًا».</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -912,7 +912,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏Groundwork مفتوح بالفعل. استخدم النافذة المفتوحة، أو أغلقها وشغّل Groundwork من جديد.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -935,31 +935,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>الأقراص الإضافية تتصل عند بدء التشغيل</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>أقراصك الداخلية الأخرى جاهزة في ⁦/mnt⁩ في كل مرة يبدأ فيها الحاسوب. غياب قرص لا يمنع بدء التشغيل أبدًا.</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر عرض الأقراص.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة قائمة الأقراص التي تتصل عند بدء التشغيل.</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يُعثر على أقراص داخلية إضافية.</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>غير متصل بعد عند بدء التشغيل: %1.</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ توصيل الأقراص الإضافية عند بدء التشغيل</translation>
     </message>
 </context>
 <context>
@@ -1070,31 +1070,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافة مجلد…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا المجلد مشارَك بالفعل باسم %1.</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا المجلد موجود في القائمة بالفعل.</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>السماح للآخرين بإضافة الملفات وتغييرها وحذفها</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">إزالة</translation>
+        <translation>إزالة</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>إزالة %1</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>اختر مجلدًا لمشاركته</translation>
     </message>
 </context>
 <context>
@@ -1148,7 +1148,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ قراءة برنامج مسجّل التجمّد المدمج في Groundwork</translation>
     </message>
 </context>
 <context>
@@ -1319,7 +1319,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>كما يحذف السجلات الأقدم من ثلاثة أشهر، ويترك 2 GB على الأقل من القرص فارغة.</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1346,7 +1346,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>مراقب الذاكرة earlyoom قيد التشغيل.</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1377,71 +1377,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر استخدام مسار هذا المجلد.</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا يمكن مشاركة مجلد يحتوي مساره على حرف تحكم أو % أو علامة اقتباس مزدوجة أو شرطة مائلة عكسية.</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا يمكن مشاركة مجلد يبدأ مساره أو ينتهي بمسافة، أو يحتوي على مسافتين متتاليتين.</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>مسار هذا المجلد أطول من أن تمكن مشاركته.</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا يمكن مشاركة الحاسوب كله.</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>يحتوي هذا المجلد على ملفات النظام، لذا لا يمكن مشاركته.</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>يحتوي مجلدك الرئيسي على مفاتيح وكلمات مرور، لذا لا يمكن مشاركته كاملًا. اختر مجلدًا بداخله.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>تحتوي المجلدات المخفية في مجلدك الرئيسي على إعدادات ومفاتيح، لذا لا يمكن مشاركتها.</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>مشاركة المجلدات على الشبكة</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>يتيح للحواسيب الأخرى فتح المجلدات التي تذكرها هنا. يمكن لأي شخص على الشبكة الدخول دون كلمة مرور، على أي شبكة ينضم إليها هذا الحاسوب. قد يرفض Windows 11 مجلدًا بلا كلمة مرور إلى أن يُغيَّر إعداد على ذلك الحاسوب.</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>المجلدات المراد مشاركتها:</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">لم يستجب مدير الخدمات.</translation>
+        <translation>لم يستجب مدير الخدمات.</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>مجلدات مشارَكة أخرى، تُركت كما هي: %1.</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت مشاركة الملفات</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ مشاركة مجلداتك</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ السماح لمشاركة الملفات بالمرور عبر جدار الحماية</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">جارٍ إعادة تحميل جدار الحماية</translation>
+        <translation>جارٍ إعادة تحميل جدار الحماية</translation>
     </message>
 </context>
 <context>
@@ -1503,7 +1503,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تفعيل مصدر برامج NVIDIA</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1549,7 +1549,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تفعيل مصدر البرامج Packman</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1708,7 +1708,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>حجم بعض الإعدادات المفعّلة غير معروف.</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1759,7 +1759,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>لكل من يستخدم هذا الحاسوب</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2238,7 +2238,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>ما زال شيء فعّلته يحتاج إلى قيمة، مثل مجلد لمشاركته. ارجع واملأها.</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2246,7 +2246,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>العودة إلى خياراتي</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2330,7 +2330,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر على Groundwork أن يطلب إيقاف التشغيل (%1)، لذا يستمر حتى نهايته.</translation>
     </message>
 </context>
 <context>
@@ -2345,7 +2345,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>القرص الذي يحتوي على %1 ممتلئ: المتبقي %2.</translation>
     </message>
     <message>
         <source>Already done.</source>

@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>«%1» no se puede llevar: nombra más de una clave de firma.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>«%1» no se puede llevar: su clave de firma no se obtiene por https.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>«%1» no se puede llevar: su prioridad no es un número del 1 al 200.</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -382,11 +382,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork no ha podido leer %1 en %2.</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ya contiene otra fuente de software.</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -418,7 +418,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadiendo Flathub por ti</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -458,7 +458,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork no ha podido saber el tamaño de algunos ajustes activados. Desactívalos para guardar.</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -482,15 +482,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>«%1» no se puede llevar: su nombre contiene un carácter que Groundwork no puede usar.</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork no ha podido saber si este disco usa FAT, que no admite archivos de más de 4 GiB, y los ajustes activados necesitan %1. Desactiva algunos o elige otra carpeta.</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se ha omitido una segunda fuente de software llamada «%1»: el archivo la nombra dos veces.</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -550,7 +550,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>tamaño desconocido</translation>
     </message>
 </context>
 <context>
@@ -596,7 +596,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Leyendo la clave de firma integrada de Groundwork para Claude Code</translation>
     </message>
 </context>
 <context>
@@ -785,7 +785,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork no ha podido listar los discos: lsblk no ha funcionado. Pulsa Buscar de nuevo.</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -908,7 +908,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork ya está abierto. Usa la ventana abierta, o ciérrala y vuelve a iniciar Groundwork.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -931,31 +931,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Los discos adicionales se conectan al arrancar</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tus otros discos internos están listos en /mnt cada vez que arranca el ordenador. Un disco que falte nunca impide el arranque.</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se han podido listar los discos.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido leer la lista de discos que se conectan al arrancar.</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se han encontrado discos internos adicionales.</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aún no se conectan al arrancar: %1.</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectando los discos adicionales al arrancar</translation>
     </message>
 </context>
 <context>
@@ -1062,31 +1062,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir una carpeta…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta carpeta ya se comparte como %1.</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta carpeta ya está en la lista.</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir que otros añadan, cambien y borren archivos</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Quitar</translation>
+        <translation>Quitar</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitar %1</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>Elige una carpeta para compartir</translation>
     </message>
 </context>
 <context>
@@ -1140,7 +1140,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>Leyendo el script integrado de Groundwork que registra los bloqueos</translation>
     </message>
 </context>
 <context>
@@ -1311,7 +1311,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>También borra las entradas de más de tres meses y deja al menos 2 GB libres en el disco.</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1338,7 +1338,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>El vigilante de memoria earlyoom está en marcha.</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1369,71 +1369,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido usar la ruta de esta carpeta.</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede compartir una carpeta cuya ruta contenga un carácter de control, %, comillas dobles o una barra invertida.</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede compartir una carpeta cuya ruta empiece o termine con un espacio, o tenga dos espacios seguidos.</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>La ruta de esta carpeta es demasiado larga para compartirla.</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede compartir todo el ordenador.</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta carpeta contiene archivos del sistema, así que no se puede compartir.</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu carpeta personal contiene claves y contraseñas, así que no se puede compartir entera. Elige una carpeta dentro de ella.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las carpetas ocultas de tu carpeta personal contienen ajustes y claves, así que no se pueden compartir.</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Compartir carpetas en la red</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Permite que otros ordenadores abran las carpetas que indiques aquí. Cualquiera en la red puede entrar sin contraseña, en cualquier red a la que se conecte este ordenador. Windows 11 puede rechazar una carpeta sin contraseña hasta que se cambie un ajuste en ese ordenador.</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>Carpetas para compartir:</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">El gestor de servicios no ha respondido.</translation>
+        <translation>El gestor de servicios no ha respondido.</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Otras carpetas compartidas, sin cambios: %1.</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalando el uso compartido de archivos</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Compartiendo tus carpetas</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Dejando pasar el uso compartido de archivos por el cortafuegos</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">Recargando el cortafuegos</translation>
+        <translation>Recargando el cortafuegos</translation>
     </message>
 </context>
 <context>
@@ -1495,7 +1495,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Activando la fuente de software de NVIDIA</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1541,7 +1541,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Activando la fuente de software Packman</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1696,7 +1696,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se desconoce el tamaño de algunos ajustes activados.</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1747,7 +1747,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Para todos en este ordenador</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2222,7 +2222,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algo que has activado aún necesita un valor, como una carpeta para compartir. Vuelve atrás y complétalo.</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2230,7 +2230,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>Volver a mis opciones</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2314,7 +2314,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork no ha podido pedir que la ejecución se detenga (%1), así que sigue hasta el final.</translation>
     </message>
 </context>
 <context>
@@ -2329,7 +2329,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>El disco que contiene %1 está lleno: quedan %2 libres.</translation>
     </message>
     <message>
         <source>Already done.</source>

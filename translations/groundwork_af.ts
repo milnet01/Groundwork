@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” kan nie saamgeneem word nie: dit noem meer as een ondertekeningsleutel.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” kan nie saamgeneem word nie: sy ondertekeningsleutel word nie oor https gehaal nie.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” kan nie saamgeneem word nie: sy prioriteit is nie &apos;n getal van 1 tot 200 nie.</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -382,11 +382,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork kon nie %1 in %2 lees nie.</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bevat reeds &apos;n ander sagtewarebron.</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -418,7 +418,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om Flathub vir jou by te voeg</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -458,7 +458,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork kon nie die grootte van sommige aangeskakelde instellings uitwerk nie. Skakel hulle af om te stoor.</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -482,15 +482,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” kan nie saamgeneem word nie: sy naam bevat &apos;n karakter wat Groundwork nie kan gebruik nie.</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork kon nie uitwerk of hierdie skyf FAT gebruik nie, wat nie &apos;n lêer groter as 4 GiB kan hou nie, en die aangeskakelde instellings het %1 nodig. Skakel sommige af, of kies &apos;n ander vouer.</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;n Tweede sagtewarebron genaamd “%1” is oorgeslaan: die lêer noem dit twee keer.</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -550,7 +550,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>grootte onbekend</translation>
     </message>
 </context>
 <context>
@@ -596,7 +596,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om Groundwork se ingeboude ondertekeningsleutel vir Claude Code te lees</translation>
     </message>
 </context>
 <context>
@@ -785,7 +785,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork kon nie die skywe lys nie: lsblk het nie gewerk nie. Druk Kyk weer.</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -908,7 +908,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork is reeds oop. Gebruik die venster wat oop is, of maak dit toe en begin Groundwork weer.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -931,31 +931,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekstra skywe koppel met opstart</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jou ander interne skywe is gereed in /mnt elke keer as die rekenaar begin. &apos;n Skyf wat ontbreek, keer nooit dat dit begin nie.</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die skywe kon nie gelys word nie.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die lys skywe wat met opstart koppel, kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen ekstra interne skywe is gevind nie.</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog nie met opstart gekoppel nie: %1.</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om ekstra skywe met opstart te koppel</translation>
     </message>
 </context>
 <context>
@@ -1062,31 +1062,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg &apos;n vouer by…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie vouer word reeds as %1 gedeel.</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie vouer is reeds op die lys.</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat mense lêers byvoeg, verander en uitvee</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Verwyder</translation>
+        <translation>Verwyder</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwyder %1</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies &apos;n vouer om te deel</translation>
     </message>
 </context>
 <context>
@@ -1140,7 +1140,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om Groundwork se ingeboude vriesopnemer-skrip te lees</translation>
     </message>
 </context>
 <context>
@@ -1311,7 +1311,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit vee ook inskrywings ouer as drie maande uit, en laat minstens 2 GB van die skyf vry.</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1338,7 +1338,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die geheuewaghond earlyoom loop.</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1369,71 +1369,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie vouer se pad kon nie gebruik word nie.</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;n Vouer waarvan die pad &apos;n beheerkarakter, %, &apos;n dubbele aanhalingsteken of &apos;n terugskuinsstreep bevat, kan nie gedeel word nie.</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;n Vouer waarvan die pad met &apos;n spasie begin of eindig, of twee spasies langs mekaar het, kan nie gedeel word nie.</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie vouer se pad is te lank om te deel.</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die hele rekenaar kan nie gedeel word nie.</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie vouer bevat stelsellêers, so dit kan nie gedeel word nie.</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jou tuisvouer bevat sleutels en wagwoorde, so dit kan nie in sy geheel gedeel word nie. Kies &apos;n vouer daarin.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteekte vouers in jou tuisvouer bevat instellings en sleutels, so hulle kan nie gedeel word nie.</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Deel vouers op die netwerk</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat ander rekenaars die vouers oopmaak wat jy hier lys. Enigiemand op die netwerk kan sonder &apos;n wagwoord inkom, op enige netwerk waarby hierdie rekenaar aansluit. Windows 11 kan &apos;n vouer sonder wagwoord weier totdat &apos;n instelling op daardie rekenaar verander word.</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vouers om te deel:</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">Die diensbestuurder het nie geantwoord nie.</translation>
+        <translation>Die diensbestuurder het nie geantwoord nie.</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ander gedeelde vouers, gelaat soos hulle is: %1.</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om lêerdeling te installeer</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om jou vouers te deel</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om lêerdeling deur die brandmuur te laat</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">Besig om die brandmuur weer te laai</translation>
+        <translation>Besig om die brandmuur weer te laai</translation>
     </message>
 </context>
 <context>
@@ -1495,7 +1495,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om NVIDIA se sagtewarebron aan te skakel</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1541,7 +1541,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om die Packman-sagtewarebron aan te skakel</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1696,7 +1696,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die grootte van sommige aangeskakelde instellings is onbekend.</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1747,7 +1747,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Vir almal op hierdie rekenaar</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2222,7 +2222,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iets wat jy aangeskakel het, het nog &apos;n waarde nodig, soos &apos;n vouer om te deel. Gaan terug en vul dit in.</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2230,7 +2230,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>Terug na my keuses</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2314,7 +2314,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork kon nie die lopie vra om te stop nie (%1), so dit gaan voort tot die einde.</translation>
     </message>
 </context>
 <context>
@@ -2329,7 +2329,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die skyf wat %1 hou, is vol: %2 vry.</translation>
     </message>
     <message>
         <source>Already done.</source>

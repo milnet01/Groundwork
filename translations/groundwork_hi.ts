@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” को साथ नहीं ले जाया जा सकता: इसमें एक से ज़्यादा हस्ताक्षर कुंजियाँ हैं।</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” को साथ नहीं ले जाया जा सकता: इसकी हस्ताक्षर कुंजी https से नहीं लाई जाती।</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” को साथ नहीं ले जाया जा सकता: इसकी प्राथमिकता 1 से 200 तक की संख्या नहीं है।</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -382,11 +382,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork %2 में %1 नहीं पढ़ सका।</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 में पहले से एक और सॉफ़्टवेयर स्रोत है।</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -418,7 +418,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके लिए Flathub जोड़ा जा रहा है</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -458,7 +458,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork चालू की गई कुछ सेटिंग्स का आकार नहीं जान सका। सेव करने के लिए उन्हें बंद करें।</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -482,15 +482,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” को साथ नहीं ले जाया जा सकता: इसके नाम में ऐसा अक्षर है जिसे Groundwork इस्तेमाल नहीं कर सकता।</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork यह नहीं जान सका कि यह ड्राइव FAT का उपयोग करती है या नहीं, जिसमें 4 GiB से बड़ी फ़ाइल नहीं आ सकती, और चालू की गई सेटिंग्स को %1 चाहिए। कुछ को बंद करें, या दूसरा फ़ोल्डर चुनें।</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” नाम का दूसरा सॉफ़्टवेयर स्रोत छोड़ दिया गया: फ़ाइल में उसका नाम दो बार है।</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -550,7 +550,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>आकार अज्ञात</translation>
     </message>
 </context>
 <context>
@@ -596,7 +596,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Claude Code के लिए Groundwork की अंतर्निहित हस्ताक्षर कुंजी पढ़ी जा रही है</translation>
     </message>
 </context>
 <context>
@@ -785,7 +785,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork ड्राइवों की सूची नहीं बना सका: lsblk ने काम नहीं किया। फिर से देखें दबाएँ।</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -908,7 +908,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork पहले से खुला है। खुली हुई विंडो का उपयोग करें, या उसे बंद करके Groundwork फिर से शुरू करें।</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -931,31 +931,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>अतिरिक्त ड्राइवें स्टार्ट-अप पर जुड़ती हैं</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>कंप्यूटर के हर बार शुरू होने पर आपकी दूसरी आंतरिक ड्राइवें /mnt में तैयार रहती हैं। कोई ड्राइव न होने पर भी कंप्यूटर शुरू होने से कभी नहीं रुकता।</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>ड्राइवों की सूची नहीं बन सकी।</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>स्टार्ट-अप पर जुड़ने वाली ड्राइवों की सूची पढ़ी नहीं जा सकी।</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>कोई अतिरिक्त आंतरिक ड्राइव नहीं मिली।</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>अभी स्टार्ट-अप पर नहीं जुड़ीं: %1।</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>अतिरिक्त ड्राइवें स्टार्ट-अप पर जोड़ी जा रही हैं</translation>
     </message>
 </context>
 <context>
@@ -1062,31 +1062,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ोल्डर जोड़ें…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह फ़ोल्डर पहले से %1 नाम से साझा है।</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह फ़ोल्डर पहले से सूची में है।</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>लोगों को फ़ाइलें जोड़ने, बदलने और हटाने दें</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">हटाएँ</translation>
+        <translation>हटाएँ</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 हटाएँ</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>साझा करने के लिए फ़ोल्डर चुनें</translation>
     </message>
 </context>
 <context>
@@ -1140,7 +1140,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork की अंतर्निहित फ़्रीज़ रिकॉर्डर स्क्रिप्ट पढ़ी जा रही है</translation>
     </message>
 </context>
 <context>
@@ -1311,7 +1311,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह तीन महीने से पुरानी प्रविष्टियाँ भी हटाता है, और ड्राइव पर कम से कम 2 GB खाली छोड़ता है।</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1338,7 +1338,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>मेमोरी निगरानी earlyoom चल रही है।</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1369,71 +1369,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस फ़ोल्डर का पथ उपयोग नहीं किया जा सका।</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>जिस फ़ोल्डर के पथ में कंट्रोल अक्षर, %, दोहरा उद्धरण चिह्न या बैकस्लैश हो, उसे साझा नहीं किया जा सकता।</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>जिस फ़ोल्डर का पथ स्पेस से शुरू या ख़त्म होता हो, या जिसमें दो स्पेस एक साथ हों, उसे साझा नहीं किया जा सकता।</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस फ़ोल्डर का पथ साझा करने के लिए बहुत लंबा है।</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>पूरा कंप्यूटर साझा नहीं किया जा सकता।</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस फ़ोल्डर में सिस्टम फ़ाइलें हैं, इसलिए इसे साझा नहीं किया जा सकता।</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके होम फ़ोल्डर में कुंजियाँ और पासवर्ड हैं, इसलिए इसे पूरा साझा नहीं किया जा सकता। इसके अंदर का कोई फ़ोल्डर चुनें।</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके होम फ़ोल्डर के छिपे फ़ोल्डरों में सेटिंग्स और कुंजियाँ हैं, इसलिए उन्हें साझा नहीं किया जा सकता।</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>नेटवर्क पर फ़ोल्डर साझा करें</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>दूसरे कंप्यूटरों को वे फ़ोल्डर खोलने देता है जिनकी सूची आप यहाँ देते हैं। नेटवर्क पर कोई भी बिना पासवर्ड के अंदर आ सकता है, यह कंप्यूटर जिस भी नेटवर्क से जुड़े उस पर। Windows 11 बिना पासवर्ड वाले फ़ोल्डर को तब तक मना कर सकता है जब तक उस कंप्यूटर पर कोई सेटिंग न बदली जाए।</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>साझा करने के फ़ोल्डर:</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">सेवा प्रबंधक ने जवाब नहीं दिया।</translation>
+        <translation>सेवा प्रबंधक ने जवाब नहीं दिया।</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>दूसरे साझा फ़ोल्डर, जैसे थे वैसे ही छोड़े गए: %1।</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ाइल साझाकरण इंस्टॉल किया जा रहा है</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके फ़ोल्डर साझा किए जा रहे हैं</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ाइल साझाकरण को फ़ायरवॉल से गुज़रने दिया जा रहा है</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">फ़ायरवॉल फिर से लोड किया जा रहा है</translation>
+        <translation>फ़ायरवॉल फिर से लोड किया जा रहा है</translation>
     </message>
 </context>
 <context>
@@ -1495,7 +1495,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>NVIDIA का सॉफ़्टवेयर स्रोत चालू किया जा रहा है</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1541,7 +1541,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Packman सॉफ़्टवेयर स्रोत चालू किया जा रहा है</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1696,7 +1696,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>चालू की गई कुछ सेटिंग्स का आकार अज्ञात है।</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1747,7 +1747,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>इस कंप्यूटर पर सभी के लिए</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2222,7 +2222,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>आपने जो चालू किया है, उसे अभी भी एक मान चाहिए, जैसे साझा करने के लिए फ़ोल्डर। वापस जाकर उसे भरें।</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2230,7 +2230,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>मेरी पसंद पर वापस</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2314,7 +2314,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork रन को रुकने के लिए नहीं कह सका (%1), इसलिए वह अंत तक चलता रहेगा।</translation>
     </message>
 </context>
 <context>
@@ -2329,7 +2329,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 वाली डिस्क भरी हुई है: %2 खाली।</translation>
     </message>
     <message>
         <source>Already done.</source>

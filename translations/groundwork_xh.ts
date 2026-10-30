@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” ayinakuthwalwa: ibiza izitshixo zokutyikitya ezingaphezu kwesinye.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” ayinakuthwalwa: isitshixo sayo sokutyikitya asilandwa nge-https.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” ayinakuthwalwa: inqanaba layo lokubaluleka asilonani ukusuka ku-1 ukuya ku-200.</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -382,11 +382,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-Groundwork ayikwazanga ukufunda u-%1 ku-%2.</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>U-%1 sele ene mthombo wesoftwe owahlukileyo.</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -418,7 +418,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Kongezwa iFlathub ngenxa yakho</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -458,7 +458,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-Groundwork ayikwazanga ukubona ubungakanani bezinye iisetingi ezivuliweyo. Zivale ukuze ugcine.</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -482,15 +482,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” ayinakuthwalwa: igama layo linonobumba i-Groundwork engenakubusebenzisa.</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-Groundwork ayikwazanga ukubona ukuba le drayivu isebenzisa i-FAT, engakwaziyo ukugcina ifayile enkulu kune-4 GiB, kwaye iisetingi ezivuliweyo zidinga u-%1. Vala ezinye, okanye ukhethe enye ifolda.</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kutsitywe umthombo wesoftwe wesibini ogama lingu-“%1”: ifayile iwubiza kabini.</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -550,7 +550,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>ubungakanani abaziwa</translation>
     </message>
 </context>
 <context>
@@ -596,7 +596,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufundwa isitshixo sokutyikitya esakhelwe ngaphakathi kwi-Groundwork se-Claude Code</translation>
     </message>
 </context>
 <context>
@@ -785,7 +785,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-Groundwork ayikwazanga ukudwelisa iidrayivu: i-lsblk ayisebenzanga. Cofa u-Jonga kwakhona.</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -908,7 +908,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-Groundwork sele ivuliwe. Sebenzisa ifestile evulekileyo, okanye uyivale uze uqale i-Groundwork kwakhona.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -931,31 +931,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Iidrayivu ezongezelelweyo ziyaxhuma ekuqaleni</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezinye iidrayivu zakho zangaphakathi zilungile ku-/mnt qho xa ikhompyutha iqala. Idrayivu engekhoyo ayiyithinteli ikhompyutha ukuba iqale.</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iidrayivu azikwazanga ukudweliswa.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uluhlu lweedrayivu ezixhuma ekuqaleni alukwazanga ukufundwa.</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akufunyanwanga drayivu zangaphakathi ezongezelelweyo.</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Azikaxhunywa ekuqaleni: %1.</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuxhunywa iidrayivu ezongezelelweyo ekuqaleni</translation>
     </message>
 </context>
 <context>
@@ -1062,31 +1062,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>Yongeza ifolda…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le folda sele yabelwana njengo-%1.</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le folda sele ikuluhlu.</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>Vumela abantu bongeze, batshintshe kwaye bacime iifayile</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Susa</translation>
+        <translation>Susa</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Susa u-%1</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>Khetha ifolda yokwabelana</translation>
     </message>
 </context>
 <context>
@@ -1140,7 +1140,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufundwa iskripthi esakhelwe ngaphakathi kwi-Groundwork esirekhoda ukuma</translation>
     </message>
 </context>
 <context>
@@ -1311,7 +1311,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikwacima amangeno amadala kuneenyanga ezintathu, kwaye ishiya ubuncinane i-2 GB yedrayivu ingenanto.</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1338,7 +1338,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Umlindi wememori i-earlyoom uyasebenza.</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1369,71 +1369,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indlela yale folda ayikwazanga ukusetyenziswa.</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifolda enendlela enonobumba wolawulo, %, uphawu lokucaphula oluphindiweyo okanye i-backslash ayinakwabelwana.</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifolda enendlela eqala okanye iphele ngesithuba, okanye enezithuba ezimbini ezilandelelanayo ayinakwabelwana.</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indlela yale folda inde kakhulu ukuba ingabelwana.</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikhompyutha yonke ayinakwabelwana.</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le folda inefayile zesistim, ngoko ayinakwabelwana.</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifolda yakho yasekhaya ineephaswedi nezitshixo, ngoko ayinakwabelwana yonke. Khetha ifolda engaphakathi kwayo.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iifolda ezifihliweyo kwifolda yakho yasekhaya zineesetingi nezitshixo, ngoko azinakwabelwana.</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Yabelana ngeefolda kwinethiwekhi</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ivumela ezinye iikhompyutha zivule iifolda ozidwelisa apha. Nabani na okwinethiwekhi angangena ngaphandle kwephaswedi, kuyo nayiphi na inethiwekhi le khompyutha ejoyina kuyo. I-Windows 11 ingayala ifolda engenaphaswedi de kutshintshwe isetingi kuloo khompyutha.</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>Iifolda zokwabelana:</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">Umphathi weenkonzo akaphendulanga.</translation>
+        <translation>Umphathi weenkonzo akaphendulanga.</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezinye izabelo, zishiywe njengoko zinjalo: %1.</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufakwa ukwabelana ngeefayile</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwabelwana ngeefolda zakho</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvunyelwa ukwabelana ngeefayile ukudlula kwi-firewall</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">Kulayishwa kwakhona i-firewall</translation>
+        <translation>Kulayishwa kwakhona i-firewall</translation>
     </message>
 </context>
 <context>
@@ -1495,7 +1495,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvulwa umthombo wesoftwe we-NVIDIA</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1541,7 +1541,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvulwa umthombo wesoftwe we-Packman</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1696,7 +1696,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubungakanani bezinye iisetingi ezivuliweyo abaziwa.</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1747,7 +1747,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubo bonke kule khompyutha</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2222,7 +2222,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Into oyivulileyo isadinga ixabiso, njengefolda yokwabelana. Buyela umva uyizalise.</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2230,7 +2230,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>Buyela kukhetho lwam</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2314,7 +2314,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-Groundwork ayikwazanga ukucela ukuba ukusebenza kume (%1), ngoko kuyaqhubeka kude kube sekupheleni.</translation>
     </message>
 </context>
 <context>
@@ -2329,7 +2329,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>Idiski equlethe u-%1 izele: kuseshiyeke u-%2.</translation>
     </message>
     <message>
         <source>Already done.</source>

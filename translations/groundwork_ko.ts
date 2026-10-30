@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” 항목은 옮길 수 없습니다: 서명 키가 둘 이상 지정되어 있습니다.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” 항목은 옮길 수 없습니다: 서명 키를 https로 가져오지 않습니다.</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” 항목은 옮길 수 없습니다: 우선순위가 1에서 200 사이의 숫자가 아닙니다.</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -381,11 +381,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork가 %2에서 %1을(를) 읽지 못했습니다.</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에는 이미 다른 소프트웨어 소스가 있습니다.</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -417,7 +417,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>Flathub 추가 중</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -457,7 +457,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork가 켜 둔 일부 설정의 크기를 알아내지 못했습니다. 저장하려면 해당 설정을 끄세요.</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -481,15 +481,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>“%1” 항목은 옮길 수 없습니다: 이름에 Groundwork가 사용할 수 없는 문자가 있습니다.</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork가 이 드라이브가 4 GiB보다 큰 파일을 담을 수 없는 FAT를 쓰는지 알아내지 못했으며, 켜 둔 설정에는 %1이(가) 필요합니다. 일부를 끄거나 다른 폴더를 선택하세요.</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>이름이 “%1”인 두 번째 소프트웨어 소스를 건너뛰었습니다: 파일에 두 번 적혀 있습니다.</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -549,7 +549,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>크기 알 수 없음</translation>
     </message>
 </context>
 <context>
@@ -595,7 +595,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork에 내장된 Claude Code용 서명 키 읽는 중</translation>
     </message>
 </context>
 <context>
@@ -784,7 +784,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork가 드라이브 목록을 가져오지 못했습니다: lsblk가 작동하지 않았습니다. 다시 찾기를 누르세요.</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -907,7 +907,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork가 이미 열려 있습니다. 열려 있는 창을 사용하거나, 창을 닫고 Groundwork를 다시 시작하세요.</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -930,31 +930,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>추가 드라이브를 시작할 때 연결</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>컴퓨터를 시작할 때마다 다른 내장 드라이브가 /mnt에 준비됩니다. 드라이브가 없어도 시작이 멈추지 않습니다.</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>드라이브 목록을 가져오지 못했습니다.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>시작할 때 연결되는 드라이브 목록을 읽지 못했습니다.</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>추가 내장 드라이브를 찾지 못했습니다.</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>아직 시작할 때 연결되지 않음: %1.</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>추가 드라이브를 시작할 때 연결하도록 설정하는 중</translation>
     </message>
 </context>
 <context>
@@ -1060,31 +1060,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>폴더 추가…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 폴더는 이미 %1(으)로 공유되어 있습니다.</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 폴더는 이미 목록에 있습니다.</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>다른 사람이 파일을 추가, 변경, 삭제할 수 있게 허용</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">제거</translation>
+        <translation>제거</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 제거</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>공유할 폴더 선택</translation>
     </message>
 </context>
 <context>
@@ -1138,7 +1138,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork에 내장된 멈춤 기록 스크립트 읽는 중</translation>
     </message>
 </context>
 <context>
@@ -1309,7 +1309,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>또한 3개월이 지난 기록을 삭제하고, 드라이브에 최소 2 GB의 여유 공간을 남깁니다.</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1336,7 +1336,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>메모리 감시 도구 earlyoom이 실행 중입니다.</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1367,71 +1367,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 폴더의 경로를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>경로에 제어 문자, %, 큰따옴표 또는 백슬래시가 있는 폴더는 공유할 수 없습니다.</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>경로가 공백으로 시작하거나 끝나는 폴더, 또는 공백이 두 개 연속된 폴더는 공유할 수 없습니다.</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 폴더의 경로가 너무 길어 공유할 수 없습니다.</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>컴퓨터 전체는 공유할 수 없습니다.</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 폴더에는 시스템 파일이 있어 공유할 수 없습니다.</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>홈 폴더에는 키와 비밀번호가 있어 통째로 공유할 수 없습니다. 그 안의 폴더를 선택하세요.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>홈 폴더의 숨겨진 폴더에는 설정과 키가 있어 공유할 수 없습니다.</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>네트워크에서 폴더 공유</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>여기에 적은 폴더를 다른 컴퓨터에서 열 수 있게 합니다. 이 컴퓨터가 연결되는 어떤 네트워크에서든 네트워크의 누구나 비밀번호 없이 들어올 수 있습니다. Windows 11은 해당 컴퓨터의 설정을 바꾸기 전까지 비밀번호 없는 폴더를 거부할 수 있습니다.</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>공유할 폴더:</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">서비스 관리자가 응답하지 않았습니다.</translation>
+        <translation>서비스 관리자가 응답하지 않았습니다.</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>다른 공유는 그대로 둡니다: %1.</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 공유 설치 중</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>폴더 공유 중</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>방화벽에서 파일 공유 허용 중</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">방화벽 다시 불러오는 중</translation>
+        <translation>방화벽 다시 불러오는 중</translation>
     </message>
 </context>
 <context>
@@ -1493,7 +1493,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>NVIDIA 소프트웨어 소스 켜는 중</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1539,7 +1539,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>Packman 소프트웨어 소스 켜는 중</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1693,7 +1693,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>켜 둔 일부 설정의 크기를 알 수 없습니다.</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1744,7 +1744,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>이 컴퓨터의 모든 사용자용</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2218,7 +2218,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>켜 둔 항목에 아직 값이 필요합니다(예: 공유할 폴더). 돌아가서 입력하세요.</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2226,7 +2226,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>내 선택으로 돌아가기</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2310,7 +2310,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork가 실행 중지를 요청하지 못했습니다(%1). 그래서 끝까지 계속합니다.</translation>
     </message>
 </context>
 <context>
@@ -2325,7 +2325,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1이(가) 있는 디스크가 가득 찼습니다: 여유 공간 %2.</translation>
     </message>
     <message>
         <source>Already done.</source>

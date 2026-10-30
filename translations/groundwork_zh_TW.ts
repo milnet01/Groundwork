@@ -323,15 +323,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: it names more than one signing key.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法移轉「%1」：它指定了多個簽署金鑰。</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its signing key is not fetched over https.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法移轉「%1」：它的簽署金鑰不是透過 https 取得的。</translation>
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its priority is not a number from 1 to 200.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法移轉「%1」：它的優先順序不是 1 到 200 之間的數字。</translation>
     </message>
     <message>
         <source>zypper could not be run.</source>
@@ -381,11 +381,11 @@
     </message>
     <message>
         <source>Groundwork could not read %1 in %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork 無法讀取 %2 中的 %1。</translation>
     </message>
     <message>
         <source>%1 already holds another software source.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已包含另一個軟體來源。</translation>
     </message>
     <message>
         <source>Installs the programs you had. Any that cannot be installed is skipped and named at the end.</source>
@@ -417,7 +417,7 @@
     </message>
     <message>
         <source>Adding Flathub for you</source>
-        <translation type="unfinished"></translation>
+        <translation>正在為您新增 Flathub</translation>
     </message>
     <message>
         <source>Settings from your saved file</source>
@@ -457,7 +457,7 @@
     </message>
     <message>
         <source>Groundwork could not tell the size of some settings switched on. Switch them off to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork 無法判斷部分已開啟設定的大小。請關閉它們後再儲存。</translation>
     </message>
     <message>
         <source>Groundwork could not tell how much room this folder has. Choose another folder.</source>
@@ -481,15 +481,15 @@
     </message>
     <message>
         <source>“%1” can&apos;t be carried: its name holds a character Groundwork cannot use.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法移轉「%1」：它的名稱包含 Groundwork 無法使用的字元。</translation>
     </message>
     <message>
         <source>Groundwork could not tell whether this drive uses FAT, which cannot hold a file bigger than 4 GiB, and the settings switched on need %1. Switch some off, or choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork 無法判斷此磁碟機是否使用 FAT（FAT 無法存放大於 4 GiB 的檔案），而已開啟的設定需要 %1。請關閉部分設定，或選擇其他資料夾。</translation>
     </message>
     <message>
         <source>Skipped a second software source named “%1”: the file names it twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>已略過第二個名為「%1」的軟體來源：檔案中提到了兩次。</translation>
     </message>
     <message>
         <source>The file names a setting outside the home folder: %1</source>
@@ -549,7 +549,7 @@
     </message>
     <message>
         <source>size unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>大小不明</translation>
     </message>
 </context>
 <context>
@@ -595,7 +595,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in signing key for Claude Code</source>
-        <translation type="unfinished"></translation>
+        <translation>正在讀取 Groundwork 內建的 Claude Code 簽署金鑰</translation>
     </message>
 </context>
 <context>
@@ -784,7 +784,7 @@
     </message>
     <message>
         <source>Groundwork could not list the drives: lsblk did not work. Press Look again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork 無法列出磁碟機：lsblk 無法運作。請按「重新尋找」。</translation>
     </message>
     <message>
         <source>Start-up</source>
@@ -919,7 +919,7 @@
     </message>
     <message>
         <source>Groundwork is already open. Use the window that is open, or close it and start Groundwork again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork 已經開啟。請使用已開啟的視窗，或關閉它後重新啟動 Groundwork。</translation>
     </message>
     <message>
         <source>Usage: groundwork [--lang LANG] --check | --worker [--set ITEM=VALUE] [ITEM...] | --worker --prepare-drive LAYOUT_FILE | --worker --setup-choices CHOICES_FILE [--set ITEM=VALUE] ITEM... | --worker --save-setup CHOICES_FILE | --worker --remove-secrets FILE | --worker --delete-setup-file FILE | --version</source>
@@ -930,31 +930,31 @@
     <name>gw::ExtraDrivesItem</name>
     <message>
         <source>Extra drives connect at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>開機時連接額外的磁碟機</translation>
     </message>
     <message>
         <source>Your other internal drives are ready in /mnt every time the computer starts. A missing drive never stops it starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>每次電腦啟動時，您的其他內接磁碟機都會在 /mnt 中準備好。缺少磁碟機絕不會妨礙啟動。</translation>
     </message>
     <message>
         <source>The drives could not be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法列出磁碟機。</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法讀取開機時連接的磁碟機清單。</translation>
     </message>
     <message>
         <source>No extra internal drives were found.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到額外的內接磁碟機。</translation>
     </message>
     <message>
         <source>Not yet connected at start-up: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>尚未在開機時連接：%1。</translation>
     </message>
     <message>
         <source>Connecting extra drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>正在設定開機時連接額外的磁碟機</translation>
     </message>
 </context>
 <context>
@@ -1060,31 +1060,31 @@
     <name>gw::FolderListField</name>
     <message>
         <source>Add a folder…</source>
-        <translation type="unfinished"></translation>
+        <translation>新增資料夾…</translation>
     </message>
     <message>
         <source>This folder is already shared as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>此資料夾已共用為 %1。</translation>
     </message>
     <message>
         <source>This folder is already on the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>此資料夾已在清單中。</translation>
     </message>
     <message>
         <source>Let people add, change and delete files</source>
-        <translation type="unfinished"></translation>
+        <translation>允許他人新增、變更和刪除檔案</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>移除 %1</translation>
     </message>
     <message>
         <source>Choose a folder to share</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇要共用的資料夾</translation>
     </message>
 </context>
 <context>
@@ -1138,7 +1138,7 @@
     </message>
     <message>
         <source>Reading Groundwork&apos;s built-in freeze recorder script</source>
-        <translation type="unfinished"></translation>
+        <translation>正在讀取 Groundwork 內建的當機記錄指令碼</translation>
     </message>
 </context>
 <context>
@@ -1309,7 +1309,7 @@
     </message>
     <message>
         <source>It also deletes entries older than three months, and leaves at least 2 GB of the drive free.</source>
-        <translation type="unfinished"></translation>
+        <translation>它也會刪除超過三個月的記錄，並在磁碟機上至少留下 2 GB 可用空間。</translation>
     </message>
     <message>
         <source>The system&apos;s log may grow larger than 1 GB.</source>
@@ -1336,7 +1336,7 @@
     </message>
     <message>
         <source>The memory watchdog earlyoom is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>記憶體監看程式 earlyoom 正在執行。</translation>
     </message>
     <message>
         <source>The memory watchdog, systemd-oomd, is not installed.</source>
@@ -1367,71 +1367,71 @@
     <name>gw::NetworkSharesItem</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法使用此資料夾的路徑。</translation>
     </message>
     <message>
         <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>路徑中含有控制字元、%、雙引號或反斜線的資料夾無法共用。</translation>
     </message>
     <message>
         <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>路徑以空格開頭或結尾，或含有連續兩個空格的資料夾無法共用。</translation>
     </message>
     <message>
         <source>This folder&apos;s path is too long to share.</source>
-        <translation type="unfinished"></translation>
+        <translation>此資料夾的路徑太長，無法共用。</translation>
     </message>
     <message>
         <source>The whole computer cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法共用整台電腦。</translation>
     </message>
     <message>
         <source>This folder holds system files, so it cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>此資料夾包含系統檔案，因此無法共用。</translation>
     </message>
     <message>
         <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
-        <translation type="unfinished"></translation>
+        <translation>您的家目錄資料夾包含金鑰和密碼，因此無法整個共用。請選擇其中的資料夾。</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
-        <translation type="unfinished"></translation>
+        <translation>您家目錄資料夾中的隱藏資料夾包含設定和金鑰，因此無法共用。</translation>
     </message>
     <message>
         <source>Share folders on the network</source>
-        <translation type="unfinished"></translation>
+        <translation>在網路上共用資料夾</translation>
     </message>
     <message>
         <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>讓其他電腦開啟您在此列出的資料夾。無論這台電腦加入哪個網路，網路上的任何人都不需密碼即可進入。在對方電腦上變更某項設定之前，Windows 11 可能會拒絕沒有密碼的資料夾。</translation>
     </message>
     <message>
         <source>Folders to share:</source>
-        <translation type="unfinished"></translation>
+        <translation>要共用的資料夾：</translation>
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">服務管理員沒有回應。</translation>
+        <translation>服務管理員沒有回應。</translation>
     </message>
     <message>
         <source>Other shares, left as they are: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>其他共用維持不變：%1。</translation>
     </message>
     <message>
         <source>Installing file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>正在安裝檔案共用</translation>
     </message>
     <message>
         <source>Sharing your folders</source>
-        <translation type="unfinished"></translation>
+        <translation>正在共用您的資料夾</translation>
     </message>
     <message>
         <source>Letting file sharing through the firewall</source>
-        <translation type="unfinished"></translation>
+        <translation>正在允許檔案共用通過防火牆</translation>
     </message>
     <message>
         <source>Reloading the firewall</source>
-        <translation type="unfinished">正在重新載入防火牆</translation>
+        <translation>正在重新載入防火牆</translation>
     </message>
 </context>
 <context>
@@ -1493,7 +1493,7 @@
     </message>
     <message>
         <source>Switching on NVIDIA&apos;s software source</source>
-        <translation type="unfinished"></translation>
+        <translation>正在開啟 NVIDIA 的軟體來源</translation>
     </message>
     <message>
         <source>Adding NVIDIA&apos;s software source</source>
@@ -1539,7 +1539,7 @@
     <name>gw::Packman</name>
     <message>
         <source>Switching on the Packman software source</source>
-        <translation type="unfinished"></translation>
+        <translation>正在開啟 Packman 軟體來源</translation>
     </message>
     <message>
         <source>Adding the Packman software source</source>
@@ -1693,7 +1693,7 @@
     </message>
     <message>
         <source>The size of some settings switched on is unknown.</source>
-        <translation type="unfinished"></translation>
+        <translation>部分已開啟設定的大小不明。</translation>
     </message>
     <message>
         <source>This folder has %1 free, on a %2 drive.</source>
@@ -1744,7 +1744,7 @@
     </message>
     <message>
         <source>For everyone on this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>適用於這台電腦上的所有人</translation>
     </message>
     <message>
         <source>Holds saved passwords or keys.</source>
@@ -2218,7 +2218,7 @@
     </message>
     <message>
         <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
-        <translation type="unfinished"></translation>
+        <translation>您開啟的某一項仍需要一個值，例如要共用的資料夾。請返回填寫。</translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>
@@ -2226,7 +2226,7 @@
     </message>
     <message>
         <source>Back to my choices</source>
-        <translation type="unfinished"></translation>
+        <translation>返回我的選擇</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2310,7 +2310,7 @@
     </message>
     <message>
         <source>Groundwork could not ask the run to stop (%1), so it goes on to its end.</source>
-        <translation type="unfinished"></translation>
+        <translation>Groundwork 無法要求停止執行（%1），因此它會繼續執行到結束。</translation>
     </message>
 </context>
 <context>
@@ -2325,7 +2325,7 @@
     </message>
     <message>
         <source>The disk holding %1 is full: %2 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>存放 %1 的磁碟已滿：剩餘 %2。</translation>
     </message>
     <message>
         <source>Already done.</source>
