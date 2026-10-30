@@ -114,7 +114,7 @@ The wizard writes `$XDG_STATE_HOME/groundwork/github-choices.json`:
 
 Then one item per repository, id `github:<owner>/<name>`, title the name, in the order given. `stopRequested` is read between them. Destination `DEST` is `<folder>/<name>`.
 
-1. `DEST` exists, link or empty folder included: `SKIPPED`, saying it is already there.
+1. `DEST` exists, link or empty folder included: `STEP_END` with `skip`, saying it is already there.
 2. All as the user:
 
 ```
