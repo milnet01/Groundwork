@@ -1422,6 +1422,60 @@ private slots:
         QVERIFY(!w->selection().contains(QStringLiteral("update")));
     }
 
+    // GRND-0111: a choice that stays, with nothing left to install, does
+    // not hold on to the update the saved setup pulled in. With something
+    // to install it does: aSavedSetupSwitchedOffLeavesNoneOfItsChoices.
+    void aSavedSetupSwitchedOffTakesAnUpdateNothingStillNeeds()
+    {
+        gw::CheckResult nothingLeft;
+        nothingLeft.state = gw::CheckState::NotDone;
+        nothingLeft.nothingToInstall = true;
+        m_moreResults = {{QStringLiteral("nvidia"), nothingLeft}};
+        const auto reset = qScopeGuard([this] { m_moreResults.clear(); });
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.packages = {QStringLiteral("act")};
+        m_carriedState = gw::CheckState::NotDone;
+        auto w = fromSaved();
+        QVERIFY(w);
+        w->next();
+        QVERIFY(w->selection().contains(QStringLiteral("update")));
+        w->userToggled(QStringLiteral("nvidia"), true);
+        w->back();
+        w->back();
+        w->currentPage()->findChild<QCheckBox *>(QStringLiteral("fromSaved"))->click();
+        w->next();
+        QVERIFY(!w->savedSetup());
+        QVERIFY(w->selection().contains(QStringLiteral("nvidia")));
+        QVERIFY(!w->selection().contains(QStringLiteral("update")));
+    }
+
+    // GRND-0105: after a run from a saved setup, going back to the choices
+    // forgets that setup, so its rows and choices do not come round again.
+    void backToMyChoicesForgetsTheSavedSetup()
+    {
+        m_saved.systemId = QStringLiteral("opensuse-tumbleweed");
+        m_saved.items = {QStringLiteral("firewall")};
+        m_saved.packages = {QStringLiteral("act")};
+        m_carriedState = gw::CheckState::NotDone;
+        auto w = fromSaved();
+        QVERIFY(w);
+        w->next();
+        const QString firstLevel = w->currentPage()->title();
+        QVERIFY(w->selection().contains(QStringLiteral("firewall")));
+        QVERIFY(w->row(QStringLiteral("carried-packages")));
+        goToRunPage(*w);
+        QTRY_VERIFY(w->runPage()->isComplete());
+        auto *back = w->runPage()->findChild<QPushButton *>(QStringLiteral("backToChoices"));
+        QVERIFY(back && !back->isHidden());
+        back->click();
+        QTRY_COMPARE(w->currentPage()->title(), firstLevel);
+        QVERIFY(!w->savedSetup());
+        QVERIFY(!w->row(QStringLiteral("carried-packages")));
+        QVERIFY(!w->selection().contains(QStringLiteral("carried-packages")));
+        QVERIFY(!w->selection().contains(QStringLiteral("firewall")));
+        QVERIFY(!w->runOrder().contains(QStringLiteral("carried-packages")));
+    }
+
     // Audit 2026-10-29: reading a saved file runs tar over it, and its
     // checks compare an archive that may be gigabytes on a stick. Both run
     // off the window's thread, as the startup checks do, so the window
