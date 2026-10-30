@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=111 -->
+<!-- ants-roadmap-id-high-water: GRND=113 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1613,6 +1613,7 @@ built as 0.4.0 instead.
   folder. Private ones work once signed in. Copying runs as the user,
   not root. Needs a design first: signing in from a window, a list of
   choices rather than one switch, and nothing personal in the source.
+  Next, with GRND-0073, after the user's reinstall (user, 2026-10-30).
   **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -1699,6 +1700,11 @@ built as 0.4.0 instead.
   configurations, so that after a reinstall it can reinstate them.
   Needs a write-spec design first: what is recorded, where the record
   lives so it survives a reinstall, and how restoring maps onto items.
+  Scope, the user 2026-10-30: the carry job (GRND-0078, GRND-0079) now covers
+  programs, sources, items and the user's own settings. This item adds
+  system-wide settings outside the home folder, such as the firewall,
+  printers and drive mounts. Item checks never run as root, so the design
+  must say how root-only settings are read. Built after the user's reinstall.
   **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
   Kind: feature.
   Source: user-request-2026-10-12.
@@ -2164,3 +2170,27 @@ scheduled.
   Kind: ux.
   Source: grnd-0066-vm-run-2026-10-30.
   Lanes: items, core.
+
+- 📋 [GRND-0112] **A saved setup treats more sign-in folders as secrets.**
+  gatherSettings offers every hidden entry in the home folder, and only
+  kSecrets (src/carry/settingsgroups.cpp) marks one secret. .claude
+  (holds .credentials.json), .config/osc and .oscrc are not listed, so a
+  small one starts switched on with no warning. Check .npmrc, .pypirc
+  and .cargo the same way. The user's own .claude is 19 GB, so it starts
+  off by size, and their oscrc keeps its password in the keyring: neither
+  is exposed today (read 2026-10-30).
+  **Layman:** Folders holding your Claude or OBS sign-in start switched off and warn you, as SSH keys already do.
+  Kind: security.
+  Source: code-read-2026-10-30.
+  Lanes: carry.
+
+- 📋 [GRND-0113] **Tools for Claude Code row offers osc too.**
+  The user needs git and osc on the new install (2026-10-30). The
+  dev-claude-tools row installs git and gh; no row installs osc, so today
+  it arrives only through a saved setup's programs list. Decide whether
+  it belongs in that row or in a row of its own: most users do not
+  publish to OBS.
+  **Layman:** A fresh install can get the OBS command-line tool from one switch, without a saved setup.
+  Kind: enhancement.
+  Source: user-request-2026-10-30.
+  Lanes: items.

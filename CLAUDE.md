@@ -3,7 +3,7 @@
 ## Where this project is
 
 **State:** 4 — Between items.
-**In flight:** GRND-0066, GRND-0110 and GRND-0111 shipped 2026-10-30, not yet released, and GRND-0066's Windows step unmeasured; 0.5.1 released 2026-10-29 (GitHub and OBS); the v0.5.0 tag exists but was never published (its GitHub check failed). Every fix-kind Backlog item fixed 2026-10-29. The queue the user set 2026-10-29 is done: GRND-0072, GRND-0108 and GRND-0105 shipped 2026-10-30; then GRND-0067, the user's pick, the same day. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
+**In flight:** 0.5.2 released 2026-10-30 (GitHub and OBS), GRND-0066's Windows step and GRND-0111 in a VM still untried; the v0.5.0 tag exists but was never published (its GitHub check failed). Next, the user's pick 2026-10-30, once they have reinstalled: GRND-0065 and GRND-0073, each needing a design first; GRND-0112 and GRND-0113 filed the same day. Translations wait for checks (GRND-0033 a fluent Afrikaans reader; zh_CN, zh_TW, ja, ko, hi, zu, xh a machine check: Gemini, or DeepSeek in Chrome for Chinese, user 2026-10-16).
 
 > Keep the two lines above true, and keep them to two lines. They are
 > the only position this project records. Everything else about where
