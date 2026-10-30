@@ -1,6 +1,7 @@
 // The app's own password box (GRND-0007): the program sudo -A calls, so the
 // app needs no desktop's password helper. It says in plain words whose
-// password sudo wants (docs/design.md, Root).
+// password sudo wants (docs/design.md, Root). The run page shows the same
+// form in place, as a widget (GRND-0108).
 #pragma once
 
 #include <QDialog>

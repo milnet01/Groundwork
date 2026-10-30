@@ -25,9 +25,9 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ### Fixed
 
-- **The password box can no longer hide behind the main window.** It
-  now opens as part of Groundwork's window, so a click on the window
-  leaves it in front.
+- **The password box can no longer hide behind the main window.** The
+  "Setting up" page now asks for the password in a field of its own,
+  so nothing pops up.
 - **The window opens wide.** It opened narrow, so its rows wrapped
   until the window took the screen's whole height.
 - **The window keeps one size from step to step.** It changed size at

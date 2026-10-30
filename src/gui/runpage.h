@@ -3,6 +3,7 @@
 #pragma once
 
 #include <QHash>
+#include <QPointer>
 #include <QProcess>
 #include <QWizardPage>
 
@@ -13,6 +14,7 @@ class QVBoxLayout;
 
 namespace gw {
 
+class AskpassDialog;
 class PasswordChannel;
 
 class RunPage : public QWizardPage
@@ -43,9 +45,11 @@ private:
     void readOutput();
     void handleLine(const QString &line);
     void finish();
+    void askPassword(const QString &sudoPrompt);
 
     QProcess m_process;
     PasswordChannel *m_passwords;
+    QPointer<AskpassDialog> m_passwordForm;
     QString m_pending;
     bool m_started = false;
     QHash<QString, QLabel *> m_status;

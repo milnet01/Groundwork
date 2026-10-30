@@ -1,15 +1,11 @@
 #include "passwordchannel.h"
 
-#include "askpassdialog.h"
-
 #include <QDir>
 #include <QFile>
 #include <QSocketNotifier>
-#include <QWidget>
 
 #include <cerrno>
 #include <cstring>
-#include <memory>
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/un.h>
@@ -64,7 +60,7 @@ void writeAll(int fd, const QByteArray &data)
 
 } // namespace
 
-PasswordChannel::PasswordChannel(QWidget *owner) : QObject(owner), m_owner(owner) {}
+PasswordChannel::PasswordChannel(QObject *parent) : QObject(parent) {}
 
 PasswordChannel::~PasswordChannel() { close(); }
 
@@ -90,12 +86,13 @@ bool PasswordChannel::listen()
         return false;
     }
     m_notifier = new QSocketNotifier(m_fd, QSocketNotifier::Read, this);
-    connect(m_notifier, &QSocketNotifier::activated, this, &PasswordChannel::answer);
+    connect(m_notifier, &QSocketNotifier::activated, this, &PasswordChannel::take);
     return true;
 }
 
 void PasswordChannel::close()
 {
+    refuse();
     delete m_notifier;
     m_notifier = nullptr;
     if (m_fd >= 0)
@@ -109,7 +106,7 @@ void PasswordChannel::close()
     m_dir.clear();
 }
 
-void PasswordChannel::answer()
+void PasswordChannel::take()
 {
     const int client = ::accept4(m_fd, nullptr, nullptr, SOCK_CLOEXEC);
     if (client < 0)
@@ -119,23 +116,24 @@ void PasswordChannel::answer()
     timeval wait{2, 0};
     ::setsockopt(client, SOL_SOCKET, SO_RCVTIMEO, &wait, sizeof wait);
     const QString prompt = QString::fromLocal8Bit(readAll(client, kMaxPrompt));
-    auto *box = new AskpassDialog(prompt, m_owner);
-    box->setAttribute(Qt::WA_DeleteOnClose);
-    // Hanging up with nothing written reads as Cancel, also when the
-    // window closes before the box is answered.
-    auto open = std::make_shared<int>(client);
-    auto hangUp = [open] {
-        if (*open >= 0)
-            ::close(*open);
-        *open = -1;
-    };
-    connect(box, &QDialog::finished, box, [box, open, hangUp](int result) {
-        if (result == QDialog::Accepted)
-            writeAll(*open, box->password().toUtf8() + '\n');
-        hangUp();
-    });
-    connect(box, &QObject::destroyed, hangUp);
-    box->open();
+    refuse();
+    m_client = client;
+    emit asked(prompt);
+}
+
+void PasswordChannel::reply(const QString &password)
+{
+    if (m_client >= 0)
+        writeAll(m_client, password.toUtf8() + '\n');
+    refuse();
+}
+
+// Hanging up with nothing written reads as Cancel.
+void PasswordChannel::refuse()
+{
+    if (m_client >= 0)
+        ::close(m_client);
+    m_client = -1;
 }
 
 Asked askWindow(const QString &path, const QString &sudoPrompt, QByteArray *password)

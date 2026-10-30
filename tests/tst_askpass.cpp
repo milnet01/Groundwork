@@ -4,11 +4,13 @@
 #include "core/translations.h"
 #include "gui/askpassdialog.h"
 #include "gui/passwordchannel.h"
+#include "gui/runpage.h"
 
 #include <QDialogButtonBox>
 #include <QFileInfo>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPlainTextEdit>
 #include <QPushButton>
 #include <QtTest>
 
@@ -82,52 +84,94 @@ private slots:
         QVERIFY2(cancel != QLatin1String("Cancel") && cancel != QLatin1String("&Cancel"), qPrintable(cancel));
     }
 
-    // Askpass mode asks the window, whose own box is its child, so a click
-    // on the window cannot hide it (GRND-0102).
-    void theWindowShowsTheBoxAsItsOwn()
+    // Askpass mode asks the window, which answers it (GRND-0102).
+    void theWindowAnswersAskpassMode()
     {
-        QWidget window;
-        window.show();
-        gw::PasswordChannel channel(&window);
+        gw::PasswordChannel channel;
         QVERIFY(channel.listen());
         // The socket's folder is the user's alone.
         QCOMPARE(QFileInfo(QFileInfo(channel.path()).path()).permissions() & 0x0077, QFileDevice::Permissions());
+        QString prompt;
+        connect(&channel, &gw::PasswordChannel::asked, &channel, [&](const QString &p) {
+            prompt = p;
+            channel.reply(QStringLiteral("s3cret"));
+        });
 
         QByteArray reply;
         gw::Asked asked = gw::Asked::NoChannel;
         std::thread askpass([&] { asked = gw::askWindow(channel.path(), QStringLiteral("root"), &reply); });
-        gw::AskpassDialog *box = nullptr;
-        QTRY_VERIFY((box = window.findChild<gw::AskpassDialog *>()));
-        QCOMPARE(box->parentWidget(), &window);
-        QVERIFY(box->isModal());
-        QVERIFY2(allText(*box).contains(QLatin1String("administrator password")), qPrintable(allText(*box)));
-        QTest::keyClicks(box->passwordField(), QStringLiteral("s3cret"));
-        box->findChild<QDialogButtonBox *>()->button(QDialogButtonBox::Ok)->click();
+        QTRY_COMPARE(prompt, QStringLiteral("root"));
         askpass.join();
         QCOMPARE(asked, gw::Asked::Answered);
         QCOMPARE(reply, QByteArray("s3cret\n"));
     }
 
-    void cancelInTheWindowReadsAsCancel()
+    void refusedInTheWindowReadsAsCancel()
     {
-        QWidget window;
-        gw::PasswordChannel channel(&window);
+        gw::PasswordChannel channel;
         QVERIFY(channel.listen());
+        connect(&channel, &gw::PasswordChannel::asked, &channel, [&] { channel.refuse(); });
         QByteArray reply;
         gw::Asked asked = gw::Asked::NoChannel;
         std::thread askpass([&] { asked = gw::askWindow(channel.path(), QStringLiteral("root"), &reply); });
-        gw::AskpassDialog *box = nullptr;
-        QTRY_VERIFY((box = window.findChild<gw::AskpassDialog *>()));
-        box->findChild<QDialogButtonBox *>()->button(QDialogButtonBox::Cancel)->click();
+        QTRY_VERIFY(asked != gw::Asked::NoChannel);
         askpass.join();
         QCOMPARE(asked, gw::Asked::Cancelled);
+    }
+
+    // A second request before an answer replaces the first, which reads as
+    // Cancel, so no askpass waits on a field that is gone.
+    void aSecondRequestRefusesTheFirst()
+    {
+        gw::PasswordChannel channel;
+        QVERIFY(channel.listen());
+        int requests = 0;
+        connect(&channel, &gw::PasswordChannel::asked, &channel, [&] { ++requests; });
+        QByteArray first, second;
+        gw::Asked firstAsked = gw::Asked::NoChannel;
+        std::thread one([&] { firstAsked = gw::askWindow(channel.path(), QStringLiteral("root"), &first); });
+        QTRY_COMPARE(requests, 1);
+        std::thread two([&] { gw::askWindow(channel.path(), QStringLiteral("root"), &second); });
+        QTRY_COMPARE(requests, 2);
+        one.join();
+        QCOMPARE(firstAsked, gw::Asked::Cancelled);
+        channel.reply(QStringLiteral("s3cret"));
+        two.join();
+        QCOMPARE(second, QByteArray("s3cret\n"));
+    }
+
+    // The run page asks in a field of its own, not a box that pops up
+    // (GRND-0108). The Worker stands in here as a shell that prints the
+    // socket's name sudo would pass on.
+    void theRunPageAsksInAFieldOfItsOwn()
+    {
+        gw::RunPage page;
+        page.show();
+        page.start(QStringLiteral("sh"),
+                   {QStringLiteral("-c"), QStringLiteral("echo \"$GROUNDWORK_ASKPASS_SOCKET\"; sleep 10")}, {});
+        auto *details = page.findChild<QPlainTextEdit *>();
+        QTRY_VERIFY(!details->toPlainText().trimmed().isEmpty());
+        const QString path = details->toPlainText().trimmed();
+
+        QByteArray reply;
+        gw::Asked asked = gw::Asked::NoChannel;
+        std::thread askpass([&] { asked = gw::askWindow(path, QStringLiteral("root"), &reply); });
+        gw::AskpassDialog *form = nullptr;
+        QTRY_VERIFY((form = page.findChild<gw::AskpassDialog *>()) && form->isVisible());
+        QVERIFY(!form->isWindow());
+        QVERIFY2(allText(*form).contains(QLatin1String("administrator password")), qPrintable(allText(*form)));
+        QTest::keyClicks(form->passwordField(), QStringLiteral("s3cret"));
+        QTest::keyClick(form->passwordField(), Qt::Key_Return);
+        askpass.join();
+        QCOMPARE(asked, gw::Asked::Answered);
+        QCOMPARE(reply, QByteArray("s3cret\n"));
+        QTRY_VERIFY(!page.findChild<gw::AskpassDialog *>());
     }
 
     // With no window listening, askpass mode shows its own box, as before.
     void noWindowLeavesTheBoxToAskpass()
     {
-        QWidget window;
-        gw::PasswordChannel channel(&window);
+        gw::PasswordChannel channel;
         QVERIFY(channel.listen());
         const QString path = channel.path();
         channel.close();

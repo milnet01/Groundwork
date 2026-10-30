@@ -1,9 +1,11 @@
 #include "runpage.h"
 
+#include "askpassdialog.h"
 #include "core/markers.h"
 #include "passwordchannel.h"
 
 #include <QLabel>
+#include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QProcess>
 #include <QPushButton>
@@ -46,6 +48,8 @@ RunPage::RunPage(QWidget *parent)
     layout->addWidget(toggle);
     layout->addWidget(m_details);
 
+    connect(m_passwords, &PasswordChannel::asked, this, &RunPage::askPassword);
+
     m_process.setProcessChannelMode(QProcess::SeparateChannels);
     connect(&m_process, &QProcess::readyReadStandardOutput, this, &RunPage::readOutput);
     connect(&m_process, &QProcess::readyReadStandardError, this,
@@ -67,11 +71,32 @@ void RunPage::finish()
         handleLine(m_pending);
     m_pending.clear();
     m_passwords->close();
+    delete m_passwordForm;
     if (m_summary->text().isEmpty())
         m_summary->setText(tr("Groundwork stopped unexpectedly. The details below say why."));
     m_oneUp->setVisible(m_offersOneUp && !QStandardPaths::findExecutable(QStringLiteral("oneup")).isEmpty());
     emit completeChanged();
     emit runFinished();
+}
+
+// The password box's form, shown in the page under the rows rather than
+// over it, so nothing pops up (GRND-0108).
+void RunPage::askPassword(const QString &sudoPrompt)
+{
+    delete m_passwordForm;
+    auto *form = new AskpassDialog(sudoPrompt, this);
+    form->setWindowFlags(Qt::Widget);
+    static_cast<QVBoxLayout *>(layout())->insertWidget(1, form);
+    connect(form, &QDialog::finished, this, [this, form](int result) {
+        if (result == QDialog::Accepted)
+            m_passwords->reply(form->password());
+        else
+            m_passwords->refuse();
+        form->deleteLater();
+    });
+    m_passwordForm = form;
+    form->show();
+    form->passwordField()->setFocus();
 }
 
 RunPage::~RunPage()
@@ -95,8 +120,8 @@ void RunPage::start(const QString &program, const QStringList &arguments,
     // A later run on this page, such as removing secrets, says its own outcome.
     m_summary->clear();
     m_started = true;
-    // The Worker's sudo passes this on to askpass mode, so the box opens
-    // as this window's own (GRND-0102).
+    // The Worker's sudo passes this on to askpass mode, which then asks
+    // this page for the password (GRND-0102, GRND-0108).
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     if (m_passwords->listen())
         env.insert(QString::fromLatin1(kAskpassSocketVar), m_passwords->path());

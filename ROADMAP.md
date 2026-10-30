@@ -2067,12 +2067,15 @@ scheduled.
   Kind: fix.
   Source: user-report-2026-10-29.
 
-- 📋 [GRND-0108] **The run page asks for the password in a field of its own, not a box.**
+- ✅ [GRND-0108] **The run page asks for the password in a field of its own, not a box.**
   GRND-0102 made the askpass box the window's own dialog. The user
   asked on 2026-10-29 for a field built into the run page instead.
   PasswordChannel already brings the request to the window; the page
   shows a field and OK and Cancel in place of the dialog. Askpass mode
   outside the window keeps its own box.
+  Shipped 2026-10-30: the run page shows the box's own form in place
+  (RunPage::askPassword); PasswordChannel hands the request over with
+  asked() and takes reply() or refuse().
   **Layman:** When Groundwork needs your password, the 'Setting up' page shows a password field in place, so nothing pops up.
   Kind: ux.
   Source: user-request-2026-10-29.

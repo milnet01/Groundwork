@@ -1,8 +1,8 @@
-// The window shows the password box (GRND-0102). sudo -A starts askpass
-// mode as a process of its own, whose box the desktop does not tie to the
-// window, so a click on the window could hide it. So the run page listens
-// on a socket in a folder only the user can open, askpass mode asks
-// through it, and the box opens as the window's own (docs/design.md, Root).
+// The run page asks for the password (GRND-0102, GRND-0108). sudo -A starts
+// askpass mode as a process of its own, whose box the desktop does not tie
+// to the window, so a click on the window could hide it. So the run page
+// listens on a socket in a folder only the user can open, askpass mode asks
+// through it, and the page shows the field (docs/design.md, Root).
 #pragma once
 
 #include <QByteArray>
@@ -10,7 +10,6 @@
 #include <QString>
 
 class QSocketNotifier;
-class QWidget;
 
 namespace gw {
 
@@ -22,20 +21,29 @@ class PasswordChannel : public QObject
 {
     Q_OBJECT
 public:
-    // owner is the box's parent, so the box stays in front of its window.
-    explicit PasswordChannel(QWidget *owner);
+    explicit PasswordChannel(QObject *parent = nullptr);
     ~PasswordChannel() override;
 
     // True once listening; false leaves askpass mode to show its own box.
     bool listen();
     QString path() const { return m_path; }
+    // Also hangs up on a request not yet answered.
     void close();
 
-private:
-    void answer();
+    // Answer the request asked() named; refuse() reads as Cancel.
+    void reply(const QString &password);
+    void refuse();
 
-    QWidget *m_owner;
+signals:
+    // sudoPrompt is whose password sudo wants. A second request before an
+    // answer replaces the first, which is refused.
+    void asked(const QString &sudoPrompt);
+
+private:
+    void take();
+
     int m_fd = -1;
+    int m_client = -1;
     QString m_dir;
     QString m_path;
     QSocketNotifier *m_notifier = nullptr;
