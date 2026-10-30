@@ -19,6 +19,7 @@
 #include "virtualmachinesitem.h"
 #include "hostnameitem.h"
 #include "logcapitem.h"
+#include "networksharesitem.h"
 #include "numlockitem.h"
 #include "memoryitem.h"
 #include "nvidiaitem.h"
@@ -63,6 +64,7 @@ const Catalogue &catalogue()
     static const ClockItem clock;
     static const NumlockItem numlock;
     static const ExtraDrivesItem extraDrives; // GRND-0067
+    static const NetworkSharesItem networkShares; // GRND-0066
     // Nice to have: everyday apps (GRND-0025)
     static const FlathubAppItem chrome(QStringLiteral("app-chrome"), QT_TRANSLATE_NOOP("gw::Apps", "Google Chrome"),
         QT_TRANSLATE_NOOP("gw::Apps", "Installs Google's web browser from Flathub."), QStringLiteral("com.google.Chrome"),
@@ -145,7 +147,7 @@ const Catalogue &catalogue()
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &amdVideo, &soundFirmware, &broadcom,
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
-                                &hostname, &ssh, &clock, &numlock, &extraDrives,
+                                &hostname, &ssh, &clock, &numlock, &extraDrives, &networkShares,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
                                 &buildTools, &codium, &claudeCode, &claudeTools, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;

@@ -77,13 +77,14 @@ The list reaches the Worker through the existing `--set`, as compact JSON in one
 
 ### 4.3 What a value may hold
 
-`NetworkSharesItem::isValidValue` accepts JSON of the §4.2 shape and refuses the whole value when any entry breaks a rule. The Wizard and the Worker both call it. `NetworkSharesItem::whyRefused(path)` returns the plain sentence the list shows when a folder is refused.
+`NetworkSharesItem::isValidValue` accepts JSON of the §4.2 shape and refuses the whole value when any entry breaks a rule. The Wizard and the Worker both call it. `Item::whyRefused(path)`, a virtual `NetworkSharesItem` overrides, returns the plain sentence the list shows when a folder is refused.
 
 | Rule | Why |
 |---|---|
 | Absolute, and equal to its own `QDir::cleanPath` | no `..` or doubled slash |
 | No control character, `%`, `"` or `\` | a newline would start a new line in the file; `%` is a Samba substitution; a final `\` continues the line |
-| No leading or trailing space | Samba trims it, so another folder would be shared |
+| No leading or trailing space, and no two spaces together | Samba trims the ends and squeezes spaces inside (`testparm -s`, 2026-10-30), so another folder would be shared |
+| A link's target obeys these rules too | Samba follows a share's own path, whatever `wide links` says |
 | Not `/` | the whole machine |
 | Not `/bin`, `/boot`, `/dev`, `/etc`, `/lib`, `/lib64`, `/opt`, `/proc`, `/root`, `/sbin`, `/sys`, `/usr`, `/var` or below them | system files |
 | Not under `/run`, except `/run/media` | a drive the desktop opened lives there |
@@ -100,18 +101,23 @@ The list reaches the Worker through the existing `--set`, as compact JSON in one
 
 ### 4.5 The row
 
-`Item` gains one virtual, and `CheckResult` one field:
+`Item` gains these virtuals, and `CheckResult` these fields:
 
 ```cpp
 // True for an item whose value is a list of folders rather than a line of text.
 virtual bool valueIsFolderList() const { return false; }
+// Why a folder cannot go on such a list, in a sentence; empty if it can.
+virtual QString whyRefused(const QString &) const { return {}; }
 
 struct CheckResult {
     CheckState state = CheckState::CouldNotTell;
     QString detail;
     QString currentValue = {}; // what is applied now, for an item that can read it
+    QMap<QString, QString> heldFolders = {}; // folders something else already has, with the name to give
 };
 ```
+
+`src/core/folderlist.{h,cpp}` holds the value's format, so the row and the item read and write one shape.
 
 `src/gui/folderlistfield.{h,cpp}` adds `FolderListField`. It shows one line per folder: the path, a `Switch` labelled "Let people add, change and delete files" (off to start, per the user's preference for switches), and a Remove button. Below them is an "Add a folder…" button using `QFileDialog::getExistingDirectory`, as `src/gui/carrypages.cpp` does, disabled at the cap. A refused folder is not added and `whyRefused`'s sentence shows beneath the list. A folder another share already has is refused too, naming that share.
 
@@ -124,8 +130,9 @@ struct CheckResult {
 **Check.** It uses `readService` and `CheckContext::readFile` only, and never `firewall-cmd`.
 
 - `readService` did not answer: `CouldNotTell`.
-- `smb`, `nmb` and `wsdd` are all enabled and active, `groundwork-shares.conf` is readable, and `smb.conf` holds the include line: `Done`, with `currentValue` parsed from `groundwork-shares.conf`.
+- `smb`, `nmb` and `wsdd` are all enabled and active, `groundwork-shares.conf` is readable, and `smb.conf` holds the include line: `Done`.
 - Anything else, an unreadable file included: `NotDone`. Applying fixes each of those (CLAUDE.md, Item checks never run as root).
+- `currentValue` is parsed from `groundwork-shares.conf` whenever it is readable, so a row reading `NotDone` still shows the list. `heldFolders` comes from `smb.conf`'s other sections.
 - `detail` names any other shares in `smb.conf`: "Other shares, left as they are: ROMS, PC Games." Reserved names are not listed. Each name passes through `isolated()`.
 
 **Apply.** `Item` gains a second virtual, and the Worker calls it instead of `applySteps`. Its default returns `applySteps(system, context)`, so no other item changes:
@@ -151,7 +158,11 @@ No step runs `testparm` as a gate. A file holding an unknown parameter still exi
 
 ### 4.7 Changing the list later
 
-`Worker::run` gains one case: an item whose re-check is `Done` still runs when its `currentValue` is not empty and differs from the value given. Both are compact JSON from one writer, so a plain comparison serves. An item that leaves `currentValue` empty, as `HostnameItem` does, behaves as now.
+`Worker::run` gains one case: an item whose re-check is `Done` still runs when its `currentValue` is not empty and a value was given that differs from it. Both are compact JSON from one writer, so a plain comparison serves. An item that leaves `currentValue` empty, as `HostnameItem` does, behaves as now.
+
+The item installs packages, so it depends on bringing the system up to date (`docs/design.md`, The levels). Changing the list later still switches that on when updates are waiting.
+
+An empty list leaves Apply greyed out, so the review page says a value is still needed.
 
 ## 5. Invariants
 
@@ -201,7 +212,7 @@ Each new test must be seen to fail before its code exists.
 |---|---|
 | INV-1, INV-2, INV-3, INV-4, INV-5, INV-7, INV-10, INV-11 | `tests/tst_networksharesitem.cpp`, a new target in `tests/CMakeLists.txt`, using `FileReader` and fake runner fixtures as `tests/tst_extradrivesitem.cpp` does |
 | INV-6 | `tests/tst_selection.cpp::networkSharesNeverStartsOn` |
-| INV-8, INV-9 | `tests/tst_worker.cpp`. Each proves the Worker's handling only, with a fake item; neither touches Samba |
+| INV-8, INV-9 | `tests/tst_worker.cpp`. Each drives the built program, whose catalogue is the real one, with fake commands on `PATH`; neither touches Samba |
 | INV-12 | `tests/tst_wizard.cpp::aFolderListGivesItsValue`. It does not open the file dialog |
 | INV-13 | the recipe below |
 
@@ -283,5 +294,5 @@ The user's existing `smb.conf` shares stay as they are and are named on the row.
 
 ## 15. Open questions
 
-- **Does Leap 16.0 offer `wsdd`, and `wsdd` as a firewalld service?** Measured on Tumbleweed only. Check with `zypper search` in a Leap VM before building §4.6 step 1. If it is absent, leave wsdd out on that system by `SystemIdentity`, and have the row say other computers may need the address typed in.
+- **Does Leap 16.0 offer `wsdd`, and `wsdd` as a firewalld service?** Settled 2026-10-30: yes. Leap 16.0's `repo/oss` metadata lists `wsdd` 0.8, whose files include `wsdd.service` and `/usr/lib/firewalld/services/wsdd.xml`. No system needs a separate path.
 - **Should the row warn about Windows 11?** Decided here unless the recipe shows otherwise: yes, one sentence, "Windows 11 may refuse a folder with no password until a setting is changed on that computer." The exact Windows behaviour is from the sources in §6, and is not measured here.

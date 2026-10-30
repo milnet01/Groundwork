@@ -1057,6 +1057,37 @@
     </message>
 </context>
 <context>
+    <name>gw::FolderListField</name>
+    <message>
+        <source>Add a folder…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This folder is already shared as %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This folder is already on the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Let people add, change and delete files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">제거</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a folder to share</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>gw::FontsItem</name>
     <message>
         <source>Microsoft-compatible fonts</source>
@@ -1330,6 +1361,77 @@
     <message>
         <source>Switching the memory watchdog on</source>
         <translation>메모리 감시 도구를 켜는 중</translation>
+    </message>
+</context>
+<context>
+    <name>gw::NetworkSharesItem</name>
+    <message>
+        <source>This folder&apos;s path could not be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A folder whose path holds a control character, %, a double quote or a backslash cannot be shared.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A folder whose path starts or ends with a space, or has two spaces together, cannot be shared.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This folder&apos;s path is too long to share.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The whole computer cannot be shared.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This folder holds system files, so it cannot be shared.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your home folder holds keys and passwords, so it cannot be shared whole. Choose a folder inside it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden folders in your home folder hold settings and keys, so they cannot be shared.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Share folders on the network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lets other computers open the folders you list here. Anyone on the network can get in with no password, on any network this computer joins. Windows 11 may refuse a folder with no password until a setting is changed on that computer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Folders to share:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The service manager did not answer.</source>
+        <translation type="unfinished">서비스 관리자가 응답하지 않았습니다.</translation>
+    </message>
+    <message>
+        <source>Other shares, left as they are: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installing file sharing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sharing your folders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letting file sharing through the firewall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reloading the firewall</source>
+        <translation type="unfinished">방화벽 다시 불러오는 중</translation>
     </message>
 </context>
 <context>
@@ -2113,6 +2215,10 @@
     <message>
         <source>These run in this order after one password.</source>
         <translation>비밀번호를 한 번 입력하면 다음 순서로 실행됩니다.</translation>
+    </message>
+    <message>
+        <source>Something you switched on still needs a value, such as a folder to share. Go back and fill it in.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>What to restore could not be written to %1, so nothing was changed.</source>

@@ -317,6 +317,12 @@ public:
             lines << QStringLiteral("• ") + item->title() + QStringLiteral(" — ") + item->applySentence();
         }
         m_list->setText(lines.join(QLatin1Char('\n')));
+        // Apply stays greyed out for this, so say why.
+        if (!m_wizard->valuesValid()) {
+            m_error->setText(Wizard::tr("Something you switched on still needs a value, such as a folder to share. "
+                                        "Go back and fill it in."));
+            m_error->show();
+        }
     }
     // Apply is unavailable until an item is switched on (design, Worker's interface).
     bool isComplete() const override { return !m_wizard->runOrder().isEmpty() && m_wizard->valuesValid(); }
@@ -790,7 +796,7 @@ QStringList Wizard::workerArguments() const
     const QStringList order = runOrder();
     for (const QString &id : order) {
         const ItemRow *row = m_rows.value(id);
-        if (row && row->valueField())
+        if (row && row->takesValue())
             args << QStringLiteral("--set") << id + QLatin1Char('=') + row->value();
     }
     return args + order;
@@ -836,7 +842,7 @@ bool Wizard::valuesValid() const
 {
     for (const QStringList ids = runOrder(); const QString &id : ids) {
         const ItemRow *row = m_rows.value(id);
-        if (row && row->valueField() && !catalogue().find(id)->isValidValue(row->value()))
+        if (row && row->takesValue() && !catalogue().find(id)->isValidValue(row->value()))
             return false;
     }
     return true;

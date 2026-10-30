@@ -272,7 +272,12 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         // An item already done, or not needed, is reported as such whatever
         // its dependencies did.
         const CheckResult recheck = item->check(context);
-        if (recheck.state != CheckState::NotDone) {
+        // Except a done item given a value that differs from what is applied
+        // now, such as a changed list of shared folders (GRND-0066 spec 4.7).
+        const QString value = values.value(id);
+        const bool changed = recheck.state == CheckState::Done && !recheck.currentValue.isEmpty()
+            && !value.isEmpty() && value != recheck.currentValue;
+        if (recheck.state != CheckState::NotDone && !changed) {
             const Outcome o = recheck.state == CheckState::Done ? Outcome::SkippedDone
                 : recheck.state == CheckState::NotNeeded       ? Outcome::SkippedNotNeeded
                                                                : Outcome::SkippedOther;
@@ -312,7 +317,6 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
         }
 
         // An item that takes a value runs only with a valid one.
-        const QString value = values.value(id);
         if (!item->valuePrompt().isEmpty() && (value.isEmpty() || !item->isValidValue(value))) {
             outcomes.insert(id, Outcome::SkippedOther);
             say(formatMarker(QStringLiteral("STEP_END"),
@@ -322,7 +326,7 @@ int Worker::run(const QStringList &ids, const QHash<QString, QString> &values)
 
         QString detail;
         bool success = true;
-        for (Step &step : item->applySteps(system, context)) {
+        for (Step &step : item->applyStepsFor(system, context, value)) {
             step.argv.replaceInStrings(kValuePlaceholder, value);
             if (step.needsRoot && !ensureRoot())
                 break;

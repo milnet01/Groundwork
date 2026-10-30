@@ -1618,7 +1618,7 @@ built as 0.4.0 instead.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
 
-- 📋 [GRND-0066] **Item: share folders on the network.**
+- 🚧 [GRND-0066] **Item: share folders on the network.**
   From the owner's machine: Samba (smb and nmb) with wsdd so Windows
   finds it, and the firewall opened for it. Needs a design first: which
   folders, who may open them, and a Samba password.
@@ -1631,6 +1631,11 @@ built as 0.4.0 instead.
   Seen on the owner's machine the same day: wsdd is installed but off,
   so the item must decide whether to switch it on. `--set id=value`
   (Wizard::workerArguments) is the existing path for a typed value.
+  Built 2026-10-30 from docs/specs/GRND-0066-network-shares.md. Unit
+  tests pass. Its spec's manual VM recipe (INV-13) is what proves Samba
+  obeys the file, and it stays owed until run. Leap 16.0 offers wsdd 0.8
+  with its firewalld service, read from that release's repo/oss
+  metadata. Translations are unfinished in every .ts file.
   **Layman:** Lets other computers at home open folders you choose on this one.
   Kind: feature.
   Source: user-request-2026-10-10.

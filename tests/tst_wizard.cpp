@@ -4,6 +4,7 @@
 #include "core/statepaths.h"
 #include "core/translations.h"
 #include "gui/carrypages.h"
+#include "gui/folderlistfield.h"
 #include "gui/itemrow.h"
 #include "gui/runpage.h"
 #include "gui/switch.h"
@@ -67,6 +68,17 @@ public:
     bool isValidValue(const QString &v) const override { return !v.isEmpty() && !v.contains(QLatin1Char(' ')); }
 };
 const FakeValueItem hostname(QStringLiteral("hostname"), gw::Level::Configuration, false);
+class FakeFolderListItem : public FakeItem
+{
+public:
+    using FakeItem::FakeItem;
+    QString valuePrompt() const override { return QStringLiteral("Folders:"); }
+    bool valueIsFolderList() const override { return true; }
+    QString whyRefused(const QString &path) const override
+    {
+        return path == QLatin1String("/etc") ? QStringLiteral("Not that one.") : QString();
+    }
+};
 const FakeItem fonts(QStringLiteral("fonts"), gw::Level::NiceToHave, true);
 const gw::Catalogue catalogue({&update, &codecs, &hostname, &fonts});
 class FakeIncluder : public FakeItem
@@ -609,6 +621,56 @@ private slots:
         const QStringList args = w->workerArguments();
         QVERIFY(args.join(QLatin1Char(' ')).contains(QLatin1String("--set hostname=lounge-pc")));
         QVERIFY(w->row(QStringLiteral("codecs"))->valueField() == nullptr);
+    }
+
+    // A row taking a list of folders (GRND-0066, INV-12): nothing to apply
+    // on a fresh row, a new folder starts look-only, and a row that opened
+    // with folders can give up its last one. The file dialog is not opened.
+    void aFolderListGivesItsValue()
+    {
+        const FakeFolderListItem shares(QStringLiteral("shares"), gw::Level::Configuration, false);
+        const gw::CheckResult fresh{gw::CheckState::NotDone, {}};
+        gw::ItemRow row(shares, fresh);
+        QVERIFY(row.takesValue());
+        QVERIFY(row.valueField() == nullptr);
+        gw::FolderListField *list = row.folderList();
+        QVERIFY(list);
+        QCOMPARE(row.value(), QString());
+
+        list->addFolder(QStringLiteral("/mnt/a b"));
+        QCOMPARE(row.value(), QStringLiteral(R"([{"path":"/mnt/a b","write":false}])"));
+        auto *write = list->findChild<gw::Switch *>();
+        QVERIFY(write);
+        QVERIFY(!write->isChecked());
+        write->click();
+        QCOMPARE(row.value(), QStringLiteral(R"([{"path":"/mnt/a b","write":true}])"));
+
+        // Refused: not added, and why is shown.
+        list->addFolder(QStringLiteral("/etc"));
+        QCOMPARE(list->refusal(), QStringLiteral("Not that one."));
+        QCOMPARE(row.value(), QStringLiteral(R"([{"path":"/mnt/a b","write":true}])"));
+        list->addFolder(QStringLiteral("/mnt/a b"));
+        QVERIFY(!list->refusal().isEmpty());
+
+        const auto buttons = list->findChildren<QPushButton *>();
+        for (QPushButton *button : buttons)
+            if (button->text() == QLatin1String("Remove"))
+                button->click();
+        QCOMPARE(row.value(), QString()); // fresh, so still nothing to apply
+
+        gw::CheckResult opened{gw::CheckState::Done, {}};
+        opened.currentValue = QStringLiteral(R"([{"path":"/mnt/old","write":true}])");
+        opened.heldFolders.insert(QStringLiteral("/mnt/theirs"), QStringLiteral("Theirs"));
+        gw::ItemRow filled(shares, opened);
+        QCOMPARE(filled.value(), opened.currentValue);
+        filled.folderList()->addFolder(QStringLiteral("/mnt/theirs"));
+        QVERIFY2(filled.folderList()->refusal().contains(QLatin1String("Theirs")),
+                 qPrintable(filled.folderList()->refusal()));
+        const auto oldButtons = filled.folderList()->findChildren<QPushButton *>();
+        for (QPushButton *button : oldButtons)
+            if (button->text() == QLatin1String("Remove"))
+                button->click();
+        QCOMPARE(filled.value(), QStringLiteral("[]"));
     }
 
     // Each row's choice is an on/off switch, not a tick box (GRND-0069):

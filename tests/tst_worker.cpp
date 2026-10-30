@@ -585,6 +585,80 @@ exit 0
         QCOMPARE(r.endsFor(QStringLiteral("computer-name")).value(1), QStringLiteral("skip"));
     }
 
+    // Sharing folders (GRND-0066), switched on already, with the shares file
+    // holding one folder. The fake dd keeps what it is given.
+    void shareFixture()
+    {
+        m_env.insert(QStringLiteral("FAKE_WRITTEN"), m_dir->filePath(QStringLiteral("written")));
+        writeFile(m_bin + QStringLiteral("/systemctl"), R"(#!/bin/sh
+echo "systemctl $*" >> "$FAKE_LOG"
+case "$1" in is-enabled) echo enabled;; is-active) echo active;; esac
+exit 0
+)", true);
+        writeFile(m_bin + QStringLiteral("/touch"), "#!/bin/sh\necho \"touch $*\" >> \"$FAKE_LOG\"\n", true);
+        writeFile(m_bin + QStringLiteral("/firewall-cmd"), "#!/bin/sh\necho \"firewall-cmd $*\" >> \"$FAKE_LOG\"\n", true);
+        writeFile(m_bin + QStringLiteral("/dd"), R"(#!/bin/sh
+echo "dd $*" >> "$FAKE_LOG"
+out=$(printf '%s' "$1" | sed 's|^of=||; s|/|_|g')
+cat > "$FAKE_WRITTEN$out"
+)", true);
+        writeFile(m_root + QStringLiteral("/etc/samba/smb.conf"),
+                  "[global]\n\n# Added by Groundwork: the folders it shares.\n"
+                  "include = /etc/samba/groundwork-shares.conf\n");
+        writeFile(m_root + QStringLiteral("/etc/samba/groundwork-shares.conf"),
+                  "[global]\n   map to guest = bad user\n\n[old]\n   path = /mnt/old\n   read only = yes\n");
+    }
+    QByteArray writtenShares() const
+    {
+        QFile written(m_dir->filePath(QStringLiteral("written_etc_samba_groundwork-shares.conf")));
+        return written.open(QIODevice::ReadOnly) ? written.readAll() : QByteArray();
+    }
+
+    // INV-8: a done item runs when the value differs from what is applied,
+    // and is skipped when it matches or no value was given. An item that
+    // does not report what is applied is skipped as before.
+    void aChangedValueRunsADoneItem()
+    {
+        shareFixture();
+        const QString same = QStringLiteral(R"(network-shares=[{"path":"/mnt/old","write":false}])");
+        Run r = run({QStringLiteral("--set"), same, QStringLiteral("network-shares")});
+        QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("skip"));
+        QCOMPARE(r.count(QStringLiteral("sudo -n -- dd")), 0);
+
+        r = run({QStringLiteral("network-shares")}); // no --set
+        QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("skip"));
+
+        const QString refused = QStringLiteral(R"(network-shares=[{"path":"/etc","write":false}])");
+        r = run({QStringLiteral("--set"), refused, QStringLiteral("network-shares")});
+        QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("skip"));
+        QCOMPARE(r.count(QStringLiteral("sudo -n -- dd")), 0);
+
+        const QString changed = QStringLiteral(R"(network-shares=[{"path":"/mnt/new","write":true}])");
+        // With the update, as the Wizard sends it (design, The levels).
+        r = run({QStringLiteral("--set"), changed, QStringLiteral("system-update"), QStringLiteral("network-shares")});
+        QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("ok"));
+        QVERIFY(writtenShares().contains("path = /mnt/new\n"));
+        QVERIFY(r.calls.contains(QStringLiteral("sudo -n -- systemctl restart smb nmb wsdd")));
+
+        writeFile(m_bin + QStringLiteral("/hostnamectl"), "#!/bin/sh\necho \"hostnamectl $*\" >> \"$FAKE_LOG\"\necho lounge-pc\n", true);
+        QFile::remove(m_log);
+        r = run({QStringLiteral("--set"), QStringLiteral("computer-name=other-pc"), QStringLiteral("computer-name")});
+        QCOMPARE(r.endsFor(QStringLiteral("computer-name")).value(1), QStringLiteral("skip"));
+        QCOMPARE(r.count(QStringLiteral("sudo -n -- hostnamectl hostname other-pc")), 0);
+    }
+
+    // INV-9: spaces, an equals sign and a letter beyond ASCII survive the
+    // trip through --set.
+    void aListValueReachesItsItemWhole()
+    {
+        shareFixture();
+        const QString path = QStringLiteral("/mnt/Spiele für alle=1");
+        const QString given = QStringLiteral(R"(network-shares=[{"path":")") + path + QStringLiteral(R"(","write":false}])");
+        const Run r = run({QStringLiteral("--set"), given, QStringLiteral("system-update"), QStringLiteral("network-shares")});
+        QCOMPARE(r.endsFor(QStringLiteral("network-shares")).value(1), QStringLiteral("ok"));
+        QVERIFY2(writtenShares().contains("   path = " + path.toUtf8() + '\n'), writtenShares().constData());
+    }
+
     // A step's text reaches its command's standard input: how an item writes
     // a file as root with no shell (GRND-0052). The fake dd keeps what it
     // was given, named after its target.

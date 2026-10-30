@@ -24,6 +24,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   time the computer starts. A missing drive never stops it starting.
   An empty drive becomes yours to save to. USB and Windows drives
   are left out.
+- **Share folders on the network** (GRND-0066). List the folders you
+  want other computers at home to open, and choose for each whether
+  people may only look or may also add, change and delete files. Anyone
+  on the network can get in with no password, and the row says so.
+  System folders and your home folder as a whole are refused. Shares
+  you already have stay as they are.
 
 ### Changed
 

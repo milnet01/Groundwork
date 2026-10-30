@@ -1,6 +1,7 @@
 // Default selection, dependency closure, items that include others, and
 // run order (docs/design.md, The levels; S1 and S4).
 #include "core/selection.h"
+#include "items/networksharesitem.h"
 
 #include <QtTest>
 
@@ -72,6 +73,16 @@ private slots:
                                 {"nvidia", S::NotNeeded}, {"hostname", S::NotDone}, {"fonts", S::NotDone}});
         QCOMPARE(sorted(catalogue().defaultSelection(r)),
                  QStringList({"codecs", "flathub", "update"}));
+    }
+
+    // Opening folders to the network is only ever the user's choice
+    // (GRND-0066, INV-6).
+    void networkSharesNeverStartsOn()
+    {
+        const gw::NetworkSharesItem shares;
+        const gw::Catalogue withShares({&update, &shares});
+        const auto r = results({{"update", S::NotDone}, {"network-shares", S::NotDone}});
+        QVERIFY(!withShares.defaultSelection(r).contains(QStringLiteral("network-shares")));
     }
 
     void setUpSystemStartsNothingEvenWithUpdatesWaiting() // S1

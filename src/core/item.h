@@ -9,6 +9,7 @@
 #include "systemidentity.h"
 
 #include <QList>
+#include <QMap>
 #include <QString>
 #include <QStringList>
 
@@ -30,6 +31,10 @@ struct CheckResult
 {
     CheckState state = CheckState::CouldNotTell;
     QString detail; // plain English; required for CouldNotTell
+    QString currentValue = {}; // what is applied now, for an item that can read it
+    // A folder-list item: folders something else already has, with the name
+    // to give for each.
+    QMap<QString, QString> heldFolders = {};
 };
 
 // In a step's argv, replaced by the value the user gave the item.
@@ -121,6 +126,10 @@ public:
     // computer's name: the field's label. Its steps carry kValuePlaceholder.
     virtual QString valuePrompt() const { return {}; }
     virtual bool isValidValue(const QString &) const { return true; }
+    // True for an item whose value is a list of folders rather than a line of text.
+    virtual bool valueIsFolderList() const { return false; }
+    // Why a folder cannot go on such a list, in a sentence; empty if it can.
+    virtual QString whyRefused(const QString &) const { return {}; }
 
     virtual CheckResult check(const CheckContext &context) const = 0;
     // The steps can differ by system (dup on the rolling family, update on
@@ -128,6 +137,13 @@ public:
     // without root.
     virtual QList<Step> applySteps(const SystemIdentity &system,
                                    const CheckContext &context) const = 0;
+    // The steps for the value given. What the Worker calls; an item that
+    // writes a file built from its value overrides it.
+    virtual QList<Step> applyStepsFor(const SystemIdentity &system, const CheckContext &context,
+                                      const QString &) const
+    {
+        return applySteps(system, context);
+    }
 };
 
 } // namespace gw

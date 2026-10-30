@@ -1,6 +1,7 @@
 #include "itemrow.h"
 
 #include "core/checkrunner.h"
+#include "folderlistfield.h"
 #include "switch.h"
 
 #include <QCheckBox>
@@ -39,15 +40,25 @@ ItemRow::ItemRow(const Item &item, const CheckResult &result, QWidget *parent)
     if (!item.valuePrompt().isEmpty()) {
         auto *prompt = new QLabel(item.valuePrompt(), this);
         prompt->setWordWrap(true);
-        m_value = new QLineEdit(this);
-        prompt->setBuddy(m_value);
-        m_value->setAccessibleName(item.valuePrompt());
         layout->addWidget(prompt);
-        layout->addWidget(m_value);
+        if (item.valueIsFolderList()) {
+            m_folders = new FolderListField(item, result, this);
+            layout->addWidget(m_folders);
+        } else {
+            m_value = new QLineEdit(this);
+            prompt->setBuddy(m_value);
+            m_value->setAccessibleName(item.valuePrompt());
+            layout->addWidget(m_value);
+        }
     }
 }
 
-QString ItemRow::value() const { return m_value ? m_value->text().trimmed() : QString(); }
+QString ItemRow::value() const
+{
+    if (m_folders)
+        return m_folders->value();
+    return m_value ? m_value->text().trimmed() : QString();
+}
 
 void ItemRow::changeEvent(QEvent *event)
 {

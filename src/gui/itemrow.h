@@ -13,6 +13,8 @@ class QLineEdit;
 
 namespace gw {
 
+class FolderListField;
+
 class ItemRow : public QWidget
 {
     Q_OBJECT
@@ -31,6 +33,9 @@ public:
     QString title() const { return m_title; }
     // For an item that takes a value; null otherwise.
     QLineEdit *valueField() const { return m_value; }
+    // For an item whose value is a list of folders; null otherwise.
+    FolderListField *folderList() const { return m_folders; }
+    bool takesValue() const { return m_value || m_folders; }
     QString value() const;
 
 signals:
@@ -49,6 +54,7 @@ private:
     QCheckBox *m_toggle;
     QLabel *m_reason;
     QLineEdit *m_value = nullptr;
+    FolderListField *m_folders = nullptr;
 };
 
 } // namespace gw

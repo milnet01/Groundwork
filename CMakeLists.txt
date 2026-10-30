@@ -20,6 +20,7 @@ add_library(groundwork_core STATIC
     src/core/checkrunner.cpp
     src/core/commandrunner.cpp
     src/core/filereader.cpp
+    src/core/folderlist.cpp
     src/core/markers.cpp
     src/core/selection.cpp
     src/core/statepaths.cpp
@@ -75,6 +76,7 @@ add_library(groundwork_items STATIC
     src/items/sysrqitem.cpp
     src/items/diskscheduleritem.cpp
     src/items/extradrivesitem.cpp
+    src/items/networksharesitem.cpp
     src/items/wakeitem.cpp
     src/items/logcapitem.cpp
     src/items/bootmenuitem.cpp
@@ -116,6 +118,7 @@ target_link_libraries(groundwork_worker PUBLIC groundwork_carry groundwork_drive
 add_library(groundwork_gui STATIC
     src/gui/askpassdialog.cpp
     src/gui/carrypages.cpp
+    src/gui/folderlistfield.cpp
     src/gui/itemrow.cpp
     src/gui/passwordchannel.cpp
     src/gui/preparepages.cpp
