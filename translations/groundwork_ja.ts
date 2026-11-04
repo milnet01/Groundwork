@@ -441,59 +441,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">サービスマネージャーから応答がありませんでした。</translation>
+        <translation>サービスマネージャーから応答がありませんでした。</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>保存したファイルのファイアウォールのルール</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>システムの設定を変更します：ファイアウォールのゾーンとサービス、および既定のゾーンを元に戻します。置き換えるファイルは、番号付きのコピーとしてその隣に残します。</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイアウォールのルールを元に戻しています</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>保存したファイルのプリンター</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>システムの設定を変更します：プリンターを元に戻し、CUPS がなければインストールします。置き換えるファイルは、番号付きのコピーとしてその隣に残します。</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>プリンターを元に戻しています</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>CUPS をインストールしています</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>保存したファイルのドライブ</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>システムの設定を変更します：ドライブを以前と同じように起動時に接続します。ドライブが見つからなくても、コンピューターの起動が止まることはありません。</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">起動時に接続するドライブの一覧を読み取れませんでした。</translation>
+        <translation>起動時に接続するドライブの一覧を読み取れませんでした。</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>このコンピューターに接続されていないため、追加しませんでした：%1。</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>既にドライブの一覧にあるため、追加しませんでした：%1。</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>ドライブを起動時に接続しています</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -553,7 +553,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルに Groundwork が使えない設定が指定されています：%1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -613,19 +613,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>保存したファイルを読み取れませんでした。</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>保存したファイルには %1 が含まれていますが、Groundwork はこれを元に戻さないため、この部分はそのままにしました。</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 は引き継ぎません：パスワードを求めます。</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 は引き継ぎません：%2</translation>
     </message>
 </context>
 <context>
@@ -1304,248 +1304,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>システムの設定</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイアウォールのルール。保存するときにパスワードを求めます。</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>プリンター：%1。保存するときにパスワードを求めます。</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>保存するファイルにはプリンターの設定が含まれ、プリンターのアドレスにはパスワードが含まれることがあります。ファイルを持っている人は誰でも読めます。</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 のドライブ</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>共有フォルダー %1：他の人がファイルを追加できます</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>共有フォルダー %1：他の人は見るだけです</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">このフォルダーのパスは使用できませんでした。</translation>
+        <translation>このフォルダーのパスは使用できませんでした。</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>このフォルダーにはシステムファイルがあります。別のフォルダーを選んでください。</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>ホームフォルダー内の隠しフォルダーには設定があります。別のフォルダーを選んでください。</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 はフォルダーではなくファイルです。</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 には書き込めません。別のフォルダーを選んでください。</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>プロジェクトの一覧に使えない名前があります。</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>2 つのプロジェクトが同じフォルダーに入ってしまいます：%1。</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>コピーするプロジェクトの一覧が空です。</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>git と gh をインストールしています</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダーを作成しています</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>git がサインインを使えるようにしています</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>プロジェクトをコピーしています</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>プロジェクトを所定の場所に置いています</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>プロジェクトをコピー中</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>コピー先</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>各プロジェクトは、このフォルダーの中に専用のフォルダーを持ちます。既にあるフォルダーはそのままにします。</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>コピー</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">フォルダーを選ぶ…</translation>
+        <translation>フォルダーを選ぶ…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">フォルダーを選ぶ</translation>
+        <translation>フォルダーを選ぶ</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">フォルダー：%1</translation>
+        <translation>フォルダー：%1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>オンにしたプロジェクトは約 %1 です。</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>このドライブの空きは %1 です。</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>空きが足りないかもしれません。それでもコピーを試すことはできます。</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>コピーする内容を %1 に書き込めなかったため、何もコピーしませんでした。</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>git と gh をインストールしています</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてオン</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてオフ</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>コピーするプロジェクト</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>フォークは最初オフになっています。</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>サインインしました。</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 としてサインインしました。</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub からプロジェクトの一覧を読み取れなかったため、何もコピーできません。戻るかウィンドウを閉じて、後でもう一度お試しください。</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>このアカウントが所有するプロジェクトはありません。</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>最初の 1000 件だけを表示しています。</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 — 非公開 — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub にサインイン</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>コードをコピー</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>ブラウザーを開く</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub に、一度だけ使うコードを求めるページが表示されます。Groundwork があなたのパスワードを見ることはありません。</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub を待っています…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>ブラウザーを開いてこのコードを入力し、そこで Groundwork のサインインを承認してください。このページは自動的に先へ進みます。</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>サインインが完了しませんでした。ボタンを押してもう一度お試しください。</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>サインインが完了しませんでした。ボタンを押してもう一度お試しください。GitHub のツールの出力：%1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>サインインしました。プロジェクトを読み込んでいます…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub のプロジェクトをコピー</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub に一度サインインし、残すプロジェクトを選んで、フォルダーを選んでください。</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>git と gh を探しています…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>git と gh はこのコンピューターにあります。</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>まだこのコンピューターにありません：%1。「次へ」でインストールします。その際パスワードを求めます。</translation>
     </message>
 </context>
 <context>
@@ -2073,15 +2073,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>共有フォルダー。ネットワーク上の誰でもパスワードなしで開けます。</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1：他の人がファイルを追加できます</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>%1：他の人は見るだけです</translation>
     </message>
 </context>
 <context>
@@ -2467,7 +2467,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub のプロジェクトをこのコンピューターにコピー</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2567,7 +2567,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub のプロジェクトをコピー…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2766,11 +2766,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 を読み取っています</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 にはこのコンピューター上の独自の設定がないため、保存するものはありませんでした。</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2782,7 +2782,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 を保存しています</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2842,19 +2842,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>コピーするプロジェクトの一覧を読み取れませんでした。</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>git がサインインを使えるように設定できなかったため、git push でサインインを求められることがあります。コピーは続けます。</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>既にあるため、そのままにしました。</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>途中までコピーされたフォルダーが %1 にあります。削除してから、もう一度コピーしてください。</translation>
     </message>
 </context>
 </TS>

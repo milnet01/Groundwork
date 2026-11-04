@@ -441,59 +441,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">服務管理員沒有回應。</translation>
+        <translation>服務管理員沒有回應。</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存的檔案中的防火牆規則</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>變更系統設定：還原防火牆的區域和服務，以及它的預設區域。被取代的檔案會以編號副本的形式保留在旁邊。</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>正在還原您的防火牆規則</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存的檔案中的印表機</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>變更系統設定：還原您的印表機，如果缺少 CUPS 就安裝它。被取代的檔案會以編號副本的形式保留在旁邊。</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>正在還原您的印表機</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>正在安裝 CUPS</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存的檔案中的磁碟機</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>變更系統設定：像以前一樣在開機時連接您的磁碟機。缺少某個磁碟機也絕不會讓電腦無法開機。</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">無法讀取開機時連接的磁碟機清單。</translation>
+        <translation>無法讀取開機時連接的磁碟機清單。</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>未連接到這台電腦，因此沒有加入：%1。</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>已在磁碟機清單中，因此沒有加入：%1。</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>正在設定開機時連接您的磁碟機</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -553,7 +553,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案中有一項 Groundwork 無法使用的設定：%1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -613,19 +613,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法讀取儲存的檔案。</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存的檔案包含 %1，Groundwork 不會還原它，因此這部分維持不變。</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 不會移轉：它需要密碼。</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 不會移轉：%2</translation>
     </message>
 </context>
 <context>
@@ -1304,248 +1304,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>系統設定</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>防火牆規則。儲存時會要求輸入您的密碼。</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>印表機：%1。儲存時會要求輸入您的密碼。</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存的檔案將包含您的印表機設定，而印表機的位址可能包含密碼。任何拿到這個檔案的人都能讀取它們。</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>位於 %1 的磁碟機</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>共用資料夾 %1：其他人可以加入檔案</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>共用資料夾 %1：其他人只能檢視</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">無法使用此資料夾的路徑。</translation>
+        <translation>無法使用此資料夾的路徑。</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>此資料夾包含系統檔案。請選擇另一個。</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>您家目錄資料夾中的隱藏資料夾包含設定。請選擇另一個。</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 是檔案，不是資料夾。</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>您無法寫入 %1。請選擇另一個資料夾。</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>專案清單中有一個無法使用的名稱。</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>兩個專案會放進同一個資料夾：%1。</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>要複製的專案清單是空的。</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>正在安裝 git 和 gh</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>正在建立資料夾</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>正在讓 git 使用您的登入資訊</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>正在複製專案</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>正在把專案放到定位</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>正在複製您的專案</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>複製到哪裡</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>每個專案在這個資料夾裡都有自己的資料夾。已經存在的資料夾維持不變。</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>複製</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">選擇資料夾…</translation>
+        <translation>選擇資料夾…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">選擇資料夾</translation>
+        <translation>選擇資料夾</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">資料夾：%1</translation>
+        <translation>資料夾：%1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>已開啟的專案大約佔用 %1。</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>這個磁碟機還有 %1 可用。</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>空間可能不夠。仍然可以嘗試複製。</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法將要複製的內容寫入 %1，因此沒有複製任何內容。</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>正在安裝 git 和 gh</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>全部開啟</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>全部關閉</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>要複製哪些專案</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>分支（fork）的專案一開始是關閉的。</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>已登入。</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>已登入為 %1。</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法從 GitHub 讀取您的專案清單，因此無法複製任何內容。請返回或關閉視窗，稍後再試。</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>這個帳號沒有自己的專案。</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>只顯示前 1000 個。</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 — 私人 — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>登入 GitHub</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>複製代碼</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟瀏覽器</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub 會顯示一個要求輸入一次性代碼的頁面。Groundwork 永遠看不到您的密碼。</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>正在等待 GitHub…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟瀏覽器，輸入這個代碼，然後在那裡核准 Groundwork 的登入。此頁面會自動繼續。</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>登入沒有完成。按下按鈕再試一次。</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>登入沒有完成。按下按鈕再試一次。GitHub 的工具表示：%1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>已登入。正在讀取您的專案…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>複製您的 GitHub 專案</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>登入 GitHub 一次，選擇要保留哪些專案，再選擇一個資料夾。</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>正在尋找 git 和 gh…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>這台電腦上已有 git 和 gh。</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>這台電腦上還沒有：%1。按「下一步」會安裝它，並要求輸入您的密碼。</translation>
     </message>
 </context>
 <context>
@@ -2073,15 +2073,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>共用資料夾。網路上的任何人都可以不用密碼開啟它們。</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1：其他人可以加入檔案</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>%1：其他人只能檢視</translation>
     </message>
 </context>
 <context>
@@ -2467,7 +2467,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>將您的 GitHub 專案複製到這台電腦</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2567,7 +2567,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>複製您的 GitHub 專案…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2766,11 +2766,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在讀取 %1</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 在這台電腦上沒有自己的設定，因此沒有可儲存的內容。</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2782,7 +2782,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在儲存 %1</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2842,19 +2842,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法讀取要複製的專案清單。</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法讓 git 使用您的登入資訊，因此 git push 可能會要求登入。複製會繼續進行。</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>已經存在，因此維持不變。</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 有一個只複製了一部分的資料夾。請刪除它，然後重新複製。</translation>
     </message>
 </context>
 </TS>

@@ -442,59 +442,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">सेवा प्रबंधक ने जवाब नहीं दिया।</translation>
+        <translation>सेवा प्रबंधक ने जवाब नहीं दिया।</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>आपकी सेव की गई फ़ाइल से फ़ायरवॉल के नियम</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>सिस्टम सेटिंग बदलता है: आपके फ़ायरवॉल के ज़ोन और सेवाएँ, और उसका डिफ़ॉल्ट ज़ोन वापस लाता है। जिस फ़ाइल की जगह नई आती है, वह उसके बगल में एक क्रमांकित कॉपी के रूप में रखी जाती है।</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके फ़ायरवॉल के नियम वापस लाए जा रहे हैं</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>आपकी सेव की गई फ़ाइल से प्रिंटर</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>सिस्टम सेटिंग बदलता है: आपके प्रिंटर वापस लाता है, और CUPS न हो तो उसे इंस्टॉल करता है। जिस फ़ाइल की जगह नई आती है, वह उसके बगल में एक क्रमांकित कॉपी के रूप में रखी जाती है।</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके प्रिंटर वापस लाए जा रहे हैं</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>CUPS इंस्टॉल किया जा रहा है</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>आपकी सेव की गई फ़ाइल से ड्राइवें</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>सिस्टम सेटिंग बदलता है: आपकी ड्राइवों को स्टार्ट-अप पर पहले की तरह जोड़ता है। कोई ड्राइव न मिले तो भी कंप्यूटर शुरू होने से कभी नहीं रुकता।</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">स्टार्ट-अप पर जुड़ने वाली ड्राइवों की सूची पढ़ी नहीं जा सकी।</translation>
+        <translation>स्टार्ट-अप पर जुड़ने वाली ड्राइवों की सूची पढ़ी नहीं जा सकी।</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस कंप्यूटर से जुड़ी नहीं हैं, इसलिए जोड़ी नहीं गईं: %1।</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>पहले से ड्राइवों की सूची में हैं, इसलिए जोड़ी नहीं गईं: %1।</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>आपकी ड्राइवें स्टार्ट-अप पर जोड़ी जा रही हैं</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ाइल में ऐसी सेटिंग है जिसे Groundwork उपयोग नहीं कर सकता: %1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -614,19 +614,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>सेव की गई फ़ाइल पढ़ी नहीं जा सकी।</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>सेव की गई फ़ाइल में %1 है, जिसे Groundwork वापस नहीं लाएगा, इसलिए यह हिस्सा जैसा था वैसा ही छोड़ दिया गया।</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 साथ नहीं ले जाया जाता: यह पासवर्ड माँगता है।</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 साथ नहीं ले जाया जाता: %2</translation>
     </message>
 </context>
 <context>
@@ -1306,248 +1306,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>सिस्टम सेटिंग</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ायरवॉल के नियम। सेव करते समय आपका पासवर्ड माँगा जाएगा।</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>प्रिंटर: %1। सेव करते समय आपका पासवर्ड माँगा जाएगा।</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>सेव की गई फ़ाइल में आपके प्रिंटरों की सेटिंग होंगी, और किसी प्रिंटर के पते में पासवर्ड हो सकता है। जिसके पास भी यह फ़ाइल हो, वह उन्हें पढ़ सकता है।</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 पर ड्राइव</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>साझा फ़ोल्डर %1: दूसरे फ़ाइलें जोड़ सकते हैं</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>साझा फ़ोल्डर %1: दूसरे केवल देख सकते हैं</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">इस फ़ोल्डर का पथ उपयोग नहीं किया जा सका।</translation>
+        <translation>इस फ़ोल्डर का पथ उपयोग नहीं किया जा सका।</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस फ़ोल्डर में सिस्टम फ़ाइलें हैं। कोई दूसरा चुनें।</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके होम फ़ोल्डर के छिपे फ़ोल्डरों में सेटिंग हैं। कोई दूसरा चुनें।</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 एक फ़ाइल है, फ़ोल्डर नहीं।</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>आप %1 में लिख नहीं सकते। कोई दूसरा फ़ोल्डर चुनें।</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>प्रोजेक्ट की सूची में एक ऐसा नाम है जिसका उपयोग नहीं किया जा सकता।</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>दो प्रोजेक्ट एक ही फ़ोल्डर में जाएँगे: %1।</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>कॉपी करने के लिए प्रोजेक्ट की सूची खाली है।</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>git और gh इंस्टॉल किए जा रहे हैं</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ोल्डर बनाया जा रहा है</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>git को आपके साइन-इन का उपयोग करने दिया जा रहा है</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>प्रोजेक्ट कॉपी किया जा रहा है</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>प्रोजेक्ट को उसकी जगह रखा जा रहा है</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>आपके प्रोजेक्ट कॉपी किए जा रहे हैं</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>उन्हें कहाँ कॉपी करना है</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>हर प्रोजेक्ट को इसके अंदर अपना फ़ोल्डर मिलता है। जो पहले से मौजूद है, उसे जैसा है वैसा ही छोड़ दिया जाता है।</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>कॉपी करें</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">फ़ोल्डर चुनें…</translation>
+        <translation>फ़ोल्डर चुनें…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">फ़ोल्डर चुनें</translation>
+        <translation>फ़ोल्डर चुनें</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">फ़ोल्डर: %1</translation>
+        <translation>फ़ोल्डर: %1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>चालू किए गए प्रोजेक्ट लगभग %1 लेते हैं।</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस ड्राइव में %1 खाली है।</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>शायद इतनी जगह काफ़ी न हो। फिर भी कॉपी करके देखा जा सकता है।</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>क्या कॉपी करना है, यह %1 में लिखा नहीं जा सका, इसलिए कुछ भी कॉपी नहीं हुआ।</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>git और gh इंस्टॉल किए जा रहे हैं</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>सभी चालू करें</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>सभी बंद करें</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>कौन से प्रोजेक्ट कॉपी करने हैं</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ोर्क शुरू में बंद रहते हैं।</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>साइन इन हो गया।</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 के रूप में साइन इन हो गया।</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub से आपके प्रोजेक्ट की सूची पढ़ी नहीं जा सकी, इसलिए कुछ भी कॉपी नहीं किया जा सकता। वापस जाएँ या विंडो बंद करें, और बाद में फिर से कोशिश करें।</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस खाते का कोई प्रोजेक्ट नहीं है।</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>केवल पहले 1000 दिखाए गए हैं।</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 — निजी — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub में साइन इन करें</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>कोड कॉपी करें</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>ब्राउज़र खोलें</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub एक पेज दिखाता है जो एक बार इस्तेमाल होने वाला कोड माँगता है। Groundwork आपका पासवर्ड कभी नहीं देखता।</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub का इंतज़ार किया जा रहा है…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>ब्राउज़र खोलें, यह कोड डालें, और वहाँ Groundwork के साइन-इन को स्वीकार करें। यह पेज अपने आप आगे बढ़ जाता है।</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>साइन इन पूरा नहीं हुआ। फिर से कोशिश करने के लिए बटन दबाएँ।</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>साइन इन पूरा नहीं हुआ। फिर से कोशिश करने के लिए बटन दबाएँ। GitHub के टूल ने कहा: %1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>साइन इन हो गया। आपके प्रोजेक्ट पढ़े जा रहे हैं…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>अपने GitHub प्रोजेक्ट कॉपी करें</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>एक बार GitHub में साइन इन करें, चुनें कि अपने कौन से प्रोजेक्ट रखने हैं, और एक फ़ोल्डर चुनें।</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>git और gh खोजे जा रहे हैं…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>git और gh इस कंप्यूटर पर हैं।</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>अभी इस कंप्यूटर पर नहीं है: %1। आगे दबाने पर यह इंस्टॉल होता है, और आपका पासवर्ड माँगा जाता है।</translation>
     </message>
 </context>
 <context>
@@ -2076,15 +2076,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>साझा फ़ोल्डर। नेटवर्क पर कोई भी इन्हें बिना पासवर्ड के खोल सकता है।</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: दूसरे फ़ाइलें जोड़ सकते हैं</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: दूसरे केवल देख सकते हैं</translation>
     </message>
 </context>
 <context>
@@ -2471,7 +2471,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>अपने GitHub प्रोजेक्ट इस कंप्यूटर पर कॉपी करें</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2571,7 +2571,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>अपने GitHub प्रोजेक्ट कॉपी करें…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2770,11 +2770,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 पढ़ा जा रहा है</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस कंप्यूटर पर %1 की अपनी कोई सेटिंग नहीं है, इसलिए सेव करने के लिए कुछ नहीं था।</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2786,7 +2786,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 सेव किया जा रहा है</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2846,19 +2846,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>कॉपी करने के लिए प्रोजेक्ट की सूची पढ़ी नहीं जा सकी।</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>git को आपके साइन-इन का उपयोग करने के लिए सेट नहीं किया जा सका, इसलिए git push उसे माँग सकता है। कॉपी करना जारी है।</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>पहले से मौजूद है, इसलिए जैसा था वैसा ही छोड़ दिया गया।</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>आधा कॉपी किया गया फ़ोल्डर %1 पर है। उसे हटाएँ, फिर दोबारा कॉपी करें।</translation>
     </message>
 </context>
 </TS>

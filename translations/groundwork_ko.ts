@@ -441,59 +441,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">서비스 관리자가 응답하지 않았습니다.</translation>
+        <translation>서비스 관리자가 응답하지 않았습니다.</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>저장한 파일의 방화벽 규칙</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>시스템 설정을 바꿉니다: 방화벽의 영역과 서비스, 기본 영역을 되돌려 놓습니다. 덮어쓰는 파일은 번호를 붙인 사본으로 옆에 남겨 둡니다.</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>방화벽 규칙을 되돌려 놓는 중</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>저장한 파일의 프린터</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>시스템 설정을 바꿉니다: 프린터를 되돌려 놓고, CUPS가 없으면 설치합니다. 덮어쓰는 파일은 번호를 붙인 사본으로 옆에 남겨 둡니다.</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>프린터를 되돌려 놓는 중</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>CUPS 설치 중</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>저장한 파일의 드라이브</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>시스템 설정을 바꿉니다: 드라이브를 예전처럼 시작할 때 연결합니다. 드라이브가 없어도 컴퓨터가 시작되지 않는 일은 없습니다.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">시작할 때 연결되는 드라이브 목록을 읽지 못했습니다.</translation>
+        <translation>시작할 때 연결되는 드라이브 목록을 읽지 못했습니다.</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 컴퓨터에 연결되어 있지 않아 추가하지 않았습니다: %1.</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>이미 드라이브 목록에 있어 추가하지 않았습니다: %1.</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>드라이브를 시작할 때 연결하도록 설정하는 중</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -553,7 +553,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>파일에 Groundwork가 사용할 수 없는 설정이 있습니다: %1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -613,19 +613,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>저장한 파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>저장한 파일에 Groundwork가 되돌리지 않는 %1이(가) 있어, 이 부분은 그대로 두었습니다.</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은(는) 옮기지 않습니다: 비밀번호를 요구합니다.</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은(는) 옮기지 않습니다: %2</translation>
     </message>
 </context>
 <context>
@@ -1304,248 +1304,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>시스템 설정</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>방화벽 규칙. 저장할 때 비밀번호를 묻습니다.</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>프린터: %1. 저장할 때 비밀번호를 묻습니다.</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>저장되는 파일에 프린터 설정이 들어가며, 프린터 주소에는 비밀번호가 들어 있을 수 있습니다. 파일을 가진 사람은 누구나 읽을 수 있습니다.</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1의 드라이브</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>공유 폴더 %1: 다른 사람이 파일을 추가할 수 있음</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>공유 폴더 %1: 다른 사람은 보기만 할 수 있음</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">이 폴더의 경로를 사용할 수 없습니다.</translation>
+        <translation>이 폴더의 경로를 사용할 수 없습니다.</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 폴더에는 시스템 파일이 있습니다. 다른 폴더를 선택하세요.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>홈 폴더의 숨겨진 폴더에는 설정이 있습니다. 다른 폴더를 선택하세요.</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1은(는) 폴더가 아니라 파일입니다.</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에 쓸 수 없습니다. 다른 폴더를 선택하세요.</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>프로젝트 목록에 사용할 수 없는 이름이 있습니다.</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>두 프로젝트가 같은 폴더로 들어가게 됩니다: %1.</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>복사할 프로젝트 목록이 비어 있습니다.</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>git과 gh 설치 중</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>폴더를 만드는 중</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>git이 로그인 정보를 쓰도록 설정하는 중</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>프로젝트를 복사하는 중</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>프로젝트를 제자리에 두는 중</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>프로젝트 복사 중</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>복사할 위치</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>각 프로젝트는 이 폴더 안에 자기 폴더를 갖습니다. 이미 있는 폴더는 그대로 둡니다.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>복사</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">폴더 선택…</translation>
+        <translation>폴더 선택…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">폴더 선택</translation>
+        <translation>폴더 선택</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">폴더: %1</translation>
+        <translation>폴더: %1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>켜 둔 프로젝트는 약 %1을(를) 차지합니다.</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 드라이브의 남은 공간은 %1입니다.</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>공간이 부족할 수 있습니다. 그래도 복사를 시도할 수 있습니다.</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>복사할 항목을 %1에 기록할 수 없어, 아무것도 복사하지 않았습니다.</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>git과 gh 설치 중</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 켜기</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 끄기</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>복사할 프로젝트</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>포크는 꺼진 상태로 시작합니다.</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>로그인했습니다.</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1(으)로 로그인했습니다.</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub에서 프로젝트 목록을 읽지 못해 아무것도 복사할 수 없습니다. 뒤로 가거나 창을 닫고 나중에 다시 시도하세요.</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 계정이 소유한 프로젝트가 없습니다.</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>처음 1000개만 표시합니다.</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 — 비공개 — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub에 로그인</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>코드 복사</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>브라우저 열기</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub에 일회용 코드를 묻는 페이지가 표시됩니다. Groundwork는 비밀번호를 절대 보지 않습니다.</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub를 기다리는 중…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>브라우저를 열고 이 코드를 입력한 다음, 그곳에서 Groundwork의 로그인을 승인하세요. 이 페이지는 저절로 다음으로 넘어갑니다.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>로그인을 마치지 못했습니다. 버튼을 눌러 다시 시도하세요.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>로그인을 마치지 못했습니다. 버튼을 눌러 다시 시도하세요. GitHub 도구의 메시지: %1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>로그인했습니다. 프로젝트를 읽는 중…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub 프로젝트 복사</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub에 한 번 로그인하고, 보관할 프로젝트를 고른 다음, 폴더를 선택하세요.</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>git과 gh를 찾는 중…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>이 컴퓨터에 git과 gh가 있습니다.</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>아직 이 컴퓨터에 없습니다: %1. 다음을 누르면 설치하며, 비밀번호를 묻습니다.</translation>
     </message>
 </context>
 <context>
@@ -2073,15 +2073,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>공유 폴더. 네트워크의 누구나 비밀번호 없이 열 수 있습니다.</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: 다른 사람이 파일을 추가할 수 있음</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: 다른 사람은 보기만 할 수 있음</translation>
     </message>
 </context>
 <context>
@@ -2467,7 +2467,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub 프로젝트를 이 컴퓨터로 복사</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2567,7 +2567,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub 프로젝트 복사…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2766,11 +2766,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 읽는 중</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1에는 이 컴퓨터에 자체 설정이 없어 저장할 것이 없었습니다.</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2782,7 +2782,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 저장 중</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2842,19 +2842,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>복사할 프로젝트 목록을 읽을 수 없습니다.</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>git이 로그인 정보를 쓰도록 설정하지 못해, git push가 로그인을 물을 수 있습니다. 복사는 계속합니다.</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>이미 있어 그대로 두었습니다.</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>일부만 복사된 폴더가 %1에 있습니다. 삭제한 다음 다시 복사하세요.</translation>
     </message>
 </context>
 </TS>

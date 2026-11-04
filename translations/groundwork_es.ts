@@ -442,59 +442,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">El gestor de servicios no ha respondido.</translation>
+        <translation>El gestor de servicios no ha respondido.</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Reglas del cortafuegos de tu archivo guardado</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia ajustes del sistema: devuelve las zonas y los servicios de tu cortafuegos, y su zona predeterminada. Si sustituye un archivo, lo conserva a su lado como copia numerada.</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>Devolviendo las reglas de tu cortafuegos</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Impresoras de tu archivo guardado</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia ajustes del sistema: devuelve tus impresoras e instala CUPS si falta. Si sustituye un archivo, lo conserva a su lado como copia numerada.</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>Devolviendo tus impresoras</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalando CUPS</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Discos de tu archivo guardado</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia ajustes del sistema: conecta tus discos al arrancar, como estaban. Un disco que falta nunca impide que el ordenador arranque.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">No se ha podido leer la lista de discos que se conectan al arrancar.</translation>
+        <translation>No se ha podido leer la lista de discos que se conectan al arrancar.</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>No están conectados a este ordenador, así que no se han añadido: %1.</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ya están en la lista de discos, así que no se han añadido: %1.</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectando tus discos al arrancar</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo nombra un ajuste que Groundwork no puede usar: %1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -614,19 +614,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido leer el archivo guardado.</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo guardado contiene %1, que Groundwork no restaura, así que esta parte se ha dejado como estaba.</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 no se lleva: pide una contraseña.</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 no se lleva: %2</translation>
     </message>
 </context>
 <context>
@@ -1306,248 +1306,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes del sistema</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reglas del cortafuegos. Al guardar se te pedirá la contraseña.</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impresoras: %1. Al guardar se te pedirá la contraseña.</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo guardado contendrá los ajustes de tus impresoras, y la dirección de una impresora puede contener una contraseña. Cualquiera que tenga el archivo podrá leerlos.</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco en %1</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>Carpeta compartida %1: otros pueden añadir archivos</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>Carpeta compartida %1: otros solo pueden mirar</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">No se ha podido usar la ruta de esta carpeta.</translation>
+        <translation>No se ha podido usar la ruta de esta carpeta.</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta carpeta contiene archivos del sistema. Elige otra.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las carpetas ocultas de tu carpeta personal contienen ajustes. Elige otra.</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 es un archivo, no una carpeta.</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>No puedes escribir en %1. Elige otra carpeta.</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>La lista de proyectos contiene un nombre que no se puede usar.</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dos proyectos irían a la misma carpeta: %1.</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>La lista de proyectos que copiar está vacía.</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalando git y gh</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Creando la carpeta</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>Dejando que git use tu inicio de sesión</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiando el proyecto</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>Poniendo el proyecto en su sitio</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiando tus proyectos</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>Dónde copiarlos</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cada proyecto tiene su propia carpeta dentro de esta. Si ya hay una, se deja como está.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">Elige una carpeta…</translation>
+        <translation>Elige una carpeta…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">Elige una carpeta</translation>
+        <translation>Elige una carpeta</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">Carpeta: %1</translation>
+        <translation>Carpeta: %1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los proyectos activados ocupan unos %1.</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este disco tiene %1 libres.</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>Puede que no haya espacio suficiente. Aun así, se puede intentar copiar.</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido escribir en %1 qué copiar, así que no se ha copiado nada.</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalando git y gh</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar todo</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar todo</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Qué proyectos copiar</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las bifurcaciones (forks) empiezan desactivadas.</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión iniciada.</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión iniciada como %1.</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido leer de GitHub la lista de tus proyectos, así que no se puede copiar nada. Vuelve atrás o cierra la ventana, e inténtalo más tarde.</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta cuenta no tiene proyectos.</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo se muestran los primeros 1000.</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 — Privado — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar sesión en GitHub</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar el código</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir el navegador</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub muestra una página que pide un código de un solo uso. Groundwork nunca ve tu contraseña.</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando a GitHub…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abre el navegador, escribe este código y aprueba allí el inicio de sesión de Groundwork. Esta página avanza sola.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>El inicio de sesión no ha terminado. Pulsa el botón para volver a intentarlo.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>El inicio de sesión no ha terminado. Pulsa el botón para volver a intentarlo. La herramienta de GitHub dijo: %1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión iniciada. Leyendo tus proyectos…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar tus proyectos de GitHub</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicia sesión en GitHub una vez, elige qué proyectos quieres conservar y elige una carpeta.</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscando git y gh…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>git y gh están en este ordenador.</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aún no está en este ordenador: %1. Siguiente lo instala y te pide la contraseña.</translation>
     </message>
 </context>
 <context>
@@ -2076,15 +2076,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Carpetas compartidas. Cualquiera en la red puede abrirlas sin contraseña.</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: otros pueden añadir archivos</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: otros solo pueden mirar</translation>
     </message>
 </context>
 <context>
@@ -2471,7 +2471,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar tus proyectos de GitHub a este ordenador</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2571,7 +2571,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar tus proyectos de GitHub…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2770,11 +2770,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Leyendo %1</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 no tiene ajustes propios en este ordenador, así que no había nada que guardar.</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2786,7 +2786,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardando %1</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2846,19 +2846,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido leer la lista de proyectos que copiar.</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido preparar git para usar tu inicio de sesión, así que git push puede pedirlo. La copia continúa.</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ya estaba, así que se ha dejado como está.</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hay una carpeta copiada a medias en %1. Bórrala y vuelve a copiar.</translation>
     </message>
 </context>
 </TS>

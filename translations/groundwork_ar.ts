@@ -446,59 +446,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">لم يستجب مدير الخدمات.</translation>
+        <translation>لم يستجب مدير الخدمات.</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>قواعد جدار الحماية من ملفك المحفوظ</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>يغيّر إعدادات النظام: يعيد مناطق جدار الحماية وخدماته، ومنطقته الافتراضية. أي ملف يُستبدل يُحتفظ به بجانبه كنسخة مرقّمة.</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إعادة قواعد جدار الحماية</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>الطابعات من ملفك المحفوظ</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>يغيّر إعدادات النظام: يعيد طابعاتك، ويثبّت CUPS إن لم يكن موجودًا. أي ملف يُستبدل يُحتفظ به بجانبه كنسخة مرقّمة.</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إعادة طابعاتك</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت CUPS</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>الأقراص من ملفك المحفوظ</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>يغيّر إعدادات النظام: يوصل أقراصك عند بدء التشغيل كما كانت. القرص المفقود لا يمنع الحاسوب أبدًا من بدء التشغيل.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">تعذّرت قراءة قائمة الأقراص التي تتصل عند بدء التشغيل.</translation>
+        <translation>تعذّرت قراءة قائمة الأقراص التي تتصل عند بدء التشغيل.</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>غير متصلة بهذا الحاسوب، لذا لم تُضف: %1.</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>موجودة بالفعل في قائمة الأقراص، لذا لم تُضف: %1.</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ توصيل أقراصك عند بدء التشغيل</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -558,7 +558,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>يذكر الملف إعدادًا لا يستطيع Groundwork استخدامه: %1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -618,19 +618,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة الملف المحفوظ.</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>يحتوي الملف المحفوظ على %1، ولن يستعيده Groundwork، لذا تُرك هذا الجزء كما هو.</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 لا يُنقل: فهو يطلب كلمة مرور.</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 لا يُنقل: %2</translation>
     </message>
 </context>
 <context>
@@ -1314,248 +1314,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>إعدادات النظام</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>قواعد جدار الحماية. سيطلب الحفظ كلمة المرور.</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>الطابعات: %1. سيطلب الحفظ كلمة المرور.</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>سيحتوي الملف المحفوظ على إعدادات طابعاتك، وقد يحتوي عنوان الطابعة على كلمة مرور. يستطيع أي شخص لديه الملف قراءتها.</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>قرص في %1</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>مجلد مشارَك %1: يمكن للآخرين إضافة ملفات</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>مجلد مشارَك %1: يمكن للآخرين النظر فقط</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">تعذّر استخدام مسار هذا المجلد.</translation>
+        <translation>تعذّر استخدام مسار هذا المجلد.</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>يحتوي هذا المجلد على ملفات النظام. اختر مجلدًا آخر.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>تحتوي المجلدات المخفية في مجلدك الرئيسي على إعدادات. اختر مجلدًا آخر.</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 ملف، وليس مجلدًا.</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا يمكنك الكتابة في %1. اختر مجلدًا آخر.</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>تحتوي قائمة المشاريع على اسم لا يمكن استخدامه.</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>سيذهب مشروعان إلى المجلد نفسه: %1.</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>قائمة المشاريع المراد نسخها فارغة.</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت git و gh</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ إنشاء المجلد</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ السماح لـ git باستخدام تسجيل دخولك</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ نسخ المشروع</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ وضع المشروع في مكانه</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ نسخ مشاريعك</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>أين تُنسخ</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>يحصل كل مشروع على مجلد خاص به داخل هذا المجلد. أي مجلد موجود بالفعل يُترك كما هو.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>نسخ</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">اختر مجلدًا…</translation>
+        <translation>اختر مجلدًا…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">اختر مجلدًا</translation>
+        <translation>اختر مجلدًا</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">المجلد: %1</translation>
+        <translation>المجلد: %1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>تشغل المشاريع المفعّلة نحو %1.</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>المساحة الحرة في هذا القرص %1.</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>قد لا تكون المساحة كافية. لا يزال من الممكن محاولة النسخ.</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت كتابة قائمة ما يجب نسخه في %1، لذا لم يُنسخ أي شيء.</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تثبيت git و gh</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>تفعيل الكل</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>تعطيل الكل</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>المشاريع المراد نسخها</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>تبدأ النسخ المتفرّعة (forks) معطّلة.</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم تسجيل الدخول.</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم تسجيل الدخول باسم %1.</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة قائمة مشاريعك من GitHub، لذا لا يمكن نسخ أي شيء. ارجع أو أغلق النافذة، وحاول مرة أخرى لاحقًا.</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا يملك هذا الحساب أي مشاريع.</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>تُعرض أول 1000 فقط.</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 — خاص — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>تسجيل الدخول إلى GitHub</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>نسخ الرمز</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>فتح المتصفح</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>يعرض GitHub صفحة تطلب رمزًا لمرة واحدة. لا يرى Groundwork كلمة مرورك أبدًا.</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>في انتظار GitHub…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>افتح المتصفح، وأدخل هذا الرمز، ووافق هناك على تسجيل دخول Groundwork. تنتقل هذه الصفحة إلى ما بعدها من تلقاء نفسها.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يكتمل تسجيل الدخول. اضغط الزر للمحاولة مرة أخرى.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يكتمل تسجيل الدخول. اضغط الزر للمحاولة مرة أخرى. قالت أداة GitHub: %1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>تم تسجيل الدخول. جارٍ قراءة مشاريعك…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>انسخ مشاريعك على GitHub</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>سجّل الدخول إلى GitHub مرة واحدة، واختر أيّ مشاريعك تريد الاحتفاظ بها، واختر مجلدًا.</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ البحث عن git و gh…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏git و gh موجودان على هذا الحاسوب.</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>ليس على هذا الحاسوب بعد: %1. زر «التالي» يثبّته ويطلب كلمة المرور.</translation>
     </message>
 </context>
 <context>
@@ -2088,15 +2088,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>المجلدات المشارَكة. يستطيع أي شخص على الشبكة فتحها دون كلمة مرور.</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: يمكن للآخرين إضافة ملفات</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: يمكن للآخرين النظر فقط</translation>
     </message>
 </context>
 <context>
@@ -2487,7 +2487,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>انسخ مشاريعك على GitHub إلى هذا الحاسوب</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2587,7 +2587,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>انسخ مشاريعك على GitHub…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2786,11 +2786,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ قراءة %1</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>ليس لـ %1 إعدادات خاصة به على هذا الحاسوب، لذا لم يكن هناك ما يُحفظ.</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2802,7 +2802,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ حفظ %1</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2862,19 +2862,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّرت قراءة قائمة المشاريع المراد نسخها.</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>تعذّر إعداد git لاستخدام تسجيل دخولك، لذا قد يطلبه git push. يستمر النسخ.</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>موجود بالفعل، لذا تُرك كما هو.</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>يوجد مجلد منسوخ جزئيًا في %1. احذفه، ثم انسخ مرة أخرى.</translation>
     </message>
 </context>
 </TS>

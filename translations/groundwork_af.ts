@@ -442,59 +442,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">Die diensbestuurder het nie geantwoord nie.</translation>
+        <translation>Die diensbestuurder het nie geantwoord nie.</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Brandmuurreëls uit jou gestoorde lêer</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander stelselinstellings: sit jou brandmuur se sones en dienste, en sy verstek-sone, terug. &apos;n Lêer wat dit vervang, word langsaan as &apos;n genommerde kopie gehou.</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om jou brandmuurreëls terug te sit</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Drukkers uit jou gestoorde lêer</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander stelselinstellings: sit jou drukkers terug, en installeer CUPS as dit ontbreek. &apos;n Lêer wat dit vervang, word langsaan as &apos;n genommerde kopie gehou.</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om jou drukkers terug te sit</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om CUPS te installeer</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Skywe uit jou gestoorde lêer</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander stelselinstellings: koppel jou skywe met opstart, soos hulle was. &apos;n Skyf wat ontbreek, keer nooit dat die rekenaar opstart nie.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">Die lys skywe wat met opstart koppel, kon nie gelees word nie.</translation>
+        <translation>Die lys skywe wat met opstart koppel, kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie aan hierdie rekenaar gekoppel nie, so nie bygevoeg nie: %1.</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reeds in die lys skywe, so nie bygevoeg nie: %1.</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om jou skywe met opstart te koppel</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Die lêer noem &apos;n instelling wat Groundwork nie kan gebruik nie: %1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -614,19 +614,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die gestoorde lêer kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die gestoorde lêer bevat %1, wat Groundwork nie sal terugsit nie, so hierdie deel is gelaat soos dit is.</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 word nie saamgeneem nie: dit vra &apos;n wagwoord.</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 word nie saamgeneem nie: %2</translation>
     </message>
 </context>
 <context>
@@ -1306,248 +1306,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelselinstellings</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Brandmuurreëls. Stoor sal jou wagwoord vra.</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drukkers: %1. Stoor sal jou wagwoord vra.</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die gestoorde lêer sal jou drukkers se instellings bevat, en &apos;n drukker se adres kan &apos;n wagwoord bevat. Enigiemand met die lêer kan hulle lees.</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Skyf by %1</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedeelde vouer %1: ander mag lêers byvoeg</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedeelde vouer %1: ander mag net kyk</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">Hierdie vouer se pad kon nie gebruik word nie.</translation>
+        <translation>Hierdie vouer se pad kon nie gebruik word nie.</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie vouer bevat stelsellêers. Kies &apos;n ander een.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteekte vouers in jou tuisvouer bevat instellings. Kies &apos;n ander een.</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is &apos;n lêer, nie &apos;n vouer nie.</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jy kan nie na %1 skryf nie. Kies &apos;n ander vouer.</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die lys projekte bevat &apos;n naam wat nie gebruik kan word nie.</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Twee projekte sou in dieselfde vouer beland: %1.</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die lys projekte om te kopieer is leeg.</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om git en gh te installeer</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om die vouer te maak</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om git jou aanmelding te laat gebruik</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om die projek te kopieer</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om die projek op sy plek te sit</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om jou projekte te kopieer</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarheen om hulle te kopieer</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>Elke projek kry sy eie vouer binne hierdie een. Een wat reeds daar is, word gelaat soos dit is.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">Kies &apos;n vouer…</translation>
+        <translation>Kies &apos;n vouer…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">Kies &apos;n vouer</translation>
+        <translation>Kies &apos;n vouer</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">Vouer: %1</translation>
+        <translation>Vouer: %1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die projekte wat aangeskakel is, neem omtrent %1 op.</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie skyf het %1 vry.</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is dalk nie genoeg plek nie. Die kopie kan steeds probeer word.</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wat gekopieer moet word, kon nie na %1 geskryf word nie, so niks is gekopieer nie.</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om git en gh te installeer</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>Skakel almal aan</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>Skakel almal af</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Watter projekte om te kopieer</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vurke (forks) begin afgeskakel.</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangemeld.</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangemeld as %1.</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie die lys van jou projekte van GitHub lees nie, so niks kan gekopieer word nie. Gaan terug of maak die venster toe, en probeer later weer.</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierdie rekening besit geen projekte nie.</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Net die eerste 1000 word gewys.</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 — Privaat — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>Meld aan by GitHub</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer die kode</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak die blaaier oop</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub wys &apos;n bladsy wat &apos;n eenmalige kode vra. Groundwork sien nooit jou wagwoord nie.</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>Wag vir GitHub…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak die blaaier oop, tik hierdie kode in, en keur Groundwork se aanmelding daar goed. Hierdie bladsy gaan vanself aan.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanmelding is nie voltooi nie. Druk die knoppie om weer te probeer.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanmelding is nie voltooi nie. Druk die knoppie om weer te probeer. GitHub se hulpmiddel het gesê: %1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangemeld. Besig om jou projekte te lees…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer jou GitHub-projekte</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Meld een keer by GitHub aan, kies watter van jou projekte om te hou, en kies &apos;n vouer.</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om na git en gh te soek…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>git en gh is op hierdie rekenaar.</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog nie op hierdie rekenaar nie: %1. Volgende installeer dit, en vra jou wagwoord.</translation>
     </message>
 </context>
 <context>
@@ -2076,15 +2076,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedeelde vouers. Enigiemand op die netwerk kan hulle sonder &apos;n wagwoord oopmaak.</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: ander mag lêers byvoeg</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: ander mag net kyk</translation>
     </message>
 </context>
 <context>
@@ -2471,7 +2471,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer jou GitHub-projekte na hierdie rekenaar</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2571,7 +2571,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer jou GitHub-projekte…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2770,11 +2770,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om %1 te lees</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 het geen eie instellings op hierdie rekenaar nie, so daar was niks om te stoor nie.</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2786,7 +2786,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Besig om %1 te stoor</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2846,19 +2846,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die lys projekte om te kopieer kon nie gelees word nie.</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>git kon nie opgestel word om jou aanmelding te gebruik nie, so git push sal dit dalk vra. Die kopiëring gaan voort.</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reeds daar, so dit is gelaat soos dit is.</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;n Gedeeltelik gekopieerde vouer is by %1. Skrap dit, en kopieer dan weer.</translation>
     </message>
 </context>
 </TS>

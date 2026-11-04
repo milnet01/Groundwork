@@ -442,59 +442,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">Umphathi wamasevisi akaphendulanga.</translation>
+        <translation>Umphathi wamasevisi akaphendulanga.</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Imithetho ye-firewall evela efayeleni lakho elilondoloziwe</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ishintsha izilungiselelo zesistimu: ibuyisela izindawo namasevisi e-firewall yakho, kanye nendawo yayo ezenzakalelayo. Ifayela elithathelwa indawo ligcinwa eceleni kwalo njengekhophi enenombolo.</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubuyiselwa imithetho ye-firewall yakho</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Amaphrinta avela efayeleni lakho elilondoloziwe</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ishintsha izilungiselelo zesistimu: ibuyisela amaphrinta akho, ifake i-CUPS uma ingekho. Ifayela elithathelwa indawo ligcinwa eceleni kwalo njengekhophi enenombolo.</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubuyiselwa amaphrinta akho</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufakwa i-CUPS</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ama-drive avela efayeleni lakho elilondoloziwe</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ishintsha izilungiselelo zesistimu: ixhuma ama-drive akho ekuqaleni, njengoba ayenjalo. I-drive engekho ayisoze yavimba ikhompyutha ukuthi iqale.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">Uhlu lwama-drive axhuma ekuqaleni alukwazanga ukufundwa.</translation>
+        <translation>Uhlu lwama-drive axhuma ekuqaleni alukwazanga ukufundwa.</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Awaxhunyiwe kule khompyutha, ngakho awengezwanga: %1.</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Asevele asohlwini lwama-drive, ngakho awengezwanga: %1.</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuxhunywa ama-drive akho ekuqaleni</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifayela lisho isilungiselelo i-Groundwork engakwazi ukusisebenzisa: %1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -614,19 +614,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifayela elilondoloziwe alikwazanga ukufundwa.</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifayela elilondoloziwe linakho i-%1, i-Groundwork engeke iyibuyisele, ngakho le ngxenye ishiywe injalo.</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-%1 ayithathwa: icela iphasiwedi.</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>I-%1 ayithathwa: %2</translation>
     </message>
 </context>
 <context>
@@ -1306,248 +1306,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Izilungiselelo zesistimu</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Imithetho ye-firewall. Ukulondoloza kuzocela iphasiwedi yakho.</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amaphrinta: %1. Ukulondoloza kuzocela iphasiwedi yakho.</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifayela elilondoloziwe lizoqukatha izilungiselelo zamaphrinta akho, futhi ikheli lephrinta lingaqukatha iphasiwedi. Noma ubani onefayela angakufunda.</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>I-drive ku-%1</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifolda eyabiwe %1: abanye bangangeza amafayela</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifolda eyabiwe %1: abanye bangabuka kuphela</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">Indlela yale folda ayikwazanga ukusetshenziswa.</translation>
+        <translation>Indlela yale folda ayikwazanga ukusetshenziswa.</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le folda iqukethe amafayela esistimu. Khetha enye.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amafolda afihliwe kufolda yakho yasekhaya aqukethe izilungiselelo. Khetha enye.</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-%1 ifayela, hhayi ifolda.</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Awukwazi ukubhala ku-%1. Khetha enye ifolda.</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhlu lwamaphrojekthi lunegama elingeke lisetshenziswe.</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amaphrojekthi amabili angaya kufolda efanayo: %1.</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhlu lwamaphrojekthi okufanele akopishwe alunalutho.</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufakwa i-git ne-gh</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwenziwa ifolda</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvunyelwa i-git isebenzise ukungena kwakho</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>Kukopishwa iphrojekthi</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubekwa iphrojekthi endaweni yayo</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Kukopishwa amaphrojekthi akho</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>Azokopishelwa kuphi</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iphrojekthi ngayinye ithola ifolda yayo ngaphakathi kule. Esevele ikhona ishiywa injalo.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopisha</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">Khetha ifolda…</translation>
+        <translation>Khetha ifolda…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">Khetha ifolda</translation>
+        <translation>Khetha ifolda</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">Ifolda: %1</translation>
+        <translation>Ifolda: %1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amaphrojekthi avuliwe athatha cishe i-%1.</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le drive ine-%1 engenalutho.</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>Isikhala singase singaneli. Ukukopisha kungazanywa noma kunjalo.</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Okufanele kukopishwe akukwazanga ukubhalwa ku-%1, ngakho akukho okukopishiwe.</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufakwa i-git ne-gh</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>Vula konke</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>Vala konke</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Imaphi amaphrojekthi azokopishwa</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ama-fork aqala evaliwe.</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungene ngemvume.</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungene ngemvume njengo-%1.</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhlu lwamaphrojekthi akho alukwazanga ukufundwa ku-GitHub, ngakho akukho okungakopishwa. Buyela emuva noma uvale iwindi, bese uzama futhi kamuva.</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le akhawunti ayinawo amaphrojekthi.</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuboniswa angu-1000 okuqala kuphela.</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 — Okuyimfihlo — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>Ngena ngemvume ku-GitHub</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopisha ikhodi</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Vula isiphequluli</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-GitHub ibonisa ikhasi elicela ikhodi yesikhathi esisodwa. I-Groundwork ayisoze yayibona iphasiwedi yakho.</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulindelwe i-GitHub…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vula isiphequluli, ufake le khodi, bese uvuma ukungena kwe-Groundwork lapho. Leli khasi liqhubeka ngokwalo.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukungena ngemvume akuphelanga. Cindezela inkinobho ukuze uzame futhi.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukungena ngemvume akuphelanga. Cindezela inkinobho ukuze uzame futhi. Ithuluzi le-GitHub lithe: %1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungene ngemvume. Kufundwa amaphrojekthi akho…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopisha amaphrojekthi akho e-GitHub</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ngena ngemvume ku-GitHub kanye, ukhethe ukuthi imaphi amaphrojekthi akho ofuna ukuwagcina, bese ukhetha ifolda.</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufunwa i-git ne-gh…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-git ne-gh zikule khompyutha.</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akukabi kule khompyutha: %1. Okulandelayo kuyakufaka, futhi kucela iphasiwedi yakho.</translation>
     </message>
 </context>
 <context>
@@ -2076,15 +2076,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amafolda abiwe. Noma ubani osenethiwekhi angawavula ngaphandle kwephasiwedi.</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: abanye bangangeza amafayela</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: abanye bangabuka kuphela</translation>
     </message>
 </context>
 <context>
@@ -2471,7 +2471,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopisha amaphrojekthi akho e-GitHub kule khompyutha</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2571,7 +2571,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopisha amaphrojekthi akho e-GitHub…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2770,11 +2770,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kufundwa i-%1</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-%1 ayinazo izilungiselelo zayo kule khompyutha, ngakho bekungekho okufanele kulondolozwe.</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2786,7 +2786,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulondolozwa i-%1</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2846,19 +2846,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhlu lwamaphrojekthi okufanele akopishwe alukwazanga ukufundwa.</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>I-git ayikwazanga ukusethwa ukuze isebenzise ukungena kwakho, ngakho i-git push ingase ikucele. Ukukopisha kuyaqhubeka.</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>Isivele ikhona, ngakho ishiywe injalo.</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ifolda ekopishwe ingxenye iku-%1. Yisuse, bese ukopisha futhi.</translation>
     </message>
 </context>
 </TS>

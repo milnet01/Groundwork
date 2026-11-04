@@ -442,59 +442,59 @@
     </message>
     <message>
         <source>The service manager did not answer.</source>
-        <translation type="unfinished">מנהל השירותים לא הגיב.</translation>
+        <translation>מנהל השירותים לא הגיב.</translation>
     </message>
     <message>
         <source>Firewall rules from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>כללי חומת האש מהקובץ השמור שלך</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your firewall&apos;s zones and services, and its default zone. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>משנה הגדרות מערכת: מחזיר את האזורים והשירותים של חומת האש שלך, ואת אזור ברירת המחדל שלה. קובץ שמוחלף נשמר לידו כעותק ממוספר.</translation>
     </message>
     <message>
         <source>Putting your firewall rules back</source>
-        <translation type="unfinished"></translation>
+        <translation>מחזיר את כללי חומת האש שלך</translation>
     </message>
     <message>
         <source>Printers from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>מדפסות מהקובץ השמור שלך</translation>
     </message>
     <message>
         <source>Changes system settings: puts back your printers, installing CUPS if it is missing. A file it replaces is kept beside it as a numbered copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>משנה הגדרות מערכת: מחזיר את המדפסות שלך, ומתקין את CUPS אם הוא חסר. קובץ שמוחלף נשמר לידו כעותק ממוספר.</translation>
     </message>
     <message>
         <source>Putting your printers back</source>
-        <translation type="unfinished"></translation>
+        <translation>מחזיר את המדפסות שלך</translation>
     </message>
     <message>
         <source>Installing CUPS</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את CUPS</translation>
     </message>
     <message>
         <source>Drives from your saved file</source>
-        <translation type="unfinished"></translation>
+        <translation>כוננים מהקובץ השמור שלך</translation>
     </message>
     <message>
         <source>Changes system settings: connects your drives at start-up, as they were. A missing drive never stops the computer starting.</source>
-        <translation type="unfinished"></translation>
+        <translation>משנה הגדרות מערכת: מחבר את הכוננים שלך בעת ההפעלה, כפי שהיו. כונן חסר לעולם לא מונע מהמחשב לעלות.</translation>
     </message>
     <message>
         <source>The list of drives that connect at start-up could not be read.</source>
-        <translation type="unfinished">לא ניתן היה לקרוא את רשימת הכוננים שמתחברים בעת ההפעלה.</translation>
+        <translation>לא ניתן היה לקרוא את רשימת הכוננים שמתחברים בעת ההפעלה.</translation>
     </message>
     <message>
         <source>Not connected to this computer, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא מחוברים למחשב הזה, ולכן לא נוספו: %1.</translation>
     </message>
     <message>
         <source>Already in the list of drives, so not added: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>כבר ברשימת הכוננים, ולכן לא נוספו: %1.</translation>
     </message>
     <message>
         <source>Connecting your drives at start-up</source>
-        <translation type="unfinished"></translation>
+        <translation>מחבר את הכוננים שלך בעת ההפעלה</translation>
     </message>
     <message>
         <source>Off: this source does not check its programs&apos; signatures.</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>The file names a setting Groundwork cannot use: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>הקובץ מציין הגדרה ש־Groundwork לא יכול להשתמש בה: %1</translation>
     </message>
     <message>
         <source>The setup list in the file is damaged.</source>
@@ -614,19 +614,19 @@
     </message>
     <message>
         <source>The saved file could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא את הקובץ השמור.</translation>
     </message>
     <message>
         <source>The saved file holds %1, which Groundwork will not restore, so this part was left alone.</source>
-        <translation type="unfinished"></translation>
+        <translation>הקובץ השמור מכיל את %1, ש־Groundwork לא ישחזר, ולכן החלק הזה נשאר כפי שהוא.</translation>
     </message>
     <message>
         <source>%1 is not carried: it asks for a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 לא מועבר: הוא מבקש סיסמה.</translation>
     </message>
     <message>
         <source>%1 is not carried: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 לא מועבר: %2</translation>
     </message>
 </context>
 <context>
@@ -1306,248 +1306,248 @@
     </message>
     <message>
         <source>System settings</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרות מערכת</translation>
     </message>
     <message>
         <source>Firewall rules. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>כללי חומת האש. השמירה תבקש את הסיסמה שלך.</translation>
     </message>
     <message>
         <source>Printers: %1. Save will ask for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>מדפסות: %1. השמירה תבקש את הסיסמה שלך.</translation>
     </message>
     <message>
         <source>The saved file will hold your printers&apos; settings, and a printer&apos;s address can hold a password. Anyone with the file can read them.</source>
-        <translation type="unfinished"></translation>
+        <translation>הקובץ השמור יכיל את ההגדרות של המדפסות שלך, וכתובת של מדפסת יכולה להכיל סיסמה. כל מי שיש לו את הקובץ יכול לקרוא אותן.</translation>
     </message>
     <message>
         <source>Drive at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>כונן ב־%1</translation>
     </message>
     <message>
         <source>Shared folder %1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>תיקייה משותפת %1: אחרים יכולים להוסיף קבצים</translation>
     </message>
     <message>
         <source>Shared folder %1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>תיקייה משותפת %1: אחרים יכולים רק להסתכל</translation>
     </message>
 </context>
 <context>
     <name>gw::GitHub</name>
     <message>
         <source>This folder&apos;s path could not be used.</source>
-        <translation type="unfinished">לא ניתן היה להשתמש בנתיב של התיקייה הזו.</translation>
+        <translation>לא ניתן היה להשתמש בנתיב של התיקייה הזו.</translation>
     </message>
     <message>
         <source>This folder holds system files. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>התיקייה הזו מכילה קובצי מערכת. בחר תיקייה אחרת.</translation>
     </message>
     <message>
         <source>Hidden folders in your home folder hold settings. Choose another.</source>
-        <translation type="unfinished"></translation>
+        <translation>תיקיות מוסתרות בתיקיית הבית שלך מכילות הגדרות. בחר תיקייה אחרת.</translation>
     </message>
     <message>
         <source>%1 is a file, not a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 הוא קובץ, לא תיקייה.</translation>
     </message>
     <message>
         <source>You cannot write to %1. Choose another folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>אין לך הרשאה לכתוב ל־%1. בחר תיקייה אחרת.</translation>
     </message>
     <message>
         <source>The list of projects holds a name that cannot be used.</source>
-        <translation type="unfinished"></translation>
+        <translation>רשימת הפרויקטים מכילה שם שלא ניתן להשתמש בו.</translation>
     </message>
     <message>
         <source>Two projects would go to the same folder: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>שני פרויקטים היו נכנסים לאותה תיקייה: %1.</translation>
     </message>
     <message>
         <source>The list of projects to copy is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>רשימת הפרויקטים להעתקה ריקה.</translation>
     </message>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את git ואת gh</translation>
     </message>
     <message>
         <source>Making the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>יוצר את התיקייה</translation>
     </message>
     <message>
         <source>Letting git use your sign-in</source>
-        <translation type="unfinished"></translation>
+        <translation>מאפשר ל־git להשתמש בכניסה שלך</translation>
     </message>
     <message>
         <source>Copying the project</source>
-        <translation type="unfinished"></translation>
+        <translation>מעתיק את הפרויקט</translation>
     </message>
     <message>
         <source>Putting the project in place</source>
-        <translation type="unfinished"></translation>
+        <translation>מציב את הפרויקט במקומו</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubCopyPage</name>
     <message>
         <source>Copying your projects</source>
-        <translation type="unfinished"></translation>
+        <translation>מעתיק את הפרויקטים שלך</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubFolderPage</name>
     <message>
         <source>Where to copy them</source>
-        <translation type="unfinished"></translation>
+        <translation>לאן להעתיק אותם</translation>
     </message>
     <message>
         <source>Each project gets its own folder inside this one. One already there is left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>כל פרויקט מקבל תיקייה משלו בתוך התיקייה הזו. תיקייה שכבר קיימת נשארת כפי שהיא.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקה</translation>
     </message>
     <message>
         <source>Choose a folder…</source>
-        <translation type="unfinished">בחירת תיקייה…</translation>
+        <translation>בחירת תיקייה…</translation>
     </message>
     <message>
         <source>Choose a folder</source>
-        <translation type="unfinished">בחירת תיקייה</translation>
+        <translation>בחירת תיקייה</translation>
     </message>
     <message>
         <source>Folder: %1</source>
-        <translation type="unfinished">תיקייה: %1</translation>
+        <translation>תיקייה: %1</translation>
     </message>
     <message>
         <source>The projects switched on take about %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>הפרויקטים המופעלים תופסים בערך %1.</translation>
     </message>
     <message>
         <source>This drive has %1 free.</source>
-        <translation type="unfinished"></translation>
+        <translation>בכונן הזה פנויים %1.</translation>
     </message>
     <message>
         <source>That may not be enough room. The copy can still be tried.</source>
-        <translation type="unfinished"></translation>
+        <translation>ייתכן שאין מספיק מקום. עדיין אפשר לנסות להעתיק.</translation>
     </message>
     <message>
         <source>What to copy could not be written to %1, so nothing was copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לכתוב ל־%1 את מה שיש להעתיק, לכן שום דבר לא הועתק.</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubInstallPage</name>
     <message>
         <source>Installing git and gh</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקין את git ואת gh</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubProjectsPage</name>
     <message>
         <source>Switch all on</source>
-        <translation type="unfinished"></translation>
+        <translation>הפעל הכול</translation>
     </message>
     <message>
         <source>Switch all off</source>
-        <translation type="unfinished"></translation>
+        <translation>כבה הכול</translation>
     </message>
     <message>
         <source>Which projects to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>אילו פרויקטים להעתיק</translation>
     </message>
     <message>
         <source>Forks start switched off.</source>
-        <translation type="unfinished"></translation>
+        <translation>מזלגות (forks) מתחילים כבויים.</translation>
     </message>
     <message>
         <source>Signed in.</source>
-        <translation type="unfinished"></translation>
+        <translation>מחובר.</translation>
     </message>
     <message>
         <source>Signed in as %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>מחובר בתור %1.</translation>
     </message>
     <message>
         <source>Couldn&apos;t read the list of your projects from GitHub, so nothing can be copied. Go back or close the window, and try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא מ־GitHub את רשימת הפרויקטים שלך, ולכן אי אפשר להעתיק דבר. חזור אחורה או סגור את החלון, ונסה שוב מאוחר יותר.</translation>
     </message>
     <message>
         <source>This account owns no projects.</source>
-        <translation type="unfinished"></translation>
+        <translation>לחשבון הזה אין פרויקטים.</translation>
     </message>
     <message>
         <source>Only the first 1000 are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>מוצגים רק 1000 הראשונים.</translation>
     </message>
     <message>
         <source>%1 — Private — %2</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1 — פרטי — %2</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubSignInPage</name>
     <message>
         <source>Sign in to GitHub</source>
-        <translation type="unfinished"></translation>
+        <translation>כניסה ל־GitHub</translation>
     </message>
     <message>
         <source>Copy the code</source>
-        <translation type="unfinished"></translation>
+        <translation>העתק את הקוד</translation>
     </message>
     <message>
         <source>Open the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>פתח את הדפדפן</translation>
     </message>
     <message>
         <source>GitHub shows a page asking for a one-time code. Groundwork never sees your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏GitHub מציג דף שמבקש קוד חד־פעמי. Groundwork אף פעם לא רואה את הסיסמה שלך.</translation>
     </message>
     <message>
         <source>Waiting for GitHub…</source>
-        <translation type="unfinished"></translation>
+        <translation>ממתין ל־GitHub…</translation>
     </message>
     <message>
         <source>Open the browser, enter this code, and approve Groundwork&apos;s sign-in there. This page moves on by itself.</source>
-        <translation type="unfinished"></translation>
+        <translation>פתח את הדפדפן, הזן את הקוד הזה, ואשר שם את הכניסה של Groundwork. הדף הזה ממשיך מעצמו.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>הכניסה לא הסתיימה. לחץ על הכפתור כדי לנסות שוב.</translation>
     </message>
     <message>
         <source>Signing in did not finish. Press the button to try again. GitHub&apos;s tool said: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>הכניסה לא הסתיימה. לחץ על הכפתור כדי לנסות שוב. הכלי של GitHub אמר: %1</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>מחובר. קורא את הפרויקטים שלך…</translation>
     </message>
 </context>
 <context>
     <name>gw::GithubStartPage</name>
     <message>
         <source>Copy your GitHub projects</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת הפרויקטים שלך מ־GitHub</translation>
     </message>
     <message>
         <source>Sign in to GitHub once, choose which of your projects to keep, and choose a folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>התחבר ל־GitHub פעם אחת, בחר אילו מהפרויקטים שלך לשמור, ובחר תיקייה.</translation>
     </message>
     <message>
         <source>Looking for git and gh…</source>
-        <translation type="unfinished"></translation>
+        <translation>מחפש את git ואת gh…</translation>
     </message>
     <message>
         <source>git and gh are on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>‏git ו־gh נמצאים במחשב הזה.</translation>
     </message>
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
-        <translation type="unfinished"></translation>
+        <translation>עדיין לא במחשב הזה: %1. ״הבא״ מתקין אותו, ומבקש את הסיסמה שלך.</translation>
     </message>
 </context>
 <context>
@@ -2076,15 +2076,15 @@
     </message>
     <message>
         <source>Shared folders. Anyone on the network can open these with no password.</source>
-        <translation type="unfinished"></translation>
+        <translation>תיקיות משותפות. כל אחד ברשת יכול לפתוח אותן בלי סיסמה.</translation>
     </message>
     <message>
         <source>%1: others may add files</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: אחרים יכולים להוסיף קבצים</translation>
     </message>
     <message>
         <source>%1: others may only look</source>
-        <translation type="unfinished"></translation>
+        <translation>‏%1: אחרים יכולים רק להסתכל</translation>
     </message>
 </context>
 <context>
@@ -2471,7 +2471,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects to this computer</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת הפרויקטים שלך מ־GitHub למחשב הזה</translation>
     </message>
     <message>
         <source>Welcome to Groundwork</source>
@@ -2571,7 +2571,7 @@
     </message>
     <message>
         <source>Copy your GitHub projects…</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת הפרויקטים שלך מ־GitHub…</translation>
     </message>
     <message>
         <source>This saved file holds saved passwords or keys. Anyone with the file can read them.</source>
@@ -2770,11 +2770,11 @@
     </message>
     <message>
         <source>Reading %1</source>
-        <translation type="unfinished"></translation>
+        <translation>קורא את %1</translation>
     </message>
     <message>
         <source>%1 has no settings of its own on this computer, so there was nothing to save.</source>
-        <translation type="unfinished"></translation>
+        <translation>ל־%1 אין הגדרות משלו במחשב הזה, ולכן לא היה מה לשמור.</translation>
     </message>
     <message>
         <source>The setup list could not be written to %1.</source>
@@ -2786,7 +2786,7 @@
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>שומר את %1</translation>
     </message>
     <message>
         <source>Some files in these settings could not be read, so they were left out: %1.</source>
@@ -2846,19 +2846,19 @@
     </message>
     <message>
         <source>The list of projects to copy could not be read.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה לקרוא את רשימת הפרויקטים להעתקה.</translation>
     </message>
     <message>
         <source>git could not be set up to use your sign-in, so git push may ask for it. Copying goes on.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן היה להגדיר את git להשתמש בכניסה שלך, ולכן git push עשוי לבקש אותה. ההעתקה נמשכת.</translation>
     </message>
     <message>
         <source>Already there, so it was left as it is.</source>
-        <translation type="unfinished"></translation>
+        <translation>כבר קיים, ולכן נשאר כפי שהוא.</translation>
     </message>
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
-        <translation type="unfinished"></translation>
+        <translation>תיקייה שהועתקה בחלקה נמצאת ב־%1. מחק אותה, ואז העתק שוב.</translation>
     </message>
 </context>
 </TS>
