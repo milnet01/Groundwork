@@ -341,12 +341,8 @@ protected:
                  QStringLiteral("--files-from=-")},
                 true, Step::Tool::Generic, label, {}, input};
     }
-    // A file's own type comes from its folder, where SELinux is on (spec 15).
-    static void relabel(const CheckContext &context, const QString &dir, const QString &label, QList<Step> *steps)
-    {
-        if (context.fileExists(QStringLiteral("/sys/fs/selinux/enforce")))
-            *steps << Step{{QStringLiteral("restorecon"), QStringLiteral("-R"), dir}, true, Step::Tool::Generic, label};
-    }
+    // No restorecon: a restored file takes its folder's SELinux type
+    // (measured in a VM with SELinux enforcing, spec 15).
 
     SettingsRow m_part;
     QString m_file;
@@ -384,7 +380,6 @@ public:
                            true, Step::Tool::Generic, label}};
         if (!files.isEmpty())
             steps << extractStep(files, dir, label);
-        relabel(context, dir, label, &steps);
         steps << Step{{QStringLiteral("firewall-cmd"), QStringLiteral("--reload")}, true, Step::Tool::Generic, label};
         if (const QString zone = defaultZone(context, members.files.contains(conf) ? conf : QString()); !zone.isEmpty())
             steps << Step{{QStringLiteral("firewall-cmd"), QStringLiteral("--set-default-zone=") + zone}, true, Step::Tool::Generic, label};
@@ -452,7 +447,6 @@ public:
             steps << Step{{QStringLiteral("chown"), QStringLiteral("root:lp"), path}, true, Step::Tool::Generic, label};
             steps << Step{{QStringLiteral("chmod"), QStringLiteral("600"), path}, true, Step::Tool::Generic, label};
         }
-        relabel(context, dir, label, &steps);
         steps << Step{{QStringLiteral("systemctl"), QStringLiteral("enable"), QStringLiteral("--now"), m_unit}, true,
                       Step::Tool::Generic, label};
         return steps;

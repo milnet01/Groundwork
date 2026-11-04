@@ -592,12 +592,13 @@ private slots:
         QVERIFY(mkdir >= 0 && mkdir < extract && extract < reload && reload < zone);
         for (const gw::Step &step : steps)
             QVERIFY(step.needsRoot);
-        QCOMPARE(stepIndex(steps, QStringLiteral("restorecon")), qsizetype(-1)); // no SELinux in the fixture
+        // Spec 15: a restored file already takes its folder's SELinux type
+        // (measured in a VM, enforcing), so neither part relabels.
         writeFile(m_root + QStringLiteral("/sys/fs/selinux/enforce"), "1");
-        const QList<gw::Step> selinux = stepsOf(gw::kFirewallPart);
-        const qsizetype relabel = stepIndex(selinux, QStringLiteral("restorecon -R /etc/firewalld"));
-        QVERIFY(relabel > stepIndex(selinux, QStringLiteral("tar --extract")));
-        QVERIFY(relabel < stepIndex(selinux, QStringLiteral("firewall-cmd --reload")));
+        QCOMPARE(stepIndex(stepsOf(gw::kFirewallPart), QStringLiteral("restorecon")), qsizetype(-1));
+        const QList<gw::Step> printers = stepsOf(gw::kPrintersPart, true);
+        QVERIFY(!printers.isEmpty());
+        QCOMPARE(stepIndex(printers, QStringLiteral("restorecon")), qsizetype(-1));
     }
 
     // Spec 4.7: a default zone that could be anything is not passed on.

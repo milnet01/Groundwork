@@ -370,7 +370,7 @@ class TstWorker : public QObject
         for (const char *tool : {"tar", "find", "mkdir", "chmod"})
             writeFile(m_bin + QLatin1Char('/') + QLatin1String(tool), kUnderRoot, true);
         writeFile(m_bin + QStringLiteral("/systemctl"), kSystemctlRunning, true);
-        for (const char *tool : {"firewall-cmd", "restorecon", "chown"}) // chown root:lp needs root
+        for (const char *tool : {"firewall-cmd", "chown"}) // chown root:lp needs root
             writeFile(m_bin + QLatin1Char('/') + QLatin1String(tool), kRecord, true);
         const QString etc = m_root + QStringLiteral("/etc/");
         writeFile(etc + QStringLiteral("firewalld/firewalld.conf"), "DefaultZone=home\n");

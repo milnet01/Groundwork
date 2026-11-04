@@ -171,7 +171,6 @@ A folder member is accepted only when it is the part's own folder or one of thos
 mkdir -p -- /etc/firewalld/zones /etc/firewalld/services /etc/firewalld/policies /etc/firewalld/ipsets
 tar --extract --file FILE -C /etc/firewalld --strip-components=2 --backup=numbered --no-same-owner
     --no-overwrite-dir --verbatim-files-from --null --files-from=-      (the named .xml files on input)
-restorecon -R /etc/firewalld                                            (when SELinux is on; see §15)
 firewall-cmd --reload
 firewall-cmd --set-default-zone=ZONE                                    (when DefaultZone is valid)
 ```
@@ -187,9 +186,10 @@ mkdir -p -- /etc/cups/ppd
 tar --extract … -C /etc/cups --strip-components=2 --backup=numbered --no-same-owner …
 chown root:lp /etc/cups/printers.conf      (and classes.conf when kept)
 chmod 600 /etc/cups/printers.conf
-restorecon -R /etc/cups                    (when SELinux is on; see §15)
 systemctl enable --now cups
 ```
+
+Neither part runs `restorecon`: a restored file takes its folder's SELinux type (§15).
 
 Printer drivers come from the carried programs, which run first.
 
@@ -253,7 +253,7 @@ These tests prove the commands Groundwork builds. Only the recipe proves firewal
 2. In the carry job, the page raises no password box. Switch printers on. Save asks once. `tar --list` of the file shows both parts, and no `cupsd.conf`.
 3. On a fresh second VM with that disk attached, start from the file. Rows appear for each kind, printers marked secret.
 4. After the run, with no manual repair: `firewall-cmd --list-services` includes `ftp`; the default zone matches; `lpstat -e` lists the printer; `findmnt /mnt/<name>` shows the disk, and `/etc/fstab` has `nofail`; `smbclient -N -L` lists the share.
-5. `ausearch -m avc -ts recent` shows no denial for firewalld or cupsd. `ls -Z` on a restored file shows the type its folder's others have.
+5. `ausearch -m avc -ts recent` (add `--input-logs` over ssh, or it waits on its input) shows no denial for firewalld or cupsd. `ls -Z` on a restored file shows the type its folder's others have.
 6. `systemctl restart firewalld cups`, then repeat step 4's first three checks. Restart the VM, and again.
 7. Run from the same file a second time: numbered copies appear and `fstab` gains no line.
 8. Detach the disk and repeat on a third fresh VM: the mount is named as absent, and the VM starts normally.
@@ -323,9 +323,9 @@ A format 1 file saved by an earlier version has no system parts and reads as bef
 
 ## 15. Open questions
 
-Each needs root or a fresh VM, so none is measured here. §7's recipe settles them all before release, and a wrong answer changes only the step it names.
+§7's recipe ran on Tumbleweed VMs with SELinux enforcing on 2026-11-04, steps 3 to 8, Worker only over ssh. Three questions are answered; the Leap one is open.
 
-- **Does a restored file need `restorecon`?** Files made in an existing folder usually take the folder's type. The step stays if the recipe's step 5 shows a wrong type, and is dropped if not.
-- **Does `cupsd` overwrite `printers.conf` on stop?** Taken from CUPS's known behaviour, unmeasured here. INV-10 is cheap either way.
-- **Does `firewall-cmd --reload` take new zone files, and the default zone set after it?** Taken from firewalld's documented behaviour, unmeasured here.
-- **Does Leap 16's tar list members the same way?** Measured on Tumbleweed only. The recipe's step 9 reads it.
+- **Does a restored file need `restorecon`? No.** Step 5 read `firewalld_etc_rw_t` on the restored `zones/home.xml` and `cupsd_rw_etc_t` on `printers.conf` and the PPD, the same type as each folder's other files, before any relabel. The step is dropped from §4.7 and §4.8. `ausearch -m avc` showed no denial.
+- **Does `cupsd` overwrite `printers.conf`?** It rewrites the file when it starts: a `printers.conf.O` of its own appeared beside the restored file, and the printer stayed listed through restarts of `cups` and of the VM. Whether a stop alone writes it was not isolated. INV-10's order works, and stays.
+- **Does `firewall-cmd --reload` take new zone files, and the default zone set after it? Yes.** After the run, `home` was the default zone and listed `ftp`, and both held through a `firewalld` restart and a VM restart.
+- **Does Leap 16's tar list members the same way?** Open: step 9 has not run.
