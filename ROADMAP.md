@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=114 -->
+<!-- ants-roadmap-id-high-water: GRND=115 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1607,7 +1607,7 @@ has a written design before it is built.
 Numbered 0.4.0 until 2026-10-16, when the user chose to ship what was
 built as 0.4.0 instead.
 
-- 🚧 [GRND-0065] **Your GitHub projects, copied into a folder you choose.**
+- ✅ [GRND-0065] **Your GitHub projects, copied into a folder you choose.**
   The user liked this over a personal list (2026-10-10): sign in
   once, list the user's repositories, tick which to copy, choose the
   folder. Private ones work once signed in. Copying runs as the user,
@@ -1628,6 +1628,13 @@ built as 0.4.0 instead.
   throwaway VM, the user typing the sign-in code shown. 0.6.0 is cut
   once it passes.
   Translations done 2026-11-04.
+  Section 7 recipe passed 2026-11-04 on Tumbleweed (steps 1-6, the user
+  signing in) and Leap 16.0 (step 7: the Worker installed git and gh;
+  gh printed a code in the shape oneTimeCode reads). Step 5 broke the
+  VM's saved token instead of revoking on GitHub: revoking the GitHub
+  CLI app would also sign out the host's gh. A bad token after the list
+  loaded made the copy fail with no password box and no partial folder.
+  Polish found on the way is GRND-0115.
   **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -1761,6 +1768,19 @@ built as 0.4.0 instead.
   Kind: fix.
   Source: vm-recipe-2026-11-04.
   Lanes: items.
+
+- 📋 [GRND-0115] **GitHub job: plainer words on three pages.**
+  Seen in the GRND-0065 VM check, 2026-11-04:
+  - The tools page says "Next installs it" for git and gh together.
+  - After sign-in, the projects page shows gh's raw lines: tick marks
+    render as boxes, and "Failed to copy one-time code to clipboard"
+    shows although Groundwork's own Copy button worked.
+  - A copy that fails because the sign-in went bad says only "Copying
+    the project failed (exit code 1)", not that signing in again fixes it.
+  **Layman:** The GitHub copying pages say things in plain words instead of showing gh's raw messages.
+  Kind: ux.
+  Source: grnd-0065-vm-check-2026-11-04.
+  Lanes: gui.
 
 ## Backlog — no version yet
 
