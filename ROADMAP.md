@@ -1705,7 +1705,7 @@ built as 0.4.0 instead.
   Source: user-request-2026-10-12.
   Lanes: gui.
 
-- 🚧 [GRND-0073] **Scan a system's settings, and put them back after a reinstall.**
+- ✅ [GRND-0073] **Scan a system's settings, and put them back after a reinstall.**
   From the user, 2026-10-12: Groundwork should scan the system for its
   configurations, so that after a reinstall it can reinstate them.
   Needs a write-spec design first: what is recorded, where the record
@@ -1735,6 +1735,10 @@ built as 0.4.0 instead.
   takes the zones and the default zone. A share on the kept drive was
   listed but would not open, filed and fixed as GRND-0114. Still to run:
   step 9 on Leap 16, so this stays in progress. Translations done.
+  Shipped 2026-11-04. Step 9 passed on Leap 16.0 the same day: the
+  file saved on Tumbleweed restored firewall, printer, drive and share,
+  with no SELinux denial. Not seen, for want of a window: step 2's
+  password box at Save, and step 3's rows with printers marked secret.
   **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
   Kind: feature.
   Source: user-request-2026-10-12.

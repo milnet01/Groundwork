@@ -323,9 +323,9 @@ A format 1 file saved by an earlier version has no system parts and reads as bef
 
 ## 15. Open questions
 
-§7's recipe ran on Tumbleweed VMs with SELinux enforcing on 2026-11-04, steps 3 to 8, Worker only over ssh. Three questions are answered; the Leap one is open.
+§7's recipe ran on 2026-11-04, Worker only over ssh with SELinux enforcing: steps 3 to 8 on Tumbleweed, step 9 on Leap 16.0. All four questions are answered. With no window, step 2's password box and step 3's rows were not seen.
 
 - **Does a restored file need `restorecon`? No.** Step 5 read `firewalld_etc_rw_t` on the restored `zones/home.xml` and `cupsd_rw_etc_t` on `printers.conf` and the PPD, the same type as each folder's other files, before any relabel. The step is dropped from §4.7 and §4.8. `ausearch -m avc` showed no denial.
 - **Does `cupsd` overwrite `printers.conf`?** It rewrites the file when it starts: a `printers.conf.O` of its own appeared beside the restored file, and the printer stayed listed through restarts of `cups` and of the VM. Whether a stop alone writes it was not isolated. INV-10's order works, and stays.
 - **Does `firewall-cmd --reload` take new zone files, and the default zone set after it? Yes.** After the run, `home` was the default zone and listed `ftp`, and both held through a `firewalld` restart and a VM restart.
-- **Does Leap 16's tar list members the same way?** Open: step 9 has not run.
+- **Does Leap 16's tar list members the same way? Yes.** On Leap 16.0 the file saved on Tumbleweed restored all five steps, and step 4's checks and step 5's labels read as on Tumbleweed, with no denial.
