@@ -1692,6 +1692,12 @@ built as 0.4.0 instead.
   suspend masked. Needs a design first: swap at least as large as
   memory, Secure Boot's lockdown blocks hibernation, and a wrong
   resume= can stop the machine waking. Pairs with GRND-0055.
+  Waiting-on: user (should Groundwork make room for hibernation by
+  creating or growing swap, or offer it only where swap is already big
+  enough? Recommended: only where swap already holds all of memory and
+  Secure Boot is off, never touching swap or partitions, off by default;
+  the row says why when it cannot be offered. A spec follows the answer,
+  since a wrong resume= stops the machine waking, 2026-11-04).
   **Layman:** The computer can save everything and switch off, then carry on where it left off, for machines where sleep does not work.
   Kind: feature.
   Source: user-request-2026-10-10.
