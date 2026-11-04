@@ -754,6 +754,19 @@ private slots:
         QVERIFY(gw::withCarried(gw::catalogue(), carried).orderProblems().isEmpty());
     }
 
+    // GRND-0114: a kept drive is mounted before Samba starts, so a shared
+    // folder on it is there, and labelled, when smbd first looks.
+    void keptDrivesAreMountedBeforeSharing()
+    {
+        gw::Manifest kept;
+        kept.mounts << gw::CarriedMount{QStringLiteral("UUID=1"), QStringLiteral("/mnt/data"), QStringLiteral("ext4"), QString()};
+        const gw::CarriedItems carried = gw::carriedItems(kept, QStringLiteral("f.tar"), gw::catalogue());
+        const gw::Catalogue all = gw::withCarried(gw::catalogue(), carried);
+        const QStringList order = all.runOrder({QStringLiteral("network-shares"), QStringLiteral("carried-mounts")});
+        QCOMPARE(order, (QStringList{QStringLiteral("carried-mounts"), QStringLiteral("network-shares")}));
+        QVERIFY(all.orderProblems().isEmpty());
+    }
+
     // GRND-0079, INV-7: a source already present under another alias reads
     // done by its baseurl; a new one is written whole, $releasever and all.
     void aSourceIsWrittenWholeAndOnce()

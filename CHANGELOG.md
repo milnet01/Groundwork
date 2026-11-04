@@ -31,6 +31,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 - Saving a setup with no app settings switched on never finished. It now
   saves. (Found while building GRND-0073.)
+- A folder shared from a newly formatted drive was listed on the network
+  but would not open where SELinux is on. Groundwork now gives the
+  folders above it their proper SELinux type, and on a saved setup it
+  connects kept drives before sharing. (GRND-0114)
 
 ## [0.5.2] - 2026-10-30
 

@@ -147,12 +147,15 @@ virtual QList<Step> applyStepsFor(const SystemIdentity &system, const CheckConte
 1. `zypper -n install`, naming `samba` if `readService` does not find `smb` and `wsdd` if it does not find `wsdd`; absent when both are found.
 2. `writeFileStep` for `groundwork-shares.conf`.
 3. Append §4.1's lines to `smb.conf` by `dd oflag=append conv=notrunc`, as `ExtraDrivesItem::applySteps` appends to `fstab`; absent when the line is there. The text starts with a newline, for a file with no final one.
-4. `touch /etc/samba/smb.conf`.
-5. `systemctl enable smb nmb wsdd`.
-6. `systemctl restart smb nmb wsdd`.
-7. When `readService` finds `firewalld` active: `firewall-cmd --permanent --add-service=samba`, then `--add-service=wsdd`, then `--reload`, as `SshItem::applySteps` does for `ssh`.
+4. When `/sys/fs/selinux/enforce` exists: `restorecon --` on every parent folder of every shared folder, `/` excepted, outermost first, not recursive (GRND-0114).
+5. `touch /etc/samba/smb.conf`.
+6. `systemctl enable smb nmb wsdd`.
+7. `systemctl restart smb nmb wsdd`.
+8. When `readService` finds `firewalld` active: `firewall-cmd --permanent --add-service=samba`, then `--add-service=wsdd`, then `--reload`, as `SshItem::applySteps` does for `ssh`.
 
-Step 4 and the restart serve `/usr/share/samba/update-samba-security-profile`, `smb.service`'s `ExecStartPre`. It runs at start only, so a reload would skip it. It labels new share paths for SELinux, and its AppArmor branch rebuilds its list only when `smb.conf` is newer than that list, so a change to the included file alone would leave a new folder denied. It reads paths through `testparm -s`, which follows the include.
+Step 5 and the restart serve `/usr/share/samba/update-samba-security-profile`, `smb.service`'s `ExecStartPre`. It runs at start only, so a reload would skip it. It labels new share paths for SELinux, and its AppArmor branch rebuilds its list only when `smb.conf` is newer than that list, so a change to the included file alone would leave a new folder denied. It reads paths through `testparm -s`, which follows the include.
+
+That script labels the shared folder but not its parents. A freshly made ext4 drive's root has no SELinux type (`unlabeled_t`). smbd may not search it, so a share on it is listed but cannot be opened (measured 2026-11-04). Step 4 gives each parent the type its path should have.
 
 No step runs `testparm` as a gate. A file holding an unknown parameter still exited 0 on 2026-10-30, so it would prove nothing. §4.3 and §4.4 are the defence, since they decide every line written.
 
@@ -192,6 +195,8 @@ An empty list leaves Apply greyed out, so the review page says a value is still 
 
 - **INV-13** — On a real system, the boundary holds: a guest reads a look-only share and cannot write to it, adds a file to an add-files share and that file belongs to the user, and cannot follow a symlink out of a share. *Test:* §7's manual recipe. *Breaks when:* `force user`, `read only` or `wide links` behaves other than §4.1 says.
 
+- **INV-14** — Where SELinux is on, one `restorecon --` step names every parent of every shared folder, outermost first and never `/`, before the restart; where it is off, there is none (GRND-0114). *Test:* `tests/tst_networksharesitem.cpp::parentFoldersAreLabelledWhereSELinuxIsOn`, with `/mnt/data/shared` and `/mnt/data/more`. *Breaks when:* the step comes after the restart, or names a parent twice.
+
 ## 6. Failure modes
 
 - **A chosen folder is gone at apply time, such as an unplugged USB disk.** The share is still written. Samba refuses that share until the disk returns, and the others work.
@@ -210,7 +215,7 @@ Each new test must be seen to fail before its code exists.
 
 | Invariant | Test |
 |---|---|
-| INV-1, INV-2, INV-3, INV-4, INV-5, INV-7, INV-10, INV-11 | `tests/tst_networksharesitem.cpp`, a new target in `tests/CMakeLists.txt`, using `FileReader` and fake runner fixtures as `tests/tst_extradrivesitem.cpp` does |
+| INV-1, INV-2, INV-3, INV-4, INV-5, INV-7, INV-10, INV-11, INV-14 | `tests/tst_networksharesitem.cpp`, a new target in `tests/CMakeLists.txt`, using `FileReader` and fake runner fixtures as `tests/tst_extradrivesitem.cpp` does |
 | INV-6 | `tests/tst_selection.cpp::networkSharesNeverStartsOn` |
 | INV-8, INV-9 | `tests/tst_worker.cpp`. Each drives the built program, whose catalogue is the real one, with fake commands on `PATH`; neither touches Samba |
 | INV-12 | `tests/tst_wizard.cpp::aFolderListGivesItsValue`. It does not open the file dialog |
@@ -230,6 +235,7 @@ With a second machine or the host on the same network, and `/srv/look` and `/srv
 6. Repeat step 3's `get` with the firewall on and with `samba` removed from the zone, to see that the firewall is what lets it through.
 7. From a Windows machine, if one is at hand, see whether the computer appears under Network and whether it opens. Record the result in the release notes for GRND-0066.
 8. `smbclient -N` into each stock share a fresh `smb.conf` brings, `users` and `profiles` among them: each is refused, though `map to guest` is now on.
+9. With SELinux enforcing, format a second disk ext4, mount it under `/mnt`, and share a folder on it. Step 3's `get` succeeds from it (INV-14).
 
 Run 2026-10-30 in a Tumbleweed VM with SELinux enforcing and firewalld on: steps 1 to 6 and 8 behaved as written, and the shares survived a restart. Step 7 has not run: no Windows machine was used.
 
@@ -272,6 +278,7 @@ Run 2026-10-30 in a Tumbleweed VM with SELinux enforcing and firewalld on: steps
 | INV-11 | `tests/tst_networksharesitem.cpp::theStepsRunInOrder` |
 | INV-12 | `tests/tst_wizard.cpp::aFolderListGivesItsValue` |
 | INV-13 | **nothing** automatic — §7's manual recipe, run in a VM before release |
+| INV-14 | `tests/tst_networksharesitem.cpp::parentFoldersAreLabelledWhereSELinuxIsOn` |
 | §4.1 `wide links` keeps a guest inside a share | **`Partial:`** INV-5's test sees that the file does not set it. **Nothing** but the recipe sees Samba obey it |
 | §6 firewall closed after apply | **nothing** — a check cannot read the firewall without root (§2.4) |
 

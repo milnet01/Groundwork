@@ -584,8 +584,15 @@ CarriedItems carriedItems(const Manifest &kept, const QString &file, const Catal
 Catalogue withCarried(const Catalogue &catalogue, const CarriedItems &carried)
 {
     QList<const Item *> items = catalogue.items();
-    for (const std::unique_ptr<Item> &item : carried.owned)
-        items << item.get();
+    for (const std::unique_ptr<Item> &item : carried.owned) {
+        // A kept drive is mounted before Samba starts, so a folder shared
+        // from it is there when smbd looks (GRND-0114).
+        const qsizetype shares = items.indexOf(catalogue.find(QStringLiteral("network-shares")));
+        if (item->id() == kCarriedMountsId && shares >= 0)
+            items.insert(shares, item.get());
+        else
+            items << item.get();
+    }
     return Catalogue(items);
 }
 

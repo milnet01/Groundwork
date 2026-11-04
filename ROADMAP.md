@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=113 -->
+<!-- ants-roadmap-id-high-water: GRND=114 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -1729,10 +1729,41 @@ built as 0.4.0 instead.
   still open. Kit:
   /mnt/Emulators/claude-scratch/grnd-live/run73 (boot73.sh, vs,
   saved.tar, choices.json, vm/data.qcow2). New text still to translate.
+  VM recipe, 2026-11-04, Worker only over ssh, Tumbleweed, SELinux
+  enforcing: steps 3 to 8 pass (step 3's rows were not seen: no window).
+  Spec §15 answered: restorecon is not needed and was dropped; reload
+  takes the zones and the default zone. A share on the kept drive was
+  listed but would not open, filed and fixed as GRND-0114. Still to run:
+  step 9 on Leap 16, so this stays in progress. Translations done.
   **Layman:** Groundwork notes how your computer is set up, so a fresh install can be set up the same way.
   Kind: feature.
   Source: user-request-2026-10-12.
   Lanes: items, core.
+
+- ✅ [GRND-0114] **A shared folder on a newly formatted drive opens, not only lists.**
+  Found 2026-11-04 in GRND-0073's VM recipe, Tumbleweed, SELinux
+  enforcing. A share at /mnt/data/shared on an ext4 drive was listed by
+  `smbclient -N -L` but `smbclient //host/shared` failed with
+  NT_STATUS_BAD_NETWORK_NAME. smbd logged "canonicalize_connect_path
+  failed", and an AVC showed smbd_t denied search on the drive's root,
+  labelled unlabeled_t. The shared folder itself was samba_share_t;
+  Samba's start script labels only the share path, not its parents. A
+  drive formatted fresh, or under AppArmor before the SELinux switch,
+  has an unlabelled root. `restorecon /mnt/data` set it to mnt_t, and
+  the share then served note.txt.
+  On a run from a saved file, network-shares ran before carried-mounts,
+  so the drive was not yet mounted when Samba started.
+  Fixed 2026-11-04. network-shares runs `restorecon --` on every parent
+  of each shared folder before restarting Samba, where SELinux is on
+  (GRND-0066 spec §4.6 step 4, INV-14). On a run from a saved file,
+  carried-mounts now runs just before network-shares. Proven in a fresh
+  Tumbleweed VM: a drive formatted ext4 there had an unlabelled root;
+  after the item ran it was mnt_t and smbclient fetched a file from the
+  share. The run-order half is proven by tst_carry only.
+  **Layman:** A folder you share from a second drive can really be opened by other computers, even when the drive was formatted fresh or on a system without SELinux.
+  Kind: fix.
+  Source: vm-recipe-2026-11-04.
+  Lanes: items.
 
 ## Backlog — no version yet
 

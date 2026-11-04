@@ -136,7 +136,7 @@ Measured 2026-10-30 in a Tumbleweed VM, SELinux enabled: `/etc/firewalld/zones` 
 | `carried-printers` | As firewall, with `cups`. When `cups` is not found, `NotDone`, and its apply installs it | §4.8 |
 | `carried-mounts` | `Done` when every kept mount whose drive is present has a line in `/etc/fstab`; the detail names absent drives | §4.9 |
 
-`carried-firewall` depends on `firewall`. `carried-printers` depends on `system-update` only while `cups` is missing, as GRND-0111 arranged for others. Shares build no item: the page switches on `network-shares` and fills its `FolderListField` with the kept folders, joined with those it already holds. Its own row, its warning (GRND-0066 INV-10) and its validation apply unchanged.
+`carried-firewall` depends on `firewall`. `carried-printers` depends on `system-update` only while `cups` is missing, as GRND-0111 arranged for others. `withCarried` puts `carried-mounts` just before `network-shares`, so a kept drive is mounted before Samba starts (GRND-0114). Shares build no item: the page switches on `network-shares` and fills its `FolderListField` with the kept folders, joined with those it already holds. Its own row, its warning (GRND-0066 INV-10) and its validation apply unchanged.
 
 Each carried kind's row says it changes system settings. The firewall and printers always read `NotDone`, so applying them twice is possible. That is safe, because each apply keeps numbered copies. These items exist only on a run from a saved file, so S1 is untouched.
 

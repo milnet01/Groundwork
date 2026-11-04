@@ -9,6 +9,7 @@
 #include <QFileInfo>
 #include <QSet>
 
+#include <algorithm>
 #include <pwd.h>
 #include <unistd.h>
 
@@ -284,6 +285,21 @@ QList<Step> NetworkSharesItem::applyStepsFor(const SystemIdentity &, const Check
                        QStringLiteral("conv=notrunc"), QStringLiteral("status=none")},
                       true, Step::Tool::Generic, label, {},
                       "\n# Added by Groundwork: the folders it shares.\n" + kIncludeLine + '\n'});
+    // Samba's start-up script, below, labels only the shared folder. A new
+    // drive's root has no SELinux type, and smbd may not pass through it, so
+    // each parent gets the type its path should have, outermost first
+    // (GRND-0114).
+    if (context.fileExists(QStringLiteral("/sys/fs/selinux/enforce"))) {
+        QStringList parents;
+        for (const QString &path : std::as_const(paths))
+            for (QString parent = QFileInfo(path).path(); parent != QLatin1String("/"); parent = QFileInfo(parent).path())
+                if (!parents.contains(parent))
+                    parents << parent;
+        std::sort(parents.begin(), parents.end());
+        if (!parents.isEmpty())
+            steps.append({QStringList{QStringLiteral("restorecon"), QStringLiteral("--")} + parents, true,
+                          Step::Tool::Generic, label});
+    }
     // Samba's start-up script labels new folders for SELinux and AppArmor,
     // and rebuilds AppArmor's list only when smb.conf is newer than it; a
     // reload would skip the script altogether (spec 4.6).

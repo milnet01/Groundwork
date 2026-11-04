@@ -392,6 +392,28 @@ private slots:
             QVERIFY(step.argv.value(0) != QLatin1String("firewall-cmd"));
     }
 
+    // INV-14 (GRND-0114): a new drive's root has no SELinux type, and smbd may
+    // not pass through it, so every parent of a shared folder is relabelled.
+    void parentFoldersAreLabelledWhereSELinuxIsOn()
+    {
+        const QString given = value({QStringLiteral("/mnt/data/shared"), QStringLiteral("/mnt/data/more")});
+        for (const gw::Step &step : steps(given))
+            QVERIFY(step.argv.value(0) != QLatin1String("restorecon")); // no SELinux in the fixture
+        fixture(QStringLiteral("/sys/fs/selinux/enforce"), "1");
+        const QList<gw::Step> list = steps(given);
+        qsizetype relabel = -1, restart = -1;
+        for (qsizetype i = 0; i < list.size(); ++i) {
+            if (list[i].argv.value(0) == QLatin1String("restorecon"))
+                relabel = i;
+            else if (list[i].argv.value(1) == QLatin1String("restart"))
+                restart = i;
+        }
+        QVERIFY(relabel >= 0 && relabel < restart);
+        QCOMPARE(list[relabel].argv, (QStringList{QStringLiteral("restorecon"), QStringLiteral("--"), QStringLiteral("/mnt"),
+                                                  QStringLiteral("/mnt/data")}));
+        QVERIFY(list[relabel].needsRoot);
+    }
+
     // Only what is missing is installed, first of all.
     void onlyWhatIsMissingIsInstalled()
     {
