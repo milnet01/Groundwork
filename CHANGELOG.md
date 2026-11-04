@@ -36,6 +36,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   folders above it their proper SELinux type, and on a saved setup it
   connects kept drives before sharing. (GRND-0114)
 
+### Security
+
+- A saved setup now treats the sign-in folders of Claude Code, OBS
+  (`osc`), npm, PyPI and Cargo as secrets: they start switched off and
+  warn, as SSH keys already do. (GRND-0112)
+
 ## [0.5.2] - 2026-10-30
 
 **Theme:** Ready for the next install.

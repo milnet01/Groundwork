@@ -366,6 +366,11 @@ private slots:
             const QList<gw::SettingsRow> one = gw::groupSettings({QString::fromLatin1(path)});
             QVERIFY2(one.size() == 1 && one.first().secret, path);
         }
+        // GRND-0112: sign-ins for Claude Code, OBS, npm, PyPI and Cargo.
+        for (const char *path : {".claude", ".claude.json", ".config/osc", ".oscrc", ".npmrc", ".pypirc", ".cargo"}) {
+            const QList<gw::SettingsRow> one = gw::groupSettings({QString::fromLatin1(path)});
+            QVERIFY2(one.size() == 1 && one.first().secret, path);
+        }
         QVERIFY(!gw::startsOn({QStringLiteral("Steam"), {QStringLiteral(".steam")}, false, gw::kLargeSettings + 1}));
         QVERIFY(gw::startsOn({QStringLiteral("Small"), {QStringLiteral(".small")}, false, gw::kLargeSettings}));
 

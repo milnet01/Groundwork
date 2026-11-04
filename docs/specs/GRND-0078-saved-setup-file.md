@@ -170,9 +170,10 @@ off, and Save is unavailable while it is on.
 
 The same table marks secrets. At least: `.ssh`, `.gnupg`, `.pki`,
 `.password-store`, `.netrc`, `.git-credentials`, `.docker`, `.aws`,
-`.kube`, `.mozilla`, `.thunderbird`; in `.config`: `google-chrome*`,
-`chromium`, `BraveSoftware`, `microsoft-edge*`, `vivaldi`, `opera`,
-`gh`, `gcloud`, `rclone`, `discord`; and the `.var/app` folders of
+`.kube`, `.mozilla`, `.thunderbird`, `.claude`, `.claude.json`,
+`.oscrc`, `.npmrc`, `.pypirc`, `.cargo` (GRND-0112); in `.config`:
+`google-chrome*`, `chromium`, `BraveSoftware`, `microsoft-edge*`,
+`vivaldi`, `opera`, `gh`, `gcloud`, `rclone`, `discord`, `osc`; and the `.var/app` folders of
 `org.mozilla.firefox`, `org.mozilla.Thunderbird`, `com.google.Chrome`,
 `com.brave.Browser`, `org.chromium.Chromium`, `com.microsoft.Edge`,
 `com.vivaldi.Vivaldi`, `com.opera.Opera` and `com.discordapp.Discord`.

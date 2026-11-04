@@ -1624,6 +1624,10 @@ built as 0.4.0 instead.
   New text still to translate, in one pass with GRND-0073's. The VM
   recipe needs the user to sign in to GitHub in the VM's browser, so it
   waits for them; a session cannot do it alone.
+  Waiting-on: user (sign in to GitHub in a VM's browser so the spec's
+  section 7 recipe can run; recommended: a 15-minute session with a
+  throwaway VM, the user typing the code shown, 2026-11-04).
+  Translations done 2026-11-04.
   **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
   Kind: feature.
   Source: user-request-2026-10-10.
@@ -2230,7 +2234,7 @@ scheduled.
   Source: grnd-0066-vm-run-2026-10-30.
   Lanes: items, core.
 
-- 📋 [GRND-0112] **A saved setup treats more sign-in folders as secrets.**
+- ✅ [GRND-0112] **A saved setup treats more sign-in folders as secrets.**
   gatherSettings offers every hidden entry in the home folder, and only
   kSecrets (src/carry/settingsgroups.cpp) marks one secret. .claude
   (holds .credentials.json), .config/osc and .oscrc are not listed, so a
@@ -2238,6 +2242,9 @@ scheduled.
   and .cargo the same way. The user's own .claude is 19 GB, so it starts
   off by size, and their oscrc keeps its password in the keyring: neither
   is exposed today (read 2026-10-30).
+  Shipped 2026-11-04: kSecrets gains .claude, .claude.json,
+  .config/osc, .oscrc, .npmrc, .pypirc and .cargo, and GRND-0078's spec
+  lists them. tst_carry::secretsStartSwitchedOff covers each.
   **Layman:** Folders holding your Claude or OBS sign-in start switched off and warn you, as SSH keys already do.
   Kind: security.
   Source: code-read-2026-10-30.
@@ -2249,6 +2256,10 @@ scheduled.
   it arrives only through a saved setup's programs list. Decide whether
   it belongs in that row or in a row of its own: most users do not
   publish to OBS.
+  Waiting-on: user (osc in the Tools for Claude Code row, or a row of
+  its own? Recommended: a row of its own, off by default, beside that
+  row: most users never publish to OBS, and one switch per tool keeps
+  the row's sentence true, 2026-11-04).
   **Layman:** A fresh install can get the OBS command-line tool from one switch, without a saved setup.
   Kind: enhancement.
   Source: user-request-2026-10-30.
