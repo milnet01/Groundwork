@@ -1624,9 +1624,9 @@ built as 0.4.0 instead.
   New text still to translate, in one pass with GRND-0073's. The VM
   recipe needs the user to sign in to GitHub in the VM's browser, so it
   waits for them; a session cannot do it alone.
-  Waiting-on: user (sign in to GitHub in a VM's browser so the spec's
-  section 7 recipe can run; recommended: a 15-minute session with a
-  throwaway VM, the user typing the code shown, 2026-11-04).
+  Decided (user, 2026-11-04): run the section 7 recipe now in a
+  throwaway VM, the user typing the sign-in code shown. 0.6.0 is cut
+  once it passes.
   Translations done 2026-11-04.
   **Layman:** Sign in to GitHub once, tick your projects, and Groundwork copies them onto the new computer.
   Kind: feature.
@@ -1682,23 +1682,6 @@ built as 0.4.0 instead.
   and it stayed mounted after a restart. With the drive removed, the
   computer still started.
   **Layman:** Second hard drives show up and are ready every time the computer starts.
-  Kind: feature.
-  Source: user-request-2026-10-10.
-  Lanes: items, gui.
-
-- 📋 [GRND-0068] **Item: hibernate instead of sleep, where sleep is unreliable.**
-  From SYSTEM_OPTIMISATIONS.md, sections 1 and 2, and the owner's set-up
-  script: resume= on the kernel command line, HibernateMode=shutdown,
-  suspend masked. Needs a design first: swap at least as large as
-  memory, Secure Boot's lockdown blocks hibernation, and a wrong
-  resume= can stop the machine waking. Pairs with GRND-0055.
-  Waiting-on: user (should Groundwork make room for hibernation by
-  creating or growing swap, or offer it only where swap is already big
-  enough? Recommended: only where swap already holds all of memory and
-  Secure Boot is off, never touching swap or partitions, off by default;
-  the row says why when it cannot be offered. A spec follows the answer,
-  since a wrong resume= stops the machine waking, 2026-11-04).
-  **Layman:** The computer can save everything and switch off, then carry on where it left off, for machines where sleep does not work.
   Kind: feature.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
@@ -2262,11 +2245,25 @@ scheduled.
   it arrives only through a saved setup's programs list. Decide whether
   it belongs in that row or in a row of its own: most users do not
   publish to OBS.
-  Waiting-on: user (osc in the Tools for Claude Code row, or a row of
-  its own? Recommended: a row of its own, off by default, beside that
-  row: most users never publish to OBS, and one switch per tool keeps
-  the row's sentence true, 2026-11-04).
+  Decided (user, 2026-11-04): a row of its own, off by default, beside
+  the Tools for Claude Code row.
   **Layman:** A fresh install can get the OBS command-line tool from one switch, without a saved setup.
   Kind: enhancement.
   Source: user-request-2026-10-30.
   Lanes: items.
+
+- 📋 [GRND-0068] **Item: hibernate instead of sleep, where sleep is unreliable.**
+  From SYSTEM_OPTIMISATIONS.md, sections 1 and 2, and the owner's set-up
+  script: resume= on the kernel command line, HibernateMode=shutdown,
+  suspend masked. Needs a design first: swap at least as large as
+  memory, Secure Boot's lockdown blocks hibernation, and a wrong
+  resume= can stop the machine waking. Pairs with GRND-0055.
+  Decided (user, 2026-11-04): offer it only where swap already holds
+  all of memory and Secure Boot is off; never touch swap or partitions;
+  off by default; the row says why when it cannot be offered. A spec
+  comes next, since a wrong resume= stops the machine waking. Moved out
+  of 0.6.0 so that release need not wait for it (user, 2026-11-04).
+  **Layman:** The computer can save everything and switch off, then carry on where it left off, for machines where sleep does not work.
+  Kind: feature.
+  Source: user-request-2026-10-10.
+  Lanes: items, gui.
