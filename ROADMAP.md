@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=115 -->
+<!-- ants-roadmap-id-high-water: GRND=116 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2287,3 +2287,13 @@ scheduled.
   Kind: feature.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
+
+- 📋 [GRND-0116] **Faster gate: a compiler cache on GitHub and parallel tests.**
+  ci_report and ci-gate, 2026-11-05: ci.yml has no compiler cache,
+  and scripts/local-ci.sh runs ctest without -j. The GitHub median rose
+  from 2m11s to 3m23s over five runs. Parallel tests need each test's
+  fake programs and state folders to be separate first.
+  **Layman:** The checks before each push finish sooner.
+  Kind: chore.
+  Source: claude-config-ci-tune-2026-11-05.
+  Lanes: ci.

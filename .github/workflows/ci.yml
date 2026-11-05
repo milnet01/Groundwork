@@ -30,7 +30,9 @@ concurrency:
 
 jobs:
   gate:
-    runs-on: ubuntu-latest
+    # Pinned, so Qt's version changes only with this line: ubuntu-latest
+    # moves to a new image, and its Qt with it, when GitHub decides.
+    runs-on: ubuntu-24.04
     # Sized for a cold run, not a warm one. A run takes seconds today; the
     # build and test legs will add to it once the stack exists.
     timeout-minutes: 15

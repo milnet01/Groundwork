@@ -65,8 +65,8 @@ git config ants.gate.docsGlob "$(./scripts/local-ci.sh --docs-glob)"
 Linter versions are pinned in `scripts/ci-tools.env`. The workflow
 installs those versions, and the gate warns locally when yours differ.
 
-Qt is not pinned. GitHub's `ubuntu-latest` has an older Qt 6 than
-Tumbleweed, so a Qt API newer than the runner's passes the local gate
+Qt is pinned only through the runner image (`ubuntu-24.04` in
+`ci.yml`). Its Qt 6 is older than Tumbleweed's, so a Qt API newer than the runner's passes the local gate
 and fails on GitHub: `QTimeZone::UTC` (Qt 6.5) left CI red for twelve
 pushes on 2026-10-29 and cost the v0.5.0 tag, which was never
 published. After a push, read `gh run list --commit <full SHA>`.
