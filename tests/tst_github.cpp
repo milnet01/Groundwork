@@ -179,6 +179,16 @@ private slots:
         QCOMPARE(words, QStringLiteral("failed to authenticate: the code expired"));
     }
 
+    // GRND-0115: gh's marks render as boxes in some fonts, and its clipboard
+    // failure is untrue next to Groundwork's own Copy button.
+    void signInWordsLeaveOutMarksAndTheClipboard()
+    {
+        const QString words = gw::signInWords("\xE2\x9C\x93 Authentication complete.\n"
+                                              "! Failed to copy one-time code to clipboard\n"
+                                              "X failed to authenticate: the code expired\n");
+        QCOMPARE(words, QStringLiteral("Authentication complete.\nfailed to authenticate: the code expired"));
+    }
+
     // Spec 4.4's table, and the same pattern's other edges.
     void repositoryNames_data()
     {
@@ -378,7 +388,9 @@ private slots:
         writeFile(qEnvironmentVariable("FAKE_GH_CONTINUE"), "");
         QTRY_VERIFY_WITH_TIMEOUT(wizard.currentPage() != page, 10000);
         QVERIFY(choice.found.signedIn);
-        QCOMPARE(choice.signInNote, QStringLiteral("! Authentication credentials saved in plain text"));
+        // GRND-0115: only the plain-file warning is kept, in Groundwork's words.
+        QVERIFY2(choice.signInNote.contains(QLatin1String("plain file")), qPrintable(choice.signInNote));
+        QVERIFY2(!choice.signInNote.contains(QLatin1Char('!')), qPrintable(choice.signInNote));
     }
 
     // Spec 6: the code expired or was declined; the button starts afresh.

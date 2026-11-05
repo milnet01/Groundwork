@@ -162,8 +162,9 @@ Less free space than the total shows a warning and does not stop Next, since the
 ## 6. Failure modes
 
 - **No network, or GitHub is down.** `gh auth status` fails too, so the Sign in page shows, and signing in fails with `gh`'s own message on the page. It cannot tell this from being signed out.
+- **The sign-in stops working before a copy.** The clone exits 1. The Worker then runs `gh auth status`; when that fails too, the item's detail says GitHub did not accept the sign-in or could not be reached, and to start the job again to sign in again (GRND-0115). *Test:* `tests/tst_worker.cpp::aCopyFailingOnTheSignInSaysSo`.
 - **The code expires, or the user declines in the browser.** `gh` exits non-zero. The page says so, and the button starts a fresh attempt.
-- **The sign-in store is unavailable.** `gh` falls back to a plain file in `~/.config/gh`, with a warning shown on the page. The saved-setup job already marks that folder secret (`src/carry/settingsgroups.cpp`).
+- **The sign-in store is unavailable.** `gh` falls back to a plain file in `~/.config/gh`. The next page says so in Groundwork's words; no other line `gh` printed on success is shown (GRND-0115). The saved-setup job already marks that folder secret (`src/carry/settingsgroups.cpp`).
 - **`gh` is too old for a `--json` field.** The list reads as damaged and the page says "couldn't read the list". No project is touched.
 - **The disk fills during a copy.** That clone fails, git removes its partial folder, and the next projects also fail, each named.
 - **A project is very large.** Stop waits for it to finish (`docs/design.md`, Stopping). No progress bar beyond `git`'s own lines.

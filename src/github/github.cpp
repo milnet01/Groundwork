@@ -42,10 +42,18 @@ QString oneTimeCode(const QByteArray &ghErr)
 
 QString signInWords(const QByteArray &ghErr)
 {
+    // gh's marks (a tick, "!", "X") render as boxes in some fonts. Its
+    // clipboard failure is untrue beside Groundwork's own Copy button. gh is
+    // not translated, so its English words are safe to match.
+    static const QRegularExpression marks(QStringLiteral(R"(\A[^\p{L}\p{N}]*(?:X\s+)?)"));
     QStringList kept;
     for (const QString &line : QString::fromUtf8(ghErr).split(QLatin1Char('\n'), Qt::SkipEmptyParts)) {
-        if (oneTimeCode(line.toUtf8()).isEmpty() && !line.contains(QLatin1String("github.com/login/device")))
-            kept << line.trimmed();
+        if (!oneTimeCode(line.toUtf8()).isEmpty() || line.contains(QLatin1String("github.com/login/device"))
+            || line.contains(QLatin1String("clipboard"), Qt::CaseInsensitive))
+            continue;
+        const QString words = line.trimmed().remove(marks);
+        if (!words.isEmpty())
+            kept << words;
     }
     return kept.join(QLatin1Char('\n'));
 }

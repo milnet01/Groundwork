@@ -1120,6 +1120,16 @@ private slots:
         QVERIFY(pageText(w->currentPage()).contains(QLatin1String("someone")));
     }
 
+    // GRND-0115: two missing programs are "them", not "it".
+    void twoMissingProgramsAreThem()
+    {
+        m_github.missing = {QStringLiteral("git"), QStringLiteral("gh")};
+        auto w = githubJob();
+        QVERIFY(w);
+        const QString text = pageText(w->currentPage());
+        QVERIFY2(text.contains(QLatin1String("installs them")), qPrintable(text));
+    }
+
     // Spec 4.2: nothing leads on from an install that failed.
     void aFailedInstallLeadsNowhere()
     {

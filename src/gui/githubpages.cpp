@@ -102,10 +102,15 @@ void GithubStartPage::initializePage()
         const QStringList missing = m_choice->found.missing;
         // Past the install there is no coming back here (spec 4.2).
         setCommitPage(!missing.isEmpty());
-        m_status->setText(missing.isEmpty()
-                              ? tr("git and gh are on this computer.")
-                              : tr("Not on this computer yet: %1. Next installs it, and asks for your password.")
-                                    .arg(missing.join(QStringLiteral(", "))));
+        // Two strings, not a plural form: English has no translation file to
+        // supply one, and there are only ever one or two.
+        const QString names = missing.join(QStringLiteral(", "));
+        if (missing.isEmpty())
+            m_status->setText(tr("git and gh are on this computer."));
+        else if (missing.size() == 1)
+            m_status->setText(tr("Not on this computer yet: %1. Next installs it, and asks for your password.").arg(names));
+        else
+            m_status->setText(tr("Not on this computer yet: %1. Next installs them, and asks for your password.").arg(names));
         m_ready = true;
         emit completeChanged();
     });
@@ -243,8 +248,12 @@ void GithubSignInPage::finished(bool ok)
         m_start->setEnabled(true);
         return;
     }
-    // A warning, such as a plain-file store, is shown on the next page.
-    m_choice->signInNote = signInWords(m_said);
+    // The one warning that matters after success is a plain-file store; it
+    // is shown on the next page in Groundwork's words, not gh's.
+    m_choice->signInNote = m_said.contains("plain text")
+                               ? tr("No password store was found, so your GitHub sign-in is kept in a plain file in "
+                                    "your home folder.")
+                               : QString();
     m_status->setText(tr("Signed in. Reading your projects…"));
     surveyThen(this, m_choice, [this] {
         m_ready = true;

@@ -845,6 +845,15 @@ int Worker::copyGithub(const QString &choicesPath)
         } else {
             const QList<Step> steps = githubCopySteps(folder, repo);
             success = std::all_of(steps.cbegin(), steps.cend(), [&](const Step &step) { return runStep(id, step, &detail); });
+            // A sign-in GitHub no longer accepts fails as a plain exit 1. gh
+            // auth status cannot tell that from no network (spec 6), so the
+            // words name both.
+            QStringList ignored;
+            if (!success && runCommand({QStringLiteral("gh"), QStringLiteral("auth"), QStringLiteral("status")}, {},
+                                       &ignored, false)
+                                != 0)
+                detail = tr("Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose "
+                            "\"Copy your GitHub projects\" again to sign in again.");
             // mv -n moves nothing onto a folder that appeared meanwhile.
             if (present(partial)) {
                 success = false;

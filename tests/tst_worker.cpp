@@ -130,6 +130,7 @@ const QByteArray kGh = R"(#!/bin/sh
 echo "gh $*" >> "$FAKE_LOG"
 case "$1 $2" in
   "auth setup-git") exit "${FAKE_SETUP_GIT:-0}";;
+  "auth status") exit "${FAKE_AUTH_STATUS:-0}";;
   "repo clone")
     if [ "$3" = "$FAKE_GH_FAIL" ]; then echo "fatal: could not read"; exit 1; fi
     mkdir "$4" && echo copied > "$4/README" || exit 1
@@ -1387,6 +1388,22 @@ cat > "$FAKE_WRITTEN$out"
         QCOMPARE(r.endsFor(QStringLiteral("github:someone/third")).value(1), QStringLiteral("ok"));
         QVERIFY(QFile::exists(folder + QStringLiteral("/third/README")));
         QCOMPARE(r.markers.last().fields, QStringList({"2", "1", "0"}));
+        // Signed in still, so the failure says nothing about signing in.
+        QVERIFY(!r.endsFor(QStringLiteral("github:someone/first")).value(2).contains(QLatin1String("sign in")));
+    }
+
+    // GRND-0115: a copy failing on a bad sign-in says to sign in again.
+    void aCopyFailingOnTheSignInSaysSo()
+    {
+        const QString folder = m_dir->filePath(QStringLiteral("Projects"));
+        m_env.insert(QStringLiteral("FAKE_GH_FAIL"), QStringLiteral("someone/first"));
+        m_env.insert(QStringLiteral("FAKE_AUTH_STATUS"), QStringLiteral("1"));
+        const Run r = copyGithub(folder, {"someone/first"});
+        QCOMPARE(r.exitCode, 1);
+        const QStringList end = r.endsFor(QStringLiteral("github:someone/first"));
+        QCOMPARE(end.value(1), QStringLiteral("fail"));
+        QVERIFY2(end.value(2).contains(QLatin1String("sign in again")), qPrintable(end.value(2)));
+        QCOMPARE(r.count(QStringLiteral("gh auth status")), 1);
     }
 
     // GRND-0065, spec 4.5: a part-copied folder from a power cut is named
