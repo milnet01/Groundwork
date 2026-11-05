@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=116 -->
+<!-- ants-roadmap-id-high-water: GRND=117 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2301,3 +2301,12 @@ scheduled.
   Kind: chore.
   Source: claude-config-ci-tune-2026-11-05.
   Lanes: ci.
+
+- 📋 [GRND-0117] **tst_translations checks every translation keeps its %N and &amp; marks.**
+  claude-config's translate-review --check-only does this (all 14 files
+  passed, 2026-11-05), but it lives in ~/.claude, so GitHub's runner
+  cannot run it. A check in tst_translations runs everywhere.
+  **Layman:** A translation that drops a name or a number from a message is caught before release.
+  Kind: test.
+  Source: claude-config-translate-review-2026-11-05.
+  Lanes: i18n.
