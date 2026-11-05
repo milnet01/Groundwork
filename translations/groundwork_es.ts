@@ -1523,6 +1523,10 @@
         <translation>El inicio de sesión no ha terminado. Pulsa el botón para volver a intentarlo. La herramienta de GitHub dijo: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>No se encontró ningún almacén de contraseñas, así que tu inicio de sesión en GitHub se guarda en un archivo normal en tu carpeta personal.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>Sesión iniciada. Leyendo tus proyectos…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>Aún no está en este ordenador: %1. Siguiente lo instala y te pide la contraseña.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>Aún no están en este ordenador: %1. Siguiente los instala y te pide la contraseña.</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>Hay una carpeta copiada a medias en %1. Bórrala y vuelve a copiar.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>No se pudo copiar: GitHub no aceptó tu inicio de sesión, o no se pudo contactar. Elige de nuevo «Copiar tus proyectos de GitHub» para volver a iniciar sesión.</translation>
     </message>
 </context>
 </TS>

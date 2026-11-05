@@ -1521,6 +1521,10 @@
         <translation>로그인을 마치지 못했습니다. 버튼을 눌러 다시 시도하세요. GitHub 도구의 메시지: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>비밀번호 저장소를 찾지 못해, GitHub 로그인 정보가 홈 폴더의 일반 파일에 보관됩니다.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>로그인했습니다. 프로젝트를 읽는 중…</translation>
     </message>
@@ -1546,6 +1550,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>아직 이 컴퓨터에 없습니다: %1. 다음을 누르면 설치하며, 비밀번호를 묻습니다.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>아직 이 컴퓨터에 없습니다: %1. 다음을 누르면 이것들을 설치하며, 비밀번호를 묻습니다.</translation>
     </message>
 </context>
 <context>
@@ -2855,6 +2863,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>일부만 복사된 폴더가 %1에 있습니다. 삭제한 다음 다시 복사하세요.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>복사하지 못했습니다: GitHub가 로그인을 받아들이지 않았거나 GitHub에 연결할 수 없었습니다. 다시 로그인하려면 ‘GitHub 프로젝트 복사’를 다시 선택하세요.</translation>
     </message>
 </context>
 </TS>

@@ -1769,7 +1769,7 @@ built as 0.4.0 instead.
   Source: vm-recipe-2026-11-04.
   Lanes: items.
 
-- 📋 [GRND-0115] **GitHub job: plainer words on three pages.**
+- ✅ [GRND-0115] **GitHub job: plainer words on three pages.**
   Seen in the GRND-0065 VM check, 2026-11-04:
   - The tools page says "Next installs it" for git and gh together.
   - After sign-in, the projects page shows gh's raw lines: tick marks
@@ -1777,6 +1777,10 @@ built as 0.4.0 instead.
     shows although Groundwork's own Copy button worked.
   - A copy that fails because the sign-in went bad says only "Copying
     the project failed (exit code 1)", not that signing in again fixes it.
+  Shipped 2026-11-05 (f021e8a), translated into every language as
+  drafts. Tests: tst_wizard twoMissingProgramsAreThem, tst_github
+  signInWordsLeaveOutMarksAndTheClipboard and theSignInPageShowsTheCode,
+  tst_worker aCopyFailingOnTheSignInSaysSo.
   **Layman:** The GitHub copying pages say things in plain words instead of showing gh's raw messages.
   Kind: ux.
   Source: grnd-0065-vm-check-2026-11-04.

@@ -1523,6 +1523,10 @@
         <translation>La connexion n&apos;a pas abouti. Appuyez sur le bouton pour réessayer. L&apos;outil de GitHub a indiqué : %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>Aucun trousseau de mots de passe n'a été trouvé : votre connexion GitHub est donc gardée dans un simple fichier de votre dossier personnel.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>Connecté. Lecture de vos projets…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>Pas encore sur cet ordinateur : %1. Suivant l&apos;installe et demande votre mot de passe.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>Pas encore sur cet ordinateur : %1. Suivant les installe et demande votre mot de passe.</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>Un dossier copié en partie se trouve dans %1. Supprimez-le, puis recommencez la copie.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>La copie a échoué : GitHub n'a pas accepté votre connexion, ou n'a pas pu être joint. Choisissez à nouveau « Copier vos projets GitHub » pour vous reconnecter.</translation>
     </message>
 </context>
 </TS>

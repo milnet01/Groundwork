@@ -1523,6 +1523,10 @@
         <translation>הכניסה לא הסתיימה. לחץ על הכפתור כדי לנסות שוב. הכלי של GitHub אמר: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>לא נמצא מאגר סיסמאות, ולכן הכניסה שלך ל־GitHub נשמרת בקובץ רגיל בתיקיית הבית שלך.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>מחובר. קורא את הפרויקטים שלך…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>עדיין לא במחשב הזה: %1. ״הבא״ מתקין אותו, ומבקש את הסיסמה שלך.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>עדיין לא במחשב הזה: %1. ״הבא״ מתקין אותם, ומבקש את הסיסמה שלך.</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>תיקייה שהועתקה בחלקה נמצאת ב־%1. מחק אותה, ואז העתק שוב.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>ההעתקה נכשלה: GitHub לא קיבל את הכניסה שלך, או שלא ניתן היה להגיע אליו. בחר שוב ״העתקת הפרויקטים שלך מ־GitHub״ כדי להיכנס מחדש.</translation>
     </message>
 </context>
 </TS>

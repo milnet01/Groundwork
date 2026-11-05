@@ -1523,6 +1523,10 @@
         <translation>Ukungena akuzange kugqitywe. Cofa iqhosha ukuze uzame kwakhona. Isixhobo se-GitHub sithe: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>Akukho ndawo yokugcina iiphaswedi efunyenweyo, ngoko ukungena kwakho kwi-GitHub kugcinwe kwifayile eqhelekileyo kwifolda yakho yasekhaya.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>Ungenile. Kufundwa iiprojekthi zakho…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>Ayikabikho kule khompyutha: %1. Okulandelayo kuyayifaka, kwaye kucela iphaswedi yakho.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>Azikabikho kule khompyutha: %1. Okulandelayo kuyazifaka, kwaye kucela iphaswedi yakho.</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>Ifolda ekotshwe isiqingatha iku-%1. Yicime, uze ukope kwakhona.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>Ukukopa akuphumelelanga: I-GitHub ayikwamkelanga ukungena kwakho, okanye ayifikeleleki. Khetha kwakhona “Kopa iiprojekthi zakho ze-GitHub” ukuze ungene kwakhona.</translation>
     </message>
 </context>
 </TS>

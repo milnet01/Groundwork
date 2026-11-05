@@ -1523,6 +1523,10 @@
         <translation>साइन इन पूरा नहीं हुआ। फिर से कोशिश करने के लिए बटन दबाएँ। GitHub के टूल ने कहा: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>कोई पासवर्ड स्टोर नहीं मिला, इसलिए आपका GitHub साइन-इन आपके होम फ़ोल्डर की एक सादी फ़ाइल में रखा गया है।</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>साइन इन हो गया। आपके प्रोजेक्ट पढ़े जा रहे हैं…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>अभी इस कंप्यूटर पर नहीं है: %1। आगे दबाने पर यह इंस्टॉल होता है, और आपका पासवर्ड माँगा जाता है।</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>अभी इस कंप्यूटर पर नहीं हैं: %1। आगे दबाने पर ये इंस्टॉल होते हैं, और आपका पासवर्ड माँगा जाता है।</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>आधा कॉपी किया गया फ़ोल्डर %1 पर है। उसे हटाएँ, फिर दोबारा कॉपी करें।</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>कॉपी नहीं हो पाया: GitHub ने आपका साइन-इन स्वीकार नहीं किया, या उस तक पहुँचा नहीं जा सका। फिर से साइन इन करने के लिए “अपने GitHub प्रोजेक्ट कॉपी करें” दोबारा चुनें।</translation>
     </message>
 </context>
 </TS>

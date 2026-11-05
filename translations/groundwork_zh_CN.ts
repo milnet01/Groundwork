@@ -1521,6 +1521,10 @@
         <translation>登录没有完成。按下按钮再试一次。GitHub 的工具提示：%1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>没有找到密码存储，所以你的 GitHub 登录信息保存在主文件夹中的一个普通文件里。</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>已登录。正在读取你的项目…</translation>
     </message>
@@ -1546,6 +1550,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>这台电脑上还没有：%1。点“下一步”会安装它，并要求输入你的密码。</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>这台电脑上还没有：%1。点“下一步”会安装它们，并要求输入你的密码。</translation>
     </message>
 </context>
 <context>
@@ -2855,6 +2863,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>%1 处有一个只复制了一部分的文件夹。请删除它，然后重新复制。</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>复制失败：GitHub 没有接受你的登录，或者无法连接到 GitHub。再次选择“复制你的 GitHub 项目”即可重新登录。</translation>
     </message>
 </context>
 </TS>

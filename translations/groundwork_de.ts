@@ -1523,6 +1523,10 @@
         <translation>Die Anmeldung wurde nicht abgeschlossen. Klicken Sie auf die Schaltfläche, um es erneut zu versuchen. Das Werkzeug von GitHub meldete: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>Es wurde kein Passwortspeicher gefunden, daher liegt Ihre GitHub-Anmeldung in einer einfachen Datei in Ihrem persönlichen Ordner.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>Angemeldet. Ihre Projekte werden gelesen…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>Noch nicht auf diesem Computer: %1. Weiter installiert es und fragt nach Ihrem Passwort.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>Noch nicht auf diesem Computer: %1. Weiter installiert sie und fragt nach Ihrem Passwort.</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>Ein teilweise kopierter Ordner liegt unter %1. Löschen Sie ihn und kopieren Sie dann erneut.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>Kopieren fehlgeschlagen: GitHub hat Ihre Anmeldung nicht angenommen oder war nicht erreichbar. Wählen Sie erneut „Ihre GitHub-Projekte kopieren“, um sich neu anzumelden.</translation>
     </message>
 </context>
 </TS>

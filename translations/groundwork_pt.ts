@@ -1523,6 +1523,10 @@
         <translation>O login não terminou. Pressione o botão para tentar de novo. A ferramenta do GitHub disse: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>Não foi encontrado nenhum cofre de senhas, por isso o seu login do GitHub fica num ficheiro simples na sua pasta pessoal.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>Login feito. Lendo os seus projetos…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>Ainda não está neste computador: %1. Avançar instala e pede a sua senha.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>Ainda não estão neste computador: %1. Avançar instala-os e pede a sua senha.</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>Uma pasta copiada pela metade está em %1. Apague-a e copie de novo.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>A cópia falhou: o GitHub não aceitou o seu login, ou não foi possível contactá-lo. Escolha de novo “Copiar os seus projetos do GitHub” para entrar outra vez.</translation>
     </message>
 </context>
 </TS>

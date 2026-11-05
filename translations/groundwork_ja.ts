@@ -1521,6 +1521,10 @@
         <translation>サインインが完了しませんでした。ボタンを押してもう一度お試しください。GitHub のツールの出力：%1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>パスワードの保管場所が見つからなかったため、GitHub のサインイン情報はホームフォルダーの通常のファイルに保存されています。</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>サインインしました。プロジェクトを読み込んでいます…</translation>
     </message>
@@ -1546,6 +1550,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>まだこのコンピューターにありません：%1。「次へ」でインストールします。その際パスワードを求めます。</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>まだこのコンピューターにありません：%1。「次へ」でこれらをインストールします。その際パスワードを求めます。</translation>
     </message>
 </context>
 <context>
@@ -2855,6 +2863,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>途中までコピーされたフォルダーが %1 にあります。削除してから、もう一度コピーしてください。</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>コピーに失敗しました：GitHub がサインインを受け付けなかったか、GitHub に接続できませんでした。もう一度サインインするには、「GitHub のプロジェクトをコピー」をもう一度選んでください。</translation>
     </message>
 </context>
 </TS>

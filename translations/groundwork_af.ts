@@ -1523,6 +1523,10 @@
         <translation>Aanmelding is nie voltooi nie. Druk die knoppie om weer te probeer. GitHub se hulpmiddel het gesê: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>Geen wagwoordstoor is gevind nie, dus word jou GitHub-aanmelding in 'n gewone lêer in jou tuisvouer gehou.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>Aangemeld. Besig om jou projekte te lees…</translation>
     </message>
@@ -1548,6 +1552,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>Nog nie op hierdie rekenaar nie: %1. Volgende installeer dit, en vra jou wagwoord.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>Nog nie op hierdie rekenaar nie: %1. Volgende installeer hulle, en vra jou wagwoord.</translation>
     </message>
 </context>
 <context>
@@ -2859,6 +2867,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>&apos;n Gedeeltelik gekopieerde vouer is by %1. Skrap dit, en kopieer dan weer.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>Kopiëring het misluk: GitHub het jou aanmelding nie aanvaar nie, of kon nie bereik word nie. Kies weer “Kopieer jou GitHub-projekte” om weer aan te meld.</translation>
     </message>
 </context>
 </TS>

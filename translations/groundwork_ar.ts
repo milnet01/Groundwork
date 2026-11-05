@@ -1531,6 +1531,10 @@
         <translation>لم يكتمل تسجيل الدخول. اضغط الزر للمحاولة مرة أخرى. قالت أداة GitHub: %1</translation>
     </message>
     <message>
+        <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
+        <translation>لم يُعثر على مخزن لكلمات المرور، لذا يُحفظ تسجيل دخولك إلى GitHub في ملف عادي في مجلد المنزل.</translation>
+    </message>
+    <message>
         <source>Signed in. Reading your projects…</source>
         <translation>تم تسجيل الدخول. جارٍ قراءة مشاريعك…</translation>
     </message>
@@ -1556,6 +1560,10 @@
     <message>
         <source>Not on this computer yet: %1. Next installs it, and asks for your password.</source>
         <translation>ليس على هذا الحاسوب بعد: %1. زر «التالي» يثبّته ويطلب كلمة المرور.</translation>
+    </message>
+    <message>
+        <source>Not on this computer yet: %1. Next installs them, and asks for your password.</source>
+        <translation>ليس على هذا الحاسوب بعد: %1. زر «التالي» يثبّتها ويطلب كلمة المرور.</translation>
     </message>
 </context>
 <context>
@@ -2875,6 +2883,10 @@
     <message>
         <source>A part-copied folder is at %1. Delete it, then copy again.</source>
         <translation>يوجد مجلد منسوخ جزئيًا في %1. احذفه، ثم انسخ مرة أخرى.</translation>
+    </message>
+    <message>
+        <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
+        <translation>فشل النسخ: لم يقبل GitHub تسجيل دخولك، أو تعذّر الوصول إليه. اختر «انسخ مشاريعك على GitHub» مرة أخرى لتسجيل الدخول من جديد.</translation>
     </message>
 </context>
 </TS>
