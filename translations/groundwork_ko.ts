@@ -178,6 +178,14 @@
         <translation>Claude Code와 Ants Terminal이 코드를 검색하고 검사하는 데 쓰는 ripgrep, Git, 코드 검사 도구를 설치합니다.</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>openSUSE Build Service 도구</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>openSUSE Build Service에서 패키지를 빌드하고 게시하는 osc를 설치합니다.</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>tree-sitter</translation>
     </message>

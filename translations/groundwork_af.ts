@@ -178,6 +178,14 @@
         <translation>Installeer ripgrep, Git en kodekontroleerders, wat Claude Code en Ants Terminal gebruik om kode te deursoek en na te gaan.</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>Gereedskap vir die openSUSE Build Service</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>Installeer osc, om pakkette op die openSUSE Build Service te bou en te publiseer.</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>tree-sitter</translation>
     </message>
@@ -1524,7 +1532,7 @@
     </message>
     <message>
         <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
-        <translation>Geen wagwoordstoor is gevind nie, dus word jou GitHub-aanmelding in 'n gewone lêer in jou tuisvouer gehou.</translation>
+        <translation>Geen wagwoordstoor is gevind nie, dus word jou GitHub-aanmelding in &apos;n gewone lêer in jou tuisvouer gehou.</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>

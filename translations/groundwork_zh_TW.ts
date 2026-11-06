@@ -178,6 +178,14 @@
         <translation>安裝 ripgrep、Git 和程式碼檢查工具，Claude Code 和 Ants Terminal 用它們搜尋和檢查程式碼。</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>openSUSE Build Service 工具</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>安裝 osc，用於在 openSUSE Build Service 上建置並發佈套件。</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>tree-sitter</translation>
     </message>

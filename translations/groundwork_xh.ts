@@ -178,6 +178,14 @@
         <translation>Ifaka i-ripgrep, i-Git nezixhobo zokuhlola ikhowudi, ezisetyenziswa yi-Claude Code ne-Ants Terminal ukukhangela nokuhlola ikhowudi.</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>Isixhobo se-openSUSE Build Service</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>Ifaka i-osc, yokwakha nokupapasha iipakethe kwi-openSUSE Build Service.</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>tree-sitter</translation>
     </message>

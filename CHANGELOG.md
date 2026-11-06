@@ -12,6 +12,12 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Added
+
+- A new switch beside "Tools for Claude Code": "openSUSE Build Service
+  tool" installs `osc`, for building and publishing packages on OBS.
+  It starts off, like every other program. (GRND-0113)
+
 ## [0.6.0] - 2026-11-06
 
 **Theme:** Your own set-up.

@@ -178,6 +178,14 @@
         <translation>מתקין את ripgrep, את Git ובודקי קוד, שבהם Claude Code ו־Ants Terminal משתמשים כדי לחפש בקוד ולבדוק אותו.</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>כלי ל־openSUSE Build Service</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>מתקין את osc, לבנייה ולפרסום של חבילות ב־openSUSE Build Service.</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>‏tree-sitter</translation>
     </message>

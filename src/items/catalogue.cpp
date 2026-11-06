@@ -111,6 +111,11 @@ const Catalogue &catalogue()
                                       "to search and check code."),
         {QStringLiteral("ripgrep"), QStringLiteral("git"), QStringLiteral("clang-tools"), QStringLiteral("cppcheck"),
          QStringLiteral("ShellCheck"), QStringLiteral("jq"), QStringLiteral("gh"), QStringLiteral("python313-mypy")});
+    // GRND-0113: a row of its own, since most users never publish to OBS.
+    // Leap 16.0 gets it from openSUSE:Backports:SLE-16.0 (osc results, 2026-11-06).
+    static const PackageItem osc(QStringLiteral("dev-osc"), QT_TRANSLATE_NOOP("gw::Apps", "openSUSE Build Service tool"),
+        QT_TRANSLATE_NOOP("gw::Apps", "Installs osc, for building and publishing packages on the openSUSE Build Service."),
+        {QStringLiteral("osc")});
     static const PackageItem treeSitter(QStringLiteral("dev-tree-sitter"), QT_TRANSLATE_NOOP("gw::Apps", "tree-sitter"),
         QT_TRANSLATE_NOOP("gw::Apps", "Installs tree-sitter, which reads the structure of source code, with grammars "
                                       "for C, C++, Python, web pages and many more languages."),
@@ -149,7 +154,7 @@ const Catalogue &catalogue()
                                 &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
                                 &hostname, &ssh, &clock, &numlock, &extraDrives, &networkShares,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
-                                &buildTools, &codium, &claudeCode, &claudeTools, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
+                                &buildTools, &codium, &claudeCode, &claudeTools, &osc, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});
     return all;
 }
 

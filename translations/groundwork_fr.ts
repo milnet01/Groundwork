@@ -178,6 +178,14 @@
         <translation>Installe ripgrep, Git et des vérificateurs de code, que Claude Code et Ants Terminal utilisent pour chercher dans le code et le vérifier.</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>Outil de l’openSUSE Build Service</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>Installe osc, pour construire et publier des paquets sur l’openSUSE Build Service.</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>tree-sitter</translation>
     </message>
@@ -1524,7 +1532,7 @@
     </message>
     <message>
         <source>No password store was found, so your GitHub sign-in is kept in a plain file in your home folder.</source>
-        <translation>Aucun trousseau de mots de passe n'a été trouvé : votre connexion GitHub est donc gardée dans un simple fichier de votre dossier personnel.</translation>
+        <translation>Aucun trousseau de mots de passe n&apos;a été trouvé : votre connexion GitHub est donc gardée dans un simple fichier de votre dossier personnel.</translation>
     </message>
     <message>
         <source>Signed in. Reading your projects…</source>
@@ -2870,7 +2878,7 @@
     </message>
     <message>
         <source>Copying failed: GitHub did not accept your sign-in, or could not be reached. Choose &quot;Copy your GitHub projects&quot; again to sign in again.</source>
-        <translation>La copie a échoué : GitHub n'a pas accepté votre connexion, ou n'a pas pu être joint. Choisissez à nouveau « Copier vos projets GitHub » pour vous reconnecter.</translation>
+        <translation>La copie a échoué : GitHub n&apos;a pas accepté votre connexion, ou n&apos;a pas pu être joint. Choisissez à nouveau «&#xa0;Copier vos projets GitHub&#xa0;» pour vous reconnecter.</translation>
     </message>
 </context>
 </TS>

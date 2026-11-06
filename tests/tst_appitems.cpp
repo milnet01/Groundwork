@@ -111,7 +111,7 @@ private slots:
             QVERIFY2(all.find(id)->level() == gw::Level::Essentials, qPrintable(id));
         // Ants Terminal includes tree-sitter (GRND-0081).
         QCOMPARE(all.find(QStringLiteral("ants-terminal"))->includes(), QStringList{"dev-tree-sitter"});
-        for (const char *id : {"dev-claude-tools", "dev-tree-sitter"})
+        for (const char *id : {"dev-claude-tools", "dev-osc", "dev-tree-sitter"})
             QVERIFY2(all.find(QLatin1String(id)) && all.find(QLatin1String(id))->installsPackages(), id);
         // These install a package when it is missing, so they wait for the
         // system update like every other installing item (design, The levels).

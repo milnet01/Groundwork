@@ -178,6 +178,14 @@
         <translation>يثبّت ripgrep وGit وأدوات فحص الشيفرة، التي يستخدمها Claude Code وAnts Terminal للبحث في الشيفرة وفحصها.</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>أداة openSUSE Build Service</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>يثبّت osc، لبناء الحزم ونشرها على openSUSE Build Service.</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>‏tree-sitter</translation>
     </message>

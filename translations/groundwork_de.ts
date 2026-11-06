@@ -178,6 +178,14 @@
         <translation>Installiert ripgrep, Git und Code-Prüfer, mit denen Claude Code und Ants Terminal Code durchsuchen und prüfen.</translation>
     </message>
     <message>
+        <source>openSUSE Build Service tool</source>
+        <translation>Werkzeug für den openSUSE Build Service</translation>
+    </message>
+    <message>
+        <source>Installs osc, for building and publishing packages on the openSUSE Build Service.</source>
+        <translation>Installiert osc, um Pakete im openSUSE Build Service zu bauen und zu veröffentlichen.</translation>
+    </message>
+    <message>
         <source>tree-sitter</source>
         <translation>tree-sitter</translation>
     </message>

@@ -2263,7 +2263,7 @@ scheduled.
   Source: code-read-2026-10-30.
   Lanes: carry.
 
-- 📋 [GRND-0113] **Tools for Claude Code row offers osc too.**
+- ✅ [GRND-0113] **Tools for Claude Code row offers osc too.**
   The user needs git and osc on the new install (2026-10-30). The
   dev-claude-tools row installs git and gh; no row installs osc, so today
   it arrives only through a saved setup's programs list. Decide whether
@@ -2271,6 +2271,8 @@ scheduled.
   publish to OBS.
   Decided (user, 2026-11-04): a row of its own, off by default, beside
   the Tools for Claude Code row.
+  Done 2026-11-06: row `dev-osc` after `dev-claude-tools`, off by
+  default. Leap 16.0 builds osc in openSUSE:Backports:SLE-16.0.
   **Layman:** A fresh install can get the OBS command-line tool from one switch, without a saved setup.
   Kind: enhancement.
   Source: user-request-2026-10-30.
