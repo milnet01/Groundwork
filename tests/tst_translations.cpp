@@ -41,6 +41,52 @@ QSet<QString> tsMessages(const QString &path)
     return keys;
 }
 
+// One message's English and every translated form of it.
+struct TsMessage {
+    QString source;
+    QStringList forms;
+    bool plural = false;
+};
+
+QList<TsMessage> tsTranslations(const QString &path)
+{
+    QList<TsMessage> messages;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        return messages;
+    QXmlStreamReader xml(&file);
+    while (xml.readNextStartElement() || !xml.atEnd()) {
+        if (!xml.isStartElement())
+            continue;
+        if (xml.name() == QLatin1String("message"))
+            messages.append({{}, {}, xml.attributes().value(QLatin1String("numerus")) == QLatin1String("yes")});
+        else if (xml.name() == QLatin1String("source") && !messages.isEmpty())
+            messages.last().source = xml.readElementText();
+        else if (xml.name() == QLatin1String("translation") && !messages.isEmpty()
+                 && !messages.last().plural)
+            messages.last().forms.append(xml.readElementText());
+        else if (xml.name() == QLatin1String("numerusform") && !messages.isEmpty())
+            messages.last().forms.append(xml.readElementText());
+    }
+    return messages;
+}
+
+// The marks a translation must keep: %1-style places for names and numbers,
+// and & before a letter for a keyboard shortcut. %n is left out where a
+// plural's "one" form may say the word instead.
+QStringList marks(const QString &text, bool withCount)
+{
+    // Unicode \w, so a shortcut letter in Arabic or Hindi counts.
+    static const QRegularExpression mark(QStringLiteral("%\\d+|%n|&(?=\\w)"),
+                                         QRegularExpression::UseUnicodePropertiesOption);
+    QStringList found;
+    for (const auto &m : mark.globalMatch(text))
+        if (withCount || m.captured() != QLatin1String("%n"))
+            found.append(m.captured());
+    found.sort();
+    return found;
+}
+
 QSet<QString> contexts(const QSet<QString> &messages)
 {
     QSet<QString> names;
@@ -141,6 +187,36 @@ private slots:
         QVERIFY(!files.isEmpty());
         for (const QString &file : files)
             QVERIFY2(tsMessages(QStringLiteral(SOURCE_DIR "/translations/") + file) == now, qPrintable(file));
+    }
+
+    // GRND-0117: a translation that drops %1 shows a sentence with a hole in
+    // it; one that drops & loses its keyboard shortcut. An empty form falls
+    // back to English and is not checked.
+    void translationsKeepTheirMarks()
+    {
+        const QStringList files = QDir(QStringLiteral(SOURCE_DIR "/translations"))
+                                      .entryList({QStringLiteral("groundwork_*.ts")}, QDir::Files);
+        QVERIFY(!files.isEmpty());
+        int checked = 0;
+        for (const QString &file : files) {
+            for (const TsMessage &m : tsTranslations(QStringLiteral(SOURCE_DIR "/translations/") + file)) {
+                const QStringList want = marks(m.source, !m.plural);
+                for (const QString &form : m.forms) {
+                    if (form.isEmpty())
+                        continue;
+                    ++checked;
+                    QVERIFY2(marks(form, !m.plural) == want,
+                             qPrintable(file + QStringLiteral(": ") + m.source + QStringLiteral(" → ") + form));
+                }
+                // A plural's last form covers the large counts, so it needs the number.
+                if (m.plural && m.source.contains(QStringLiteral("%n")) && !m.forms.isEmpty()
+                    && !m.forms.last().isEmpty())
+                    QVERIFY2(m.forms.last().contains(QStringLiteral("%n")),
+                             qPrintable(file + QStringLiteral(": ") + m.source + QStringLiteral(" → ")
+                                        + m.forms.last()));
+            }
+        }
+        QVERIFY(checked > 0);
     }
 
     // lupdate files a string under a context only from what it can see at

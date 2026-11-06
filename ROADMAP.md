@@ -2304,10 +2304,16 @@ scheduled.
   Source: claude-config-ci-tune-2026-11-05.
   Lanes: ci.
 
-- 📋 [GRND-0117] **tst_translations checks every translation keeps its %N and &amp; marks.**
+- ✅ [GRND-0117] **tst_translations checks every translation keeps its %N and &amp; marks.**
   claude-config's translate-review --check-only does this (all 14 files
   passed, 2026-11-05), but it lives in ~/.claude, so GitHub's runner
   cannot run it. A check in tst_translations runs everywhere.
+  Done (2026-11-06): translationsKeepTheirMarks in tst_translations. Every
+  translated form keeps the English's %1-style marks and & shortcuts;
+  %n is not required in a plural's first forms, but the last must hold
+  it. Qt's \w needs UseUnicodePropertiesOption, or Arabic shortcuts
+  read as missing. Proved by breaking six translations one at a time:
+  all six fail the test.
   **Layman:** A translation that drops a name or a number from a message is caught before release.
   Kind: test.
   Source: claude-config-translate-review-2026-11-05.
