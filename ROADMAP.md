@@ -2294,11 +2294,15 @@ scheduled.
   Source: user-request-2026-10-10.
   Lanes: items, gui.
 
-- 📋 [GRND-0116] **Faster gate: a compiler cache on GitHub and parallel tests.**
+- ✅ [GRND-0116] **Faster gate: a compiler cache on GitHub and parallel tests.**
   ci_report and ci-gate, 2026-11-05: ci.yml has no compiler cache,
   and scripts/local-ci.sh runs ctest without -j. The GitHub median rose
   from 2m11s to 3m23s over five runs. Parallel tests need each test's
   fake programs and state folders to be separate first.
+  Shipped 2026-11-06 in 5ea1237. The tests needed no change: each one
+  that writes already uses its own temporary folder. Local test leg 12.6
+  s to 3.4 s. GitHub: 3m40s with an empty cache, 46 s with it warm
+  (rerun of run 42185293392).
   **Layman:** The checks before each push finish sooner.
   Kind: chore.
   Source: claude-config-ci-tune-2026-11-05.
