@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-11-06
+
+**Theme:** Your own set-up.
+
 ### Added
 
 - A new switch beside "Tools for Claude Code": "openSUSE Build Service
