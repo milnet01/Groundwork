@@ -12,6 +12,10 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-06
+
+**Theme:** Your own set-up.
+
 ### Added
 
 - A new job on the first page, also offered at the end of a set-up run:
