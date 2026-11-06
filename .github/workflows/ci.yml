@@ -74,7 +74,20 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            cmake ninja-build g++ qt6-base-dev qt6-tools-dev qt6-l10n-tools
+            cmake ninja-build g++ ccache qt6-base-dev qt6-tools-dev qt6-l10n-tools
+
+      # The compiler cache, kept between runs so unchanged files are not
+      # recompiled. Each run saves under its own commit and starts from the
+      # newest saved one. The gate script uses ccache when it is installed.
+      - name: Restore the compiler cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ github.workspace }}/.ccache
+          key: ccache-${{ runner.os }}-${{ github.sha }}
+          restore-keys: ccache-${{ runner.os }}-
 
       - name: Run the gate
+        env:
+          CCACHE_DIR: ${{ github.workspace }}/.ccache
+          CCACHE_MAXSIZE: 500M
         run: ./scripts/local-ci.sh

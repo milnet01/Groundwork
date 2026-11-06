@@ -48,7 +48,7 @@ The CI gate is `scripts/local-ci.sh`. GitHub's `ci.yml` calls it and adds
 no steps of its own, so a change to CI goes in the script. It has two modes:
 
 - `./scripts/local-ci.sh` — the full gate: builds into `build/` and runs
-  `ctest`. `GROUNDWORK_JOBS` sets parallel compiles (default 4).
+  `ctest`. `GROUNDWORK_JOBS` sets parallel compiles and tests (default 4).
 - `./scripts/local-ci.sh --docs` — every check that needs no build.
 
 Every push runs the gate. `.githooks/pre-push` hands off to

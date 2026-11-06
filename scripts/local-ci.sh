@@ -165,11 +165,18 @@ step 'build'
 need cmake || fail "cmake is needed for the build leg"
 # Memory, not CPU count, bounds parallel compiles on this machine.
 JOBS=${GROUNDWORK_JOBS:-4}
-cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug >/dev/null
+# ccache when installed: ci.yml installs it and keeps its folder between
+# runs. Set empty otherwise, so a build/ configured with it still builds.
+LAUNCHER=
+command -v ccache >/dev/null 2>&1 && LAUNCHER=ccache
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug \
+    -DCMAKE_CXX_COMPILER_LAUNCHER="$LAUNCHER" >/dev/null
 cmake --build build --parallel "$JOBS"
 printf 'build clean\n' >&2
 
 step 'test'
-ctest --test-dir build --output-on-failure --timeout 60
+# In parallel: every test that writes does so in its own temporary folder,
+# with its own fake programs (GRND-0116). A new test must keep to that.
+ctest --test-dir build --output-on-failure --timeout 60 --parallel "$JOBS"
 
 report 'full gate'
