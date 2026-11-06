@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>Veille prolongée au lieu de la veille</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>Désactive la veille et garde la mise en veille prolongée, qui enregistre votre travail sur le disque et éteint l&apos;ordinateur. Pour les ordinateurs qui ne se réveillent pas correctement de la veille.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>Secure Boot est activé, et il empêche la mise en veille prolongée.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>Cet ordinateur ne peut pas se mettre en veille prolongée.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>L&apos;ordinateur n&apos;est pas configuré pour se réveiller d&apos;une mise en veille prolongée. Cet élément ne modifie jamais les réglages de démarrage.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>La quantité de mémoire de l&apos;ordinateur n&apos;a pas pu être lue.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>Le swap depuis lequel l&apos;ordinateur se réveille est plus petit que sa mémoire, et risque donc de ne pas tout contenir.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>Les réglages de veille ne sont pas encore ceux que cet élément définit.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>Désactivation de la veille, maintien de la veille prolongée</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

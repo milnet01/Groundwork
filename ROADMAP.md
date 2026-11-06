@@ -2278,7 +2278,7 @@ scheduled.
   Source: user-request-2026-10-30.
   Lanes: items.
 
-- 📋 [GRND-0068] **Item: hibernate instead of sleep, where sleep is unreliable.**
+- ✅ [GRND-0068] **Item: hibernate instead of sleep, where sleep is unreliable.**
   From SYSTEM_OPTIMISATIONS.md, sections 1 and 2, and the owner's set-up
   script: resume= on the kernel command line, HibernateMode=shutdown,
   suspend masked. Needs a design first: swap at least as large as
@@ -2289,6 +2289,17 @@ scheduled.
   off by default; the row says why when it cannot be offered. A spec
   comes next, since a wrong resume= stops the machine waking. Moved out
   of 0.6.0 so that release need not wait for it (user, 2026-11-04).
+  Decided (user, 2026-11-06): the item never touches the kernel command
+  line or boot loader. It is offered only where the running kernel
+  already resumes from a swap partition that holds all of memory
+  (/sys/power/resume); otherwise the row says why. With nothing hard to
+  undo left, spec-format.md § 1 needs no spec; built directly.
+  Shipped 2026-11-06: hibernate-not-sleep, a System setup row that
+  starts off. It writes
+  /etc/systemd/sleep.conf.d/99-groundwork-hibernate.conf (suspend off,
+  hibernate on, HibernateMode=shutdown). Suspend targets are not masked:
+  AllowSuspend=no already makes systemd refuse to sleep, so the one file
+  is the whole undo. Unreleased.
   **Layman:** The computer can save everything and switch off, then carry on where it left off, for machines where sleep does not work.
   Kind: feature.
   Source: user-request-2026-10-10.

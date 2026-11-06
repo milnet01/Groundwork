@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>Hiberneer in plaas van slaap</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>Skakel slaap af en hou hibernasie, wat jou werk op die skyf stoor en die rekenaar afskakel. Vir rekenaars wat nie behoorlik uit slaap wakker word nie.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>Secure Boot is aan, en dit keer dat die rekenaar hiberneer.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>Hierdie rekenaar kan nie hiberneer nie.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>Die rekenaar is nie opgestel om uit hibernasie wakker te word nie. Hierdie item verander nooit die opstartinstellings nie.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>Hoeveel geheue die rekenaar het, kon nie gelees word nie.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>Die ruilspasie waaruit die rekenaar wakker word, is kleiner as sy geheue, so dit hou dalk nie alles nie.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>Die slaapinstellings is nog nie dié wat hierdie item stel nie.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>Skakel slaap af en hou hibernasie</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

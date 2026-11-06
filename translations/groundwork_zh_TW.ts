@@ -1565,6 +1565,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>以休眠取代睡眠</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>關閉睡眠並保留休眠。休眠會把你的工作儲存到磁碟，然後關閉電腦。適用於無法從睡眠中正常喚醒的電腦。</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>安全開機已開啟，它會阻止電腦休眠。</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>這台電腦無法休眠。</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>這台電腦沒有設定從休眠中喚醒。此項絕不會變更開機設定。</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>無法讀取這台電腦的記憶體大小。</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>電腦喚醒時使用的交換空間比記憶體小，可能裝不下所有內容。</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>睡眠設定還不是此項所設的值。</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>正在關閉睡眠並保留休眠</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

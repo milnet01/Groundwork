@@ -1565,6 +1565,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>スリープの代わりに休止状態</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>スリープをオフにして休止状態を残します。休止状態は作業内容をディスクに保存し、コンピューターの電源を切ります。スリープから正しく復帰しないコンピューター向けです。</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>セキュアブートがオンになっていて、休止状態を妨げています。</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>このコンピューターは休止状態にできません。</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>このコンピューターは休止状態から復帰するように設定されていません。この項目が起動設定を変えることはありません。</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>コンピューターのメモリ量を読み取れませんでした。</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>復帰に使うスワップ領域がメモリより小さいため、すべてを保存できない可能性があります。</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>スリープの設定は、まだこの項目が設定する内容になっていません。</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>スリープをオフにし、休止状態を残しています</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

@@ -1575,6 +1575,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>السبات بدلًا من السكون</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>يوقف السكون ويُبقي السبات، الذي يحفظ عملك على القرص ويطفئ الحاسوب. للحواسيب التي لا تستيقظ جيدًا من السكون.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>التمهيد الآمن (Secure Boot) مفعَّل، وهو يمنع الحاسوب من السبات.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>لا يستطيع هذا الحاسوب الدخول في السبات.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>الحاسوب غير مُعَدّ للاستيقاظ من السبات. لا يغيّر هذا البند إعدادات بدء التشغيل أبدًا.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>تعذّرت قراءة مقدار ذاكرة الحاسوب.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>مساحة التبديل (swap) التي يستيقظ منها الحاسوب أصغر من ذاكرته، لذا قد لا تتسع لكل شيء.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>إعدادات السكون ليست بعدُ تلك التي يضبطها هذا البند.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>إيقاف السكون والإبقاء على السبات</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

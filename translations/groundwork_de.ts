@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>Ruhezustand statt Standby</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>Schaltet den Standby aus und behält den Ruhezustand, der Ihre Arbeit auf der Festplatte speichert und den Computer ausschaltet. Für Computer, die aus dem Standby nicht richtig aufwachen.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>Secure Boot ist eingeschaltet und verhindert den Ruhezustand.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>Dieser Computer kann nicht in den Ruhezustand wechseln.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>Der Computer ist nicht dafür eingerichtet, aus dem Ruhezustand aufzuwachen. Dieser Punkt ändert nie die Starteinstellungen.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>Wie viel Arbeitsspeicher der Computer hat, konnte nicht gelesen werden.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>Der Swap-Bereich, aus dem der Computer aufwacht, ist kleiner als sein Arbeitsspeicher und fasst daher vielleicht nicht alles.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>Die Standby-Einstellungen sind noch nicht die, die dieser Punkt festlegt.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>Standby wird ausgeschaltet, Ruhezustand bleibt</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

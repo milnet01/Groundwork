@@ -1565,6 +1565,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>절전 모드 대신 최대 절전 모드</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>절전 모드를 끄고 최대 절전 모드는 남겨 둡니다. 최대 절전 모드는 작업을 디스크에 저장하고 컴퓨터를 끕니다. 절전 모드에서 제대로 깨어나지 않는 컴퓨터를 위한 것입니다.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>보안 부팅이 켜져 있어 컴퓨터가 최대 절전 모드로 들어갈 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>이 컴퓨터는 최대 절전 모드를 쓸 수 없습니다.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>이 컴퓨터는 최대 절전 모드에서 깨어나도록 설정되어 있지 않습니다. 이 항목은 시작 설정을 절대 바꾸지 않습니다.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>컴퓨터의 메모리 크기를 읽을 수 없었습니다.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>컴퓨터가 깨어날 때 쓰는 스왑 공간이 메모리보다 작아서 모든 것을 담지 못할 수 있습니다.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>절전 설정이 아직 이 항목이 정하는 값이 아닙니다.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>절전 모드를 끄고 최대 절전 모드를 유지하는 중</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

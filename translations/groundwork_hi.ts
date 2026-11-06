@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>स्लीप की जगह हाइबरनेट</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>स्लीप बंद करता है और हाइबरनेट रखता है, जो आपका काम डिस्क पर सहेजकर कंप्यूटर बंद कर देता है। उन कंप्यूटरों के लिए जो स्लीप से ठीक से नहीं जागते।</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>Secure Boot चालू है, और यह कंप्यूटर को हाइबरनेट होने से रोकता है।</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>यह कंप्यूटर हाइबरनेट नहीं हो सकता।</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>कंप्यूटर हाइबरनेशन से जागने के लिए सेट नहीं है। यह आइटम कभी भी स्टार्ट-अप सेटिंग्स नहीं बदलता।</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>कंप्यूटर में कितनी मेमोरी है, यह पढ़ा नहीं जा सका।</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>जिस स्वैप स्पेस से कंप्यूटर जागता है वह उसकी मेमोरी से छोटा है, इसलिए हो सकता है उसमें सब कुछ न समाए।</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>स्लीप सेटिंग्स अभी वे नहीं हैं जो यह आइटम सेट करता है।</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>स्लीप बंद करके हाइबरनेट रखा जा रहा है</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

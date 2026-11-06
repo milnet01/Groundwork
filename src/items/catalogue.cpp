@@ -14,6 +14,7 @@
 #include "firmwareitem.h"
 #include "flathubitem.h"
 #include "freezerecorderitem.h"
+#include "hibernateitem.h"
 #include "fontsitem.h"
 #include "gamingextrasitem.h"
 #include "virtualmachinesitem.h"
@@ -53,6 +54,7 @@ const Catalogue &catalogue()
     static const MemoryItem memory;
     static const SysrqItem sysrq;
     static const DiskSchedulerItem diskScheduler;
+    static const HibernateItem hibernate; // GRND-0068
     static const WakeItem calmWake;
     static const LogCapItem logCap;
     static const BootMenuItem bootMenu;
@@ -151,7 +153,7 @@ const Catalogue &catalogue()
     static const FontsItem fonts;
 
     static const Catalogue all({&update, &codecs, &flathub, &nvidia, &amdVideo, &soundFirmware, &broadcom,
-                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
+                                &snapshots, &firewall, &firmware, &power, &memory, &sysrq, &diskScheduler, &hibernate, &calmWake, &logCap, &bootMenu, &freezeRecorder, &swappiness,
                                 &hostname, &ssh, &clock, &numlock, &extraDrives, &networkShares,
                                 &chrome, &brave, &vlc, &discord, &zoom, &spotify, &steam, &bottles, &gamingExtras, &virtualMachines,
                                 &buildTools, &codium, &claudeCode, &claudeTools, &osc, &treeSitter, &antsTerminal, &oneUp, &dejaDup, &htop, &sevenZip, &git, &fastfetch, &fonts});

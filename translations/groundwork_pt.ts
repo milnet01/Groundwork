@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>Hibernar em vez de suspender</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>Desativa a suspensão e mantém a hibernação, que salva seu trabalho no disco e desliga o computador. Para computadores que não acordam direito da suspensão.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>O Secure Boot está ligado e impede o computador de hibernar.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>Este computador não consegue hibernar.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>O computador não está configurado para acordar da hibernação. Este item nunca muda as configurações de inicialização.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>Não foi possível ler quanta memória o computador tem.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>O espaço de swap de onde o computador acorda é menor que a memória dele, então pode não caber tudo.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>As configurações de suspensão ainda não são as que este item define.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>Desativando a suspensão e mantendo a hibernação</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

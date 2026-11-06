@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>Hibernar en lugar de suspender</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>Desactiva la suspensión y mantiene la hibernación, que guarda tu trabajo en el disco y apaga el ordenador. Para ordenadores que no se despiertan bien de la suspensión.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>El arranque seguro (Secure Boot) está activado e impide que el ordenador hiberne.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>Este ordenador no puede hibernar.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>El ordenador no está preparado para despertar de la hibernación. Este elemento nunca cambia los ajustes de arranque.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>No se pudo leer cuánta memoria tiene el ordenador.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>El espacio de swap desde el que despierta el ordenador es más pequeño que su memoria, así que puede que no quepa todo.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>Los ajustes de suspensión aún no son los que fija este elemento.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>Desactivando la suspensión y manteniendo la hibernación</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

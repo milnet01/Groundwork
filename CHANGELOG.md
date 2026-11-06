@@ -17,6 +17,13 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 - A new switch beside "Tools for Claude Code": "openSUSE Build Service
   tool" installs `osc`, for building and publishing packages on OBS.
   It starts off, like every other program. (GRND-0113)
+- A new System setup switch, "Hibernate instead of sleep", for computers
+  that do not wake properly from sleep. It turns sleep off and keeps
+  hibernate, with one settings file in `/etc/systemd/sleep.conf.d/`;
+  deleting that file undoes it. It starts off. It is offered only where
+  Secure Boot is off and the computer already wakes from a swap
+  partition at least as large as its memory. It never changes start-up
+  settings. (GRND-0068)
 
 ## [0.6.0] - 2026-11-06
 

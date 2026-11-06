@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>שינה עמוקה במקום שינה</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>מכבה את מצב השינה ומשאיר את השינה העמוקה, ששומרת את העבודה בדיסק ומכבה את המחשב. למחשבים שלא מתעוררים כראוי ממצב שינה.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>האתחול המאובטח (Secure Boot) פעיל, והוא מונע מהמחשב להיכנס לשינה עמוקה.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>מחשב זה אינו יכול להיכנס לשינה עמוקה.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>המחשב אינו מוגדר להתעורר משינה עמוקה. פריט זה לעולם אינו משנה את הגדרות ההפעלה.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>לא ניתן היה לקרוא כמה זיכרון יש במחשב.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>שטח ה־swap שממנו המחשב מתעורר קטן מהזיכרון שלו, ולכן ייתכן שלא יכיל הכול.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>הגדרות השינה עדיין אינן אלה שפריט זה קובע.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>מכבה את מצב השינה ומשאיר שינה עמוקה</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>

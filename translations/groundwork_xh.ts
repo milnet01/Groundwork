@@ -1567,6 +1567,45 @@
     </message>
 </context>
 <context>
+    <name>gw::HibernateItem</name>
+    <message>
+        <source>Hibernate instead of sleep</source>
+        <translation>Ukulala okunzulu endaweni yokulala</translation>
+    </message>
+    <message>
+        <source>Turns sleep off and keeps hibernate, which saves your work to the disk and switches the computer off. For computers that do not wake properly from sleep.</source>
+        <translation>Icima ukulala ize igcine ukulala okunzulu, okugcina umsebenzi wakho kwidiski kuze kucime ikhompyutha. Kwiikhompyutha ezingavuki kakuhle ekulaleni.</translation>
+    </message>
+    <message>
+        <source>Secure Boot is on, and it stops the computer hibernating.</source>
+        <translation>I-Secure Boot ivuliwe, kwaye ithintela ikhompyutha ukuba ilale ngokunzulu.</translation>
+    </message>
+    <message>
+        <source>This computer cannot hibernate.</source>
+        <translation>Le khompyutha ayinakulala ngokunzulu.</translation>
+    </message>
+    <message>
+        <source>The computer is not set up to wake from hibernation. This item never changes start-up settings.</source>
+        <translation>Ikhompyutha ayisetelwanga ukuvuka ekulaleni okunzulu. Le nto ayize itshintshe iisetingi zokuqalisa.</translation>
+    </message>
+    <message>
+        <source>How much memory the computer has could not be read.</source>
+        <translation>Ubungakanani bememori yekhompyutha abunakufundwa.</translation>
+    </message>
+    <message>
+        <source>The swap space the computer wakes from is smaller than its memory, so it might not hold everything.</source>
+        <translation>Indawo ye-swap ikhompyutha evuka kuyo incinci kunememori yayo, ngoko isenokungakwazi ukuphatha yonke into.</translation>
+    </message>
+    <message>
+        <source>The sleep settings are not yet the ones this item sets.</source>
+        <translation>Iisetingi zokulala azikabi zezo le nto izisetayo.</translation>
+    </message>
+    <message>
+        <source>Turning sleep off and keeping hibernate</source>
+        <translation>Kucinywa ukulala, kugcinwa ukulala okunzulu</translation>
+    </message>
+</context>
+<context>
     <name>gw::HostnameItem</name>
     <message>
         <source>Computer name</source>
