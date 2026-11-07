@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-<!-- ants-roadmap-id-high-water: GRND=117 -->
+<!-- ants-roadmap-id-high-water: GRND=123 -->
 # Groundwork — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
@@ -2333,3 +2333,72 @@ scheduled.
   Kind: test.
   Source: claude-config-translate-review-2026-11-05.
   Lanes: i18n.
+
+- 📋 [GRND-0118] **Network shares: a missing parent folder no longer stops Samba being enabled.**
+  Found 2026-11-07 on the user's reinstall. network-shares runs
+  `restorecon --` on every parent of each shared folder (GRND-0114).
+  A parent that does not exist makes restorecon fail, which failed
+  the item, so Samba was never enabled. Label only the parents that
+  exist, and name any shared folder that is missing.
+  **Layman:** Sharing a folder still works when part of its path is missing, and Groundwork names the missing folder.
+  Kind: fix.
+  Source: reinstall-2026-11-07.
+  Lanes: items.
+
+- 📋 [GRND-0119] **Disk scheduler: the udev trigger fails under systemd 261, and the item is a suspected freeze cause.**
+  Found 2026-11-07 on the user's reinstall. `udevadm trigger
+  --attr-match=queue/rotational=1` fails under systemd 261 with "not
+  a valid key name".
+  Suspected, not confirmed: the desktop froze repeatedly after the
+  restore. disk-scheduler was the only item not done on the old,
+  freeze-free install. Under bfq, the memory-protection IOWeight
+  drop-ins become live (app.slice 80 against session.slice 500). The
+  rule was removed from the machine as a test; freezes became fewer,
+  but the user has not ruled BFQ the cause (2026-11-07).
+  Against it: the rule reached only the rotational disks, never the
+  system SSD, which measured slow writes and was busy for much of the
+  boot. The kwin hangs line up with I/O pressure that may be the
+  SSD's. Decide the item's design once the cause is known.
+  **Layman:** The setting for spinning hard drives applies cleanly, and is checked as a possible cause of desktop freezes.
+  Kind: fix.
+  Source: reinstall-2026-11-07.
+  Lanes: items.
+
+- 📋 [GRND-0120] **Saving: Flatpaks installed from a local bundle are named as "can't be carried".**
+  Found 2026-11-07. A Flatpak installed from a local bundle has a
+  remote named "<name>-origin", which a new install does not have.
+  Saving records it as installable. Name it "can't be carried" at
+  save time instead.
+  **Layman:** An app installed from a downloaded file is listed as one you must reinstall yourself, instead of failing on restore.
+  Kind: fix.
+  Source: reinstall-2026-11-07.
+  Lanes: carry.
+
+- 📋 [GRND-0121] **Settings restore: a symlink in the archive comes back as a link, not an empty file.**
+  Found 2026-11-07. `.config/autostart/ants-stats-tray.desktop`, a
+  symlink in the archive, was restored as an empty file with mode
+  000. That is tar's delayed-symlink placeholder, never replaced by
+  the link.
+  **Layman:** Shortcuts inside your saved settings come back working after a reinstall.
+  Kind: fix.
+  Source: reinstall-2026-11-07.
+  Lanes: carry.
+
+- 📋 [GRND-0122] **Run page: a progress bar and a large, high-contrast "now doing" line.**
+  The user, who is partially sighted, could not tell which item was
+  running during the 2026-11-07 restore. Add a progress bar, and a
+  line naming the item now running in large, high-contrast text.
+  **Layman:** While Groundwork works, you can see at a glance how far along it is and which step it is on.
+  Kind: accessibility.
+  Source: user-request-2026-11-07.
+  Lanes: gui.
+
+- 📋 [GRND-0123] **Freeze recorder: log which processes and disks are busy while pressure rises.**
+  Asked by the claude-c0 session (~/.claude) during the 2026-11-07
+  freeze investigation, for GRND-0058's recorder. While pressure is
+  rising, log per-process read and write deltas, and per-disk busy %
+  and in-flight count. Say when a busy disk has no matching process.
+  **Layman:** After a freeze, the log shows which program and which disk were busy, not only that the disk was slow.
+  Kind: enhancement.
+  Source: peer-request-2026-11-07.
+  Lanes: items.
