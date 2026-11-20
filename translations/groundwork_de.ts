@@ -1796,6 +1796,10 @@
         <translation>Andere Freigaben, unverändert gelassen: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>Nicht gefunden, daher erst wieder freigegeben, wenn es zurück ist: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>Die Dateifreigabe wird installiert</translation>
     </message>

@@ -2334,12 +2334,15 @@ scheduled.
   Source: claude-config-translate-review-2026-11-05.
   Lanes: i18n.
 
-- 📋 [GRND-0118] **Network shares: a missing parent folder no longer stops Samba being enabled.**
+- ✅ [GRND-0118] **Network shares: a missing parent folder no longer stops Samba being enabled.**
   Found 2026-11-07 on the user's reinstall. network-shares runs
   `restorecon --` on every parent of each shared folder (GRND-0114).
   A parent that does not exist makes restorecon fail, which failed
   the item, so Samba was never enabled. Label only the parents that
   exist, and name any shared folder that is missing.
+  Done (2026-11-20): only parents that exist are labelled, and the
+  row names a shared folder it cannot find. aMissingFolderIsNamedNotLabelled
+  failed on the old code (it labelled /mnt/gone) and passes now.
   **Layman:** Sharing a folder still works when part of its path is missing, and Groundwork names the missing folder.
   Kind: fix.
   Source: reinstall-2026-11-07.
@@ -2359,6 +2362,9 @@ scheduled.
   system SSD, which measured slow writes and was busy for much of the
   boot. The kwin hangs line up with I/O pressure that may be the
   SSD's. Decide the item's design once the cause is known.
+  2026-11-20, the user: many of the reinstall's problems were likely
+  the very cheap 4 TB drive used then, since returned. That weakens the
+  BFQ suspicion; the udev trigger's failure under systemd 261 stands.
   **Layman:** The setting for spinning hard drives applies cleanly, and is checked as a possible cause of desktop freezes.
   Kind: fix.
   Source: reinstall-2026-11-07.

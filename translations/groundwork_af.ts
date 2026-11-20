@@ -1796,6 +1796,10 @@
         <translation>Ander gedeelde vouers, gelaat soos hulle is: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>Nie gevind nie, dus nie gedeel totdat dit terug is nie: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>Besig om lêerdeling te installeer</translation>
     </message>

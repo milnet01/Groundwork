@@ -1796,6 +1796,10 @@
         <translation>दूसरे साझा फ़ोल्डर, जैसे थे वैसे ही छोड़े गए: %1।</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>नहीं मिला, इसलिए वापस आने तक साझा नहीं होगा: %1।</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>फ़ाइल साझाकरण इंस्टॉल किया जा रहा है</translation>
     </message>

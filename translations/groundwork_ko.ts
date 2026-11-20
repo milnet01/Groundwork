@@ -1794,6 +1794,10 @@
         <translation>다른 공유는 그대로 둡니다: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>찾을 수 없어 돌아올 때까지 공유되지 않습니다: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>파일 공유 설치 중</translation>
     </message>

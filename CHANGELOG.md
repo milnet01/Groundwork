@@ -12,6 +12,13 @@ The `[Unreleased]` block stays at the top, always, even when empty.
 
 ## [Unreleased]
 
+### Fixed
+
+- Sharing folders on the network no longer fails when part of a shared
+  folder's path is missing, such as a drive not yet plugged in. Samba
+  is still turned on, and the row names the folder it cannot find.
+  (GRND-0118)
+
 ## [0.6.1] - 2026-11-06
 
 **Theme:** Your own set-up.

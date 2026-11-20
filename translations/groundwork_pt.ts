@@ -1796,6 +1796,10 @@
         <translation>Outros compartilhamentos, deixados como estão: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>Não encontrado, então não será compartilhado até voltar: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>Instalando o compartilhamento de arquivos</translation>
     </message>

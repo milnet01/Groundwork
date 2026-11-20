@@ -1796,6 +1796,10 @@
         <translation>Autres partages, laissés tels quels : %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>Introuvable, donc non partagé tant qu’il n’est pas revenu : %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>Installation du partage de fichiers</translation>
     </message>

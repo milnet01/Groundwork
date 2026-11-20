@@ -397,6 +397,7 @@ private slots:
     void parentFoldersAreLabelledWhereSELinuxIsOn()
     {
         const QString given = value({QStringLiteral("/mnt/data/shared"), QStringLiteral("/mnt/data/more")});
+        QVERIFY(QDir().mkpath(m_root->path() + QStringLiteral("/mnt/data/shared")));
         for (const gw::Step &step : steps(given))
             QVERIFY(step.argv.value(0) != QLatin1String("restorecon")); // no SELinux in the fixture
         fixture(QStringLiteral("/sys/fs/selinux/enforce"), "1");
@@ -412,6 +413,30 @@ private slots:
         QCOMPARE(list[relabel].argv, (QStringList{QStringLiteral("restorecon"), QStringLiteral("--"), QStringLiteral("/mnt"),
                                                   QStringLiteral("/mnt/data")}));
         QVERIFY(list[relabel].needsRoot);
+    }
+
+    // GRND-0118: restorecon fails on a path that does not exist, which failed
+    // the item before Samba was enabled. Only parents that exist are
+    // labelled, and the row names a shared folder it cannot find.
+    void aMissingFolderIsNamedNotLabelled()
+    {
+        QVERIFY(QDir().mkpath(m_root->path() + QStringLiteral("/mnt/data/shared")));
+        fixture(QStringLiteral("/sys/fs/selinux/enforce"), "1");
+        const QString given = value({QStringLiteral("/mnt/data/shared"), QStringLiteral("/mnt/gone/away")});
+        bool relabelled = false;
+        for (const gw::Step &step : steps(given))
+            if (step.argv.value(0) == QLatin1String("restorecon")) {
+                QCOMPARE(step.argv, (QStringList{QStringLiteral("restorecon"), QStringLiteral("--"),
+                                                 QStringLiteral("/mnt"), QStringLiteral("/mnt/data")}));
+                relabelled = true;
+            }
+        QVERIFY(relabelled);
+
+        fixture(kShares, written(given));
+        const QString detail = m_item.check(context()).detail;
+        QVERIFY2(detail.contains(QLatin1String("/mnt/gone/away")), qPrintable(detail));
+        QVERIFY2(!detail.contains(QLatin1String("/mnt/data/shared")), qPrintable(detail));
+        QVERIFY2(detail.contains(QLatin1String("ROMS")), qPrintable(detail)); // other shares still named
     }
 
     // Only what is missing is installed, first of all.

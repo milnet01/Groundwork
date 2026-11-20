@@ -1796,6 +1796,10 @@
         <translation>Otras carpetas compartidas, sin cambios: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>No encontrado, así que no se comparte hasta que vuelva: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>Instalando el uso compartido de archivos</translation>
     </message>

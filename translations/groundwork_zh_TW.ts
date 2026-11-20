@@ -1794,6 +1794,10 @@
         <translation>其他共用維持不變：%1。</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>找不到，恢復之前不會共用：%1。</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>正在安裝檔案共用</translation>
     </message>

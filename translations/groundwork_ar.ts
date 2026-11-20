@@ -1804,6 +1804,10 @@
         <translation>مجلدات مشارَكة أخرى، تُركت كما هي: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>غير موجود، فلن تتم مشاركته حتى يعود: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>جارٍ تثبيت مشاركة الملفات</translation>
     </message>

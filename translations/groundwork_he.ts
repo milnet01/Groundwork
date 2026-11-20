@@ -1796,6 +1796,10 @@
         <translation>שיתופים אחרים, שנשארו כפי שהם: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>לא נמצא, ולכן לא ישותף עד שיחזור: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>מתקין שיתוף קבצים</translation>
     </message>

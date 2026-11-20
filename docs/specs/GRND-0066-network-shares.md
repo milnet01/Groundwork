@@ -133,7 +133,7 @@ struct CheckResult {
 - `smb`, `nmb` and `wsdd` are all enabled and active, `groundwork-shares.conf` is readable, and `smb.conf` holds the include line: `Done`.
 - Anything else, an unreadable file included: `NotDone`. Applying fixes each of those (CLAUDE.md, Item checks never run as root).
 - `currentValue` is parsed from `groundwork-shares.conf` whenever it is readable, so a row reading `NotDone` still shows the list. `heldFolders` comes from `smb.conf`'s other sections.
-- `detail` names any other shares in `smb.conf`: "Other shares, left as they are: ROMS, PC Games." Reserved names are not listed. Each name passes through `isolated()`.
+- `detail` names any other shares in `smb.conf`: "Other shares, left as they are: ROMS, PC Games." Reserved names are not listed. Each name passes through `isolated()`. It also names each shared folder that `CheckContext::fileExists` cannot find: "Not found, so not shared until it is back: /mnt/USB/Photos." (GRND-0118).
 
 **Apply.** `Item` gains a second virtual, and the Worker calls it instead of `applySteps`. Its default returns `applySteps(system, context)`, so no other item changes:
 
@@ -147,7 +147,7 @@ virtual QList<Step> applyStepsFor(const SystemIdentity &system, const CheckConte
 1. `zypper -n install`, naming `samba` if `readService` does not find `smb` and `wsdd` if it does not find `wsdd`; absent when both are found.
 2. `writeFileStep` for `groundwork-shares.conf`.
 3. Append §4.1's lines to `smb.conf` by `dd oflag=append conv=notrunc`, as `ExtraDrivesItem::applySteps` appends to `fstab`; absent when the line is there. The text starts with a newline, for a file with no final one.
-4. When `/sys/fs/selinux/enforce` exists: `restorecon --` on every parent folder of every shared folder, `/` excepted, outermost first, not recursive (GRND-0114).
+4. When `/sys/fs/selinux/enforce` exists: `restorecon --` on every parent folder of every shared folder that exists, `/` excepted, outermost first, not recursive (GRND-0114). `restorecon` fails on a missing path, which would stop the steps before Samba is enabled (GRND-0118).
 5. `touch /etc/samba/smb.conf`.
 6. `systemctl enable smb nmb wsdd`.
 7. `systemctl restart smb nmb wsdd`.
@@ -195,11 +195,11 @@ An empty list leaves Apply greyed out, so the review page says a value is still 
 
 - **INV-13** — On a real system, the boundary holds: a guest reads a look-only share and cannot write to it, adds a file to an add-files share and that file belongs to the user, and cannot follow a symlink out of a share. *Test:* §7's manual recipe. *Breaks when:* `force user`, `read only` or `wide links` behaves other than §4.1 says.
 
-- **INV-14** — Where SELinux is on, one `restorecon --` step names every parent of every shared folder, outermost first and never `/`, before the restart; where it is off, there is none (GRND-0114). *Test:* `tests/tst_networksharesitem.cpp::parentFoldersAreLabelledWhereSELinuxIsOn`, with `/mnt/data/shared` and `/mnt/data/more`. *Breaks when:* the step comes after the restart, or names a parent twice.
+- **INV-14** — Where SELinux is on, one `restorecon --` step names every existing parent of every shared folder, outermost first and never `/`, before the restart; where it is off, there is none (GRND-0114, GRND-0118). *Test:* `tests/tst_networksharesitem.cpp::parentFoldersAreLabelledWhereSELinuxIsOn`, with `/mnt/data/shared` and `/mnt/data/more`; `aMissingFolderIsNamedNotLabelled`, with `/mnt/gone/away` missing. *Breaks when:* the step comes after the restart, names a parent twice, or names a parent that does not exist.
 
 ## 6. Failure modes
 
-- **A chosen folder is gone at apply time, such as an unplugged USB disk.** The share is still written. Samba refuses that share until the disk returns, and the others work.
+- **A chosen folder is gone at apply time, such as an unplugged USB disk.** The share is still written, and its missing parents are not labelled. Samba refuses that share until the disk returns, and the others work. The row names the folder until it is back.
 - **A package is unavailable or zypper fails.** The step fails and the item reports it. `groundwork-shares.conf` and `smb.conf` are untouched, since those steps come later.
 - **The first restart labels a very large folder.** Relabelling runs in `ExecStartPre` under `smb.service`'s `TimeoutSec=5min`. If it times out, the step fails, the run page says so, and Samba is down until it starts. Applying again resumes, since the script records a share only when it finishes.
 - **A restart interrupts someone copying a file.** Accepted. It happens only when the list changes or the item is first applied.

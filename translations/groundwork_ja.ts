@@ -1794,6 +1794,10 @@
         <translation>他の共有はそのままです: %1。</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>見つからないため、戻るまで共有されません: %1。</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>ファイル共有をインストールしています</translation>
     </message>

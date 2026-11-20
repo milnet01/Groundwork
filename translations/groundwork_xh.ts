@@ -1796,6 +1796,10 @@
         <translation>Ezinye izabelo, zishiywe njengoko zinjalo: %1.</translation>
     </message>
     <message>
+        <source>Not found, so not shared until it is back: %1.</source>
+        <translation>Ayifumanekanga, ngoko ayizukwabelwana ide ibuye: %1.</translation>
+    </message>
+    <message>
         <source>Installing file sharing</source>
         <translation>Kufakwa ukwabelana ngeefayile</translation>
     </message>

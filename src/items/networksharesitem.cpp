@@ -237,8 +237,14 @@ CheckResult NetworkSharesItem::check(const CheckContext &context) const
 
     CheckResult result{running && conf && shares && holdsIncludeLine(*conf) ? CheckState::Done : CheckState::NotDone, {}};
     result.nothingToInstall = packagesToInstall(context).isEmpty();
-    if (shares)
+    QStringList lines, missing;
+    if (shares) {
         result.currentValue = appliedValue(*shares);
+        if (const auto folders = parseFolderList(result.currentValue))
+            for (const ListedFolder &folder : *folders)
+                if (!context.fileExists(folder.path))
+                    missing << isolated(folder.path);
+    }
     if (conf) {
         QStringList others;
         for (const Section &section : readSections(*conf)) {
@@ -249,8 +255,11 @@ CheckResult NetworkSharesItem::check(const CheckContext &context) const
                 result.heldFolders.insert(section.path, section.name);
         }
         if (!others.isEmpty())
-            result.detail = tr("Other shares, left as they are: %1.").arg(others.join(QStringLiteral(", ")));
+            lines << tr("Other shares, left as they are: %1.").arg(others.join(QStringLiteral(", ")));
     }
+    if (!missing.isEmpty())
+        lines << tr("Not found, so not shared until it is back: %1.").arg(missing.join(QStringLiteral(", ")));
+    result.detail = lines.join(QLatin1Char(' ')); // one line: the Worker sends it as a marker
     return result;
 }
 
@@ -288,12 +297,13 @@ QList<Step> NetworkSharesItem::applyStepsFor(const SystemIdentity &, const Check
     // Samba's start-up script, below, labels only the shared folder. A new
     // drive's root has no SELinux type, and smbd may not pass through it, so
     // each parent gets the type its path should have, outermost first
-    // (GRND-0114).
+    // (GRND-0114). restorecon fails on a missing path, which would stop the
+    // item before Samba is enabled, so only parents that exist (GRND-0118).
     if (context.fileExists(QStringLiteral("/sys/fs/selinux/enforce"))) {
         QStringList parents;
         for (const QString &path : std::as_const(paths))
             for (QString parent = QFileInfo(path).path(); parent != QLatin1String("/"); parent = QFileInfo(parent).path())
-                if (!parents.contains(parent))
+                if (!parents.contains(parent) && context.fileExists(parent))
                     parents << parent;
         std::sort(parents.begin(), parents.end());
         if (!parents.isEmpty())
